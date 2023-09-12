@@ -1,5 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
@@ -42,7 +46,7 @@ namespace SPTC_APP.Database
             }
 
 
-            public async Task<bool> CreateAsync()
+            public bool Create()
             {
                 if (!string.IsNullOrEmpty(connectionString))
                 {
@@ -50,14 +54,44 @@ namespace SPTC_APP.Database
                     {
                         DatabaseConnection connection = new DatabaseConnection(connectionString);
 
-                        MySqlConnection mySqlConnection = DatabaseConnection.GetConnection();
-                        await mySqlConnection.OpenAsync();
-                        await Task.Delay(1000);
-                        mySqlConnection.Close();
+                        using (MySqlConnection mySqlConnection = DatabaseConnection.GetConnection())
+                        {
+                            Stopwatch stopwatch = new Stopwatch();
+                            stopwatch.Start();
 
-                        Log = ConnectionLogs.ESTABLISHED;
-                        return true;
+                            Task<bool> openTask = Task.Run(() =>
+                            {
+                                try
+                                {
+                                    mySqlConnection.Open();
+                                    return true;
+                                }
+                                catch
+                                {
+                                    return false;
+                                }
+                            });
+
+                            int timeoutMilliseconds = 10000; // Adjust as needed
+
+                            if (Task.WaitAll(new[] { openTask }, timeoutMilliseconds))
+                            {
+                                if (openTask.Result)
+                                {
+                                    mySqlConnection.Close();
+                                    Log = ConnectionLogs.ESTABLISHED;
+                                    return true;
+                                }
+                            }
+                            else
+                            {
+                                mySqlConnection.Close(); // Close the connection if it times out
+                                Log = ConnectionLogs.TIMEOUT;
+                                return false;
+                            }
+                        } return false;
                     }
+
                     catch (MySqlException ex)
                     {
                         if (ex.Number == 1045)
@@ -74,7 +108,12 @@ namespace SPTC_APP.Database
                         }
                         return false;
                     }
-                }
+                    catch (Exception e)
+                    {
+                        Log = ConnectionLogs.EXCEPTION_OCCURED;
+                        return false;
+                    }
+               }
                 else
                 {
                     Log = ConnectionLogs.STRING_EMPTY;
@@ -139,5 +178,8 @@ namespace SPTC_APP.Database
 
         [Description("Cannot Connect")]
         CANNOT_CONNECT,
+
+        [Description("Host Timeout")]
+        TIMEOUT,
     }
 }

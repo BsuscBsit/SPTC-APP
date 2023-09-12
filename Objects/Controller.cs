@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
 using SPTC_APP.Properties;
 using SPTC_APP.View;
@@ -23,53 +25,68 @@ namespace SPTC_APP.Objects
             string password = Settings.Default.Password;
             AppState.LoadFromJson();
             AppState.SaveToJson();
-
-            DatabaseConnection.Builder builder = CreateDatabaseConnectionBuilder(host, port, database, username, password);
-
-            bool isConnected = await builder.CreateAsync();
-
-            int maxAttempts = 3;
-            int attemptCount = 1;
-
-            while (!IsConnectionSuccessful(isConnected, builder.Log) && attemptCount <= maxAttempts)
+            try
             {
-                EventLogger.Post($"DTB :: Database Connnection attemp ({attemptCount}) :{builder.Log.ToString()}");
-                UpdateUIForRetry(progressBar, log, builder.Log);
-                UpdateSettingsFromDefault(ref host, ref port, ref database, ref username, ref password);
+                DatabaseConnection.Builder builder = CreateDatabaseConnectionBuilder(host, port, database, username, password);
+            
+                bool isConnected = builder.Create();
 
-                DatabaseConfigInput inputWindow = GetDatabaseConfigInputWindow(host, port, database, username, password);
-                if (inputWindow.Exit)
+                int maxAttempts = 3;
+                int attemptCount = 1;
+
+                while (!IsConnectionSuccessful(isConnected, builder.Log) && attemptCount <= maxAttempts)
+                {
+                    EventLogger.Post($"DTB :: Database Connnection attemp ({attemptCount}) :{builder.Log.ToString()}");
+                    UpdateUIForRetry(progressBar, log, builder.Log);
+                    UpdateSettingsFromDefault(ref host, ref port, ref database, ref username, ref password);
+
+                    DatabaseConfigInput inputWindow = GetDatabaseConfigInputWindow(host, port, database, username, password);
+                    if (inputWindow.Exit)
+                    {
+                        window.Close();
+                    }
+                    UpdateSettingsFromDefault(ref host, ref port, ref database, ref username, ref password);
+
+                    builder = CreateDatabaseConnectionBuilder(host, port, database, username, password);
+                    isConnected = builder.Create();
+
+                    attemptCount++;
+                }
+                if (!isConnected && attemptCount > maxAttempts)
                 {
                     window.Close();
+                    return;
                 }
-                UpdateSettingsFromDefault(ref host, ref port, ref database, ref username, ref password);
 
-                builder = CreateDatabaseConnectionBuilder(host, port, database, username, password);
-                isConnected = await builder.CreateAsync();
+                if (isConnected && builder.Log == ConnectionLogs.ESTABLISHED)
+                {
+                    await PerformDatabaseTasks(progressBar, log);
+                }
+                else
+                {
+                    progressBar.Value = 10;
+                }
 
-                attemptCount++;
+                log.Text = DatabaseConnection.GetEnumDescription(builder.Log);
+                await Task.Delay(500);
+
+                if (progressBar.Value == 100)
+                {
+                    ShowLoginWindowAndCloseCurrent(window);
+                }
+                else
+                {
+                    HandleConnectionFailure(builder.Log);
+                    ShowSplashScreenAndCloseCurrent(window);
+                }
             }
-
-            if (isConnected && builder.Log == ConnectionLogs.ESTABLISHED)
+            catch (MySqlException ex)
             {
-                await PerformDatabaseTasks(progressBar, log);
+                EventLogger.Post("DTB :: MySqlException : " + ex.Message);
             }
-            else
+            catch (Exception e)
             {
-                progressBar.Value = 10;
-            }
-
-            log.Text = DatabaseConnection.GetEnumDescription(builder.Log);
-            await Task.Delay(500);
-
-            if (progressBar.Value == 100)
-            {
-                ShowLoginWindowAndCloseCurrent(window);
-            }
-            else
-            {
-                HandleConnectionFailure(builder.Log);
-                ShowSplashScreenAndCloseCurrent(window);
+                EventLogger.Post("ERR :: Exception : " + e.Message);
             }
         }
         private static DatabaseConnection.Builder CreateDatabaseConnectionBuilder(string host, string port, string database, string username, string password)

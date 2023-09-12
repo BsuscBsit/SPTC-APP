@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using MySql.Data.MySqlClient;
 using SPTC_APP.Objects;
 
 namespace SPTC_APP.View
@@ -8,7 +10,18 @@ namespace SPTC_APP.View
         public SplashScreen()
         {
             InitializeComponent();
-            Controller.StartInitialization(this, pbLoading, tbDebugLog);
+            try
+            {
+                Controller.StartInitialization(this, pbLoading, tbDebugLog);
+            }
+            catch (MySqlException ex)
+            {
+                EventLogger.Post("DTB :: MySqlException : " + ex.Message);
+            }
+            catch (Exception e)
+            {
+                EventLogger.Post("ERR :: Exception : " + e.Message);
+            }
         }
     }
 }

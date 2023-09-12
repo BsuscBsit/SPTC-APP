@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SPTC_APP
+namespace SPTC_APP.View.Pages.Leaflets
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TableView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TableView : Window
     {
-        public MainWindow()
+        public TableView()
         {
             InitializeComponent();
         }

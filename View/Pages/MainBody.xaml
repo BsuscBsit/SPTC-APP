@@ -1,0 +1,294 @@
+﻿<Window
+    x:Class="SPTC_APP.View.Pages.MainBody"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SPTC_APP.View.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Sapang Palay Tricycle Cooperative"
+    Height="600"
+    MinWidth="1000"
+    MinHeight="600"
+    Icon="../../View/Images/icons/logo.ico"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View/Styles/ButtonsAndTextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="Beige">
+        <Rectangle
+            Width="NaN"
+            Height="40"
+            VerticalAlignment="Top"
+            Fill="#FEF301"
+            Stroke="#FEF301" />
+        <Grid
+            x:Name="sidePanel"
+            Width="214"
+            Margin="0,40,0,0"
+            HorizontalAlignment="Left"
+            Background="White">
+            <Ellipse
+                Width="48"
+                Height="48"
+                Margin="11,6,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="userImage" ImageSource="../Images/icons/person.png" />
+                </Ellipse.Fill>
+            </Ellipse>
+            <Label
+                x:Name="username"
+                Width="151"
+                Margin="59,17,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="General Manager"
+                FontFamily="Inter"
+                FontSize="16"
+                FontWeight="SemiBold"
+                Foreground="Gray" />
+            <Rectangle
+                Height="1"
+                Margin="5,60,5,0"
+                VerticalAlignment="Top"
+                Stroke="DarkGray" />
+            <Button
+                Height="40"
+                Margin="12,81,12,0"
+                VerticalAlignment="Top"
+                BorderThickness="0"
+                Click="Button_Click"
+                Style="{StaticResource GenericButton}">
+                <Grid Width="200">
+                    <Image
+                        Width="32"
+                        Height="32"
+                        Margin="15,4,0,4"
+                        HorizontalAlignment="Left"
+                        Source="../Images/icons/home.png" />
+                    <Label
+                        Margin="49,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="Dashboard"
+                        FontFamily="Inter"
+                        FontSize="16"
+                        FontWeight="SemiBold"
+                        Foreground="Black" />
+                </Grid>
+            </Button>
+            <Label
+                Width="151"
+                Margin="12,148,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="MENU"
+                FontFamily="Inter"
+                FontSize="16"
+                FontWeight="SemiBold"
+                Foreground="Gray" />
+            <Grid x:Name="menu" Margin="0,177,0,158">
+                <Rectangle
+                    Height="1"
+                    Margin="5,45,5,0"
+                    VerticalAlignment="Top"
+                    Stroke="DarkGray" />
+                <Rectangle
+                    Height="1"
+                    Margin="5,95,5,0"
+                    VerticalAlignment="Top"
+                    Stroke="DarkGray" />
+                <Rectangle
+                    Height="1"
+                    Margin="5,145,5,0"
+                    VerticalAlignment="Top"
+                    Stroke="DarkGray" />
+                <Button
+                    Height="40"
+                    Margin="15,0,9,0"
+                    VerticalAlignment="Top"
+                    BorderThickness="0"
+                    Click="Button_Click"
+                    Style="{StaticResource GenericButton}">
+                    <Grid Width="200">
+                        <Image
+                            Width="32"
+                            Height="32"
+                            Margin="15,4,0,4"
+                            HorizontalAlignment="Left"
+                            Source="../Images/icons/paper.png" />
+                        <Label
+                            Margin="55,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Franchise"
+                            FontFamily="Inter"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Foreground="Black" />
+                    </Grid>
+                </Button>
+                <Button
+                    Height="40"
+                    Margin="15,50,9,0"
+                    VerticalAlignment="Top"
+                    BorderThickness="0"
+                    Click="Button_Click"
+                    Style="{StaticResource GenericButton}">
+                    <Grid Width="200">
+                        <Image
+                            Width="32"
+                            Height="32"
+                            Margin="15,4,0,4"
+                            HorizontalAlignment="Left"
+                            Source="../Images/icons/operator.png" />
+                        <Label
+                            Margin="55,4,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Operator"
+                            FontFamily="Inter"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Foreground="Black" />
+                    </Grid>
+                </Button>
+                <Button
+                    Height="40"
+                    Margin="15,100,9,0"
+                    VerticalAlignment="Top"
+                    BorderThickness="0"
+                    Click="Button_Click"
+                    Style="{StaticResource GenericButton}">
+                    <Grid Width="200">
+                        <Image
+                            Width="32"
+                            Height="32"
+                            Margin="15,4,0,4"
+                            HorizontalAlignment="Left"
+                            Source="../Images/icons/tricycle.png" />
+                        <Label
+                            Margin="55,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Driver"
+                            FontFamily="Inter"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Foreground="Black" />
+                    </Grid>
+                </Button>
+                <Button
+                    Height="40"
+                    Margin="15,150,9,0"
+                    VerticalAlignment="Top"
+                    BorderThickness="0"
+                    Click="Button_Click"
+                    Style="{StaticResource GenericButton}">
+                    <Grid Width="200">
+                        <Image
+                            Width="32"
+                            Height="32"
+                            Margin="15,4,0,4"
+                            HorizontalAlignment="Left"
+                            Source="../Images/icons/group.png" />
+                        <Label
+                            Margin="55,4,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Board Members"
+                            FontFamily="Inter"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Foreground="Black" />
+                    </Grid>
+                </Button>
+
+            </Grid>
+            <Button
+                Height="40"
+                Margin="15,0,9,59"
+                VerticalAlignment="Bottom"
+                BorderThickness="0"
+                Click="Btn_Settings"
+                Style="{StaticResource GenericButton}">
+                <Grid Width="200">
+                    <Image
+                        Width="32"
+                        Height="32"
+                        Margin="15,4,0,4"
+                        HorizontalAlignment="Left"
+                        Source="../Images/icons/settings.png" />
+                    <Label
+                        Margin="55,4,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Settings"
+                        FontFamily="Inter"
+                        FontSize="16"
+                        FontWeight="SemiBold"
+                        Foreground="Black" />
+                </Grid>
+            </Button>
+            <Button
+                Height="40"
+                Margin="15,0,9,9"
+                VerticalAlignment="Bottom"
+                BorderThickness="0"
+                Click="Btn_Logout"
+                Style="{StaticResource GenericButton}">
+                <Grid Width="200">
+                    <Image
+                        Width="32"
+                        Height="32"
+                        Margin="15,4,0,4"
+                        HorizontalAlignment="Left"
+                        Source="../Images/icons/logout.png" />
+                    <Label
+                        Margin="55,4,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Logout"
+                        FontFamily="Inter"
+                        FontSize="16"
+                        FontWeight="SemiBold"
+                        Foreground="Black" />
+                </Grid>
+            </Button>
+        </Grid>
+        <Grid
+            x:Name="mainPanel"
+            Width="1061"
+            Margin="0,40,0,0"
+            HorizontalAlignment="Right">
+            <Button
+                x:Name="btnGererate"
+                Width="175"
+                Height="40"
+                Margin="0,30,30,0"
+                HorizontalAlignment="right"
+                VerticalAlignment="Top"
+                Click="btnGererate_Click"
+                Content="GENERATE ID"
+                Style="{StaticResource GenericButton}" />
+            <Button
+                x:Name="btnTest"
+                Width="175"
+                Height="40"
+                Margin="0,30,230,0"
+                HorizontalAlignment="right"
+                VerticalAlignment="Top"
+                Click="btnTest_Click"
+                Content="TEST"
+                Style="{StaticResource GenericButton}" />
+        </Grid>
+
+    </Grid>
+</Window>

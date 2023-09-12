@@ -1,0 +1,86 @@
+﻿<Window x:Name="window" x:Class="SPTC_APP.View.BackID"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SPTC_APP.View"
+        WindowStyle="None"
+        mc:Ignorable="d" Topmost="False" ResizeMode="NoResize"  Height="424.32" Width="305.28" Loaded="window_Loaded">
+    <Window.Resources>
+        <Style x:Key="Labels" TargetType="Label">
+            <Setter Property="Foreground" Value="#C00000" />
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="Fields" TargetType="Label">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="back" VerticalAlignment="Center">
+        <!--lblName-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
+            <Label x:Name="label1" FontSize="14" Content="License No:." Style="{StaticResource Labels}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,-5"/>
+            <Label x:Name="lblLicense" Content="C07-16-017959" Style="{StaticResource Fields}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,-5"/>
+        </StackPanel>
+        <Rectangle Fill="Black" Height="1" Grid.Row="1"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top">
+            <Label x:Name="label2" Content="Expiration Date:" Style="{StaticResource Labels}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,-5" FontSize="14"/>
+            <Label x:Name="lblXPDate" Content="2024-08-20" Style="{StaticResource Fields}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,-5"/>
+        </StackPanel>
+        <Rectangle Fill="Black" Height="1" Grid.Row="3"/>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Top">
+            <Label x:Name="label3" Content="SPTC NO." Style="{StaticResource Labels}" VerticalAlignment="Bottom" Margin="13,-5,0,-5" HorizontalAlignment="Center"/>
+            <Label x:Name="lblBodyNum" Content="055"
+                   FontFamily="Impact" VerticalAlignment="Center" FontWeight="Bold" Margin="0,-15,0,-15"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Orientation="Vertical" VerticalAlignment="Top">
+            <Label x:Name="label4" Content="Sakaling may Emergency," Style="{StaticResource Labels}" HorizontalAlignment="Center" Margin="0,-5,0,-5"/>
+            <Label x:Name="label5" Content="Sunduin si;" Style="{StaticResource Labels}" HorizontalAlignment="Center" Margin="0,-5,0,-5" FontSize="11"/>
+        </StackPanel>
+        <StackPanel Grid.Row="6" Orientation="Horizontal" VerticalAlignment="Top">
+            <Label x:Name="label6" Content="MR./MRS./MS." Style="{StaticResource Labels}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,-3" FontSize="14"/>
+            <Label x:Name="lblEmePer" Content="Myra B. Mara" Style="{StaticResource Fields}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,-3"/>
+        </StackPanel>
+        <Rectangle Fill="Black" Height="1" Grid.Row="7"/>
+        <StackPanel Grid.Row="8" Orientation="Horizontal" VerticalAlignment="Top">
+            <Label x:Name="label7" Content="Address:" Style="{StaticResource Labels}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,-5" FontSize="14"/>
+            <Label x:Name="lblAddressBuilding" Content="Blk.259 Lt.5, P-5" Style="{StaticResource Fields}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,-5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="9" Orientation="Vertical" VerticalAlignment="Top">
+            <Rectangle Fill="Black" Height="1" Grid.Row="7"/>
+            <Viewbox x:Name="viewbox1" Margin="0,-5,0,-5" Height="28">
+                <Label x:Name="lblAddressStreet" Content="Brgy. Sta. Cruz II, CSJDM, Bul" Style="{StaticResource Fields}"/>
+            </Viewbox>
+        </StackPanel>
+        <Rectangle Fill="Black" Height="1" Grid.Row="10"/>
+        <StackPanel Grid.Row="11" Orientation="Horizontal" VerticalAlignment="Top">
+            <Label x:Name="label8" Content="Contact No.:" Style="{StaticResource Labels}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,-5" FontSize="14"/>
+            <Label x:Name="lblContact" Content="0906-1041728" Style="{StaticResource Fields}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,-5"/>
+        </StackPanel>
+        <Rectangle Fill="Black" Height="1" Grid.Row="12"/>
+        <StackPanel Grid.Row="13" Orientation="Vertical">
+            <Image x:Name="imgSign" Height="80" Width="200" Stretch="UniformToFill"/>
+            <Label x:Name="lblName" Content="PANUELOS, JOEL G." FontFamily="Arial Rounded MT Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,-5,0,-5" FontWeight="Bold"/>
+            <Rectangle Fill="Black" Height="1" VerticalAlignment="Bottom"/>
+            <Label x:Name="label9" Content="Signature" Style="{StaticResource Labels}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,-5,0,-5" FontSize="14"/>
+        </StackPanel>
+    </Grid>
+</Window>

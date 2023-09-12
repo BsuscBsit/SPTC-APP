@@ -1,0 +1,200 @@
+﻿<Window
+    x:Class="SPTC_APP.View.FrontID"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SPTC_APP.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="window"
+    Width="305.28"
+    Height="424.32"
+    Loaded="window_Loaded"
+    ResizeMode="NoResize"
+    Topmost="False"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Grid x:Name="front">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel
+                Grid.Row="0"
+                Margin="0,1,0,-8"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Label
+                    x:Name="label1"
+                    HorizontalAlignment="Center"
+                    Content="CDA REG. NO."
+                    FontFamily="Comic Sans MS"
+                    Foreground="#FFC00000" />
+                <Label
+                    x:Name="lblRegNum"
+                    HorizontalAlignment="Center"
+                    Content="9520-03006397"
+                    FontFamily="Comic Sans MS"
+                    Foreground="#FFC00000" />
+            </StackPanel>
+            <StackPanel
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                Orientation="Vertical">
+                <Label
+                    x:Name="label2"
+                    Margin="0,0,0,-9"
+                    HorizontalAlignment="Center"
+                    Content="SAPANG PALAY TRICYCLE"
+                    FontFamily="Berlin Sans FB"
+                    FontWeight="SemiBold" />
+                <Label
+                    x:Name="label3"
+                    Margin="0,0,0,-9"
+                    HorizontalAlignment="Center"
+                    Content="SERVICE COOPERATIVE (SPTC)"
+                    FontFamily="Berlin Sans FB"
+                    FontWeight="SemiBold" />
+                <Label
+                    x:Name="label4"
+                    Margin="0,0,0,-9"
+                    HorizontalAlignment="Center"
+                    Content="Blk.1 Lot 8 Hacienda Sapang Palay Proper,"
+                    FontFamily="Comic Sans MS"
+                    Foreground="#FFC00000" />
+                <Label
+                    x:Name="label5"
+                    Margin="0,0,0,-9"
+                    HorizontalAlignment="Center"
+                    Content="City of San Jose Del Monte, Bulacan"
+                    FontFamily="Comic Sans MS"
+                    Foreground="#FFC00000" />
+            </StackPanel>
+            <Grid
+                Grid.Row="2"
+                Width="300"
+                Margin="8,5,8,-4"
+                HorizontalAlignment="Left"
+                Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Image
+                    x:Name="imgSPTC"
+                    Grid.Column="0"
+                    Width="115"
+                    Height="115"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Opacity="1"
+                    Source="/View/Images/logo.png"
+                    Stretch="Uniform" />
+                <Image
+                    x:Name="imgID"
+                    Grid.Column="1"
+                    Width="144"
+                    Height="144"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Opacity="1"
+                    Source="/View/Images/no_id.png"
+                    Stretch="UniformToFill" />
+            </Grid>
+            <StackPanel
+                Grid.Row="3"
+                Margin="0,0,0,-15"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Label
+                    x:Name="label6"
+                    Content="Expiry Date:"
+                    FontFamily="Consolas"
+                    FontWeight="Bold"
+                    Foreground="#FFC00000" />
+                <Label
+                    x:Name="lblXPDate"
+                    Content="April 2022-2023"
+                    FontFamily="Consolas"
+                    FontWeight="Bold"
+                    Foreground="#FFC00000" />
+            </StackPanel>
+            <StackPanel
+                Grid.Row="4"
+                Margin="0,0,0,4"
+                Orientation="Vertical">
+                <Viewbox
+                    x:Name="viewbox2"
+                    Height="1"
+                    Margin="0,0,0,-15"
+                    Stretch="Fill">
+                    <local:OutlinedTextBlock
+                        x:Name="lblPosition"
+                        Margin="1,0,1,0"
+                        Fill="Black"
+                        FontFamily="Playbill"
+                        FontWeight="Bold"
+                        Stroke="#B2B2B2"
+                        StrokeThickness="0.1"
+                        Text="DRIVER"
+                        TextWrapping="Wrap" />
+                </Viewbox>
+                <Viewbox
+                    x:Name="viewbox3"
+                    Height="1"
+                    Stretch="Fill">
+                    <local:OutlinedTextBlock
+                        x:Name="lblName"
+                        Margin="2,0,2,0"
+                        Fill="#1D314E"
+                        FontFamily="Impact"
+                        FontWeight="Bold"
+                        RenderTransformOrigin="0.5,0.5"
+                        Stroke="#EAEAEA"
+                        StrokeThickness="0.3"
+                        Text="SAN DIEGO, CHRISTIAN V."
+                        TextWrapping="Wrap">
+                        <local:OutlinedTextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform AngleX="-5" AngleY="0" />
+                                <RotateTransform />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </local:OutlinedTextBlock.RenderTransform>
+                    </local:OutlinedTextBlock>
+                </Viewbox>
+            </StackPanel>
+            <StackPanel
+                Grid.Row="5"
+                HorizontalAlignment="Center"
+                Orientation="Vertical">
+                <Label
+                    x:Name="lblChairman"
+                    Margin="0,0,0,-8"
+                    HorizontalAlignment="Center"
+                    Content="ROLLY M. LABINDAO"
+                    FontFamily="Bookman Old Style"
+                    FontWeight="Bold" />
+                <Label
+                    x:Name="label7"
+                    HorizontalAlignment="Center"
+                    Content="Chairman"
+                    FontFamily="Bell MT"
+                    Foreground="#FFC00000" />
+            </StackPanel>
+        </Grid>
+        <Label
+            Margin="-1,0,0,-2"
+            VerticalAlignment="Bottom"
+            Content="AllenLiao-Morado2022"
+            FontFamily="Centaur"
+            FontSize="11" />
+    </Grid>
+</Window>

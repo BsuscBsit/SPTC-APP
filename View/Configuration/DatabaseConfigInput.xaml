@@ -1,0 +1,239 @@
+﻿<Window
+    x:Class="SPTC_APP.View.DatabaseConfigInput"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SPTC_APP.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="dciWindow"
+    Title="DatabaseConfigInput"
+    Width="425"
+    Height="235"
+    AllowsTransparency="True"
+    Background="Transparent"
+    Icon="../../View/Images/icons/logo.ico"
+    ResizeMode="NoResize"
+    Style="{StaticResource CustomWindowStyle}"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border
+                Grid.Row="0"
+                Height="40"
+                VerticalAlignment="Center"
+                Background="#FEF301"
+                CornerRadius="15,15,0,0" />
+            <Label
+                Grid.Row="1"
+                Height="Auto"
+                Margin="25,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="NETWORK MANAGEMENT"
+                FontFamily="Inter"
+                FontSize="20"
+                FontWeight="SemiBold"
+                Foreground="Gray" />
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label
+                    Margin="40,0,50,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="HOST"
+                    FontFamily="Inter"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Foreground="Gray" />
+                <Label
+                    Grid.Row="1"
+                    Margin="40,0,50,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="PORT"
+                    FontFamily="Inter"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Foreground="Gray" />
+                <Label
+                    Grid.Row="2"
+                    Margin="40,0,50,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="DATABASE"
+                    FontFamily="Inter"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Foreground="Gray" />
+                <Label
+                    Grid.Row="3"
+                    Margin="40,0,50,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="USERNAME"
+                    FontFamily="Inter"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Foreground="Gray" />
+                <Label
+                    Grid.Row="4"
+                    Margin="40,0,50,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="PASSWORD"
+                    FontFamily="Inter"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Foreground="Gray" />
+                <TextBox
+                    x:Name="tbHost"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="120"
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource GenericTextBox}"
+                    TextWrapping="Wrap" />
+                <TextBox
+                    x:Name="tbPort"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="120"
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource GenericTextBox}"
+                    TextWrapping="Wrap" />
+                <TextBox
+                    x:Name="tbDatabase"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Width="120"
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource GenericTextBox}"
+                    TextWrapping="Wrap" />
+                <TextBox
+                    x:Name="tbUsername"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Width="120"
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource GenericTextBox}"
+                    TextWrapping="Wrap" />
+                <PasswordBox
+                    x:Name="pbPassword"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Width="120"
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center" />
+
+            </Grid>
+            <StackPanel
+                Grid.Row="3"
+                Margin="0,11,0,29"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    x:Name="btnConnect"
+                    Width="172"
+                    Height="40"
+                    Margin="0,0,20,0"
+                    Click="btnConnect_Click"
+                    Content="RETRY"
+                    Style="{StaticResource GenericButton}" />
+                <Button
+                    Width="101"
+                    Height="40"
+                    Click="Button_Click"
+                    Content="EXIT"
+                    Style="{StaticResource GenericButton}" />
+            </StackPanel>
+        </Grid>
+        <Border
+            x:Name="brdrPrompt"
+            Background="White"
+            CornerRadius="15,15,15,15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border
+                    Grid.Row="0"
+                    Height="40"
+                    VerticalAlignment="Center"
+                    Background="#FEF301"
+                    CornerRadius="15,15,0,0" />
+                <StackPanel
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <ContentControl Content="{StaticResource OctagonError}" />
+                    <Label
+                        Margin="15,0,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="An error has occurred.&#xD;&#xA;We apologize for the inconvenience."
+                        FontFamily="Inter"
+                        FontSize="16"
+                        FontWeight="Medium" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="2"
+                    Margin="0,0,0,22"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="110"
+                        Height="40"
+                        Click="btnConnect_Click"
+                        Content="RETRY"
+                        Style="{StaticResource GenericButton}" />
+                    <Button
+                        Width="110"
+                        Height="40"
+                        Margin="10,0,10,0"
+                        Click="configProceed_Click"
+                        Content="CONFIGURE"
+                        Style="{StaticResource GenericButton}" />
+                    <Button
+                        Width="110"
+                        Height="40"
+                        Click="Button_Click"
+                        Content="EXIT"
+                        Style="{StaticResource GenericButton}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

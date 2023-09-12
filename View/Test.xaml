@@ -1,0 +1,77 @@
+﻿<Window
+    x:Class="SPTC_APP.View.Test"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Test"
+    Width="800"
+    Height="450"
+    mc:Ignorable="av">
+    <Grid>
+        <Image x:Name="imageRender" />
+
+        <TabControl x:Name="tabControl">
+            <TabItem Header="Test VideoCapture Signature pad">
+                <Grid x:Name="inageRender" Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="289*" />
+                        <ColumnDefinition Width="505*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Margin="10,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Click="Button_Click"
+                        Content="Button" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Test Login">
+                <Grid x:Name="list" Background="#FFE5E5E5">
+                    <Label
+                        x:Name="lblName"
+                        Margin="139,66,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Label" />
+                    <Label
+                        x:Name="lblPosition"
+                        Margin="158,110,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Label" />
+                    <Label
+                        x:Name="lblAddress"
+                        Margin="177,157,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Label" />
+
+                </Grid>
+            </TabItem>
+            <TabItem
+                Height="20"
+                VerticalAlignment="Bottom"
+                Header="Test List">
+                <Grid x:Name="list2" Background="#FFE5E5E5">
+                    <TextBox
+                        x:Name="tbResult"
+                        Width="120"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Text="TextBox"
+                        TextWrapping="Wrap" />
+                    <Grid x:Name="DatagridList" />
+                    <Image
+                        x:Name="tmpImage"
+                        Width="100"
+                        Height="100"
+                        Margin="632,18,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

@@ -1,0 +1,463 @@
+﻿<Window
+    x:Class="SPTC_APP.View.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SPTC_APP.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Login"
+    Width="620"
+    Height="350"
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    AllowsTransparency="True"
+    Background="Transparent"
+    Icon="../../View/Images/icons/logo.ico"
+    PreviewKeyDown="Window_PreviewKeyDown"
+    ResizeMode="NoResize"
+    Style="{StaticResource CustomWindowStyle}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ExitButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                Padding="0,0,1,1"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1,0,2,4"
+                                CornerRadius="7">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                    To="#ff6666"
+                                                    Duration="0:0:0.2" />
+                                                <ColorAnimation
+                                                    Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
+                                                    To="White"
+                                                    Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                    To="Transparent"
+                                                    Duration="0:0:0.3" />
+                                                <ColorAnimation
+                                                    Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
+                                                    To="#FF100000"
+                                                    Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                    To="#cc0000"
+                                                    Duration="0:0:0.0" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Button.PreviewMouseUp">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                    To="Transparent"
+                                                    Duration="0:0:0.3" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="PasswordVisible" TargetType="Button">
+                <Setter Property="Background" Value="White" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="4,4,4,4">
+                                <Image
+                                    Width="20"
+                                    Height="20"
+                                    Margin="5,5,5,5"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Source="/View/Images/icons/pw_visible.png" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="Button.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation
+                                    Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                    To="#EEEEEE"
+                                    Duration="0:0:0.2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Button.MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation
+                                    Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                    To="White"
+                                    Duration="0:0:0.2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="UIElement.PreviewMouseDown">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                        To="#E0E0E0"
+                                        Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="UIElement.PreviewMouseUp">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                        To="#EEEEEE"
+                                        Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="LComboBoxTextBoxStyle" TargetType="{x:Type TextBox}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Grid>
+                                <Border
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="#FEF301"
+                                    BorderThickness="1,1,0,1"
+                                    CornerRadius="5,0,0,5">
+                                    <ScrollViewer x:Name="PART_ContentHost" />
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="LComboBoxButtonStyle" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border
+                                x:Name="border"
+                                Padding="0,0,10,0"
+                                Background="White"
+                                BorderBrush="#FEF301"
+                                BorderThickness="0,1,1,1"
+                                CornerRadius="0,5,5,0">
+                                <ContentPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="LocalComboBox" TargetType="{x:Type ComboBox}">
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ComboBox}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition MaxWidth="18" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox
+                                    Name="PART_EditableTextBox"
+                                    Height="{TemplateBinding Height}"
+                                    Padding="5,0,0,0"
+                                    Style="{StaticResource LComboBoxTextBoxStyle}" />
+                                <ToggleButton
+                                    Grid.Column="1"
+                                    Height="{TemplateBinding Height}"
+                                    Margin="0"
+                                    ClickMode="Press"
+                                    Focusable="False"
+                                    IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Style="{StaticResource LComboBoxButtonStyle}">
+                                    <Path
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Data="M 0 0 L 4 4 L 8 0 Z"
+                                        Fill="Gray" />
+                                </ToggleButton>
+                                <ContentPresenter
+                                    Name="ContentSite"
+                                    Margin="15,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding SelectionBoxItem}"
+                                    ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                    ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" />
+                                <Popup
+                                    Name="Popup"
+                                    AllowsTransparency="True"
+                                    Focusable="False"
+                                    IsOpen="{TemplateBinding IsDropDownOpen}"
+                                    Placement="Bottom"
+                                    PopupAnimation="Slide">
+                                    <Grid
+                                        Name="DropDown"
+                                        MinWidth="{TemplateBinding ActualWidth}"
+                                        MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                        SnapsToDevicePixels="True">
+                                        <Border
+                                            x:Name="DropDownBorder"
+                                            Background="#FEFEFE"
+                                            BorderBrush="Black"
+                                            BorderThickness="1" />
+                                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        </ScrollViewer>
+                                    </Grid>
+                                </Popup>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Image Source="/View/Images/bg_login.png" Stretch="UniformToFill">
+            <Image.OpacityMask>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Path Data="M0,0 L200,0 200,150 0,150 Z">
+                            <Path.Fill>
+                                <SolidColorBrush Color="Black" />
+                            </Path.Fill>
+                        </Path>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Image.OpacityMask>
+            <Image.Clip>
+                <RectangleGeometry
+                    RadiusX="15"
+                    RadiusY="15"
+                    Rect="0,0,618,348" />
+            </Image.Clip>
+        </Image>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image
+                Width="200"
+                Height="200"
+                Margin="0,0,20,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Source="/View/Images/logo.png" />
+            <Grid Grid.Column="1">
+                <StackPanel
+                    Margin="25,0,25,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Vertical">
+                    <Grid Height="91" Margin="0,0,0,40">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Height="Auto">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="#FEF301" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <StackPanel
+                            Grid.Column="1"
+                            Margin="0,0,0,10"
+                            Orientation="Vertical">
+                            <Label
+                                Margin="5,10,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="WELCOME"
+                                FontFamily="Inter"
+                                FontSize="30"
+                                FontWeight="Bold" />
+                            <Label
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="Please login your account to continue"
+                                FontFamily="Inter"
+                                FontSize="15"
+                                FontWeight="Light" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="5,0,5,0">
+                        <ComboBox
+                            x:Name="cbUser"
+                            Height="40"
+                            Margin="0,10,0,20"
+                            VerticalAlignment="Top"
+                            FontFamily="Inter"
+                            FontWeight="SemiBold"
+                            IsReadOnly="True"
+                            SelectedIndex="0"
+                            Style="{StaticResource LocalComboBox}" />
+                        <Label
+                            Margin="10,0,0,0"
+                            Padding="5,0,5,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="White"
+                            Content="Position"
+                            FontFamily="Inter"
+                            Foreground="Gray" />
+                    </Grid>
+                    <Grid Margin="5,0,5,0">
+                        <Label
+                            x:Name="pbHint"
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Password"
+                            FontFamily="Inter"
+                            Foreground="Gray" />
+                        <Border
+                            BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                    x:Name="btnViewPass"
+                                    Grid.Column="1"
+                                    Margin="0,0,5,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    PreviewMouseDown="Button_PreviewMouseDown"
+                                    PreviewMouseUp="Button_PreviewMouseUp"
+                                    Style="{StaticResource PasswordVisible}"
+                                    Visibility="Hidden" />
+                                <PasswordBox
+                                    x:Name="pbPassword"
+                                    Grid.Column="0"
+                                    Height="40"
+                                    Padding="10,0,0,0"
+                                    VerticalAlignment="Top"
+                                    VerticalContentAlignment="Center"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="0"
+                                    GotFocus="pbPassword_GotFocus"
+                                    LostFocus="pbPassword_LostFocus"
+                                    PreviewKeyDown="pbPassword_PreviewKeyDown" />
+                            </Grid>
+                        </Border>
+                        <Label
+                            x:Name="pbView"
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="we"
+                            FontFamily="Inter"
+                            Foreground="Gray"
+                            Visibility="Hidden" />
+                    </Grid>
+                    <Grid Margin="0,20,0,0">
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal"
+                            Visibility="Hidden">
+                            <Button
+                                x:Name="btnLogin"
+                                Width="148"
+                                Height="40"
+                                Click="btnLogin_Click"
+                                Content="LOG IN"
+                                Style="{StaticResource GenericButton}" />
+                            <Button
+                                x:Name="btnExit"
+                                Width="79"
+                                Height="40"
+                                Margin="19,0,0,0"
+                                Click="btnLogin_Click"
+                                Content="EXIT"
+                                Style="{StaticResource GenericButton}" />
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button
+                                x:Name="btnLogin1"
+                                Width="148"
+                                Height="40"
+                                Click="btnLogin_Click"
+                                Content="LOG IN"
+                                Style="{StaticResource GenericButton}" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Button
+            x:Name="imgClose"
+            Width="28"
+            Height="28"
+            Margin="0,17,17,0"
+            Padding="1,0,1,1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            BorderThickness="1,1,1,1"
+            Click="imgClose_Click"
+            Content="x"
+            FontFamily="Berlin Sans FB"
+            FontSize="20"
+            FontStretch="Normal"
+            FontWeight="Regular"
+            Foreground="#FF100000"
+            Style="{StaticResource ExitButtonStyle}" />
+    </Grid>
+</Window>

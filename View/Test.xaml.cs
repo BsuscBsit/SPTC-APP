@@ -12,7 +12,7 @@ namespace SPTC_APP.View
 {
     public partial class Test : System.Windows.Window
     {
-        List<Franchise> fetchedData;
+
         public Test()
         {
             InitializeComponent();
@@ -55,7 +55,7 @@ namespace SPTC_APP.View
                 }
                 if (selectedTab.Header.ToString() == "Test List")
                 {
-                    UpdateList();
+                    btnFranchise_Click(null, null);
                 }
             }
 
@@ -69,44 +69,7 @@ namespace SPTC_APP.View
         }
 
 
-        //SAMPLE ONLY, use DataTable on next Iteration
-        //Problematic because of Objects
-        private async void UpdateList()
-        {
-            fetchedData = await Task.Run(() =>
-            {
-                using (var connection = DatabaseConnection.GetConnection())
-                {
-                    connection.Open();
-
-                    List<Franchise> franchises = new List<Franchise>();
-                    franchises.AddRange(Retrieve.GetData<Franchise>(Table.FRANCHISE, Select.ALL, Where.ALL_NOTDELETED));
-                    
-                    return franchises;
-                }
-            });
-
-            // Assuming you have a List<Franchise> fetchedData
-
-            DataGrid dataGrid = new DataGrid();
-
-            DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(dataGrid);
-
-            List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
-            {
-                new ColumnConfiguration("bodynumber", "###", width: 30),
-                new ColumnConfiguration("licenceNO", "Plate Number", width: 60, backgroundColor: Brushes.Yellow),
-                new ColumnConfiguration("Operator", "Operator name"),
-                new ColumnConfiguration("Driver_day", "Driver name", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
-
-            };
-            dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
-
-            DatagridList.Children.Add(dataGrid);
-            
-            dataGrid.SelectionChanged += dgList_SelectionChanged;
-            //dataGrid.PreviewMouseLeftButtonDown += dgList_PreviewMouseLeftButtonDown;
-        }
+        //SAMPLE ONLY, use DataTable on next Iterati
 
         /*foreach(Franchise f in fetchedData)
         {
@@ -118,12 +81,89 @@ namespace SPTC_APP.View
 
         private void dgList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataGrid grid = (DataGrid)sender;
+           
+        }
 
-            if (grid.SelectedCells.Count > 0)
+        private void btnFranchise_Click(object sender, RoutedEventArgs e)
+        {
+            List<Franchise> fetchedData = (new TableObject<Franchise>(Table.FRANCHISE)).data;
+            DataGrid dataGrid = new DataGrid();
+
+            DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(dataGrid);
+
+            List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
-                (new GenerateID(fetchedData[grid.SelectedIndex], true)).Show();
-            }
+                new ColumnConfiguration("bodynumber", "###", width: 30),
+                new ColumnConfiguration("licenceNO", "Plate Number", width: 60, backgroundColor: Brushes.Yellow),
+                new ColumnConfiguration("Operator", "Operator name"),
+                new ColumnConfiguration("Driver_day", "Driver name", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
+            };
+            dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
+            DatagridList.Children.Add(dataGrid);
+
+            dataGrid.SelectionChanged += dgList_SelectionChanged;
+        }
+
+        private void btnDriver_Click(object sender, RoutedEventArgs e)
+        {
+            List<Driver> fetchedData = (new TableObject<Driver>(Table.DRIVER)).data;
+            DataGrid dataGrid = new DataGrid();
+
+            DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(dataGrid);
+
+            List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+            {
+                new ColumnConfiguration("name", "FullName", width: 30),
+                new ColumnConfiguration("birthday", "Date of Birth", width: 60, backgroundColor: Brushes.Yellow),
+                new ColumnConfiguration("emergencyPerson", "Em Person"),
+                new ColumnConfiguration("emergencyContact", "Em Contact", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
+                new ColumnConfiguration("isDayShift", "Is Day Shift")
+            };
+            dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
+            
+            DatagridList.Children.Add(dataGrid);
+
+            dataGrid.SelectionChanged += dgList_SelectionChanged;
+        }
+
+        private void btnOperator_Click(object sender, RoutedEventArgs e)
+        {
+            List<Operator> fetchedData = (new TableObject<Operator>(Table.OPERATOR)).data;
+            DataGrid dataGrid = new DataGrid();
+
+            DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(dataGrid);
+
+            List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+            {
+                new ColumnConfiguration("name", "FullName", width: 30),
+                new ColumnConfiguration("birthday", "Date of Birth", width: 60, backgroundColor: Brushes.Yellow),
+                new ColumnConfiguration("emergencyPerson", "Em Person"),
+                new ColumnConfiguration("emergencyContact", "Em Contact", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
+            };
+            dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
+            
+            DatagridList.Children.Add(dataGrid);
+
+            dataGrid.SelectionChanged += dgList_SelectionChanged;
+        }
+
+        private void btnEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            List<Employee> fetchedData = (new TableObject<Employee>(Table.EMPLOYEE)).data;
+            DataGrid dataGrid = new DataGrid();
+
+            DataGridHelper<Employee> dataGridHelper = new DataGridHelper<Employee>(dataGrid);
+
+            List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+            {
+                new ColumnConfiguration("name", "FullName", width: 30),
+                new ColumnConfiguration("position", "Position", width: 60, backgroundColor: Brushes.Yellow)
+            };
+            dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
+            
+            DatagridList.Children.Add(dataGrid);
+
+            dataGrid.SelectionChanged += dgList_SelectionChanged;
         }
 
         //PLANS ON EDITING FIELDS

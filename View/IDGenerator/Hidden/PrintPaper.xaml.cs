@@ -1,7 +1,12 @@
 ﻿using System.Drawing;
+using System.IO;
+using System.Printing;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Shapes;
+using System.Windows.Xps;
+using System.Windows.Xps.Packaging;
 using Image = System.Windows.Controls.Image;
 
 namespace SPTC_APP.View.IDGenerator.Hidden
@@ -82,16 +87,41 @@ namespace SPTC_APP.View.IDGenerator.Hidden
             }
 
             string page = (isFront) ? "Front" : "Back";
+            string outputPath = AppState.OUTPUT_PATH + page + "_page.xps";
 
-            PrintDialog printDialog = new PrintDialog();
+            // Check if the output directory exists, and create it if it doesn't
+            if (!Directory.Exists(AppState.OUTPUT_PATH))
+            {
+                Directory.CreateDirectory(AppState.OUTPUT_PATH);
+            }
+
+            using (XpsDocument xpsDoc = new XpsDocument(outputPath, FileAccess.Write))
+            {
+                XpsDocumentWriter xpsWriter = XpsDocument.CreateXpsDocumentWriter(xpsDoc);
+
+                PrintTicket printTicket = new PrintTicket(); // Optional, you can configure print settings here
+                xpsWriter.Write(frontPage, printTicket);
+            }
+
+            // Print the XPS file
+            PrintDialog printDialog = new PrintDialog();// Set the desired printer name
+
             if (printDialog.ShowDialog() == true)
             {
-                printDialog.PrintVisual(frontPage, "Printing : " + page + " page");
-                this.Hide();
+                XpsDocument xpsDocToPrint = new XpsDocument(outputPath, FileAccess.Read);
+                FixedDocumentSequence fixedDocumentSequence = xpsDocToPrint.GetFixedDocumentSequence();
+
+                // Get a paginator for the document sequence
+                DocumentPaginator paginator = fixedDocumentSequence.DocumentPaginator;
+
+                // Print the paginator
+                printDialog.PrintDocument(paginator, "Printing XPS Document");
+                xpsDocToPrint.Close();
+
                 ControlWindow.ShowDialog("Success", page + " page was printed successfully!" + ((isFront) ? "\nPress OK to print the next page." : ""), Icons.NOTIFY);
-                foreach(ID id in arr)
+                foreach (ID id in arr)
                 {
-                    if(id != null)
+                    if (id != null)
                     {
                         if (isFront)
                         {

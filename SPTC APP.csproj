@@ -346,7 +346,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SPTC APPLICATION_TemporaryKey.pfx" />
     <None Include="SPTC APP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

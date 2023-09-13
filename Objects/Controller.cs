@@ -1,9 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
 using SPTC_APP.Properties;
 using SPTC_APP.View;
+using Table = SPTC_APP.Database.Table;
 
 namespace SPTC_APP.Objects
 {
@@ -20,75 +25,84 @@ namespace SPTC_APP.Objects
             string password = Settings.Default.Password;
             AppState.LoadFromJson();
             AppState.SaveToJson();
-
-            DatabaseConnection.Builder builder = CreateDatabaseConnectionBuilder(host, port, database, username, password);
-
-            bool isConnected = await builder.CreateAsync();
-
-            int maxAttempts = 3;
-            int attemptCount = 1;
-
-            while (!IsConnectionSuccessful(isConnected, builder.Log) && attemptCount <= maxAttempts)
+            try
             {
-                EventLogger.Post($"DTB :: Database Connnection attemp ({attemptCount}) :{builder.Log.ToString()}");
-                UpdateUIForRetry(progressBar, log, builder.Log);
-                UpdateSettingsFromDefault(ref host, ref port, ref database, ref username, ref password);
+                DatabaseConnection.Builder builder = CreateDatabaseConnectionBuilder(host, port, database, username, password);
+            
+                bool isConnected = builder.Create();
 
-                DatabaseConfigInput inputWindow = GetDatabaseConfigInputWindow(host, port, database, username, password);
-                if (inputWindow.Exit)
+                int maxAttempts = 3;
+                int attemptCount = 1;
+
+                while (!IsConnectionSuccessful(isConnected, builder.Log) && attemptCount <= maxAttempts)
+                {
+                    EventLogger.Post($"DTB :: Database Connnection attemp ({attemptCount}) :{builder.Log.ToString()}");
+                    UpdateUIForRetry(progressBar, log, builder.Log);
+                    UpdateSettingsFromDefault(ref host, ref port, ref database, ref username, ref password);
+
+                    DatabaseConfigInput inputWindow = GetDatabaseConfigInputWindow(host, port, database, username, password);
+                    if (inputWindow.Exit)
+                    {
+                        window.Close();
+                    }
+                    UpdateSettingsFromDefault(ref host, ref port, ref database, ref username, ref password);
+
+                    builder = CreateDatabaseConnectionBuilder(host, port, database, username, password);
+                    isConnected = builder.Create();
+
+                    attemptCount++;
+                }
+                if (!isConnected && attemptCount > maxAttempts)
                 {
                     window.Close();
+                    return;
                 }
-                UpdateSettingsFromDefault(ref host, ref port, ref database, ref username, ref password);
 
-                builder = CreateDatabaseConnectionBuilder(host, port, database, username, password);
-                isConnected = await builder.CreateAsync();
+                if (isConnected && builder.Log == ConnectionLogs.ESTABLISHED)
+                {
+                    await PerformDatabaseTasks(progressBar, log);
+                }
+                else
+                {
+                    progressBar.Value = 10;
+                }
 
-                attemptCount++;
+                log.Text = DatabaseConnection.GetEnumDescription(builder.Log);
+                await Task.Delay(500);
+
+                if (progressBar.Value == 100)
+                {
+                    ShowLoginWindowAndCloseCurrent(window);
+                }
+                else
+                {
+                    HandleConnectionFailure(builder.Log);
+                    ShowSplashScreenAndCloseCurrent(window);
+                }
             }
-
-            if (isConnected && builder.Log == ConnectionLogs.ESTABLISHED)
+            catch (MySqlException ex)
             {
-                await PerformDatabaseTasks(progressBar, log);
+                EventLogger.Post("DTB :: MySqlException : " + ex.Message);
             }
-            else
+            catch (Exception e)
             {
-                progressBar.Value = 10;
-            }
-
-            log.Text = DatabaseConnection.GetEnumDescription(builder.Log);
-            await Task.Delay(500);
-
-            if (progressBar.Value == 100)
-            {
-                ShowLoginWindowAndCloseCurrent(window);
-            }
-            else
-            {
-                HandleConnectionFailure(builder.Log);
-                ShowSplashScreenAndCloseCurrent(window);
+                EventLogger.Post("ERR :: Exception : " + e.Message);
             }
         }
-
-        
-
         private static DatabaseConnection.Builder CreateDatabaseConnectionBuilder(string host, string port, string database, string username, string password)
         {
             return new DatabaseConnection.Builder(host, port, database, username, password);
         }
-
         private static bool IsConnectionSuccessful(bool isConnected, ConnectionLogs log)
         {
             return isConnected && log == ConnectionLogs.ESTABLISHED;
         }
-
         private static void UpdateUIForRetry(ProgressBar progressBar, TextBox log, ConnectionLogs logType)
         {
             progressBar.IsIndeterminate = true;
             log.Text = DatabaseConnection.GetEnumDescription(logType);
             Settings.Default.Reload();
         }
-
         private static void UpdateSettingsFromDefault(ref string host, ref string port, ref string database, ref string username, ref string password)
         {
             host = Settings.Default.Host;
@@ -97,7 +111,6 @@ namespace SPTC_APP.Objects
             username = Settings.Default.Username;
             password = Settings.Default.Password;
         }
-
         private static DatabaseConfigInput GetDatabaseConfigInputWindow(string host, string port, string database, string username, string password)
         {
             var inputWindow = new DatabaseConfigInput();
@@ -109,7 +122,6 @@ namespace SPTC_APP.Objects
             inputWindow.ShowDialog();
             return inputWindow;
         }
-
         private static async Task PerformDatabaseTasks(ProgressBar progressBar, TextBox log)
         {
             //TODO: task here, load database large files
@@ -124,13 +136,11 @@ namespace SPTC_APP.Objects
             //await 1 : for last loading
             progressBar.Value = 100;
         }
-
         private static void ShowLoginWindowAndCloseCurrent(Window window)
         {
             (new Login()).Show();
             window.Close();
         }
-
         private static void HandleConnectionFailure(ConnectionLogs logType)
         {
             if (logType == ConnectionLogs.CANNOT_CONNECT)
@@ -142,15 +152,11 @@ namespace SPTC_APP.Objects
                 ControlWindow.ShowDialog(DatabaseConnection.GetEnumDescription(logType), "Input the correct password and try again");
             }
         }
-
         private static void ShowSplashScreenAndCloseCurrent(Window window)
         {
             (new View.SplashScreen()).Show();
             window.Close();
         }
-
-
-        // LOGIN CONTROL (TMP: to PrintPreview)
         
 
         //FOR DEBUG PURPOSE

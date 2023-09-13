@@ -15,12 +15,13 @@ namespace SPTC_APP
     {
         //SAVED EXTERNALLY
         public static string APPSTATE_PATH = "Config\\AppState.json";
+        public static string OUTPUT_PATH = "Output\\";
         public static string DEFAULT_PASSWORD = "Admin1234";
         public static string DEFAULT_ADDRESSLINE2 = "Sapang Palay San Jose Del Monte, Bulacan";
         public static string EXPIRATION_DATE = "2023 - 2024";
         public static string CHAIRMAN = "ROLLY M. LABINDAO";
         public static string REGISTRATION_NO = "9520-03006397";
-        public static double PRINT_AJUSTMENTS = 24.67712;
+        public static double PRINT_AJUSTMENTS = 0;
 
 
 
@@ -45,9 +46,9 @@ namespace SPTC_APP
             {
 
                 USER = employee;
-                (new PrintPreview()).Show();
+                //(new PrintPreview()).Show();
                 //(new Test()).Show();
-                //(new MainBody()).Show();
+                (new MainBody()).Show();
                 EventLogger.Post($"User :: Login Success: USER({username})");
                 window.Close();
             }
@@ -67,6 +68,7 @@ namespace SPTC_APP
             var data = new
             {
                 APPSTATE_PATH,
+                OUTPUT_PATH,
                 DEFAULT_PASSWORD,
                 DEFAULT_ADDRESSLINE2,
                 EXPIRATION_DATE,
@@ -104,6 +106,7 @@ namespace SPTC_APP
                 {
                     dynamic data = JsonConvert.DeserializeObject(json);
                     APPSTATE_PATH = data.APPSTATE_PATH;
+                    OUTPUT_PATH = data.OUTPUT_PATH;
                     DEFAULT_PASSWORD = data.DEFAULT_PASSWORD;
                     DEFAULT_ADDRESSLINE2 = data.DEFAULT_ADDRESSLINE2;
                     EXPIRATION_DATE = data.EXPIRATION_DATE;

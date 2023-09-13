@@ -35,14 +35,14 @@ namespace SPTC_APP.View
             EventLogger.Post("VIEW :: ID GENERATE Window");
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             btnStartPad.IsEnabled = false;
+            isUpdate = false;
+            franchise = new Franchise();
             if (videoDevices.Count == 0)
             {
                 EventLogger.Post("ERR :: No video devices found.");
                 btnStartCam.IsEnabled = false;
                 return;
             }
-            franchise = new Franchise();
-            isUpdate = false;
             videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
         }
@@ -56,16 +56,7 @@ namespace SPTC_APP.View
             EventLogger.Post("VIEW :: ID GENERATE Window id="+franchise.id);
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             btnStartPad.IsEnabled = false;
-            if (videoDevices.Count == 0)
-            {
-                EventLogger.Post("ERR :: No video devices found.");
-                btnStartCam.IsEnabled = false;
-                return;
-            }
-
-            videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
-            videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
-
+            
             this.isDriver = isDriver;
             MySwitch.Visibility = Visibility.Hidden;
             if (isDriver)
@@ -154,6 +145,15 @@ namespace SPTC_APP.View
                 }
             }
 
+            if (videoDevices.Count == 0)
+            {
+                EventLogger.Post("ERR :: No video devices found.");
+                btnStartCam.IsEnabled = false;
+                return;
+            }
+
+            videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
+            videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
         }
 

@@ -44,6 +44,7 @@ namespace SPTC_APP.Objects
                     if (inputWindow.Exit)
                     {
                         window.Close();
+                        return;
                     }
                     UpdateSettingsFromDefault(ref host, ref port, ref database, ref username, ref password);
 

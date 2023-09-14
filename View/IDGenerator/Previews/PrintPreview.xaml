@@ -58,9 +58,9 @@
             <ScrollViewer
                 x:Name="scrollViewer"
                 Grid.Column="0"
-                HorizontalScrollBarVisibility="Visible"
+                HorizontalScrollBarVisibility="Auto"
                 PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown"
-                VerticalScrollBarVisibility="Visible">
+                VerticalScrollBarVisibility="Auto">
                 <Grid
                     x:Name="zoomableGrid"
                     HorizontalAlignment="Center"

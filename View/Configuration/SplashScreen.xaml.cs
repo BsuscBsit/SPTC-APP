@@ -10,18 +10,9 @@ namespace SPTC_APP.View
         public SplashScreen()
         {
             InitializeComponent();
-            try
-            {
+            
                 Controller.StartInitialization(this, pbLoading, tbDebugLog);
-            }
-            catch (MySqlException ex)
-            {
-                EventLogger.Post("DTB :: MySqlException : " + ex.Message);
-            }
-            catch (Exception e)
-            {
-                EventLogger.Post("ERR :: Exception : " + e.Message);
-            }
+            
         }
     }
 }

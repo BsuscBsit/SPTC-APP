@@ -61,7 +61,12 @@
                         VerticalAlignment="Top"
                         Text="TextBox"
                         TextWrapping="Wrap" />
-                    
+                    <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
+                        <Button x:Name="btnFranchise" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Franchise" Height="22" Width="100" Click="btnFranchise_Click" Margin="141,0,0,.0"/>
+                        <Button x:Name="btnDriver" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Driver" Height="22" Width="100" Margin="241,0,0,0" Click="btnDriver_Click"/>
+                        <Button x:Name="btnOperator" HorizontalAlignment="Left" VerticalAlignment="Top"  Content="Operator" Height="22" Width="100" Margin="341,0,0,0" Click="btnOperator_Click"/>
+                        <Button x:Name="btnEmployee" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Employee" Height="22" Width="100" Margin="441,0,0,0s" Click="btnEmployee_Click"/>
+                    </Grid>
                     <Grid x:Name="DatagridList" Margin="0, 50, 0, 0" />
                     <Image
                         x:Name="tmpImage"
@@ -70,12 +75,6 @@
                         Margin="632,18,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top" />
-                    <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
-                        <Button x:Name="btnFranchise" HorizontalAlignment="Left" Content="Franchise" Height="22" Width="100" Click="btnFranchise_Click" Margin="141,0,553,384"/>
-                        <Button x:Name="btnDriver" HorizontalAlignment="Left" Content="Driver" Height="22" Width="100" Margin="241,0,0,384" Click="btnDriver_Click"/>
-                        <Button x:Name="btnOperator" HorizontalAlignment="Left"  Content="Operator" Height="22" Width="100" Margin="341,0,0,384" Click="btnOperator_Click"/>
-                        <Button x:Name="btnEmployee" HorizontalAlignment="Left" Content="Employee" Height="22" Width="100" Margin="441,0,0,384" Click="btnEmployee_Click"/>
-                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>

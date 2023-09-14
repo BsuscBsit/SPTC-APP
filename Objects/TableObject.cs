@@ -30,7 +30,7 @@ namespace SPTC_APP.Objects
             }
             catch (MySqlException e)
             {
-                ControlWindow.ShowDialog("Database Error", "Error Loading table.", Icons.ERROR);
+                ControlWindow.ShowDialog("Database Error", "Error Loading table. \n" + e.Message, Icons.ERROR);
             }
         }
     }

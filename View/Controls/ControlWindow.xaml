@@ -62,16 +62,17 @@
                     FontSize="20"
                     FontWeight="Bold"
                     Foreground="Black" />
-                <Label
-                    x:Name="lblContent"
-                    Grid.Row="1"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="CONTENT"
-                    FontFamily="Inter"
-                    FontSize="16"
-                    FontWeight="Medium"
-                    Foreground="Gray" />
+                <ScrollViewer Grid.Row="1" MaxWidth="350"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" PanningMode="HorizontalOnly">
+                    <Label
+                        x:Name="lblContent"
+                        Content="CONTENT"
+                        FontFamily="Inter"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="Gray"/>
+                </ScrollViewer>
             </Grid>
         </StackPanel>
         <Button

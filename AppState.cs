@@ -38,6 +38,7 @@ namespace SPTC_APP
 
             if (result is View.ControlWindow controlWindow)
             {
+                result.Show();
                 EventLogger.Post($"User :: Login Failed: USER({username})");
                 //DEBUG THIS ON OTHER PC
                 //CreateEmployee(AppState.Employees.IndexOf(username)); //result in password :: 751cb3f4aa17c36186f4856c8982bf27
@@ -92,7 +93,7 @@ namespace SPTC_APP
                 }
                 catch (Exception ex)
                 {
-                    ControlWindow.ShowDialog("Error creating log file", ex.Message);
+                    ControlWindow.Show("Error creating log file", ex.Message);
                 }
             }
         }

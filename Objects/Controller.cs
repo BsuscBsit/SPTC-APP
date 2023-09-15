@@ -146,11 +146,11 @@ namespace SPTC_APP.Objects
         {
             if (logType == ConnectionLogs.CANNOT_CONNECT)
             {
-                ControlWindow.ShowDialog(DatabaseConnection.GetEnumDescription(logType), "Check if database is online");
+                ControlWindow.Show(DatabaseConnection.GetEnumDescription(logType), "Check if database is online");
             }
             else if (logType == ConnectionLogs.WRONG_PASSWORD)
             {
-                ControlWindow.ShowDialog(DatabaseConnection.GetEnumDescription(logType), "Input the correct password and try again");
+                ControlWindow.Show(DatabaseConnection.GetEnumDescription(logType), "Input the correct password and try again");
             }
         }
         private static void ShowSplashScreenAndCloseCurrent(Window window)

@@ -9,29 +9,40 @@ namespace SPTC_APP.View
     /// </summary>
     public partial class ControlWindow : Window
     {
-        public ControlWindow()
+        private bool result;
+        public ControlWindow(string header = "", string content = "", Icons icons = Icons.DEFAULT)
         {
             InitializeComponent();
+            this.SetIcon(icons);
+            this.lblHeader.Content = header;
+            this.lblContent.Content = content;
+            this.result = false;
         }
 
-        public static ControlWindow Show(string header, string content, Icons icons = Icons.DEFAULT)
+        public static void Show(string header, string content, Icons icons = Icons.DEFAULT)
         {
             ControlWindow control = new ControlWindow();
             control.SetIcon(icons);
             control.lblHeader.Content = header;
             control.lblContent.Content = content;
             control.Show();
-            return control;
+            //return control;
         }
-        public static ControlWindow ShowDialog(string header, string content, Icons icons = Icons.DEFAULT)
+        public static bool ShowDialog(string header, string content, Icons icons = Icons.DEFAULT)
         {
             
             ControlWindow control = new ControlWindow();
             control.SetIcon(icons);
             control.lblHeader.Content = header;
             control.lblContent.Content = content;
-            control.ShowDialog();
-            return control;
+            control.Cancellable();
+            control.Show();
+            return control.result;
+        }
+
+        private void Cancellable()
+        {
+            //Set cancel visibility here
         }
 
         private void SetIcon(Icons icon)
@@ -55,6 +66,7 @@ namespace SPTC_APP.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.result = false;
             this.Close();
         }
     }

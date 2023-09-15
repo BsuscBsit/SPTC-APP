@@ -396,7 +396,7 @@ namespace SPTC_APP.View
             }
             else
             {
-                ControlWindow.ShowDialog("Input Fields incomplete!", "Missing some required inputs.");
+                ControlWindow.Show("Input Fields incomplete!", "Missing some required inputs.");
             }
             if (videoSource != null && videoSource.IsRunning)
             {
@@ -427,7 +427,7 @@ namespace SPTC_APP.View
                 }
             }catch(Exception e)
             {
-                ControlWindow.ShowDialog("Camera Error", e.Message, Icons.ERROR);
+                ControlWindow.Show("Camera Error", e.Message, Icons.ERROR);
             }
         }
     }

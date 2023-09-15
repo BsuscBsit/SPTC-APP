@@ -2,12 +2,12 @@
     x:Class="SPTC_APP.View.Test"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SPTC_APP.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Test"
     Width="800"
-    Height="450"
-    mc:Ignorable="av">
+    Height="450" mc:Ignorable="d">
     <Grid>
         <Image x:Name="imageRender" />
 
@@ -65,7 +65,7 @@
                         <Button x:Name="btnFranchise" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Franchise" Height="22" Width="100" Click="btnFranchise_Click" Margin="141,0,0,.0"/>
                         <Button x:Name="btnDriver" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Driver" Height="22" Width="100" Margin="241,0,0,0" Click="btnDriver_Click"/>
                         <Button x:Name="btnOperator" HorizontalAlignment="Left" VerticalAlignment="Top"  Content="Operator" Height="22" Width="100" Margin="341,0,0,0" Click="btnOperator_Click"/>
-                        <Button x:Name="btnEmployee" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Employee" Height="22" Width="100" Margin="441,0,0,0s" Click="btnEmployee_Click"/>
+                        <Button x:Name="btnEmployee" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Employee" Height="22" Width="100" Margin="441,0,0,0" Click="btnEmployee_Click"/>
                     </Grid>
                     <Grid x:Name="DatagridList" Margin="0, 50, 0, 0" />
                     <Image

@@ -31,17 +31,17 @@ namespace SPTC_APP.View
             }
             else
             {
-                lblName.Content = franchise.Driver_day.name.wholename;
+                lblName.Content = franchise.Driver.name.wholename;
 
                 lblLicense.Content = franchise.licenceNO;
                 lblBodyNum.Content = franchise.bodynumber;
-                lblEmePer.Content = franchise.Driver_day.emergencyPerson;
-                lblAddressBuilding.Content = franchise.Driver_day.address.addressline1;
-                lblAddressStreet.Content = franchise.Driver_day.address.addressline2;
-                lblContact.Content = franchise.Driver_day.emergencyContact;
-                if (franchise.Driver_day.signature != null)
+                lblEmePer.Content = franchise.Driver.emergencyPerson;
+                lblAddressBuilding.Content = franchise.Driver.address.addressline1;
+                lblAddressStreet.Content = franchise.Driver.address.addressline2;
+                lblContact.Content = franchise.Driver.emergencyContact;
+                if (franchise.Driver.signature != null)
                 {
-                    imgSign.Source = franchise.Driver_day.signature.GetSource();
+                    imgSign.Source = franchise.Driver.signature.GetSource();
                 }
             }
         }

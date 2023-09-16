@@ -118,6 +118,15 @@ namespace SPTC_APP.View
         public void SaveInfo()
         {
             franchise.Save();
+            IDHistory history = new IDHistory();
+            if(type == General.OPERATOR)
+            {
+                history.WriteInto(franchise.Operator.id, General.OPERATOR, franchise.Operator.name.id);
+            } else
+            {
+                history.WriteInto(franchise.Driver.id, General.DRIVER, franchise.Driver.name.id);
+            }
+            history.Save();
         }
     }
 }

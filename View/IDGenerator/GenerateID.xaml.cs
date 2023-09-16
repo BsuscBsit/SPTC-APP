@@ -64,9 +64,9 @@ namespace SPTC_APP.View
                 drvOrOprt.Content = "DRIVER";
                 lblPhoto.Content = "Driver's Photo";
                 lblsign.Content = "Driver's Signature";
-                if (franchise.Driver_day != null)
+                if (franchise.Driver != null)
                 {
-                    var drv = franchise.Driver_day;
+                    var drv = franchise.Driver;
                     if(drv.name != null)
                     {
                         cbGender.SelectedIndex = ((drv.name.prefix == "Mrs.") ? 1 : 0);
@@ -325,7 +325,7 @@ namespace SPTC_APP.View
                     string prefix = (cbGender.SelectedIndex == 0) ? "Mr." : "Mrs.";
                     if (isUpdate)
                     {
-                        @obj = franchise.Driver_day;
+                        @obj = franchise.Driver;
                         Name name = @obj.name;
                         name.prefix = prefix;
                         name.firstname = tboxFn.Text;
@@ -343,9 +343,9 @@ namespace SPTC_APP.View
                         @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
                     }
                     
-                    franchise.WriteInto(tboxBnum.Text, null, @obj, null, tboxLnum.Text);
+                    franchise.WriteInto(tboxBnum.Text, null, @obj, tboxLnum.Text);
 
-                    ID id = new ID(franchise, Objects.General.DRIVER_DAY);
+                    ID id = new ID(franchise, Objects.General.DRIVER);
                     print.Save(id);
                     print.Show();
                     this.Hide();
@@ -361,7 +361,7 @@ namespace SPTC_APP.View
                     }
                     if (hasSign)
                     {
-                        sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign  -{tboxFn.Text}");
+                        sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign - {tboxFn.Text}");
                     }
                     string prefix = (cbGender.SelectedIndex == 0) ? "Mr." : "Mrs.";
                     if (isUpdate)
@@ -385,7 +385,7 @@ namespace SPTC_APP.View
                     }
 
                     
-                    franchise.WriteInto(tboxBnum.Text, @obj, null, null, tboxLnum.Text);
+                    franchise.WriteInto(tboxBnum.Text, @obj, null, tboxLnum.Text);
 
                     ID id = new ID(franchise, Objects.General.OPERATOR);
                     print.Save(id);

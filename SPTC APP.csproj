@@ -192,6 +192,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Objects\IDHistory.cs" />
     <Compile Include="Objects\TableObject.cs" />
     <Compile Include="View\Configuration\DatabaseConfigInput.xaml.cs">
       <DependentUpon>DatabaseConfigInput.xaml</DependentUpon>

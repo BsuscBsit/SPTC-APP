@@ -181,8 +181,7 @@
                     Height="31"
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
-                    Style="{StaticResource GenericTextBox}"
-                    Text="">
+                    Style="{StaticResource GenericTextBox}">
                     <TextBox.ToolTip>
                         <ToolTip Content="tis a tooltip" />
                     </TextBox.ToolTip>
@@ -228,8 +227,7 @@
                     Height="31"
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
-                    Style="{StaticResource GenericTextBox}"
-                    Text="" />
+                    Style="{StaticResource GenericTextBox}" />
                 <Label
                     Grid.Row="4"
                     Grid.Column="0"

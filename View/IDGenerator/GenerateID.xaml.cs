@@ -430,5 +430,6 @@ namespace SPTC_APP.View
                 ControlWindow.Show("Camera Error", e.Message, Icons.ERROR);
             }
         }
+
     }
 }

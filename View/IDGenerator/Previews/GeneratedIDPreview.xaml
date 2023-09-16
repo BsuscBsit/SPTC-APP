@@ -47,11 +47,11 @@
                     Padding="20,20,20,20"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    Background="#FFD2D2D2"
-                    BorderBrush="#FFBDBDBD"
+                    Background="{StaticResource ThemeSoftGrey1}"
+                    BorderBrush="{StaticResource ThemeSoftGrey2}"
                     BorderThickness="1"
                     CornerRadius="5,5,5,5">
-                    <Border BorderBrush="Black" BorderThickness="1">
+                    <Border BorderBrush="Black" BorderThickness="1.2">
                         <Image x:Name="imgFront" />
                     </Border>
                 </Border>
@@ -64,8 +64,8 @@
                     Padding="20,20,20,20"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Background="#FFD2D2D2"
-                    BorderBrush="#FFBDBDBD"
+                    Background="{StaticResource ThemeSoftGrey1}"
+                    BorderBrush="{StaticResource ThemeSoftGrey2}"
                     BorderThickness="1"
                     CornerRadius="5,5,5,5">
                     <Image x:Name="imgBack" />

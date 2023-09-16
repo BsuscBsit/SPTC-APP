@@ -9,13 +9,10 @@
     Title="Splash Screen"
     Width="300"
     Height="350"
-    AllowsTransparency="True"
-    Background="Transparent"
     Icon="../../View/Images/icons/logo.ico"
     ResizeMode="NoResize"
     Style="{StaticResource CustomWindowStyle}"
     WindowStartupLocation="CenterScreen"
-    WindowStyle="None"
     mc:Ignorable="d">
     <Grid
         x:Name="grid"

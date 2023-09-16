@@ -29,7 +29,7 @@
                 Grid.Row="0"
                 Margin="0,1,0,-8"
                 HorizontalAlignment="Center"
-                Orientation="Horizontal">
+                Orientation="Horizontal" UseLayoutRounding="True">
                 <Label
                     x:Name="label1"
                     HorizontalAlignment="Center"
@@ -46,7 +46,7 @@
             <StackPanel
                 Grid.Row="1"
                 HorizontalAlignment="Center"
-                Orientation="Vertical">
+                Orientation="Vertical" UseLayoutRounding="True">
                 <Label
                     x:Name="label2"
                     Margin="0,0,0,-9"
@@ -88,6 +88,7 @@
                 </Grid.ColumnDefinitions>
                 <Image
                     x:Name="imgSPTC"
+                    UseLayoutRounding="True"
                     Grid.Column="0"
                     Width="115"
                     Height="115"
@@ -98,6 +99,7 @@
                     Stretch="Uniform" />
                 <Image
                     x:Name="imgID"
+                    UseLayoutRounding="True"
                     Grid.Column="1"
                     Width="144"
                     Height="144"
@@ -174,7 +176,7 @@
             <StackPanel
                 Grid.Row="5"
                 HorizontalAlignment="Center"
-                Orientation="Vertical">
+                Orientation="Vertical" UseLayoutRounding="True">
                 <Label
                     x:Name="lblChairman"
                     Margin="0,0,0,-8"
@@ -195,6 +197,6 @@
             VerticalAlignment="Bottom"
             Content="AllenLiao-Morado2022"
             FontFamily="Centaur"
-            FontSize="11" />
+            FontSize="11" UseLayoutRounding="True" />
     </Grid>
 </Window>

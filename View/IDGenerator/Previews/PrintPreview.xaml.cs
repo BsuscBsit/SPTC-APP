@@ -26,6 +26,8 @@ namespace SPTC_APP.View
         private double zoomScale = 1.0;
         private Point panOrigin;
         private bool isPanning = false;
+        private bool isReset = true;
+        private int offsetAfterSpace = 50;
 
         public PrintPreview()
         {
@@ -311,19 +313,15 @@ namespace SPTC_APP.View
             {
                 case 1:
                     mGrid1 = id;
-                    btnAddNew.Visibility = Visibility.Visible;
                     break;
                 case 2:
                     mGrid2 = id;
-                    btnAddNew.Visibility = Visibility.Visible;
                     break;
                 case 3:
                     mGrid3 = id;
-                    btnAddNew.Visibility = Visibility.Visible;
                     break;
                 case 4:
                     mGrid4 = id;
-                    btnAddNew.Visibility = Visibility.Hidden;
                     break;
                 default:
                     break;
@@ -372,10 +370,14 @@ namespace SPTC_APP.View
             scrollViewer.PreviewMouseMove += OnMouseMove;
             scrollViewer.PreviewMouseUp += OnMouseUp;
         }
-
+        private void CenterOffset()
+        {
+            scrollViewer.ScrollToVerticalOffset(scrollViewer.ScrollableHeight / 2);
+            scrollViewer.ScrollToHorizontalOffset(scrollViewer.ScrollableWidth / 2);
+        }
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && zoomScale > 1)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 var contentArea = new Rect(0, 0, scrollViewer.ViewportWidth, scrollViewer.ViewportHeight);
 
@@ -388,8 +390,6 @@ namespace SPTC_APP.View
                 }
             }
         }
-
-
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
             if (isPanning && scrollViewer.IsMouseCaptured)
@@ -404,7 +404,6 @@ namespace SPTC_APP.View
                 panOrigin = currentPos;
             }
         }
-
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
         {
             if (isPanning)
@@ -414,21 +413,18 @@ namespace SPTC_APP.View
                 scrollViewer.ReleaseMouseCapture();
             }
         }
-
         private void UpdateZoom(double newZoom)
         {
             zoomScale = Math.Max(0.1, newZoom);
             zoomSlider.Value = zoomScale;
             UpdateZoomTransform();
         }
-
         private void UpdateZoomTransform()
         {
             ScaleTransform scaleTransform = new ScaleTransform(zoomScale, zoomScale);
             zoomableGrid.LayoutTransform = scaleTransform;
             UpdateZoomText();
         }
-
         private void UpdateZoomText()
         {
             if (zoomTextBlock != null)
@@ -436,27 +432,24 @@ namespace SPTC_APP.View
                 zoomTextBlock.Text = $"Zoom: {Math.Round(zoomScale * 100)}%";
             }
         }
-
         private void ZoomIn_Click(object sender, RoutedEventArgs e)
         {
             UpdateZoom(zoomScale + 0.1);
         }
-
         private void ZoomOut_Click(object sender, RoutedEventArgs e)
         {
             UpdateZoom(zoomScale - 0.1);
         }
-
         private void ResetZoom_Click(object sender, RoutedEventArgs e)
         {
+            isReset = true;
             UpdateZoom(1.0);
+            CenterOffset();
         }
-
         private void ZoomSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             UpdateZoom(zoomSlider.Value);
         }
-
         private void ScrollViewer_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (zoomScale == 1)
@@ -468,7 +461,6 @@ namespace SPTC_APP.View
                 }
             }
         }
-
         private void ZoomToImage(Image image)
         {
             if (zoomScale == 1)
@@ -479,23 +471,23 @@ namespace SPTC_APP.View
                 switch (((Grid)image.Parent).Name)
                 {
                     case "grid1":
-                        tho = 55;
-                        tvo = 72;
+                        tho = 85;
+                        tvo = 90;
                         pan = (image.Tag?.ToString() != "NullImage");
                         break;
                     case "grid2":
-                        tho = 410;
-                        tvo = 72;
+                        tho = 420;
+                        tvo = 90;
                         pan = (image.Tag?.ToString() != "NullImage");
                         break;
                     case "grid3":
-                        tho = 55;
-                        tvo = 505;
+                        tho = 85;
+                        tvo = 545;
                         pan = (image.Tag?.ToString() != "NullImage");
                         break;
                     case "grid4":
-                        tho = 410;
-                        tvo = 505;
+                        tho = 420;
+                        tvo = 545;
                         pan = (image.Tag?.ToString() != "NullImage");
                         break;
                     default:
@@ -504,17 +496,15 @@ namespace SPTC_APP.View
                 if (pan)
                 {
                     UpdateZoom(2.44);
-                    scrollViewer.ScrollToHorizontalOffset(tho);
-                    scrollViewer.ScrollToVerticalOffset(tvo);
+                    scrollViewer.ScrollToHorizontalOffset(tho + (offsetAfterSpace * 2));
+                    scrollViewer.ScrollToVerticalOffset(tvo + (offsetAfterSpace * 2));
                 }
             }
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SaveAndClearID();
         }
-
         private void btnPrintBoth_Click(object sender, RoutedEventArgs e)
         {
             if (idcount >= 1)
@@ -543,6 +533,56 @@ namespace SPTC_APP.View
                 printpaper.Close();
                 RenderIDs();
             }
+        }
+
+        private void frontPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            CenterOffset();
+        }
+
+        private void scrollViewer_LayoutUpdated(object sender, EventArgs e)
+        {
+            if (isReset)
+            {
+                CenterOffset();
+                isReset = false;
+            }
+        }
+
+        private void scrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            bool isCtrlPressed = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
+            bool isShiftPressed = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+
+            if (isCtrlPressed)
+            {
+                double horizontalChange = e.Delta;
+                double horizontalOffset = scrollViewer.HorizontalOffset - horizontalChange;
+                scrollViewer.ScrollToHorizontalOffset(horizontalOffset);
+            }
+            else if (isShiftPressed)
+            {
+                double zoomChange = e.Delta > 0 ? 0.1 : -0.1;
+                double newZoom = zoomScale + zoomChange;
+                UpdateZoom(newZoom);
+            }
+            else
+            {
+                double verticalChange = e.Delta;
+                double verticalOffset = scrollViewer.VerticalOffset - verticalChange;
+                scrollViewer.ScrollToVerticalOffset(verticalOffset);
+            }
+            e.Handled = true;
+        }
+
+        private void frontPage_Loaded(object sender, SizeChangedEventArgs e)
+        {
+            CenterOffset();
+        }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            CenterOffset();
         }
     }
 }

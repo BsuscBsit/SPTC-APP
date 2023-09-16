@@ -5,16 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Print Preview"
-    Width="560"
-    Height="535"
-    AllowsTransparency="True"
     Background="Transparent"
     Icon="../../../View/Images/icons/logo.ico"
     ResizeMode="NoResize"
     Style="{StaticResource CustomWindowStyle}"
     WindowStartupLocation="CenterScreen"
-    WindowStyle="None"
-    mc:Ignorable="d">
+    mc:Ignorable="d" SizeToContent="WidthAndHeight" Width="569" Height="545" ContentRendered="Window_ContentRendered">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -23,11 +19,12 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Height="535" VerticalAlignment="Top">
+    <Grid VerticalAlignment="Top" Width="570">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="462" />
+            <RowDefinition Height="10" />
         </Grid.RowDefinitions>
         <Border
             Grid.Row="0"
@@ -40,144 +37,179 @@
             Margin="40,0,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="PRINT PREVIEW"
+            Content="PRINT LAYOUT"
             FontFamily="Inter"
             FontSize="20"
             FontWeight="SemiBold"
             Foreground="Gray" />
         <Grid
             Grid.Row="2"
-            Height="451"
-            Margin="28,0,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top">
+            VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="347" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="364" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="169" />
             </Grid.ColumnDefinitions>
-            <ScrollViewer
-                x:Name="scrollViewer"
+            <Border
                 Grid.Column="0"
-                HorizontalScrollBarVisibility="Auto"
-                PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown"
-                VerticalScrollBarVisibility="Auto">
-                <Grid
-                    x:Name="zoomableGrid"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                    <Border
-                        x:Name="Content"
-                        Grid.Column="0"
-                        Width="326"
-                        Height="422"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BorderBrush="Black"
-                        BorderThickness="1">
-                        <Grid x:Name="frontPage">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Border
-                                x:Name="g1Border"
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Width="130.56"
-                                Height="169.728"
-                                Margin="0,0,9,9"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Bottom"
-                                BorderBrush="black"
-                                BorderThickness="1">
-                                <Grid x:Name="grid1">
-                                    <Image
-                                        Margin="0,0,0,0"
-                                        Opacity="0.2"
-                                        Source="/View/Images/no_id.png"
-                                        Stretch="UniformToFill"
-                                        Tag="NullImage" />
-                                </Grid>
+                Padding="10,10,10,10"
+                Background="{StaticResource ThemeSoftGrey1}"
+                CornerRadius="4,4,4,4">
+                <ScrollViewer
+                    x:Name="scrollViewer"
+                    HorizontalScrollBarVisibility="Auto"
+                    PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown"
+                    SnapsToDevicePixels="False"
+                    UseLayoutRounding="True"
+                    VerticalScrollBarVisibility="Auto" LayoutUpdated="scrollViewer_LayoutUpdated" PreviewMouseWheel="scrollViewer_PreviewMouseWheel" Loaded="frontPage_Loaded">
+                    <ScrollViewer.Content>
+                        <Grid
+                            x:Name="zoomableGrid"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            SnapsToDevicePixels="False" Loaded="frontPage_Loaded">
+                            <Border Padding="50,50,50,50">
+                                <Border.LayoutTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterX="0" CenterY="0" />
+                                        <SkewTransform CenterX="0" CenterY="0" />
+                                        <RotateTransform CenterX="0" CenterY="0" />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </Border.LayoutTransform>
+                                <Border
+                                    x:Name="Content"
+                                    Grid.Column="0"
+                                    Width="326.4"
+                                    Height="422.4"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="White"
+                                    BorderBrush="Black"
+                                    BorderThickness="1">
+                                    <Border.LayoutTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="0.98" ScaleY="0.99" />
+                                            <SkewTransform />
+                                            <RotateTransform />
+                                            <TranslateTransform X="-27" />
+                                        </TransformGroup>
+                                    </Border.LayoutTransform>
 
-                            </Border>
-                            <Border
-                                x:Name="g2Border"
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Width="130.56"
-                                Height="169.728"
-                                Margin="9,0,0,9"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom"
-                                BorderBrush="black"
-                                BorderThickness="1">
-                                <Grid x:Name="grid2">
-                                    <Image
-                                        Margin="0,0,0,0"
-                                        Opacity="0.2"
-                                        Source="/View/Images/no_id.png"
-                                        Stretch="UniformToFill"
-                                        Tag="NullImage" />
-                                </Grid>
+                                    <Grid x:Name="frontPage" Loaded="frontPage_Loaded" SizeChanged="frontPage_Loaded">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border
+                                            x:Name="g1Border"
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Width="122.112"
+                                            Height="169.728"
+                                            Margin="0,0,9,9"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Bottom"
+                                            BorderBrush="black"
+                                            BorderThickness="1">
+                                            <Grid x:Name="grid1">
+                                                <Image
+                                                    Margin="0,0,0,0"
+                                                    Opacity="0.2"
+                                                    Source="/View/Images/no_id.png"
+                                                    Stretch="UniformToFill"
+                                                    Tag="NullImage" />
+                                            </Grid>
 
-                            </Border>
-                            <Border
-                                x:Name="g3Border"
-                                Grid.Row="2"
-                                Grid.Column="0"
-                                Width="130.56"
-                                Height="169.728"
-                                Margin="0,9,9,0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                BorderBrush="black"
-                                BorderThickness="1">
-                                <Grid x:Name="grid3">
-                                    <Image
-                                        Margin="0,0,0,0"
-                                        Opacity="0.2"
-                                        Source="/View/Images/no_id.png"
-                                        Stretch="UniformToFill"
-                                        Tag="NullImage" />
-                                </Grid>
+                                        </Border>
+                                        <Border
+                                            x:Name="g2Border"
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Width="122.112"
+                                            Height="169.728"
+                                            Margin="9,0,0,9"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Bottom"
+                                            BorderBrush="black"
+                                            BorderThickness="1">
+                                            <Grid x:Name="grid2">
+                                                <Image
+                                                    Margin="0,0,0,0"
+                                                    Opacity="0.2"
+                                                    Source="/View/Images/no_id.png"
+                                                    Stretch="UniformToFill"
+                                                    Tag="NullImage" />
+                                            </Grid>
 
-                            </Border>
-                            <Border
-                                x:Name="g4Border"
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                Width="130.56"
-                                Height="169.728"
-                                Margin="9,9,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                BorderBrush="Black"
-                                BorderThickness="1">
-                                <Grid x:Name="grid4">
-                                    <Image
-                                        Margin="0,0,0,0"
-                                        Opacity="0.2"
-                                        Source="/View/Images/no_id.png"
-                                        Stretch="UniformToFill"
-                                        Tag="NullImage" />
-                                </Grid>
+                                        </Border>
+                                        <Border
+                                            x:Name="g3Border"
+                                            Grid.Row="2"
+                                            Grid.Column="0"
+                                            Width="122.112"
+                                            Height="169.728"
+                                            Margin="0,9,9,0"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            BorderBrush="black"
+                                            BorderThickness="1">
+                                            <Grid x:Name="grid3">
+                                                <Image
+                                                    Margin="0,0,0,0"
+                                                    Opacity="0.2"
+                                                    Source="/View/Images/no_id.png"
+                                                    Stretch="UniformToFill"
+                                                    Tag="NullImage" />
+                                            </Grid>
 
+                                        </Border>
+                                        <Border
+                                            x:Name="g4Border"
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Width="122.112"
+                                            Height="169.728"
+                                            Margin="9,9,0,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            BorderBrush="Black"
+                                            BorderThickness="1">
+                                            <Grid x:Name="grid4">
+                                                <Image
+                                                    Margin="0,0,0,0"
+                                                    Opacity="0.2"
+                                                    Source="/View/Images/no_id.png"
+                                                    Stretch="UniformToFill"
+                                                    Tag="NullImage" />
+                                            </Grid>
+
+                                        </Border>
+                                    </Grid>
+                                </Border>
                             </Border>
                         </Grid>
-                    </Border>
-
-                </Grid>
-            </ScrollViewer>
-            <Grid Grid.Column="1" Margin="13,0,0,0">
+                    </ScrollViewer.Content>
+                </ScrollViewer>
+            </Border>
+            <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Button
+                        x:Name="btnAddNew"
+                        Width="135"
+                        Height="40"
+                        Margin="8,0,8,20"
+                        Click="btnAddNew_Click"
+                        Content="ADD NEW ID"
+                        Style="{StaticResource GenericButton}" />
                     <Button
                         x:Name="btnPrintCurrent"
                         Width="135"
@@ -196,21 +228,12 @@
                         Style="{StaticResource GenericButton}" />
 
                     <Button
-                        x:Name="btnAddNew"
-                        Width="135"
-                        Height="40"
-                        Margin="8,0,8,20"
-                        Click="btnAddNew_Click"
-                        Content="ADD NEW ID"
-                        Style="{StaticResource GenericButton}" />
-                    <Button
                         x:Name="btnClear"
                         Height="40"
                         Margin="8,0,8,20"
                         Click="Button_Click"
                         Content="CLEAR"
-                        Style="{StaticResource GenericButton}"
-                        Visibility="Collapsed" />
+                        Style="{StaticResource GenericButton}" Visibility="Collapsed" />
                     <Button
                         x:Name="btnCancelp"
                         Width="135"
@@ -248,6 +271,7 @@
                         Grid.Row="2"
                         Width="25"
                         Height="25"
+                        Margin="17,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
                         Click="ZoomOut_Click"
@@ -267,6 +291,7 @@
                         Grid.Row="2"
                         Width="25"
                         Height="25"
+                        Margin="0,0,17,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Click="ZoomIn_Click"
@@ -279,7 +304,7 @@
                 Grid.Column="0"
                 Width="181"
                 Height="49"
-                Margin="17,328,0,0"
+                Margin="25,302,0,0"
                 HorizontalAlignment="Left">
                 <Border
                     Padding="15,10,14,10"
@@ -292,9 +317,9 @@
                     <Border.Effect>
                         <DropShadowEffect
                             BlurRadius="15"
-                            Opacity="0.3"
+                            Opacity="0"
                             ShadowDepth="5"
-                            Color="Gray" />
+                            Color="{StaticResource ThemeGreyColor}" />
                     </Border.Effect>
                     <Border.Style>
                         <Style TargetType="{x:Type Border}">
@@ -308,6 +333,10 @@
                                                     Storyboard.TargetProperty="Opacity"
                                                     To="1.0"
                                                     Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    Storyboard.TargetProperty="Effect.Opacity"
+                                                    To="0.7"
+                                                    Duration="0:0:0.2" />
                                             </Storyboard>
                                         </BeginStoryboard>
                                     </Trigger.EnterActions>
@@ -316,8 +345,12 @@
                                             <Storyboard>
                                                 <DoubleAnimation
                                                     Storyboard.TargetProperty="Opacity"
-                                                    To="0.2"
+                                                    To="0.5"
                                                     Duration="0:0:0.3" />
+                                                <DoubleAnimation
+                                                    Storyboard.TargetProperty="Effect.Opacity"
+                                                    To="0"
+                                                    Duration="0:0:0.2" />
                                             </Storyboard>
                                         </BeginStoryboard>
                                     </Trigger.ExitActions>
@@ -358,8 +391,8 @@
                 </Border>
             </Canvas>
         </Grid>
-        <Grid Grid.RowSpan="3" d:IsHidden="True">
-            <Grid x:Name="Grid0Content" Visibility="Visible">
+        <Grid Grid.RowSpan="4">
+            <Grid x:Name="Grid0Content" Visibility="Visible" d:IsHidden="True">
                 <Image Source="/View/Images/bg_dialog.png" Stretch="UniformToFill">
                     <Image.OpacityMask>
                         <VisualBrush>
@@ -376,10 +409,10 @@
                         <RectangleGeometry
                             RadiusX="15"
                             RadiusY="15"
-                            Rect="0,0,558,533" />
+                            Rect="0,0,569,545" />
                     </Image.Clip>
                 </Image>
-                <Grid>
+                <Grid Width="563">
                     <Border
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"

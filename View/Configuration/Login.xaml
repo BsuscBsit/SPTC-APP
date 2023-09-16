@@ -10,156 +10,14 @@
     Height="350"
     HorizontalAlignment="Center"
     VerticalAlignment="Center"
-    AllowsTransparency="True"
-    Background="Transparent"
     Icon="../../View/Images/icons/logo.ico"
     PreviewKeyDown="Window_PreviewKeyDown"
     ResizeMode="NoResize"
     Style="{StaticResource CustomWindowStyle}"
     WindowStartupLocation="CenterScreen"
-    WindowStyle="None"
     mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
-            <Style x:Key="ExitButtonStyle" TargetType="Button">
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="BorderBrush" Value="Transparent" />
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border
-                                Padding="0,0,1,1"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="1,0,2,4"
-                                CornerRadius="7">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ColorAnimation
-                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                    To="#ff6666"
-                                                    Duration="0:0:0.2" />
-                                                <ColorAnimation
-                                                    Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
-                                                    To="White"
-                                                    Duration="0:0:0.2" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ColorAnimation
-                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                    To="Transparent"
-                                                    Duration="0:0:0.3" />
-                                                <ColorAnimation
-                                                    Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
-                                                    To="#FF100000"
-                                                    Duration="0:0:0.2" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.ExitActions>
-                                </Trigger>
-                                <EventTrigger RoutedEvent="Button.Click">
-                                    <EventTrigger.Actions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ColorAnimation
-                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                    To="#cc0000"
-                                                    Duration="0:0:0.0" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger.Actions>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="Button.PreviewMouseUp">
-                                    <EventTrigger.Actions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ColorAnimation
-                                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                    To="Transparent"
-                                                    Duration="0:0:0.3" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger.Actions>
-                                </EventTrigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="PasswordVisible" TargetType="Button">
-                <Setter Property="Background" Value="White" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="4,4,4,4">
-                                <Image
-                                    Width="20"
-                                    Height="20"
-                                    Margin="5,5,5,5"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Source="/View/Images/icons/pw_visible.png" />
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <EventTrigger RoutedEvent="Button.MouseEnter">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation
-                                    Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                    To="#EEEEEE"
-                                    Duration="0:0:0.2" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="Button.MouseLeave">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation
-                                    Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                    To="White"
-                                    Duration="0:0:0.2" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="UIElement.PreviewMouseDown">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation
-                                        Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                        To="#E0E0E0"
-                                        Duration="0:0:0.2" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="UIElement.PreviewMouseUp">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation
-                                        Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                        To="#EEEEEE"
-                                        Duration="0:0:0.1" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </Style.Triggers>
-            </Style>
             <Style x:Key="LComboBoxTextBoxStyle" TargetType="{x:Type TextBox}">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -167,7 +25,7 @@
                             <Grid>
                                 <Border
                                     Background="{TemplateBinding Background}"
-                                    BorderBrush="#FEF301"
+                                    BorderBrush="{StaticResource ThemeYellow}"
                                     BorderThickness="1,1,0,1"
                                     CornerRadius="5,0,0,5">
                                     <ScrollViewer x:Name="PART_ContentHost" />
@@ -185,7 +43,7 @@
                                 x:Name="border"
                                 Padding="0,0,10,0"
                                 Background="White"
-                                BorderBrush="#FEF301"
+                                BorderBrush="{StaticResource ThemeYellow}"
                                 BorderThickness="0,1,1,1"
                                 CornerRadius="0,5,5,0">
                                 <ContentPresenter />
@@ -223,7 +81,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Data="M 0 0 L 4 4 L 8 0 Z"
-                                        Fill="Gray" />
+                                        Fill="{StaticResource ThemeGrey}" />
                                 </ToggleButton>
                                 <ContentPresenter
                                     Name="ContentSite"
@@ -247,8 +105,8 @@
                                         SnapsToDevicePixels="True">
                                         <Border
                                             x:Name="DropDownBorder"
-                                            Background="#FEFEFE"
-                                            BorderBrush="Black"
+                                            Background="{StaticResource ThemeSoftGrey1}"
+                                            BorderBrush="{StaticResource ThemeBlack}"
                                             BorderThickness="1" />
                                         <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
                                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
@@ -269,7 +127,7 @@
                     <VisualBrush.Visual>
                         <Path Data="M0,0 L200,0 200,150 0,150 Z">
                             <Path.Fill>
-                                <SolidColorBrush Color="Black" />
+                                <SolidColorBrush Color="{StaticResource ThemeBlackColor}" />
                             </Path.Fill>
                         </Path>
                     </VisualBrush.Visual>
@@ -307,7 +165,7 @@
                         </Grid.ColumnDefinitions>
                         <Rectangle Grid.Column="0" Height="Auto">
                             <Rectangle.Fill>
-                                <SolidColorBrush Color="#FEF301" />
+                                <SolidColorBrush Color="{StaticResource ThemeYellowColor}" />
                             </Rectangle.Fill>
                         </Rectangle>
                         <StackPanel
@@ -351,7 +209,7 @@
                             Background="White"
                             Content="Position"
                             FontFamily="Inter"
-                            Foreground="Gray" />
+                            Foreground="{StaticResource ThemeGrey}" />
                     </Grid>
                     <Grid Margin="5,0,5,0">
                         <Label
@@ -361,9 +219,9 @@
                             VerticalAlignment="Center"
                             Content="Password"
                             FontFamily="Inter"
-                            Foreground="Gray" />
+                            Foreground="{StaticResource ThemeGrey}" />
                         <Border
-                            BorderBrush="Gray"
+                            BorderBrush="{StaticResource ThemeGrey}"
                             BorderThickness="1"
                             CornerRadius="5">
                             <Grid>
@@ -374,13 +232,23 @@
                                 <Button
                                     x:Name="btnViewPass"
                                     Grid.Column="1"
+                                    Width="25"
+                                    Height="25"
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     PreviewMouseDown="Button_PreviewMouseDown"
                                     PreviewMouseUp="Button_PreviewMouseUp"
-                                    Style="{StaticResource PasswordVisible}"
-                                    Visibility="Hidden" />
+                                    Style="{StaticResource ViewPasswordStyle}"
+                                    Visibility="Hidden">
+                                    <ContentControl
+                                        Width="25"
+                                        Height="17"
+                                        Margin="0,1,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Content="{StaticResource Deprecated1}" />
+                                </Button>
                                 <PasswordBox
                                     x:Name="pbPassword"
                                     Grid.Column="0"
@@ -402,8 +270,8 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="we"
-                            FontFamily="Inter"
-                            Foreground="Gray"
+                            FontFamily="Cascadia Code SemiLight"
+                            Foreground="{StaticResource ThemeGrey}"
                             Visibility="Hidden" />
                     </Grid>
                     <Grid Margin="0,20,0,0">
@@ -417,7 +285,7 @@
                                 Height="40"
                                 Click="btnLogin_Click"
                                 Content="LOG IN"
-                                Style="{StaticResource GenericButton}" />
+                                Style="{StaticResource Deprecated1}" />
                             <Button
                                 x:Name="btnExit"
                                 Width="79"
@@ -425,7 +293,7 @@
                                 Margin="19,0,0,0"
                                 Click="btnLogin_Click"
                                 Content="EXIT"
-                                Style="{StaticResource GenericButton}" />
+                                Style="{StaticResource Deprecated1}" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button
@@ -434,7 +302,7 @@
                                 Height="40"
                                 Click="btnLogin_Click"
                                 Content="LOG IN"
-                                Style="{StaticResource GenericButton}" />
+                                Style="{StaticResource Deprecated1}" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -445,19 +313,17 @@
             Width="28"
             Height="28"
             Margin="0,17,17,0"
-            Padding="1,0,1,1"
+            Padding="0,0,0,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
-            BorderThickness="1,1,1,1"
             Click="imgClose_Click"
             Content="x"
             FontFamily="Berlin Sans FB"
             FontSize="20"
             FontStretch="Normal"
             FontWeight="Regular"
-            Foreground="#FF100000"
-            Style="{StaticResource ExitButtonStyle}" />
+            Style="{StaticResource Deprecated1}" />
     </Grid>
 </Window>

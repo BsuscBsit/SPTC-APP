@@ -247,7 +247,7 @@
                                         Margin="0,1,0,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Content="{StaticResource Deprecated1}" />
+                                        Content="{StaticResource EyeView}" />
                                 </Button>
                                 <PasswordBox
                                     x:Name="pbPassword"
@@ -285,7 +285,7 @@
                                 Height="40"
                                 Click="btnLogin_Click"
                                 Content="LOG IN"
-                                Style="{StaticResource Deprecated1}" />
+                                Style="{StaticResource GenericButton}" />
                             <Button
                                 x:Name="btnExit"
                                 Width="79"
@@ -293,7 +293,7 @@
                                 Margin="19,0,0,0"
                                 Click="btnLogin_Click"
                                 Content="EXIT"
-                                Style="{StaticResource Deprecated1}" />
+                                Style="{StaticResource GenericButton}" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button
@@ -302,7 +302,7 @@
                                 Height="40"
                                 Click="btnLogin_Click"
                                 Content="LOG IN"
-                                Style="{StaticResource Deprecated1}" />
+                                Style="{StaticResource GenericButton}" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -324,6 +324,6 @@
             FontSize="20"
             FontStretch="Normal"
             FontWeight="Regular"
-            Style="{StaticResource Deprecated1}" />
+            Style="{StaticResource ExitButtonStyle}" />
     </Grid>
 </Window>

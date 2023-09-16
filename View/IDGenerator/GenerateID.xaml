@@ -19,7 +19,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/View/Styles/ButtonsAndTextBox.xaml" />
+                <ResourceDictionary Source="/View/Styles/ControlStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style
                 x:Key="ButtonBrowse"

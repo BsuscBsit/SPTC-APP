@@ -18,6 +18,9 @@
     mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View/Styles/ControlStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
             <Style x:Key="LComboBoxTextBoxStyle" TargetType="{x:Type TextBox}">
                 <Setter Property="Template">
                     <Setter.Value>

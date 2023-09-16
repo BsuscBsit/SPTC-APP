@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2023 at 02:17 AM
+-- Generation Time: Sep 16, 2023 at 03:59 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -102,8 +102,7 @@ CREATE TABLE `tbl_franchise` (
   `id` int(11) NOT NULL,
   `body_number` int(11) NOT NULL DEFAULT -1,
   `operator_id` int(11) NOT NULL DEFAULT -1,
-  `driver_day_id` int(11) NOT NULL DEFAULT -1,
-  `driver_night_id` int(11) NOT NULL DEFAULT -1,
+  `driver_id` int(11) NOT NULL DEFAULT -1,
   `owner_id` int(11) NOT NULL DEFAULT -1,
   `last_franchise_id` int(11) NOT NULL DEFAULT -1,
   `buying_date` int(11) NOT NULL DEFAULT current_timestamp(),
@@ -122,7 +121,7 @@ CREATE TABLE `tbl_franchise` (
 CREATE TABLE `tbl_id_history` (
   `id` int(11) NOT NULL,
   `date` date DEFAULT current_timestamp(),
-  `violator_id` int(11) NOT NULL DEFAULT -1,
+  `owner_id` int(11) NOT NULL DEFAULT -1,
   `entity_type` varchar(10) NOT NULL DEFAULT 'OPERATOR',
   `name_id` int(11) NOT NULL DEFAULT -1,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
@@ -324,7 +323,8 @@ ALTER TABLE `tbl_address`
 -- Indexes for table `tbl_driver`
 --
 ALTER TABLE `tbl_driver`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name_id` (`name_id`,`address_id`,`image_id`,`sign_id`);
 
 --
 -- Indexes for table `tbl_employee`
@@ -375,7 +375,8 @@ ALTER TABLE `tbl_name`
 -- Indexes for table `tbl_operator`
 --
 ALTER TABLE `tbl_operator`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name_id` (`name_id`,`address_id`,`image_id`,`sign_id`);
 
 --
 -- Indexes for table `tbl_payment_details`

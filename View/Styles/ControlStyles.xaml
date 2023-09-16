@@ -17,13 +17,13 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <EventTrigger RoutedEvent="Button.MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
                         <ColorAnimation
                             Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
-                            To="{StaticResource ThemeGreyColor}"
+                            To="{DynamicResource ThemeGreyColor}"
                             Duration="0:0:0.2" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -44,7 +44,7 @@
                         <Storyboard>
                             <ColorAnimation
                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
-                                To="{StaticResource ThemeSoftGrey3Color}"
+                                To="{DynamicResource ThemeSoftGrey3Color}"
                                 Duration="0:0:0.0" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -56,19 +56,19 @@
                         <Storyboard>
                             <ColorAnimation
                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
-                                To="{StaticResource ThemeSoftGrey1Color}"
+                                To="{DynamicResource ThemeSoftGrey1Color}"
                                 Duration="0:0:0.2" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
             </EventTrigger>
-        </Style.Triggers>
+        </Style.Triggers> -->
     </Style>
     <Style x:Key="ExitButtonStyle" TargetType="Button">
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Background" Value="White" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Foreground" Value="{StaticResource ThemeBlack}" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeBlack}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -153,8 +153,8 @@
     <Style x:Key="GenericButton" TargetType="Button">
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Background" Value="White" />
-        <Setter Property="Foreground" Value="{StaticResource ThemeBlack}" />
-        <Setter Property="BorderBrush" Value="{StaticResource ThemeBlack}" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeBlack}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBlack}" />
         <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="FontSize" Value="15" />
@@ -172,7 +172,7 @@
                                     BlurRadius="0"
                                     Opacity="0"
                                     ShadowDepth="0"
-                                    Color="{StaticResource ThemeGreyColor}" />
+                                    Color="{DynamicResource ThemeGreyColor}" />
                             </Border.Effect>
                         </Border>
                         <Border
@@ -271,7 +271,7 @@
         TargetType="TextBox">
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Background" Value="White" />
-        <Setter Property="BorderBrush" Value="{StaticResource ThemeGrey}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeGrey}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -309,14 +309,14 @@
                                 VerticalScrollBarVisibility="Hidden" />
                         </Border>
                     </Grid>
-                    <ControlTemplate.Triggers>
+                    <!--<ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <ColorAnimation
                                             Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
-                                            To="{StaticResource ThemeBlackColor}"
+                                            To="{DynamicResource ThemeBlackColor}"
                                             Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -326,7 +326,7 @@
                                     <Storyboard>
                                         <ColorAnimation
                                             Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
-                                            To="{StaticResource ThemeGreyColor}"
+                                            To="{DynamicResource ThemeGreyColor}"
                                             Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -337,7 +337,7 @@
                                 <Storyboard>
                                     <ColorAnimation
                                         Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
-                                        To="{StaticResource ThemeBlackColor}"
+                                        To="{DynamicResource ThemeBlackColor}"
                                         Duration="0:0:0.2" />
                                     <DoubleAnimation
                                         Storyboard.TargetName="BF"
@@ -357,7 +357,7 @@
                                 <Storyboard>
                                     <ColorAnimation
                                         Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
-                                        To="{StaticResource ThemeGreyColor}"
+                                        To="{DynamicResource ThemeGreyColor}"
                                         Duration="0:0:0.2" />
                                     <DoubleAnimation
                                         Storyboard.TargetName="BF"
@@ -372,7 +372,7 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                    </ControlTemplate.Triggers>
+                    </ControlTemplate.Triggers>-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

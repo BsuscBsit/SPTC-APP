@@ -1,4 +1,6 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SPTC_APP.View.Styles">
     <Style x:Key="StrokedButtonStyle" TargetType="Button">
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="Background" Value="White" />
@@ -112,8 +114,6 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
-
-
     <Style x:Key="Deprecated2" TargetType="TextBox">
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="Background" Value="White" />
@@ -315,8 +315,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style
-        x:Key="Deprecated1"
+    <Style x:Key="Deprecated1"
         BasedOn="{StaticResource StrokedButtonStyle}"
         TargetType="Button">
         <Setter Property="Template">

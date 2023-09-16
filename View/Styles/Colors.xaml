@@ -1,4 +1,6 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:local="clr-namespace:SPTC_APP.View.Styles">
     <Color x:Key="ThemeBlackColor">#1C1C1E</Color>
     <Color x:Key="ThemeYellowColor">#FEF301</Color>
     <Color x:Key="ThemeYellowDarkedColor">#FFF9EE01</Color>

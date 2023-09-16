@@ -29,11 +29,11 @@ namespace SPTC_APP.View
             }
             else
             {
-                lblName.Text = franchise.Driver_day.name.wholename.ToUpper();
+                lblName.Text = franchise.Driver.name.wholename.ToUpper();
                 lblPosition.Text = "DRIVER";
-                if (franchise.Driver_day.image != null)
+                if (franchise.Driver.image != null)
                 {
-                    imgID.Source = franchise.Driver_day.image.GetSource();
+                    imgID.Source = franchise.Driver.image.GetSource();
                 }
             }
 

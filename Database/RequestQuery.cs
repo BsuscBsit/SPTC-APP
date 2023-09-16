@@ -56,6 +56,7 @@ namespace SPTC_APP.Database
         public static string LONG_TERM_LOAN = "tbl_long_term_loan_ledger";
         public static string VIOLATION_TYPE = "tbl_violation_type";
         public static string VIOLATION = "tbl_violation";
+        public static string IDHISTORY = "tbl_id_history";
 
     }
     public static class Select
@@ -85,6 +86,7 @@ namespace SPTC_APP.Database
         public static string START_DATE = "start_date";
         public static string END_DATE = "end_date";
         public static string TITLE = "title";
+        public static string ENTITY_TYPE = "entity_type";
 
         // Foreign Keys
         public static string EMPLOYEE_ID = "user_id";
@@ -94,8 +96,7 @@ namespace SPTC_APP.Database
         public static string SIGN_ID = "sign_id";
         public static string POSITION_ID = "position_id";
         public static string OPERATOR_ID = "operator_id";
-        public static string DRIVER_DAY_ID = "driver_day_id";
-        public static string DRIVER_NIGHT_ID = "driver_night_id";
+        public static string DRIVER_ID = "driver_id";
         public static string OWNER_ID = "owner_id";
         public static string LAST_FRANCHISE_ID = "last_franchise_id";
         public static string PAYMENT_ID = "payment_id";
@@ -171,13 +172,14 @@ namespace SPTC_APP.Database
         public static string CAPITAL_BUILDUP = "capital_buildup";
 
         //VIOLATION_TYPES
-        public static string IS_FOR_DRIVER = "is_for_driver";
         public static string NUM_OF_DAYS = "num_of_days";
 
         //VIOLATION
         public static string VIOLATION_LEVEL_COUNT = "violation_level_count";
         public static string SUSPENSION_START = "suspension_start";
         public static string SUSPENSION_END = "suspension_end";
+
+        //IDHISTORY
     }
 
     public enum CRUDControl

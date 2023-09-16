@@ -11,8 +11,7 @@ namespace SPTC_APP.Objects
     {
         FRANCHISE,
         OPERATOR,
-        DRIVER_DAY,
-        DRIVAR_NIGHT,
+        DRIVER,
 
 
         NEW_DRIVER,
@@ -424,20 +423,19 @@ namespace SPTC_APP.Objects
         public string title;
         public string details;
         public int numOfDays;
-        public bool isForDriver;
+        public General entityType;
 
         private Upsert violationType;
         public ViolationType()
         {
             violationType = new Upsert(Table.VIOLATION_TYPE, -1);
         }
-
-        public ViolationType(string title, string details, int numOfDays, bool isForDriver)
+        public void WriteInto(string title, string details, int numOfDays, General entity)
         {
             this.title = title;
             this.details = details;
             this.numOfDays = numOfDays;
-            this.isForDriver = isForDriver;
+            this.entityType = entity;
         }
 
         public ViolationType(MySqlDataReader reader)
@@ -446,7 +444,7 @@ namespace SPTC_APP.Objects
             this.title = Retrieve.GetValueOrDefault<string>(reader, Field.TITLE);
             this.details = Retrieve.GetValueOrDefault<string>(reader, Field.DETAILS);
             this.numOfDays = Retrieve.GetValueOrDefault<int>(reader, Field.NUM_OF_DAYS);
-            this.isForDriver = Retrieve.GetValueOrDefault<bool>(reader, Field.IS_FOR_DRIVER);
+            this.entityType = (Retrieve.GetValueOrDefault<string>(reader, Field.ENTITY_TYPE).Equals("OPERATOR")) ? General.OPERATOR : General.DRIVER;
         }
 
         public int Save()
@@ -459,7 +457,7 @@ namespace SPTC_APP.Objects
             violationType.Insert(Field.TITLE, title);
             violationType.Insert(Field.DETAILS, details);
             violationType.Insert(Field.NUM_OF_DAYS, numOfDays);
-            violationType.Insert(Field.IS_FOR_DRIVER, isForDriver);
+            violationType.Insert(Field.ENTITY_TYPE, (entityType == General.OPERATOR) ? "OPERATOR" : "DRIVER");
             violationType.Save();
             id = violationType.id;
 

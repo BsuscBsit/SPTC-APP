@@ -15,13 +15,13 @@ namespace SPTC_APP.Objects
         public DateTime? suspensionEnd { get; set; }
         public string remarks { get; set; }
         public int nameId { get; set; }
-        public bool isDeleted { get; set; }
 
         private Upsert violation;
 
         public Violation()
         {
             violation = new Upsert(Table.VIOLATION, -1);
+            
         }
 
         public Violation(MySqlDataReader reader)
@@ -51,7 +51,6 @@ namespace SPTC_APP.Objects
             violation.Insert(Field.SUSPENSION_END, suspensionEnd);
             violation.Insert(Field.REMARKS, remarks);
             violation.Insert(Field.NAME_ID, nameId);
-            violation.Insert(Field.ISDELETED, isDeleted);
             violation.Save();
             id = violation.id;
 

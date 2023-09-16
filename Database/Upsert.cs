@@ -131,19 +131,51 @@ namespace SPTC_APP.Database
                             if (tableName == Table.NAME)
                             {
                                 id = GetExistingRecordId(fieldValues);
-                            } else if (tableName == Table.ADDRESS) {
+                            } else if (tableName == Table.IMAGE)
+                            {
                                 Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
                                 {
-                                    { Field.ADDRESSLINE1, fieldValues[Field.ADDRESSLINE1] },
-                                    { Field.ADDRESSLINE2, fieldValues[Field.ADDRESSLINE2] }
+                                    { Field.IMAGE_NAME, fieldValues.TryGetValue(Field.IMAGE_NAME, out var temp) ? temp : -1 },
                                 };
 
                                 id = GetExistingRecordId(uniqueAttributes);
+                            } else if (tableName == Table.ADDRESS)
+                            {
+                                Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
+                                {
+                                    { Field.ADDRESSLINE1, fieldValues.TryGetValue(Field.ADDRESSLINE1, out var temp) ? temp : -1 },
+                                    { Field.ADDRESSLINE2, fieldValues.TryGetValue(Field.ADDRESSLINE2, out temp) ? temp : -1 }
+                                };
 
+                                id = GetExistingRecordId(uniqueAttributes);
                             }
-                            else {
+                            else if (tableName == Table.FRANCHISE)
+                            {
+                                Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
+                                {
+                                    { Field.BODY_NUMBER, fieldValues.TryGetValue(Field.BODY_NUMBER, out var temp) ? temp : -1 },
+                                };
+
+                                id = GetExistingRecordId(uniqueAttributes);
+                            }
+                            else if (tableName == Table.DRIVER || tableName == Table.OPERATOR)
+                            {
+                                Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
+                                {
+                                    { Field.NAME_ID, fieldValues.TryGetValue(Field.NAME_ID, out var temp) ? temp : -1 },
+                                    { Field.ADDRESS_ID, fieldValues.TryGetValue(Field.ADDRESS_ID, out temp) ? temp : -1 },
+                                    { Field.IMAGE_ID, fieldValues.TryGetValue(Field.IMAGE_ID, out temp) ? temp : -1 },
+                                    { Field.SIGN_ID, fieldValues.TryGetValue(Field.SIGN_ID, out temp) ? temp : -1 },
+                                };
+
+                                id = GetExistingRecordId(uniqueAttributes);
+                            }
+
+                            else
+                            {
                                 id = GetExistingRecordId();
                             }
+                            UpdateDataInDatabase();
                         }
                         else
                         {

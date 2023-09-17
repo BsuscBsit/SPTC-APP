@@ -209,6 +209,7 @@ namespace SPTC_APP.View
 
                 // Display the captured frame in imgIDPic
                 imgIDPic.Source = bitmapSource;
+                lastCapturedImage = bitmapSource;
 
                 // Dispose of the frame to release resources
                 frame.Dispose();
@@ -224,13 +225,13 @@ namespace SPTC_APP.View
                 {
                     try
                     {
+                        hasPhoto = false;
                         btnStartCam.IsEnabled = false;
                         ((System.Windows.Controls.Button)sender).Content = "Capture Image";
                         pbCameraOpen.Visibility = Visibility.Visible;
                         pbCameraOpen.Value = pbCameraOpen.Minimum;
                         pbCameraOpen.IsIndeterminate = true;
-
-                        if (videoSource != null) videoSource.Start();
+                        videoSource.Start();
 
                         //Short delay. nag lalag/crash minsan pag binigla eh.
                         await Task.Delay(TimeSpan.FromSeconds(3));
@@ -238,14 +239,12 @@ namespace SPTC_APP.View
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ControlWindow.Show("Camera Error", $"An error occurred: {ex.Message}", Icons.ERROR);
                         pbCameraOpen.Visibility = Visibility.Hidden;
                     }
                 }
                 else
                 {
-
-
                     if (lastCapturedImage != null)
                     {
                         imgIDPic.Source = lastCapturedImage;
@@ -398,12 +397,7 @@ namespace SPTC_APP.View
             {
                 ControlWindow.Show("Input Fields incomplete!", "Missing some required inputs.");
             }
-            if (videoSource != null && videoSource.IsRunning)
-            {
-                videoSource.SignalToStop();
-                videoSource.WaitForStop();
-                videoSource.NewFrame -= new NewFrameEventHandler(videoSource_NewFrame);
-            }
+            StopCamera();
         }
 
         public void StopCamera()
@@ -421,11 +415,12 @@ namespace SPTC_APP.View
                     {
                         videoSource.SignalToStop();
                         videoSource.WaitForStop();
-                        videoSource.NewFrame -= new NewFrameEventHandler(videoSource_NewFrame);
-                        videoSource = null;
                     }
                 }
-            }catch(Exception e)
+
+                videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
+            }
+            catch(Exception e)
             {
                 ControlWindow.Show("Camera Error", e.Message, Icons.ERROR);
             }

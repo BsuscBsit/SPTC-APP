@@ -96,7 +96,7 @@ namespace SPTC_APP.View
                 new ColumnConfiguration("bodynumber", "###", width: 30),
                 new ColumnConfiguration("licenceNO", "Plate Number", width: 60, backgroundColor: Brushes.Yellow),
                 new ColumnConfiguration("Operator", "Operator name"),
-                new ColumnConfiguration("Driver_day", "Driver name", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
+                new ColumnConfiguration("Driver", "Driver name", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
             };
             dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
             DatagridList.Children.Add(dataGrid);

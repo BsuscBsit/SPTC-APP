@@ -87,7 +87,7 @@ CREATE TABLE `tbl_employee` (
 --
 
 INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `image_id`, `password`, `position_id`, `start_date`, `end_date`, `date_of_birth`, `contact_no`, `isDeleted`) VALUES
-(1, 1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, '2023-06-26', NULL, NULL, NULL, 0),
+(1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, '2023-06-26', NULL, NULL, NULL, 0),
 (2, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 2, '2023-06-26', NULL, NULL, NULL, 0),
 (3, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, '2023-06-26', NULL, NULL, NULL, 0),
 (4, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, '2023-06-26', NULL, NULL, NULL, 0);
@@ -429,7 +429,7 @@ ALTER TABLE `tbl_driver`
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_franchise`

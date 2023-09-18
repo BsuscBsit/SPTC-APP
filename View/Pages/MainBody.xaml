@@ -253,13 +253,13 @@
             </Button>
         </Grid>
         <Grid
-            x:Name="mainPanel"
-            Width="1061"
-            Margin="0,40,0,0"
-            HorizontalAlignment="Right">
-            <Grid x:Name="TablePanelSwap" Margin="220,0,0,0"/>
+            x:Name="TablePanelSwap"
+            Background="LightGray"
+            Margin="214,40,0,0"
+            Height="560" Width="786"
+            HorizontalAlignment="Left" VerticalAlignment="Center">
         </Grid>
-        <Grid Margin="625,66,0,388" x:Name="DashButton" Visibility="Collapsed">
+        <Grid Margin="0,40,0,0" HorizontalAlignment="Right" x:Name="DashButton" Visibility="Collapsed">
             <Button
                 x:Name="btnGererate"
                 Width="175"

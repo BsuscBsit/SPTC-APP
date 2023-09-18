@@ -6,40 +6,41 @@
     xmlns:local="clr-namespace:SPTC_APP.View.Pages.Leaflets"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="TableView"
-    mc:Ignorable="d">
-    <Grid x:Name="franchisePanel" HorizontalAlignment="Center" Background="LightGray" VerticalAlignment="Center">
-        <Grid x:Name="franchiseInformation" HorizontalAlignment="Left" Height="333" Background="White" Margin="557,97,0,0" VerticalAlignment="Top" Width="182" >
-                <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="72,10,0,0">
-                    <Ellipse.Fill>
-                        <ImageBrush x:Name="userImage1" ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
-                    </Ellipse.Fill>
-                </Ellipse>
-                <Label Content="Operators Name" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top"
+     Width="786" Height="560"
+    mc:Ignorable="d" WindowStyle="None">
+    <Grid x:Name="franchisePanel" HorizontalAlignment="Right" Background="LightGray" VerticalAlignment="Bottom"  Width="786" Height="560">
+        <Grid x:Name="franchiseInformation" HorizontalAlignment="Right" Height="458" Background="White" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="182" >
+            <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="72,10,0,0">
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="userImage1" ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Label Content="Operators Name" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top"
                        FontWeight="Medium"
                         FontSize="9"
                        Foreground="DarkGray"/>
-                <Label Content="Body No." HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top"
+            <Label Content="Body No." HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
-                <Label Content="Loan Balance" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top"
+            <Label Content="Loan Balance" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
-                <Label Content="LTL Balance" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"
+            <Label Content="LTL Balance" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
-                <Label Content="Reference :" HorizontalAlignment="Left" Margin="19,216,0,0" VerticalAlignment="Top"
+            <Label Content="Reference :" HorizontalAlignment="Left" Margin="19,216,0,0" VerticalAlignment="Top"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
-                <Label Content="Driver Day " HorizontalAlignment="Left" Margin="22,248,0,0" VerticalAlignment="Top"
+            <Label Content="Driver" HorizontalAlignment="Left" Margin="22,248,0,0" VerticalAlignment="Top"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
-                <Rectangle Height="1" Margin="0,202,0,0" Stroke="LightGray" VerticalAlignment="Top" />
-                <Label x:Name="OperatorName" Content="Juan Dela Cruz" HorizontalAlignment="Left" Margin="93,81,0,0" VerticalAlignment="Top"
+            <Rectangle Height="1" Margin="0,202,0,0" Stroke="LightGray" VerticalAlignment="Top" />
+            <Label x:Name="OperatorName" Content="Juan Dela Cruz" HorizontalAlignment="Left" Margin="93,81,0,0" VerticalAlignment="Top"
                        Foreground="Black"
                        FontWeight="DemiBold"
                        FontFamily="Arial"
@@ -75,26 +76,26 @@
                     FontFamily="Helvetica"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
+            <Button x:Name="ManageButton" Content="MANAGE" HorizontalAlignment="Center" Margin="8,0,0,10" VerticalAlignment="Bottom" Width="80" Height="32"
+                    FontFamily="hevitica "
+                    FontWeight="ExtraBold"
+                    
+                    FontSize="10"
+                    Background="Yellow" Click="ManageButton_Click" />
         </Grid>
-            <Rectangle HorizontalAlignment="Left" Height="30"  Margin="23,52,0,0"  VerticalAlignment="Top" Width="398">
-                <Rectangle.Fill>
-                    <SolidColorBrush Color="White" />
-                </Rectangle.Fill>
-            </Rectangle>
-            <Button x:Name="AddFranchiseButton" Content="ADD FRANCHISE" HorizontalAlignment="Left" Margin="599,52,0,0" VerticalAlignment="Top" Width="110" Height="32"
+        <Rectangle HorizontalAlignment="Left" Height="30"  Margin="20,40,0,0"  VerticalAlignment="Top" Width="398">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="White" />
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button x:Name="AddFranchiseButton" Content="ADD FRANCHISE" HorizontalAlignment="Right" Margin="0,40,20,0" VerticalAlignment="Top" Width="110" Height="32"
                     FontFamily="hevitica "
                     FontWeight="ExtraBold"
                     Visibility="Collapsed"
                     FontSize="10"
                     Background="Yellow" Click="AddFranchiseButton_Click"
                     />
-            <Button Content="MANAGE" HorizontalAlignment="Left" Margin="619,452,0,0" VerticalAlignment="Top" Width="80" Height="32"
-                    FontFamily="hevitica "
-                    FontWeight="ExtraBold"
-                    
-                    FontSize="10"
-                    Background="Yellow"/>
-        <DataGrid x:Name="TableGrid" HorizontalAlignment="Left" Height="376" Margin="10,96,0,0" VerticalAlignment="Top" Width="545">
+        <DataGrid x:Name="TableGrid" HorizontalAlignment="Left" Height="458" Margin="20,0,0,20" VerticalAlignment="Bottom" Width="545">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="FontFamily" Value="Arial"/>

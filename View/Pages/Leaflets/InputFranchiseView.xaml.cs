@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,23 @@ namespace SPTC_APP.View.Pages.Leaflets
         public InputFranchiseView()
         {
             InitializeComponent();
+            AppState.mainwindow?.Hide();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            AppState.mainwindow?.Show();
+            base.OnClosing(e);
+        }
+
+        private void btnCanceFranchiseInfo_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnNextFranchiseInput_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

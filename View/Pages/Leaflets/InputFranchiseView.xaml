@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SPTC_APP.View.Pages.Leaflets"
         mc:Ignorable="d"
+        Height="600"
+        Width="800"
         WindowStyle="None">
-    <Grid x:Name="franchisePanel" HorizontalAlignment="Right" Background="WhiteSmoke" >
+    <Grid x:Name="franchisePanel" HorizontalAlignment="Right" Background="WhiteSmoke" Width="800">
         <Rectangle Height="40" Stroke="#FEF301" Fill="#FEF301"  VerticalAlignment="Top" Width="NaN"/>
         <Label 
                Content="FRANCHISE INFORMATION" 
@@ -222,9 +224,9 @@
                                 VerticalContentAlignment="Center" Height="31" Margin="548,48,46,425"/>
         <Button x:Name="btnCanceFranchiseInfo" Content="CANCEL" Width="135" Height="40"
                     FontWeight="ExtraBold"
-                    Background="White" Margin="134,426,491,38"/>
+                    Background="White" Margin="134,426,491,38" Click="btnCanceFranchiseInfo_Click"/>
         <Button x:Name="btnNextFranchiseInput" Content="NEXT" Width="135" Height="40"
                     FontWeight="ExtraBold"
-                    Background="Yellow" Margin="480,426,145,38"/>
+                    Background="Yellow" Margin="480,426,145,38" Click="btnNextFranchiseInput_Click"/>
     </Grid>
 </Window>

@@ -18,6 +18,13 @@ namespace SPTC_APP.View.Pages.Leaflets
         {
             InitializeComponent();
             this.table = table;
+            if(table == Table.FRANCHISE)
+            {
+                AddFranchiseButton.Visibility = Visibility.Visible;
+            } else
+            {
+                AddFranchiseButton.Visibility = Visibility.Collapsed;
+            }
             UpdateTable();
         }
 
@@ -135,5 +142,9 @@ namespace SPTC_APP.View.Pages.Leaflets
             return franchisePanel;
         }
 
+        private void AddFranchiseButton_Click(object sender, RoutedEventArgs e)
+        {
+            (new InputFranchiseView()).Show();
+        }
     }
 }

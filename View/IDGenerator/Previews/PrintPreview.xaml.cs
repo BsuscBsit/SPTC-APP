@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -32,6 +33,7 @@ namespace SPTC_APP.View
         public PrintPreview()
         {
             InitializeComponent();
+            AppState.mainwindow?.Hide();
             isFront = true;
             RenderIDs();
             checkIdCount();
@@ -583,6 +585,12 @@ namespace SPTC_APP.View
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             CenterOffset();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            AppState.mainwindow?.Show();
+            base.OnClosing(e);
         }
     }
 }

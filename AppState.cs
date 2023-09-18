@@ -30,7 +30,7 @@ namespace SPTC_APP
         public static bool IS_ADMIN = false;
         public static Employee USER = null;
 
-
+        public static Window mainwindow = null;
 
         public static void Login(string username, string password, Window window)
         {
@@ -49,7 +49,9 @@ namespace SPTC_APP
                 USER = employee;
                 //(new PrintPreview()).Show();
                 //(new Test()).Show();
-                (new MainBody()).Show();
+                MainBody body = (new MainBody());
+                AppState.mainwindow = body;
+                body.Show();
                 EventLogger.Post($"User :: Login Success: USER({username})");
                 window.Close();
             }
@@ -61,6 +63,7 @@ namespace SPTC_APP
             USER = null;
             EventLogger.Post($"User :: Logout Success");
             (new Login()).Show();
+            AppState.mainwindow = null;
             window.Close();
         }
 

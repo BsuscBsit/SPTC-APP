@@ -146,5 +146,10 @@ namespace SPTC_APP.View.Pages.Leaflets
         {
             (new InputFranchiseView()).Show();
         }
+
+        private void ManageButton_Click(object sender, RoutedEventArgs e)
+        {
+            franchisePanel.Children.Add((new FranchiseInformationView()).Fetch());
+        }
     }
 }

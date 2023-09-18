@@ -65,7 +65,7 @@ namespace SPTC_APP.Database
                 }
                 else
                 {
-                    return new ControlWindow("Wrong Password", "Username and Password not Match.", Icons.ERROR);
+                    return new ControlWindow("Wrong Password", "The username and password do not match.", Icons.ERROR);
                 }
             }
             catch (MySqlException ex)

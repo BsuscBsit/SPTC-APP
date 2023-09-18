@@ -108,7 +108,7 @@ namespace SPTC_APP.Database
                         }
                         return false;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         Log = ConnectionLogs.EXCEPTION_OCCURED;
                         return false;

@@ -7,14 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="dciWindow"
     Title="DatabaseConfigInput"
-    Width="425"
-    Height="235"
     Icon="../../View/Images/icons/logo.ico"
-    ResizeMode="NoResize"
-    Style="{StaticResource CustomWindowStyle}"
+    Style="{StaticResource DetachedRoundedWindow}"
     Topmost="True"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Width="416" Height="214">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -32,13 +29,10 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="NETWORK MANAGEMENT"
-                FontFamily="Inter"
-                FontSize="20"
-                FontWeight="SemiBold"
-                Foreground="Gray" />
-            <Grid Grid.Row="2">
+                Style="{StaticResource CommonTitlePreset}"/>
+            <Grid Grid.Row="2" HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -49,54 +43,39 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Label
-                    Margin="40,0,50,0"
+                    Margin="0,0,50,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Content="HOST"
-                    FontFamily="Inter"
-                    FontSize="14"
-                    FontWeight="SemiBold"
-                    Foreground="Gray" />
+                    Style="{StaticResource SubTitlePreset}" />
                 <Label
                     Grid.Row="1"
-                    Margin="40,0,50,0"
+                    Margin="0,0,50,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Content="PORT"
-                    FontFamily="Inter"
-                    FontSize="14"
-                    FontWeight="SemiBold"
-                    Foreground="Gray" />
+                    Style="{StaticResource SubTitlePreset}" />
                 <Label
                     Grid.Row="2"
-                    Margin="40,0,50,0"
+                    Margin="0,0,50,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Content="DATABASE"
-                    FontFamily="Inter"
-                    FontSize="14"
-                    FontWeight="SemiBold"
-                    Foreground="Gray" />
+                    Style="{StaticResource SubTitlePreset}" />
                 <Label
                     Grid.Row="3"
-                    Margin="40,0,50,0"
+                    Margin="0,0,50,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Content="USERNAME"
-                    FontFamily="Inter"
-                    FontSize="14"
-                    FontWeight="SemiBold"
-                    Foreground="Gray" />
+                    Style="{StaticResource SubTitlePreset}" />
                 <Label
                     Grid.Row="4"
-                    Margin="40,0,50,0"
+                    Margin="0,0,50,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Content="PASSWORD"
-                    FontFamily="Inter"
-                    FontSize="14"
-                    FontWeight="SemiBold"
-                    Foreground="Gray" />
+                    Style="{StaticResource SubTitlePreset}" />
                 <TextBox
                     x:Name="tbHost"
                     Grid.Row="0"
@@ -105,8 +84,8 @@
                     Margin="20,0,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Style="{StaticResource GenericTextBox}"
-                    TextWrapping="Wrap" />
+                    
+                    TextWrapping="Wrap" Style="{DynamicResource CommonTextBoxStyle}" Height="31" />
                 <TextBox
                     x:Name="tbPort"
                     Grid.Row="1"
@@ -115,8 +94,8 @@
                     Margin="20,0,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Style="{StaticResource GenericTextBox}"
-                    TextWrapping="Wrap" />
+                    
+                    TextWrapping="Wrap" Style="{DynamicResource CommonTextBoxStyle}" Height="31" />
                 <TextBox
                     x:Name="tbDatabase"
                     Grid.Row="2"
@@ -125,8 +104,8 @@
                     Margin="20,0,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Style="{StaticResource GenericTextBox}"
-                    TextWrapping="Wrap" />
+                    
+                    TextWrapping="Wrap" Style="{DynamicResource CommonTextBoxStyle}" Height="31" />
                 <TextBox
                     x:Name="tbUsername"
                     Grid.Row="3"
@@ -135,17 +114,18 @@
                     Margin="20,0,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Style="{StaticResource GenericTextBox}"
-                    TextWrapping="Wrap" />
-                <PasswordBox
-                    x:Name="pbPassword"
+                    
+                    TextWrapping="Wrap" Style="{DynamicResource CommonTextBoxStyle}" Height="31" />
+                <Border
                     Grid.Row="4"
-                    Grid.Column="1"
-                    Width="120"
-                    Margin="20,0,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center" />
-
+                    BorderBrush="{StaticResource BrushGrey}"
+                    BorderThickness="1"
+                    CornerRadius="5"
+                    Grid.Column="1" Width="120" Height="31" HorizontalAlignment="Right" Background="White" Padding="5,5,5,5">
+                    <PasswordBox
+                    x:Name="pbPassword"
+                    VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" />
+                </Border>
             </Grid>
             <StackPanel
                 Grid.Row="3"
@@ -158,14 +138,14 @@
                     Height="40"
                     Margin="0,0,20,0"
                     Click="btnConnect_Click"
-                    Content="RETRY"
-                    Style="{StaticResource GenericButton}" />
+                    Content="RETRY" Style="{DynamicResource CommonButtonStyle}"
+                     />
                 <Button
                     Width="101"
                     Height="40"
                     Click="Button_Click"
-                    Content="EXIT"
-                    Style="{StaticResource GenericButton}" />
+                    Content="EXIT" Style="{DynamicResource CommonButtonStyle}"
+                     />
             </StackPanel>
         </Grid>
         <Border
@@ -191,7 +171,7 @@
                         VerticalAlignment="Center"
                         Content="An error has occurred.&#xD;&#xA;We apologize for the inconvenience."
                         FontFamily="Inter"
-                        FontSize="16"
+                        FontSize="15"
                         FontWeight="Medium" />
                 </StackPanel>
                 <StackPanel
@@ -204,21 +184,21 @@
                         Width="110"
                         Height="40"
                         Click="btnConnect_Click"
-                        Content="RETRY"
-                        Style="{StaticResource GenericButton}" />
+                        Content="RETRY" Style="{DynamicResource CommonButtonStyle}"
+                         />
                     <Button
                         Width="110"
                         Height="40"
                         Margin="10,0,10,0"
                         Click="configProceed_Click"
-                        Content="CONFIGURE"
-                        Style="{StaticResource GenericButton}" />
+                        Content="CONFIGURE" Style="{DynamicResource CommonButtonStyle}"
+                         />
                     <Button
                         Width="110"
                         Height="40"
                         Click="Button_Click"
-                        Content="EXIT"
-                        Style="{StaticResource GenericButton}" />
+                        Content="EXIT" Style="{DynamicResource CommonButtonStyle}"
+                         />
                 </StackPanel>
             </Grid>
         </Border>

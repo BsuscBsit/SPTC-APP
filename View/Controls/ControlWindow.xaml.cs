@@ -15,7 +15,7 @@ namespace SPTC_APP.View
             InitializeComponent();
             this.SetIcon(icons);
             this.lblHeader.Content = header;
-            this.lblContent.Content = content;
+            this.tblockContent.Text = content;
             this.result = false;
         }
 
@@ -24,7 +24,7 @@ namespace SPTC_APP.View
             ControlWindow control = new ControlWindow();
             control.SetIcon(icons);
             control.lblHeader.Content = header;
-            control.lblContent.Content = content;
+            control.tblockContent.Text = content;
             control.Show();
             //return control;
         }
@@ -34,7 +34,7 @@ namespace SPTC_APP.View
             ControlWindow control = new ControlWindow();
             control.SetIcon(icons);
             control.lblHeader.Content = header;
-            control.lblContent.Content = content;
+            control.tblockContent.Text = content;
             control.Cancellable();
             control.Show();
             return control.result;

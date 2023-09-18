@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="ColorBlack">#1C1C1E</Color>
+    <Color x:Key="ColorYellow">#FEF301</Color>
+    <Color x:Key="ColorDarkedYellow">#FFFF66</Color>
+    <Color x:Key="ColorGrey">#777778</Color>
+    <Color x:Key="ColorSoftGrey1">#EBEBE9</Color>
+    <Color x:Key="ColorSoftGrey2">#D2D2D2</Color>
+    <Color x:Key="ColorSoftGrey3">#BBBBBC</Color>
+
+    <!--  Added Colors  -->
+    <Color x:Key="ColorLightRed">#F17170</Color>
+    <Color x:Key="ColorCrimson">#DC143C</Color>
+    <Color x:Key="ColorMidnight">#777778</Color>
+    <Color x:Key="ColorFireBush">#EBEBE9</Color>
+    <Color x:Key="ColorPicton">#D2D2D2</Color>
+    <Color x:Key="ColorCerulean">#BBBBBC</Color>
+
+    <!--  Brush Version  -->
+    <SolidColorBrush x:Key="BrushBlack" Color="{StaticResource ColorBlack}" />
+    <SolidColorBrush x:Key="BrushYellow" Color="{StaticResource ColorYellow}" />
+    <SolidColorBrush x:Key="BrushDarkedYellow" Color="{StaticResource ColorDarkedYellow}" />
+    <SolidColorBrush x:Key="BrushGrey" Color="{StaticResource ColorGrey}" />
+    <SolidColorBrush x:Key="BrushSoftGrey1" Color="{StaticResource ColorSoftGrey1}" />
+    <SolidColorBrush x:Key="BrushSoftGrey2" Color="{StaticResource ColorSoftGrey2}" />
+    <SolidColorBrush x:Key="BrushSoftGrey3" Color="{StaticResource ColorSoftGrey3}" />
+    <SolidColorBrush x:Key="BrushLightRed" Color="{StaticResource ColorLightRed}" />
+    <SolidColorBrush x:Key="BrushCrimson" Color="{StaticResource ColorCrimson}" />
+    <SolidColorBrush x:Key="BrushMidnight" Color="{StaticResource ColorMidnight}" />
+    <SolidColorBrush x:Key="BrushFireBush" Color="{StaticResource ColorFireBush}" />
+    <SolidColorBrush x:Key="BrushPicton" Color="{StaticResource ColorPicton}" />
+    <SolidColorBrush x:Key="BrushCerulean" Color="{StaticResource ColorCerulean}" />
+
+</ResourceDictionary>

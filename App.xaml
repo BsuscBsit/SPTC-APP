@@ -7,12 +7,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="View/Styles/FontDefaults.xaml" />
-                <ResourceDictionary Source="View/Styles/ControlStyles.xaml" />
-                <ResourceDictionary Source="View/Styles/Colors.xaml" />
-                <ResourceDictionary Source="View/Styles/Windows.xaml" />
-                <ResourceDictionary Source="View/Styles/ButtonsAndTextBox.xaml" />
-                <ResourceDictionary Source="View/Images/vector/Icons.xaml" />
+                <ResourceDictionary Source="View/Styling/IconResource.xaml" />
+                <ResourceDictionary Source="View/Styling/FontPresets.xaml" />
+                <ResourceDictionary Source="View/Styling/ColorScheme.xaml" />
+                <ResourceDictionary Source="View/Styling/WindowStyling.xaml" />
+                <ResourceDictionary Source="View/Styling/ControlStyling.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

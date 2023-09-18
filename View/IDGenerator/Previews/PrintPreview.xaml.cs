@@ -431,7 +431,7 @@ namespace SPTC_APP.View
         {
             if (zoomTextBlock != null)
             {
-                zoomTextBlock.Text = $"Zoom: {Math.Round(zoomScale * 100)}%";
+                zoomTextBlock.Content = $"Zoom: {Math.Round(zoomScale * 100)}%";
             }
         }
         private void ZoomIn_Click(object sender, RoutedEventArgs e)

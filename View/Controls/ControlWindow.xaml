@@ -3,22 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Control Window"
-    Height="235"
-    MaxWidth="500"
-    AllowsTransparency="True"
-    Background="#00FFFFFD"
     ResizeMode="NoResize"
-    Style="{StaticResource CustomWindowStyle}"
+    SizeToContent="WidthAndHeight"
+    Style="{StaticResource DetachedRoundedWindow}"
     Topmost="True"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/View/Styles/ButtonsAndTextBox.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -33,7 +23,7 @@
             CornerRadius="15,15,0,0" />
         <StackPanel
             Grid.Row="1"
-            Margin="15,0,15,0"
+            Margin="40,25,40,25"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Horizontal">
@@ -59,19 +49,29 @@
                     VerticalAlignment="Bottom"
                     Content="HEADER"
                     FontFamily="Inter"
-                    FontSize="20"
+                    FontSize="22"
                     FontWeight="Bold"
                     Foreground="Black" />
-                <ScrollViewer Grid.Row="1" MaxWidth="350"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" PanningMode="HorizontalOnly">
-                    <Label
-                        x:Name="lblContent"
-                        Content="CONTENT"
-                        FontFamily="Inter"
-                        FontSize="16"
-                        FontWeight="Medium"
-                        Foreground="Gray"/>
+                <ScrollViewer
+                    Grid.Row="1"
+                    MaxWidth="350"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalScrollBarVisibility="Auto"
+                    PanningMode="HorizontalOnly"
+                    VerticalScrollBarVisibility="Disabled">
+                    <Grid MaxWidth="300">
+                        <TextBlock
+                            x:Name="tblockContent"
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Left"
+                            FontFamily="Inter"
+                            FontSize="15"
+                            FontWeight="Medium"
+                            Foreground="{StaticResource BrushGrey}"
+                            Text="CONTENT"
+                            TextWrapping="Wrap" />
+                    </Grid>
                 </ScrollViewer>
             </Grid>
         </StackPanel>
@@ -84,6 +84,6 @@
             VerticalAlignment="Bottom"
             Click="Button_Click"
             Content="OK"
-            Style="{StaticResource GenericButton}" />
+            Style="{DynamicResource CommonButtonStyle}" />
     </Grid>
 </Window>

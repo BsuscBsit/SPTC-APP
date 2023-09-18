@@ -13,41 +13,45 @@
     Icon="../../View/Images/icons/logo.ico"
     PreviewKeyDown="Window_PreviewKeyDown"
     ResizeMode="NoResize"
-    Style="{StaticResource CustomWindowStyle}"
+    Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/View/Styles/ControlStyles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             <Style x:Key="LComboBoxTextBoxStyle" TargetType="{x:Type TextBox}">
+                <Setter Property="Background" Value="White" />
+                <Setter Property="BorderBrush" Value="{StaticResource BrushYellow}" />
+                <Setter Property="BorderThickness" Value="1,1,0,1" />
+                <Setter Property="Padding" Value="0" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TextBox}">
-                            <Grid>
-                                <Border
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{StaticResource ThemeYellow}"
-                                    BorderThickness="1,1,0,1"
-                                    CornerRadius="5,0,0,5">
-                                    <ScrollViewer x:Name="PART_ContentHost" />
-                                </Border>
-                            </Grid>
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5,0,0,5">
+                                <ScrollViewer x:Name="PART_ContentHost" />
+                            </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
+
             <Style x:Key="LComboBoxButtonStyle" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Padding" Value="0,0,10,0" />
+                <Setter Property="Background" Value="White" />
+                <Setter Property="BorderBrush" Value="{StaticResource BrushYellow}" />
+                <Setter Property="BorderThickness" Value="0,1,1,1" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToggleButton}">
                             <Border
                                 x:Name="border"
-                                Padding="0,0,10,0"
-                                Background="White"
-                                BorderBrush="{StaticResource ThemeYellow}"
-                                BorderThickness="0,1,1,1"
+                                Margin="-18,0,0,0"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="0,5,5,0">
                                 <ContentPresenter />
                             </Border>
@@ -55,6 +59,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
             <Style x:Key="LocalComboBox" TargetType="{x:Type ComboBox}">
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -80,11 +85,10 @@
                                     IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                     Style="{StaticResource LComboBoxButtonStyle}">
                                     <Path
-                                        Grid.Column="1"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Data="M 0 0 L 4 4 L 8 0 Z"
-                                        Fill="{StaticResource ThemeGrey}" />
+                                        Fill="{DynamicResource BrushGrey}" />
                                 </ToggleButton>
                                 <ContentPresenter
                                     Name="ContentSite"
@@ -108,9 +112,10 @@
                                         SnapsToDevicePixels="True">
                                         <Border
                                             x:Name="DropDownBorder"
-                                            Background="{StaticResource ThemeSoftGrey1}"
-                                            BorderBrush="{StaticResource ThemeBlack}"
-                                            BorderThickness="1" />
+                                            Background="{DynamicResource BrushSoftGrey1}"
+                                            BorderBrush="{DynamicResource BrushSoftGrey2}"
+                                            BorderThickness="1"
+                                            CornerRadius="2,2,7,7" />
                                         <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
                                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                         </ScrollViewer>
@@ -124,13 +129,13 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
-        <Image Source="/View/Images/bg_login.png" Stretch="UniformToFill">
+        <Image Source="/View/Images/bg_login.png" Stretch="UniformToFill" Margin="-1,1,0,0">
             <Image.OpacityMask>
                 <VisualBrush>
                     <VisualBrush.Visual>
                         <Path Data="M0,0 L200,0 200,150 0,150 Z">
                             <Path.Fill>
-                                <SolidColorBrush Color="{StaticResource ThemeBlackColor}" />
+                                <SolidColorBrush Color="{DynamicResource ColorBlack}" />
                             </Path.Fill>
                         </Path>
                     </VisualBrush.Visual>
@@ -140,7 +145,7 @@
                 <RectangleGeometry
                     RadiusX="15"
                     RadiusY="15"
-                    Rect="0,0,618,348" />
+                    Rect="1.2,0,618,348" />
             </Image.Clip>
         </Image>
         <Grid>
@@ -161,22 +166,20 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Orientation="Vertical">
-                    <Grid Height="91" Margin="0,0,0,40">
+                    <Grid Height="95" Margin="0,0,0,25">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="7" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Rectangle Grid.Column="0" Height="Auto">
                             <Rectangle.Fill>
-                                <SolidColorBrush Color="{StaticResource ThemeYellowColor}" />
+                                <SolidColorBrush Color="{DynamicResource ColorYellow}" />
                             </Rectangle.Fill>
                         </Rectangle>
-                        <StackPanel
-                            Grid.Column="1"
-                            Margin="0,0,0,10"
-                            Orientation="Vertical">
+                        <StackPanel Grid.Column="1" Orientation="Vertical">
                             <Label
-                                Margin="5,10,0,0"
+                                Margin="5,5,0,0"
+                                Padding="5,5,5,5"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 Content="WELCOME"
@@ -185,9 +188,10 @@
                                 FontWeight="Bold" />
                             <Label
                                 Margin="5,0,0,0"
+                                Padding="5,0,5,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                Content="Please login your account to continue"
+                                Content="Please log in to your account to&#xD;&#xA;continue."
                                 FontFamily="Inter"
                                 FontSize="15"
                                 FontWeight="Light" />
@@ -212,7 +216,7 @@
                             Background="White"
                             Content="Position"
                             FontFamily="Inter"
-                            Foreground="{StaticResource ThemeGrey}" />
+                            Foreground="Gray" />
                     </Grid>
                     <Grid Margin="5,0,5,0">
                         <Label
@@ -222,9 +226,9 @@
                             VerticalAlignment="Center"
                             Content="Password"
                             FontFamily="Inter"
-                            Foreground="{StaticResource ThemeGrey}" />
+                            Foreground="Gray" />
                         <Border
-                            BorderBrush="{StaticResource ThemeGrey}"
+                            BorderBrush="Gray"
                             BorderThickness="1"
                             CornerRadius="5">
                             <Grid>
@@ -235,22 +239,22 @@
                                 <Button
                                     x:Name="btnViewPass"
                                     Grid.Column="1"
-                                    Width="25"
-                                    Height="25"
-                                    Margin="0,0,5,0"
+                                    Width="28"
+                                    Height="28"
+                                    Margin="0,0,4.4,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     PreviewMouseDown="Button_PreviewMouseDown"
                                     PreviewMouseUp="Button_PreviewMouseUp"
-                                    Style="{StaticResource ViewPasswordStyle}"
+                                    Style="{StaticResource ShowPasswordButtonStyle}"
                                     Visibility="Hidden">
                                     <ContentControl
-                                        Width="25"
-                                        Height="17"
+                                        Width="17"
+                                        Height="20"
                                         Margin="0,1,0,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Content="{StaticResource EyeView}" />
+                                        Content="{StaticResource Mata}" />
                                 </Button>
                                 <PasswordBox
                                     x:Name="pbPassword"
@@ -274,10 +278,10 @@
                             VerticalAlignment="Center"
                             Content="we"
                             FontFamily="Cascadia Code SemiLight"
-                            Foreground="{StaticResource ThemeGrey}"
+                            Foreground="Gray"
                             Visibility="Hidden" />
                     </Grid>
-                    <Grid Margin="0,20,0,0">
+                    <Grid Margin="0,25,0,0">
                         <StackPanel
                             HorizontalAlignment="Center"
                             Orientation="Horizontal"
@@ -287,25 +291,23 @@
                                 Width="148"
                                 Height="40"
                                 Click="btnLogin_Click"
-                                Content="LOG IN"
-                                Style="{StaticResource GenericButton}" />
+                                Content="LOG IN" />
                             <Button
                                 x:Name="btnExit"
                                 Width="79"
                                 Height="40"
                                 Margin="19,0,0,0"
                                 Click="btnLogin_Click"
-                                Content="EXIT"
-                                Style="{StaticResource GenericButton}" />
+                                Content="EXIT" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button
                                 x:Name="btnLogin1"
                                 Width="148"
-                                Height="40"
+                                Background="White"
                                 Click="btnLogin_Click"
                                 Content="LOG IN"
-                                Style="{StaticResource GenericButton}" />
+                                Style="{DynamicResource CommonButtonStyle}" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -327,6 +329,6 @@
             FontSize="20"
             FontStretch="Normal"
             FontWeight="Regular"
-            Style="{StaticResource ExitButtonStyle}" />
+            Style="{DynamicResource ExitButtonStyle}" />
     </Grid>
 </Window>

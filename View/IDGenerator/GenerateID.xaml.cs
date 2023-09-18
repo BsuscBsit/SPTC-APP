@@ -45,6 +45,8 @@ namespace SPTC_APP.View
             }
             videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
+
+            GenerateDummy();
         }
 
         public GenerateID(Franchise franchise, bool isDriver)
@@ -425,6 +427,18 @@ namespace SPTC_APP.View
                 ControlWindow.Show("Camera Error", e.Message, Icons.ERROR);
             }
         }
+        private void GenerateDummy()
+        {
+            tboxFn.Text = "First Name";
+            tboxMn.Text = "Middle Name";
+            tboxLn.Text = "Last Name";
+            tboxLnum.Text = "C07-05-001168";
+            tboxBnum.Text = "99999";
+            tboxAddressB.Text = "Block 9999, Lot 9999, Phase 9999 Area ABC123";
+            tboxEmePer.Text = "FirstName LastName";
+            tboxPhone.Text = "09123456789";
 
+        }
     }
+
 }

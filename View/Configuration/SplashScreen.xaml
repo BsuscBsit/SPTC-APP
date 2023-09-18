@@ -11,7 +11,7 @@
     Height="350"
     Icon="../../View/Images/icons/logo.ico"
     ResizeMode="NoResize"
-    Style="{StaticResource CustomWindowStyle}"
+    Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid

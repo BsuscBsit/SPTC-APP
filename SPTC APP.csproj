@@ -231,6 +231,9 @@
     <Compile Include="View\Pages\Leaflets\TableView.xaml.cs">
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\Leaflets\InputFranchiseView.xaml.cs">
+      <DependentUpon>InputFranchiseView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\MainBody.xaml.cs">
       <DependentUpon>MainBody.xaml</DependentUpon>
     </Compile>
@@ -294,6 +297,10 @@
     <Page Include="View\Pages\Leaflets\TableView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\Leaflets\InputFranchiseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\MainBody.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -403,5 +410,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

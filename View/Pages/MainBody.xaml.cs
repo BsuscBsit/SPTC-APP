@@ -58,5 +58,17 @@ namespace SPTC_APP.View.Pages
         {
             DashButton.Visibility = Visibility.Visible;
         }
+
+        private void OperatorButton_Click(object sender, RoutedEventArgs e)
+        {
+            TablePanelSwap.Children.Clear();
+            TablePanelSwap.Children.Add((new TableView(Table.OPERATOR)).Fetch());
+        }
+
+        private void DriverButton_Click(object sender, RoutedEventArgs e)
+        {
+            TablePanelSwap.Children.Clear();
+            TablePanelSwap.Children.Add((new TableView(Table.DRIVER)).Fetch());
+        }
     }
 }

@@ -31,8 +31,24 @@ namespace SPTC_APP.View.Pages.Leaflets
 
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
-                new ColumnConfiguration("id", "id", visibility: Visibility.Hidden, width: 0),
-                new ColumnConfiguration("Operator", "NAME", width: 140),
+                new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
+                new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
+                new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
+                new ColumnConfiguration("MTOPNo", "MTOP NO.", width: 100),
+                 new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
+            };
+                dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
+                TableGrid.SelectedCellsChanged += TableSelectedChanged;
+            }
+            else if (table == Table.OPERATOR)
+            {
+                List<Franchise> fetchedData = (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_OPERATOR)).data;
+
+                DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid);
+
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+            {
+                new ColumnConfiguration("Operator.name.wholename", "NAME", width: 140),
                 new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
                 new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
                 new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
@@ -41,15 +57,34 @@ namespace SPTC_APP.View.Pages.Leaflets
                 dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
                 TableGrid.SelectedCellsChanged += TableSelectedChanged;
             }
+            else if (table == Table.DRIVER)
+            {
+                List<Franchise> fetchedData = (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_DRIVER)).data;
+
+                DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid);
+
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+            {
+                new ColumnConfiguration("Driver.name.wholename", "NAME", width: 140),
+                new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
+                new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
+                new ColumnConfiguration("Operator", "OPERATOR", width: 100),
+                 new ColumnConfiguration("Driver.Shift", "SHIFT", width: 100),
+            };
+                dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
+                TableGrid.SelectedCellsChanged += TableSelectedChanged;
+            }
+
         }
 
         private void TableSelectedChanged(object sender, SelectedCellsChangedEventArgs e)
         {
 
             DataGrid grid = (DataGrid)sender;
-            if (table == Table.FRANCHISE)
+
+            if (grid.SelectedItems.Count > 0)
             {
-                if (grid.SelectedItems.Count > 0)
+                if (table == Table.FRANCHISE)
                 {
                     Franchise selectedFranchise = (Franchise)grid.SelectedItems[0];
                     OperatorName.Content = selectedFranchise.Operator;
@@ -58,7 +93,31 @@ namespace SPTC_APP.View.Pages.Leaflets
                     LTLBalance.Content = 0;
                     Reference.Content = selectedFranchise.owner;
                     DriverName.Content = selectedFranchise.Driver;
+
                 }
+                else if(table == Table.OPERATOR)
+                {
+                    Franchise selectedFranchise = (Franchise)grid.SelectedItems[0];
+                    OperatorName.Content = selectedFranchise.Operator;
+                    bodynum.Content = selectedFranchise.BodyNumber;
+                    LoanBalance.Content = 0;
+                    LTLBalance.Content = 0;
+
+                    Reference.Content = selectedFranchise.owner;
+                    DriverName.Content = selectedFranchise.Driver;
+                }
+                else if (table == Table.DRIVER)
+                {
+                    Franchise selectedFranchise = (Franchise)grid.SelectedItems[0];
+                    OperatorName.Content = selectedFranchise.Driver;
+                    bodynum.Content = selectedFranchise.BodyNumber;
+                    LoanBalance.Content = 0;
+                    LTLBalance.Content = 0;
+                    Reference.Content = selectedFranchise.owner;
+                    DriverName.Content = selectedFranchise.Driver;
+
+                }
+
             }
         }
 

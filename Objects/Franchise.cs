@@ -14,6 +14,7 @@ namespace SPTC_APP.Objects
         public Name owner { get; set; }
         public Franchise lastFranchiseId { get; set; }
 
+        public string MTOPNo { get; set; }
         public double ShareCapital { get; set; }
         public double MonthlyDues { get; set; }
 

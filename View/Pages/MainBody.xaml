@@ -135,12 +135,12 @@
                     </Grid>
                 </Button>
                 <Button
+                    x:Name="OperatorButton"
                     Height="40"
                     Margin="15,50,9,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
-                    Click="Button_Click"
-                    Style="{StaticResource GenericButton}">
+                    Style="{StaticResource GenericButton}" Click="OperatorButton_Click">
                     <Grid Width="200">
                         <Image
                             Width="32"
@@ -160,12 +160,12 @@
                     </Grid>
                 </Button>
                 <Button
+                    x:Name="DriverButton"
                     Height="40"
                     Margin="15,100,9,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
-                    Click="Button_Click"
-                    Style="{StaticResource GenericButton}">
+                    Style="{StaticResource GenericButton}" Click="DriverButton_Click">
                     <Grid Width="200">
                         <Image
                             Width="32"

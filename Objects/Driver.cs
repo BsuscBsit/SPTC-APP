@@ -19,6 +19,18 @@ namespace SPTC_APP.Objects
         public string emergencyContact { get; set; }
         public bool isDayShift { get; set; }
 
+        public string Shift
+        {
+            get
+            {
+                return (isDayShift) ? "Day" : "Night";
+            }
+            private set
+            {
+
+            }
+        }
+
         private Upsert mDriver;
 
         public Driver()

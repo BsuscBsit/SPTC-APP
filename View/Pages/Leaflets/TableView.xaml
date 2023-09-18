@@ -94,7 +94,7 @@
                     
                     FontSize="10"
                     Background="Yellow"/>
-        <DataGrid x:Name="TableGrid" HorizontalAlignment="Left" Height="376" Margin="10,96,0,0" VerticalAlignment="Top" Width="520">
+        <DataGrid x:Name="TableGrid" HorizontalAlignment="Left" Height="376" Margin="10,96,0,0" VerticalAlignment="Top" Width="545">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="FontFamily" Value="Arial"/>
@@ -103,13 +103,6 @@
                     <Setter Property="BorderThickness" Value="0"/>
                 </Style>
             </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="NAME" Width="140" />
-                <DataGridTextColumn Header="BODY NO" Width="80"/>
-                <DataGridTextColumn Header="PLATE NO." Width="100"/>
-                <DataGridTextColumn Header="SHARE CAPITAL" Width="100"/>
-                <DataGridTextColumn Header="MONTHLY DUE" Width="100"/>
-            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 

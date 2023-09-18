@@ -71,6 +71,9 @@ namespace SPTC_APP.Database
         public static string ID_ = "id=?";
         public static string ID_NOTDELETED = "id=? AND isDeleted=0";
         public static string ID_DELETED = "id=? AND isDeleted=1";
+
+        public static string THEREIS_OPERATOR = "operator_id != -1 AND isDeleted = 0";
+        public static string THEREIS_DRIVER = "driver_id != -1 AND isDeleted = 0";
     }
     public static class Field
     {

@@ -13,8 +13,12 @@ namespace SPTC_APP.Objects
     {
         public List<T> data;
         public string tableName;
-        public TableObject(string table)
+        public TableObject(string table, string where = null)
         {
+            if(where == null)
+            {
+                where = Where.ALL_NOTDELETED;
+            } 
             data = new List<T>();
             tableName = table;
             try
@@ -24,7 +28,7 @@ namespace SPTC_APP.Objects
                     connection.Open();
 
                     List<T> objectList = new List<T>();
-                    objectList.AddRange(Retrieve.GetData<T>(tableName, Select.ALL, Where.ALL_NOTDELETED));
+                    objectList.AddRange(Retrieve.GetData<T>(tableName, Select.ALL, where));
                     data = objectList;
                 }
             }

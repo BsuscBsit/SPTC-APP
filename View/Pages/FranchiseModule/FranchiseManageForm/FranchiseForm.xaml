@@ -1,0 +1,262 @@
+﻿<Window x:Class="SPTC_APPLICATION.View.Pages.FranchiseModule.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SPTC_APPLICATION.View.Pages.FranchiseModule"
+        mc:Ignorable="d"
+        Title="Franchise Form">
+    <Grid>
+        <Grid x:Name="franchisePanel" HorizontalAlignment="Right" Width="760" Background="WhiteSmoke">
+            <Rectangle Height="40" Stroke="#FEF301" Fill="#FEF301"  VerticalAlignment="Top" Width="NaN"/>
+            <Label 
+               Content="FRANCHISE INFORMATION" 
+               Height="Auto" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Center"
+               Foreground="Gray"
+               FontWeight="SemiBold"
+               FontSize="20"
+               FontFamily="Inter"
+               Margin="28,45,0,425"/>
+
+            <Label Content="Franchise Requirement." 
+                           Height="Auto" 
+                           HorizontalAlignment="Left" 
+                           VerticalAlignment="Center"
+                           FontWeight="SemiBold"
+                           FontSize="14"
+                           Foreground="Gray"
+                           FontFamily="Inter"
+                           Margin="60,88,0,389"/>
+
+            <Grid Margin="0,0,10,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Body Number :"
+                           Grid.Column="0"
+                           Height="Auto" 
+                           HorizontalAlignment="Stretch" 
+                           VerticalAlignment="Center"
+                           FontWeight="SemiBold"
+                           FontSize="14"
+                           FontFamily="Inter" Margin="80,134,413,332"/>
+                <TextBox x:Name="tboxBodyNum"               
+                            Text="" 
+                            Width="164"
+                            Height="30"
+                            HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Center" Margin="80,162,506,302">
+
+                </TextBox>
+                <Label Content="Requirement 1 : "
+                           Grid.Column="0"
+                           Height="Auto" 
+                           HorizontalAlignment="Stretch" 
+                           VerticalAlignment="Center"
+                           FontWeight="SemiBold"
+                           FontSize="14"
+                           FontFamily="Inter" Margin="80,209,413,259"/>
+                <TextBox x:Name="Req1"               
+                            Text="" 
+                            Width="164"
+                            Height="30"
+                            HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Center" Margin="80,235,506,229">
+
+                </TextBox>
+                <Label Content="Requirement 2 : "
+                           Grid.Column="0"
+                           Height="Auto" 
+                           HorizontalAlignment="Stretch" 
+                           VerticalAlignment="Center"
+                           FontWeight="SemiBold"
+                           FontSize="14"
+                           FontFamily="Inter" Margin="80,273,413,195"/>
+                <TextBox x:Name="Req2"               
+                            Text="" 
+                            Width="164"
+                            Height="30"
+                            HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Center" Margin="80,298,506,166">
+
+                </TextBox>
+                <Label Content="Requirement 3 : "
+                           Grid.Column="0"
+                           Height="Auto" 
+                           HorizontalAlignment="Stretch" 
+                           VerticalAlignment="Center"
+                           FontWeight="SemiBold"
+                           FontSize="14"
+                           FontFamily="Inter" Margin="80,338,413,130"/>
+                <TextBox x:Name="Req3"               
+                            Text="" 
+                            Width="164"
+                            Height="30"
+                            HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Center" Margin="80,364,506,100">
+
+                </TextBox>
+            </Grid>
+
+
+            <Label Content="MTOP Plate Number : "
+                Grid.Column="0"
+                Height="Auto" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center"
+                FontWeight="SemiBold"
+                FontSize="14"
+                FontFamily="Inter" Margin="290,134,213,343"/>
+
+            <TextBox x:Name="tboxMTOPplateNum"               
+                Text="" 
+                Width="164"
+                Height="30"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center" Margin="290,161,306,313"/>
+
+            <Label Content="ID Number : "
+                Grid.Column="0"
+                Height="Auto" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center"
+                FontWeight="SemiBold"
+                FontSize="14"
+                FontFamily="Inter" Margin="290,210,213,267"/>
+
+            <TextBox x:Name="tboxIDNum1"               
+                Text="" 
+                Width="164"
+                Height="30"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center" Margin="290,235,306,239"/>
+
+            <Label Content="ID Number : "
+                Grid.Column="0"
+                Height="Auto" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center"
+                FontWeight="SemiBold"
+                FontSize="14"
+                FontFamily="Inter" Margin="290,273,213,204"/>
+
+            <TextBox x:Name="tboxIDNum2"               
+                Text="" 
+                Width="164"
+                Height="30"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center" Margin="290,300,306,174"/>
+            <Label Content="ID Number : "
+                Grid.Column="0"
+                Height="Auto" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center"
+                FontWeight="SemiBold"
+                FontSize="14"
+                FontFamily="Inter" Margin="290,338,213,139"/>
+
+            <TextBox x:Name="tboxIDNum3"               
+                Text="" 
+                Width="164"
+                Height="30"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center" Margin="290,365,306,109"/>
+
+            <Label Content="LTO Plate Number : "
+                Grid.Column="0"
+                Height="Auto" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center"
+                FontWeight="SemiBold"
+                FontSize="14"
+                FontFamily="Inter" Margin="500,134,3,343"/>
+
+            <TextBox x:Name="tboxLTOplateNum"               
+                Text="" 
+                Width="164"
+                Height="30"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center" Margin="500,161,96,313"/>
+
+            <Label Content="Expiration Date : "
+                Grid.Column="0"
+                Height="Auto" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center"
+                FontWeight="SemiBold"
+                FontSize="14"
+                FontFamily="Inter" Margin="500,209,3,268"/>
+
+            <TextBox x:Name="tboxExprationDate1"               
+                Text="" 
+                Width="164"
+                Height="30"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center" Margin="500,235,96,239"/>
+
+            <Label Content="Expiration Date : "
+                Grid.Column="0"
+                Height="Auto" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center"
+                FontWeight="SemiBold"
+                FontSize="14"
+                FontFamily="Inter" Margin="500,275,3,202"/>
+
+            <TextBox x:Name="tboxExprationDate2"               
+                Text="" 
+                Width="164"
+                Height="30"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center" Margin="500,300,96,174"/>
+
+            <Label Content="Expiration Date : "
+                Grid.Column="0"
+                Height="Auto" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center"
+                FontWeight="SemiBold"
+                FontSize="14"
+                FontFamily="Inter" Margin="503,340,0,137"/>
+
+            <TextBox x:Name="tboxExprationDate3"               
+                Text="" 
+                Width="164"
+                Height="30"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center" Margin="500,365,96,109"/>
+
+            <Label Content="Date of Issued:"
+                           Grid.Column="0"
+                           Height="Auto" 
+                           HorizontalAlignment="Stretch" 
+                           VerticalAlignment="Center"
+                           FontWeight="SemiBold"
+                           FontSize="14"
+                           FontFamily="Inter" Margin="422,50,31,426"/>
+            <DatePicker x:Name="bDay"
+                                BorderThickness="0"
+                                VerticalContentAlignment="Center" Height="31" Margin="548,48,46,425"/>
+
+
+
+            <Button x:Name="btnCanceFranchiseInfo" Content="CANCEL" Width="135" Height="40"
+                    FontWeight="ExtraBold"
+                    Background="White" Margin="134,426,491,38"/>
+
+            <Button x:Name="btnNextFranchiseInput" Content="NEXT" Width="135" Height="40"
+                    FontWeight="ExtraBold"
+                    Background="Yellow" Margin="480,426,145,38"/>
+
+
+
+
+
+
+
+        </Grid>
+    </Grid>
+</Window>

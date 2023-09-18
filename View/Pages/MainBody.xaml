@@ -60,12 +60,12 @@
                 VerticalAlignment="Top"
                 Stroke="DarkGray" />
             <Button
+                x:Name="DashBoard"
                 Height="40"
                 Margin="12,81,12,0"
                 VerticalAlignment="Top"
                 BorderThickness="0"
-                Click="Button_Click"
-                Style="{StaticResource GenericButton}">
+                Style="{StaticResource GenericButton}" Click="DashBoard_Click">
                 <Grid Width="200">
                     <Image
                         Width="32"
@@ -111,12 +111,12 @@
                     VerticalAlignment="Top"
                     Stroke="DarkGray" />
                 <Button
+                    x:Name="FranchiseButton"
                     Height="40"
                     Margin="15,0,9,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
-                    Click="Button_Click"
-                    Style="{StaticResource GenericButton}">
+                    Style="{StaticResource GenericButton}" Click="FranchiseButton_Click">
                     <Grid Width="200">
                         <Image
                             Width="32"
@@ -268,6 +268,9 @@
             Width="1061"
             Margin="0,40,0,0"
             HorizontalAlignment="Right">
+            <Grid x:Name="TablePanelSwap" Margin="220,0,0,0"/>
+        </Grid>
+        <Grid Margin="625,66,0,388" x:Name="DashButton" Visibility="Collapsed">
             <Button
                 x:Name="btnGererate"
                 Width="175"
@@ -289,6 +292,5 @@
                 Content="TEST"
                 Style="{StaticResource GenericButton}" />
         </Grid>
-
     </Grid>
 </Window>

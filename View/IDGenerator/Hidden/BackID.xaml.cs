@@ -18,8 +18,8 @@ namespace SPTC_APP.View
             {
                 lblName.Content = franchise.Operator.name.wholename;
 
-                lblLicense.Content = franchise.licenceNO;
-                lblBodyNum.Content = franchise.bodynumber;
+                lblLicense.Content = franchise.LicenseNO;
+                lblBodyNum.Content = franchise.BodyNumber;
                 lblEmePer.Content = franchise.Operator.emergencyPerson;
                 lblAddressBuilding.Content = franchise.Operator.address.addressline1;
                 lblAddressStreet.Content = franchise.Operator.address.addressline2;
@@ -33,8 +33,8 @@ namespace SPTC_APP.View
             {
                 lblName.Content = franchise.Driver.name.wholename;
 
-                lblLicense.Content = franchise.licenceNO;
-                lblBodyNum.Content = franchise.bodynumber;
+                lblLicense.Content = franchise.LicenseNO;
+                lblBodyNum.Content = franchise.BodyNumber;
                 lblEmePer.Content = franchise.Driver.emergencyPerson;
                 lblAddressBuilding.Content = franchise.Driver.address.addressline1;
                 lblAddressStreet.Content = franchise.Driver.address.addressline2;

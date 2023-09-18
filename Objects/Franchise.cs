@@ -7,12 +7,15 @@ namespace SPTC_APP.Objects
     public class Franchise
     {
         public int id { get; private set; }
-        public string bodynumber { get; set; }
+        public string BodyNumber { get; set; }
         public Operator Operator { get; set; }
-        public string licenceNO { get; set; }
+        public string LicenseNO { get; set; }
         public Driver Driver { get; set; }
         public Name owner { get; set; }
         public Franchise lastFranchiseId { get; set; }
+
+        public double ShareCapital { get; set; }
+        public double MonthlyDues { get; set; }
 
         private Upsert franchise;
 
@@ -35,8 +38,8 @@ namespace SPTC_APP.Objects
             lastFranchiseId = null;
             franchise = null;
             this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
-            this.bodynumber = Retrieve.GetValueOrDefault<string>(reader, Field.BODY_NUMBER);
-            this.licenceNO = Retrieve.GetValueOrDefault<string>(reader, Field.LICENSE_NO);
+            this.BodyNumber = Retrieve.GetValueOrDefault<string>(reader, Field.BODY_NUMBER);
+            this.LicenseNO = Retrieve.GetValueOrDefault<string>(reader, Field.LICENSE_NO);
 
             Populate(Retrieve.GetValueOrDefault<int>(reader, Field.OPERATOR_ID), Retrieve.GetValueOrDefault<int>(reader, Field.DRIVER_ID), Retrieve.GetValueOrDefault<int>(reader, Field.OWNER_ID), Retrieve.GetValueOrDefault<int>(reader, Field.LAST_FRANCHISE_ID));
 
@@ -56,10 +59,10 @@ namespace SPTC_APP.Objects
 
         public bool WriteInto(string bodynumber, Operator lOperator, Driver lDriver, string licenceNO)
         {
-            this.bodynumber = bodynumber;
+            this.BodyNumber = bodynumber;
             this.Operator = lOperator;
             this.Driver = lDriver;
-            this.licenceNO = licenceNO;
+            this.LicenseNO = licenceNO;
             return true;
         }
         public int Save()
@@ -68,8 +71,8 @@ namespace SPTC_APP.Objects
             {
                 franchise = new Upsert(Table.FRANCHISE, id);
             }
-            franchise.Insert(Field.BODY_NUMBER, bodynumber);
-            franchise.Insert(Field.LICENSE_NO, licenceNO);
+            franchise.Insert(Field.BODY_NUMBER, BodyNumber);
+            franchise.Insert(Field.LICENSE_NO, LicenseNO);
             if (this.Operator != null)
             {
                 franchise.Insert(Field.OPERATOR_ID, this.Operator.Save());
@@ -94,9 +97,9 @@ namespace SPTC_APP.Objects
 
         public override string ToString()
         {
-            if (bodynumber != null)
+            if (BodyNumber != null)
             {
-                return bodynumber.ToString();
+                return BodyNumber.ToString();
             }
             return "";
         }

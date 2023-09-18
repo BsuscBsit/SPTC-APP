@@ -75,10 +75,10 @@ public class DataGridHelper<T>
         public ColumnConfiguration(
             string bindingPath,
             string header,
-            double width = 200,
+            double width = 100,
             double height = 20,
             double maxWidth = 200,
-            double fontSize = 12,
+            double fontSize = 10,
             System.Windows.Media.Brush backgroundColor = null,
             System.Windows.FontWeight? fontWeight = null)
         {

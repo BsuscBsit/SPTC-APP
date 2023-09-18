@@ -1,5 +1,7 @@
 ﻿using System.Windows;
+using SPTC_APP.Database;
 using SPTC_APP.Objects;
+using SPTC_APP.View.Pages.Leaflets;
 
 namespace SPTC_APP.View.Pages
 {
@@ -22,7 +24,7 @@ namespace SPTC_APP.View.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+           
         }
 
         private void btnTest_Click(object sender, RoutedEventArgs e)
@@ -44,6 +46,17 @@ namespace SPTC_APP.View.Pages
         private void Btn_Settings(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void FranchiseButton_Click(object sender, RoutedEventArgs e)
+        {
+            TablePanelSwap.Children.Clear();
+            TablePanelSwap.Children.Add((new TableView(Table.FRANCHISE)).Fetch());
+        }
+
+        private void DashBoard_Click(object sender, RoutedEventArgs e)
+        {
+            DashButton.Visibility = Visibility.Visible;
         }
     }
 }

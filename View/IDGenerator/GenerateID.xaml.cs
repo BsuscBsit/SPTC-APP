@@ -98,8 +98,8 @@ namespace SPTC_APP.View
                     }
                     tboxEmePer.Text = drv.emergencyPerson;
                     tboxPhone.Text = drv.emergencyContact;
-                    tboxBnum.Text = franchise.bodynumber;
-                    tboxLnum.Text = franchise.licenceNO;
+                    tboxBnum.Text = franchise.BodyNumber;
+                    tboxLnum.Text = franchise.LicenseNO;
                 }
             } else
             {
@@ -140,8 +140,8 @@ namespace SPTC_APP.View
                     }
                     tboxEmePer.Text = drv.emergencyPerson;
                     tboxPhone.Text = drv.emergencyContact;
-                    tboxBnum.Text = franchise.bodynumber;
-                    tboxLnum.Text = franchise.licenceNO;
+                    tboxBnum.Text = franchise.BodyNumber;
+                    tboxLnum.Text = franchise.LicenseNO;
                 }
             }
 

@@ -7,12 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="TableView"
     mc:Ignorable="d">
-    <Grid x:Name="franchisePanel" HorizontalAlignment="Center" Background="LightGray" VerticalAlignment="Center" Width="800" Height="500">
-        <Rectangle Height="40" Stroke="#FEF301" Fill="#FEF301"  VerticalAlignment="Top" Width="NaN"/>
+    <Grid x:Name="franchisePanel" HorizontalAlignment="Center" Background="LightGray" VerticalAlignment="Center">
         <Grid x:Name="franchiseInformation" HorizontalAlignment="Left" Height="333" Background="White" Margin="557,97,0,0" VerticalAlignment="Top" Width="182" >
                 <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="72,10,0,0">
                     <Ellipse.Fill>
-                        <ImageBrush x:Name="userImage1" ImageSource="/SPTC APPLICATION;component/View/Images/icons/person.png"/>
+                        <ImageBrush x:Name="userImage1" ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
                     </Ellipse.Fill>
                 </Ellipse>
                 <Label Content="Operators Name" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top"
@@ -111,29 +110,22 @@
                     
                     FontSize="10"
                     Background="Yellow"/>
-            <DataGrid x:Name="Franchise" HorizontalAlignment="Left" Height="376" Margin="10,96,0,0" VerticalAlignment="Top" Width="532">
-
+        <DataGrid x:Name="TableGrid" HorizontalAlignment="Left" Height="376" Margin="10,96,0,0" VerticalAlignment="Top" Width="520">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
-
                     <Setter Property="FontFamily" Value="Arial"/>
                     <Setter Property="FontWeight" Value="Bold"/>
                     <Setter Property="FontSize" Value="10"/>
                     <Setter Property="BorderThickness" Value="0"/>
-
-
                 </Style>
             </DataGrid.Resources>
-
             <DataGrid.Columns>
                 <DataGridTextColumn Header="NAME" Width="140" />
                 <DataGridTextColumn Header="BODY NO" Width="80"/>
                 <DataGridTextColumn Header="PLATE NO." Width="100"/>
                 <DataGridTextColumn Header="SHARE CAPITAL" Width="100"/>
                 <DataGridTextColumn Header="MONTHLY DUE" Width="100"/>
-
             </DataGrid.Columns>
-
         </DataGrid>
     </Grid>
 

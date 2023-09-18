@@ -65,7 +65,7 @@ namespace SPTC_APP.View
         {
             this.franchise = franchise;
             this.type = type;
-            EventLogger.Post($"OUT :: ID Generation :  Body#: {franchise.bodynumber} type: {type.ToString()}");
+            EventLogger.Post($"OUT :: ID Generation :  Body#: {franchise.BodyNumber} type: {type.ToString()}");
         }
 
         public void incrementFrontPrint()

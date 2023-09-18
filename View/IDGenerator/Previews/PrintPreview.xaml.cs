@@ -260,8 +260,8 @@ namespace SPTC_APP.View
             foreach (ID id in new ID[] { mGrid1, mGrid2, mGrid3, mGrid4 }) {
                 if(id != null)
                 {
-                    EventLogger.Post("ID :" + id.franchise.bodynumber + " Front page has been printed " + id.FrontPrint);
-                    EventLogger.Post("ID :" + id.franchise.bodynumber + " Back page has been printed " + id.BackPrint);
+                    EventLogger.Post("ID :" + id.franchise.BodyNumber + " Front page has been printed " + id.FrontPrint);
+                    EventLogger.Post("ID :" + id.franchise.BodyNumber + " Back page has been printed " + id.BackPrint);
                 }
             }
             checkIdCount();

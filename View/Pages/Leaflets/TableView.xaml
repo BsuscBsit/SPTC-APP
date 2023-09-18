@@ -26,7 +26,7 @@
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
-                <Label Content="LT Balance" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"
+                <Label Content="LTL Balance" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
@@ -39,59 +39,43 @@
                     FontSize="9"
                     Foreground="DarkGray"/>
                 <Rectangle Height="1" Margin="0,202,0,0" Stroke="LightGray" VerticalAlignment="Top" />
-                <Label Content="Juan Dela Cruz" HorizontalAlignment="Left" Margin="93,81,0,0" VerticalAlignment="Top"
+                <Label x:Name="OperatorName" Content="Juan Dela Cruz" HorizontalAlignment="Left" Margin="93,81,0,0" VerticalAlignment="Top"
                        Foreground="Black"
                        FontWeight="DemiBold"
                        FontFamily="Arial"
                        FontStretch="SemiExpanded"
                        FontSize="9"/>
-                <Label Content="103" HorizontalAlignment="Left" Margin="110,112,0,0" VerticalAlignment="Top"
+            <Label x:Name="bodynum" Content="103" HorizontalAlignment="Left" Margin="110,112,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Arial"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
-                <Label Content="10,000" HorizontalAlignment="Left" Margin="110,137,0,0" VerticalAlignment="Top"
+            <Label x:Name="LoanBalance"  Content="10,000" HorizontalAlignment="Left" Margin="110,137,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Arial"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
-                <Label Content="90,500" HorizontalAlignment="Left" Margin="110,162,0,0" VerticalAlignment="Top"
+            <Label x:Name="LTLBalance"  Content="90,500" HorizontalAlignment="Left" Margin="110,162,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Arial"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
-                <Label Content="Gabriel Manriza" HorizontalAlignment="Left" Margin="99,213,0,0" VerticalAlignment="Top"
+            <Label x:Name="Reference" Content="Gabriel Manriza" HorizontalAlignment="Left" Margin="99,213,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Helvetica"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
-                <Label Content="" HorizontalAlignment="Left" Margin="110,324,0,0" VerticalAlignment="Top"
+            <Label x:Name="DriverName" Content="Diero Estrella" HorizontalAlignment="Left" Margin="111,248,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Helvetica"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
-                <Label Content="Driver Night " HorizontalAlignment="Left" Margin="22,286,0,0" VerticalAlignment="Top"
-                    FontWeight="Medium"
-                    FontSize="8"
-                    Foreground="DarkGray"/>
-                <Label Content="Diero Estrella" HorizontalAlignment="Left" Margin="111,248,0,0" VerticalAlignment="Top"
-                    Foreground="Black"
-                    FontWeight="DemiBold"
-                    FontFamily="Helvetica"
-                    FontStretch="SemiExpanded"
-                    FontSize="9"/>
-                <Label Content="Arwyn Calim" HorizontalAlignment="Left" Margin="110,287,0,0" VerticalAlignment="Top"
-                    Foreground="Black"
-                    FontWeight="DemiBold"
-                    FontFamily="Helvetica"
-                    FontStretch="SemiExpanded"
-                    FontSize="9"/>
-            </Grid>
+        </Grid>
             <Rectangle HorizontalAlignment="Left" Height="30"  Margin="23,52,0,0"  VerticalAlignment="Top" Width="398">
                 <Rectangle.Fill>
                     <SolidColorBrush Color="White" />

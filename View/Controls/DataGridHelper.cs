@@ -41,17 +41,19 @@ public class DataGridHelper<T>
                     CellStyle = new System.Windows.Style
                     {
                         Setters =
-                    {
-                        new Setter(System.Windows.Controls.Control.BackgroundProperty, config.BackgroundColor),
-                        new Setter(System.Windows.Controls.Control.FontWeightProperty, config.FontWeight),
-                        new Setter(System.Windows.Controls.Control.FontSizeProperty, config.FontSize),
-                        new Setter(System.Windows.Controls.Control.HeightProperty, config.Height)
-                    }
-                    }
+            {
+                new Setter(System.Windows.Controls.Control.BackgroundProperty, config.BackgroundColor),
+                new Setter(System.Windows.Controls.Control.FontWeightProperty, config.FontWeight),
+                new Setter(System.Windows.Controls.Control.FontSizeProperty, config.FontSize),
+                new Setter(System.Windows.Controls.Control.HeightProperty, config.Height)
+            }
+                    },
+                    Visibility = config.Visibility // Apply the visibility setting
                 };
 
                 dataGrid.Columns.Add(column);
             }
+
 
             // Set the data source
             dataGrid.ItemsSource = items;
@@ -71,6 +73,7 @@ public class DataGridHelper<T>
         public double FontSize { get; }
         public System.Windows.Media.Brush BackgroundColor { get; }
         public System.Windows.FontWeight FontWeight { get; }
+        public Visibility Visibility { get; } // New property for visibility
 
         public ColumnConfiguration(
             string bindingPath,
@@ -80,7 +83,8 @@ public class DataGridHelper<T>
             double maxWidth = 200,
             double fontSize = 10,
             System.Windows.Media.Brush backgroundColor = null,
-            System.Windows.FontWeight? fontWeight = null)
+            System.Windows.FontWeight? fontWeight = null,
+            Visibility visibility = Visibility.Visible) // Default visibility is Visible
         {
             BindingPath = bindingPath;
             Header = header;
@@ -92,6 +96,8 @@ public class DataGridHelper<T>
 
             // Check if fontWeight is provided, otherwise use the default value
             FontWeight = fontWeight.HasValue ? fontWeight.Value : System.Windows.FontWeights.Normal;
+
+            Visibility = visibility;
         }
     }
 

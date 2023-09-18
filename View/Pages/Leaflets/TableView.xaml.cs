@@ -31,6 +31,7 @@ namespace SPTC_APP.View.Pages.Leaflets
 
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
+                new ColumnConfiguration("id", "id", visibility: Visibility.Hidden, width: 0),
                 new ColumnConfiguration("Operator", "NAME", width: 140),
                 new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
                 new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
@@ -38,10 +39,28 @@ namespace SPTC_APP.View.Pages.Leaflets
                  new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
             };
                 dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
-
+                TableGrid.SelectedCellsChanged += TableSelectedChanged;
             }
         }
 
+        private void TableSelectedChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+
+            DataGrid grid = (DataGrid)sender;
+            if (table == Table.FRANCHISE)
+            {
+                if (grid.SelectedItems.Count > 0)
+                {
+                    Franchise selectedFranchise = (Franchise)grid.SelectedItems[0];
+                    OperatorName.Content = selectedFranchise.Operator;
+                    bodynum.Content = selectedFranchise.BodyNumber;
+                    LoanBalance.Content = 0;
+                    LTLBalance.Content = 0;
+                    Reference.Content = selectedFranchise.owner;
+                    DriverName.Content = selectedFranchise.Driver;
+                }
+            }
+        }
 
         public Grid Fetch()
         {
@@ -53,6 +72,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                     currentParent.Content = null;
                 }
             }
+            this.Close();
             return franchisePanel;
         }
 

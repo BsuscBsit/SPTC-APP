@@ -24,6 +24,7 @@ namespace SPTC_APP.View
         bool isDriver = true;
         private Franchise franchise;
         bool isUpdate = false;
+        private bool isCameraRunning;
 
         private FilterInfoCollection videoDevices;
         private VideoCaptureDevice videoSource;
@@ -197,34 +198,38 @@ namespace SPTC_APP.View
 
         private void videoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            isCameraRunning = true;
+            if (isCameraRunning)
             {
-                // This event is called for each new camera frame
-                // Convert the frame to a BitmapSource and display it
-                System.Drawing.Bitmap frame = (System.Drawing.Bitmap)eventArgs.Frame.Clone();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    // This event is called for each new camera frame
+                    // Convert the frame to a BitmapSource and display it
+                    System.Drawing.Bitmap frame = (System.Drawing.Bitmap)eventArgs.Frame.Clone();
 
-                // Convert to BitmapSource
-                IntPtr hBitmap = frame.GetHbitmap(); // Get the HBitmap
-                BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
-                    hBitmap,
-                    IntPtr.Zero,
-                    Int32Rect.Empty,
-                    BitmapSizeOptions.FromEmptyOptions());
+                    // Convert to BitmapSource
+                    var hBitmap = frame.GetHbitmap();
+                    BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
+                        hBitmap,
+                        IntPtr.Zero,
+                        Int32Rect.Empty,
+                        BitmapSizeOptions.FromEmptyOptions());
 
-                // Display the captured frame in imgIDPic
-                imgIDPic.Source = bitmapSource;
-                lastCapturedImage = bitmapSource;
+                    // Display the captured frame in imgIDPic
+                    imgIDPic.Source = bitmapSource;
+                    lastCapturedImage = bitmapSource;
 
-                // Dispose of the frame to release resources
-                frame.Dispose();
+                    // Dispose of the frame to release resources
+                    frame.Dispose();
 
-                // Release the HBitmap
-                DeleteObject(hBitmap);
-            });
-
-
-
+                    // Freeze the BitmapSource to release its resources
+                    bitmapSource.Freeze();
+                    // Release the HBitmap
+                    DeleteObject(hBitmap);
+                });
+            }
         }
+
 
         // Define the DeleteObject method to release HBitmap
         [DllImport("gdi32.dll")]
@@ -316,6 +321,7 @@ namespace SPTC_APP.View
 
         private void btnPreview_Click(object sender, RoutedEventArgs e)
         {
+            this.StopCamera();
             if (tboxLnum.Text.Length > 0 && tboxFn.Text.Length > 0 && tboxLn.Text.Length > 0 && tboxAddressB.Text.Length > 0 && tboxAddressS.Text.Length > 0 && tboxEmePer.Text.Length > 0 && tboxPhone.Text.Length > 0)
             {
                 GeneratedIDPreview print = new GeneratedIDPreview();
@@ -410,34 +416,38 @@ namespace SPTC_APP.View
             {
                 ControlWindow.Show("Input Fields incomplete!", "Missing some required inputs.");
             }
-            StopCamera();
         }
 
         public void StopCamera()
         {
+            isCameraRunning = false; // Set the flag to indicate camera stopping
+            pbCameraOpen.Visibility = Visibility.Hidden;
             try
             {
-                if (lastCapturedImage != null)
+                if (videoSource != null && videoSource.IsRunning)
                 {
-                    imgIDPic.Source = lastCapturedImage;
-                }
-                hasPhoto = true;
-                if (videoSource != null)
-                {
-                    if (videoSource.IsRunning)
-                    {
-                        videoSource.SignalToStop();
-                        videoSource.WaitForStop();
-                    }
+                    videoSource.SignalToStop();
+                    videoSource.WaitForStop();
                 }
 
+                // Ensure that the camera source is completely stopped and disposed
+                videoSource?.Stop();
+                videoSource?.SignalToStop();
+                videoSource?.WaitForStop();
                 videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
+            
+
+                // Dispose of the last captured image if necessary
+                lastCapturedImage?.Freeze();
+                //lastCapturedImage?.Dispose();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ControlWindow.Show("Camera Error", e.Message, Icons.ERROR);
             }
         }
+
+
         private void GenerateDummy()
         {
             tboxFn.Text = "First Name";

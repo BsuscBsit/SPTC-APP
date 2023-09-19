@@ -45,7 +45,7 @@ namespace SPTC_APP.View
                 btnStartCam.IsEnabled = false;
                 return;
             }
-            videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
+            videoSource = new VideoCaptureDevice(videoDevices[AppState.DEFAULT_CAMERA].MonikerString);
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
             //GenerateDummy();
@@ -318,6 +318,7 @@ namespace SPTC_APP.View
                 hasSign = true;
             }
         }
+       
 
         private void btnPreview_Click(object sender, RoutedEventArgs e)
         {
@@ -334,10 +335,16 @@ namespace SPTC_APP.View
                     if (hasPhoto)
                     {
                         image = new SPTC_APP.Objects.Image(imgIDPic.Source, $"Drv - {tboxFn.Text}");
+                    } else
+                    {
+                        imgIDPic.Source = new BitmapImage(new Uri("/View/Images/album.png", UriKind.Relative));
                     }
                     if (hasSign)
                     {
                         sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign  -{tboxFn.Text}");
+                    } else
+                    {
+                        imgSignPic.Source = new BitmapImage(new Uri("/View/Images/sign.png", UriKind.Relative));
                     }
 
                     string prefix = (cbGender.SelectedIndex == 0) ? "Mr." : "Mrs.";
@@ -375,11 +382,19 @@ namespace SPTC_APP.View
                     SPTC_APP.Objects.Image sign = null;
                     if (hasPhoto)
                     {
-                        image = new SPTC_APP.Objects.Image(imgIDPic.Source, $"Drv - {tboxFn.Text}");
+                        image = new SPTC_APP.Objects.Image(imgIDPic.Source, $"Oprt - {tboxFn.Text}");
+                    }
+                    else
+                    {
+                        imgIDPic.Source = new BitmapImage(new Uri("/View/Images/album.png", UriKind.Relative));
                     }
                     if (hasSign)
                     {
-                        sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign - {tboxFn.Text}");
+                        sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign  -{tboxFn.Text}");
+                    }
+                    else
+                    {
+                        imgSignPic.Source = new BitmapImage(new Uri("/View/Images/sign.png", UriKind.Relative));
                     }
                     string prefix = (cbGender.SelectedIndex == 0) ? "Mr." : "Mrs.";
                     if (isUpdate)
@@ -414,6 +429,14 @@ namespace SPTC_APP.View
             }
             else
             {
+                if (!hasPhoto)
+                {
+                    imgIDPic.Source = new BitmapImage(new Uri("/View/Images/album.png", UriKind.Relative));
+                }
+                if (!hasSign)
+                {
+                    imgSignPic.Source = new BitmapImage(new Uri("/View/Images/sign.png", UriKind.Relative));
+                }
                 ControlWindow.Show("Input Fields incomplete!", "Missing some required inputs.");
             }
         }

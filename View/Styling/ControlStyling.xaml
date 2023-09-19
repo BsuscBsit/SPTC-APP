@@ -157,7 +157,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="CommonButtonStyle"
+    <Style
+        x:Key="CommonButtonStyle"
         BasedOn="{StaticResource ButtonTextPreset}"
         TargetType="Button">
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -393,8 +394,9 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <Style x:Key="NoBorderButtonStyle"
+
+    <Style
+        x:Key="NoBorderButtonStyle"
         BasedOn="{StaticResource ButtonTextPreset}"
         TargetType="Button">
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -485,17 +487,17 @@
                                             Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
                                             To="{DynamicResource ColorYellow}"
                                             Duration="0:0:0.8" />
-                                                                            <ColorAnimation
+                                        <ColorAnimation
                                             Storyboard.TargetName="TheContent"
                                             Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
                                             To="{StaticResource ColorSoftGrey1}"
                                             Duration="0:0:1" />
-                                                                            <DoubleAnimation
+                                        <DoubleAnimation
                                             Storyboard.TargetName="TheBorder"
                                             Storyboard.TargetProperty="Effect.BlurRadius"
                                             To="7"
                                             Duration="0:0:0.1" />
-                                                                            <DoubleAnimation
+                                        <DoubleAnimation
                                             Storyboard.TargetName="TheBorder"
                                             Storyboard.TargetProperty="Effect.Opacity"
                                             To="7"

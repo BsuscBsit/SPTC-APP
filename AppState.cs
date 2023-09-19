@@ -22,6 +22,7 @@ namespace SPTC_APP
         public static string CHAIRMAN = "ROLLY M. LABINDAO";
         public static string REGISTRATION_NO = "9520-03006397";
         public static double PRINT_AJUSTMENTS = 0;
+        public static int DEFAULT_CAMERA = 0;
 
 
 
@@ -31,6 +32,7 @@ namespace SPTC_APP
         public static Employee USER = null;
 
         public static Window mainwindow = null;
+
 
         public static void Login(string username, string password, Window window)
         {
@@ -78,7 +80,8 @@ namespace SPTC_APP
                 EXPIRATION_DATE,
                 CHAIRMAN,
                 REGISTRATION_NO,
-                PRINT_AJUSTMENTS
+                PRINT_AJUSTMENTS,
+                DEFAULT_CAMERA,
             };
 
             if (File.Exists(APPSTATE_PATH))
@@ -117,11 +120,12 @@ namespace SPTC_APP
                     CHAIRMAN = data.CHAIRMAN;
                     REGISTRATION_NO = data.REGISTRATION_NO;
                     PRINT_AJUSTMENTS = data.PRINT_AJUSTMENTS;
+                    DEFAULT_CAMERA = data.DEFAULT_CAMERA;
                          
                 }
                 catch (Exception e)
                 {
-                    EventLogger.Post("ERR :: Exception : "+e.Message);
+                    EventLogger.Post("ERR :: Exception in JSON : "+e.Message);
                 }
             }
         }

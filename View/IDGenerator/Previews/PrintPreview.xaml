@@ -14,7 +14,7 @@
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid VerticalAlignment="Top" Height="544.3">
+    <Grid Height="544.3" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -46,10 +46,11 @@
                 Grid.Column="0"
                 Width="364"
                 Height="461"
+                Margin="16,0,0,0"
                 Padding="10,10,10,10"
                 Background="{DynamicResource BrushSoftGrey1}"
                 ClipToBounds="True"
-                CornerRadius="5" Margin="16,0,0,0">
+                CornerRadius="5">
                 <ScrollViewer
                     x:Name="scrollViewer"
                     HorizontalScrollBarVisibility="Auto"
@@ -248,8 +249,10 @@
                 </StackPanel>
                 <Grid
                     Grid.Row="1"
+                    Width="160"
                     Margin="0,0,0,23"
-                    VerticalAlignment="Top" HorizontalAlignment="Left" Width="160">
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -265,11 +268,12 @@
                     <Slider
                         x:Name="zoomSlider"
                         Grid.Row="1"
+                        Width="143"
                         VerticalAlignment="Top"
                         Maximum="5"
                         Minimum="0.1"
                         ValueChanged="ZoomSlider_ValueChanged"
-                        Value="1" Width="143" />
+                        Value="1" />
                     <Button
                         Grid.Row="2"
                         Width="25"
@@ -393,12 +397,16 @@
             </Canvas>
         </Grid>
         <Grid Grid.RowSpan="4" d:IsHidden="True">
-            <Grid x:Name="Grid0Content" Visibility="Visible" Width="568.8" Height="550.4">
+            <Grid
+                x:Name="Grid0Content"
+                Width="568.8"
+                Height="550.4"
+                Visibility="Visible">
                 <Image Source="/View/Images/bg_dialog.png" Stretch="UniformToFill">
                     <Image.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
-                                <Path Data="M0,0 L200,0 200,150 0,150 Z" Fill="Black"/>
+                                <Path Data="M0,0 L200,0 200,150 0,150 Z" Fill="Black" />
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Image.OpacityMask>

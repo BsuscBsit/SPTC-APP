@@ -157,8 +157,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style
-        x:Key="CommonButtonStyle"
+    <Style x:Key="CommonButtonStyle"
         BasedOn="{StaticResource ButtonTextPreset}"
         TargetType="Button">
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -385,6 +384,158 @@
                                             Storyboard.TargetProperty="Effect.BlurRadius"
                                             To="0"
                                             Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    //Copy of commonbuttonstyle
+    <Style x:Key="NoBorderButtonStyle"
+        BasedOn="{StaticResource ButtonTextPreset}"
+        TargetType="Button">
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border
+                            x:Name="TheBorder"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="7"
+                            UseLayoutRounding="True">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="0"
+                                    Opacity="0"
+                                    ShadowDepth="0"
+                                    Color="{DynamicResource ColorSoftGrey2}" />
+                            </Border.Effect>
+                        </Border>
+                        <Border
+                            x:Name="TheBG"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{DynamicResource BrushBlack}"
+                            BorderThickness="0"
+                            CornerRadius="7"
+                            UseLayoutRounding="True" />
+                        <ContentPresenter
+                            x:Name="TheContent"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            UseLayoutRounding="True" />
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="TheBG"
+                                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                            To="{TemplateBinding Background}"
+                                            Duration="0:0:0.1" />
+                                        <ColorAnimation
+                                            Storyboard.TargetName="TheBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                            To="{TemplateBinding Background}"
+                                            Duration="0:0:0.1" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="TheBorder"
+                                            Storyboard.TargetProperty="Effect.BlurRadius"
+                                            To="0"
+                                            Duration="0:0:0.1" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="TheBorder"
+                                            Storyboard.TargetProperty="Effect.Opacity"
+                                            To="0"
+                                            Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="TheBG"
+                                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                            To="{DynamicResource ColorYellow}"
+                                            Duration="0:0:0.2" />
+                                        <ColorAnimation
+                                            Storyboard.TargetName="TheBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                            To="{DynamicResource ColorYellow}"
+                                            Duration="0:0:0.2" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="TheBorder"
+                                            Storyboard.TargetProperty="Effect.BlurRadius"
+                                            To="12"
+                                            Duration="0:0:0.2" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="TheBorder"
+                                            Storyboard.TargetProperty="Effect.Opacity"
+                                            To="3"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="TheBG"
+                                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                            To="{DynamicResource ColorYellow}"
+                                            Duration="0:0:0.8" />
+                                                                            <ColorAnimation
+                                            Storyboard.TargetName="TheContent"
+                                            Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                            To="{StaticResource ColorSoftGrey1}"
+                                            Duration="0:0:1" />
+                                                                            <DoubleAnimation
+                                            Storyboard.TargetName="TheBorder"
+                                            Storyboard.TargetProperty="Effect.BlurRadius"
+                                            To="7"
+                                            Duration="0:0:0.1" />
+                                                                            <DoubleAnimation
+                                            Storyboard.TargetName="TheBorder"
+                                            Storyboard.TargetProperty="Effect.Opacity"
+                                            To="7"
+                                            Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="TheBG"
+                                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                            To="{DynamicResource ColorSoftGrey1}"
+                                            Duration="0" />
+                                        <ColorAnimation
+                                            Storyboard.TargetName="TheBG"
+                                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
+                                            To="{DynamicResource ColorGrey}"
+                                            Duration="0" />
+                                        <ColorAnimation
+                                            Storyboard.TargetName="TheBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                            To="{DynamicResource ColorSoftGrey2}"
+                                            Duration="0" />
+                                        <ColorAnimation
+                                            Storyboard.TargetName="TheContent"
+                                            Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                            To="{StaticResource ColorGrey}"
+                                            Duration="0" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="TheBG"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0.7"
+                                            Duration="0" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="TheBorder"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0.7"
+                                            Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>

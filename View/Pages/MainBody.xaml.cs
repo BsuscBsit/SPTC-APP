@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Pages.Leaflets;
@@ -11,7 +12,7 @@ namespace SPTC_APP.View.Pages
     /// </summary>
     public partial class MainBody : Window
     {
-
+        private Button selectedButton = null;
         public MainBody()
         {
             InitializeComponent();
@@ -46,30 +47,45 @@ namespace SPTC_APP.View.Pages
 
         private void Btn_Settings(object sender, RoutedEventArgs e)
         {
-
+            ClickColorControl(sender as Button);
         }
 
         private void FranchiseButton_Click(object sender, RoutedEventArgs e)
         {
             TablePanelSwap.Children.Clear();
             TablePanelSwap.Children.Add((new TableView(Table.FRANCHISE)).Fetch());
+            ClickColorControl(sender as Button);
         }
 
         private void DashBoard_Click(object sender, RoutedEventArgs e)
         {
             DashButton.Visibility = Visibility.Visible;
+            ClickColorControl(sender as Button);
         }
 
         private void OperatorButton_Click(object sender, RoutedEventArgs e)
         {
             TablePanelSwap.Children.Clear();
             TablePanelSwap.Children.Add((new TableView(Table.OPERATOR)).Fetch());
+            ClickColorControl(sender as Button);
         }
 
         private void DriverButton_Click(object sender, RoutedEventArgs e)
         {
             TablePanelSwap.Children.Clear();
             TablePanelSwap.Children.Add((new TableView(Table.DRIVER)).Fetch());
+            ClickColorControl(sender as Button);
+        }
+
+        private void ClickColorControl(Button button)
+        {
+            if (selectedButton != null)
+            {
+                selectedButton.Background = Brushes.White;
+            }
+
+            button.Background = Brushes.Yellow;
+            selectedButton = button; 
         }
 
     }

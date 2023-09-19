@@ -3,11 +3,11 @@ using System.Windows;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Pages;
 using SPTC_APP.View;
-using System.Windows.Documents;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
 using System;
+using System.Linq;
 
 namespace SPTC_APP
 {
@@ -25,9 +25,11 @@ namespace SPTC_APP
         public static int DEFAULT_CAMERA = 0;
 
 
+        //"Signature - CurrentPresident" signature usage
+
 
         //NOT SAVED EXTERNALLY
-        public static List<string> Employees =new List<string> { "General Manager", "Secretary", "Treasurer", "Book Keeper" };
+        public static List<string> Employees =new List<string> { "General Manager", "Secretary", "Treasurer", "Bookeeper" };
         public static bool IS_ADMIN = false;
         public static Employee USER = null;
 
@@ -49,11 +51,11 @@ namespace SPTC_APP
             {
 
                 USER = employee;
-                (new PrintPreview()).Show();
+                //(new PrintPreview()).Show();
                 //(new Test()).Show();
-                //MainBody body = (new MainBody());
-                //AppState.mainwindow = body;
-                //body.Show();
+                MainBody body = (new MainBody());
+                AppState.mainwindow = body;
+                body.Show();
                 EventLogger.Post($"User :: Login Success: USER({username})");
                 window.Close();
             }
@@ -128,6 +130,12 @@ namespace SPTC_APP
                     EventLogger.Post("ERR :: Exception in JSON : "+e.Message);
                 }
             }
+        }
+
+        public static System.Windows.Media.ImageSource FetchPresidentImage()
+        {
+            Image presImage = Retrieve.GetData<Image>(Table.IMAGE, Select.ALL, Where.GET_CURRENT_PRESIDENT).FirstOrDefault();
+            return presImage.GetSource();
         }
     }
 

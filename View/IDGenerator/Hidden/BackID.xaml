@@ -11,8 +11,9 @@
     Loaded="window_Loaded"
     ResizeMode="NoResize"
     Topmost="False"
+    UseLayoutRounding="True"
     WindowStyle="None"
-    mc:Ignorable="d" UseLayoutRounding="True">
+    mc:Ignorable="d">
     <Window.Resources>
         <Style x:Key="Labels" TargetType="Label">
             <Setter Property="Foreground" Value="#C00000" />
@@ -107,11 +108,15 @@
             <Viewbox
                 x:Name="lbodyView"
                 Grid.Column="1"
-                Height="39" HorizontalAlignment="Left" VerticalAlignment="Bottom" UseLayoutRounding="True">
+                Height="39"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                UseLayoutRounding="True">
                 <Label
                     x:Name="lblBodyNum"
+                    Padding="0,0,0,0"
                     Content="055"
-                    FontFamily="Impact" Padding="0,0,0,0" />
+                    FontFamily="Impact" />
             </Viewbox>
         </Grid>
         <StackPanel
@@ -227,7 +232,8 @@
                 x:Name="imgSign"
                 Width="200"
                 Height="80"
-                Stretch="UniformToFill" UseLayoutRounding="True" />
+                Stretch="UniformToFill"
+                UseLayoutRounding="True" />
             <Label
                 x:Name="lblName"
                 Margin="0,-5,0,-5"

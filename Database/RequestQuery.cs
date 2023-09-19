@@ -74,6 +74,10 @@ namespace SPTC_APP.Database
 
         public static string THEREIS_OPERATOR = "operator_id != -1 AND isDeleted = 0";
         public static string THEREIS_DRIVER = "driver_id != -1 AND isDeleted = 0";
+
+
+
+        public static string GET_CURRENT_PRESIDENT = "name = 'Signature - CurrentPresident'";
     }
     public static class Field
     {

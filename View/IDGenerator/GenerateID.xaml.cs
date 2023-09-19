@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -46,7 +47,7 @@ namespace SPTC_APP.View
             videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
-            GenerateDummy();
+            //GenerateDummy();
         }
 
         public GenerateID(Franchise franchise, bool isDriver)
@@ -203,8 +204,9 @@ namespace SPTC_APP.View
                 System.Drawing.Bitmap frame = (System.Drawing.Bitmap)eventArgs.Frame.Clone();
 
                 // Convert to BitmapSource
+                IntPtr hBitmap = frame.GetHbitmap(); // Get the HBitmap
                 BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
-                    frame.GetHbitmap(),
+                    hBitmap,
                     IntPtr.Zero,
                     Int32Rect.Empty,
                     BitmapSizeOptions.FromEmptyOptions());
@@ -215,10 +217,19 @@ namespace SPTC_APP.View
 
                 // Dispose of the frame to release resources
                 frame.Dispose();
+
+                // Release the HBitmap
+                DeleteObject(hBitmap);
             });
+
+
 
         }
 
+        // Define the DeleteObject method to release HBitmap
+        [DllImport("gdi32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DeleteObject(IntPtr hObject);
         private async void BtnStartCam_Click(object sender, RoutedEventArgs e)
         {
             if (videoSource != null)

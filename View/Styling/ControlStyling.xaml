@@ -394,7 +394,6 @@
         </Setter>
     </Style>
     
-    //Copy of commonbuttonstyle
     <Style x:Key="NoBorderButtonStyle"
         BasedOn="{StaticResource ButtonTextPreset}"
         TargetType="Button">

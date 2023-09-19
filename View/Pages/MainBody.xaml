@@ -11,6 +11,7 @@
     MinHeight="600"
     Icon="../../View/Images/icons/logo.ico"
     WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
     <Grid Background="Beige">
         <Rectangle
@@ -181,13 +182,12 @@
                             Foreground="Black" />
                     </Grid>
                 </Button>
-                <Button
+                <Button x:Name="BtnBoardMember"
                     Height="40"
                     Margin="15,150,9,0"
                     VerticalAlignment="Top"
                     Style="{StaticResource NoBorderButtonStyle}"
-                    BorderThickness="0"
-                    Click="Button_Click">
+                    BorderThickness="0" Click="BtnBoardMember_Click">
                     <Grid Width="200">
                         <Image
                             Width="32"
@@ -265,26 +265,7 @@
             Margin="214,40,0,0"
             Height="560" Width="786"
             HorizontalAlignment="Left" VerticalAlignment="Center">
-        </Grid>
-        <Grid Margin="0,40,0,0" HorizontalAlignment="Right" x:Name="DashButton" Visibility="Collapsed">
-            <Button
-                x:Name="btnGererate"
-                Width="175"
-                Height="40"
-                Margin="0,30,30,0"
-                HorizontalAlignment="right"
-                VerticalAlignment="Top"
-                Click="btnGererate_Click"
-                Content="GENERATE ID"/>
-            <Button
-                x:Name="btnTest"
-                Width="175"
-                Height="40"
-                Margin="0,30,230,0"
-                HorizontalAlignment="right"
-                VerticalAlignment="Top"
-                Click="btnTest_Click"
-                Content="TEST"/>
+           
         </Grid>
     </Grid>
 </Window>

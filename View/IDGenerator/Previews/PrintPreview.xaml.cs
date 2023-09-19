@@ -272,6 +272,7 @@ namespace SPTC_APP.View
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            AppState.mainwindow?.Show();
             //App.Current.Shutdown();
         }
 
@@ -589,7 +590,7 @@ namespace SPTC_APP.View
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            AppState.mainwindow?.Show();
+            
             base.OnClosing(e);
         }
     }

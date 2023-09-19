@@ -32,6 +32,7 @@ namespace SPTC_APP.View
         public GenerateID()
         {
             InitializeComponent();
+            AppState.mainwindow?.Hide();
             tboxAddressS.Text = AppState.DEFAULT_ADDRESSLINE2;
             bDay.SelectedDate = DateTime.Today;
             EventLogger.Post("VIEW :: ID GENERATE Window");
@@ -54,6 +55,7 @@ namespace SPTC_APP.View
         public GenerateID(Franchise franchise, bool isDriver)
         {
             InitializeComponent();
+            AppState.mainwindow?.Hide();
             bDay.SelectedDate = DateTime.Today;
             this.franchise = franchise;
             isUpdate = true;

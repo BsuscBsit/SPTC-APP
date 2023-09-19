@@ -17,6 +17,7 @@ namespace SPTC_APP.View.Pages
         {
             InitializeComponent();
             username.Content = AppState.USER.position.title.ToString();
+            DashBoard_Click(DashBoard, null);
         }
 
         private void imgClose_Click(object sender, RoutedEventArgs e)
@@ -24,22 +25,9 @@ namespace SPTC_APP.View.Pages
             this.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
 
-        private void btnTest_Click(object sender, RoutedEventArgs e)
-        {
-            (new Test()).Show();
-        }
 
-        private void btnGererate_Click(object sender, RoutedEventArgs e)
-        {
-
-            (new PrintPreview()).Show();
-        }
-
+        //Side panel buttons
         private void Btn_Logout(object sender, RoutedEventArgs e)
         {
             AppState.Logout(this);
@@ -50,33 +38,46 @@ namespace SPTC_APP.View.Pages
             ClickColorControl(sender as Button);
         }
 
-        private void FranchiseButton_Click(object sender, RoutedEventArgs e)
+        private async void FranchiseButton_Click(object sender, RoutedEventArgs e)
         {
             TablePanelSwap.Children.Clear();
-            TablePanelSwap.Children.Add((new TableView(Table.FRANCHISE)).Fetch());
+            TablePanelSwap.Children.Add(await (new TableView(Table.FRANCHISE)).Fetch());
             ClickColorControl(sender as Button);
         }
 
-        private void DashBoard_Click(object sender, RoutedEventArgs e)
-        {
-            DashButton.Visibility = Visibility.Visible;
-            ClickColorControl(sender as Button);
-        }
-
-        private void OperatorButton_Click(object sender, RoutedEventArgs e)
+        private async void DashBoard_Click(object sender, RoutedEventArgs e)
         {
             TablePanelSwap.Children.Clear();
-            TablePanelSwap.Children.Add((new TableView(Table.OPERATOR)).Fetch());
+            TablePanelSwap.Children.Add(await (new DashboardView()).Fetch());
             ClickColorControl(sender as Button);
         }
 
-        private void DriverButton_Click(object sender, RoutedEventArgs e)
+        private async void OperatorButton_Click(object sender, RoutedEventArgs e)
         {
             TablePanelSwap.Children.Clear();
-            TablePanelSwap.Children.Add((new TableView(Table.DRIVER)).Fetch());
+            TablePanelSwap.Children.Add(await(new TableView(Table.OPERATOR)).Fetch());
             ClickColorControl(sender as Button);
         }
 
+        private async void DriverButton_Click(object sender, RoutedEventArgs e)
+        {
+            TablePanelSwap.Children.Clear();
+            TablePanelSwap.Children.Add(await (new TableView(Table.DRIVER)).Fetch());
+            ClickColorControl(sender as Button);
+        }
+
+        private void BtnBoardMember_Click(object sender, RoutedEventArgs e)
+        {
+            TablePanelSwap.Children.Clear();
+            //TablePanelSwap.Children.Add(await(new TableView(Table.DRIVER)).Fetch());
+            ClickColorControl(sender as Button);
+        }
+
+
+
+
+
+        //Button control
         private void ClickColorControl(Button button)
         {
             if (selectedButton != null)
@@ -85,8 +86,7 @@ namespace SPTC_APP.View.Pages
             }
 
             button.Background = Brushes.Yellow;
-            selectedButton = button; 
+            selectedButton = button;
         }
-
     }
 }

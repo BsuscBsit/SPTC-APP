@@ -17,6 +17,7 @@ namespace SPTC_APP.View
         public GeneratedIDPreview()
         {
             InitializeComponent();
+            AppState.mainwindow?.Hide();
         }
 
         public void ReturnControl(GenerateID prev)

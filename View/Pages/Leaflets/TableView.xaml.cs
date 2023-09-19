@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using SPTC_APP.Database;
@@ -25,63 +26,73 @@ namespace SPTC_APP.View.Pages.Leaflets
             {
                 AddFranchiseButton.Visibility = Visibility.Collapsed;
             }
-            UpdateTable();
         }
 
-        private void UpdateTable()
+        private async Task UpdateTableAsync()
         {
-            if(table == Table.FRANCHISE)
+            if (table == Table.FRANCHISE)
             {
-                List<Franchise> fetchedData = (new TableObject<Franchise>(Table.FRANCHISE)).data;
+                List<Franchise> fetchedData = await Task.Run(() =>
+                {
+                    return (new TableObject<Franchise>(Table.FRANCHISE)).data;
+                });
 
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid);
 
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
-            {
-                new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
-                new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-                new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
-                new ColumnConfiguration("MTOPNo", "MTOP NO.", width: 100),
-                 new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
-            };
+        {
+            new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
+            new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
+            new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
+            new ColumnConfiguration("MTOPNo", "MTOP NO.", width: 100),
+            new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
+        };
+
                 dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
                 TableGrid.SelectedCellsChanged += TableSelectedChanged;
             }
             else if (table == Table.OPERATOR)
             {
-                List<Franchise> fetchedData = (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_OPERATOR)).data;
+                List<Franchise> fetchedData = await Task.Run(() =>
+                {
+                    return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_OPERATOR)).data;
+                });
 
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid);
 
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
-            {
-                new ColumnConfiguration("Operator.name.wholename", "NAME", width: 140),
-                new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-                new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
-                new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
-                 new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
-            };
+        {
+            new ColumnConfiguration("Operator.name.wholename", "NAME", width: 140),
+            new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
+            new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
+            new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
+            new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
+        };
+
                 dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
                 TableGrid.SelectedCellsChanged += TableSelectedChanged;
             }
             else if (table == Table.DRIVER)
             {
-                List<Franchise> fetchedData = (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_DRIVER)).data;
+                List<Franchise> fetchedData = await Task.Run(() =>
+                {
+                    return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_DRIVER)).data;
+                });
 
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid);
 
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
-            {
-                new ColumnConfiguration("Driver.name.wholename", "NAME", width: 140),
-                new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-                new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
-                new ColumnConfiguration("Operator", "OPERATOR", width: 100),
-                 new ColumnConfiguration("Driver.Shift", "SHIFT", width: 100),
-            };
+        {
+            new ColumnConfiguration("Driver.name.wholename", "NAME", width: 140),
+            new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
+            new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
+            new ColumnConfiguration("Operator", "OPERATOR", width: 100),
+            new ColumnConfiguration("Driver.Shift", "SHIFT", width: 100),
+        };
+
                 dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
                 TableGrid.SelectedCellsChanged += TableSelectedChanged;
             }
-
         }
 
         private void TableSelectedChanged(object sender, SelectedCellsChangedEventArgs e)
@@ -128,8 +139,9 @@ namespace SPTC_APP.View.Pages.Leaflets
             }
         }
 
-        public Grid Fetch()
+        public async Task<Grid> Fetch()
         {
+            UpdateTableAsync();
             if (franchisePanel.Parent != null)
             {
                 Window currentParent = franchisePanel.Parent as Window;

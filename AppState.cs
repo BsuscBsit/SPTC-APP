@@ -47,11 +47,11 @@ namespace SPTC_APP
             {
 
                 USER = employee;
-                //(new PrintPreview()).Show();
+                (new PrintPreview()).Show();
                 //(new Test()).Show();
-                MainBody body = (new MainBody());
-                AppState.mainwindow = body;
-                body.Show();
+                //MainBody body = (new MainBody());
+                //AppState.mainwindow = body;
+                //body.Show();
                 EventLogger.Post($"User :: Login Success: USER({username})");
                 window.Close();
             }

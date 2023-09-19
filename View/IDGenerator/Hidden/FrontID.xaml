@@ -6,14 +6,19 @@
     xmlns:local="clr-namespace:SPTC_APP.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="window"
-    Width="305.28"
-    Height="424.32"
+    Height="446"
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
     Loaded="window_Loaded"
     ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
     Topmost="False"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Grid x:Name="front">
+    <Grid
+        x:Name="front"
+        Width="324.4"
+        Height="447.6">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

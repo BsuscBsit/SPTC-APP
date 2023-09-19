@@ -15,30 +15,24 @@
     mc:Ignorable="d">
     <Grid
         x:Name="frontPage"
-        Width="auto"
-        Height="auto"
-        Margin="0,6,0,0"
         HorizontalAlignment="Center"
-        VerticalAlignment="Center">
+        VerticalAlignment="Top">
         <Grid.RowDefinitions>
-            <RowDefinition Height="441.8" />
+            <RowDefinition Height="447.6" />
             <RowDefinition Height="40" />
-            <RowDefinition Height="441.8" />
+            <RowDefinition Height="447.6" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="316.6" />
+            <ColumnDefinition Width="324.4" />
             <ColumnDefinition Width="30" />
-            <ColumnDefinition Width="316.6" />
+            <ColumnDefinition Width="324.4" />
         </Grid.ColumnDefinitions>
         <Border
             x:Name="brd1"
             Grid.Row="0"
             Grid.Column="0"
-            Margin="15,15,10,5"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
             BorderBrush="Black"
-            BorderThickness="1">
+            BorderThickness="1" Height="447.6" Width="324.4">
             <Image
                 Margin="0"
                 HorizontalAlignment="Center"
@@ -51,11 +45,8 @@
             x:Name="brd2"
             Grid.Row="0"
             Grid.Column="2"
-            Margin="10,15,15,5"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
             BorderBrush="Black"
-            BorderThickness="1">
+            BorderThickness="1" Height="447.6" Width="324.4">
             <Image
                 Margin="0"
                 HorizontalAlignment="Center"
@@ -66,11 +57,8 @@
         <Border
             x:Name="brd3"
             Grid.Row="2"
-            Margin="15,4,10,15"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
             BorderBrush="Black"
-            BorderThickness="1">
+            BorderThickness="1" Height="447.6" Width="324.4">
             <Image
                 Margin="0,4,0,0"
                 HorizontalAlignment="Center"
@@ -83,11 +71,8 @@
             x:Name="brd4"
             Grid.Row="2"
             Grid.Column="2"
-            Margin="10,4,15,15"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
             BorderBrush="Black"
-            BorderThickness="1">
+            BorderThickness="1" Height="447.6" Width="324.4">
             <Image
                 Margin="0,4,0,0"
                 HorizontalAlignment="Center"

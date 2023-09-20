@@ -1,13 +1,13 @@
-﻿using SPTC_APP.Database;
-using System.Windows;
+﻿using Newtonsoft.Json;
+using SPTC_APP.Database;
 using SPTC_APP.Objects;
-using SPTC_APP.View.Pages;
 using SPTC_APP.View;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.IO;
+using SPTC_APP.View.Pages;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Windows;
 
 namespace SPTC_APP
 {
@@ -25,7 +25,7 @@ namespace SPTC_APP
         public static int DEFAULT_CAMERA = 0;
 
 
-        //"Signature - CurrentPresident" signature usage
+        //"Signature - CurrentChairman" signature usage in name
 
 
         //NOT SAVED EXTERNALLY
@@ -132,9 +132,9 @@ namespace SPTC_APP
             }
         }
 
-        public static System.Windows.Media.ImageSource FetchPresidentImage()
+        public static System.Windows.Media.ImageSource FetchChairmanSign()
         {
-            Image presImage = Retrieve.GetData<Image>(Table.IMAGE, Select.ALL, Where.GET_CURRENT_PRESIDENT).FirstOrDefault();
+            Image presImage = Retrieve.GetData<Image>(Table.IMAGE, Select.ALL, Where.GET_CURRENT_CHAIRMAN_SIGN).FirstOrDefault();
             return presImage.GetSource();
         }
     }

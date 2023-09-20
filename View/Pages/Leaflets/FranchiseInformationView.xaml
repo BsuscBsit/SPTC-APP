@@ -22,7 +22,7 @@
                     FontWeight="Medium"
                     FontSize="10"
                     Foreground="DarkGray"/>
-            <Label Content="101" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top"
+            <Label x:Name="bodyNumber" Content="101" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Arial"

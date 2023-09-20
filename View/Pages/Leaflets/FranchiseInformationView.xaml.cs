@@ -1,4 +1,5 @@
 ﻿
+using SPTC_APP.Objects;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,9 +10,10 @@ namespace SPTC_APP.View.Pages.Leaflets
     /// </summary>
     public partial class FranchiseInformationView : Window
     {
-        public FranchiseInformationView()
+        public FranchiseInformationView(Franchise franchise)
         {
             InitializeComponent();
+            bodyNumber.Content = franchise.BodyNumber;
         }
 
         public Grid Fetch()

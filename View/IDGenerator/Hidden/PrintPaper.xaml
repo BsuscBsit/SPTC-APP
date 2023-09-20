@@ -15,6 +15,7 @@
     mc:Ignorable="d">
     <Grid
         x:Name="frontPage"
+        Margin="25,25,25,25"
         HorizontalAlignment="Center"
         VerticalAlignment="Top">
         <Grid.RowDefinitions>
@@ -31,8 +32,9 @@
             x:Name="brd1"
             Grid.Row="0"
             Grid.Column="0"
-            BorderBrush="Black"
-            BorderThickness="1" Height="447.6" Width="324.4">
+            Width="324.4"
+            Height="447.6"
+            BorderBrush="Black">
             <Image
                 Margin="0"
                 HorizontalAlignment="Center"
@@ -45,8 +47,9 @@
             x:Name="brd2"
             Grid.Row="0"
             Grid.Column="2"
-            BorderBrush="Black"
-            BorderThickness="1" Height="447.6" Width="324.4">
+            Width="324.4"
+            Height="447.6"
+            BorderBrush="Black">
             <Image
                 Margin="0"
                 HorizontalAlignment="Center"
@@ -57,8 +60,9 @@
         <Border
             x:Name="brd3"
             Grid.Row="2"
-            BorderBrush="Black"
-            BorderThickness="1" Height="447.6" Width="324.4">
+            Width="324.4"
+            Height="447.6"
+            BorderBrush="Black">
             <Image
                 Margin="0,4,0,0"
                 HorizontalAlignment="Center"
@@ -71,8 +75,9 @@
             x:Name="brd4"
             Grid.Row="2"
             Grid.Column="2"
-            BorderBrush="Black"
-            BorderThickness="1" Height="447.6" Width="324.4">
+            Width="324.4"
+            Height="447.6"
+            BorderBrush="Black">
             <Image
                 Margin="0,4,0,0"
                 HorizontalAlignment="Center"

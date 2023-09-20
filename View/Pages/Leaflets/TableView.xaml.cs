@@ -26,6 +26,15 @@ namespace SPTC_APP.View.Pages.Leaflets
             {
                 AddFranchiseButton.Visibility = Visibility.Collapsed;
             }
+            UpdateDefaultSidePanel();
+        }
+
+        private void UpdateDefaultSidePanel()
+        {
+            if (table == Table.FRANCHISE)
+            {
+                //USAGE:: CHange side panel design
+            }
         }
 
         private async Task UpdateTableAsync()
@@ -41,6 +50,7 @@ namespace SPTC_APP.View.Pages.Leaflets
 
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
         {
+            
             new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
             new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
             new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
@@ -161,7 +171,7 @@ namespace SPTC_APP.View.Pages.Leaflets
 
         private void ManageButton_Click(object sender, RoutedEventArgs e)
         {
-            franchisePanel.Children.Add((new FranchiseInformationView()).Fetch());
+            
         }
     }
 }

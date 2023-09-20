@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Objects;
+using System.Threading.Tasks;	
 using SPTC_APP.View;
 
 namespace SPTC_APP.Database
@@ -96,11 +97,68 @@ namespace SPTC_APP.Database
                 using (MySqlConnection connection = DatabaseConnection.GetConnection())
                 {
                     connection.Open();
-
+                    
                     string query = $"SELECT {selectQuery} FROM {tableName} WHERE {whereQuery}";
-
+                    
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.Parameters.AddRange(parameters);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            T item = ReadData<T>(reader);
+                            results.Add(item);
+                        }
+                    }
+
+                    if (results.Count == 0)
+                    {
+                        if (typeof(T).IsClass && constructor != null)
+                        {
+                            results.Add((T)constructor.Invoke(null));
+                        }
+                        else
+                        {
+                            results.Add(default(T));
+                        }
+                    }
+
+                    return results;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                EventLogger.Post($"DTB :: {ex.Message}");
+
+                if (results.Count == 0)
+                {
+                    if (typeof(T).IsClass && constructor != null)
+                    {
+                        results.Add((T)constructor.Invoke(null));
+                    }
+                    else
+                    {
+                        results.Add(default(T));
+                    }
+                }
+
+                return results;
+            }
+        }
+
+        public static List<T> GetDataUsingQuery<T>(string query)
+        {
+            Type type = typeof(T);
+            ConstructorInfo constructor = type.GetConstructor(Type.EmptyTypes);
+            List<T> results = new List<T>();
+            try
+            {
+                using (MySqlConnection connection = DatabaseConnection.GetConnection())
+                {
+                    connection.Open();
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {

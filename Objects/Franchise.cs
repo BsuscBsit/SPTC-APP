@@ -40,6 +40,7 @@ namespace SPTC_APP.Objects
             franchise = null;
             this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
             this.BodyNumber = Retrieve.GetValueOrDefault<string>(reader, Field.BODY_NUMBER);
+            this.MTOPNo = Retrieve.GetValueOrDefault<string>(reader, Field.MTOP_NUMBER);
             this.LicenseNO = Retrieve.GetValueOrDefault<string>(reader, Field.LICENSE_NO);
 
             Populate(Retrieve.GetValueOrDefault<int>(reader, Field.OPERATOR_ID), Retrieve.GetValueOrDefault<int>(reader, Field.DRIVER_ID), Retrieve.GetValueOrDefault<int>(reader, Field.OWNER_ID), Retrieve.GetValueOrDefault<int>(reader, Field.LAST_FRANCHISE_ID));
@@ -73,6 +74,7 @@ namespace SPTC_APP.Objects
                 franchise = new Upsert(Table.FRANCHISE, id);
             }
             franchise.Insert(Field.BODY_NUMBER, BodyNumber);
+            franchise.Insert(Field.MTOP_NUMBER, MTOPNo);
             franchise.Insert(Field.LICENSE_NO, LicenseNO);
             if (this.Operator != null)
             {
@@ -95,7 +97,6 @@ namespace SPTC_APP.Objects
 
             return id;
         }
-
         public override string ToString()
         {
             if (BodyNumber != null)

@@ -106,6 +106,7 @@ CREATE TABLE `tbl_franchise` (
   `owner_id` int(11) NOT NULL DEFAULT -1,
   `last_franchise_id` int(11) NOT NULL DEFAULT -1,
   `buying_date` int(11) NOT NULL DEFAULT current_timestamp(),
+  `mtop_no` varchar(20) DEFAULT NULL,
   `license_no` varchar(20) DEFAULT NULL,
   `voters_id_number` varchar(255) DEFAULT NULL,
   `tin_number` varchar(255) DEFAULT NULL,

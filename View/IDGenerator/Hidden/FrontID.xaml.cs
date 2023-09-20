@@ -17,6 +17,7 @@ namespace SPTC_APP.View
             lblXPDate.Content = AppState.EXPIRATION_DATE;
             lblChairman.Content = AppState.CHAIRMAN;
             lblRegNum.Content = AppState.REGISTRATION_NO;
+            imgChairmanSignature.Source = AppState.FetchChairmanSign();
 
             if (type == General.OPERATOR)
             {

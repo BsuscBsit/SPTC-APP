@@ -34,6 +34,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                     currentParent.Content = null;
                 }
             }
+            
             this.Close();
             return mainpanel;
         }

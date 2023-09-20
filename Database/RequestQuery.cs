@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -62,6 +63,8 @@ namespace SPTC_APP.Database
     public static class Select
     {
         public static string ALL = "*";
+
+        public static string BODY_NUMBER = "body_number";
     }
     public static class Where
     {
@@ -75,9 +78,12 @@ namespace SPTC_APP.Database
         public static string THEREIS_OPERATOR = "operator_id != -1 AND isDeleted = 0";
         public static string THEREIS_DRIVER = "driver_id != -1 AND isDeleted = 0";
 
+        public static string GET_CURRENT_CHAIRMAN_SIGN = "image_name = 'Signature - CurrentChairman'";
 
-
-        public static string GET_CURRENT_PRESIDENT = "name = 'Signature - CurrentPresident'";
+        public static string Search(string text)
+        {
+            return "SELECT * FROM `tbl_franchise` AS f \r\nLEFT JOIN `tbl_operator` AS O ON f.operator_id=O.id \r\nLEFT JOIN `tbl_driver` AS D ON f.driver_id=D.id \r\nLEFT JOIN `tbl_name` AS OName ON O.name_id=OName.id \r\nLEFT JOIN `tbl_name` AS DName ON D.name_id=DName.id \r\nWHERE f.body_number LIKE \"%"+text+ "%\" OR OName.last_name LIKE \"%"+text+ "%\" OR DName.last_name LIKE \"%"+text+"%\"";
+        }
     }
     public static class Field
     {
@@ -117,6 +123,7 @@ namespace SPTC_APP.Database
         // FRANCHISE
         public static string BODY_NUMBER = "body_number";
         public static string BUYING_DATE = "buying_date";
+        public static string MTOP_NUMBER = "mtop_no";
         public static string LICENSE_NO = "license_no";
         public static string VOTERS_ID_NUMBER = "voters_id_number";
         public static string TIN_NUMBER = "tin_number";
@@ -185,6 +192,7 @@ namespace SPTC_APP.Database
         public static string VIOLATION_LEVEL_COUNT = "violation_level_count";
         public static string SUSPENSION_START = "suspension_start";
         public static string SUSPENSION_END = "suspension_end";
+
 
         //IDHISTORY
     }

@@ -13,6 +13,7 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
+
     <Grid Background="Beige">
         <Rectangle
             Width="NaN"
@@ -20,6 +21,7 @@
             VerticalAlignment="Top"
             Fill="#FEF301"
             Stroke="#FEF301" />
+
         <Grid
             x:Name="sidePanel"
             Width="214"
@@ -58,8 +60,8 @@
                 Margin="12,81,12,0"
                 VerticalAlignment="Top"
                 BorderThickness="0"
-                Style="{StaticResource NoBorderButtonStyle}"
-                Click="DashBoard_Click">
+                Click="DashBoard_Click"
+                Style="{StaticResource NoBorderButtonStyle}">
                 <Grid Width="200">
                     <Image
                         Width="32"
@@ -108,10 +110,10 @@
                     x:Name="FranchiseButton"
                     Height="40"
                     Margin="15,0,9,0"
-                    Style="{StaticResource NoBorderButtonStyle}"
                     VerticalAlignment="Top"
                     BorderThickness="0"
-                    Click="FranchiseButton_Click">
+                    Click="FranchiseButton_Click"
+                    Style="{StaticResource NoBorderButtonStyle}">
                     <Grid Width="200">
                         <Image
                             Width="32"
@@ -136,8 +138,8 @@
                     Margin="15,50,9,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
-                    Style="{StaticResource NoBorderButtonStyle}"
-                    Click="OperatorButton_Click">
+                    Click="OperatorButton_Click"
+                    Style="{StaticResource NoBorderButtonStyle}">
                     <Grid Width="200">
                         <Image
                             Width="32"
@@ -159,11 +161,11 @@
                 <Button
                     x:Name="DriverButton"
                     Height="40"
-                    Style="{StaticResource NoBorderButtonStyle}"
                     Margin="15,100,9,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
-                    Click="DriverButton_Click">
+                    Click="DriverButton_Click"
+                    Style="{StaticResource NoBorderButtonStyle}">
                     <Grid Width="200">
                         <Image
                             Width="32"
@@ -182,12 +184,14 @@
                             Foreground="Black" />
                     </Grid>
                 </Button>
-                <Button x:Name="BtnBoardMember"
+                <Button
+                    x:Name="BtnBoardMember"
                     Height="40"
                     Margin="15,150,9,0"
                     VerticalAlignment="Top"
-                    Style="{StaticResource NoBorderButtonStyle}"
-                    BorderThickness="0" Click="BtnBoardMember_Click">
+                    BorderThickness="0"
+                    Click="BtnBoardMember_Click"
+                    Style="{StaticResource NoBorderButtonStyle}">
                     <Grid Width="200">
                         <Image
                             Width="32"
@@ -211,10 +215,10 @@
             <Button
                 Height="40"
                 Margin="15,0,9,59"
-                Style="{StaticResource NoBorderButtonStyle}"
                 VerticalAlignment="Bottom"
                 BorderThickness="0"
-                Click="Btn_Settings">
+                Click="Btn_Settings"
+                Style="{StaticResource NoBorderButtonStyle}">
                 <Grid Width="200">
                     <Image
                         Width="32"
@@ -236,10 +240,10 @@
             <Button
                 Height="40"
                 Margin="15,0,9,9"
-                Style="{StaticResource NoBorderButtonStyle}"
                 VerticalAlignment="Bottom"
                 BorderThickness="0"
-                Click="Btn_Logout">
+                Click="Btn_Logout"
+                Style="{StaticResource NoBorderButtonStyle}">
                 <Grid Width="200">
                     <Image
                         Width="32"
@@ -261,11 +265,31 @@
         </Grid>
         <Grid
             x:Name="TablePanelSwap"
-            Background="LightGray"
+            Width="786"
+            Height="560"
             Margin="214,40,0,0"
-            Height="560" Width="786"
-            HorizontalAlignment="Left" VerticalAlignment="Center">
-           
-        </Grid>
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Background="LightGray" />
+        <TextBox
+            x:Name="cbSearch"
+            Width="400"
+            Height="40"
+            Margin="0,54,20,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Background="White"
+            LostFocus="cbSearch_LostFocus"
+            Style="{DynamicResource CommonTextBoxStyle}"
+            TextChanged="cbSearch_TextChanged" />
+
+        <DataGrid
+            x:Name="lsSuggestion"
+            Width="400"
+            Margin="0,84,20,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Visibility="Collapsed"
+            SelectionChanged="lsSuggestion_SelectionChanged"/>
     </Grid>
 </Window>

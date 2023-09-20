@@ -76,25 +76,13 @@
                     FontFamily="Helvetica"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
-            <Button x:Name="ManageButton" Content="MANAGE" HorizontalAlignment="Center" Margin="8,0,0,10" VerticalAlignment="Bottom" Width="80" Height="32"
-                    FontFamily="hevitica "
-                    FontWeight="ExtraBold"
-                    
-                    FontSize="10"
+            <Button x:Name="ManageButton" Style="{DynamicResource NoBorderButtonStyle}" Content="MANAGE" HorizontalAlignment="Center" Margin="8,0,0,10" VerticalAlignment="Bottom"
+                    Width="100"
+                    FontWeight="Bold"
                     Background="Yellow" Click="ManageButton_Click" />
         </Grid>
-        <Rectangle HorizontalAlignment="Left" Height="30"  Margin="20,40,0,0"  VerticalAlignment="Top" Width="398">
-            <Rectangle.Fill>
-                <SolidColorBrush Color="White" />
-            </Rectangle.Fill>
-        </Rectangle>
-        <Button x:Name="AddFranchiseButton" Content="ADD FRANCHISE" HorizontalAlignment="Right" Margin="0,40,20,0" VerticalAlignment="Top" Width="110" Height="32"
-                    FontFamily="hevitica "
-                    FontWeight="ExtraBold"
-                    Visibility="Collapsed"
-                    FontSize="10"
-                    Background="Yellow" Click="AddFranchiseButton_Click"
-                    />
+        
+        
         <DataGrid x:Name="TableGrid" HorizontalAlignment="Left" Height="458" Margin="20,0,0,20" VerticalAlignment="Bottom" Width="545">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -105,6 +93,13 @@
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
+        <Button x:Name="AddFranchiseButton" Content="ADD FRANCHISE" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="110" Height="32"
+                    FontFamily="hevitica "
+                    FontWeight="ExtraBold"
+                    Visibility="Visible"
+                    FontSize="10"
+                    Background="Yellow" Click="AddFranchiseButton_Click"
+                    />
     </Grid>
 
 </Window>

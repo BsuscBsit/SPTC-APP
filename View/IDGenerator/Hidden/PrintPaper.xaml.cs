@@ -56,6 +56,7 @@ namespace SPTC_APP.View.IDGenerator.Hidden
                     if (arr[i] != null)
                     {
                         borders[i].Child = arr[i].RenderFrontID();
+                        borders[i].BorderThickness = new Thickness(1.5);
                     }
                 }
 

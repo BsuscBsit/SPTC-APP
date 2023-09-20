@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2023 at 03:59 AM
+-- Generation Time: Sep 20, 2023 at 01:54 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -87,7 +87,7 @@ CREATE TABLE `tbl_employee` (
 --
 
 INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `image_id`, `password`, `position_id`, `start_date`, `end_date`, `date_of_birth`, `contact_no`, `isDeleted`) VALUES
-(1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, '2023-06-26', NULL, NULL, NULL, 0),
+(1, 1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, '2023-06-26', NULL, NULL, NULL, 0),
 (2, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 2, '2023-06-26', NULL, NULL, NULL, 0),
 (3, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, '2023-06-26', NULL, NULL, NULL, 0),
 (4, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, '2023-06-26', NULL, NULL, NULL, 0);
@@ -106,7 +106,6 @@ CREATE TABLE `tbl_franchise` (
   `owner_id` int(11) NOT NULL DEFAULT -1,
   `last_franchise_id` int(11) NOT NULL DEFAULT -1,
   `buying_date` int(11) NOT NULL DEFAULT current_timestamp(),
-  `mtop_no` varchar(20) DEFAULT NULL,
   `license_no` varchar(20) DEFAULT NULL,
   `voters_id_number` varchar(255) DEFAULT NULL,
   `tin_number` varchar(255) DEFAULT NULL,
@@ -338,7 +337,7 @@ ALTER TABLE `tbl_employee`
 --
 ALTER TABLE `tbl_franchise`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `body_number` (`body_number`);
+  ADD UNIQUE KEY `body_number` (`body_number`,`last_franchise_id`);
 
 --
 -- Indexes for table `tbl_id_history`
@@ -430,7 +429,7 @@ ALTER TABLE `tbl_driver`
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_franchise`

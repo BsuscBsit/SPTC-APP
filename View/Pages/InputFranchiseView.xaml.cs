@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SPTC_APP.Objects;
 
 namespace SPTC_APP.View.Pages
 {
@@ -23,6 +24,7 @@ namespace SPTC_APP.View.Pages
         public InputFranchiseView()
         {
             InitializeComponent();
+            bDay.DisplayDate = DateTime.Now;
             AppState.mainwindow?.Hide();
         }
 
@@ -37,9 +39,18 @@ namespace SPTC_APP.View.Pages
             this.Close();
         }
 
+
+        //Make Requirements into dropdown, out database will only save tin_number and voters_id_number
+        //NOTE: gather all posible requirements for Franchise only
+
         private void btnNextFranchiseInput_Click(object sender, RoutedEventArgs e)
         {
-
+            Franchise franchise = new Franchise();
+            franchise.BodyNumber = tboxBodyNum.Text;
+            franchise.MTOPNo = tboxMTOPplateNum.Text;
+            franchise.LicenseNO = tboxLTOplateNum.Text;
+            franchise.BuyingDate = bDay.DisplayDate;
+            franchise.Save();
         }
     }
 }

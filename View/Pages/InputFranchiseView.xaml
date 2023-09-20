@@ -223,10 +223,10 @@
         <DatePicker x:Name="bDay"
                                 BorderThickness="0"
                                 VerticalContentAlignment="Center" Height="31" Margin="548,48,46,425"/>
-        <Button x:Name="btnCanceFranchiseInfo" Content="CANCEL" Width="135" Height="40"
+        <Button x:Name="btnCanceFranchiseInfo" Style="{DynamicResource CommonButtonStyle}" Content="CANCEL" Width="135" Height="40"
                     FontWeight="ExtraBold"
                     Background="White" Margin="134,426,491,38" Click="btnCanceFranchiseInfo_Click"/>
-        <Button x:Name="btnNextFranchiseInput" Content="NEXT" Width="135" Height="40"
+        <Button x:Name="btnNextFranchiseInput" Style="{DynamicResource NoBorderButtonStyle}" Content="NEXT" Width="135" Height="40"
                     FontWeight="ExtraBold"
                     Background="Yellow" Margin="480,426,145,38" Click="btnNextFranchiseInput_Click"/>
     </Grid>

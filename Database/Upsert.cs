@@ -135,7 +135,7 @@ namespace SPTC_APP.Database
                             {
                                 Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
                                 {
-                                    { Field.IMAGE_NAME, fieldValues.TryGetValue(Field.IMAGE_NAME, out var temp) ? temp : -1 },
+                                    { Field.IMAGE_NAME, fieldValues.TryGetValue(Field.IMAGE_NAME, out var temp) ? temp : "" },
                                 };
 
                                 id = GetExistingRecordId(uniqueAttributes);
@@ -143,8 +143,8 @@ namespace SPTC_APP.Database
                             {
                                 Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
                                 {
-                                    { Field.ADDRESSLINE1, fieldValues.TryGetValue(Field.ADDRESSLINE1, out var temp) ? temp : -1 },
-                                    { Field.ADDRESSLINE2, fieldValues.TryGetValue(Field.ADDRESSLINE2, out temp) ? temp : -1 }
+                                    { Field.ADDRESSLINE1, fieldValues.TryGetValue(Field.ADDRESSLINE1, out var temp) ? temp : "" },
+                                    { Field.ADDRESSLINE2, fieldValues.TryGetValue(Field.ADDRESSLINE2, out temp) ? temp : "" }
                                 };
 
                                 id = GetExistingRecordId(uniqueAttributes);
@@ -154,6 +154,7 @@ namespace SPTC_APP.Database
                                 Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
                                 {
                                     { Field.BODY_NUMBER, fieldValues.TryGetValue(Field.BODY_NUMBER, out var temp) ? temp : -1 },
+                                    { Field.LAST_FRANCHISE_ID, fieldValues.TryGetValue(Field.LAST_FRANCHISE_ID, out temp) ? temp : -1 },
                                 };
 
                                 id = GetExistingRecordId(uniqueAttributes);

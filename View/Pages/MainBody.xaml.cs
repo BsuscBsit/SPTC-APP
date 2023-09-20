@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -97,29 +98,9 @@ namespace SPTC_APP.View.Pages
             //Search
             if (cbSearch.Text.Length > 0)
             {
-                List<Franchise> tmp = Retrieve.GetDataUsingQuery<Franchise>(Where.Search(cbSearch.Text));
-                if (tmp != null)
+                if (selectedButton == null)
                 {
-                    if (tmp.Count > 0)
-                    {
-                        lsSuggestion.Visibility = Visibility.Visible;
-                        DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(lsSuggestion);
-
-                        List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
-                        {
-
-                            new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-                            new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
-                            new ColumnConfiguration("Driver.name.wholename", "Driver NAME", width: 140),
-                        };
-
-                        dataGridHelper.DesignGrid(tmp, columnConfigurations);
-                        lsSuggestion.ItemsSource = tmp;
-                    }
-                }
-                else
-                {
-                    lsSuggestion.Visibility = Visibility.Collapsed;
+                    GetFranchiseInList();
                 }
             }
             else
@@ -128,6 +109,33 @@ namespace SPTC_APP.View.Pages
             }
         }
 
+        private void GetFranchiseInList()
+        {
+            List<Franchise> tmp = Retrieve.GetDataUsingQuery<Franchise>(Where.Search(cbSearch.Text));
+            if (tmp != null)
+            {
+                if (tmp.Count > 0)
+                {
+                    lsSuggestion.Visibility = Visibility.Visible;
+                    DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(lsSuggestion);
+
+                    List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+                        {
+
+                            new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
+                            new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
+                            new ColumnConfiguration("Driver.name.wholename", "Driver NAME", width: 140),
+                        };
+
+                    dataGridHelper.DesignGrid(tmp, columnConfigurations);
+                    lsSuggestion.ItemsSource = tmp;
+                }
+            }
+            else
+            {
+                lsSuggestion.Visibility = Visibility.Collapsed;
+            }
+        }
 
         private void cbSearch_LostFocus(object sender, RoutedEventArgs e)
         {

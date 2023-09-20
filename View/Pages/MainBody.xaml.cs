@@ -98,7 +98,17 @@ namespace SPTC_APP.View.Pages
             //Search
             if (cbSearch.Text.Length > 0)
             {
-                if (selectedButton == null)
+                if (selectedButton != null)
+                {
+                    if (selectedButton.Content.Equals("Operator"))
+                    {
+
+                    }
+                    else
+                    {
+                        GetFranchiseInList();
+                    }
+                } else
                 {
                     GetFranchiseInList();
                 }

@@ -13,7 +13,11 @@ namespace SPTC_APP.View.Pages.Leaflets
         public FranchiseInformationView(Franchise franchise)
         {
             InitializeComponent();
-            bodyNumber.Content = franchise.BodyNumber;
+            lblbodyNumber.Content = franchise.BodyNumber;
+            lblOperatorName.Content = franchise.Operator;
+            lblDateOfBIrth.Content = franchise.Operator?.birthday.ToLongDateString();
+            lblPlateNo.Content = franchise.LicenseNO;
+            lblMTOPNo.Content = franchise.MTOPNo;
         }
 
         public Grid Fetch()

@@ -22,7 +22,7 @@
                     FontWeight="Medium"
                     FontSize="10"
                     Foreground="DarkGray"/>
-            <Label x:Name="bodyNumber" Content="101" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblbodyNumber" Content="101" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Arial"
@@ -32,7 +32,7 @@
                     FontWeight="Medium"
                     FontSize="10"
                     Foreground="DarkGray"/>
-            <Label Content="GAV 635" HorizontalAlignment="Left" Margin="73,42,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblPlateNo" Content="GAV 635" HorizontalAlignment="Left" Margin="73,42,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="SemiBold"
                     FontFamily="Arial"
@@ -42,7 +42,7 @@
                     FontWeight="Medium"
                     FontSize="10"
                     Foreground="DarkGray"/>
-            <Label Content="11001" HorizontalAlignment="Left" Margin="73,69,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblMTOPNo" Content="11001" HorizontalAlignment="Left" Margin="73,69,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="SemiBold"
                     FontFamily="Arial"
@@ -53,7 +53,7 @@
                        FontWeight="Medium"
                         FontSize="9"
                        Foreground="DarkGray"/>
-            <Label Content="Juan Dela Cruz" HorizontalAlignment="Left" Margin="325,73,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblOperatorName" Content="Juan Dela Cruz" HorizontalAlignment="Left" Margin="325,73,0,0" VerticalAlignment="Top"
                        Foreground="Black"
                        FontWeight="DemiBold"
                        FontFamily="Arial"
@@ -64,7 +64,7 @@
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray" Grid.RowSpan="2"/>
-            <Label Content="December, 18 2000" HorizontalAlignment="Left" Margin="325,99,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblDateOfBIrth" Content="December, 18 2000" HorizontalAlignment="Left" Margin="325,99,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Arial"

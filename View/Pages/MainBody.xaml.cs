@@ -136,11 +136,21 @@ namespace SPTC_APP.View.Pages
 
         private async void lsSuggestion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Franchise fran = ((DataGrid)sender).SelectedItem as Franchise;
-            TablePanelSwap.Children.Clear();
-            ClickColorControl(FranchiseButton);
-            TablePanelSwap.Children.Add(await (new TableView(Table.FRANCHISE)).Fetch());
-            TablePanelSwap.Children.Add((new FranchiseInformationView(fran)).Fetch());
+            if (((DataGrid)sender).SelectedItem is Franchise fran)
+            {
+                if (fran.BodyNumber != null)
+                {
+                    TablePanelSwap.Children.Clear();
+                    ClickColorControl(FranchiseButton);
+                    TablePanelSwap.Children.Add(await (new TableView(Table.FRANCHISE)).Fetch());
+                    TablePanelSwap.Children.Add((new FranchiseInformationView(fran)).Fetch());
+                }
+            }
+        }
+
+        private void cbSearch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            cbSearch_TextChanged(sender, null);
         }
     }
 }

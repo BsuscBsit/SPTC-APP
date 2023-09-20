@@ -280,6 +280,7 @@
             VerticalAlignment="Top"
             Background="White"
             LostFocus="cbSearch_LostFocus"
+            GotFocus="cbSearch_GotFocus"
             Style="{DynamicResource CommonTextBoxStyle}"
             TextChanged="cbSearch_TextChanged" />
 

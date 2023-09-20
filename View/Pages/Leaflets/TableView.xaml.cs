@@ -15,6 +15,7 @@ namespace SPTC_APP.View.Pages.Leaflets
     public partial class TableView : Window
     {
         private string table;
+        private Franchise selectedFranchise;
         public TableView(string table)
         {
             InitializeComponent();
@@ -114,7 +115,7 @@ namespace SPTC_APP.View.Pages.Leaflets
             {
                 if (table == Table.FRANCHISE)
                 {
-                    Franchise selectedFranchise = (Franchise)grid.SelectedItems[0];
+                     selectedFranchise = (Franchise)grid.SelectedItems[0];
                     OperatorName.Content = selectedFranchise.Operator;
                     bodynum.Content = selectedFranchise.BodyNumber;
                     LoanBalance.Content = 0;
@@ -125,7 +126,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                 }
                 else if(table == Table.OPERATOR)
                 {
-                    Franchise selectedFranchise = (Franchise)grid.SelectedItems[0];
+                     selectedFranchise = (Franchise)grid.SelectedItems[0];
                     OperatorName.Content = selectedFranchise.Operator;
                     bodynum.Content = selectedFranchise.BodyNumber;
                     LoanBalance.Content = 0;
@@ -136,7 +137,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                 }
                 else if (table == Table.DRIVER)
                 {
-                    Franchise selectedFranchise = (Franchise)grid.SelectedItems[0];
+                     selectedFranchise = (Franchise)grid.SelectedItems[0];
                     OperatorName.Content = selectedFranchise.Driver;
                     bodynum.Content = selectedFranchise.BodyNumber;
                     LoanBalance.Content = 0;
@@ -171,7 +172,11 @@ namespace SPTC_APP.View.Pages.Leaflets
 
         private void ManageButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            if(selectedFranchise != null)
+            {
+                franchisePanel.Children.Clear();
+                franchisePanel.Children.Add((new FranchiseInformationView(selectedFranchise)).Fetch());
+            }
         }
     }
 }

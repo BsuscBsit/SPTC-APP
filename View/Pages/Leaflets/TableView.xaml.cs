@@ -42,32 +42,61 @@ namespace SPTC_APP.View.Pages.Leaflets
         {
             if (table == Table.FRANCHISE)
             {
-                List<Franchise> fetchedData = await Task.Run(() =>
+                int batchSize = 5;
+                int pageIndex = 0;
+
+                List<Franchise> fetchedData = new List<Franchise>();
+
+                while (true)
                 {
-                    return (new TableObject<Franchise>(Table.FRANCHISE)).data;
-                });
+                    List<Franchise> batch = await Task.Run(() =>
+                    {
+                        return (new TableObject<Franchise>(Table.FRANCHISE, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                    });
+
+                    if (batch.Count == 0)
+                        break; 
+
+                    fetchedData.AddRange(batch);
+                    pageIndex++;
+                }
 
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid);
 
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
-        {
-            
+                {
+
             new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
             new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
             new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
             new ColumnConfiguration("MTOPNo", "MTOP NO.", width: 100),
             new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
-        };
+                };
 
                 dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
                 TableGrid.SelectedCellsChanged += TableSelectedChanged;
             }
+
             else if (table == Table.OPERATOR)
             {
-                List<Franchise> fetchedData = await Task.Run(() =>
+                int batchSize = 25;
+                int pageIndex = 0;
+
+                List<Franchise> fetchedData = new List<Franchise>();
+
+                while (true)
                 {
-                    return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_OPERATOR)).data;
-                });
+                    List<Franchise> batch = await Task.Run(() =>
+                    {
+                        return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_OPERATOR, pageIndex * batchSize, batchSize)).data;
+                    });
+
+                    if (batch.Count == 0)
+                        break; // No more data
+
+                    fetchedData.AddRange(batch);
+                    pageIndex++;
+                }
 
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid);
 
@@ -85,10 +114,24 @@ namespace SPTC_APP.View.Pages.Leaflets
             }
             else if (table == Table.DRIVER)
             {
-                List<Franchise> fetchedData = await Task.Run(() =>
+                int batchSize = 25;
+                int pageIndex = 0;
+
+                List<Franchise> fetchedData = new List<Franchise>();
+
+                while (true)
                 {
-                    return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_DRIVER)).data;
-                });
+                    List<Franchise> batch = await Task.Run(() =>
+                    {
+                        return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_DRIVER, pageIndex * batchSize, batchSize)).data;
+                    });
+
+                    if (batch.Count == 0)
+                        break; // No more data
+
+                    fetchedData.AddRange(batch);
+                    pageIndex++;
+                }
 
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid);
 

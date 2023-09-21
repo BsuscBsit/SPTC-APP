@@ -148,7 +148,22 @@ namespace SPTC_APP.View
 
         private void btnFranchise_Click(object sender, RoutedEventArgs e)
         {
-            List<Franchise> fetchedData = (new TableObject<Franchise>(Table.FRANCHISE)).data;
+            int batchSize = 5;
+            int pageIndex = 0;
+
+            List<Franchise> fetchedData = new List<Franchise>();
+
+            while (true)
+            {
+                List<Franchise> batch = (new TableObject<Franchise>(Table.FRANCHISE, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+
+                if (batch.Count == 0)
+                    break;
+
+                fetchedData.AddRange(batch);
+                pageIndex++;
+            }
+
             DataGrid dataGrid = new DataGrid();
 
             DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(dataGrid);
@@ -168,7 +183,7 @@ namespace SPTC_APP.View
 
         private void btnDriver_Click(object sender, RoutedEventArgs e)
         {
-            List<Driver> fetchedData = (new TableObject<Driver>(Table.DRIVER)).data;
+            List<Driver> fetchedData = (new TableObject<Driver>(Table.DRIVER, Where.ALL_NOTDELETED)).data;
             DataGrid dataGrid = new DataGrid();
 
             DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(dataGrid);
@@ -190,7 +205,7 @@ namespace SPTC_APP.View
 
         private void btnOperator_Click(object sender, RoutedEventArgs e)
         {
-            List<Operator> fetchedData = (new TableObject<Operator>(Table.OPERATOR)).data;
+            List<Operator> fetchedData = (new TableObject<Operator>(Table.OPERATOR, Where.ALL_NOTDELETED)).data;
             DataGrid dataGrid = new DataGrid();
 
             DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(dataGrid);
@@ -211,7 +226,7 @@ namespace SPTC_APP.View
 
         private void btnEmployee_Click(object sender, RoutedEventArgs e)
         {
-            List<Employee> fetchedData = (new TableObject<Employee>(Table.EMPLOYEE)).data;
+            List<Employee> fetchedData = (new TableObject<Employee>(Table.EMPLOYEE, Where.ALL_NOTDELETED)).data;
             DataGrid dataGrid = new DataGrid();
 
             DataGridHelper<Employee> dataGridHelper = new DataGridHelper<Employee>(dataGrid);

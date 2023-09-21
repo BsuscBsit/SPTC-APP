@@ -25,8 +25,8 @@
         </Style>
     </Window.Resources>
     <Viewbox
-        Width="300"
-        Stretch="UniformToFill" Height="413.933415536375">
+        Height="600" Width="434.85254691689"
+        Stretch="UniformToFill">
         <Grid Width="324.4" Height="447.6">
             <Grid x:Name="back" VerticalAlignment="Center">
                 <!--  lblName  -->

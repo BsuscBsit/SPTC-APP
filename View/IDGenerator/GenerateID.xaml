@@ -341,13 +341,29 @@
                     Content="E-signature"
                     Style="{StaticResource SubTitlePreset}" />
                 <Viewbox Width="200" Height="208">
-                    <Image
-                        x:Name="imgSignPic"
-                        Width="200"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Source="/View/Images/sign.png"
-                        Stretch="UniformToFill" />
+                    <Grid Height="300" Width="400">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="8" />
+                        </Grid.RowDefinitions>
+                       <Grid Grid.Row="0">
+                        <Image
+                            Visibility="Visible"
+                            x:Name="imgSignPic"
+                            Height="250"
+                            Width="400"
+                            Source="/View/Images/sign.png"
+                            Stretch="UniformToFill"/>
+
+                        <InkCanvas x:Name="inkSign" Width="400" Height="250" Background="White" IsEnabled="False" Visibility="Collapsed"/>
+                        </Grid>
+                        <ProgressBar
+                        x:Name="pbSignOpen"
+                        Height="8"
+                        Grid.Row="1"
+                        IsIndeterminate="false"
+                        Visibility="Hidden" />
+                    </Grid>
                 </Viewbox>
                 <StackPanel>
                     <Button
@@ -358,7 +374,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
                         Content="Start Pad"
-                        Style="{DynamicResource CommonButtonStyle}" />
+                        Style="{DynamicResource CommonButtonStyle}" Click="btnStartPad_Click" />
                     <Button
                         x:Name="btnBrowseSignPic"
                         Width="175"

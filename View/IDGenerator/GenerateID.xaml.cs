@@ -1,9 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Ink;
+using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 using AForge.Video;
@@ -19,12 +24,17 @@ namespace SPTC_APP.View
     public partial class GenerateID : Window
     {
         BitmapSource lastCapturedImage = null;
+
         bool hasPhoto = false;
         bool hasSign = false;
+
+
+        private bool isCameraRunning;
+        private bool isSignPadRunning;
+
         bool isDriver = true;
         private Franchise franchise;
         bool isUpdate = false;
-        private bool isCameraRunning;
 
         private FilterInfoCollection videoDevices;
         private VideoCaptureDevice videoSource;
@@ -37,7 +47,6 @@ namespace SPTC_APP.View
             bDay.SelectedDate = DateTime.Today;
             EventLogger.Post("VIEW :: ID GENERATE Window");
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            btnStartPad.IsEnabled = false;
             isUpdate = false;
             franchise = new Franchise();
             if (videoDevices.Count == 0)
@@ -162,7 +171,6 @@ namespace SPTC_APP.View
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
         }
-
         protected override void OnClosing(CancelEventArgs e)
         {
             this.StopCamera();
@@ -278,6 +286,65 @@ namespace SPTC_APP.View
             }
         }
 
+        private void btnStartPad_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isSignPadRunning)
+            {
+                pbSignOpen.Visibility = Visibility.Visible;
+                pbSignOpen.IsIndeterminate = true;
+                imgSignPic.Visibility = Visibility.Collapsed;
+                inkSign.Visibility = Visibility.Visible;
+                btnStartPad.Content = "Save signature";
+                inkSign.IsEnabled = true;
+                isSignPadRunning = true;
+                hasSign = false;
+            } else
+            {
+                pbSignOpen.IsIndeterminate = false;
+                pbSignOpen.Value = 100;
+                imgSignPic.Visibility = Visibility.Visible;
+                
+                RenderTargetBitmap rtb = new RenderTargetBitmap((int)inkSign.ActualWidth, (int)inkSign.ActualHeight, 96, 96, PixelFormats.Default);
+                rtb.Render(inkSign);
+
+                imgSignPic.Source = rtb;
+                inkSign.Visibility = Visibility.Collapsed;
+                isSignPadRunning = false;
+                inkSign.IsEnabled = false;
+                inkSign.Strokes.Clear();
+                btnStartPad.Content = "Start Pad";
+                hasSign = true;
+            }
+        }
+
+        private void OnStylusDown(object sender, StylusDownEventArgs e)
+        {
+            inkSign.CaptureStylus();
+
+            DrawingAttributes drawingAttributes = new DrawingAttributes
+            {
+                Color = Colors.Black // You can set other properties like color, etc.
+            };
+
+            StylusPoint stylusPoint = e.GetStylusPoints(inkSign)[0];
+            drawingAttributes.Width = stylusPoint.PressureFactor * 10; // Adjust as needed
+            drawingAttributes.Height = stylusPoint.PressureFactor * 10; // Adjust as needed
+
+            inkSign.DefaultDrawingAttributes = drawingAttributes;
+        }
+
+        private void OnStylusMove(object sender, StylusEventArgs e)
+        {
+            StylusPointCollection points = e.GetStylusPoints(inkSign);
+            Stroke newStroke = new Stroke(points);
+            inkSign.Strokes.Add(newStroke);
+        }
+
+        private void OnStylusUp(object sender, StylusEventArgs e)
+        {
+            inkSign.ReleaseStylusCapture();
+        }
+
         private void btnBrowseIDPic_Click(object sender, RoutedEventArgs e)
         {
             this.StopCamera();
@@ -302,6 +369,7 @@ namespace SPTC_APP.View
 
         private void btnBrowseSignPic_Click(object sender, RoutedEventArgs e)
         {
+            pbSignOpen.Visibility = Visibility.Visible;
             var openFileDialog = new OpenFileDialog();
 
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
@@ -325,6 +393,7 @@ namespace SPTC_APP.View
         private void btnPreview_Click(object sender, RoutedEventArgs e)
         {
             this.StopCamera();
+            pbSignOpen.Visibility = Visibility.Hidden;
             if (tboxLnum.Text.Length > 0 && tboxFn.Text.Length > 0 && tboxLn.Text.Length > 0 && tboxAddressB.Text.Length > 0 && tboxAddressS.Text.Length > 0 && tboxEmePer.Text.Length > 0 && tboxPhone.Text.Length > 0)
             {
                 GeneratedIDPreview print = new GeneratedIDPreview();
@@ -485,6 +554,8 @@ namespace SPTC_APP.View
             tboxPhone.Text = "09123456789";
 
         }
+
+        
     }
 
 }

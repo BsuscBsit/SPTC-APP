@@ -24,7 +24,7 @@
                         Click="Button_Click"
                         Content="Button" />
                     <Grid Grid.Column="1">
-                        <InkCanvas x:Name="inkCanvas" Background="White" />
+                        <InkCanvas x:Name="inkCanvas" Background="White" Margin="41,63,41,81" />
                     </Grid>
                 </Grid>
             </TabItem>

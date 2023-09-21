@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Drawing;
+using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using SPTC_APP.Objects;
@@ -84,33 +87,42 @@ namespace SPTC_APP.View
 
             page.Populate(franchise, type);
             page.Show();
-            page.Measure(new System.Windows.Size(page.Width, page.Height));
-            page.Arrange(new System.Windows.Rect(0, 0, page.Width, page.Height));
 
-            var renderTargetBitmap = new RenderTargetBitmap((int)page.Width, (int)page.Height, 96, 96, PixelFormats.Pbgra32);
+
+            int renderScale = 4; // Increase this value for higher resolution rendering
+
+            var renderTargetBitmap = new RenderTargetBitmap((int)(page.ActualWidth * renderScale), (int)(page.ActualHeight * renderScale), 96 * renderScale, 96 * renderScale, PixelFormats.Pbgra32);
             renderTargetBitmap.Render(page);
 
+            var scaledBitmap = new TransformedBitmap(renderTargetBitmap, new ScaleTransform(1.0 / renderScale, 1.0 / renderScale));
+
             var image = new System.Windows.Controls.Image();
-            image.Source = renderTargetBitmap;
+            image.Source = scaledBitmap;
+
             page.Close();
 
             return image;
         }
+
 
         public System.Windows.Controls.Image RenderBackID()
         {
             BackID page = new BackID();
 
             page.Populate(franchise, type);
-            page.Show();
-            page.Measure(new System.Windows.Size(page.Width, page.Height));
-            page.Arrange(new System.Windows.Rect(0, 0, page.Width, page.Height));
 
-            var renderTargetBitmap = new RenderTargetBitmap((int)page.Width, (int)page.Height, 96, 96, PixelFormats.Pbgra32);
+            page.Show();
+
+            int renderScale = 4; // Increase this value for higher resolution rendering
+
+            var renderTargetBitmap = new RenderTargetBitmap((int)(page.ActualWidth * renderScale), (int)(page.ActualHeight * renderScale), 96 * renderScale, 96 * renderScale, PixelFormats.Pbgra32);
             renderTargetBitmap.Render(page);
 
+            var scaledBitmap = new TransformedBitmap(renderTargetBitmap, new ScaleTransform(1.0 / renderScale, 1.0 / renderScale));
+
             var image = new System.Windows.Controls.Image();
-            image.Source = renderTargetBitmap;
+            image.Source = scaledBitmap;
+
             page.Close();
 
             return image;

@@ -12,13 +12,11 @@
     ResizeMode="NoResize"
     SizeToContent="WidthAndHeight"
     Topmost="False"
-    WindowStyle="None"
-    mc:Ignorable="d">
+    WindowStyle="None">
     <Viewbox
         x:Name="front"
-        Width="700"
-        Height="965.844636251542"
-        Stretch="UniformToFill">
+        Width="1000"
+        Stretch="UniformToFill" Height="1379.77805178792">
         <Grid Width="324.4" Height="447.6">
             <Grid>
                 <Grid.RowDefinitions>
@@ -216,5 +214,4 @@
                 UseLayoutRounding="True" />
         </Grid>
     </Viewbox>
-
 </Window>

@@ -21,23 +21,30 @@ namespace SPTC_APP.View
 
         public static void Show(string header, string content, Icons icons = Icons.DEFAULT)
         {
-            ControlWindow control = new ControlWindow();
-            control.SetIcon(icons);
-            control.lblHeader.Content = header;
-            control.tblockContent.Text = content;
-            control.Show();
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ControlWindow control = new ControlWindow();
+                control.SetIcon(icons);
+                control.lblHeader.Content = header;
+                control.tblockContent.Text = content;
+                control.Show();
+            });
             //return control;
         }
         public static bool ShowDialog(string header, string content, Icons icons = Icons.DEFAULT)
         {
-            
-            ControlWindow control = new ControlWindow();
-            control.SetIcon(icons);
-            control.lblHeader.Content = header;
-            control.tblockContent.Text = content;
-            control.Cancellable();
-            control.Show();
-            return control.result;
+            bool result = false;
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ControlWindow control = new ControlWindow();
+                control.SetIcon(icons);
+                control.lblHeader.Content = header;
+                control.tblockContent.Text = content;
+                control.Cancellable();
+                control.Show();
+                result = control.result;
+            });
+            return result;
         }
 
         private void Cancellable()

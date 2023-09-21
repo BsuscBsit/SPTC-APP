@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
+using Image = SPTC_APP.Objects.Image;
 
 namespace SPTC_APP.View
 {
@@ -30,6 +31,24 @@ namespace SPTC_APP.View
         //Test for VideoCamera
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)inkCanvas.ActualWidth, (int)inkCanvas.ActualHeight, 96, 96, PixelFormats.Default);
+            rtb.Render(inkCanvas);
+
+            BitmapEncoder encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(rtb));
+            byte[] signatureBytes = null;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                encoder.Save(stream);
+                signatureBytes = stream.ToArray();
+            }
+
+            Image image = new Objects.Image();
+            image.name = "Signature - CurrentChairman";
+            image.picture = signatureBytes;
+            image.Save();
+
+
             /*
             using (var capture = new VideoCapture(0))
             {

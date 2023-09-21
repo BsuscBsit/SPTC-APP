@@ -43,5 +43,10 @@ namespace SPTC_APP.View.Pages.Leaflets
         {
             (new PrintPreview()).Show();
         }
+
+        private void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+            (new Test()).Show();
+        }
     }
 }

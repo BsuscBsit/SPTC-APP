@@ -1,9 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
@@ -49,6 +56,11 @@ namespace SPTC_APP.View
         {
             if (tabControl.SelectedItem is TabItem selectedTab)
             {
+                if(selectedTab.Header.ToString() == "Test VideoCapture Signature pad")
+                {
+
+                    
+                }
                 if (selectedTab.Header.ToString() == "Test Login")
                 {
                     UpdateLogin();
@@ -60,6 +72,35 @@ namespace SPTC_APP.View
             }
 
         }
+
+        private void OnStylusDown(object sender, StylusDownEventArgs e)
+        {
+            inkCanvas.CaptureStylus();
+
+            DrawingAttributes drawingAttributes = new DrawingAttributes
+            {
+                Color = Colors.Black // You can set other properties like color, etc.
+            };
+
+            StylusPoint stylusPoint = e.GetStylusPoints(inkCanvas)[0];
+            drawingAttributes.Width = stylusPoint.PressureFactor * 10; // Adjust as needed
+            drawingAttributes.Height = stylusPoint.PressureFactor * 10; // Adjust as needed
+
+            inkCanvas.DefaultDrawingAttributes = drawingAttributes;
+        }
+
+        private void OnStylusMove(object sender, StylusEventArgs e)
+        {
+            StylusPointCollection points = e.GetStylusPoints(inkCanvas);
+            Stroke newStroke = new Stroke(points);
+            inkCanvas.Strokes.Add(newStroke);
+        }
+
+        private void OnStylusUp(object sender, StylusEventArgs e)
+        {
+            inkCanvas.ReleaseStylusCapture();
+        }
+
 
         private void UpdateLogin()
         {

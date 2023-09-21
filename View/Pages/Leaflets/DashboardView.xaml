@@ -17,5 +17,14 @@
                 VerticalAlignment="Top"
                 Click="btnGererate_Click"
                 Content="GENERATE ID"/>
+        <Button
+                x:Name="btnTest"
+                Width="175"
+                Height="40"
+                Margin="0,160,30,0"
+                HorizontalAlignment="Right"
+            Style="{StaticResource CommonButtonStyle}"
+                VerticalAlignment="Top"
+                Content="TEST" Click="btnTest_Click"/>
     </Grid>
 </Window>

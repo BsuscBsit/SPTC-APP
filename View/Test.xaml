@@ -7,9 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Test"
     Width="800"
-    Height="450" mc:Ignorable="d">
+    Height="450" WindowStyle="ToolWindow">
     <Grid>
-        <Image x:Name="imageRender" />
 
         <TabControl x:Name="tabControl">
             <TabItem Header="Test VideoCapture Signature pad">
@@ -24,6 +23,9 @@
                         VerticalAlignment="Top"
                         Click="Button_Click"
                         Content="Button" />
+                    <Grid Grid.Column="1">
+                        <InkCanvas x:Name="inkCanvas" Background="White" />
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Test Login">

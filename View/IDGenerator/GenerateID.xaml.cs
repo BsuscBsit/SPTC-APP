@@ -58,7 +58,7 @@ namespace SPTC_APP.View
             videoSource = new VideoCaptureDevice(videoDevices[AppState.DEFAULT_CAMERA].MonikerString);
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
-            //GenerateDummy();
+            if(AppState.BYPASS) GenerateDummy();
         }
 
         public GenerateID(Franchise franchise, bool isDriver)

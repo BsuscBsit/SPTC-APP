@@ -16,6 +16,7 @@ namespace SPTC_APP.View
         public Login()
         {
             InitializeComponent();
+            if(AppState.BYPASS) pbPassword.Password = "Admin1234";
             cbUser.ItemsSource = AppState.Employees;
         }
 

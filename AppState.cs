@@ -33,6 +33,10 @@ namespace SPTC_APP
         public static bool IS_ADMIN = false;
         public static Employee USER = null;
 
+
+        //TOggle off defore deploying
+        public static bool BYPASS = true;
+
         public static Window mainwindow = null;
 
 

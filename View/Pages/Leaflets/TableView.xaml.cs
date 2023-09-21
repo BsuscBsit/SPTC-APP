@@ -174,7 +174,6 @@ namespace SPTC_APP.View.Pages.Leaflets
         {
             if(selectedFranchise != null)
             {
-                franchisePanel.Children.Clear();
                 franchisePanel.Children.Add((new FranchiseInformationView(selectedFranchise)).Fetch());
             }
         }

@@ -303,7 +303,7 @@ namespace SPTC_APP.View
                 pbSignOpen.IsIndeterminate = false;
                 pbSignOpen.Value = 100;
                 imgSignPic.Visibility = Visibility.Visible;
-                
+                inkSign.Background = Brushes.Transparent;
                 RenderTargetBitmap rtb = new RenderTargetBitmap((int)inkSign.ActualWidth, (int)inkSign.ActualHeight, 96, 96, PixelFormats.Default);
                 rtb.Render(inkSign);
 
@@ -314,6 +314,7 @@ namespace SPTC_APP.View
                 inkSign.Strokes.Clear();
                 btnStartPad.Content = "Start Pad";
                 hasSign = true;
+                inkSign.Background = Brushes.White;
             }
         }
 

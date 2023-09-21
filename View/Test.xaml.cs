@@ -31,6 +31,7 @@ namespace SPTC_APP.View
         //Test for VideoCamera
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            inkCanvas.Background = Brushes.Transparent;
             RenderTargetBitmap rtb = new RenderTargetBitmap((int)inkCanvas.ActualWidth, (int)inkCanvas.ActualHeight, 96, 96, PixelFormats.Default);
             rtb.Render(inkCanvas);
 
@@ -47,7 +48,8 @@ namespace SPTC_APP.View
             image.name = "Signature - CurrentChairman";
             image.picture = signatureBytes;
             image.Save();
-
+            inkCanvas.Background = Brushes.White;
+            inkCanvas.Strokes.Clear();
 
             /*
             using (var capture = new VideoCapture(0))

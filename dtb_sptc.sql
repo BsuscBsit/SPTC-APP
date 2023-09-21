@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2023 at 01:54 PM
+-- Generation Time: Sep 21, 2023 at 10:13 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -104,8 +104,9 @@ CREATE TABLE `tbl_franchise` (
   `operator_id` int(11) NOT NULL DEFAULT -1,
   `driver_id` int(11) NOT NULL DEFAULT -1,
   `owner_id` int(11) NOT NULL DEFAULT -1,
+  `buying_date` date NOT NULL DEFAULT current_timestamp(),
   `last_franchise_id` int(11) NOT NULL DEFAULT -1,
-  `buying_date` int(11) NOT NULL DEFAULT current_timestamp(),
+  `mtop_no` varchar(50) DEFAULT NULL,
   `license_no` varchar(20) DEFAULT NULL,
   `voters_id_number` varchar(255) DEFAULT NULL,
   `tin_number` varchar(255) DEFAULT NULL,

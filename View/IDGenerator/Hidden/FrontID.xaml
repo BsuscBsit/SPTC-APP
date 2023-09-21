@@ -184,10 +184,9 @@
                     Orientation="Vertical"
                     UseLayoutRounding="True">
                     <Viewbox
-                        Height="60"
-                        Margin="0,0,0,-60"
-                        Stretch="UniformToFill">
-                        <Image x:Name="imgChairmanSignature" />
+                        Height="100"
+                        Margin="0,0,0,-60">
+                        <Image x:Name="imgChairmanSignature"/>
                     </Viewbox>
                     <Label
                         x:Name="lblChairman"
@@ -201,7 +200,7 @@
                         Content="Chairman"
                         FontFamily="Bell MT"
                         Foreground="#FFC00000" />
-
+                    
                 </StackPanel>
             </Grid>
             <Label

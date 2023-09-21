@@ -138,7 +138,7 @@ namespace SPTC_APP
 
         public static System.Windows.Media.ImageSource FetchChairmanSign()
         {
-            Image presImage = Retrieve.GetData<Image>(Table.IMAGE, Select.ALL, Where.GET_CURRENT_CHAIRMAN_SIGN).FirstOrDefault();
+            Image presImage = Retrieve.GetDataUsingQuery<Image>(RequestQuery.GET_CURRENT_CHAIRMAN_SIGN).FirstOrDefault();
             return presImage.GetSource();
         }
     }

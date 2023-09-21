@@ -234,16 +234,28 @@ namespace SPTC_APP.Database
 
         public static T GetValueOrDefault<T>(MySqlDataReader reader, string columnName)
         {
+            int ordinal = -1;
             try
             {
-                int ordinal = reader.GetOrdinal(columnName);
-                return reader.IsDBNull(ordinal) ? default(T) : reader.GetFieldValue<T>(ordinal);
+                ordinal = reader.GetOrdinal(columnName);
+                if (ordinal >= 0)
+                {
+                    return reader.IsDBNull(ordinal) ? default(T) : reader.GetFieldValue<T>(ordinal);
+                }
+                else
+                {
+                    // Log a message indicating that the column was not found
+                    EventLogger.Post($"ERR :: Column '{columnName}' not found");
+                    return default(T);
+                }
             }
             catch (Exception ex)
             {
-                EventLogger.Post($"ERR :: Reader<{typeof(T)}>(columnName) {ex.Message}");
+                // Add extra logging to see the value of 'ordinal'
+                EventLogger.Post($"ERR :: Reader<{typeof(T)}>{columnName} {ex.Message}, ordinal = {ordinal}");
                 return default(T);
             }
+
         }
 
 

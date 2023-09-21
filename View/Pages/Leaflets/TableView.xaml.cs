@@ -173,7 +173,7 @@ namespace SPTC_APP.View.Pages.Leaflets
         private void ManageButton_Click(object sender, RoutedEventArgs e)
         {
             if(selectedFranchise != null)
-            {dde
+            {
                 franchisePanel.Children.Add((new FranchiseInformationView(selectedFranchise)).Fetch());
             }
         }

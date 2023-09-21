@@ -121,7 +121,7 @@ namespace SPTC_APP.View.Pages
 
         private void GetFranchiseInList()
         {
-            List<Franchise> tmp = Retrieve.GetDataUsingQuery<Franchise>(Where.Search(cbSearch.Text));
+            List<Franchise> tmp = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.Search(cbSearch.Text));
             if (tmp != null)
             {
                 if (tmp.Count > 0)

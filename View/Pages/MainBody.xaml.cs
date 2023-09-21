@@ -127,8 +127,6 @@ namespace SPTC_APP.View.Pages
                 if (tmp.Count > 0)
                 {
                     lsSuggestion.Visibility = Visibility.Visible;
-                    DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(lsSuggestion);
-
                     List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                         {
 
@@ -136,8 +134,8 @@ namespace SPTC_APP.View.Pages
                             new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
                             new ColumnConfiguration("Driver.name.wholename", "Driver NAME", width: 140),
                         };
+                    DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(lsSuggestion, columnConfigurations);
 
-                    dataGridHelper.DesignGrid(tmp, columnConfigurations);
                     lsSuggestion.ItemsSource = tmp;
                 }
             }

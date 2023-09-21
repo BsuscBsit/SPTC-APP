@@ -15,7 +15,7 @@ namespace SPTC_APP.Database
         public static string GET_CURRENT_CHAIRMAN_SIGN = "SELECT * FROM tbl_image WHERE image_name='Signature - CurrentChairman'";
         public static string Search(string text)
         {
-            return "SELECT * FROM `tbl_franchise` AS f \r\nLEFT JOIN `tbl_operator` AS O ON f.operator_id=O.id \r\nLEFT JOIN `tbl_driver` AS D ON f.driver_id=D.id \r\nLEFT JOIN `tbl_name` AS OName ON O.name_id=OName.id \r\nLEFT JOIN `tbl_name` AS DName ON D.name_id=DName.id \r\nWHERE f.body_number LIKE \"%" + text + "%\" OR OName.last_name LIKE \"%" + text + "%\" OR DName.last_name LIKE \"%" + text + "%\"";
+            return "SELECT * FROM `tbl_franchise` AS f \r\nLEFT JOIN `tbl_operator` AS O ON f.operator_id=O.id \r\nLEFT JOIN `tbl_driver` AS D ON f.driver_id=D.id \r\nLEFT JOIN `tbl_name` AS OName ON O.name_id=OName.id \r\nLEFT JOIN `tbl_name` AS DName ON D.name_id=DName.id \r\nWHERE f.body_number LIKE \"%" + text + "%\" OR OName.last_name LIKE \"%" + text + "%\" OR DName.last_name LIKE \"%" + text + "%\" LIMIT 0, 10";
         }
         public static string GetEnumDescription(CRUDControl value)
         {

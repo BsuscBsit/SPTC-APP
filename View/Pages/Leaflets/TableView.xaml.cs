@@ -44,8 +44,17 @@ namespace SPTC_APP.View.Pages.Leaflets
             {
                 int batchSize = 5;
                 int pageIndex = 0;
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+                {
+                    new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
+                    new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
+                    new ColumnConfiguration("MTOPNo", "MTOP NO.", width: 100),
+                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
+                };
+                DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
 
-                List<Franchise> fetchedData = new List<Franchise>();
+
 
                 while (true)
                 {
@@ -55,34 +64,34 @@ namespace SPTC_APP.View.Pages.Leaflets
                     });
 
                     if (batch.Count == 0)
-                        break; 
+                        break;
+                    foreach (var obj in batch)
+                    {
+                        TableGrid.Items.Add(obj);
+                        await Task.Delay(200);
+                    }
 
-                    fetchedData.AddRange(batch);
+                    await Task.Delay(200);
+
                     pageIndex++;
                 }
 
-                DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid);
-
-                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
-                {
-
-            new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
-            new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-            new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
-            new ColumnConfiguration("MTOPNo", "MTOP NO.", width: 100),
-            new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
-                };
-
-                dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
                 TableGrid.SelectedCellsChanged += TableSelectedChanged;
             }
-
             else if (table == Table.OPERATOR)
             {
-                int batchSize = 25;
+                int batchSize = 5;
                 int pageIndex = 0;
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+                {
+                    new ColumnConfiguration("Operator.name.wholename", "NAME", width: 140),
+                    new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
+                    new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
+                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
+                };
+                DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
 
-                List<Franchise> fetchedData = new List<Franchise>();
 
                 while (true)
                 {
@@ -92,59 +101,60 @@ namespace SPTC_APP.View.Pages.Leaflets
                     });
 
                     if (batch.Count == 0)
-                        break; // No more data
+                        break;
+                    foreach (var obj in batch)
+                    {
+                        TableGrid.Items.Add(obj);
+                        await Task.Delay(200);
+                    }
 
-                    fetchedData.AddRange(batch);
+                    await Task.Delay(200);
+
                     pageIndex++;
                 }
 
-                DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid);
-
-                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
-        {
-            new ColumnConfiguration("Operator.name.wholename", "NAME", width: 140),
-            new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-            new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
-            new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
-            new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
-        };
-
-                dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
                 TableGrid.SelectedCellsChanged += TableSelectedChanged;
             }
             else if (table == Table.DRIVER)
             {
-                int batchSize = 25;
+                int batchSize = 5;
                 int pageIndex = 0;
 
-                List<Franchise> fetchedData = new List<Franchise>();
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+                {
+                    new ColumnConfiguration("Driver.name.wholename", "NAME", width: 140),
+                    new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
+                    new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
+                    new ColumnConfiguration("Operator", "OPERATOR", width: 100),
+                    new ColumnConfiguration("Driver.Shift", "SHIFT", width: 100),
+                };
+                DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
+
+
 
                 while (true)
                 {
                     List<Franchise> batch = await Task.Run(() =>
                     {
-                        return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_DRIVER, pageIndex * batchSize, batchSize)).data;
+                        return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_OPERATOR, pageIndex * batchSize, batchSize)).data;
                     });
 
                     if (batch.Count == 0)
-                        break; // No more data
+                        break;
 
-                    fetchedData.AddRange(batch);
+                    foreach(var obj in batch)
+                    {
+                        TableGrid.Items.Add(obj);
+                        await Task.Delay(200);
+                    }
+
+                    // Wait a bit before fetching the next batch (optional, for visual effect)
+
+                    await Task.Delay(200);
+
                     pageIndex++;
                 }
 
-                DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid);
-
-                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
-        {
-            new ColumnConfiguration("Driver.name.wholename", "NAME", width: 140),
-            new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-            new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
-            new ColumnConfiguration("Operator", "OPERATOR", width: 100),
-            new ColumnConfiguration("Driver.Shift", "SHIFT", width: 100),
-        };
-
-                dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
                 TableGrid.SelectedCellsChanged += TableSelectedChanged;
             }
         }

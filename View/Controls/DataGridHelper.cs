@@ -13,23 +13,18 @@ namespace SPTC_APP.View.Controls
 public class DataGridHelper<T>
     {
         private DataGrid dataGrid;
+        private List<T> stack;
 
-        public DataGridHelper(DataGrid dataGrid)
+        public DataGridHelper(DataGrid dataGrid, List<ColumnConfiguration> columnConfigurations)
         {
             this.dataGrid = dataGrid;
-        }
-
-        public void DesignGrid(List<T> items, List<ColumnConfiguration> columnConfigurations)
-        {
+            this.stack = new List<T>();
             // Clear existing columns
             dataGrid.Columns.Clear();
             dataGrid.Focusable = true;
             dataGrid.IsReadOnly = true;
             dataGrid.SelectionUnit = DataGridSelectionUnit.FullRow;
             dataGrid.AutoGenerateColumns = false;
-            // Define your column configurations here
-
-
             foreach (var config in columnConfigurations)
             {
                 var column = new DataGridTextColumn
@@ -53,11 +48,8 @@ public class DataGridHelper<T>
 
                 dataGrid.Columns.Add(column);
             }
-
-
-            // Set the data source
-            dataGrid.ItemsSource = items;
         }
+
     }
 
     /// <summary>

@@ -1,4 +1,6 @@
-﻿using SPTC_APP.Objects;
+﻿
+using SPTC_APP.Objects;
+using System.Windows.Controls;
 
 namespace SPTC_APP.View
 {
@@ -40,7 +42,7 @@ namespace SPTC_APP.View
 
         }
 
-
+       
 
         private void window_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -62,4 +64,6 @@ namespace SPTC_APP.View
 
         }
     }
+
+    
 }

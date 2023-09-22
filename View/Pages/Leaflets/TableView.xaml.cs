@@ -15,7 +15,6 @@ namespace SPTC_APP.View.Pages.Leaflets
     public partial class TableView : Window
     {
         private string table;
-        private Franchise selectedFranchise;
         public TableView(string table)
         {
             InitializeComponent();
@@ -68,10 +67,10 @@ namespace SPTC_APP.View.Pages.Leaflets
                     foreach (var obj in batch)
                     {
                         TableGrid.Items.Add(obj);
-                        await Task.Delay(200);
+                        //await Task.Delay(200);
                     }
 
-                    await Task.Delay(200);
+                    //await Task.Delay(200);
 
                     pageIndex++;
                 }
@@ -105,10 +104,10 @@ namespace SPTC_APP.View.Pages.Leaflets
                     foreach (var obj in batch)
                     {
                         TableGrid.Items.Add(obj);
-                        await Task.Delay(200);
+                        //await Task.Delay(200);
                     }
 
-                    await Task.Delay(200);
+                   // await Task.Delay(200);
 
                     pageIndex++;
                 }
@@ -145,12 +144,10 @@ namespace SPTC_APP.View.Pages.Leaflets
                     foreach(var obj in batch)
                     {
                         TableGrid.Items.Add(obj);
-                        await Task.Delay(200);
+                        //await Task.Delay(200);
                     }
 
-                    // Wait a bit before fetching the next batch (optional, for visual effect)
-
-                    await Task.Delay(200);
+                    //await Task.Delay(200);
 
                     pageIndex++;
                 }
@@ -168,35 +165,35 @@ namespace SPTC_APP.View.Pages.Leaflets
             {
                 if (table == Table.FRANCHISE)
                 {
-                     selectedFranchise = (Franchise)grid.SelectedItems[0];
-                    OperatorName.Content = selectedFranchise.Operator;
-                    bodynum.Content = selectedFranchise.BodyNumber;
+                    MainBody.selectedFranchise = (Franchise)grid.SelectedItems[0];
+                    OperatorName.Content = MainBody.selectedFranchise.Operator;
+                    bodynum.Content = MainBody.selectedFranchise.BodyNumber;
                     LoanBalance.Content = 0;
                     LTLBalance.Content = 0;
-                    Reference.Content = selectedFranchise.owner;
-                    DriverName.Content = selectedFranchise.Driver;
+                    Reference.Content = MainBody.selectedFranchise.owner;
+                    DriverName.Content = MainBody.selectedFranchise.Driver;
 
                 }
                 else if(table == Table.OPERATOR)
                 {
-                     selectedFranchise = (Franchise)grid.SelectedItems[0];
-                    OperatorName.Content = selectedFranchise.Operator;
-                    bodynum.Content = selectedFranchise.BodyNumber;
+                    MainBody.selectedFranchise = (Franchise)grid.SelectedItems[0];
+                    OperatorName.Content = MainBody.selectedFranchise.Operator;
+                    bodynum.Content = MainBody.selectedFranchise.BodyNumber;
                     LoanBalance.Content = 0;
                     LTLBalance.Content = 0;
 
-                    Reference.Content = selectedFranchise.owner;
-                    DriverName.Content = selectedFranchise.Driver;
+                    Reference.Content = MainBody.selectedFranchise.owner;
+                    DriverName.Content = MainBody.selectedFranchise.Driver;
                 }
                 else if (table == Table.DRIVER)
                 {
-                     selectedFranchise = (Franchise)grid.SelectedItems[0];
-                    OperatorName.Content = selectedFranchise.Driver;
-                    bodynum.Content = selectedFranchise.BodyNumber;
+                     MainBody.selectedFranchise = (Franchise)grid.SelectedItems[0];
+                    OperatorName.Content = MainBody.selectedFranchise.Driver;
+                    bodynum.Content = MainBody.selectedFranchise.BodyNumber;
                     LoanBalance.Content = 0;
                     LTLBalance.Content = 0;
-                    Reference.Content = selectedFranchise.owner;
-                    DriverName.Content = selectedFranchise.Driver;
+                    Reference.Content = MainBody.selectedFranchise.owner;
+                    DriverName.Content = MainBody.selectedFranchise.Driver;
 
                 }
 
@@ -225,9 +222,9 @@ namespace SPTC_APP.View.Pages.Leaflets
 
         private void ManageButton_Click(object sender, RoutedEventArgs e)
         {
-            if(selectedFranchise != null)
+            if(MainBody.selectedFranchise != null)
             {
-                franchisePanel.Children.Add((new FranchiseInformationView(selectedFranchise)).Fetch());
+                franchisePanel.Children.Add((new FranchiseInformationView()).Fetch());
             }
         }
     }

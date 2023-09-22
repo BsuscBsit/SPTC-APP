@@ -10,14 +10,14 @@ namespace SPTC_APP.View.Pages.Leaflets
     /// </summary>
     public partial class FranchiseInformationView : Window
     {
-        public FranchiseInformationView(Franchise franchise)
+        public FranchiseInformationView()
         {
             InitializeComponent();
-            lblbodyNumber.Content = franchise.BodyNumber;
-            lblOperatorName.Content = franchise.Operator;
-            lblDateOfBIrth.Content = franchise.Operator?.birthday.ToLongDateString();
-            lblPlateNo.Content = franchise.LicenseNO;
-            lblMTOPNo.Content = franchise.MTOPNo;
+            lblbodyNumber.Content = MainBody.selectedFranchise.BodyNumber;
+            lblOperatorName.Content = MainBody.selectedFranchise.Operator;
+            lblDateOfBIrth.Content = MainBody.selectedFranchise.Operator?.birthday.ToLongDateString();
+            lblPlateNo.Content = MainBody.selectedFranchise.LicenseNO;
+            lblMTOPNo.Content = MainBody.selectedFranchise.MTOPNo;
         }
 
         public Grid Fetch()

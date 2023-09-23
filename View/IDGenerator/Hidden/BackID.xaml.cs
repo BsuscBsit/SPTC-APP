@@ -62,7 +62,7 @@ namespace SPTC_APP.View
 
             lblLicense.FontSize = Scaler.PtToPx(12);
             lblXPDate.FontSize = Scaler.PtToPx(12);
-            lbodyView.Height = Scaler.PtToPx(72);
+            lbodyView.Height = Scaler.PtToPx(85);
             lblEmePer.FontSize = Scaler.PtToPx(11);
             lblAddressBuilding.FontSize = Scaler.PtToPx(10);
             lblAddressStreet.FontSize = Scaler.PtToPx(10);

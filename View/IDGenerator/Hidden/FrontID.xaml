@@ -15,7 +15,9 @@
     WindowStyle="None">
     <Viewbox
         x:Name="front"
-        Stretch="UniformToFill" Height="600" Width="434.85254691689">
+        Width="434.85254691689"
+        Height="600"
+        Stretch="UniformToFill">
         <Grid Width="324.4" Height="447.6">
             <Grid>
                 <Grid.RowDefinitions>
@@ -178,30 +180,33 @@
                         </local:OutlinedTextBlock>
                     </Viewbox>
                 </StackPanel>
-                <StackPanel
-                    Grid.Row="5"
-                    HorizontalAlignment="Center"
-                    Orientation="Vertical"
-                    UseLayoutRounding="True">
-                    <Viewbox
-                        Height="100"
-                        Margin="0,0,0,-60">
-                        <Image x:Name="imgChairmanSignature"/>
+                <Grid Grid.Row="5" UseLayoutRounding="True" Margin="0,-5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Row="0" Margin="0,0,0,10">
+                        <Image x:Name="imgChairmanSignature" />
                     </Viewbox>
-                    <Label
-                        x:Name="lblChairman"
+                    <StackPanel
+                        Grid.Row="0"
                         HorizontalAlignment="Center"
-                        Content="ROLLY M. LABINDAO"
-                        FontFamily="Bookman Old Style"
-                        FontWeight="Bold" />
-                    <Label
-                        x:Name="label7"
-                        HorizontalAlignment="Center"
-                        Content="Chairman"
-                        FontFamily="Bell MT"
-                        Foreground="#FFC00000" />
-                    
-                </StackPanel>
+                        VerticalAlignment="Bottom">
+                        <Label
+                            x:Name="lblChairman"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Content="ROLLY M. LABINDAO"
+                            FontFamily="Bookman Old Style"
+                            FontWeight="Bold" Padding="5,5,5,0" />
+                        <Label
+                            x:Name="label7"
+                            HorizontalAlignment="Center"
+                            Content="Chairman"
+                            FontFamily="Bell MT"
+                            Foreground="#FFC00000" Padding="5,0,5,5" />
+                    </StackPanel>
+
+                </Grid>
             </Grid>
             <Label
                 Margin="-1,0,0,-2"

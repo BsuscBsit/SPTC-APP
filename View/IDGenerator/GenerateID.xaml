@@ -8,7 +8,9 @@
     Title="Generate ID"
     Width="785"
     Height="572"
+    ContentRendered="Window_ContentRendered"
     Icon="..\..\View\Images\icons\logo.ico"
+    KeyboardNavigation.TabNavigation="Continue"
     ResizeMode="NoResize"
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
@@ -81,7 +83,9 @@
                     Height="31"
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
-                    Style="{DynamicResource CommonTextBoxStyle}">
+                    GotFocus="TextBoxGotFocus_Yey"
+                    Style="{DynamicResource CommonTextBoxStyle}"
+                    TabIndex="0">
                     <TextBox.ToolTip>
                         <ToolTip Content="tis a tooltip" />
                     </TextBox.ToolTip>
@@ -101,7 +105,9 @@
                     Height="31"
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
+                    GotFocus="TextBoxGotFocus_Yey"
                     Style="{DynamicResource CommonTextBoxStyle}"
+                    TabIndex="1"
                     Text="" />
                 <Label
                     Grid.Row="3"
@@ -120,7 +126,9 @@
                     Height="31"
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
-                    Style="{DynamicResource CommonTextBoxStyle}" />
+                    GotFocus="TextBoxGotFocus_Yey"
+                    Style="{DynamicResource CommonTextBoxStyle}"
+                    TabIndex="2" />
                 <Label
                     Grid.Row="4"
                     Grid.Column="0"
@@ -129,7 +137,7 @@
                     Padding="-1,-1,-1,-1"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Content="Gender:"
+                    Content="Sex:"
                     Style="{StaticResource TextFieldLabelingPreset}" />
                 <ComboBox
                     x:Name="cbGender"
@@ -139,6 +147,7 @@
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
                     IsReadOnly="True"
+                    IsTabStop="False"
                     SelectedIndex="0"
                     Style="{DynamicResource CommonComboBox}">
                     <ComboBoxItem Content="MALE" />
@@ -170,7 +179,9 @@
                         Grid.Column="1"
                         Height="31"
                         VerticalContentAlignment="Center"
-                        BorderThickness="0" />
+                        BorderThickness="0"
+                        IsTabStop="False"
+                        KeyboardNavigation.TabNavigation="None" />
                 </Border>
                 <Label
                     Grid.Row="6"
@@ -189,7 +200,9 @@
                     Height="31"
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
+                    GotFocus="TextBoxGotFocus_Yey"
                     Style="{DynamicResource CommonTextBoxStyle}"
+                    TabIndex="3"
                     Text="" />
                 <Label
                     Grid.Row="7"
@@ -208,7 +221,9 @@
                     Height="31"
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
+                    GotFocus="TextBoxGotFocus_Yey"
                     Style="{DynamicResource CommonTextBoxStyle}"
+                    TabIndex="4"
                     Text="" />
                 <Label
                     Grid.Row="8"
@@ -226,7 +241,9 @@
                     Height="31"
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
+                    GotFocus="TextBoxGotFocus_Yey"
                     Style="{DynamicResource CommonTextBoxStyle}"
+                    TabIndex="5"
                     Text="" />
                 <Label
                     Grid.Row="9"
@@ -245,7 +262,8 @@
                     Height="31"
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
-                    Style="{DynamicResource CommonTextBoxStyle}" />
+                    Style="{DynamicResource CommonTextBoxStyle}"
+                    TabIndex="6" GotFocus="TextBoxGotFocus_Yey" />
                 <Label
                     Grid.Row="10"
                     Grid.Column="0"
@@ -263,7 +281,9 @@
                     Height="31"
                     Margin="0,4,-1,4"
                     VerticalAlignment="Center"
+                    GotFocus="TextBoxGotFocus_Yey"
                     Style="{DynamicResource CommonTextBoxStyle}"
+                    TabIndex="7"
                     Text="" />
                 <Label
                     Grid.Row="11"
@@ -282,7 +302,9 @@
                     Height="31"
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
+                    GotFocus="TextBoxGotFocus_Yey"
                     Style="{DynamicResource CommonTextBoxStyle}"
+                    TabIndex="8"
                     Text="" />
             </Grid>
             <StackPanel Grid.Column="1" Margin="15,0,0,0">
@@ -317,7 +339,8 @@
                         VerticalAlignment="Center"
                         Click="BtnStartCam_Click"
                         Content="Start Camera"
-                        Style="{DynamicResource CommonButtonStyle}" />
+                        Style="{DynamicResource CommonButtonStyle}"
+                        TabIndex="9" />
                     <Button
                         x:Name="btnBrowseIDPic"
                         Width="175"
@@ -327,6 +350,7 @@
                         VerticalAlignment="Center"
                         Click="btnBrowseIDPic_Click"
                         Content="Browse"
+                        IsTabStop="False"
                         Style="{DynamicResource CommonButtonStyle}" />
                 </StackPanel>
             </StackPanel>
@@ -341,28 +365,44 @@
                     Content="E-signature"
                     Style="{StaticResource SubTitlePreset}" />
                 <Viewbox Width="200" Height="208">
-                    <Grid Height="300" Width="400">
+                    <Grid Width="400">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="8" />
                         </Grid.RowDefinitions>
-                       <Grid Grid.Row="0">
-                        <Image
-                            Visibility="Visible"
-                            x:Name="imgSignPic"
-                            Height="250"
-                            Width="400"
-                            Source="/View/Images/sign.png"
-                            Stretch="UniformToFill"/>
-
-                        <InkCanvas x:Name="inkSign" Width="400" Height="250" Background="White" IsEnabled="False" Visibility="Collapsed"/>
-                        </Grid>
+                        <Border BorderThickness="1,1,1,1">
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource ColorBlack}" />
+                            </Border.BorderBrush>
+                            <Grid Grid.Row="0">
+                                <Viewbox Height="250">
+                                    <ContentControl Content="{StaticResource OctagonError}" Margin="0,15,0,15" />
+                                </Viewbox>
+                                <!--The "default" image will be hardcoded to xaml by now-->
+                                <!--All image placeholders should be hidden/empty/transparent by default-->
+                                <!--Assigning of "empty" image to Image controls are to be discontinued-->
+                                <!--If incase an image is empty, it should be printed empty-->
+                                <Image
+                                    x:Name="imgSignPic"
+                                    Width="400"
+                                    Height="250"
+                                    Stretch="UniformToFill"
+                                    Visibility="Visible" />
+                                <InkCanvas
+                                    x:Name="inkSign"
+                                    Width="400"
+                                    Height="250"
+                                    Background="White"
+                                    IsEnabled="False"
+                                    Visibility="Collapsed" />
+                            </Grid>
+                        </Border>
                         <ProgressBar
-                        x:Name="pbSignOpen"
-                        Height="8"
-                        Grid.Row="1"
-                        IsIndeterminate="false"
-                        Visibility="Hidden" />
+                            x:Name="pbSignOpen"
+                            Grid.Row="1"
+                            Height="8"
+                            IsIndeterminate="false"
+                            Visibility="Hidden" />
                     </Grid>
                 </Viewbox>
                 <StackPanel>
@@ -373,8 +413,10 @@
                         Margin="0,10,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
+                        Click="btnStartPad_Click"
                         Content="Start Pad"
-                        Style="{DynamicResource CommonButtonStyle}" Click="btnStartPad_Click" />
+                        Style="{DynamicResource CommonButtonStyle}"
+                        TabIndex="10" />
                     <Button
                         x:Name="btnBrowseSignPic"
                         Width="175"
@@ -384,6 +426,7 @@
                         VerticalAlignment="Top"
                         Click="btnBrowseSignPic_Click"
                         Content="Browse"
+                        IsTabStop="False"
                         Style="{DynamicResource CommonButtonStyle}" />
                 </StackPanel>
 
@@ -397,7 +440,8 @@
                 VerticalAlignment="Bottom"
                 Click="btnPreview_Click"
                 Content="PREVIEW"
-                Style="{DynamicResource CommonButtonStyle}" />
+                Style="{DynamicResource CommonButtonStyle}"
+                TabIndex="13" />
             <Button
                 x:Name="btnCancel"
                 Grid.Column="1"
@@ -407,7 +451,8 @@
                 VerticalAlignment="Bottom"
                 Click="btnCancel_Click"
                 Content="CANCEL"
-                Style="{DynamicResource CommonButtonStyle}" />
+                Style="{DynamicResource CommonButtonStyle}"
+                TabIndex="12" />
             <StackPanel
                 Grid.Column="2"
                 Margin="0,0,0,54"
@@ -420,83 +465,9 @@
                     Height="33"
                     Background="Transparent"
                     Checked="MySwitch_Back"
-                    Unchecked="MySwitch_Front">
-                    <ToggleButton.Style>
-                        <Style TargetType="{x:Type ToggleButton}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                        <Viewbox>
-                                            <Border
-                                                x:Name="Border"
-                                                Width="40"
-                                                Height="20"
-                                                Background="#FFFEF301"
-                                                CornerRadius="10">
-                                                <Border.Effect>
-                                                    <DropShadowEffect
-                                                        Direction="0"
-                                                        Opacity="0.3"
-                                                        ShadowDepth="0.5" />
-                                                </Border.Effect>
-                                                <Ellipse
-                                                    x:Name="Ellipse"
-                                                    Margin="2,1,2,1"
-                                                    HorizontalAlignment="Stretch"
-                                                    Fill="#FFFFFFFF"
-                                                    Stretch="Uniform"
-                                                    Stroke="Gray"
-                                                    StrokeThickness="0.2">
-                                                    <Ellipse.Effect>
-                                                        <DropShadowEffect
-                                                            BlurRadius="10"
-                                                            Direction="260"
-                                                            Opacity="0.3"
-                                                            ShadowDepth="1" />
-                                                    </Ellipse.Effect>
-                                                </Ellipse>
-                                            </Border>
-                                        </Viewbox>
-                                        <ControlTemplate.Triggers>
-                                            <EventTrigger RoutedEvent="Checked">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <ColorAnimation
-                                                            Storyboard.TargetName="Border"
-                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                            To="#FF4CD661"
-                                                            Duration="0:0:0.1" />
-                                                        <ThicknessAnimation
-                                                            Storyboard.TargetName="Ellipse"
-                                                            Storyboard.TargetProperty="Margin"
-                                                            To="20 1 2 1"
-                                                            Duration="0:0:0.1" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="Unchecked">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <ColorAnimation
-                                                            Storyboard.TargetName="Border"
-                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                            To="#FFFEF301"
-                                                            Duration="0:0:0.1" />
-                                                        <ThicknessAnimation
-                                                            Storyboard.TargetName="Ellipse"
-                                                            Storyboard.TargetProperty="Margin"
-                                                            To="2 1 2 1"
-                                                            Duration="0:0:0.1" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ToggleButton.Style>
-                </ToggleButton>
+                    Style="{DynamicResource ToggleButtonStyle}"
+                    TabIndex="11"
+                    Unchecked="MySwitch_Front" />
                 <Label
                     x:Name="drvOrOprt"
                     Margin="8,0,0,0"

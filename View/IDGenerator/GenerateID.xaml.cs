@@ -556,7 +556,18 @@ namespace SPTC_APP.View
 
         }
 
-        
+        private async void Window_ContentRendered(object sender, EventArgs e)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(0.2));
+            tboxFn.Focus();
+        }
+        private void TextBoxGotFocus_Yey(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox && !string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.SelectAll();
+            }
+        }
     }
 
 }

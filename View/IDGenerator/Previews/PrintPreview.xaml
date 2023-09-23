@@ -28,7 +28,7 @@
             Margin="40,0,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="PRINT LAYOUT"
+            Content="ID LAYOUT"
             FontFamily="Inter"
             FontSize="24"
             FontWeight="SemiBold"
@@ -229,7 +229,6 @@
                         Click="btnPrintBoth_Click"
                         Content="PRINT BOTH"
                         Style="{DynamicResource CommonButtonStyle}" />
-
                     <Button
                         x:Name="btnClear"
                         Height="40"

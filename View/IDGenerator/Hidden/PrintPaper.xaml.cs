@@ -119,7 +119,7 @@ namespace SPTC_APP.View.IDGenerator.Hidden
                 printDialog.PrintDocument(paginator, "Printing XPS Document");
                 xpsDocToPrint.Close();
 
-                ControlWindow.Show("Success", page + " page was printed successfully!" + ((isFront) ? "\nPress OK to print the next page." : ""), Icons.NOTIFY);
+                ControlWindow.Show("Success", page + " page printing initiated!" + ((isFront) ? "\nPress OK to print the next page." : ""), Icons.NOTIFY);
                 foreach (ID id in arr)
                 {
                     if (id != null)
@@ -139,7 +139,7 @@ namespace SPTC_APP.View.IDGenerator.Hidden
             }
             else
             {
-                ControlWindow.Show("Failed", page + " page was not printed.", Icons.ERROR);
+                ControlWindow.Show("Failed", page + " page printed was cancelled.", Icons.ERROR);
                 return false;
             }
         }

@@ -13,12 +13,10 @@ namespace SPTC_APP.Objects
     {
         public List<T> data;
         public string tableName;
-        public TableObject(string table, string where = null)
+
+        public TableObject(string table, string where, int startIndex = -1, int batchSize = -1)
         {
-            if(where == null)
-            {
-                where = Where.ALL_NOTDELETED;
-            } 
+            
             data = new List<T>();
             tableName = table;
             try
@@ -28,7 +26,13 @@ namespace SPTC_APP.Objects
                     connection.Open();
 
                     List<T> objectList = new List<T>();
-                    objectList.AddRange(Retrieve.GetData<T>(tableName, Select.ALL, where));
+                    if (startIndex != -1 && batchSize != -1)
+                    {
+                        objectList.AddRange(Retrieve.GetPaginationData<T>(tableName, Select.ALL, where, startIndex, batchSize));
+                    } else
+                    {
+                        objectList.AddRange(Retrieve.GetData<T>(tableName, Select.ALL, where));
+                    }
                     data = objectList;
                 }
             }
@@ -38,4 +42,5 @@ namespace SPTC_APP.Objects
             }
         }
     }
+
 }

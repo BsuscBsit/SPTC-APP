@@ -112,18 +112,6 @@ namespace SPTC_APP.Database
                         }
                     }
 
-                    if (results.Count == 0)
-                    {
-                        if (typeof(T).IsClass && constructor != null)
-                        {
-                            results.Add((T)constructor.Invoke(null));
-                        }
-                        else
-                        {
-                            results.Add(default(T));
-                        }
-                    }
-
                     return results;
                 }
             }
@@ -146,6 +134,55 @@ namespace SPTC_APP.Database
                 return results;
             }
         }
+
+        public static List<T> GetPaginationData<T>(string tableName, string selectQuery, string whereQuery, int startIndex, int batchSize, params MySqlParameter[] parameters)
+        {
+            Type type = typeof(T);
+            ConstructorInfo constructor = type.GetConstructor(Type.EmptyTypes);
+            List<T> results = new List<T>();
+            try
+            {
+                using (MySqlConnection connection = DatabaseConnection.GetConnection())
+                {
+                    connection.Open();
+
+                    string query = $"SELECT {selectQuery} FROM {tableName} WHERE {whereQuery} LIMIT {startIndex}, {batchSize}";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddRange(parameters);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            T item = ReadData<T>(reader);
+                            results.Add(item);
+                        }
+                    }
+
+                    return results;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                EventLogger.Post($"DTB :: Pagination : {ex.Message}");
+
+                if (results.Count == 0)
+                {
+                    if (typeof(T).IsClass && constructor != null)
+                    {
+                        results.Add((T)constructor.Invoke(null));
+                    }
+                    else
+                    {
+                        results.Add(default(T));
+                    }
+                }
+
+                return results;
+            }
+        }
+
 
         public static List<T> GetDataUsingQuery<T>(string query)
         {

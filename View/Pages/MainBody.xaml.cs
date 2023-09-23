@@ -17,6 +17,7 @@ namespace SPTC_APP.View.Pages
     public partial class MainBody : Window
     {
         private Button selectedButton = null;
+        public static Franchise selectedFranchise = null;
         public MainBody()
         {
             InitializeComponent();
@@ -93,6 +94,8 @@ namespace SPTC_APP.View.Pages
             selectedButton = button;
         }
 
+
+        //Search functionality
         private async void cbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             //Search
@@ -100,7 +103,15 @@ namespace SPTC_APP.View.Pages
             {
                 if (selectedButton != null)
                 {
-                    if (selectedButton.Content.Equals("Operator"))
+                    if (selectedButton  == FranchiseButton)
+                    {
+
+                    } 
+                    else if(selectedButton == OperatorButton)
+                    {
+
+                    }
+                    else if (selectedButton == DriverButton)
                     {
 
                     }
@@ -127,8 +138,6 @@ namespace SPTC_APP.View.Pages
                 if (tmp.Count > 0)
                 {
                     lsSuggestion.Visibility = Visibility.Visible;
-                    DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(lsSuggestion);
-
                     List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                         {
 
@@ -136,8 +145,8 @@ namespace SPTC_APP.View.Pages
                             new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
                             new ColumnConfiguration("Driver.name.wholename", "Driver NAME", width: 140),
                         };
+                    DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(lsSuggestion, columnConfigurations);
 
-                    dataGridHelper.DesignGrid(tmp, columnConfigurations);
                     lsSuggestion.ItemsSource = tmp;
                 }
             }
@@ -161,7 +170,8 @@ namespace SPTC_APP.View.Pages
                     TablePanelSwap.Children.Clear();
                     ClickColorControl(FranchiseButton);
                     TablePanelSwap.Children.Add(await (new TableView(Table.FRANCHISE)).Fetch());
-                    TablePanelSwap.Children.Add((new FranchiseInformationView(fran)).Fetch());
+                    MainBody.selectedFranchise = fran;
+                    TablePanelSwap.Children.Add((new FranchiseInformationView()).Fetch());
                 }
             }
         }

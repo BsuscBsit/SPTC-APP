@@ -146,13 +146,16 @@ namespace SPTC_APP.View
            
         }
 
-        private void btnFranchise_Click(object sender, RoutedEventArgs e)
+        private async void btnFranchise_Click(object sender, RoutedEventArgs e)
         {
-            List<Franchise> fetchedData = (new TableObject<Franchise>(Table.FRANCHISE)).data;
+            int batchSize = 5;
+            int pageIndex = 0;
+
+            
+
             DataGrid dataGrid = new DataGrid();
 
-            DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(dataGrid);
-
+            DatagridList.Children.Add(dataGrid);
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
                 new ColumnConfiguration("BodyNumber", "###", width: 30),
@@ -160,19 +163,39 @@ namespace SPTC_APP.View
                 new ColumnConfiguration("Operator", "Operator name"),
                 new ColumnConfiguration("Driver", "Driver name", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
             };
-            dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
-            DatagridList.Children.Add(dataGrid);
+            DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(dataGrid, columnConfigurations);
 
-            dataGrid.SelectionChanged += dgList_SelectionChanged;
+
+            while (true)
+            {
+                List<Franchise> batch = await Task.Run(() =>
+                {
+                    return (new TableObject<Franchise>(Table.FRANCHISE, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                });
+
+                if (batch.Count == 0)
+                    break;
+                foreach (var obj in batch)
+                {
+                    dataGrid.Items.Add(obj);
+
+                    await Task.Delay(200);
+                }
+
+                await Task.Delay(200);
+
+                pageIndex++;
+            }
         }
 
-        private void btnDriver_Click(object sender, RoutedEventArgs e)
+        private async void btnDriver_Click(object sender, RoutedEventArgs e)
         {
-            List<Driver> fetchedData = (new TableObject<Driver>(Table.DRIVER)).data;
+
+            int batchSize = 5;
+            int pageIndex = 0;
             DataGrid dataGrid = new DataGrid();
 
-            DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(dataGrid);
-
+            DatagridList.Children.Add(dataGrid);
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
                 new ColumnConfiguration("name", "FullName", width: 30),
@@ -181,19 +204,39 @@ namespace SPTC_APP.View
                 new ColumnConfiguration("emergencyContact", "Em Contact", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
                 new ColumnConfiguration("isDayShift", "Is Day Shift")
             };
-            dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
-            
-            DatagridList.Children.Add(dataGrid);
+            DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(dataGrid, columnConfigurations);
 
-            dataGrid.SelectionChanged += dgList_SelectionChanged;
+
+            while (true)
+            {
+                List<Driver> batch = await Task.Run(() =>
+                {
+                    return (new TableObject<Driver>(Table.DRIVER, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                });
+
+                if (batch.Count == 0)
+                    break;
+                foreach (var obj in batch)
+                {
+                    dataGrid.Items.Add(obj);
+
+                    await Task.Delay(200);
+                }
+
+                await Task.Delay(200);
+
+                pageIndex++;
+            }
         }
 
-        private void btnOperator_Click(object sender, RoutedEventArgs e)
+        private async void btnOperator_Click(object sender, RoutedEventArgs e)
         {
-            List<Operator> fetchedData = (new TableObject<Operator>(Table.OPERATOR)).data;
+
+            int batchSize = 5;
+            int pageIndex = 0;
             DataGrid dataGrid = new DataGrid();
 
-            DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(dataGrid);
+            DatagridList.Children.Add(dataGrid);
 
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
@@ -202,30 +245,64 @@ namespace SPTC_APP.View
                 new ColumnConfiguration("emergencyPerson", "Em Person"),
                 new ColumnConfiguration("emergencyContact", "Em Contact", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
             };
-            dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
-            
-            DatagridList.Children.Add(dataGrid);
+            DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(dataGrid, columnConfigurations);
 
-            dataGrid.SelectionChanged += dgList_SelectionChanged;
+            while (true)
+            {
+                List<Operator> batch = await Task.Run(() =>
+                {
+                    return (new TableObject<Operator>(Table.OPERATOR, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                });
+
+                if (batch.Count == 0)
+                    break;
+                foreach (var obj in batch)
+                {
+                    dataGrid.Items.Add(obj);
+                    await Task.Delay(200);
+                }
+
+                await Task.Delay(200);
+
+                pageIndex++;
+            }
         }
 
-        private void btnEmployee_Click(object sender, RoutedEventArgs e)
+        private async void btnEmployee_Click(object sender, RoutedEventArgs e)
         {
-            List<Employee> fetchedData = (new TableObject<Employee>(Table.EMPLOYEE)).data;
+
+            int batchSize = 5;
+            int pageIndex = 0;
             DataGrid dataGrid = new DataGrid();
 
-            DataGridHelper<Employee> dataGridHelper = new DataGridHelper<Employee>(dataGrid);
-
+            DatagridList.Children.Add(dataGrid);
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
                 new ColumnConfiguration("name", "FullName", width: 30),
                 new ColumnConfiguration("position", "Position", width: 60, backgroundColor: Brushes.Yellow)
             };
-            dataGridHelper.DesignGrid(fetchedData, columnConfigurations);
-            
-            DatagridList.Children.Add(dataGrid);
+            DataGridHelper<Employee> dataGridHelper = new DataGridHelper<Employee>(dataGrid, columnConfigurations);
 
-            dataGrid.SelectionChanged += dgList_SelectionChanged;
+
+            while (true)
+            {
+                List<Employee> batch = await Task.Run(() =>
+                {
+                    return (new TableObject<Employee>(Table.EMPLOYEE, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                });
+
+                if (batch.Count == 0)
+                    break;
+                foreach (var obj in batch)
+                {
+                    dataGrid.Items.Add(obj);
+                    await Task.Delay(200);
+                }
+
+                await Task.Delay(200);
+
+                pageIndex++;
+            }
         }
 
         //PLANS ON EDITING FIELDS

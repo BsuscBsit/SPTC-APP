@@ -69,7 +69,7 @@ namespace SPTC_APP.Objects
                 }
 
                 log.Text = DatabaseConnection.GetEnumDescription(builder.Log);
-                await Task.Delay(500);
+                await Task.Delay(100);
 
                 if (progressBar.Value == 100)
                 {
@@ -132,9 +132,8 @@ namespace SPTC_APP.Objects
                 progressBar.IsIndeterminate = false;
                 progressBar.Value = i;
                 log.Text = "Loading . . .";
-                await Task.Delay(10);
+                await Task.Delay(1);
             }
-            //await 1 : for last loading
             progressBar.Value = 100;
         }
         private static void ShowLoginWindowAndCloseCurrent(Window window)

@@ -213,11 +213,11 @@ namespace SPTC_APP.View
                 {
                     if(!id.isSaved)
                     {
-                        idnotsavedcount +=1;
+                        idnotsavedcount = idnotsavedcount + 1;
                     }
                     if(id.FrontPrint == 0 || id.BackPrint == 0)
                     {
-                        idnotsavedcount +=1;
+                        idnotprintedcunt = idnotprintedcunt + 1;
                     }
                 }
             }

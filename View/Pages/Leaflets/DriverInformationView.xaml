@@ -15,7 +15,7 @@
 
             <Ellipse Width="62" Height="60" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="158,68,0,0" Grid.RowSpan="2">
                 <Ellipse.Fill>
-                    <ImageBrush x:Name="userImage1" ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
+                    <ImageBrush x:Name="imgProfilePic" ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
                 </Ellipse.Fill>
             </Ellipse>
             <Label Content="Body No." HorizontalAlignment="Left" Margin="15,10,0,0" VerticalAlignment="Top"

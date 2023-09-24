@@ -186,7 +186,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                     LTLBalance.Content = 0;
                     Reference.Content = MainBody.selectedFranchise.owner;
                     DriverName.Content = MainBody.selectedFranchise.Driver;
-
+                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise.Operator?.image?.GetSource();
                 }
                 else if(table == Table.OPERATOR)
                 {
@@ -198,6 +198,7 @@ namespace SPTC_APP.View.Pages.Leaflets
 
                     Reference.Content = MainBody.selectedFranchise.owner;
                     DriverName.Content = MainBody.selectedFranchise.Driver;
+                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise.Operator?.image?.GetSource();
                 }
                 else if (table == Table.DRIVER)
                 {
@@ -208,6 +209,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                     LTLBalance.Content = 0;
                     Reference.Content = MainBody.selectedFranchise.owner;
                     DriverName.Content = MainBody.selectedFranchise.Driver;
+                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise.Driver?.image?.GetSource();
 
                 }
 

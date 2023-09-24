@@ -18,6 +18,8 @@ namespace SPTC_APP.View.Pages.Leaflets
             lblDateOfBIrth.Content = MainBody.selectedFranchise.Operator?.birthday.ToLongDateString();
             lblPlateNo.Content = MainBody.selectedFranchise.LicenseNO;
             lblMTOPNo.Content = MainBody.selectedFranchise.MTOPNo;
+
+            imgProfilePic.ImageSource = MainBody.selectedFranchise.Operator?.image?.GetSource();
         }
 
         public Grid Fetch()

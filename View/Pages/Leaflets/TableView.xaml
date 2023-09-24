@@ -12,7 +12,7 @@
         <Grid x:Name="franchiseInformation" HorizontalAlignment="Right" Height="458" Background="White" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="182" Visibility="Collapsed">
             <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="72,10,0,0">
                 <Ellipse.Fill>
-                    <ImageBrush x:Name="userImage1" ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
+                    <ImageBrush x:Name="imgUserProfilePic" ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
                 </Ellipse.Fill>
             </Ellipse>
             <Label Content="Operators Name" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top"

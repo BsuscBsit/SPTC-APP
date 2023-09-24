@@ -66,6 +66,7 @@ namespace SPTC_APP.View
         private General type;
         public int FrontPrint = 0;
         public int BackPrint = 0;
+        public bool isSaved = false;
 
         public ID(Franchise franchise, General type)
         {
@@ -129,6 +130,7 @@ namespace SPTC_APP.View
         public void SaveInfo()
         {
             franchise.Save();
+
             IDHistory history = new IDHistory();
             if(type == General.OPERATOR)
             {
@@ -138,6 +140,7 @@ namespace SPTC_APP.View
                 history.WriteInto(franchise.Driver.id, General.DRIVER, franchise.Driver.name.id);
             }
             history.Save();
+            isSaved = true;
         }
     }
 }

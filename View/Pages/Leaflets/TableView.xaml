@@ -9,7 +9,7 @@
      Width="786" Height="560"
     mc:Ignorable="d" WindowStyle="None">
     <Grid x:Name="franchisePanel" HorizontalAlignment="Right" Background="LightGray" VerticalAlignment="Bottom"  Width="786" Height="560">
-        <Grid x:Name="franchiseInformation" HorizontalAlignment="Right" Height="458" Background="White" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="182" >
+        <Grid x:Name="franchiseInformation" HorizontalAlignment="Right" Height="458" Background="White" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="182" Visibility="Collapsed">
             <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="72,10,0,0">
                 <Ellipse.Fill>
                     <ImageBrush x:Name="userImage1" ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
@@ -76,13 +76,34 @@
                     FontFamily="Helvetica"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
-            <Button x:Name="ManageButton" Style="{DynamicResource NoBorderButtonStyle}" Content="MANAGE" HorizontalAlignment="Center" Margin="8,0,0,10" VerticalAlignment="Bottom"
-                    Width="100"
-                    FontWeight="Bold"
-                    Background="Yellow" Click="ManageButton_Click" />
+
+            <Grid Margin="8,0,0,10" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="btnManage" Style="{DynamicResource CommonButtonStyle}" Content="MANAGE" Grid.Row="0" Margin="5" Visibility="Collapsed"
+                        Width="150"
+                        FontWeight="Bold"
+                        Background="Yellow" Click="btnManage_Click"/>
+                <Button x:Name="btnEditProfile" Style="{DynamicResource CommonButtonStyle}" Content="EDIT PROFILE" Grid.Row="1" Margin="5" Visibility="Collapsed"
+                        Width="150"
+                        FontWeight="Bold"
+                        Background="White" Click="btnEditProfile_Click" />
+                <Button x:Name="btnGenerateid" Style="{DynamicResource CommonButtonStyle}" Content="GENERATE ID" Grid.Row="2" Margin="5" Visibility="Collapsed"
+                        Width="150"
+                        FontWeight="Bold"
+                        Background="White" Click="btnGenerateid_Click" />
+                <Button x:Name="btnAddViolation" Style="{DynamicResource CommonButtonStyle}" Content="ADD VIOLATION" Grid.Row="3" Margin="5,5,0,5" Visibility="Collapsed"
+                        Width="150"
+                        FontWeight="Bold"
+                        Background="White" HorizontalAlignment="Left" Click="btnAddViolation_Click" />
+            </Grid>
         </Grid>
-        
-        
+
+
         <DataGrid x:Name="TableGrid" HorizontalAlignment="Left" Height="458" Margin="20,0,0,20" VerticalAlignment="Bottom" Width="545">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">

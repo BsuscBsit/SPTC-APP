@@ -205,6 +205,52 @@ namespace SPTC_APP.View
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            int idnotsavedcount = 0;
+            int idnotprintedcunt = 0;
+            foreach (ID id in new ID[] { PrintPreview.mGrid1, PrintPreview.mGrid2, PrintPreview.mGrid3, PrintPreview.mGrid4 })
+            {
+                if (id != null)
+                {
+                    if(!id.isSaved)
+                    {
+                        idnotsavedcount +=1;
+                    }
+                    if(id.FrontPrint == 0 || id.BackPrint == 0)
+                    {
+                        idnotsavedcount +=1;
+                    }
+                }
+            }
+
+            if (idnotprintedcunt > 0)
+            {
+                if (ControlWindow.ShowDialog($"{idnotsavedcount} ID not Printed!", "Are you sure you want to exit?", Icons.NOTIFY))
+                {
+                    ResetPrintData();
+                    (new PrintPreview()).Show();
+                    this.Close();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            if (idnotsavedcount > 0)
+            {
+                if(ControlWindow.ShowDialog($"{idnotsavedcount} ID not Saved!", "Are you sure you want to exit?", Icons.NOTIFY))
+                {
+                    ResetPrintData();
+                    (new PrintPreview()).Show();
+                    this.Close();
+                } else
+                {
+                    return;
+                }
+            }
+
+            
+
             ResetPrintData();
             (new PrintPreview()).Show();
             this.Close();
@@ -253,19 +299,19 @@ namespace SPTC_APP.View
         private void SaveAndClearID()
         {
             //Save to database and clear print paper
-            mGrid1?.SaveInfo();
-            mGrid2?.SaveInfo();
-            mGrid3?.SaveInfo();
-            mGrid4?.SaveInfo();
+            PrintPreview.mGrid1?.SaveInfo();
+            PrintPreview.mGrid2?.SaveInfo();
+            PrintPreview.mGrid3?.SaveInfo();
+            PrintPreview.mGrid4?.SaveInfo();
 
-            ResetPrintData();
-            foreach (ID id in new ID[] { mGrid1, mGrid2, mGrid3, mGrid4 }) {
+            foreach (ID id in new ID[] { PrintPreview.mGrid1, PrintPreview.mGrid2, PrintPreview.mGrid3, PrintPreview.mGrid4 }) {
                 if(id != null)
                 {
-                    EventLogger.Post("ID :" + id.franchise.BodyNumber + " Front page has been printed " + id.FrontPrint);
-                    EventLogger.Post("ID :" + id.franchise.BodyNumber + " Back page has been printed " + id.BackPrint);
+                    EventLogger.Post("OUT :: ID : " + id.franchise.BodyNumber + " FRONT: " + id.FrontPrint  + " BACK: " +  id.BackPrint);
+
                 }
             }
+            ResetPrintData();
             checkIdCount();
         }
 
@@ -302,29 +348,29 @@ namespace SPTC_APP.View
 
         private void ResetPrintData()
         {
-            mGrid1 = null;
-            mGrid2 = null;
-            mGrid3 = null;
-            mGrid4 = null;
-            idcount = 0;
+            PrintPreview.mGrid1 = null;
+            PrintPreview.mGrid2 = null;
+            PrintPreview.mGrid3 = null;
+            PrintPreview.mGrid4 = null;
+            PrintPreview.idcount = 0;
         }
 
         public void NewID(ID id)
         {
 
-            switch (++idcount)
+            switch (++PrintPreview.idcount)
             {
                 case 1:
-                    mGrid1 = id;
+                    PrintPreview.mGrid1 = id;
                     break;
                 case 2:
-                    mGrid2 = id;
+                    PrintPreview.mGrid2 = id;
                     break;
                 case 3:
-                    mGrid3 = id;
+                    PrintPreview.mGrid3 = id;
                     break;
                 case 4:
-                    mGrid4 = id;
+                    PrintPreview.mGrid4 = id;
                     break;
                 default:
                     break;

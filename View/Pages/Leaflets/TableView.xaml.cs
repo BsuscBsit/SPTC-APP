@@ -34,6 +34,20 @@ namespace SPTC_APP.View.Pages.Leaflets
             if (table == Table.FRANCHISE)
             {
                 //USAGE:: CHange side panel design
+                btnManage.Visibility = Visibility.Visible;
+            }
+            if (table == Table.OPERATOR)
+            {
+                //USAGE:: CHange side panel design
+                btnEditProfile.Visibility = Visibility.Visible;
+                btnGenerateid.Visibility = Visibility.Visible;
+            }
+            if (table == Table.DRIVER)
+            {
+                //USAGE:: CHange side panel design
+                btnEditProfile.Visibility = Visibility.Visible;
+                btnGenerateid.Visibility = Visibility.Visible;
+                btnAddViolation.Visibility = Visibility.Visible;
             }
         }
 
@@ -135,7 +149,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                 {
                     List<Franchise> batch = await Task.Run(() =>
                     {
-                        return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_OPERATOR, pageIndex * batchSize, batchSize)).data;
+                        return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_DRIVER, pageIndex * batchSize, batchSize)).data;
                     });
 
                     if (batch.Count == 0)
@@ -198,6 +212,8 @@ namespace SPTC_APP.View.Pages.Leaflets
                 }
 
             }
+
+            franchiseInformation.Visibility = Visibility.Visible;
         }
 
         public async Task<Grid> Fetch()
@@ -220,11 +236,56 @@ namespace SPTC_APP.View.Pages.Leaflets
             (new InputFranchiseView()).Show();
         }
 
-        private void ManageButton_Click(object sender, RoutedEventArgs e)
+
+        private void btnManage_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainBody.selectedFranchise != null)
+            {
+                if (table == Table.FRANCHISE)
+                {
+                    franchisePanel.Children.Add((new FranchiseInformationView()).Fetch());
+                }
+            }
+        }
+
+        private void btnEditProfile_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainBody.selectedFranchise != null)
+            {
+                if (table == Table.OPERATOR)
+                {
+                    franchisePanel.Children.Add((new FranchiseInformationView()).Fetch());
+                }
+                else if (table == Table.DRIVER)
+                {
+                    franchisePanel.Children.Add((new DriverInformationView()).Fetch());
+                }
+            }
+        }
+
+        private void btnGenerateid_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainBody.selectedFranchise != null)
+            {
+                if (table == Table.OPERATOR)
+                {
+                    (new GenerateID(MainBody.selectedFranchise, false)).Show();
+                }
+                else if (table == Table.DRIVER)
+                {
+                    (new GenerateID(MainBody.selectedFranchise, true)).Show();
+                }
+            }
+        }
+
+        private void btnAddViolation_Click(object sender, RoutedEventArgs e)
         {
             if(MainBody.selectedFranchise != null)
             {
-                franchisePanel.Children.Add((new FranchiseInformationView()).Fetch());
+                if(table == Table.DRIVER) 
+                { 
+
+                }
             }
         }
     }

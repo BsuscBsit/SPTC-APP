@@ -234,7 +234,7 @@
                         Height="40"
                         Margin="8,0,8,20"
                         Click="Button_Click"
-                        Content="CLEAR"
+                        Content="SAVE AND CLEAR"
                         Style="{DynamicResource CommonButtonStyle}"
                         Visibility="Collapsed" />
                     <Button

@@ -9,14 +9,13 @@ namespace SPTC_APP.View
     /// </summary>
     public partial class ControlWindow : Window
     {
-        private bool result;
+        private bool isDialog = false;
         public ControlWindow(string header = "", string content = "", Icons icons = Icons.DEFAULT)
         {
             InitializeComponent();
             this.SetIcon(icons);
             this.lblHeader.Content = header;
             this.tblockContent.Text = content;
-            this.result = false;
         }
 
         public static void Show(string header, string content, Icons icons = Icons.DEFAULT)
@@ -33,23 +32,24 @@ namespace SPTC_APP.View
         }
         public static bool ShowDialog(string header, string content, Icons icons = Icons.DEFAULT)
         {
-            bool result = false;
-            Application.Current.Dispatcher.Invoke(() =>
+            bool? res = Application.Current.Dispatcher.Invoke(() =>
             {
                 ControlWindow control = new ControlWindow();
                 control.SetIcon(icons);
                 control.lblHeader.Content = header;
                 control.tblockContent.Text = content;
                 control.Cancellable();
-                control.Show();
-                result = control.result;
+                return (control.ShowDialog());
             });
-            return result;
+            return res??false;
         }
 
         private void Cancellable()
         {
             //Set cancel visibility here
+            isDialog = true;
+            btnCancel.Visibility = Visibility.Visible;
+            btnOK.Width = 120;
         }
 
         private void SetIcon(Icons icon)
@@ -71,9 +71,21 @@ namespace SPTC_APP.View
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.result = false;
+
+            this.DialogResult = false;
+            this.Close();
+        }
+
+        private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.isDialog)
+            {
+                this.DialogResult = true;
+            }
             this.Close();
         }
     }

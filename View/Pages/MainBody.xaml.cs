@@ -85,6 +85,7 @@ namespace SPTC_APP.View.Pages
         //Button control
         private void ClickColorControl(Button button)
         {
+            selectedFranchise = null;
             if (selectedButton != null)
             {
                 selectedButton.Background = Brushes.White;

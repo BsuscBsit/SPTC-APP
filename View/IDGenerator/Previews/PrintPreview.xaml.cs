@@ -229,6 +229,7 @@ namespace SPTC_APP.View
                     ResetPrintData();
                     (new PrintPreview()).Show();
                     this.Close();
+                    return;
                 }
                 else
                 {
@@ -243,6 +244,7 @@ namespace SPTC_APP.View
                     ResetPrintData();
                     (new PrintPreview()).Show();
                     this.Close();
+                    return;
                 } else
                 {
                     return;

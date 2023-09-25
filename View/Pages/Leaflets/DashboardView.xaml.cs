@@ -151,7 +151,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                     };
 
 
-                    Canvas.SetLeft(TblYear, (barWidth * (i+1)) - TblYear.Width/2);
+                    Canvas.SetLeft(TblYear, ((barWidth) * (i+1)) - TblYear.Width/2);
                     Canvas.SetTop(TblYear, 0 - 25);
                     cvChart.Children.Add(TblYear);
                     cvChart.Children.Add(line);
@@ -195,10 +195,10 @@ namespace SPTC_APP.View.Pages.Leaflets
                 {
                     IsReadOnly = true,
                     BorderThickness = new Thickness(0),
-                    Background = Brushes.White,
+                    Background = Brushes.Transparent,
                     Foreground = Brushes.Black,
                     FontSize = 12,
-                    Width = Rect.Width,
+                    Width = 200,
                     HorizontalContentAlignment = HorizontalAlignment.Center,
                 };
             }
@@ -211,7 +211,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                 Canvas.SetLeft(TextBlock, left);
                 Canvas.SetBottom(TextBlock, bottom - 16);
 
-                Canvas.SetLeft(hoverTextBox, left);
+                Canvas.SetLeft(hoverTextBox, left - 100 + (Rect.Width/2));
                 Canvas.SetBottom(hoverTextBox, top);
 
             }

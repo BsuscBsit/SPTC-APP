@@ -32,7 +32,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                     currentParent.Content = null;
                 }
             }
-            
+            await Task.Delay(50);
             this.Close();
             return mainpanel;
         }
@@ -49,6 +49,7 @@ namespace SPTC_APP.View.Pages.Leaflets
 
         private void DrawChart()
         {
+
             int currentMonthIndex = DateTime.Now.Month - 1; 
             int startMonthIndex = (currentMonthIndex + 1) % 12;
 
@@ -82,11 +83,11 @@ namespace SPTC_APP.View.Pages.Leaflets
                 {
                     Text = roundedValues[i].ToString(),
                     TextAlignment = TextAlignment.Right,
-                    Opacity = 0.6
+                    Opacity = 0.6,
+                    Width = 60
                 };
-
-                Canvas.SetLeft(textBlock, -30);
                 Canvas.SetTop(textBlock, yPositions[i] - 8);
+                Canvas.SetLeft(textBlock, -65);
 
                 cvChart.Children.Add(textBlock);
             }
@@ -167,9 +168,6 @@ namespace SPTC_APP.View.Pages.Leaflets
                     TextAlignment = TextAlignment.Center,
                     Width = barWidth - 5
                 };
-
-                Canvas.SetLeft(TextBlock, 0);
-                Canvas.SetBottom(TextBlock, -16);
 
                 Rect.MouseEnter += Rectangle_MouseEnter;
                 Rect.MouseLeave += Rectangle_MouseLeave;

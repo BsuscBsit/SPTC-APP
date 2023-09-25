@@ -15,7 +15,7 @@ namespace SPTC_APP.Database
         public static string GET_CURRENT_CHAIRMAN_SIGN = "SELECT * FROM tbl_image WHERE image_name='Signature - CurrentChairman'";
         public static string Search(string text)
         {
-            return "SELECT * FROM `tbl_franchise` AS f \r\nLEFT JOIN `tbl_operator` AS O ON f.operator_id=O.id \r\nLEFT JOIN `tbl_driver` AS D ON f.driver_id=D.id \r\nLEFT JOIN `tbl_name` AS OName ON O.name_id=OName.id \r\nLEFT JOIN `tbl_name` AS DName ON D.name_id=DName.id \r\nWHERE f.body_number LIKE \"%" + text + "%\" OR OName.last_name LIKE \"%" + text + "%\" OR DName.last_name LIKE \"%" + text + "%\" LIMIT 0, 10";
+            return "SELECT * FROM `tbl_franchise` AS f LEFT JOIN `tbl_operator` AS O ON f.operator_id=O.id LEFT JOIN `tbl_driver` AS D ON f.driver_id=D.id LEFT JOIN `tbl_name` AS OName ON O.name_id=OName.id LEFT JOIN `tbl_name` AS DName ON D.name_id=DName.id WHERE f.body_number LIKE \"%" + text + "%\" OR OName.last_name LIKE \"%" + text + "%\" OR DName.last_name LIKE \"%" + text + "%\" AND f.isDeleted = 0 LIMIT 0, 10";
         }
         public static string GetEnumDescription(CRUDControl value)
         {
@@ -24,6 +24,10 @@ namespace SPTC_APP.Database
             DescriptionAttribute[] attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
             return attributes.Length > 0 ? attributes[0].Description : value.ToString();
+        }
+        public static string GET_ALL_PAYMENT_IN_MONTH(int month)
+        {
+            return $"SELECT SUM(deposit) FROM tbl_payment_details AS pd WHERE MONTH(date) = {month} AND ledger_id <> -1 AND isDeleted = 0";
         }
 
         public static string Protect(string input)
@@ -42,7 +46,6 @@ namespace SPTC_APP.Database
                 return stringBuilder.ToString();
             }
         }
-
 
     }
 

@@ -129,6 +129,7 @@ namespace SPTC_APP.View.Pages
             {
                 lsSuggestion.Visibility = Visibility.Collapsed;
             }
+            await Task.Delay(50);
         }
 
         private void GetFranchiseInList()
@@ -160,6 +161,7 @@ namespace SPTC_APP.View.Pages
         private void cbSearch_LostFocus(object sender, RoutedEventArgs e)
         {
             lsSuggestion.Visibility = Visibility.Collapsed;
+            cbSearch.Text = "";
         }
 
         private async void lsSuggestion_SelectionChanged(object sender, SelectionChangedEventArgs e)

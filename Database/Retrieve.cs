@@ -206,18 +206,6 @@ namespace SPTC_APP.Database
                         }
                     }
 
-                    if (results.Count == 0)
-                    {
-                        if (typeof(T).IsClass && constructor != null)
-                        {
-                            results.Add((T)constructor.Invoke(null));
-                        }
-                        else
-                        {
-                            results.Add(default(T));
-                        }
-                    }
-
                     return results;
                 }
             }
@@ -244,29 +232,46 @@ namespace SPTC_APP.Database
         private static T ReadData<T>(MySqlDataReader reader)
         {
             Type type = typeof(T);
-            ConstructorInfo readerConstructor = type.GetConstructor(new[] { typeof(MySqlDataReader) });
-            ConstructorInfo emptyConstructor = type.GetConstructor(Type.EmptyTypes);
 
-            if (readerConstructor != null)
+            if (type == typeof(double) || type == typeof(int) || type == typeof(float) ||
+                type == typeof(bool) || type == typeof(decimal) || type == typeof(string))
             {
-                object[] parameters = new object[] { reader };
-                try
+                if (!reader.IsDBNull(0))
                 {
-                    return (T)readerConstructor.Invoke(parameters);
-                }
-                catch (Exception ex)
+                    object value = reader.GetValue(0);
+                    return (T)value;
+                } else
                 {
-                    EventLogger.Post($"ERR :: ReadData<{typeof(T)}> {ex.Message}");
+                    return default(T);
                 }
             }
-
-            if (emptyConstructor != null)
+            else
             {
-                return (T)emptyConstructor.Invoke(null);
+                ConstructorInfo readerConstructor = type.GetConstructor(new[] { typeof(MySqlDataReader) });
+                ConstructorInfo emptyConstructor = type.GetConstructor(Type.EmptyTypes);
+
+                if (readerConstructor != null)
+                {
+                    object[] parameters = new object[] { reader };
+                    try
+                    {
+                        return (T)readerConstructor.Invoke(parameters);
+                    }
+                    catch (Exception ex)
+                    {
+                        EventLogger.Post($"ERR :: ReadData<{typeof(T)}> {ex.Message}");
+                    }
+                }
+
+                if (emptyConstructor != null)
+                {
+                    return (T)emptyConstructor.Invoke(null);
+                }
             }
 
             return default(T);
         }
+
 
 
         public static T GetValueOrDefault<T>(MySqlDataReader reader, string columnName)

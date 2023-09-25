@@ -220,7 +220,7 @@ namespace SPTC_APP.View.Pages.Leaflets
 
         public async Task<Grid> Fetch()
         {
-            UpdateTableAsync();
+            await UpdateTableAsync();
             if (franchisePanel.Parent != null)
             {
                 Window currentParent = franchisePanel.Parent as Window;
@@ -229,6 +229,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                     currentParent.Content = null;
                 }
             }
+            await Task.Delay(50);
             this.Close();
             return franchisePanel;
         }

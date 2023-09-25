@@ -43,27 +43,49 @@ namespace SPTC_APP
 
         public static async Task<bool> LoadDatabase()
         {
-            bool result = false;
-            result = await Task.Run(() => {
-                MonthlyIncome = new Dictionary<string, double>{
-                    { "Jan", 1435.0},
-                    { "Feb", 2342.0},
-                    { "Mar", 3433.4},
-                    { "Apr", 4777.0},
-                    { "May", 2202.0},
-                    { "Jun", 2220.0},
-                    { "Jul", 7540.0},
-                    { "Aug", 4431.0},
-                    { "Sep", 0.0},
-                    { "Oct", 2022.0},
-                    { "Nov", 1112.0},
-                    { "Dec", 3312.0}
+            try
+            {
+                MonthlyIncome = new Dictionary<string, double>
+                {
+                    { "Jan", RetrieveIncomeForMonth(1) },
+                    { "Feb", RetrieveIncomeForMonth(2) },
+                    { "Mar", RetrieveIncomeForMonth(3) },
+                    { "Apr", RetrieveIncomeForMonth(4) },
+                    { "May", RetrieveIncomeForMonth(5) },
+                    { "Jun", RetrieveIncomeForMonth(6) },
+                    { "Jul", RetrieveIncomeForMonth(7) },
+                    { "Aug", RetrieveIncomeForMonth(8) },
+                    { "Sep", RetrieveIncomeForMonth(9) },
+                    { "Oct", RetrieveIncomeForMonth(10) },
+                    { "Nov", RetrieveIncomeForMonth(11) },
+                    { "Dec", RetrieveIncomeForMonth(12) }
                 };
+                await Task.Delay(50);
                 return true;
-            });
-
-            return result;
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                EventLogger.Post($"LoadDatabase Error: {ex.Message}");
+                return false;
+            }
         }
+
+        private static double RetrieveIncomeForMonth(int month)
+        {
+            try
+            {
+                var income = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(month)).FirstOrDefault();
+                return income;
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                EventLogger.Post($"RetrieveIncomeForMonth Error: {ex.Message}");
+                return 0.0;
+            }
+        }
+
 
 
         public static async Task<bool> Test()

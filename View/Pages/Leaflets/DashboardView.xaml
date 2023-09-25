@@ -27,7 +27,7 @@
                 VerticalAlignment="Top"
                 Content="TEST" Click="btnTest_Click"/>
         <Border BorderBrush="Black" Background="White" CornerRadius="5" BorderThickness="1" Margin="20, 0, 0, 20" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <Canvas x:Name="cvChart" Background="White" Width="480" Height="300" Margin="40, 20, 20, 20" />
+            <Canvas x:Name="cvChart" Background="White" Width="480" Height="240" Margin="60, 60, 20, 20" />
         </Border>
     </Grid>
 </Window>

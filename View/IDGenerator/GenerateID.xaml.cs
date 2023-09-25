@@ -15,6 +15,7 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using Microsoft.Win32;
 using SPTC_APP.Objects;
+using SPTC_APP.View.Styling;
 
 namespace SPTC_APP.View
 {
@@ -39,6 +40,8 @@ namespace SPTC_APP.View
         private FilterInfoCollection videoDevices;
         private VideoCaptureDevice videoSource;
 
+        private bool hasInkBeenAdded = false;
+
         public GenerateID()
         {
             InitializeComponent();
@@ -59,6 +62,7 @@ namespace SPTC_APP.View
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
             if(AppState.BYPASS) GenerateDummy();
+            inkSign.StrokeCollected += inkSign_StrokeCollected;
         }
 
         public GenerateID(Franchise franchise, bool isDriver)
@@ -294,7 +298,7 @@ namespace SPTC_APP.View
                 pbSignOpen.IsIndeterminate = true;
                 imgSignPic.Visibility = Visibility.Collapsed;
                 inkSign.Visibility = Visibility.Visible;
-                btnStartPad.Content = "Save signature";
+                btnStartPad.Content = "Save Signature";
                 inkSign.IsEnabled = true;
                 isSignPadRunning = true;
                 hasSign = false;
@@ -390,126 +394,166 @@ namespace SPTC_APP.View
             }
         }
        
-
-        private void btnPreview_Click(object sender, RoutedEventArgs e)
+        private bool Preview_WarnDone(RoutedEventArgs e)
         {
-            this.StopCamera();
-            pbSignOpen.Visibility = Visibility.Hidden;
-            if (tboxLnum.Text.Length > 0 && tboxFn.Text.Length > 0 && tboxLn.Text.Length > 0 && tboxAddressB.Text.Length > 0 && tboxAddressS.Text.Length > 0 && tboxEmePer.Text.Length > 0 && tboxPhone.Text.Length > 0)
+            string warn = "";
+            bool cameraWarning = isCameraRunning && !hasPhoto;
+            bool signPadWarning = isSignPadRunning && !hasSign;
+
+            if (cameraWarning)
             {
-                GeneratedIDPreview print = new GeneratedIDPreview();
-                print.ReturnControl(this);
-                if (isDriver)
+                this.StopCamera();
+                imgIDPic.Source = null;
+            }
+
+            if (cameraWarning || signPadWarning)
+            {
+                warn = (cameraWarning ? "Camera" : "") + (cameraWarning && signPadWarning ? " and " : "") + (signPadWarning ? "Sign Pad" : "");
+                //warn += " has been initiated but no " + (warn.Length == 6 ? "image was" : "") + " captured. Are you certain you want to proceed?";
+                warn = !string.IsNullOrEmpty(warn) ? (warn + " has been initiated but, no" + (warn.Length < 7 ? " image was" : (warn.Length < 10 ? " input was" : " inputs were")) + " captured. Are you certain you want to proceed?") : warn;
+                if(ControlWindow.ShowDialog("Continue?", warn, Icons.NOTIFY))
                 {
-                    Driver @obj = new Driver();
-                    SPTC_APP.Objects.Image image = null;
-                    SPTC_APP.Objects.Image sign = null;
-                    if (hasPhoto)
-                    {
-                        image = new SPTC_APP.Objects.Image(imgIDPic.Source, $"Drv - {tboxFn.Text}");
-                    } else
-                    {
-                        imgIDPic.Source = new BitmapImage(new Uri("/View/Images/album.png", UriKind.Relative));
-                    }
-                    if (hasSign)
-                    {
-                        sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign  -{tboxFn.Text}");
-                    } else
-                    {
-                        imgSignPic.Source = new BitmapImage(new Uri("/View/Images/sign.png", UriKind.Relative));
-                    }
-
-                    string prefix = (cbGender.SelectedIndex == 0) ? "Mr." : "Mrs.";
-                    if (isUpdate)
-                    {
-                        @obj = franchise.Driver;
-                        Name name = @obj.name;
-                        name.prefix = prefix;
-                        name.firstname = tboxFn.Text;
-                        name.middlename = tboxMn.Text;
-                        name.lastname = tboxLn.Text;
-                        Address address = @obj.address;
-                        address.addressline1 = tboxAddressB.Text;
-                        address.addressline2 = tboxAddressS.Text;
-                        @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
-                    }
-                    else
-                    {
-                        Name name = new Name(prefix, tboxFn.Text, tboxMn.Text, tboxLn.Text, "");
-                        Address address = new Address(tboxAddressB.Text, tboxAddressS.Text);
-                        @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
-                    }
-                    
-                    franchise.WriteInto(tboxBnum.Text, null, @obj, tboxLnum.Text);
-
-                    ID id = new ID(franchise, Objects.General.DRIVER);
-                    print.Save(id);
-                    print.Show();
-                    this.Hide();
+                    return true;
                 }
                 else
                 {
-                    Operator @obj = new Operator();
-                    SPTC_APP.Objects.Image image = null;
-                    SPTC_APP.Objects.Image sign = null;
-                    if (hasPhoto)
+                    if (cameraWarning)
                     {
-                        image = new SPTC_APP.Objects.Image(imgIDPic.Source, $"Oprt - {tboxFn.Text}");
+                        BtnStartCam_Click(btnStartCam, e);
+                        return false;
                     }
-                    else
-                    {
-                        imgIDPic.Source = new BitmapImage(new Uri("/View/Images/album.png", UriKind.Relative));
-                    }
-                    if (hasSign)
-                    {
-                        sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign  -{tboxFn.Text}");
-                    }
-                    else
-                    {
-                        imgSignPic.Source = new BitmapImage(new Uri("/View/Images/sign.png", UriKind.Relative));
-                    }
-                    string prefix = (cbGender.SelectedIndex == 0) ? "Mr." : "Mrs.";
-                    if (isUpdate)
-                    {
-                        @obj = franchise.Operator;
-                        Name name = @obj.name;
-                        name.prefix = prefix;
-                        name.firstname = tboxFn.Text;
-                        name.middlename = tboxMn.Text;
-                        name.lastname = tboxLn.Text;
-                        Address address = @obj.address;
-                        address.addressline1 = tboxAddressB.Text;
-                        address.addressline2 = tboxAddressS.Text;
-                        @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
-                    }
-                    else
-                    {
-                        Name name = new Name(prefix, tboxFn.Text, tboxMn.Text, tboxLn.Text, "");
-                        Address address = new Address(tboxAddressB.Text, tboxAddressS.Text);
-                        @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
-                    }
-
-                    
-                    franchise.WriteInto(tboxBnum.Text, @obj, null, tboxLnum.Text);
-
-                    ID id = new ID(franchise, Objects.General.OPERATOR);
-                    print.Save(id);
-                    print.Show();
-                    this.Hide();
+                    return false;
                 }
-
             }
             else
             {
-                if (!hasPhoto)
+                return true;
+            }
+        }
+        private void btnPreview_Click(object sender, RoutedEventArgs e)
+        {
+            if (Preview_WarnDone(e))
+            {
+                this.StopCamera();
+                pbSignOpen.Visibility = Visibility.Hidden;
+                if (tboxLnum.Text.Length > 0 && tboxFn.Text.Length > 0 && tboxLn.Text.Length > 0 && tboxAddressB.Text.Length > 0 && tboxAddressS.Text.Length > 0 && tboxEmePer.Text.Length > 0 && tboxPhone.Text.Length > 0)
                 {
-                    imgIDPic.Source = new BitmapImage(new Uri("/View/Images/album.png", UriKind.Relative));
+                    GeneratedIDPreview print = new GeneratedIDPreview();
+                    print.ReturnControl(this);
+                    if (isDriver)
+                    {
+                        Driver @obj = new Driver();
+                        SPTC_APP.Objects.Image image = null;
+                        SPTC_APP.Objects.Image sign = null;
+                        if (hasPhoto)
+                        {
+                            image = new SPTC_APP.Objects.Image(imgIDPic.Source, $"Drv - {tboxFn.Text}");
+                        }
+                        else
+                        {
+                            imgIDPic.Source = null;
+                        }
+                        if (hasSign)
+                        {
+                            sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign  -{tboxFn.Text}");
+                        }
+                        else
+                        {
+                            imgSignPic.Source = null;
+                        }
+
+                        string prefix = (cbGender.SelectedIndex == 0) ? "Mr." : "Mrs.";
+                        if (isUpdate)
+                        {
+                            @obj = franchise.Driver;
+                            Name name = @obj.name;
+                            name.prefix = prefix;
+                            name.firstname = tboxFn.Text;
+                            name.middlename = tboxMn.Text;
+                            name.lastname = tboxLn.Text;
+                            Address address = @obj.address;
+                            address.addressline1 = tboxAddressB.Text;
+                            address.addressline2 = tboxAddressS.Text;
+                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
+                        }
+                        else
+                        {
+                            Name name = new Name(prefix, tboxFn.Text, tboxMn.Text, tboxLn.Text, "");
+                            Address address = new Address(tboxAddressB.Text, tboxAddressS.Text);
+                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
+                        }
+
+                        franchise.WriteInto(tboxBnum.Text, null, @obj, tboxLnum.Text);
+
+                        ID id = new ID(franchise, Objects.General.DRIVER);
+                        print.Save(id);
+                        print.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        Operator @obj = new Operator();
+                        SPTC_APP.Objects.Image image = null;
+                        SPTC_APP.Objects.Image sign = null;
+                        if (hasPhoto)
+                        {
+                            image = new SPTC_APP.Objects.Image(imgIDPic.Source, $"Oprt - {tboxFn.Text}");
+                        }
+                        else
+                        {
+                            imgIDPic.Source = null;
+                        }
+                        if (hasSign)
+                        {
+                            sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign  -{tboxFn.Text}");
+                        }
+                        else
+                        {
+                            imgSignPic.Source = null;
+                        }
+                        string prefix = (cbGender.SelectedIndex == 0) ? "Mr." : "Mrs.";
+                        if (isUpdate)
+                        {
+                            @obj = franchise.Operator;
+                            Name name = @obj.name;
+                            name.prefix = prefix;
+                            name.firstname = tboxFn.Text;
+                            name.middlename = tboxMn.Text;
+                            name.lastname = tboxLn.Text;
+                            Address address = @obj.address;
+                            address.addressline1 = tboxAddressB.Text;
+                            address.addressline2 = tboxAddressS.Text;
+                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
+                        }
+                        else
+                        {
+                            Name name = new Name(prefix, tboxFn.Text, tboxMn.Text, tboxLn.Text, "");
+                            Address address = new Address(tboxAddressB.Text, tboxAddressS.Text);
+                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
+                        }
+
+
+                        franchise.WriteInto(tboxBnum.Text, @obj, null, tboxLnum.Text);
+
+                        ID id = new ID(franchise, Objects.General.OPERATOR);
+                        print.Save(id);
+                        print.Show();
+                        this.Hide();
+                    }
+
                 }
-                if (!hasSign)
+                else
                 {
-                    imgSignPic.Source = new BitmapImage(new Uri("/View/Images/sign.png", UriKind.Relative));
+                    if (!hasPhoto)
+                    {
+                        imgIDPic.Source = null;
+                    }
+                    if (!hasSign)
+                    {
+                        imgSignPic.Source = null;
+                    }
+                    ControlWindow.Show("Input Fields incomplete!", "Missing some required inputs.");
                 }
-                ControlWindow.Show("Input Fields incomplete!", "Missing some required inputs.");
             }
         }
 
@@ -567,6 +611,22 @@ namespace SPTC_APP.View
             {
                 textBox.SelectAll();
             }
+        }
+
+        private void inkSign_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
+        {
+            if (!hasInkBeenAdded)
+            {
+                hasInkBeenAdded = true;
+                btnClearInkCanvas.FadeIn(0.2);
+            }
+        }
+
+        private void btnClearInkCanvas_Click(object sender, RoutedEventArgs e)
+        {
+            btnClearInkCanvas.FadeOut(0.2);
+            inkSign.Strokes.Clear();
+            hasInkBeenAdded = false;
         }
     }
 

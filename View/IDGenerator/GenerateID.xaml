@@ -262,8 +262,9 @@
                     Height="31"
                     Margin="0,4,0,4"
                     VerticalAlignment="Center"
+                    GotFocus="TextBoxGotFocus_Yey"
                     Style="{DynamicResource CommonTextBoxStyle}"
-                    TabIndex="6" GotFocus="TextBoxGotFocus_Yey" />
+                    TabIndex="6" />
                 <Label
                     Grid.Row="10"
                     Grid.Column="0"
@@ -317,12 +318,21 @@
                     Content="ID Photograph"
                     Style="{StaticResource SubTitlePreset}" />
                 <StackPanel>
-                    <Image
-                        x:Name="imgIDPic"
-                        Width="200"
-                        Height="200"
-                        Source="/View/Images/album.png"
-                        Stretch="UniformToFill" />
+                    <Border BorderThickness="1">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="{DynamicResource ColorBlack}" />
+                        </Border.BorderBrush>
+                        <Grid>
+                            <Viewbox Width="200" Height="200">
+                                <ContentControl Margin="0,50,0,50" Content="{StaticResource AlbumPH}" />
+                            </Viewbox>
+                            <Image
+                                x:Name="imgIDPic"
+                                Width="200"
+                                Height="200"
+                                Stretch="UniformToFill" />
+                        </Grid>
+                    </Border>
                     <ProgressBar
                         x:Name="pbCameraOpen"
                         Height="8"
@@ -364,37 +374,49 @@
                     HorizontalContentAlignment="Center"
                     Content="E-signature"
                     Style="{StaticResource SubTitlePreset}" />
-                <Viewbox Width="200" Height="208">
-                    <Grid Width="400">
+                <Grid Width="200" Height="208">
+                    <Button
+                        x:Name="btnClearInkCanvas"
+                        Width="100"
+                        Height="27"
+                        VerticalAlignment="Bottom"
+                        Content="Clear"
+                        Visibility="Hidden"
+                        Style="{DynamicResource CommonButtonStyle}" Click="btnClearInkCanvas_Click" Margin="0,0,0,7"/>
+                    <Grid
+                        Width="200"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="8" />
                         </Grid.RowDefinitions>
-                        <Border BorderThickness="1,1,1,1">
+                        <Border Grid.Row="0" BorderThickness="1,1,1,1">
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource ColorBlack}" />
                             </Border.BorderBrush>
-                            <Grid Grid.Row="0">
-                                <Viewbox Height="250">
-                                    <ContentControl Content="{StaticResource OctagonError}" Margin="0,15,0,15" />
+                            <Grid Width="200" Height="108">
+                                <Viewbox Height="100">
+                                    <ContentControl Margin="0,15,0,15" Content="{StaticResource SignaturePH}" />
                                 </Viewbox>
-                                <!--The "default" image will be hardcoded to xaml by now-->
-                                <!--All image placeholders should be hidden/empty/transparent by default-->
-                                <!--Assigning of "empty" image to Image controls are to be discontinued-->
-                                <!--If incase an image is empty, it should be printed empty-->
-                                <Image
-                                    x:Name="imgSignPic"
-                                    Width="400"
-                                    Height="250"
-                                    Stretch="UniformToFill"
-                                    Visibility="Visible" />
-                                <InkCanvas
-                                    x:Name="inkSign"
-                                    Width="400"
-                                    Height="250"
-                                    Background="White"
-                                    IsEnabled="False"
-                                    Visibility="Collapsed" />
+                                <Viewbox Height="100" VerticalAlignment="Top">
+                                    <Grid>
+                                        <Image
+                                            x:Name="imgSignPic"
+                                            Width="400"
+                                            Height="200"
+                                            Stretch="UniformToFill"
+                                            Visibility="Visible" />
+                                        <InkCanvas
+                                            x:Name="inkSign"
+                                            Width="400"
+                                            Height="200"
+                                            Background="White"
+                                            IsEnabled="False"
+                                            StrokeCollected="inkSign_StrokeCollected"
+                                            Visibility="Hidden" />
+                                    </Grid>
+                                </Viewbox>
                             </Grid>
                         </Border>
                         <ProgressBar
@@ -404,13 +426,13 @@
                             IsIndeterminate="false"
                             Visibility="Hidden" />
                     </Grid>
-                </Viewbox>
+                </Grid>
                 <StackPanel>
                     <Button
                         x:Name="btnStartPad"
                         Width="175"
                         Height="30"
-                        Margin="0,10,0,0"
+                        Margin="0,11,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
                         Click="btnStartPad_Click"
@@ -474,7 +496,6 @@
                     HorizontalAlignment="Center"
                     Content="Create this ID for&#xA;Driver."
                     Style="{StaticResource TextFieldLabelingPreset}" />
-
             </StackPanel>
         </Grid>
 

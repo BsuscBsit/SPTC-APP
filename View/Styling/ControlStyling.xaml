@@ -166,7 +166,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid>
+                    <Grid x:Name="MainGrid">
                         <Border
                             x:Name="TheBorder"
                             Background="White"

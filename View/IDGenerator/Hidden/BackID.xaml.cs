@@ -16,7 +16,7 @@ namespace SPTC_APP.View
         {
             if (type == General.OPERATOR)
             {
-                lblName.Content = franchise.Operator.name.wholename;
+                lblName.Content = franchise.Operator.name.wholename.ToUpper();
 
                 lblLicense.Content = franchise.LicenseNO;
                 lblBodyNum.Content = franchise.BodyNumber;
@@ -31,7 +31,7 @@ namespace SPTC_APP.View
             }
             else
             {
-                lblName.Content = franchise.Driver.name.wholename;
+                lblName.Content = franchise.Driver.name.wholename.ToUpper();
 
                 lblLicense.Content = franchise.LicenseNO;
                 lblBodyNum.Content = franchise.BodyNumber;

@@ -271,6 +271,7 @@
     <Compile Include="View\Pages\MainBody.xaml.cs">
       <DependentUpon>MainBody.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Styling\AnimationHelper.cs" />
     <Compile Include="View\Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>

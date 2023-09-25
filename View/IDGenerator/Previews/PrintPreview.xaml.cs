@@ -37,7 +37,7 @@ namespace SPTC_APP.View
             isFront = true;
             RenderIDs();
             checkIdCount();
-            if(idcount >= 4)
+            if(idcount > 4)
             {
                 btnAddNew.IsEnabled = false;
             } else

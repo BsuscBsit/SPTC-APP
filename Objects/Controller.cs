@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
 using SPTC_APP.Properties;
@@ -61,22 +60,36 @@ namespace SPTC_APP.Objects
 
                 if (isConnected && builder.Log == ConnectionLogs.ESTABLISHED)
                 {
-                    await PerformDatabaseTasks(progressBar, log);
+                    if(await PerformDatabaseTasks(progressBar, log))
+                    {
+                        log.Text = DatabaseConnection.GetEnumDescription(builder.Log);
+                        await Task.Delay(100);
+
+                        if (progressBar.Value == 100)
+                        {
+                            ShowLoginWindowAndCloseCurrent(window);
+                        }
+                        else
+                        {
+                            HandleConnectionFailure(builder.Log);
+                            ShowSplashScreenAndCloseCurrent(window);
+                        }
+                    } else
+                    {
+                        progressBar.Value = 10;
+                        if(ControlWindow.ShowDialog("Somethings Wrong!", "Database takes too long to respond. Retry?", Icons.ERROR))
+                        {
+                            
+                            ShowSplashScreenAndCloseCurrent(window);
+                        } else
+                        {
+                            window.Close();
+                        }
+                    }
                 }
                 else
                 {
                     progressBar.Value = 10;
-                }
-
-                log.Text = DatabaseConnection.GetEnumDescription(builder.Log);
-                await Task.Delay(100);
-
-                if (progressBar.Value == 100)
-                {
-                    ShowLoginWindowAndCloseCurrent(window);
-                }
-                else
-                {
                     HandleConnectionFailure(builder.Log);
                     ShowSplashScreenAndCloseCurrent(window);
                 }
@@ -123,19 +136,43 @@ namespace SPTC_APP.Objects
             inputWindow.ShowDialog();
             return inputWindow;
         }
-        private static async Task PerformDatabaseTasks(ProgressBar progressBar, TextBox log)
+        private static async Task<bool> PerformDatabaseTasks(ProgressBar progressBar, TextBox log)
         {
-            //TODO: task here, load database large files
-            // Connection established animation
+            Task<bool> loadDatabaseTask = Task.Run(() => AppState.LoadDatabase());
+
             for (int i = 0; i < 100; i++)
             {
-                progressBar.IsIndeterminate = false;
-                progressBar.Value = i;
-                log.Text = "Loading . . .";
-                await Task.Delay(1);
+                progressBar.Dispatcher.Invoke(() =>
+                {
+                    progressBar.IsIndeterminate = false;
+                    progressBar.Value = i;
+                });
+
+                if (loadDatabaseTask.IsCompleted)
+                {
+                    break; 
+                }
+
+                await Task.Delay(50);
+                log.Dispatcher.Invoke(() => log.Text = "Loading . . .");
             }
-            progressBar.Value = 100;
+
+            if (loadDatabaseTask.IsCompleted)
+            {
+                log.Dispatcher.Invoke(() => log.Text = "Loading completed.");
+
+                await Task.Delay(500);
+                progressBar.Value = 100;
+                return true;
+            } else
+            {
+                log.Dispatcher.Invoke(() => log.Text = "Loading resources Incomplete.");
+                await Task.Delay(500);
+                EventLogger.Post($"ERR :: Server timeout");
+                return false;
+            }
         }
+
         private static void ShowLoginWindowAndCloseCurrent(Window window)
         {
             (new Login()).Show();
@@ -150,7 +187,11 @@ namespace SPTC_APP.Objects
             else if (logType == ConnectionLogs.WRONG_PASSWORD)
             {
                 ControlWindow.Show(DatabaseConnection.GetEnumDescription(logType), "Input the correct password and try again");
+            } else if(logType == ConnectionLogs.EXCEPTION_OCCURED)
+            {
+                ControlWindow.Show(DatabaseConnection.GetEnumDescription(logType), "Something wentwrong. try again");
             }
+            EventLogger.Post($"LOG :: {DatabaseConnection.GetEnumDescription(logType)}");
         }
         private static void ShowSplashScreenAndCloseCurrent(Window window)
         {

@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SPTC_APP
@@ -32,12 +34,44 @@ namespace SPTC_APP
         public static List<string> Employees =new List<string> { "General Manager", "Secretary", "Treasurer", "Bookeeper" };
         public static bool IS_ADMIN = false;
         public static Employee USER = null;
-
+        public static Dictionary<string, double> MonthlyIncome;
 
         //TOggle off defore deploying
         public static bool BYPASS = true;
 
         public static Window mainwindow = null;
+
+        public static async Task<bool> LoadDatabase()
+        {
+            bool result = false;
+            result = await Task.Run(() => {
+                MonthlyIncome = new Dictionary<string, double>{
+                    { "Jan", 1435.0},
+                    { "Feb", 2342.0},
+                    { "Mar", 3433.4},
+                    { "Apr", 4777.0},
+                    { "May", 2202.0},
+                    { "Jun", 2220.0},
+                    { "Jul", 7540.0},
+                    { "Aug", 4431.0},
+                    { "Sep", 0.0},
+                    { "Oct", 2022.0},
+                    { "Nov", 1112.0},
+                    { "Dec", 3312.0}
+                };
+                return true;
+            });
+
+            return result;
+        }
+
+
+        public static async Task<bool> Test()
+        {
+            await Task.Delay(10000);
+            return true;
+        }
+
 
 
         public static void Login(string username, string password, Window window)

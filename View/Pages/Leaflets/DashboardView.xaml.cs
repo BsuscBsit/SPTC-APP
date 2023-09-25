@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace SPTC_APP.View.Pages.Leaflets
@@ -22,9 +18,11 @@ namespace SPTC_APP.View.Pages.Leaflets
         public DashboardView()
         {
             InitializeComponent();
+            
         }
         public async Task<Grid> Fetch()
         {
+            DrawChart();
             //UpdateTableAsync();
             if (mainpanel.Parent != null)
             {
@@ -48,5 +46,174 @@ namespace SPTC_APP.View.Pages.Leaflets
         {
             (new Test()).Show();
         }
+
+        private void DrawChart()
+        {
+            int currentMonthIndex = DateTime.Now.Month - 1; 
+            int startMonthIndex = (currentMonthIndex + 1) % 12;
+
+            double maxBalance = AppState.MonthlyIncome.Values.Max();
+            double minBalance = AppState.MonthlyIncome.Values.Min();
+
+            double barWidth = cvChart.Width / AppState.MonthlyIncome.Count;
+
+            double maxMagnitude = Math.Pow(10, Math.Floor(Math.Log10(maxBalance)));
+
+            double roundingAdjustment = maxMagnitude <= 10 ? 1 :
+                                       maxMagnitude <= 100 ? 10 :
+                                       maxMagnitude <= 1000 ? 100 :
+                                       maxMagnitude <= 10000 ? 1000 :
+                                       maxMagnitude <= 100000 ? 10000 : 100000;
+
+            double roundedMax = Math.Ceiling(maxBalance / roundingAdjustment) * roundingAdjustment;
+            double roundedMin = Math.Ceiling(minBalance / roundingAdjustment) * roundingAdjustment;
+
+            double barHeightScale = cvChart.Height / roundedMax;
+
+            double[] roundedValues = { roundedMin, roundedMax, (roundedMax + roundedMin) / 2 };
+
+            double[] yPositions = new double[3];
+
+            for (int i = 0; i < 3; i++)
+            {
+                yPositions[i] = cvChart.Height * (1 - (roundedValues[i] / maxBalance));
+
+                TextBlock textBlock = new TextBlock
+                {
+                    Text = roundedValues[i].ToString(),
+                    TextAlignment = TextAlignment.Right,
+                    Opacity = 0.6
+                };
+
+                Canvas.SetLeft(textBlock, -30);
+                Canvas.SetTop(textBlock, yPositions[i] - 8);
+
+                cvChart.Children.Add(textBlock);
+            }
+
+            foreach (double yPos in yPositions)
+            {
+                Line line = new Line
+                {
+                    X1 = 0,
+                    X2 = cvChart.Width,
+                    Y1 = yPos,
+                    Y2 = yPos,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1,
+                    StrokeDashArray = new DoubleCollection(new double[] { 3, 1 })
+                };
+
+                cvChart.Children.Add(line);
+            }
+
+
+            foreach (double yPos in yPositions)
+            {
+                Line line = new Line
+                {
+                    X1 = 0,
+                    X2 = cvChart.Width,
+                    Y1 = yPos,
+                    Y2 = yPos,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1,
+                    StrokeDashArray = new DoubleCollection(new double[] { 4 })
+                };
+
+                cvChart.Children.Add(line);
+            }
+
+
+            for (int i = 0; i < AppState.MonthlyIncome.Count; i++)
+            {
+                int adjustedIndex = (startMonthIndex + i) % 12;
+                double barHeight = AppState.MonthlyIncome.Values.ElementAt(adjustedIndex) * barHeightScale;
+
+                CustomRectangle customRect = new CustomRectangle(barWidth, barHeight, adjustedIndex == currentMonthIndex, adjustedIndex);
+                customRect.TextBlock.Text = AppState.MonthlyIncome.Keys.ElementAt(adjustedIndex);
+                customRect.Rect.Tag = AppState.MonthlyIncome.Values.ElementAt(adjustedIndex);
+                customRect.SetPosition(i * barWidth + 5, 0, barHeight);
+
+                cvChart.Children.Add(customRect.Rect);
+                cvChart.Children.Add(customRect.TextBlock);
+            }
+
+
+
+
+        }
+
+        public class CustomRectangle
+        {
+            public Rectangle Rect { get; private set; }
+            public TextBlock TextBlock { get; private set; }
+            private TextBox hoverTextBox;
+
+            public CustomRectangle(double barWidth, double barHeight, bool isCurrentMonth, int adjustedIndex)
+            {
+                Rect = new Rectangle
+                {
+                    Width = barWidth - 5,
+                    Height = barHeight,
+                    Fill = isCurrentMonth ? Brushes.Red : Brushes.Blue,
+                    Opacity = (adjustedIndex % 3 == 0) ? 0.8 : 0.4,
+                    RadiusX = 5,
+                    RadiusY = 5,
+                };
+
+                TextBlock = new TextBlock
+                {
+                    TextAlignment = TextAlignment.Center,
+                    Width = barWidth - 5
+                };
+
+                Canvas.SetLeft(TextBlock, 0);
+                Canvas.SetBottom(TextBlock, -16);
+
+                Rect.MouseEnter += Rectangle_MouseEnter;
+                Rect.MouseLeave += Rectangle_MouseLeave;
+
+                hoverTextBox = new TextBox
+                {
+                    IsReadOnly = true,
+                    BorderThickness = new Thickness(0),
+                    Background = Brushes.White,
+                    Foreground = Brushes.Black,
+                    FontSize = 12,
+                    Width = Rect.Width,
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                };
+            }
+
+            public void SetPosition(double left, double bottom, double top)
+            {
+                Canvas.SetLeft(Rect, left);
+                Canvas.SetBottom(Rect, bottom);
+
+                Canvas.SetLeft(TextBlock, left);
+                Canvas.SetBottom(TextBlock, bottom - 16);
+
+                Canvas.SetLeft(hoverTextBox, left);
+                Canvas.SetBottom(hoverTextBox, top);
+
+            }
+
+            private void Rectangle_MouseEnter(object sender, MouseEventArgs e)
+            {
+                Rectangle rect = (Rectangle)sender;
+                string info = Rect.Tag?.ToString() ?? "";
+                hoverTextBox.Text = info;
+                ((Canvas)rect.Parent).Children.Add(hoverTextBox);
+            }
+
+            private void Rectangle_MouseLeave(object sender, MouseEventArgs e)
+            {
+                Rectangle rect = (Rectangle)sender;
+                ((Canvas)rect.Parent).Children.Remove(hoverTextBox);
+            }
+        }
+
+
     }
 }

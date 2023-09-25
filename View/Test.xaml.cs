@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
+using SPTC_APP.View.Pages;
 using Image = SPTC_APP.Objects.Image;
 
 namespace SPTC_APP.View
@@ -31,26 +32,7 @@ namespace SPTC_APP.View
         //Test for VideoCamera
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            inkCanvas.Background = Brushes.Transparent;
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)inkCanvas.ActualWidth, (int)inkCanvas.ActualHeight, 96, 96, PixelFormats.Default);
-            rtb.Render(inkCanvas);
-
-            BitmapEncoder encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(rtb));
-            byte[] signatureBytes = null;
-            using (MemoryStream stream = new MemoryStream())
-            {
-                encoder.Save(stream);
-                signatureBytes = stream.ToArray();
-            }
-
-            Image image = new Objects.Image();
-            image.name = "Signature - CurrentChairman";
-            image.picture = signatureBytes;
-            image.Save();
-            inkCanvas.Background = Brushes.White;
-            inkCanvas.Strokes.Clear();
-
+            
             /*
             using (var capture = new VideoCapture(0))
             {
@@ -303,6 +285,38 @@ namespace SPTC_APP.View
 
                 pageIndex++;
             }
+        }
+
+
+        private void btnMain_Click(object sender, RoutedEventArgs e)
+        {
+            MainBody body = (new MainBody());
+            AppState.mainwindow = body;
+            body.Show();
+        }
+
+        private void btnSaveSign_Click(object sender, RoutedEventArgs e)
+        {
+            inkCanvas.Background = Brushes.Transparent;
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)inkCanvas.ActualWidth, (int)inkCanvas.ActualHeight, 96, 96, PixelFormats.Default);
+            rtb.Render(inkCanvas);
+
+            BitmapEncoder encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(rtb));
+            byte[] signatureBytes = null;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                encoder.Save(stream);
+                signatureBytes = stream.ToArray();
+            }
+
+            Image image = new Objects.Image();
+            image.name = "Signature - CurrentChairman";
+            image.picture = signatureBytes;
+            image.Save();
+            inkCanvas.Background = Brushes.White;
+            inkCanvas.Strokes.Clear();
+
         }
 
         //PLANS ON EDITING FIELDS

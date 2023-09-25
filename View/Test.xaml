@@ -18,14 +18,19 @@
                         <ColumnDefinition Width="505*" />
                     </Grid.ColumnDefinitions>
                     <Button
-                        Margin="10,10,0,0"
+                        Margin="170,0,0,0"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Click="Button_Click"
-                        Content="Button" />
+                        VerticalAlignment="Center"
+                        Content="Save Signature" x:Name="btnSaveSign" Click="btnSaveSign_Click" />
                     <Grid Grid.Column="1">
                         <InkCanvas x:Name="inkCanvas" Background="White" Margin="41,63,41,81" />
                     </Grid>
+                    <Button
+                        x:Name="btnMain"
+                        Margin="125,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="MAIN WINDOW" Click="btnMain_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="Test Login">

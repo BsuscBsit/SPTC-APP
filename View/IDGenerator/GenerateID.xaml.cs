@@ -61,7 +61,7 @@ namespace SPTC_APP.View
             videoSource = new VideoCaptureDevice(videoDevices[AppState.DEFAULT_CAMERA].MonikerString);
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
-            if(AppState.BYPASS) GenerateDummy();
+            if(!AppState.isDeployment && !AppState.isDeployment_IDGeneration) GenerateDummy();
             inkSign.StrokeCollected += inkSign_StrokeCollected;
         }
 

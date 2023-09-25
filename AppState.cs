@@ -36,8 +36,9 @@ namespace SPTC_APP
         public static Employee USER = null;
         public static Dictionary<string, double> MonthlyIncome;
 
-        //TOggle off defore deploying
-        public static bool BYPASS = true;
+        //Toggle on defore deploying
+        public static bool isDeployment = false;
+        public static bool isDeployment_IDGeneration = false;
 
         public static Window mainwindow = null;
 
@@ -118,11 +119,23 @@ namespace SPTC_APP
             {
 
                 USER = employee;
-                //(new PrintPreview()).Show();
-                //(new Test()).Show();
-                MainBody body = (new MainBody());
-                AppState.mainwindow = body;
-                body.Show();
+
+                if (AppState.isDeployment)
+                {
+                    MainBody body = (new MainBody());
+                    AppState.mainwindow = body;
+                    body.Show();
+                }
+                if (AppState.isDeployment_IDGeneration)
+                {
+                    (new PrintPreview()).Show();
+                }
+                if(!AppState.isDeployment_IDGeneration && !AppState.isDeployment)
+                {
+                    (new Test()).Show();
+                }
+
+                
                 EventLogger.Post($"User :: Login Success: USER({username})");
                 window.Close();
             }

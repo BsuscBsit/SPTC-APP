@@ -66,22 +66,29 @@ namespace SPTC_APP
             catch (Exception ex)
             {
                 // Handle any exceptions
-                EventLogger.Post($"LoadDatabase Error: {ex.Message}");
+                EventLogger.Post($"ERR :: Exception in Loading Database{ex.Message}");
                 return false;
             }
         }
 
         private static double RetrieveIncomeForMonth(int month)
         {
+            int year = DateTime.Now.Year;
+
+            // Check if the requested month is in the future (next year)
+            if (month > DateTime.Now.Month)
+            {
+                year--;
+            }
             try
             {
-                var income = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(month)).FirstOrDefault();
+                var income = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(month, year)).FirstOrDefault();
                 return income;
             }
             catch (Exception ex)
             {
                 // Handle any exceptions
-                EventLogger.Post($"RetrieveIncomeForMonth Error: {ex.Message}");
+                EventLogger.Post($"ERR :: Exception in Retrieveing Income{ex.Message}");
                 return 0.0;
             }
         }

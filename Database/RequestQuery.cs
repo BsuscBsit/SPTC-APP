@@ -25,9 +25,9 @@ namespace SPTC_APP.Database
 
             return attributes.Length > 0 ? attributes[0].Description : value.ToString();
         }
-        public static string GET_ALL_PAYMENT_IN_MONTH(int month)
+        public static string GET_ALL_PAYMENT_IN_MONTH(int month, int year)
         {
-            return $"SELECT SUM(deposit) FROM tbl_payment_details AS pd WHERE MONTH(date) = {month} AND ledger_id <> -1 AND isDeleted = 0";
+            return $"SELECT SUM(deposit) FROM tbl_payment_details WHERE YEAR(date) = {year} AND MONTH(date) = {month} AND ledger_id <> -1 AND isDeleted = 0";
         }
 
         public static string Protect(string input)

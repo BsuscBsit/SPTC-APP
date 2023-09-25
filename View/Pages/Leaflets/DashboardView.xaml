@@ -26,6 +26,15 @@
             Style="{StaticResource CommonButtonStyle}"
                 VerticalAlignment="Top"
                 Content="TEST" Click="btnTest_Click"/>
+        <Button
+                x:Name="btnReload"
+                Width="175"
+                Height="40"
+                Margin="0,281,30,0"
+                HorizontalAlignment="Right"
+            Style="{StaticResource CommonButtonStyle}"
+                VerticalAlignment="Top"
+                Content="RELOAD" Click="btnReload_Click"/>
         <Border BorderBrush="Black" Background="White" CornerRadius="5" BorderThickness="1" Margin="20, 0, 0, 20" HorizontalAlignment="Left" VerticalAlignment="Bottom">
             <Canvas x:Name="cvChart" Background="White" Width="480" Height="240" Margin="60, 60, 20, 20" />
         </Border>

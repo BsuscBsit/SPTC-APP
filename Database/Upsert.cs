@@ -165,8 +165,6 @@ namespace SPTC_APP.Database
                                 {
                                     { Field.NAME_ID, fieldValues.TryGetValue(Field.NAME_ID, out var temp) ? temp : -1 },
                                     { Field.ADDRESS_ID, fieldValues.TryGetValue(Field.ADDRESS_ID, out temp) ? temp : -1 },
-                                    { Field.IMAGE_ID, fieldValues.TryGetValue(Field.IMAGE_ID, out temp) ? temp : -1 },
-                                    { Field.SIGN_ID, fieldValues.TryGetValue(Field.SIGN_ID, out temp) ? temp : -1 },
                                 };
 
                                 id = GetExistingRecordId(uniqueAttributes);

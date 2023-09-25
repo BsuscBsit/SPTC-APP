@@ -49,6 +49,7 @@ namespace SPTC_APP.View.Pages.Leaflets
 
         private void DrawChart()
         {
+            cvChart.Children.Clear();
 
             int currentMonthIndex = DateTime.Now.Month - 1; 
             int startMonthIndex = (currentMonthIndex + 1) % 12;
@@ -100,26 +101,10 @@ namespace SPTC_APP.View.Pages.Leaflets
                     X2 = cvChart.Width,
                     Y1 = yPos,
                     Y2 = yPos,
-                    Stroke = Brushes.Black,
-                    StrokeThickness = 1,
+                    Stroke = Brushes.Gray,
+                    Opacity = 0.6,
+                    StrokeThickness = 2,
                     StrokeDashArray = new DoubleCollection(new double[] { 3, 1 })
-                };
-
-                cvChart.Children.Add(line);
-            }
-
-
-            foreach (double yPos in yPositions)
-            {
-                Line line = new Line
-                {
-                    X1 = 0,
-                    X2 = cvChart.Width,
-                    Y1 = yPos,
-                    Y2 = yPos,
-                    Stroke = Brushes.Black,
-                    StrokeThickness = 1,
-                    StrokeDashArray = new DoubleCollection(new double[] { 4 })
                 };
 
                 cvChart.Children.Add(line);
@@ -138,6 +123,40 @@ namespace SPTC_APP.View.Pages.Leaflets
 
                 cvChart.Children.Add(customRect.Rect);
                 cvChart.Children.Add(customRect.TextBlock);
+                
+                if(AppState.MonthlyIncome.Keys.ElementAt(adjustedIndex) == "Dec")
+                {
+                    Line line = new Line
+                    {
+                        X1 = 2 + barWidth * (i+1),
+                        X2 = 2 + barWidth * (i+1),
+                        Y1 = -10,
+                        Y2 = cvChart.Height,
+                        Stroke = Brushes.Gray,
+                        Opacity = 0.6,
+                        StrokeThickness = 2,
+                    };
+                    int year = DateTime.Now.Year;
+                    TextBox TblYear = new TextBox
+                    {
+                        Text = year - 1 + " " + year,
+                        IsReadOnly = true,
+                        BorderThickness = new Thickness(0),
+                        Background = Brushes.Transparent,
+                        Foreground = Brushes.Gray,
+                        FontSize = 10,
+                        FontWeight = FontWeights.Bold,
+                        Width = 120,
+                        HorizontalContentAlignment = HorizontalAlignment.Center,
+                    };
+
+
+                    Canvas.SetLeft(TblYear, (barWidth * (i+1)) - TblYear.Width/2);
+                    Canvas.SetTop(TblYear, 0 - 25);
+                    cvChart.Children.Add(TblYear);
+                    cvChart.Children.Add(line);
+                }
+
             }
 
 
@@ -212,6 +231,10 @@ namespace SPTC_APP.View.Pages.Leaflets
             }
         }
 
-
+        private async void btnReload_Click(object sender, RoutedEventArgs e)
+        {
+            await AppState.LoadDatabase();
+            DrawChart();
+        }
     }
 }

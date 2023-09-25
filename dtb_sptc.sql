@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2023 at 10:13 AM
+-- Generation Time: Sep 25, 2023 at 08:42 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -325,7 +325,7 @@ ALTER TABLE `tbl_address`
 --
 ALTER TABLE `tbl_driver`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name_id` (`name_id`,`address_id`,`image_id`,`sign_id`);
+  ADD UNIQUE KEY `name_id` (`name_id`,`address_id`);
 
 --
 -- Indexes for table `tbl_employee`
@@ -377,7 +377,7 @@ ALTER TABLE `tbl_name`
 --
 ALTER TABLE `tbl_operator`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name_id` (`name_id`,`address_id`,`image_id`,`sign_id`);
+  ADD UNIQUE KEY `name_id` (`name_id`,`address_id`);
 
 --
 -- Indexes for table `tbl_payment_details`

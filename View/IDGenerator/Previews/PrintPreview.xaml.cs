@@ -224,7 +224,7 @@ namespace SPTC_APP.View
 
             if (idnotprintedcunt > 0)
             {
-                if (ControlWindow.ShowDialog($"{idnotsavedcount} ID not Printed!", "Are you sure you want to exit?", Icons.NOTIFY))
+                if (ControlWindow.ShowDialog("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotprintedcunt>1?"s were":" was")} not printed!",  Icons.NOTIFY))
                 {
                     ResetPrintData();
                     (new PrintPreview()).Show();
@@ -239,7 +239,7 @@ namespace SPTC_APP.View
 
             if (idnotsavedcount > 0)
             {
-                if(ControlWindow.ShowDialog($"{idnotsavedcount} ID not Saved!", "Are you sure you want to exit?", Icons.NOTIFY))
+                if(ControlWindow.ShowDialog("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotsavedcount > 1 ? "s were" : " was")} not saved!", Icons.NOTIFY))
                 {
                     ResetPrintData();
                     (new PrintPreview()).Show();
@@ -256,6 +256,18 @@ namespace SPTC_APP.View
             ResetPrintData();
             (new PrintPreview()).Show();
             this.Close();
+        }
+
+        private string numtext(int i)
+        {
+            switch(i)
+            {
+                case 1: return "One"; break;
+                case 2: return "Two"; break;
+                case 3: return "Three"; break;
+                case 4: return "Four"; break;
+                default: return "No"; break;
+            }
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
@@ -605,13 +617,13 @@ namespace SPTC_APP.View
             bool isCtrlPressed = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
             bool isShiftPressed = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
 
-            if (isCtrlPressed)
+            if (isShiftPressed)
             {
                 double horizontalChange = e.Delta;
                 double horizontalOffset = scrollViewer.HorizontalOffset - horizontalChange;
                 scrollViewer.ScrollToHorizontalOffset(horizontalOffset);
             }
-            else if (isShiftPressed)
+            else if (isCtrlPressed)
             {
                 double zoomChange = e.Delta > 0 ? 0.1 : -0.1;
                 double newZoom = zoomScale + zoomChange;

@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.Drawing.Drawing2D;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -297,13 +300,40 @@ namespace SPTC_APP.Objects
         {
             if (imageSource is BitmapSource bitmapSource)
             {
-                BitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
-
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
+                    BitmapEncoder encoder = new JpegBitmapEncoder(); // Use JPEG compression
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+
+                    // Define a compression level (adjust quality as needed)
+                    ((JpegBitmapEncoder)encoder).QualityLevel = 80; // Adjust quality from 1 to 100
+
                     encoder.Save(memoryStream);
-                    return memoryStream.ToArray();
+
+                    // Check if the resulting byte array is larger than the maximum allowed size for MEDIUMBLOB
+                    if (memoryStream.Length <= 16777215) // 16MB in bytes
+                    {
+                        return memoryStream.ToArray();
+                    }
+                    else
+                    {
+                        // Compress the image to fit within the 16MB limit
+                        memoryStream.Position = 0;
+                        using (MemoryStream compressedStream = new MemoryStream())
+                        {
+                            var buffer = new byte[4096];
+                            int bytesRead;
+                            while ((bytesRead = memoryStream.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                compressedStream.Write(buffer, 0, bytesRead);
+                                if (compressedStream.Length > 16777215) // Check size limit
+                                {
+                                    EventLogger.Post($"ERR :: Image size still exceeds the maximum allowed for MEDIUMBLOB after compression. {compressedStream.Length}");
+                                }
+                            }
+                            return compressedStream.ToArray();
+                        }
+                    }
                 }
             }
             else if (imageSource is BitmapImage bitmapImage)
@@ -312,12 +342,41 @@ namespace SPTC_APP.Objects
                 {
                     BitmapEncoder encoder = new PngBitmapEncoder();
                     encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                    // Define a compression level (adjust quality as needed)
+                    ((JpegBitmapEncoder)encoder).QualityLevel = 80; // Adjust quality from 1 to 100
+
                     encoder.Save(memoryStream);
-                    return memoryStream.ToArray();
+
+                    // Check if the resulting byte array is larger than the maximum allowed size for MEDIUMBLOB
+                    if (memoryStream.Length <= 16777215) // 16MB in bytes
+                    {
+                        return memoryStream.ToArray();
+                    }
+                    else
+                    {
+                        // Compress the image to fit within the 16MB limit
+                        memoryStream.Position = 0;
+                        using (MemoryStream compressedStream = new MemoryStream())
+                        {
+                            var buffer = new byte[4096];
+                            int bytesRead;
+                            while ((bytesRead = memoryStream.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                compressedStream.Write(buffer, 0, bytesRead);
+                                if (compressedStream.Length > 16777215) // Check size limit
+                                {
+                                    EventLogger.Post($"ERR :: Image size still exceeds the maximum allowed for MEDIUMBLOB after compression. {compressedStream.Length}");
+                                }
+                            }
+                            return compressedStream.ToArray();
+                        }
+                    }
                 }
             }
+
             return null;
         }
+
 
         public int Save()
         {

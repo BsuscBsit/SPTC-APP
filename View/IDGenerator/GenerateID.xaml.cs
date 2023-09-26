@@ -74,7 +74,7 @@ namespace SPTC_APP.View
             isUpdate = true;
             EventLogger.Post("VIEW :: ID GENERATE Window id="+franchise.id);
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            btnStartPad.IsEnabled = false;
+            //btnStartPad.IsEnabled = false;
             
             this.isDriver = isDriver;
             MySwitch.Visibility = Visibility.Hidden;
@@ -596,22 +596,20 @@ namespace SPTC_APP.View
             pbCameraOpen.Visibility = Visibility.Hidden;
             try
             {
-                if (videoSource != null && videoSource.IsRunning)
-                {
-                    videoSource.SignalToStop();
-                    videoSource.WaitForStop();
-                }
+               
 
                 // Ensure that the camera source is completely stopped and disposed
-                videoSource?.Stop();
                 videoSource?.SignalToStop();
                 videoSource?.WaitForStop();
-                videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
+                if (videoSource != null)
+                {
+                    videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
+                }
             
 
                 // Dispose of the last captured image if necessary
-                lastCapturedImage?.Freeze();
-                //lastCapturedImage?.Dispose();
+                //lastCapturedImage?.Freeze();
+                //lastCapturedImage?.ClearValue();
             }
             catch (Exception e)
             {

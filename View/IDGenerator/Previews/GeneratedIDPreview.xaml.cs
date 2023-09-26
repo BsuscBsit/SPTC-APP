@@ -101,12 +101,6 @@ namespace SPTC_APP.View
 
             return image;
         }
-
-
-
-
-
-
         public System.Windows.Controls.Image RenderBackID()
         {
             BackID page = new BackID();

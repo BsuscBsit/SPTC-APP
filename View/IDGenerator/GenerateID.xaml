@@ -379,10 +379,12 @@
                         x:Name="btnClearInkCanvas"
                         Width="100"
                         Height="27"
+                        Margin="0,0,0,7"
                         VerticalAlignment="Bottom"
+                        Click="btnClearInkCanvas_Click"
                         Content="Clear"
-                        Visibility="Hidden"
-                        Style="{DynamicResource CommonButtonStyle}" Click="btnClearInkCanvas_Click" Margin="0,0,0,7"/>
+                        Style="{DynamicResource CommonButtonStyle}"
+                        Visibility="Hidden" />
                     <Grid
                         Width="200"
                         HorizontalAlignment="Center"

@@ -411,7 +411,6 @@
                                             x:Name="inkSign"
                                             Width="400"
                                             Height="200"
-                                            Background="White"
                                             IsEnabled="False"
                                             StrokeCollected="inkSign_StrokeCollected"
                                             Visibility="Hidden" />

@@ -298,27 +298,51 @@ namespace SPTC_APP.View
                 pbSignOpen.IsIndeterminate = true;
                 imgSignPic.Visibility = Visibility.Collapsed;
                 inkSign.Visibility = Visibility.Visible;
-                btnStartPad.Content = "Save Signature";
+                btnStartPad.Content = "Cancel";
                 inkSign.IsEnabled = true;
                 isSignPadRunning = true;
                 hasSign = false;
-            } else
+            }
+            else
             {
-                pbSignOpen.IsIndeterminate = false;
-                pbSignOpen.Value = 100;
-                imgSignPic.Visibility = Visibility.Visible;
-                inkSign.Background = Brushes.Transparent;
-                RenderTargetBitmap rtb = new RenderTargetBitmap((int)inkSign.ActualWidth, (int)inkSign.ActualHeight, 96, 96, PixelFormats.Default);
-                rtb.Render(inkSign);
 
-                imgSignPic.Source = rtb;
-                inkSign.Visibility = Visibility.Collapsed;
-                isSignPadRunning = false;
-                inkSign.IsEnabled = false;
-                inkSign.Strokes.Clear();
-                btnStartPad.Content = "Start Pad";
-                hasSign = true;
-                inkSign.Background = Brushes.White;
+                if (hasInkBeenAdded)
+                {
+                    pbSignOpen.IsIndeterminate = false;
+                    pbSignOpen.Value = 100;
+
+                    imgSignPic.Visibility = Visibility.Visible;
+                    inkSign.Background = Brushes.Transparent;
+                    RenderTargetBitmap rtb = new RenderTargetBitmap((int)inkSign.ActualWidth, (int)inkSign.ActualHeight, 96, 96, PixelFormats.Default);
+                    rtb.Render(inkSign);
+
+                    imgSignPic.Source = rtb;
+                    inkSign.Visibility = Visibility.Collapsed;
+                    isSignPadRunning = false;
+                    inkSign.IsEnabled = false;
+                    inkSign.Strokes.Clear();
+                    inkSign.Background = Brushes.White;
+
+
+                    hasInkBeenAdded = false;
+                    btnStartPad.Content = "Start Pad";
+                    btnClearInkCanvas.FadeOut(0.2);
+                    hasSign = true;
+                } else
+                {
+                    pbSignOpen.IsIndeterminate = true;
+                    pbSignOpen.Visibility = Visibility.Hidden;
+
+                    inkSign.Visibility = Visibility.Hidden;
+                    imgSignPic.Visibility = Visibility.Visible;
+                    imgSignPic.Source = null;
+                    isSignPadRunning = false;
+                    inkSign.IsEnabled = false;
+                    inkSign.Strokes.Clear();
+                    btnStartPad.Content = "Start Pad";
+                    hasSign = false;
+                }
+                
             }
         }
 
@@ -406,6 +430,14 @@ namespace SPTC_APP.View
                 imgIDPic.Source = null;
             }
 
+            if (signPadWarning)
+            {
+                isSignPadRunning = false;
+                imgSignPic.Source = null;
+                inkSign.Visibility = Visibility.Hidden;
+                btnStartPad.Content = "Start Pad";
+            }
+
             if (cameraWarning || signPadWarning)
             {
                 warn = (cameraWarning ? "Camera" : "") + (cameraWarning && signPadWarning ? " and " : "") + (signPadWarning ? "Sign Pad" : "");
@@ -422,6 +454,7 @@ namespace SPTC_APP.View
                         BtnStartCam_Click(btnStartCam, e);
                         return false;
                     }
+
                     return false;
                 }
             }
@@ -455,7 +488,7 @@ namespace SPTC_APP.View
                         }
                         if (hasSign)
                         {
-                            sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign  -{tboxFn.Text}");
+                            sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign - {tboxFn.Text}");
                         }
                         else
                         {
@@ -505,7 +538,7 @@ namespace SPTC_APP.View
                         }
                         if (hasSign)
                         {
-                            sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign  -{tboxFn.Text}");
+                            sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign - {tboxFn.Text}");
                         }
                         else
                         {
@@ -619,6 +652,7 @@ namespace SPTC_APP.View
             {
                 hasInkBeenAdded = true;
                 btnClearInkCanvas.FadeIn(0.2);
+                btnStartPad.Content = "Save Signature";
             }
         }
 
@@ -626,6 +660,7 @@ namespace SPTC_APP.View
         {
             btnClearInkCanvas.FadeOut(0.2);
             inkSign.Strokes.Clear();
+            btnStartPad.Content = "Cancel";
             hasInkBeenAdded = false;
         }
     }

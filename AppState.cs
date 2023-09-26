@@ -38,7 +38,7 @@ namespace SPTC_APP
 
         //Toggle on defore deploying
         public static bool isDeployment = false;
-        public static bool isDeployment_IDGeneration = true;
+        public static bool isDeployment_IDGeneration = false;
 
         public static Window mainwindow = null;
 

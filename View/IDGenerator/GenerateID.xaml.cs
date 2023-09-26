@@ -309,6 +309,57 @@ namespace SPTC_APP.View
                 }
                 
             }*/ //UNDER MAINTENANCE
+
+            /* // NEW WAY OF GETTING THE SIGNTURE, this code clips out any whitespace outside of Rect of the actual signature writing
+            inkCanvas.Background = Brushes.Transparent;
+
+            // Create a new StrokeCollection to store only the signature strokes
+            StrokeCollection signatureStrokes = new StrokeCollection();
+
+            // Iterate through each stroke in the inkCanvas
+            foreach (Stroke stroke in inkCanvas.Strokes)
+            {
+                // Check if the stroke intersects with the bounds of the signature area
+                if (stroke.GetBounds().IntersectsWith(new Rect(0, 0, inkCanvas.ActualWidth, inkCanvas.ActualHeight)))
+                {
+                    // Add the stroke to the signatureStrokes collection
+                    signatureStrokes.Add(stroke);
+                }
+            }
+
+            // Create a new inkCanvas to render only the signature strokes
+            InkCanvas signatureCanvas = new InkCanvas();
+            signatureCanvas.Strokes = signatureStrokes;
+
+            // Get the bounds of the signature strokes
+            Rect signatureBounds = signatureCanvas.Strokes.GetBounds();
+
+            // Check if the signature bounds have a non-zero width and height
+            if (signatureBounds.Width > 0 && signatureBounds.Height > 0)
+            {
+                // Create a new inkCanvas with the size of the signature bounds
+                InkCanvas croppedCanvas = new InkCanvas();
+                croppedCanvas.Background = Brushes.Transparent;
+                croppedCanvas.Width = signatureBounds.Width;
+                croppedCanvas.Height = signatureBounds.Height;
+
+                // Translate the signature strokes to fit within the cropped canvas
+                Matrix translationMatrix = new Matrix();
+                translationMatrix.Translate(-signatureBounds.Left, -signatureBounds.Top);
+                signatureCanvas.Strokes.Transform(translationMatrix, false);
+
+                // Copy the signature strokes to the cropped canvas
+                foreach (Stroke stroke in signatureCanvas.Strokes)
+                {
+                    croppedCanvas.Strokes.Add(stroke.Clone());
+                }
+
+                // Render the cropped canvas to a RenderTargetBitmap
+                RenderTargetBitmap rtb = new RenderTargetBitmap((int)croppedCanvas.Width, (int)croppedCanvas.Height, 96, 96, PixelFormats.Default);
+                rtb.Render(croppedCanvas);
+                imgSignPic.Source = rtb;
+            }
+            */
         }
         private void btnBrowseIDPic_Click(object sender, RoutedEventArgs e)
         {

@@ -279,7 +279,8 @@ namespace SPTC_APP.Objects
 
         public ImageSource GetSource()
         {
-            if (picture == null || picture.Length == 0)
+
+            if (picture == null)
                 return null;
 
             BitmapImage image = new BitmapImage();

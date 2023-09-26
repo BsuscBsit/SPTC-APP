@@ -27,6 +27,7 @@ namespace SPTC_APP.View
             InitializeComponent();
             EventLogger.Post("VIEW :: TEST Window");
             tabControl.SelectionChanged += TabControl_SelectionChanged;
+            imgSignatureo.Source = AppState.FetchChairmanSign();
         }
 
         //Test for VideoCamera
@@ -297,27 +298,79 @@ namespace SPTC_APP.View
 
         private void btnSaveSign_Click(object sender, RoutedEventArgs e)
         {
+            // Set the background of the inkCanvas to transparent
             inkCanvas.Background = Brushes.Transparent;
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)inkCanvas.ActualWidth, (int)inkCanvas.ActualHeight, 96, 96, PixelFormats.Default);
-            rtb.Render(inkCanvas);
 
-            BitmapEncoder encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(rtb));
-            byte[] signatureBytes = null;
-            using (MemoryStream stream = new MemoryStream())
+            // Create a new StrokeCollection to store only the signature strokes
+            StrokeCollection signatureStrokes = new StrokeCollection();
+
+            // Iterate through each stroke in the inkCanvas
+            foreach (Stroke stroke in inkCanvas.Strokes)
             {
-                encoder.Save(stream);
-                signatureBytes = stream.ToArray();
+                // Check if the stroke intersects with the bounds of the signature area
+                if (stroke.GetBounds().IntersectsWith(new Rect(0, 0, inkCanvas.ActualWidth, inkCanvas.ActualHeight)))
+                {
+                    // Add the stroke to the signatureStrokes collection
+                    signatureStrokes.Add(stroke);
+                }
             }
 
-            Image image = new Objects.Image();
-            image.name = "Signature - CurrentChairman";
-            image.picture = signatureBytes;
-            image.Save();
-            inkCanvas.Background = Brushes.White;
-            inkCanvas.Strokes.Clear();
+            // Create a new inkCanvas to render only the signature strokes
+            InkCanvas signatureCanvas = new InkCanvas();
+            signatureCanvas.Strokes = signatureStrokes;
 
+            // Get the bounds of the signature strokes
+            Rect signatureBounds = signatureCanvas.Strokes.GetBounds();
+
+            // Check if the signature bounds have a non-zero width and height
+            if (signatureBounds.Width > 0 && signatureBounds.Height > 0)
+            {
+                // Create a new inkCanvas with the size of the signature bounds
+                InkCanvas croppedCanvas = new InkCanvas();
+                croppedCanvas.Background = Brushes.Transparent;
+                croppedCanvas.Width = signatureBounds.Width;
+                croppedCanvas.Height = signatureBounds.Height;
+
+                // Translate the signature strokes to fit within the cropped canvas
+                Matrix translationMatrix = new Matrix();
+                translationMatrix.Translate(-signatureBounds.Left, -signatureBounds.Top);
+                signatureCanvas.Strokes.Transform(translationMatrix, false);
+
+                // Copy the signature strokes to the cropped canvas
+                foreach (Stroke stroke in signatureCanvas.Strokes)
+                {
+                    croppedCanvas.Strokes.Add(stroke.Clone());
+                }
+
+                // Render the cropped canvas to a RenderTargetBitmap
+                RenderTargetBitmap rtb = new RenderTargetBitmap((int)croppedCanvas.Width, (int)croppedCanvas.Height, 96, 96, PixelFormats.Default);
+                rtb.Render(croppedCanvas);
+
+                // Create a BitmapEncoder and save the RenderTargetBitmap as an image
+                BitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(rtb));
+                byte[] signatureBytes;
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    encoder.Save(stream);
+                    signatureBytes = stream.ToArray();
+                }
+
+                // Save the signature image or perform any other desired operations
+                Image image = new Objects.Image();
+                image.name = "Signature - CurrentChairman";
+                image.picture = signatureBytes;
+                image.Save();
+            }
+
+            // Reset the inkCanvas by clearing the strokes and setting the background to white
+            inkCanvas.Strokes.Clear();
+            inkCanvas.Background = Brushes.White;
+
+            imgSignatureo.Source = AppState.FetchChairmanSign();
         }
+
+
 
         //PLANS ON EDITING FIELDS
         //first create a class that modifies

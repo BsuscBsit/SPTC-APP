@@ -25,23 +25,27 @@ namespace SPTC_APP.View
     public partial class GenerateID : Window
     {
         BitmapSource lastCapturedImage = null;
+        private FilterInfoCollection videoDevices;
+        private VideoCaptureDevice videoSource;
 
         bool hasPhoto = false;
         bool hasSign = false;
 
-
         private bool isCameraRunning;
         private bool isSignPadRunning;
+
+
 
         bool isDriver = true;
         private Franchise franchise;
         bool isUpdate = false;
 
-        private FilterInfoCollection videoDevices;
-        private VideoCaptureDevice videoSource;
+
 
         private bool hasInkBeenAdded = false;
 
+
+        //CONSTRUCTORS
         public GenerateID()
         {
             InitializeComponent();
@@ -64,7 +68,6 @@ namespace SPTC_APP.View
             if(!AppState.isDeployment && !AppState.isDeployment_IDGeneration) GenerateDummy();
             inkSign.StrokeCollected += inkSign_StrokeCollected;
         }
-
         public GenerateID(Franchise franchise, bool isDriver)
         {
             InitializeComponent();
@@ -175,12 +178,21 @@ namespace SPTC_APP.View
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
         }
+
+        //WINDOW EVENTS
+        private async void Window_ContentRendered(object sender, EventArgs e)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(0.2));
+            tboxFn.Focus();
+        }
         protected override void OnClosing(CancelEventArgs e)
         {
             this.StopCamera();
             base.OnClosing(e);
         }
 
+
+        //CLICK EVENTS
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.StopCamera();
@@ -188,12 +200,6 @@ namespace SPTC_APP.View
             print.Show();
             this.Close();
         }
-
-        private void ProgressBar_Loaded(object sender, RoutedEventArgs e)
-        {
-            pbCameraOpen.Value = pbCameraOpen.Minimum;
-        }
-
         private void MySwitch_Back(object sender, RoutedEventArgs e)
         {
                 // Switch is in the True state
@@ -201,7 +207,6 @@ namespace SPTC_APP.View
                 drvOrOprt.Content = "Create this ID for\nOperator.";
             
         }
-
         private void MySwitch_Front(object sender, RoutedEventArgs e)
         {
                 // Switch is in the False state
@@ -209,46 +214,6 @@ namespace SPTC_APP.View
                 drvOrOprt.Content = "Create this ID for\nDriver.";
             
         }
-
-        private void videoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            isCameraRunning = true;
-            if (isCameraRunning)
-            {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    // This event is called for each new camera frame
-                    // Convert the frame to a BitmapSource and display it
-                    System.Drawing.Bitmap frame = (System.Drawing.Bitmap)eventArgs.Frame.Clone();
-
-                    // Convert to BitmapSource
-                    var hBitmap = frame.GetHbitmap();
-                    BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
-                        hBitmap,
-                        IntPtr.Zero,
-                        Int32Rect.Empty,
-                        BitmapSizeOptions.FromEmptyOptions());
-
-                    // Display the captured frame in imgIDPic
-                    imgIDPic.Source = bitmapSource;
-                    lastCapturedImage = bitmapSource;
-
-                    // Dispose of the frame to release resources
-                    frame.Dispose();
-
-                    // Freeze the BitmapSource to release its resources
-                    bitmapSource.Freeze();
-                    // Release the HBitmap
-                    DeleteObject(hBitmap);
-                });
-            }
-        }
-
-
-        // Define the DeleteObject method to release HBitmap
-        [DllImport("gdi32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool DeleteObject(IntPtr hObject);
         private async void BtnStartCam_Click(object sender, RoutedEventArgs e)
         {
             if (videoSource != null)
@@ -289,9 +254,9 @@ namespace SPTC_APP.View
                 }
             }
         }
-
         private void btnStartPad_Click(object sender, RoutedEventArgs e)
         {
+            /*
             if (!isSignPadRunning)
             {
                 pbSignOpen.Visibility = Visibility.Visible;
@@ -343,37 +308,8 @@ namespace SPTC_APP.View
                     hasSign = false;
                 }
                 
-            }
+            }*/ //UNDER MAINTENANCE
         }
-
-        private void OnStylusDown(object sender, StylusDownEventArgs e)
-        {
-            inkSign.CaptureStylus();
-
-            DrawingAttributes drawingAttributes = new DrawingAttributes
-            {
-                Color = Colors.Black // You can set other properties like color, etc.
-            };
-
-            StylusPoint stylusPoint = e.GetStylusPoints(inkSign)[0];
-            drawingAttributes.Width = stylusPoint.PressureFactor * 10; // Adjust as needed
-            drawingAttributes.Height = stylusPoint.PressureFactor * 10; // Adjust as needed
-
-            inkSign.DefaultDrawingAttributes = drawingAttributes;
-        }
-
-        private void OnStylusMove(object sender, StylusEventArgs e)
-        {
-            StylusPointCollection points = e.GetStylusPoints(inkSign);
-            Stroke newStroke = new Stroke(points);
-            inkSign.Strokes.Add(newStroke);
-        }
-
-        private void OnStylusUp(object sender, StylusEventArgs e)
-        {
-            inkSign.ReleaseStylusCapture();
-        }
-
         private void btnBrowseIDPic_Click(object sender, RoutedEventArgs e)
         {
             this.StopCamera();
@@ -395,7 +331,6 @@ namespace SPTC_APP.View
                 hasPhoto = true;
             }
         }
-
         private void btnBrowseSignPic_Click(object sender, RoutedEventArgs e)
         {
             pbSignOpen.Visibility = Visibility.Visible;
@@ -417,7 +352,6 @@ namespace SPTC_APP.View
                 hasSign = true;
             }
         }
-       
         private bool Preview_WarnDone(RoutedEventArgs e)
         {
             string warn = "";
@@ -595,6 +529,8 @@ namespace SPTC_APP.View
             }
         }
 
+
+        //CAMERA EVENTS
         public void StopCamera()
         {
             isCameraRunning = false; // Set the flag to indicate camera stopping
@@ -621,8 +557,47 @@ namespace SPTC_APP.View
                 ControlWindow.Show("Camera Error", e.Message, Icons.ERROR);
             }
         }
+        private void videoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            isCameraRunning = true;
+            if (isCameraRunning)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    // This event is called for each new camera frame
+                    // Convert the frame to a BitmapSource and display it
+                    System.Drawing.Bitmap frame = (System.Drawing.Bitmap)eventArgs.Frame.Clone();
+
+                    // Convert to BitmapSource
+                    var hBitmap = frame.GetHbitmap();
+                    BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
+                        hBitmap,
+                        IntPtr.Zero,
+                        Int32Rect.Empty,
+                        BitmapSizeOptions.FromEmptyOptions());
+
+                    // Display the captured frame in imgIDPic
+                    imgIDPic.Source = bitmapSource;
+                    lastCapturedImage = bitmapSource;
+
+                    // Dispose of the frame to release resources
+                    frame.Dispose();
+
+                    // Freeze the BitmapSource to release its resources
+                    bitmapSource.Freeze();
+                    // Release the HBitmap
+                    DeleteObject(hBitmap);
+                });
+            }
+        }
 
 
+
+        //UNIQUE METHODS
+        private void ProgressBar_Loaded(object sender, RoutedEventArgs e)
+        {
+            pbCameraOpen.Value = pbCameraOpen.Minimum;
+        }
         private void GenerateDummy()
         {
             tboxFn.Text = "First Name";
@@ -636,11 +611,13 @@ namespace SPTC_APP.View
 
         }
 
-        private async void Window_ContentRendered(object sender, EventArgs e)
-        {
-            await Task.Delay(TimeSpan.FromSeconds(0.2));
-            tboxFn.Focus();
-        }
+        // Define the DeleteObject method to release HBitmap
+        [DllImport("gdi32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DeleteObject(IntPtr hObject);
+
+
+        //INPUT EVENTS
         private void TextBoxGotFocus_Yey(object sender, RoutedEventArgs e)
         {
             if (sender is TextBox textBox && !string.IsNullOrEmpty(textBox.Text))
@@ -649,6 +626,8 @@ namespace SPTC_APP.View
             }
         }
 
+
+        //SIGNATURE EVENTS
         private void inkSign_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
         {
             if (!hasInkBeenAdded)
@@ -658,7 +637,6 @@ namespace SPTC_APP.View
                 btnStartPad.Content = "Save Signature";
             }
         }
-
         private void btnClearInkCanvas_Click(object sender, RoutedEventArgs e)
         {
             btnClearInkCanvas.FadeOut(0.2);
@@ -666,6 +644,39 @@ namespace SPTC_APP.View
             btnStartPad.Content = "Cancel";
             hasInkBeenAdded = false;
         }
+
+
+
+
+        //STYLUS EVENTS 
+        private void OnStylusDown(object sender, StylusDownEventArgs e)
+        {
+            inkSign.CaptureStylus();
+
+            DrawingAttributes drawingAttributes = new DrawingAttributes
+            {
+                Color = Colors.Black // You can set other properties like color, etc.
+            };
+
+            StylusPoint stylusPoint = e.GetStylusPoints(inkSign)[0];
+            drawingAttributes.Width = stylusPoint.PressureFactor * 10; // Adjust as needed
+            drawingAttributes.Height = stylusPoint.PressureFactor * 10; // Adjust as needed
+
+            inkSign.DefaultDrawingAttributes = drawingAttributes;
+        }
+
+        private void OnStylusMove(object sender, StylusEventArgs e)
+        {
+            StylusPointCollection points = e.GetStylusPoints(inkSign);
+            Stroke newStroke = new Stroke(points);
+            inkSign.Strokes.Add(newStroke);
+        }
+
+        private void OnStylusUp(object sender, StylusEventArgs e)
+        {
+            inkSign.ReleaseStylusCapture();
+        }
+
     }
 
 }

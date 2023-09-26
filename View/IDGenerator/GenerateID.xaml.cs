@@ -88,7 +88,7 @@ namespace SPTC_APP.View
                     var drv = franchise.Driver;
                     if(drv.name != null)
                     {
-                        cbGender.SelectedIndex = ((drv.name.prefix == "Mrs.") ? 1 : 0);
+                        cbGender.SelectedIndex = ((drv.name.sex)?1:0);
                         tboxFn.Text = drv.name.firstname;
                         tboxMn.Text = drv.name.middlename;
                         tboxLn.Text = drv.name.lastname;
@@ -130,7 +130,7 @@ namespace SPTC_APP.View
                     var drv = franchise.Operator;
                     if (drv.name != null)
                     {
-                        cbGender.SelectedIndex = ((drv.name.prefix == "Mrs.") ? 1 : 0);
+                        cbGender.SelectedIndex = ((drv.name.sex) ? 1 : 0);
                         tboxFn.Text = drv.name.firstname;
                         tboxMn.Text = drv.name.middlename;
                         tboxLn.Text = drv.name.lastname;
@@ -435,14 +435,19 @@ namespace SPTC_APP.View
                 isSignPadRunning = false;
                 imgSignPic.Source = null;
                 inkSign.Visibility = Visibility.Hidden;
+                pbSignOpen.Visibility = Visibility.Hidden;
                 btnStartPad.Content = "Start Pad";
+                
+                inkSign.Strokes.Clear();
+                btnClearInkCanvas.FadeOut(0.2);
+                hasInkBeenAdded = false;
             }
 
             if (cameraWarning || signPadWarning)
             {
                 warn = (cameraWarning ? "Camera" : "") + (cameraWarning && signPadWarning ? " and " : "") + (signPadWarning ? "Sign Pad" : "");
                 //warn += " has been initiated but no " + (warn.Length == 6 ? "image was" : "") + " captured. Are you certain you want to proceed?";
-                warn = !string.IsNullOrEmpty(warn) ? (warn + " has been initiated but, no" + (warn.Length < 7 ? " image was" : (warn.Length < 10 ? " input was" : " inputs were")) + " captured. Are you certain you want to proceed?") : warn;
+                warn = !string.IsNullOrEmpty(warn) ? (warn + " has been initiated but, no" + (warn.Length < 7 ? " image was" : (warn.Length < 10 ? " input was" : " inputs were")) + " captured. \nAre you certain you want to proceed?") : warn;
                 if(ControlWindow.ShowDialog("Continue?", warn, Icons.NOTIFY))
                 {
                     return true;
@@ -495,12 +500,12 @@ namespace SPTC_APP.View
                             imgSignPic.Source = null;
                         }
 
-                        string prefix = (cbGender.SelectedIndex == 0) ? "Mr." : "Mrs.";
+                        bool prefix = (cbGender.SelectedIndex == 0) ? false : true;
                         if (isUpdate)
                         {
                             @obj = franchise.Driver;
                             Name name = @obj.name;
-                            name.prefix = prefix;
+                            name.sex = prefix;
                             name.firstname = tboxFn.Text;
                             name.middlename = tboxMn.Text;
                             name.lastname = tboxLn.Text;
@@ -544,12 +549,12 @@ namespace SPTC_APP.View
                         {
                             imgSignPic.Source = null;
                         }
-                        string prefix = (cbGender.SelectedIndex == 0) ? "Mr." : "Mrs.";
+                        bool prefix = (cbGender.SelectedIndex == 0) ? false : true;
                         if (isUpdate)
                         {
                             @obj = franchise.Operator;
                             Name name = @obj.name;
-                            name.prefix = prefix;
+                            name.sex = prefix;
                             name.firstname = tboxFn.Text;
                             name.middlename = tboxMn.Text;
                             name.lastname = tboxLn.Text;

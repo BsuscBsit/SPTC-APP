@@ -39,7 +39,7 @@ namespace SPTC_APP.Objects
     public class Name
     {
         public int id { get; private set; }
-        public string prefix;
+        public bool sex;
         public string firstname;
         public string middlename;
         public string lastname;
@@ -67,9 +67,9 @@ namespace SPTC_APP.Objects
             name = new Upsert(Table.NAME, -1);
         }
 
-        public Name(string prefix, string firstname, string middlename, string lastname, string suffix)
+        public Name(bool prefix, string firstname, string middlename, string lastname, string suffix)
         {
-            this.prefix = prefix;
+            this.sex = prefix;
             this.firstname = firstname;
             this.middlename = middlename;
             this.lastname = lastname;
@@ -81,7 +81,7 @@ namespace SPTC_APP.Objects
         {
             name = null;
             this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
-            this.prefix = Retrieve.GetValueOrDefault<string>(reader, Field.PREFIX);
+            this.sex = Retrieve.GetValueOrDefault<bool>(reader, Field.PREFIX);
             this.firstname = Retrieve.GetValueOrDefault<string>(reader, Field.FIRSTNAME);
             this.middlename = Retrieve.GetValueOrDefault<string>(reader, Field.MIDDLENAME);
             this.lastname = Retrieve.GetValueOrDefault<string>(reader, Field.LASTNAME);
@@ -94,7 +94,7 @@ namespace SPTC_APP.Objects
             {
                 name = new Upsert(Table.NAME, id);
             }
-            name.Insert("prefix", prefix);
+            name.Insert("sex", sex);
             name.Insert("first_name", firstname);
             name.Insert("middle_name", middlename);
             name.Insert("last_name", lastname);

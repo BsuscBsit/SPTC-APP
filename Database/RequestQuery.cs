@@ -8,7 +8,7 @@ namespace SPTC_APP.Database
 {
     public static class RequestQuery
     {
-        /* public static string LOGIN_EMPLOYEE = @"SELECT e.start_date, e.end_date, e.date_of_birth, e.contact_no, n.prefix, n.first_name, n.middle_name, n.last_name, n.suffix, a.house_no, a.street_name, a.barangay_subdivision, a.city_municipality, a.postal_code, a.province, a.country, p.title, p.can_create, p.can_edit, p.can_delete FROM tbl_employee e LEFT JOIN tbl_name n ON n.name_id = e.name_id LEFT JOIN tbl_address a ON a.address_id = e.address_id LEFT JOIN tbl_position p ON p.position_id = e.position_id WHERE p.title = ? AND e.password = ? AND e.isDeleted = 0";*/
+        /* public static string LOGIN_EMPLOYEE = @"SELECT e.start_date, e.end_date, e.date_of_birth, e.contact_no, n.sex, n.first_name, n.middle_name, n.last_name, n.suffix, a.house_no, a.street_name, a.barangay_subdivision, a.city_municipality, a.postal_code, a.province, a.country, p.title, p.can_create, p.can_edit, p.can_delete FROM tbl_employee e LEFT JOIN tbl_name n ON n.name_id = e.name_id LEFT JOIN tbl_address a ON a.address_id = e.address_id LEFT JOIN tbl_position p ON p.position_id = e.position_id WHERE p.title = ? AND e.password = ? AND e.isDeleted = 0";*/
 
         public static string LOGIN_EMPLOYEE = "SELECT * FROM tbl_employee e LEFT JOIN tbl_position p ON p.id = e.position_id WHERE p.title = ? AND e.password = ? AND e.isDeleted = 0";
 
@@ -133,7 +133,7 @@ namespace SPTC_APP.Database
         public static string TIN_NUMBER = "tin_number";
 
         // Name
-        public static string PREFIX = "prefix";
+        public static string PREFIX = "sex";
         public static string FIRSTNAME = "first_name";
         public static string MIDDLENAME = "middle_name";
         public static string LASTNAME = "last_name";

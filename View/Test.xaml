@@ -35,6 +35,7 @@
 
                         <Image x:Name="imgSignatureo"/>
                     </Viewbox>
+                    <Button Content="New SignPad Window" HorizontalAlignment="Left" Margin="69,143,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Test Login">

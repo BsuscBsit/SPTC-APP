@@ -307,6 +307,77 @@
 
             </Grid>
             <Canvas
+                x:Name="canvasSaveAnID"
+                Grid.Column="0"
+                Width="126"
+                Height="47"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="Hidden">
+                <Grid>
+                    <Border
+                        Padding="21,10,14,10"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="White"
+                        BorderBrush="Gray"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="15"
+                                Opacity="0"
+                                ShadowDepth="5"
+                                Color="Gray" />
+                        </Border.Effect>
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Opacity" Value="0.5" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetProperty="Opacity"
+                                                        To="1.0"
+                                                        Duration="0:0:0.2" />
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetProperty="Effect.Opacity"
+                                                        To="0.7"
+                                                        Duration="0:0:0.2" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetProperty="Opacity"
+                                                        To="0.5"
+                                                        Duration="0:0:0.3" />
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetProperty="Effect.Opacity"
+                                                        To="0"
+                                                        Duration="0:0:0.2" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Button
+                            x:Name="btnSaveAnID"
+                            Width="89"
+                            Height="25"
+                            Content="Save ID"
+                            Style="{DynamicResource CommonButtonStyle}" />
+                    </Border>
+                </Grid>
+            </Canvas>
+            <Canvas
+                x:Name="canvasPageCtrl"
                 Grid.Column="0"
                 Width="181"
                 Height="49"

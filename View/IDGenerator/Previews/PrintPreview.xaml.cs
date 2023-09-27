@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using SPTC_APP.Objects;
 using SPTC_APP.View.IDGenerator.Hidden;
+using SPTC_APP.View.Styling;
 using Image = System.Windows.Controls.Image;
 
 namespace SPTC_APP.View
@@ -506,6 +507,11 @@ namespace SPTC_APP.View
         private void ResetZoom_Click(object sender, RoutedEventArgs e)
         {
             isReset = true;
+            if(canvasSaveAnID.Visibility == Visibility.Visible)
+            {
+                canvasSaveAnID.FadeOut(1);
+                canvasPageCtrl.FadeIn(1);
+            }
             UpdateZoom(1.0);
             CenterOffset();
         }
@@ -528,6 +534,8 @@ namespace SPTC_APP.View
         {
             if (zoomScale == 1)
             {
+                canvasPageCtrl.FadeOut(1);
+                canvasSaveAnID.FadeIn(1);
                 int tho = 0;
                 int tvo = 0;
                 bool pan = false;

@@ -169,6 +169,15 @@ namespace SPTC_APP.Database
 
                                 id = GetExistingRecordId(uniqueAttributes);
                             }
+                            else if(tableName == Table.IDHISTORY)
+                            {
+                                Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
+                                {
+                                    { Field.NAME_ID, fieldValues.TryGetValue(Field.NAME_ID, out var temp) ? temp : -1 },
+                                    { Field.OWNER_ID, fieldValues.TryGetValue(Field.OWNER_ID, out temp) ? temp : -1 },
+                                    { Field.ENTITY_TYPE, fieldValues.TryGetValue(Field.ENTITY_TYPE, out temp) ? temp : "" },
+                                };
+                            }
 
                             else
                             {

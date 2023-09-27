@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2023 at 04:31 AM
+-- Generation Time: Sep 27, 2023 at 05:06 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -92,7 +92,7 @@ INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `sign_id`, `image_id`
 (2, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 2, '2023-06-26', NULL, NULL, NULL, 0),
 (3, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, '2023-06-26', NULL, NULL, NULL, 0),
 (4, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, '2023-06-26', NULL, NULL, NULL, 0),
-(5, -1, -1, 0, -1, NULL, 5, '2023-09-27', '0001-01-01', '0001-01-01', NULL, 0);
+(5, -1, -1, 210, -1, NULL, 5, '2023-09-27', '0001-01-01', '0001-01-01', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -347,7 +347,8 @@ ALTER TABLE `tbl_franchise`
 -- Indexes for table `tbl_id_history`
 --
 ALTER TABLE `tbl_id_history`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `owner_id` (`owner_id`,`entity_type`,`name_id`);
 
 --
 -- Indexes for table `tbl_image`

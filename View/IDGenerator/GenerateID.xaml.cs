@@ -15,6 +15,7 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using Microsoft.Win32;
 using SPTC_APP.Objects;
+using SPTC_APP.View.IDGenerator.Extra;
 using SPTC_APP.View.Styling;
 
 namespace SPTC_APP.View
@@ -256,6 +257,8 @@ namespace SPTC_APP.View
         }
         private void btnStartPad_Click(object sender, RoutedEventArgs e)
         {
+            SignPad sp = new SignPad();
+            sp.Show();
             /*
             if (!isSignPadRunning)
             {

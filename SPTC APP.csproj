@@ -235,6 +235,9 @@
     <Compile Include="View\Controls\DialogHelper.cs" />
     <Compile Include="View\Controls\OutlinedText.cs" />
     <Compile Include="View\Controls\Scaler.cs" />
+    <Compile Include="View\IDGenerator\Extra\SignPad.xaml.cs">
+      <DependentUpon>SignPad.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\IDGenerator\GenerateID.xaml.cs">
       <DependentUpon>GenerateID.xaml</DependentUpon>
     </Compile>
@@ -299,6 +302,10 @@
     <Page Include="View\Controls\ControlWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\IDGenerator\Extra\SignPad.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\IDGenerator\GenerateID.xaml">
       <Generator>MSBuild:Compile</Generator>

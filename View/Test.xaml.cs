@@ -17,6 +17,7 @@ using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
 using SPTC_APP.View.Pages;
 using Image = SPTC_APP.Objects.Image;
+using SPTC_APP.View.IDGenerator.Extra;
 
 namespace SPTC_APP.View
 {
@@ -391,6 +392,12 @@ namespace SPTC_APP.View
             }
 
             
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SignPad sp = new SignPad();
+            sp.Show();
         }
 
 

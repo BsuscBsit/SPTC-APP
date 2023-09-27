@@ -25,6 +25,7 @@ namespace SPTC_APP.View.IDGenerator.Extra
     public partial class SignPad : Window
     {
         bool isMaximized = true;
+        bool noticeHasChanged = false;
         private Rect? actualDimensions;
         private const double windowWidth = 640;
         private const double windowHeight = 390.4;
@@ -147,12 +148,21 @@ namespace SPTC_APP.View.IDGenerator.Extra
                     this.Close();
                 }
             }
+            else
+            {
+                textblockNotice.FadeIn(0.2);
+                textblockNotice.Text = "Please draw your signature before saving.";
+                noticeHasChanged = true;
+            }
         }
 
         private void btnClearStrokes_Click(object sender, RoutedEventArgs e)
         {
             inkSign.Strokes.Clear();
-
+            if (noticeHasChanged)
+            {
+                textblockNotice.Text = "Use your stylus to draw your signature inside the box. Keep your signature within the provided area.";
+            }
             textblockNotice.FadeIn(0.2);
         }
 
@@ -164,13 +174,13 @@ namespace SPTC_APP.View.IDGenerator.Extra
 
         private void canvasButtons_MouseEnter(object sender, MouseEventArgs e)
         {
-            canvasButtons.AnimateMargin(new Thickness(0, 5, 0, 0), 0.3);
+            borderOfButtons.AnimateMargin(new Thickness(0, 5, 0, 0), 0.3);
             stackpanel.AnimateMargin(new Thickness(0,0,0,0), 0.5);
         }
 
         private void canvasButtons_MouseLeave(object sender, MouseEventArgs e)
         {
-            canvasButtons.AnimateMargin(new Thickness(0, -35, 0, 0), 0.3);
+            borderOfButtons.AnimateMargin(new Thickness(0, -35, 0, 0), 0.3);
             stackpanel.AnimateMargin(new Thickness(0,0,0,30), 0.5);
         }
 

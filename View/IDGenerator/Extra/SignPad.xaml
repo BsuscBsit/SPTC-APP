@@ -18,18 +18,12 @@
     <!--  Also change the dimensions in Constructor.  -->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border
-            x:Name="borderTopBar"
-            Grid.Row="0"
-            Height="40"
-            Margin="0.7,0.5,0.7,0"
-            Background="{StaticResource BrushYellow}"/>
         <Grid Grid.Row="1">
             <Border
-                Margin="25"
+                Margin="32,32,32,32"
                 Padding="5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -37,104 +31,199 @@
                 CornerRadius="7">
                 <!--  To enlarge, adjust the Window instead.  -->
                 <Grid>
-                    <Viewbox>
-                        <!--  Set the initial size of the InkCanvas to reflect the actual size needed.  -->
-                        <InkCanvas x:Name="inkSign" Width="200" Height="100" />
-                    </Viewbox>
-                    <Canvas
-                        x:Name="canvasButtons"
-                        Width="563"
-                        Height="61.9"
-                        Margin="0,0,0,10"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom">
-                        <Border
-                            Padding="21,10,14,10"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="White"
-                            BorderBrush="Gray"
-                            BorderThickness="1"
-                            CornerRadius="10">
-                            <Border.Effect>
-                                <DropShadowEffect
-                                    BlurRadius="15"
-                                    Opacity="0"
-                                    ShadowDepth="5"
-                                    Color="Gray" />
-                            </Border.Effect>
-                            <Border.Style>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Trigger.EnterActions>
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation
-                                                            Storyboard.TargetProperty="Opacity"
-                                                            To="1.0"
-                                                            Duration="0:0:0.2" />
-                                                        <DoubleAnimation
-                                                            Storyboard.TargetProperty="Effect.Opacity"
-                                                            To="0.7"
-                                                            Duration="0:0:0.2" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </Trigger.EnterActions>
-                                            <Trigger.ExitActions>
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation
-                                                            Storyboard.TargetProperty="Opacity"
-                                                            To="0.5"
-                                                            Duration="0:0:0.3" />
-                                                        <DoubleAnimation
-                                                            Storyboard.TargetProperty="Effect.Opacity"
-                                                            To="0"
-                                                            Duration="0:0:0.2" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </Trigger.ExitActions>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <StackPanel
-                                Grid.Row="2"
+                    <Grid Margin="1,1,0,0">
+                        <Border Margin="35,35,35,35" BorderThickness="1">
+                            <Border.BorderBrush>
+                                <DrawingBrush
+                                    TileMode="Tile"
+                                    Viewport="0,0,30,30"
+                                    ViewportUnits="Absolute">
+                                    <DrawingBrush.Drawing>
+                                        <DrawingGroup>
+                                            <GeometryDrawing Brush="{StaticResource BrushBlack}">
+                                                <GeometryDrawing.Geometry>
+                                                    <GeometryGroup>
+                                                        <RectangleGeometry Rect="0,0,50,50" />
+                                                        <RectangleGeometry Rect="50,50,50,50" />
+                                                    </GeometryGroup>
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Border.BorderBrush>
+                        </Border>
+                        <Grid Margin="33,33,33,33">
+                            <Border
+                                Width="25"
+                                Height="25"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                BorderBrush="{StaticResource BrushBlack}"
+                                BorderThickness="7,7,0,0" />
+                            <Border
+                                Width="25"
+                                Height="25"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                BorderBrush="{StaticResource BrushBlack}"
+                                BorderThickness="0,7,7,0" />
+                            <Border
+                                Width="25"
+                                Height="25"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                BorderBrush="{StaticResource BrushBlack}"
+                                BorderThickness="7,0,0,7" />
+                            <Border
+                                Width="25"
+                                Height="25"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                BorderBrush="{StaticResource BrushBlack}"
+                                BorderThickness="0,0,7,7" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="100">
+                            <TextBlock x:Name="textblockNotice"
+                                FontFamily="Inter"
+                                FontSize="24"
+                                FontWeight="SemiBold"
+                                Width="456"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Orientation="Horizontal">
-                                <Button x:Name="btnSaveStroke"
-                                    Width="150"
-                                    HorizontalAlignment="Center"
-                                    Content="SAVE"
-                                    Style="{DynamicResource CommonButtonStyle}" Click="btnSaveStroke_Click" />
-                                <Button x:Name="btnClearStrokes"
-                                    Width="150"
-                                    Margin="10,0,10,0"
-                                    HorizontalAlignment="Center"
-                                    Content="CLEAR"
-                                    Style="{DynamicResource CommonButtonStyle}" Click="btnClearStrokes_Click" />
-                                <Button x:Name="btnCancel"
-                                    Width="150"
-                                    Margin="0,0,15,0"
-                                    HorizontalAlignment="Center"
-                                    Content="CANCEL"
-                                    Style="{DynamicResource CommonButtonStyle}" Click="btnCancel_Click" />
-                                <Button
-                                    x:Name="btnWindowResizer"
-                                    Width="40"
-                                    Height="40"
-                                    Click="btnWindowResizer_Click"
-                                    Style="{DynamicResource CommonButtonStyle}" />
-                            </StackPanel>
-                        </Border>
-                    </Canvas>
+                                Text="Use your stylus to draw your signature inside the box. Keep your signature within the provided area."
+                                TextWrapping="Wrap" TextAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                    <Viewbox>
+                        <!--  Set the initial size of the InkCanvas to reflect the actual size needed.  -->
+                        <InkCanvas
+                            x:Name="inkSign"
+                            Width="200"
+                            Height="100"
+                            Background="#B2FFFFFF" StrokeCollected="inkSign_StrokeCollected" />
+                    </Viewbox>
                 </Grid>
             </Border>
 
         </Grid>
+        <Canvas
+            x:Name="canvasButtons"
+            Width="458"
+            Height="95"
+            Margin="0,-35,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            MouseEnter="canvasButtons_MouseEnter"
+            MouseLeave="canvasButtons_MouseLeave">
+            <Border
+                x:Name="borderOfButtons"
+                Height="95"
+                Padding="21,10,14,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Background="White"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="10"
+                MouseEnter="canvasButtons_MouseEnter"
+                MouseLeave="canvasButtons_MouseLeave">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="15"
+                        Opacity="0"
+                        ShadowDepth="5"
+                        Color="Gray" />
+                </Border.Effect>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Opacity" Value="0.7" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="Opacity"
+                                                To="1.0"
+                                                Duration="0:0:0.2" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="Effect.Opacity"
+                                                To="0.7"
+                                                Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="Opacity"
+                                                To="0.5"
+                                                Duration="0:0:0.3" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="Effect.Opacity"
+                                                To="0"
+                                                Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <StackPanel
+                    x:Name="stackpanel"
+                    Grid.Row="2"
+                    Margin="0,0,0,26"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="btnSaveStroke"
+                        Width="115"
+                        HorizontalAlignment="Center"
+                        Click="btnSaveStroke_Click"
+                        Content="SAVE"
+                        Style="{DynamicResource CommonButtonStyle}" />
+                    <Button
+                        x:Name="btnClearStrokes"
+                        Width="115"
+                        Margin="10,0,10,0"
+                        HorizontalAlignment="Center"
+                        Click="btnClearStrokes_Click"
+                        Content="CLEAR"
+                        Style="{DynamicResource CommonButtonStyle}" />
+                    <Button
+                        x:Name="btnCancel"
+                        Width="115"
+                        Margin="0,0,15,0"
+                        HorizontalAlignment="Center"
+                        Click="btnCancel_Click"
+                        Content="CANCEL"
+                        Style="{DynamicResource CommonButtonStyle}" />
+                    <Button
+                        x:Name="btnWindowResizer"
+                        Width="40"
+                        Height="40"
+                        Click="btnWindowResizer_Click"
+                        Style="{DynamicResource CommonButtonStyle}" />
+                </StackPanel>
+            </Border>
+        </Canvas>
+        <Rectangle
+            Grid.Row="0"
+            Width="556"
+            Height="16"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Fill="{StaticResource BrushBlack}" />
+        <Border
+            x:Name="borderTopBar"
+            Grid.Row="0"
+            Height="40"
+            Margin="0.7,0.5,0.7,0"
+            Background="{StaticResource BrushYellow}" />
 
     </Grid>
 </Window>

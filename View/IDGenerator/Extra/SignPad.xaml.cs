@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using SPTC_APP.View.Styling;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -92,11 +94,31 @@ namespace SPTC_APP.View.IDGenerator.Extra
         private void btnClearStrokes_Click(object sender, RoutedEventArgs e)
         {
             inkSign.Strokes.Clear();
+
+            textblockNotice.FadeIn(0.2);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
+        private void canvasButtons_MouseEnter(object sender, MouseEventArgs e)
+        {
+            canvasButtons.AnimateMargin(new Thickness(0, 5, 0, 0), 0.3);
+            stackpanel.AnimateMargin(new Thickness(0,0,0,0), 0.5);
+        }
+
+        private void canvasButtons_MouseLeave(object sender, MouseEventArgs e)
+        {
+            canvasButtons.AnimateMargin(new Thickness(0, -35, 0, 0), 0.3);
+            stackpanel.AnimateMargin(new Thickness(0,0,0,30), 0.5);
+        }
+
+        private void inkSign_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
+        {
+            textblockNotice.FadeOut(0.2);
+        }
     }
+
 }

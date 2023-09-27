@@ -58,40 +58,40 @@ namespace SPTC_APP.Database
 
     public static class Table
     {
-        public static string FRANCHISE = "tbl_franchise";
-        public static string NAME = "tbl_name";
-        public static string ADDRESS = "tbl_address";
-        public static string IMAGE = "tbl_image";
-        public static string EMPLOYEE = "tbl_employee";
-        public static string DRIVER = "tbl_driver";
-        public static string POSITION = "tbl_position";
-        public static string OPERATOR = "tbl_operator";
-        public static string PAYMENT_DETAILS = "tbl_payment_details";
-        public static string LOAN = "tbl_loan_ledger";
-        public static string SHARE_CAPITAL = "tbl_share_capital_ledger";
-        public static string LONG_TERM_LOAN = "tbl_long_term_loan_ledger";
-        public static string VIOLATION_TYPE = "tbl_violation_type";
-        public static string VIOLATION = "tbl_violation";
-        public static string IDHISTORY = "tbl_id_history";
+        public const string FRANCHISE = "tbl_franchise";
+        public const string NAME = "tbl_name";
+        public const string ADDRESS = "tbl_address";
+        public const string IMAGE = "tbl_image";
+        public const string EMPLOYEE = "tbl_employee";
+        public const string DRIVER = "tbl_driver";
+        public const string POSITION = "tbl_position";
+        public const string OPERATOR = "tbl_operator";
+        public const string PAYMENT_DETAILS = "tbl_payment_details";
+        public const string LOAN = "tbl_loan_ledger";
+        public const string SHARE_CAPITAL = "tbl_share_capital_ledger";
+        public const string LONG_TERM_LOAN = "tbl_long_term_loan_ledger";
+        public const string VIOLATION_TYPE = "tbl_violation_type";
+        public const string VIOLATION = "tbl_violation";
+        public const string IDHISTORY = "tbl_id_history";
 
     }
     public static class Select
     {
-        public static string ALL = "*";
+        public const string ALL = "*";
 
-        public static string BODY_NUMBER = "body_number";
+        public const string BODY_NUMBER = "body_number";
     }
     public static class Where
     {
-        public static string ALL = "1";
-        public static string ALL_NOTDELETED = "isDeleted=0";
-        public static string ALL_DELETED = "isDeleted=1";
-        public static string ID_ = "id=?";
-        public static string ID_NOTDELETED = "id=? AND isDeleted=0";
-        public static string ID_DELETED = "id=? AND isDeleted=1";
+        public const string ALL = "1";
+        public const string ALL_NOTDELETED = "isDeleted=0";
+        public const string ALL_DELETED = "isDeleted=1";
+        public const string ID_ = "id=?";
+        public const string ID_NOTDELETED = "id=? AND isDeleted=0";
+        public const string ID_DELETED = "id=? AND isDeleted=1";
 
-        public static string THEREIS_OPERATOR = "operator_id != -1 AND isDeleted = 0";
-        public static string THEREIS_DRIVER = "driver_id != -1 AND isDeleted = 0";
+        public const string THEREIS_OPERATOR = "operator_id != -1 AND isDeleted = 0";
+        public const string THEREIS_DRIVER = "driver_id != -1 AND isDeleted = 0";
 
 
         
@@ -102,107 +102,107 @@ namespace SPTC_APP.Database
         public static string ISDELETED = "isDeleted";
 
         // SOME (Fields that are used in multiple classes)
-        public static string REMARKS = "remarks";
-        public static string DATE_OF_BIRTH = "date_of_birth";
-        public static string CONTACT_NO = "contact_no";
-        public static string DATE = "date";
-        public static string DETAILS = "details";
-        public static string START_DATE = "start_date";
-        public static string END_DATE = "end_date";
-        public static string TITLE = "title";
-        public static string ENTITY_TYPE = "entity_type";
+        public const string REMARKS = "remarks";
+        public const string DATE_OF_BIRTH = "date_of_birth";
+        public const string CONTACT_NO = "contact_no";
+        public const string DATE = "date";
+        public const string DETAILS = "details";
+        public const string START_DATE = "start_date";
+        public const string END_DATE = "end_date";
+        public const string TITLE = "title";
+        public const string ENTITY_TYPE = "entity_type";
 
         // Foreign Keys
-        public static string EMPLOYEE_ID = "user_id";
-        public static string NAME_ID = "name_id";
-        public static string ADDRESS_ID = "address_id";
-        public static string IMAGE_ID = "image_id";
-        public static string SIGN_ID = "sign_id";
-        public static string POSITION_ID = "position_id";
-        public static string OPERATOR_ID = "operator_id";
-        public static string DRIVER_ID = "driver_id";
-        public static string OWNER_ID = "owner_id";
-        public static string LAST_FRANCHISE_ID = "last_franchise_id";
-        public static string PAYMENT_ID = "payment_id";
-        public static string FRANCHISE_ID = "franchise_id";
-        public static string VIOLATION_TYPE_ID = "violation_type_id";
-        public static string ID = "id";
+        public const string EMPLOYEE_ID = "user_id";
+        public const string NAME_ID = "name_id";
+        public const string ADDRESS_ID = "address_id";
+        public const string IMAGE_ID = "image_id";
+        public const string SIGN_ID = "sign_id";
+        public const string POSITION_ID = "position_id";
+        public const string OPERATOR_ID = "operator_id";
+        public const string DRIVER_ID = "driver_id";
+        public const string OWNER_ID = "owner_id";
+        public const string LAST_FRANCHISE_ID = "last_franchise_id";
+        public const string PAYMENT_ID = "payment_id";
+        public const string FRANCHISE_ID = "franchise_id";
+        public const string VIOLATION_TYPE_ID = "violation_type_id";
+        public const string ID = "id";
 
         // Employee
-        public static string PASSWORD = "password";
+        public const string PASSWORD = "password";
 
         // FRANCHISE
-        public static string BODY_NUMBER = "body_number";
-        public static string BUYING_DATE = "buying_date";
-        public static string MTOP_NUMBER = "mtop_no";
-        public static string LICENSE_NO = "license_no";
-        public static string VOTERS_ID_NUMBER = "voters_id_number";
-        public static string TIN_NUMBER = "tin_number";
+        public const string BODY_NUMBER = "body_number";
+        public const string BUYING_DATE = "buying_date";
+        public const string MTOP_NUMBER = "mtop_no";
+        public const string LICENSE_NO = "license_no";
+        public const string VOTERS_ID_NUMBER = "voters_id_number";
+        public const string TIN_NUMBER = "tin_number";
 
         // Name
-        public static string PREFIX = "sex";
-        public static string FIRSTNAME = "first_name";
-        public static string MIDDLENAME = "middle_name";
-        public static string LASTNAME = "last_name";
-        public static string SUFFIX = "suffix";
+        public const string PREFIX = "sex";
+        public const string FIRSTNAME = "first_name";
+        public const string MIDDLENAME = "middle_name";
+        public const string LASTNAME = "last_name";
+        public const string SUFFIX = "suffix";
 
         // Address
-        public static string HOUSENO = "house_no";
-        public static string STREETNAME = "street_name";
-        public static string BARANGAY = "barangay_subdivision";
-        public static string CITY = "city_municipality";
-        public static string ZIPCODE = "postal_code";
-        public static string PROVINCE = "province";
-        public static string COUNTRY = "country";
-        public static string ADDRESSLINE1 = "address_line1";
-        public static string ADDRESSLINE2 = "address_line2";
+        public const string HOUSENO = "house_no";
+        public const string STREETNAME = "street_name";
+        public const string BARANGAY = "barangay_subdivision";
+        public const string CITY = "city_municipality";
+        public const string ZIPCODE = "postal_code";
+        public const string PROVINCE = "province";
+        public const string COUNTRY = "country";
+        public const string ADDRESSLINE1 = "address_line1";
+        public const string ADDRESSLINE2 = "address_line2";
 
         // Image
-        public static string IMAGE_SOURCE = "image_source_bin";
-        public static string IMAGE_NAME = "image_name";
+        public const string IMAGE_SOURCE = "image_source_bin";
+        public const string IMAGE_NAME = "image_name";
 
         // DRIVER
-        public static string EM_CONTACT_PERSON = "emergency_person";
-        public static string EM_CONTACT_NUMBER = "emergency_number";
-        public static string ISDAYSHIFT = "isDayShift";
+        public const string EM_CONTACT_PERSON = "emergency_person";
+        public const string EM_CONTACT_NUMBER = "emergency_number";
+        public const string ISDAYSHIFT = "isDayShift";
 
         // POSITION
-        public static string CAN_CREATE = "can_create";
-        public static string CAN_EDIT = "can_edit";
-        public static string CAN_DELETE = "can_delete";
+        public const string CAN_CREATE = "can_create";
+        public const string CAN_EDIT = "can_edit";
+        public const string CAN_DELETE = "can_delete";
 
         // PAYMENT DETAILS
-        public static string LEDGER_ID = "ledger_id";
-        public static string IS_DOWN_PAYMENT = "is_down_payment";
-        public static string IS_DIV_PAT = "is_div_pat";
-        public static string LEDGER_TYPE = "ledger_type";
-        public static string REFERENCE_NO = "reference_no";
-        public static string DEPOSIT = "deposit";
-        public static string PENALTIES = "penalties";
+        public const string LEDGER_ID = "ledger_id";
+        public const string IS_DOWN_PAYMENT = "is_down_payment";
+        public const string IS_DIV_PAT = "is_div_pat";
+        public const string LEDGER_TYPE = "ledger_type";
+        public const string REFERENCE_NO = "reference_no";
+        public const string DEPOSIT = "deposit";
+        public const string PENALTIES = "penalties";
 
         // LOAN
-        public static string AMOUNT = "amount";
-        public static string MONTHLY_INTEREST = "monthly_interest";
-        public static string MONTHLY_PRINCIPAL = "monthly_principal";
-        public static string PAYMENT_DUES = "payment_dues";
+        public const string AMOUNT = "amount";
+        public const string MONTHLY_INTEREST = "monthly_interest";
+        public const string MONTHLY_PRINCIPAL = "monthly_principal";
+        public const string PAYMENT_DUES = "payment_dues";
 
         // SHARECAPITAL 
-        public static string BEGINNING_BALANCE = "beginning_balance";
-        public static string LAST_BALANCE = "last_balance";
+        public const string BEGINNING_BALANCE = "beginning_balance";
+        public const string LAST_BALANCE = "last_balance";
 
         // LONGTERMLOAN
-        public static string TERMS_OF_PAYMENT_MONTH = "terms_of_payment_month";
-        public static string AMOUNT_LOANED = "amount_loaned";
-        public static string PROCESSING_FEE = "processing_fee";
-        public static string CAPITAL_BUILDUP = "capital_buildup";
+        public const string TERMS_OF_PAYMENT_MONTH = "terms_of_payment_month";
+        public const string AMOUNT_LOANED = "amount_loaned";
+        public const string PROCESSING_FEE = "processing_fee";
+        public const string CAPITAL_BUILDUP = "capital_buildup";
 
         //VIOLATION_TYPES
-        public static string NUM_OF_DAYS = "num_of_days";
+        public const string NUM_OF_DAYS = "num_of_days";
 
         //VIOLATION
-        public static string VIOLATION_LEVEL_COUNT = "violation_level_count";
-        public static string SUSPENSION_START = "suspension_start";
-        public static string SUSPENSION_END = "suspension_end";
+        public const string VIOLATION_LEVEL_COUNT = "violation_level_count";
+        public const string SUSPENSION_START = "suspension_start";
+        public const string SUSPENSION_END = "suspension_end";
 
 
         //IDHISTORY

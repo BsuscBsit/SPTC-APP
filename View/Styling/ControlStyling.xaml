@@ -535,7 +535,7 @@
     </Style>
 
     <Style
-        x:Key="NoBorderButtonStyle"
+        x:Key="ControlledButtonStyle"
         BasedOn="{StaticResource ButtonTextPreset}"
         TargetType="Button">
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -561,7 +561,7 @@
                             x:Name="TheBG"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{DynamicResource BrushBlack}"
-                            BorderThickness="0"
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="7"
                             UseLayoutRounding="True" />
                         <ContentPresenter

@@ -372,7 +372,7 @@
                             Width="89"
                             Height="25"
                             Content="Save ID"
-                            Style="{DynamicResource CommonButtonStyle}" />
+                            Style="{DynamicResource CommonButtonStyle}" Click="btnSaveAnID_Click" />
                     </Border>
                 </Grid>
             </Canvas>

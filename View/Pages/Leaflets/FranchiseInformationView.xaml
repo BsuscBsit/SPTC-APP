@@ -122,17 +122,21 @@
 
             <Button
                 x:Name="btnHistory"
-                Background="White"
                 Height="26"
+                Style="{DynamicResource ControlledButtonStyle}"
+                BorderThickness="1"
+                Background="White"
                 Margin="51,0,532,204"
                 VerticalAlignment="Bottom"  
                 Content="History" Grid.Row="1"
                 FontFamily="Arial"
                 FontWeight="Bold"
-                FontSize="10"/>
+                FontSize="10" Click="btnHistory_Click"/>
 
             <Button
                 x:Name="btnCoding"
+                Style="{DynamicResource ControlledButtonStyle}"
+                BorderThickness="1"
                 Background="White"
                 Height="26"
                 Margin="51,0,532,173"
@@ -140,9 +144,11 @@
                 Content="Coding" Grid.Row="1"
                 FontFamily="Arial"
                 FontWeight="Bold"
-                FontSize="10"/>
+                FontSize="10" Click="btnCoding_Click"/>
             <Button
                x:Name="btnViolation"
+                Style="{DynamicResource ControlledButtonStyle}"
+                BorderThickness="1"
                 Background="White"
                 Height="26"
                 Margin="51,0,532,142"
@@ -150,9 +156,11 @@
                 Content="Violation" Grid.Row="1"
                 FontFamily="Arial"
                 FontWeight="Bold"
-                FontSize="10"/>
+                FontSize="10" Click="btnViolation_Click"/>
             <Button
                x:Name="btnShareCapital"
+                Style="{DynamicResource ControlledButtonStyle}"
+                BorderThickness="1"
                 Background="White"
                 Height="26"
                 Margin="51,0,532,111"
@@ -160,9 +168,11 @@
                 Content="Share Capital Ledger" Grid.Row="1"
                 FontFamily="Arial"
                 FontWeight="Bold"
-                FontSize="9"/>
+                FontSize="9" Click="btnShareCapital_Click"/>
             <Button
                x:Name="btnLoan"
+                Style="{DynamicResource ControlledButtonStyle}"
+                BorderThickness="1"
                 Background="White"
                 Height="26"
                 Margin="51,0,532,80"
@@ -170,10 +180,12 @@
                 Content="Loan Ledger" Grid.Row="1"
                 FontFamily="Arial"
                 FontWeight="Bold"
-                FontSize="10"/>
+                FontSize="10" Click="btnLoan_Click"/>
 
             <Button
                x:Name="btnLTLoan"
+                Style="{DynamicResource ControlledButtonStyle}"
+                BorderThickness="1"
                 Background="White"
                 Height="26"
                 Margin="51,0,532,49"
@@ -181,9 +193,11 @@
                 Content="LT Loan Ledger" Grid.Row="1"
                 FontFamily="Arial"
                 FontWeight="Bold"
-                FontSize="10" />
+                FontSize="10" Click="btnLTLoan_Click" />
             <Button
                x:Name="btnTransactionHistory"
+                Style="{DynamicResource ControlledButtonStyle}"
+                BorderThickness="1"
                 Background="White"
                 Height="26"
                 Margin="51,0,532,18"
@@ -191,7 +205,8 @@
                 Content="Transfer History" Grid.Row="1"
                 FontFamily="Arial"
                 FontWeight="Bold"
-                FontSize="10"/>
+                FontSize="10" Click="btnTransactionHistory_Click"/>
+            <Grid x:Name="ModuleGrid" Grid.Row="1" Margin="158,59,0,0"/>
         </Grid>
         <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="37,26,0,0" VerticalAlignment="Top" Click="btnBack_Click"/>
     </Grid>

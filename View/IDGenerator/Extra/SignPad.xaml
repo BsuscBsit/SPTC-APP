@@ -83,25 +83,31 @@
                                 BorderBrush="{StaticResource BrushBlack}"
                                 BorderThickness="0,0,7,7" />
                         </Grid>
-                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="100">
-                            <TextBlock x:Name="textblockNotice"
-                                FontFamily="Inter"
-                                FontSize="24"
-                                FontWeight="SemiBold"
+                        <Grid
+                            MaxHeight="100"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                x:Name="textblockNotice"
                                 Width="456"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
+                                FontFamily="Inter"
+                                FontSize="24"
+                                FontWeight="SemiBold"
                                 Text="Use your stylus to draw your signature inside the box. Keep your signature within the provided area."
-                                TextWrapping="Wrap" TextAlignment="Center" />
+                                TextAlignment="Center"
+                                TextWrapping="Wrap" />
                         </Grid>
                     </Grid>
                     <Viewbox>
                         <!--  Set the initial size of the InkCanvas to reflect the actual size needed.  -->
                         <InkCanvas
                             x:Name="inkSign"
-                            Width="200"
-                            Height="100"
-                            Background="#B2FFFFFF" StrokeCollected="inkSign_StrokeCollected" />
+                            Width="600"
+                            Height="300"
+                            Background="#B2FFFFFF"
+                            StrokeCollected="inkSign_StrokeCollected" />
                     </Viewbox>
                 </Grid>
             </Border>

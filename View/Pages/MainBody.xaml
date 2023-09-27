@@ -61,7 +61,7 @@
                 VerticalAlignment="Top"
                 BorderThickness="0"
                 Click="DashBoard_Click"
-                Style="{StaticResource NoBorderButtonStyle}">
+                Style="{StaticResource ControlledButtonStyle}">
                 <Grid Width="200">
                     <Image
                         Width="32"
@@ -113,7 +113,7 @@
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     Click="FranchiseButton_Click"
-                    Style="{StaticResource NoBorderButtonStyle}">
+                    Style="{StaticResource ControlledButtonStyle}">
                     <Grid Width="200">
                         <Image
                             Width="32"
@@ -139,7 +139,7 @@
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     Click="OperatorButton_Click"
-                    Style="{StaticResource NoBorderButtonStyle}">
+                    Style="{StaticResource ControlledButtonStyle}">
                     <Grid Width="200">
                         <Image
                             Width="32"
@@ -165,7 +165,7 @@
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     Click="DriverButton_Click"
-                    Style="{StaticResource NoBorderButtonStyle}">
+                    Style="{StaticResource ControlledButtonStyle}">
                     <Grid Width="200">
                         <Image
                             Width="32"
@@ -191,7 +191,7 @@
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     Click="BtnBoardMember_Click"
-                    Style="{StaticResource NoBorderButtonStyle}">
+                    Style="{StaticResource ControlledButtonStyle}">
                     <Grid Width="200">
                         <Image
                             Width="32"
@@ -218,7 +218,7 @@
                 VerticalAlignment="Bottom"
                 BorderThickness="0"
                 Click="Btn_Settings"
-                Style="{StaticResource NoBorderButtonStyle}">
+                Style="{StaticResource ControlledButtonStyle}">
                 <Grid Width="200">
                     <Image
                         Width="32"
@@ -243,7 +243,7 @@
                 VerticalAlignment="Bottom"
                 BorderThickness="0"
                 Click="Btn_Logout"
-                Style="{StaticResource NoBorderButtonStyle}">
+                Style="{StaticResource ControlledButtonStyle}">
                 <Grid Width="200">
                     <Image
                         Width="32"

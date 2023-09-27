@@ -265,6 +265,9 @@
     <Compile Include="View\Pages\Leaflets\FranchiseInformationView.xaml.cs">
       <DependentUpon>FranchiseInformationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\Leaflets\Modules.xaml.cs">
+      <DependentUpon>Modules.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\Leaflets\TableView.xaml.cs">
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
@@ -340,6 +343,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Pages\Leaflets\FranchiseInformationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\Leaflets\Modules.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

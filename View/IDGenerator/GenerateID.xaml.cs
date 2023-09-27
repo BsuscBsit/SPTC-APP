@@ -33,17 +33,12 @@ namespace SPTC_APP.View
         bool hasSign = false;
 
         private bool isCameraRunning;
-        private bool isSignPadRunning;
 
 
 
         bool isDriver = true;
         private Franchise franchise;
         bool isUpdate = false;
-
-
-
-        private bool hasInkBeenAdded = false;
 
 
         //CONSTRUCTORS
@@ -67,7 +62,6 @@ namespace SPTC_APP.View
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
             if(!AppState.isDeployment && !AppState.isDeployment_IDGeneration) GenerateDummy();
-            inkSign.StrokeCollected += inkSign_StrokeCollected;
         }
         public GenerateID(Franchise franchise, bool isDriver)
         {
@@ -112,6 +106,7 @@ namespace SPTC_APP.View
                     {
                         imgSignPic.Source = drv.signature.GetSource();
                         hasSign = true;
+
                     }
                     if(drv.birthday != null)
                     {
@@ -175,6 +170,14 @@ namespace SPTC_APP.View
                 return;
             }
 
+            if (hasSign)
+            {
+                btnStartPad.Content = "Clear";
+            } else
+            {
+                btnStartPad.Content = "Start Pad";
+            }
+
             videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
@@ -185,7 +188,8 @@ namespace SPTC_APP.View
         {
             await Task.Delay(TimeSpan.FromSeconds(0.2));
             tboxFn.Focus();
-        }
+            }
+        
         protected override void OnClosing(CancelEventArgs e)
         {
             this.StopCamera();
@@ -257,112 +261,28 @@ namespace SPTC_APP.View
         }
         private void btnStartPad_Click(object sender, RoutedEventArgs e)
         {
-            SignPad sp = new SignPad();
-            sp.Show();
-            /*
-            if (!isSignPadRunning)
+            if (!hasSign)
             {
-                pbSignOpen.Visibility = Visibility.Visible;
-                pbSignOpen.IsIndeterminate = true;
-                imgSignPic.Visibility = Visibility.Collapsed;
-                inkSign.Visibility = Visibility.Visible;
-                btnStartPad.Content = "Cancel";
-                inkSign.IsEnabled = true;
-                isSignPadRunning = true;
+                SignPad sp = new SignPad();
+                if (sp.ShowDialog() ?? false)
+                {
+                    imgSignPic.Source = sp.signatureBitmapResult;
+                    hasSign = true;
+                    btnStartPad.Content = "Clear";
+                }
+                else
+                {
+                    //ControlWindow.Show("Signing Failed!", "No signature is saved", Icons.DEFAULT);
+                    //hasSign = false;
+
+                    btnStartPad.Content = "Start Pad";
+                }
+            } else
+            {
+                btnStartPad.Content = "Start Pad";
+                imgSignPic.Source = null;
                 hasSign = false;
             }
-            else
-            {
-
-                if (hasInkBeenAdded)
-                {
-                    pbSignOpen.IsIndeterminate = false;
-                    pbSignOpen.Value = 100;
-
-                    imgSignPic.Visibility = Visibility.Visible;
-                    inkSign.Background = Brushes.Transparent;
-                    RenderTargetBitmap rtb = new RenderTargetBitmap((int)inkSign.ActualWidth, (int)inkSign.ActualHeight, 96, 96, PixelFormats.Default);
-                    rtb.Render(inkSign);
-
-                    imgSignPic.Source = rtb;
-                    inkSign.Visibility = Visibility.Collapsed;
-                    isSignPadRunning = false;
-                    inkSign.IsEnabled = false;
-                    inkSign.Strokes.Clear();
-                    inkSign.Background = Brushes.White;
-
-
-                    hasInkBeenAdded = false;
-                    btnStartPad.Content = "Start Pad";
-                    btnClearInkCanvas.FadeOut(0.2);
-                    hasSign = true;
-                } else
-                {
-                    pbSignOpen.IsIndeterminate = true;
-                    pbSignOpen.Visibility = Visibility.Hidden;
-
-                    inkSign.Visibility = Visibility.Hidden;
-                    imgSignPic.Visibility = Visibility.Visible;
-                    imgSignPic.Source = null;
-                    isSignPadRunning = false;
-                    inkSign.IsEnabled = false;
-                    inkSign.Strokes.Clear();
-                    btnStartPad.Content = "Start Pad";
-                    hasSign = false;
-                }
-                
-            }*/ //UNDER MAINTENANCE
-
-            /* // NEW WAY OF GETTING THE SIGNTURE, this code clips out any whitespace outside of Rect of the actual signature writing
-            inkCanvas.Background = Brushes.Transparent;
-
-            // Create a new StrokeCollection to store only the signature strokes
-            StrokeCollection signatureStrokes = new StrokeCollection();
-
-            // Iterate through each stroke in the inkCanvas
-            foreach (Stroke stroke in inkCanvas.Strokes)
-            {
-                // Check if the stroke intersects with the bounds of the signature area
-                if (stroke.GetBounds().IntersectsWith(new Rect(0, 0, inkCanvas.ActualWidth, inkCanvas.ActualHeight)))
-                {
-                    // Add the stroke to the signatureStrokes collection
-                    signatureStrokes.Add(stroke);
-                }
-            }
-
-            // Create a new inkCanvas to render only the signature strokes
-            InkCanvas signatureCanvas = new InkCanvas();
-            signatureCanvas.Strokes = signatureStrokes;
-
-            // Get the bounds of the signature strokes
-            Rect signatureBounds = signatureCanvas.Strokes.GetBounds();
-
-            // Check if the signature bounds have a non-zero width and height
-            if (signatureBounds.Width > 0 && signatureBounds.Height > 0)
-            {
-                // Create a new inkCanvas with the size of the signature bounds
-                InkCanvas croppedCanvas = new InkCanvas();
-                croppedCanvas.Background = Brushes.Transparent;
-                croppedCanvas.Width = signatureBounds.Width;
-                croppedCanvas.Height = signatureBounds.Height;
-
-                // Translate the signature strokes to fit within the cropped canvas
-                Matrix translationMatrix = new Matrix();
-                translationMatrix.Translate(-signatureBounds.Left, -signatureBounds.Top);
-                signatureCanvas.Strokes.Transform(translationMatrix, false);
-
-                // Copy the signature strokes to the cropped canvas
-                foreach (Stroke stroke in signatureCanvas.Strokes)
-                {
-                    croppedCanvas.Strokes.Add(stroke.Clone());
-                }
-
-                // Render the cropped canvas to a RenderTargetBitmap
-                RenderTargetBitmap rtb = new RenderTargetBitmap((int)croppedCanvas.Width, (int)croppedCanvas.Height, 96, 96, PixelFormats.Default);
-                rtb.Render(croppedCanvas);
-                imgSignPic.Source = rtb;
-            }
-            */
         }
         private void btnBrowseIDPic_Click(object sender, RoutedEventArgs e)
         {
@@ -387,7 +307,6 @@ namespace SPTC_APP.View
         }
         private void btnBrowseSignPic_Click(object sender, RoutedEventArgs e)
         {
-            pbSignOpen.Visibility = Visibility.Visible;
             var openFileDialog = new OpenFileDialog();
 
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
@@ -410,26 +329,14 @@ namespace SPTC_APP.View
         {
             string warn = "";
             bool cameraWarning = isCameraRunning && !hasPhoto;
-            bool signPadWarning = isSignPadRunning && !hasSign;
+            bool signPadWarning = false;
 
             if (cameraWarning)
             {
                 this.StopCamera();
-                imgIDPic.Source = null;
             }
 
-            if (signPadWarning)
-            {
-                isSignPadRunning = false;
-                imgSignPic.Source = null;
-                inkSign.Visibility = Visibility.Hidden;
-                pbSignOpen.Visibility = Visibility.Hidden;
-                btnStartPad.Content = "Start Pad";
-                
-                inkSign.Strokes.Clear();
-                btnClearInkCanvas.FadeOut(0.2);
-                hasInkBeenAdded = false;
-            }
+          
 
             if (cameraWarning || signPadWarning)
             {
@@ -444,9 +351,11 @@ namespace SPTC_APP.View
                 {
                     if (cameraWarning)
                     {
+                        imgIDPic.Source = null;
                         BtnStartCam_Click(btnStartCam, e);
                         return false;
                     }
+
 
                     return false;
                 }
@@ -461,7 +370,6 @@ namespace SPTC_APP.View
             if (Preview_WarnDone(e))
             {
                 this.StopCamera();
-                pbSignOpen.Visibility = Visibility.Hidden;
                 if (tboxLnum.Text.Length > 0 && tboxFn.Text.Length > 0 && tboxLn.Text.Length > 0 && tboxAddressB.Text.Length > 0 && tboxAddressS.Text.Length > 0 && tboxEmePer.Text.Length > 0 && tboxPhone.Text.Length > 0)
                 {
                     GeneratedIDPreview print = new GeneratedIDPreview();
@@ -680,54 +588,6 @@ namespace SPTC_APP.View
             }
         }
 
-
-        //SIGNATURE EVENTS
-        private void inkSign_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
-        {
-            if (!hasInkBeenAdded)
-            {
-                hasInkBeenAdded = true;
-                btnClearInkCanvas.FadeIn(0.2);
-                btnStartPad.Content = "Save Signature";
-            }
-        }
-        private void btnClearInkCanvas_Click(object sender, RoutedEventArgs e)
-        {
-            btnClearInkCanvas.FadeOut(0.2);
-            inkSign.Strokes.Clear();
-            btnStartPad.Content = "Cancel";
-            hasInkBeenAdded = false;
-        }
-
-
-
-
-        //STYLUS EVENTS 
-        private void OnStylusDown(object sender, StylusDownEventArgs e)
-        {
-            inkSign.CaptureStylus();
-
-            DrawingAttributes drawingAttributes = new DrawingAttributes
-            {
-                Color = Colors.Black // You can set other properties like color, etc.
-            };
-
-            StylusPoint stylusPoint = e.GetStylusPoints(inkSign)[0];
-            drawingAttributes.Width = stylusPoint.PressureFactor * 10; // Adjust as needed
-            drawingAttributes.Height = stylusPoint.PressureFactor * 10; // Adjust as needed
-
-            inkSign.DefaultDrawingAttributes = drawingAttributes;
-        }
-        private void OnStylusMove(object sender, StylusEventArgs e)
-        {
-            StylusPointCollection points = e.GetStylusPoints(inkSign);
-            Stroke newStroke = new Stroke(points);
-            inkSign.Strokes.Add(newStroke);
-        }
-        private void OnStylusUp(object sender, StylusEventArgs e)
-        {
-            inkSign.ReleaseStylusCapture();
-        }
 
     }
 

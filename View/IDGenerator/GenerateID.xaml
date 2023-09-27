@@ -375,16 +375,7 @@
                     Content="E-signature"
                     Style="{StaticResource SubTitlePreset}" />
                 <Grid Width="200" Height="208">
-                    <Button
-                        x:Name="btnClearInkCanvas"
-                        Width="100"
-                        Height="27"
-                        Margin="0,0,0,7"
-                        VerticalAlignment="Bottom"
-                        Click="btnClearInkCanvas_Click"
-                        Content="Clear"
-                        Style="{DynamicResource CommonButtonStyle}"
-                        Visibility="Hidden" />
+                    
                     <Grid
                         Width="200"
                         HorizontalAlignment="Center"
@@ -409,23 +400,10 @@
                                             Height="200"
                                             Stretch="UniformToFill"
                                             Visibility="Visible" />
-                                        <InkCanvas
-                                            x:Name="inkSign"
-                                            Width="400"
-                                            Height="200"
-                                            IsEnabled="False"
-                                            StrokeCollected="inkSign_StrokeCollected"
-                                            Visibility="Hidden" />
                                     </Grid>
                                 </Viewbox>
                             </Grid>
                         </Border>
-                        <ProgressBar
-                            x:Name="pbSignOpen"
-                            Grid.Row="1"
-                            Height="8"
-                            IsIndeterminate="false"
-                            Visibility="Hidden" />
                     </Grid>
                 </Grid>
                 <StackPanel>

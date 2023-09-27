@@ -303,22 +303,17 @@ namespace SPTC_APP.Objects
             {
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    BitmapEncoder encoder = new JpegBitmapEncoder(); // Use JPEG compression
+                    BitmapEncoder encoder = new PngBitmapEncoder(); // Use PNG compression
                     encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
 
-                    // Define a compression level (adjust quality as needed)
-                    ((JpegBitmapEncoder)encoder).QualityLevel = 80; // Adjust quality from 1 to 100
-
                     encoder.Save(memoryStream);
-
-                    // Check if the resulting byte array is larger than the maximum allowed size for MEDIUMBLOB
-                    if (memoryStream.Length <= 16777215) // 16MB in bytes
+                    int sizeLimit = 16777215;
+                    if (memoryStream.Length <= sizeLimit)
                     {
                         return memoryStream.ToArray();
                     }
                     else
                     {
-                        // Compress the image to fit within the 16MB limit
                         memoryStream.Position = 0;
                         using (MemoryStream compressedStream = new MemoryStream())
                         {
@@ -327,7 +322,7 @@ namespace SPTC_APP.Objects
                             while ((bytesRead = memoryStream.Read(buffer, 0, buffer.Length)) > 0)
                             {
                                 compressedStream.Write(buffer, 0, bytesRead);
-                                if (compressedStream.Length > 16777215) // Check size limit
+                                if (compressedStream.Length > 16777215)
                                 {
                                     EventLogger.Post($"ERR :: Image size still exceeds the maximum allowed for MEDIUMBLOB after compression. {compressedStream.Length}");
                                 }
@@ -343,19 +338,16 @@ namespace SPTC_APP.Objects
                 {
                     BitmapEncoder encoder = new PngBitmapEncoder();
                     encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
-                    // Define a compression level (adjust quality as needed)
-                    ((JpegBitmapEncoder)encoder).QualityLevel = 80; // Adjust quality from 1 to 100
+                    ((JpegBitmapEncoder)encoder).QualityLevel = 80; 
 
                     encoder.Save(memoryStream);
 
-                    // Check if the resulting byte array is larger than the maximum allowed size for MEDIUMBLOB
-                    if (memoryStream.Length <= 16777215) // 16MB in bytes
+                    if (memoryStream.Length <= 16777215)
                     {
                         return memoryStream.ToArray();
                     }
                     else
                     {
-                        // Compress the image to fit within the 16MB limit
                         memoryStream.Position = 0;
                         using (MemoryStream compressedStream = new MemoryStream())
                         {
@@ -364,7 +356,7 @@ namespace SPTC_APP.Objects
                             while ((bytesRead = memoryStream.Read(buffer, 0, buffer.Length)) > 0)
                             {
                                 compressedStream.Write(buffer, 0, bytesRead);
-                                if (compressedStream.Length > 16777215) // Check size limit
+                                if (compressedStream.Length > 16777215) 
                                 {
                                     EventLogger.Post($"ERR :: Image size still exceeds the maximum allowed for MEDIUMBLOB after compression. {compressedStream.Length}");
                                 }
@@ -377,6 +369,7 @@ namespace SPTC_APP.Objects
 
             return null;
         }
+
 
 
         public int Save()

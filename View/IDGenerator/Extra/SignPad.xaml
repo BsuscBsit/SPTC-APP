@@ -39,7 +39,7 @@
                 <Grid>
                     <Viewbox>
                         <!--  Set the initial size of the InkCanvas to reflect the actual size needed.  -->
-                        <InkCanvas x:Name="inkSign" Width="200" Height="100" />
+                        <InkCanvas x:Name="inkSign" Width="600" Height="300" />
                     </Viewbox>
                     <Canvas
                         x:Name="canvasButtons"

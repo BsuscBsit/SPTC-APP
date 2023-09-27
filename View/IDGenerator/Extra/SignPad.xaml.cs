@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -27,6 +28,9 @@ namespace SPTC_APP.View.IDGenerator.Extra
         private const double windowHeight = 390.4;
         private Style roundedStyle;
         private Style normalStyle;
+
+
+        public RenderTargetBitmap signatureBitmapResult;
 
         public SignPad()
         {
@@ -86,7 +90,61 @@ namespace SPTC_APP.View.IDGenerator.Extra
 
         private void btnSaveStroke_Click(object sender, RoutedEventArgs e)
         {
+            if (inkSign.Strokes.Count > 0)
+            {
+                inkSign.Background = Brushes.Transparent;
 
+                // Create a new StrokeCollection to store only the signature strokes
+                StrokeCollection signatureStrokes = new StrokeCollection();
+
+                // Iterate through each stroke in the inkCanvas
+                foreach (Stroke stroke in inkSign.Strokes)
+                {
+                    // Check if the stroke intersects with the bounds of the signature area
+                    if (stroke.GetBounds().IntersectsWith(new Rect(0, 0, inkSign.ActualWidth, inkSign.ActualHeight)))
+                    {
+                        // Add the stroke to the signatureStrokes collection
+                        signatureStrokes.Add(stroke);
+                    }
+                }
+
+                // Create a new inkCanvas to render only the signature strokes
+                InkCanvas signatureCanvas = new InkCanvas();
+                signatureCanvas.Strokes = signatureStrokes;
+
+                // Get the bounds of the signature strokes
+                Rect signatureBounds = signatureCanvas.Strokes.GetBounds();
+
+                // Check if the signature bounds have a non-zero width and height
+                if (signatureBounds.Width > 0 && signatureBounds.Height > 0)
+                {
+                    // Create a new inkCanvas with the size of the signature bounds
+                    InkCanvas croppedCanvas = new InkCanvas();
+                    croppedCanvas.Background = Brushes.Transparent;
+                    croppedCanvas.Width = signatureBounds.Width;
+                    croppedCanvas.Height = signatureBounds.Height;
+
+                    // Translate the signature strokes to fit within the cropped canvas
+                    Matrix translationMatrix = new Matrix();
+                    translationMatrix.Translate(-signatureBounds.Left, -signatureBounds.Top);
+                    signatureCanvas.Strokes.Transform(translationMatrix, false);
+
+                    // Copy the signature strokes to the cropped canvas
+                    foreach (Stroke stroke in signatureCanvas.Strokes)
+                    {
+                        croppedCanvas.Strokes.Add(stroke.Clone());
+                    }
+
+                    // Render the cropped canvas to a RenderTargetBitmap
+                    RenderTargetBitmap rtb = new RenderTargetBitmap((int)croppedCanvas.Width, (int)croppedCanvas.Height, 96, 96, PixelFormats.Default);
+                    rtb.Render(croppedCanvas);
+                    signatureBitmapResult = rtb;
+
+
+                    DialogResult = true;
+                    this.Close();
+                }
+            }
         }
 
         private void btnClearStrokes_Click(object sender, RoutedEventArgs e)
@@ -96,6 +154,7 @@ namespace SPTC_APP.View.IDGenerator.Extra
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
             this.Close();
         }
     }

@@ -397,7 +397,7 @@ namespace SPTC_APP.View
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             SignPad sp = new SignPad();
-            sp.Show();
+            sp.ShowDialog();
         }
 
 

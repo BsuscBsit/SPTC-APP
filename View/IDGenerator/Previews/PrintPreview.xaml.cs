@@ -31,6 +31,8 @@ namespace SPTC_APP.View
         private bool isReset = true;
         private int offsetAfterSpace = 50;
 
+        private ID zoomedIn = null;
+
         public PrintPreview()
         {
             InitializeComponent();
@@ -466,6 +468,10 @@ namespace SPTC_APP.View
                 scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - deltaY);
 
                 panOrigin = currentPos;
+
+
+                canvasPageCtrl.FadeIn(1);
+                canvasSaveAnID.FadeOut(1);
             }
         }
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -534,8 +540,6 @@ namespace SPTC_APP.View
         {
             if (zoomScale == 1)
             {
-                canvasPageCtrl.FadeOut(1);
-                canvasSaveAnID.FadeIn(1);
                 int tho = 0;
                 int tvo = 0;
                 bool pan = false;
@@ -545,21 +549,25 @@ namespace SPTC_APP.View
                         tho = 85;
                         tvo = 90;
                         pan = (image.Tag?.ToString() != "NullImage");
+                        zoomedIn = (isFront) ? mGrid1 : mGrid2;
                         break;
                     case "grid2":
                         tho = 420;
                         tvo = 90;
                         pan = (image.Tag?.ToString() != "NullImage");
+                        zoomedIn = (!isFront) ? mGrid1 : mGrid2;
                         break;
                     case "grid3":
                         tho = 85;
                         tvo = 545;
                         pan = (image.Tag?.ToString() != "NullImage");
+                        zoomedIn = (isFront) ? mGrid3 : mGrid3;
                         break;
                     case "grid4":
                         tho = 420;
                         tvo = 545;
                         pan = (image.Tag?.ToString() != "NullImage");
+                        zoomedIn = (!isFront) ? mGrid3 : mGrid3;
                         break;
                     default:
                         break;
@@ -569,9 +577,13 @@ namespace SPTC_APP.View
                     UpdateZoom(2.44);
                     scrollViewer.ScrollToHorizontalOffset(tho + (offsetAfterSpace * 2));
                     scrollViewer.ScrollToVerticalOffset(tvo + (offsetAfterSpace * 2));
+
+                    canvasPageCtrl.FadeOut(1);
+                    canvasSaveAnID.FadeIn(1);
+                    
                 } else
                 {
-                    ControlWindow.ShowDialog("Note: ", "Pwede rito maglagay ng functionality", Icons.NOTIFY);
+                    //ControlWindow.ShowDialog("Note: ", "Pwede rito maglagay ng functionality", Icons.NOTIFY);
                 }
             }
         }
@@ -663,6 +675,15 @@ namespace SPTC_APP.View
         {
             
             base.OnClosing(e);
+        }
+
+        private void btnSaveAnID_Click(object sender, RoutedEventArgs e)
+        {
+            if(zoomedIn != null)
+            {
+                zoomedIn.SaveInfo();
+                EventLogger.Post("OUT :: ID : " + zoomedIn.franchise.BodyNumber + " FRONT: " + zoomedIn.FrontPrint + " BACK: " + zoomedIn.BackPrint);
+            }
         }
     }
 }

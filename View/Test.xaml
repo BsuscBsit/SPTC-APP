@@ -57,6 +57,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Content="Label" />
+                    <Button x:Name="btnClean" Content="CLEANER" HorizontalAlignment="Left" Margin="139,248,0,0" VerticalAlignment="Top" Click="btnClean_Click"/>
 
                 </Grid>
             </TabItem>

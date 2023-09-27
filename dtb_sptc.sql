@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2023 at 08:42 AM
+-- Generation Time: Sep 27, 2023 at 04:31 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -72,6 +72,7 @@ CREATE TABLE `tbl_employee` (
   `id` int(11) NOT NULL,
   `name_id` int(11) NOT NULL DEFAULT -1,
   `address_id` int(11) NOT NULL DEFAULT -1,
+  `sign_id` int(11) NOT NULL DEFAULT -1,
   `image_id` int(11) NOT NULL DEFAULT -1,
   `password` varchar(50) DEFAULT NULL,
   `position_id` int(11) NOT NULL DEFAULT -1,
@@ -86,11 +87,12 @@ CREATE TABLE `tbl_employee` (
 -- Dumping data for table `tbl_employee`
 --
 
-INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `image_id`, `password`, `position_id`, `start_date`, `end_date`, `date_of_birth`, `contact_no`, `isDeleted`) VALUES
-(1, 1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, '2023-06-26', NULL, NULL, NULL, 0),
-(2, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 2, '2023-06-26', NULL, NULL, NULL, 0),
-(3, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, '2023-06-26', NULL, NULL, NULL, 0),
-(4, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, '2023-06-26', NULL, NULL, NULL, 0);
+INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `sign_id`, `image_id`, `password`, `position_id`, `start_date`, `end_date`, `date_of_birth`, `contact_no`, `isDeleted`) VALUES
+(1, 1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, '2023-06-26', NULL, NULL, NULL, 0),
+(2, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 2, '2023-06-26', NULL, NULL, NULL, 0),
+(3, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, '2023-06-26', NULL, NULL, NULL, 0),
+(4, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, '2023-06-26', NULL, NULL, NULL, 0),
+(5, -1, -1, 0, -1, NULL, 5, '2023-09-27', '0001-01-01', '0001-01-01', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -187,7 +189,7 @@ CREATE TABLE `tbl_long_term_loan_ledger` (
 
 CREATE TABLE `tbl_name` (
   `id` int(11) NOT NULL,
-  `prefix` varchar(50) DEFAULT NULL,
+  `sex` tinyint(1) DEFAULT 0,
   `first_name` varchar(50) DEFAULT NULL,
   `middle_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
@@ -258,7 +260,8 @@ INSERT INTO `tbl_position` (`id`, `title`, `can_create`, `can_edit`, `can_delete
 (1, 'General Manager', 1, 1, 1, 0),
 (2, 'Secretary', 0, 0, 0, 0),
 (3, 'Treasurer', 0, 0, 0, 0),
-(4, 'Book Keeper', 0, 0, 0, 0);
+(4, 'Book Keeper', 0, 0, 0, 0),
+(5, 'Chairman', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -370,7 +373,7 @@ ALTER TABLE `tbl_long_term_loan_ledger`
 --
 ALTER TABLE `tbl_name`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `prefix` (`prefix`,`first_name`,`middle_name`,`last_name`,`suffix`);
+  ADD UNIQUE KEY `prefix` (`sex`,`first_name`,`middle_name`,`last_name`,`suffix`);
 
 --
 -- Indexes for table `tbl_operator`
@@ -430,7 +433,7 @@ ALTER TABLE `tbl_driver`
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_franchise`
@@ -484,7 +487,7 @@ ALTER TABLE `tbl_payment_details`
 -- AUTO_INCREMENT for table `tbl_position`
 --
 ALTER TABLE `tbl_position`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_share_capital_ledger`

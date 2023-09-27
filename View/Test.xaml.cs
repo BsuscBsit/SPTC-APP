@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -108,9 +109,9 @@ namespace SPTC_APP.View
 
         private void UpdateLogin()
         {
-            lblName.Content = $"My Name is {AppState.USER.name.wholename}";
-            lblAddress.Content = $"I am from {AppState.USER.address}";
-            lblPosition.Content = $"I am a {AppState.USER.position}";
+            lblName.Content = $"My Name is {AppState.USER?.name.wholename}";
+            lblAddress.Content = $"I am from {AppState.USER?.address}";
+            lblPosition.Content = $"I am a {AppState.USER?.position}";
         }
 
 
@@ -356,11 +357,20 @@ namespace SPTC_APP.View
                     signatureBytes = stream.ToArray();
                 }
 
-                // Save the signature image or perform any other desired operations
-                Image image = new Objects.Image();
-                image.name = "Signature - CurrentChairman";
-                image.picture = signatureBytes;
-                image.Save();
+                Employee employee = Retrieve.GetDataUsingQuery<Employee>(RequestQuery.GET_CURRENT_CHAIRMAN).FirstOrDefault();
+                if(employee != null)
+                {
+                    if (employee.sign != null)
+                        employee.sign.picture = signatureBytes;
+                    else
+                    {
+                        employee.sign = new Objects.Image();
+                        employee.sign.name = $"Signature - {employee.position.ToString()}";
+                        employee.sign.picture = signatureBytes;
+                    }
+                    employee.Save();
+                }
+                
             }
 
             // Reset the inkCanvas by clearing the strokes and setting the background to white
@@ -368,6 +378,19 @@ namespace SPTC_APP.View
             inkCanvas.Background = Brushes.White;
 
             imgSignatureo.Source = AppState.FetchChairmanSign();
+        }
+
+        private void btnClean_Click(object sender, RoutedEventArgs e)
+        {
+            if ((new Clean(RequestQuery.CLEAN_ADDRESS)).Start())
+            {
+                btnClean.Background = Brushes.Green;
+            } else
+            {
+                btnClean.Background = Brushes.Red;
+            }
+
+            
         }
 
 

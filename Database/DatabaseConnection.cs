@@ -21,6 +21,7 @@ namespace SPTC_APP.Database
         public static MySqlConnection GetConnection()
         {
             MySqlConnection connection = new MySqlConnection(DatabaseConnection.connectionString);
+            connection.ClearAllPoolsAsync();
             return connection;
         }
 

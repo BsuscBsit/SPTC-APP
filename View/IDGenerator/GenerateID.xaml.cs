@@ -715,14 +715,12 @@ namespace SPTC_APP.View
 
             inkSign.DefaultDrawingAttributes = drawingAttributes;
         }
-
         private void OnStylusMove(object sender, StylusEventArgs e)
         {
             StylusPointCollection points = e.GetStylusPoints(inkSign);
             Stroke newStroke = new Stroke(points);
             inkSign.Strokes.Add(newStroke);
         }
-
         private void OnStylusUp(object sender, StylusEventArgs e)
         {
             inkSign.ReleaseStylusCapture();

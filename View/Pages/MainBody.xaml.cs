@@ -21,7 +21,7 @@ namespace SPTC_APP.View.Pages
         public MainBody()
         {
             InitializeComponent();
-            username.Content = AppState.USER.position.title.ToString();
+            username.Content = AppState.USER?.position.title.ToString();
             DashBoard_Click(DashBoard, null);
         }
 
@@ -96,10 +96,10 @@ namespace SPTC_APP.View.Pages
         }
 
 
-        //Search functionality
+        //SEARCH functionality
         private async void cbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //Search
+            //SEARCH
             if (cbSearch.Text.Length > 0)
             {
                 if (selectedButton != null)
@@ -134,7 +134,7 @@ namespace SPTC_APP.View.Pages
 
         private void GetFranchiseInList()
         {
-            List<Franchise> tmp = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.Search(cbSearch.Text));
+            List<Franchise> tmp = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.SEARCH(cbSearch.Text));
             if (tmp != null)
             {
                 if (tmp.Count > 0)

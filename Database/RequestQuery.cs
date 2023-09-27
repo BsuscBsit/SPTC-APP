@@ -3,20 +3,32 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using MySql.Data.MySqlClient;
 
 namespace SPTC_APP.Database
 {
     public static class RequestQuery
     {
-        /* public static string LOGIN_EMPLOYEE = @"SELECT e.start_date, e.end_date, e.date_of_birth, e.contact_no, n.sex, n.first_name, n.middle_name, n.last_name, n.suffix, a.house_no, a.street_name, a.barangay_subdivision, a.city_municipality, a.postal_code, a.province, a.country, p.title, p.can_create, p.can_edit, p.can_delete FROM tbl_employee e LEFT JOIN tbl_name n ON n.name_id = e.name_id LEFT JOIN tbl_address a ON a.address_id = e.address_id LEFT JOIN tbl_position p ON p.position_id = e.position_id WHERE p.title = ? AND e.password = ? AND e.isDeleted = 0";*/
 
-        public static string LOGIN_EMPLOYEE = "SELECT * FROM tbl_employee e LEFT JOIN tbl_position p ON p.id = e.position_id WHERE p.title = ? AND e.password = ? AND e.isDeleted = 0";
+        public static string LOGIN_EMPLOYEE = $"SELECT * FROM {Table.EMPLOYEE} AS e LEFT JOIN {Table.POSITION} p ON p.{Field.ID} = e.{Field.POSITION_ID} WHERE p.{Field.TITLE} = ? AND e.{Field.PASSWORD} = ? AND e.{Field.ISDELETED} = 0";
 
-        public static string GET_CURRENT_CHAIRMAN_SIGN = "SELECT * FROM tbl_image WHERE image_name='Signature - CurrentChairman'";
-        public static string Search(string text)
-        {
-            return "SELECT * FROM `tbl_franchise` AS f LEFT JOIN `tbl_operator` AS O ON f.operator_id=O.id LEFT JOIN `tbl_driver` AS D ON f.driver_id=D.id LEFT JOIN `tbl_name` AS OName ON O.name_id=OName.id LEFT JOIN `tbl_name` AS DName ON D.name_id=DName.id WHERE f.body_number LIKE \"%" + text + "%\" OR OName.last_name LIKE \"%" + text + "%\" OR DName.last_name LIKE \"%" + text + "%\" AND f.isDeleted = 0 LIMIT 0, 10";
-        }
+        public static string GET_CURRENT_CHAIRMAN = $"SELECT * FROM {Table.EMPLOYEE} AS e LEFT JOIN {Table.POSITION} p ON p.{Field.ID} = e.{Field.POSITION_ID} WHERE p.{Field.TITLE} = \"Chairman\" AND e.{Field.ISDELETED} = 0";
+
+        public static string CLEAN_NAME = $"DELETE n FROM {Table.NAME} AS n LEFT JOIN {Table.OPERATOR} AS o ON n.{Field.ID} = o.{Field.NAME_ID} LEFT JOIN {Table.DRIVER} AS d ON n.{Field.ID} = d.{Field.NAME_ID} LEFT JOIN {Table.EMPLOYEE} AS e ON n.{Field.ID} = e.{Field.NAME_ID} WHERE o.{Field.NAME_ID} IS NULL AND d.{Field.NAME_ID} IS NULL AND e.{Field.NAME_ID} IS NULL;";
+
+        public static string CLEAN_ADDRESS = $"DELETE a FROM {Table.ADDRESS} AS a LEFT JOIN {Table.OPERATOR} AS o ON a.{Field.ID} = o.{Field.ADDRESS_ID} LEFT JOIN {Table.DRIVER} AS d ON a.{Field.ID} = d.{Field.ADDRESS_ID} LEFT JOIN {Table.EMPLOYEE} AS e ON a.{Field.ID} = e.{Field.ADDRESS_ID} WHERE o.{Field.ADDRESS_ID} IS NULL AND d.{Field.ADDRESS_ID} IS NULL AND e.{Field.ADDRESS_ID} IS NULL;";
+
+        public static string CLEAN_IMAGE = $"DELETE i FROM {Table.IMAGE} AS i LEFT JOIN {Table.OPERATOR} AS o ON i.{Field.ID} = o.{Field.IMAGE_ID} OR i.{Field.ID} = o.{Field.SIGN_ID} LEFT JOIN {Table.DRIVER} AS d ON i.{Field.ID} = d.{Field.IMAGE_ID} OR i.{Field.ID} = d.{Field.SIGN_ID} LEFT JOIN {Table.EMPLOYEE} AS e ON i.{Field.ID} = e.{Field.IMAGE_ID} OR i.{Field.ID} = e.{Field.SIGN_ID} WHERE (o.{Field.IMAGE_ID} IS NULL AND o.{Field.SIGN_ID} IS NULL) AND (d.{Field.IMAGE_ID} IS NULL AND d.{Field.SIGN_ID} IS NULL) AND (e.{Field.IMAGE_ID} IS NULL AND e.{Field.SIGN_ID} IS NULL);";
+
+        public static string SEARCH(string text) =>
+            $"SELECT * FROM {Table.FRANCHISE} f LEFT JOIN {Table.OPERATOR} O ON f.{Field.OPERATOR_ID}=O.{Field.ID} LEFT JOIN {Table.DRIVER} D ON f.{Field.DRIVER_ID}=D.{Field.ID} " +
+            $"LEFT JOIN {Table.NAME} OName ON O.{Field.NAME_ID}=OName.{Field.ID} LEFT JOIN {Table.NAME} DName ON D.{Field.NAME_ID}=DName.{Field.ID} " +
+            $"WHERE f.{Field.BODY_NUMBER} LIKE \"%{text}%\" OR OName.{Field.LASTNAME} LIKE \"%{text}%\" OR DName.{Field.LASTNAME} LIKE \"%{text}%\" AND f.{Field.ISDELETED} = 0 LIMIT 0, 10";
+
+        public static string GET_ALL_PAYMENT_IN_MONTH(int month, int year) =>
+            $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} <> -1 AND {Field.ISDELETED} = 0";
+        
+
         public static string GetEnumDescription(CRUDControl value)
         {
             FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
@@ -25,11 +37,6 @@ namespace SPTC_APP.Database
 
             return attributes.Length > 0 ? attributes[0].Description : value.ToString();
         }
-        public static string GET_ALL_PAYMENT_IN_MONTH(int month, int year)
-        {
-            return $"SELECT SUM(deposit) FROM tbl_payment_details WHERE YEAR(date) = {year} AND MONTH(date) = {month} AND ledger_id <> -1 AND isDeleted = 0";
-        }
-
         public static string Protect(string input)
         {
             using (MD5 md5 = MD5.Create())
@@ -59,7 +66,7 @@ namespace SPTC_APP.Database
         public static string DRIVER = "tbl_driver";
         public static string POSITION = "tbl_position";
         public static string OPERATOR = "tbl_operator";
-        public static string PAYMENT_DETAILS = "tbl_payment";
+        public static string PAYMENT_DETAILS = "tbl_payment_details";
         public static string LOAN = "tbl_loan_ledger";
         public static string SHARE_CAPITAL = "tbl_share_capital_ledger";
         public static string LONG_TERM_LOAN = "tbl_long_term_loan_ledger";
@@ -212,6 +219,36 @@ namespace SPTC_APP.Database
 
         [Description("TRY AGAIN")]
         TRY_AGAIN,
+
+    }
+
+    public class Clean
+    {
+        private string CLEANER;
+        /// <summary>
+        /// CLean only if IS_ADMIN
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="cleaner"></param>
+        public Clean(string cleaner)
+        {
+            CLEANER = cleaner;
+        }
+
+        public bool Start()
+        {
+            if (AppState.IS_ADMIN)
+            {
+                using (MySqlConnection connection = DatabaseConnection.GetConnection())
+                {
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand(CLEANER, connection);
+                    int affectedRows = command.ExecuteNonQuery();
+                    return affectedRows > 0;
+                }
+            }
+            return false;
+        }
 
     }
 }

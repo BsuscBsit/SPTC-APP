@@ -280,7 +280,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppState.cs" />
-    <Compile Include="Database\Clean.cs" />
     <Compile Include="Database\DatabaseConnection.cs" />
     <Compile Include="Database\RequestQuery.cs" />
     <Compile Include="Database\Retrieve.cs" />

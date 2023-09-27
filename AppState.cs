@@ -25,13 +25,13 @@ namespace SPTC_APP
         public static string REGISTRATION_NO = "9520-03006397";
         public static double PRINT_AJUSTMENTS = 0;
         public static int DEFAULT_CAMERA = 0;
-
+        public static List<string> ALL_EMPLOYEES = new List<string> { "General Manager", "Secretary", "Treasurer", "Bookeeper", "Chairman" };
 
         //"Signature - CurrentChairman" signature usage in name
 
 
         //NOT SAVED EXTERNALLY
-        public static List<string> Employees =new List<string> { "General Manager", "Secretary", "Treasurer", "Bookeeper" };
+        public static List<string> Employees =new List<string> { ALL_EMPLOYEES[0], ALL_EMPLOYEES[1], ALL_EMPLOYEES[2], ALL_EMPLOYEES[3] };
         public static bool IS_ADMIN = false;
         public static Employee USER = null;
         public static Dictionary<string, double> MonthlyIncome;
@@ -119,6 +119,10 @@ namespace SPTC_APP
             {
 
                 USER = employee;
+                if(employee.position.ToString() == Employees[0])
+                {
+                    IS_ADMIN = true;
+                }
 
                 if (AppState.isDeployment)
                 {
@@ -164,6 +168,7 @@ namespace SPTC_APP
                 REGISTRATION_NO,
                 PRINT_AJUSTMENTS,
                 DEFAULT_CAMERA,
+                ALL_EMPLOYEES,
             };
 
             if (File.Exists(APPSTATE_PATH))
@@ -203,6 +208,7 @@ namespace SPTC_APP
                     REGISTRATION_NO = data.REGISTRATION_NO;
                     PRINT_AJUSTMENTS = data.PRINT_AJUSTMENTS;
                     DEFAULT_CAMERA = data.DEFAULT_CAMERA;
+                    ALL_EMPLOYEES = data.ALL_EMPLOYEES;
                          
                 }
                 catch (Exception e)
@@ -214,8 +220,9 @@ namespace SPTC_APP
 
         public static System.Windows.Media.ImageSource FetchChairmanSign()
         {
-            Image presImage = Retrieve.GetDataUsingQuery<Image>(RequestQuery.GET_CURRENT_CHAIRMAN_SIGN).FirstOrDefault();
-            return presImage.GetSource();
+            Employee chair = Retrieve.GetDataUsingQuery<Employee>(RequestQuery.GET_CURRENT_CHAIRMAN).FirstOrDefault();
+            //EventLogger.Post($"OUT :: {chair?.sign?.ToString()}");
+            return chair?.sign?.GetSource() ?? null;
         }
     }
 

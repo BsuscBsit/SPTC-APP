@@ -561,6 +561,9 @@ namespace SPTC_APP.View
                     UpdateZoom(2.44);
                     scrollViewer.ScrollToHorizontalOffset(tho + (offsetAfterSpace * 2));
                     scrollViewer.ScrollToVerticalOffset(tvo + (offsetAfterSpace * 2));
+                } else
+                {
+                    ControlWindow.ShowDialog("Note: ", "Pwede rito maglagay ng functionality", Icons.NOTIFY);
                 }
             }
         }

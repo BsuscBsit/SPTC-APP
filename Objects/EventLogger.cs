@@ -7,7 +7,6 @@ namespace SPTC_APP.Objects
 {
     public class EventLogger
     {
-        private static readonly string LogFilePath = "Logs\\log.txt";
         private static readonly int MaxLines = 10000;
 
         public static void Post(string message)
@@ -18,7 +17,7 @@ namespace SPTC_APP.Objects
             {
                 EnsureLogFileExists();
 
-                string currentLogContents = File.ReadAllText(LogFilePath);
+                string currentLogContents = File.ReadAllText(AppState.LOGS);
                 string updatedLogContents = logEntry + currentLogContents;
 
                 if (updatedLogContents.CountLines() > MaxLines)
@@ -27,7 +26,8 @@ namespace SPTC_APP.Objects
                     updatedLogContents = string.Join(Environment.NewLine, lines.Take(MaxLines));
                 }
 
-                File.WriteAllText(LogFilePath, updatedLogContents);
+                File.WriteAllText(AppState.LOGS, updatedLogContents);
+
             }
             catch (Exception ex)
             {
@@ -37,12 +37,12 @@ namespace SPTC_APP.Objects
 
         private static void EnsureLogFileExists()
         {
-            if (!File.Exists(LogFilePath))
+            if (!File.Exists(AppState.LOGS))
             {
                 try
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(LogFilePath));
-                    File.Create(LogFilePath).Close();
+                    Directory.CreateDirectory(Path.GetDirectoryName(AppState.LOGS));
+                    File.Create(AppState.LOGS).Close();
                 }
                 catch (Exception ex)
                 {

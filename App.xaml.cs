@@ -9,7 +9,8 @@ namespace SPTC_APP
     /// </summary>
     public partial class App : Application
     {
-
+        
+        
     }
     
 }

@@ -402,6 +402,11 @@ namespace SPTC_APP.View
             sp.ShowDialog();
         }
 
+        private void btnOpenLogs_Click(object sender, RoutedEventArgs e)
+        {
+            (new LogsWindow()).Show();
+        }
+
 
 
         //PLANS ON EDITING FIELDS

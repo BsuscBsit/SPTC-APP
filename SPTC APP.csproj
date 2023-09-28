@@ -256,6 +256,9 @@
     <Compile Include="View\IDGenerator\Previews\PrintPreview.xaml.cs">
       <DependentUpon>PrintPreview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LogsWindow.xaml.cs">
+      <DependentUpon>LogsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\Leaflets\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
@@ -333,6 +336,10 @@
     <Page Include="View\IDGenerator\Previews\PrintPreview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LogsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\Leaflets\DashboardView.xaml">
       <SubType>Designer</SubType>

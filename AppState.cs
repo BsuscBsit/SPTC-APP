@@ -43,15 +43,18 @@ namespace SPTC_APP
         public static Window mainwindow = null;
 
         private static int WindowCount = 0;
-        public static int WindowsCounter(bool isOpen)
+        public static void WindowsCounter(bool isOpen, object sender)
         {
+            int result = 0;
             if (isOpen)
             {
-                return WindowCount = WindowCount + 1;
+                result = 1;
             } else
             {
-                return WindowCount = WindowCount - 1;
+                result = -1;
             }
+            WindowCount += result;
+            EventLogger.Post($"OUT :: Opened Window Count = {WindowCount}");
         }
 
         public static async Task<bool> LoadDatabase()

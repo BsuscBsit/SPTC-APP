@@ -23,8 +23,8 @@ namespace SPTC_APP.View
         {
             InitializeComponent();
             AppState.mainwindow?.Hide();
-            Activated += (sender, e) => { AppState.WindowsCounter(true); };
-            Closing += (sender, e) => { AppState.WindowsCounter(false); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
 
         public void ReturnControl(GenerateID prev)

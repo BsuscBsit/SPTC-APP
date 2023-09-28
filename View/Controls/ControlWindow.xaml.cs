@@ -16,8 +16,8 @@ namespace SPTC_APP.View
             this.SetIcon(icons);
             this.lblHeader.Content = header;
             this.tblockContent.Text = content;
-            Activated += (sender, e) => { AppState.WindowsCounter(true); };
-            Closing += (sender, e) => { AppState.WindowsCounter(false); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
 
         public static void Show(string header, string content, Icons icons = Icons.DEFAULT)

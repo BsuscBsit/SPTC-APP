@@ -18,8 +18,6 @@ namespace SPTC_APP.View.Pages.Leaflets
         public TableView(string table)
         {
             InitializeComponent();
-            Activated += (sender, e) => { AppState.WindowsCounter(true); };
-            Closing += (sender, e) => { AppState.WindowsCounter(false); };
             this.table = table;
             if(table == Table.FRANCHISE)
             {

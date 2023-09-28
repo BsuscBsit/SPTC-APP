@@ -23,8 +23,8 @@ namespace SPTC_APP.View.Pages
             InitializeComponent();
             username.Content = AppState.USER?.position.title.ToString();
             DashBoard_Click(DashBoard, null);
-            Activated += (sender, e) => { AppState.WindowsCounter(true); };
-            Closing += (sender, e) => { AppState.WindowsCounter(false); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
 
         private void imgClose_Click(object sender, RoutedEventArgs e)

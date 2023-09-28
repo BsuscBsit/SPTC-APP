@@ -19,8 +19,6 @@ namespace SPTC_APP.View.Pages.Leaflets
         public Modules(string moduleName)
         {
             InitializeComponent();
-            Activated += (sender, e) => { AppState.WindowsCounter(true); };
-            Closing += (sender, e) => { AppState.WindowsCounter(false); };
             switch (moduleName)
             {
                 case HISTORY:

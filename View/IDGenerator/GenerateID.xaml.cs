@@ -45,8 +45,7 @@ namespace SPTC_APP.View
         public GenerateID()
         {
             InitializeComponent();
-            Activated += (sender, e) => { AppState.WindowsCounter(true); };
-            Closing += (sender, e) => { AppState.WindowsCounter(false); };
+           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             AppState.mainwindow?.Hide();
             tboxAddressS.Text = AppState.DEFAULT_ADDRESSLINE2;
             bDay.SelectedDate = DateTime.Today;
@@ -68,8 +67,7 @@ namespace SPTC_APP.View
         public GenerateID(Franchise franchise, bool isDriver)
         {
             InitializeComponent();
-            Activated += (sender, e) => { AppState.WindowsCounter(true); };
-            Closing += (sender, e) => { AppState.WindowsCounter(false); };
+           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             AppState.mainwindow?.Hide();
             bDay.SelectedDate = DateTime.Today;
             this.franchise = franchise;
@@ -190,6 +188,7 @@ namespace SPTC_APP.View
         //WINDOW EVENTS
         private async void Window_ContentRendered(object sender, EventArgs e)
         {
+            AppState.WindowsCounter(true, sender);
             await Task.Delay(TimeSpan.FromSeconds(0.2));
             tboxFn.Focus();
         }

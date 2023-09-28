@@ -172,7 +172,6 @@ namespace SPTC_APP.Objects
                 return false;
             }
         }
-
         private static void ShowLoginWindowAndCloseCurrent(Window window)
         {
             (new Login()).Show();

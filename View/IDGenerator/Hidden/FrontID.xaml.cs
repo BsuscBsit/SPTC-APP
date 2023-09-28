@@ -12,6 +12,8 @@ namespace SPTC_APP.View
         public FrontID()
         {
             InitializeComponent();
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
         public void Populate(Franchise franchise, General type)
         {

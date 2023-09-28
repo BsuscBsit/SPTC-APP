@@ -18,7 +18,7 @@ namespace SPTC_APP.View.Pages.Leaflets
         public DashboardView()
         {
             InitializeComponent();
-            
+
         }
         public async Task<Grid> Fetch()
         {

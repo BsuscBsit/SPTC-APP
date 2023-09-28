@@ -30,6 +30,8 @@ namespace SPTC_APP.View
             EventLogger.Post("VIEW :: TEST Window");
             tabControl.SelectionChanged += TabControl_SelectionChanged;
             imgSignatureo.Source = AppState.FetchChairmanSign();
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
 
         //Test for VideoCamera
@@ -398,6 +400,11 @@ namespace SPTC_APP.View
         {
             SignPad sp = new SignPad();
             sp.ShowDialog();
+        }
+
+        private void btnOpenLogs_Click(object sender, RoutedEventArgs e)
+        {
+            (new LogsWindow()).Show();
         }
 
 

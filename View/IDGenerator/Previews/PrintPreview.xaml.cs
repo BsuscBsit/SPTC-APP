@@ -265,11 +265,11 @@ namespace SPTC_APP.View
         {
             switch(i)
             {
-                case 1: return "One"; break;
-                case 2: return "Two"; break;
-                case 3: return "Three"; break;
-                case 4: return "Four"; break;
-                default: return "No"; break;
+                case 1: return "One";
+                case 2: return "Two";
+                case 3: return "Three";
+                case 4: return "Four";
+                default: return "No";
             }
         }
 
@@ -669,12 +669,6 @@ namespace SPTC_APP.View
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             CenterOffset();
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            
-            base.OnClosing(e);
         }
 
         private void btnSaveAnID_Click(object sender, RoutedEventArgs e)

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+using SPTC_APP.Objects;
 
 namespace SPTC_APP
 {
@@ -13,5 +9,8 @@ namespace SPTC_APP
     /// </summary>
     public partial class App : Application
     {
+        
+        
     }
+    
 }

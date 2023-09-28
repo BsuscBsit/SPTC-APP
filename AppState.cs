@@ -16,22 +16,21 @@ namespace SPTC_APP
     public static class AppState
     {
         //SAVED EXTERNALLY
-        public static string APPSTATE_PATH = "Config\\AppState.json";
-        public static string OUTPUT_PATH = "Output\\";
-        public static string DEFAULT_PASSWORD = "Admin1234";
-        public static string DEFAULT_ADDRESSLINE2 = "Sapang Palay San Jose Del Monte, Bulacan";
-        public static string EXPIRATION_DATE = "2023 - 2024";
-        public static string CHAIRMAN = "ROLLY M. LABINDAO";
-        public static string REGISTRATION_NO = "9520-03006397";
-        public static double PRINT_AJUSTMENTS = 0;
-        public static int DEFAULT_CAMERA = 0;
-        public static List<string> ALL_EMPLOYEES = new List<string> { "General Manager", "Secretary", "Treasurer", "Bookeeper", "Chairman" };
-
-        //"Signature - CurrentChairman" signature usage in name
+        public static string APPSTATE_PATH;
+        public static string LOGS;
+        public static string OUTPUT_PATH;
+        public static string DEFAULT_PASSWORD;
+        public static string DEFAULT_ADDRESSLINE2;
+        public static string EXPIRATION_DATE;
+        public static string CHAIRMAN;
+        public static string REGISTRATION_NO;
+        public static double PRINT_AJUSTMENTS;
+        public static int DEFAULT_CAMERA;
+        public static string[] ALL_EMPLOYEES;
 
 
         //NOT SAVED EXTERNALLY
-        public static List<string> Employees =new List<string> { ALL_EMPLOYEES[0], ALL_EMPLOYEES[1], ALL_EMPLOYEES[2], ALL_EMPLOYEES[3] };
+        public static List<string> Employees;
         public static bool IS_ADMIN = false;
         public static Employee USER = null;
         public static Dictionary<string, double> MonthlyIncome;
@@ -41,6 +40,43 @@ namespace SPTC_APP
         public static bool isDeployment_IDGeneration = false;
 
         public static Window mainwindow = null;
+
+        private static HashSet<Window> OpenedWindows = new HashSet<Window>();
+
+        public static void WindowsCounter(bool isOpen, object sender)
+        {
+            if (isOpen)
+            {
+                if (sender is SPTC_APP.View.Login)
+                {
+                    // Close all other windows
+                    foreach (Window window in Application.Current.Windows)
+                    {
+                        if (window != sender)
+                        {
+                            window.Close();
+                        }
+                    }
+                }
+
+                // Add the opened window to the HashSet
+                OpenedWindows.Add(sender as Window);
+            }
+            else
+            {
+
+                // Remove the closed window from the HashSet
+                OpenedWindows.Remove(sender as Window);
+            }
+            if (AppState.OpenedWindows.Count > 0)
+            {
+                AppState.SaveToJson();
+                string windowList = string.Join(", ", OpenedWindows.Select(w => w.ToString()));
+                EventLogger.Post($"OUT :: Opened Window Count = {AppState.OpenedWindows.Count}, Opened Windows: [ {windowList} ]");
+            }
+        }
+
+
 
         public static async Task<bool> LoadDatabase()
         {
@@ -140,7 +176,7 @@ namespace SPTC_APP
                 }
 
                 
-                EventLogger.Post($"User :: Login Success: USER({username})");
+                EventLogger.Post($"USER :: Login Success: USER({username})");
                 window.Close();
             }
         }
@@ -149,10 +185,24 @@ namespace SPTC_APP
         {
             IS_ADMIN = false;
             USER = null;
-            EventLogger.Post($"User :: Logout Success");
+            EventLogger.Post($"USER :: Logout Success");
             (new Login()).Show();
             AppState.mainwindow = null;
             window.Close();
+        }
+        public static void PopulateDefaults()
+        {
+            APPSTATE_PATH = "Config\\AppState.json";
+            LOGS = "Logs\\log.txt";
+            OUTPUT_PATH = "Output\\";
+            DEFAULT_PASSWORD = "Admin1234";
+            DEFAULT_ADDRESSLINE2 = "Sapang Palay San Jose Del Monte, Bulacan";
+            EXPIRATION_DATE = "2023 - 2024";
+            CHAIRMAN = "ROLLY M. LABINDAO";
+            REGISTRATION_NO = "9520-03006397";
+            PRINT_AJUSTMENTS = 0;
+            DEFAULT_CAMERA = 0;
+            ALL_EMPLOYEES = new string[] { "General Manager", "Secretary", "Treasurer", "Bookeeper", "Chairman" };
         }
 
         public static void SaveToJson()
@@ -160,6 +210,7 @@ namespace SPTC_APP
             var data = new
             {
                 APPSTATE_PATH,
+                LOGS,
                 OUTPUT_PATH,
                 DEFAULT_PASSWORD,
                 DEFAULT_ADDRESSLINE2,
@@ -179,6 +230,7 @@ namespace SPTC_APP
             {
                 try
                 {
+                    PopulateDefaults();
                     Directory.CreateDirectory(Path.GetDirectoryName(APPSTATE_PATH));
                     File.Create(APPSTATE_PATH).Close();
                     string json = JsonConvert.SerializeObject(data, Formatting.Indented);
@@ -200,6 +252,7 @@ namespace SPTC_APP
                 {
                     dynamic data = JsonConvert.DeserializeObject(json);
                     APPSTATE_PATH = data.APPSTATE_PATH;
+                    LOGS = data.LOGS;
                     OUTPUT_PATH = data.OUTPUT_PATH;
                     DEFAULT_PASSWORD = data.DEFAULT_PASSWORD;
                     DEFAULT_ADDRESSLINE2 = data.DEFAULT_ADDRESSLINE2;
@@ -215,7 +268,16 @@ namespace SPTC_APP
                 {
                     EventLogger.Post("ERR :: Exception in JSON : "+e.Message);
                 }
+            } else
+            {
+                PopulateDefaults();
+                AppState.SaveToJson();
+                if (File.Exists(APPSTATE_PATH))
+                {
+                    AppState.LoadFromJson();
+                }
             }
+            Employees = new List<string> { ALL_EMPLOYEES?[0], ALL_EMPLOYEES?[1], ALL_EMPLOYEES?[2], ALL_EMPLOYEES?[3] };
         }
 
         public static System.Windows.Media.ImageSource FetchChairmanSign()

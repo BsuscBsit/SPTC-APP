@@ -22,8 +22,6 @@ namespace SPTC_APP.Objects
             string database = Settings.Default.Database;
             string username = Settings.Default.Username;
             string password = Settings.Default.Password;
-            AppState.LoadFromJson();
-            AppState.SaveToJson();
             try
             {
                 DatabaseConnection.Builder builder = CreateDatabaseConnectionBuilder(host, port, database, username, password);
@@ -172,7 +170,6 @@ namespace SPTC_APP.Objects
                 return false;
             }
         }
-
         private static void ShowLoginWindowAndCloseCurrent(Window window)
         {
             (new Login()).Show();

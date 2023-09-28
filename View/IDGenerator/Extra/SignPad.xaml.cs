@@ -36,6 +36,8 @@ namespace SPTC_APP.View.IDGenerator.Extra
         public SignPad()
         {
             InitializeComponent();
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
 
         private void btnWindowResizer_Click(object sender, RoutedEventArgs e)

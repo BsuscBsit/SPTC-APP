@@ -19,7 +19,6 @@ namespace SPTC_APP.View.Pages.Leaflets
         public Modules(string moduleName)
         {
             InitializeComponent();
-
             switch (moduleName)
             {
                 case HISTORY:

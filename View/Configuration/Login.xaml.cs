@@ -18,6 +18,8 @@ namespace SPTC_APP.View
             InitializeComponent();
             if(!AppState.isDeployment && !AppState.isDeployment_IDGeneration) pbPassword.Password = "Admin1234";
             cbUser.ItemsSource = AppState.Employees;
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)

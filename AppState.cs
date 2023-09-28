@@ -43,6 +43,62 @@ namespace SPTC_APP
 
         private static HashSet<Window> OpenedWindows = new HashSet<Window>();
 
+
+
+
+        public static void Login(string username, string password, Window window)
+        {
+            dynamic result = Retrieve.Login(username, password);
+
+            if (result is View.ControlWindow controlWindow)
+            {
+                result.Show();
+                EventLogger.Post($"User :: Login Failed: USER({username})");
+                //DEBUG THIS ON OTHER PC
+                //CreateEmployee(AppState.Employees.IndexOf(username)); //result in password :: 751cb3f4aa17c36186f4856c8982bf27
+            }
+            else if (result is Employee employee)
+            {
+
+                USER = employee;
+                if (employee.position.ToString() == Employees[0])
+                {
+                    IS_ADMIN = true;
+                }
+
+                if (AppState.isDeployment)
+                {
+                    MainBody body = (new MainBody());
+                    AppState.mainwindow = body;
+                    body.Show();
+                }
+                if (AppState.isDeployment_IDGeneration)
+                {
+                    (new PrintPreview()).Show();
+                }
+                if (!AppState.isDeployment_IDGeneration && !AppState.isDeployment)
+                {
+                    (new Test()).Show();
+                }
+
+
+                EventLogger.Post($"USER :: Login Success: USER({username})");
+                window.Close();
+            }
+        }
+        public static void Logout(Window window)
+        {
+            IS_ADMIN = false;
+            USER = null;
+            EventLogger.Post($"USER :: Logout Success");
+            (new Login()).Show();
+            AppState.mainwindow = null;
+            window.Close();
+        }
+
+
+
+
         public static void WindowsCounter(bool isOpen, object sender)
         {
             if (isOpen)
@@ -75,9 +131,6 @@ namespace SPTC_APP
                 EventLogger.Post($"OUT :: Opened Window Count = {AppState.OpenedWindows.Count}, Opened Windows: [ {windowList} ]");
             }
         }
-
-
-
         public static async Task<bool> LoadDatabase()
         {
             try
@@ -107,89 +160,6 @@ namespace SPTC_APP
                 return false;
             }
         }
-
-        private static double RetrieveIncomeForMonth(int month)
-        {
-            int year = DateTime.Now.Year;
-
-            // Check if the requested month is in the future (next year)
-            if (month > DateTime.Now.Month)
-            {
-                year--;
-            }
-            try
-            {
-                var income = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(month, year)).FirstOrDefault();
-                return income;
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions
-                EventLogger.Post($"ERR :: Exception in Retrieveing Income{ex.Message}");
-                return 0.0;
-            }
-        }
-
-
-
-        public static async Task<bool> Test()
-        {
-            await Task.Delay(10000);
-            return true;
-        }
-
-
-
-        public static void Login(string username, string password, Window window)
-        {
-            dynamic result = Retrieve.Login(username, password);
-
-            if (result is View.ControlWindow controlWindow)
-            {
-                result.Show();
-                EventLogger.Post($"User :: Login Failed: USER({username})");
-                //DEBUG THIS ON OTHER PC
-                //CreateEmployee(AppState.Employees.IndexOf(username)); //result in password :: 751cb3f4aa17c36186f4856c8982bf27
-            }
-            else if (result is Employee employee)
-            {
-
-                USER = employee;
-                if(employee.position.ToString() == Employees[0])
-                {
-                    IS_ADMIN = true;
-                }
-
-                if (AppState.isDeployment)
-                {
-                    MainBody body = (new MainBody());
-                    AppState.mainwindow = body;
-                    body.Show();
-                }
-                if (AppState.isDeployment_IDGeneration)
-                {
-                    (new PrintPreview()).Show();
-                }
-                if(!AppState.isDeployment_IDGeneration && !AppState.isDeployment)
-                {
-                    (new Test()).Show();
-                }
-
-                
-                EventLogger.Post($"USER :: Login Success: USER({username})");
-                window.Close();
-            }
-        }
-
-        public static void Logout(Window window)
-        {
-            IS_ADMIN = false;
-            USER = null;
-            EventLogger.Post($"USER :: Logout Success");
-            (new Login()).Show();
-            AppState.mainwindow = null;
-            window.Close();
-        }
         public static void PopulateDefaults()
         {
             APPSTATE_PATH = "Config\\AppState.json";
@@ -204,7 +174,6 @@ namespace SPTC_APP
             DEFAULT_CAMERA = 0;
             ALL_EMPLOYEES = new string[] { "General Manager", "Secretary", "Treasurer", "Bookeeper", "Chairman" };
         }
-
         public static void SaveToJson()
         {
             var data = new
@@ -226,7 +195,8 @@ namespace SPTC_APP
             {
                 string json = JsonConvert.SerializeObject(data, Formatting.Indented);
                 File.WriteAllText(APPSTATE_PATH, json);
-            } else
+            }
+            else
             {
                 try
                 {
@@ -242,7 +212,6 @@ namespace SPTC_APP
                 }
             }
         }
-
         public static void LoadFromJson()
         {
             if (File.Exists(APPSTATE_PATH))
@@ -262,13 +231,14 @@ namespace SPTC_APP
                     PRINT_AJUSTMENTS = data.PRINT_AJUSTMENTS;
                     DEFAULT_CAMERA = data.DEFAULT_CAMERA;
                     ALL_EMPLOYEES = data.ALL_EMPLOYEES;
-                         
+
                 }
                 catch (Exception e)
                 {
-                    EventLogger.Post("ERR :: Exception in JSON : "+e.Message);
+                    EventLogger.Post("ERR :: Exception in JSON : " + e.Message);
                 }
-            } else
+            }
+            else
             {
                 PopulateDefaults();
                 AppState.SaveToJson();
@@ -280,12 +250,42 @@ namespace SPTC_APP
             Employees = new List<string> { ALL_EMPLOYEES?[0], ALL_EMPLOYEES?[1], ALL_EMPLOYEES?[2], ALL_EMPLOYEES?[3] };
         }
 
+
+
+
         public static System.Windows.Media.ImageSource FetchChairmanSign()
         {
             Employee chair = Retrieve.GetDataUsingQuery<Employee>(RequestQuery.GET_CURRENT_CHAIRMAN).FirstOrDefault();
             //EventLogger.Post($"OUT :: {chair?.sign?.ToString()}");
             return chair?.sign?.GetSource() ?? null;
         }
+        private static double RetrieveIncomeForMonth(int month)
+        {
+            int year = DateTime.Now.Year;
+
+            // Check if the requested month is in the future (next year)
+            if (month > DateTime.Now.Month)
+            {
+                year--;
+            }
+            try
+            {
+                var income = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(month, year)).FirstOrDefault();
+                return income;
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                EventLogger.Post($"ERR :: Exception in Retrieveing Income{ex.Message}");
+                return 0.0;
+            }
+        }
+        public static async Task<bool> Test()
+        {
+            await Task.Delay(10000);
+            return true;
+        }
+        
     }
 
 }

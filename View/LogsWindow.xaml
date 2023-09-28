@@ -11,6 +11,13 @@
             <DataGrid x:Name="dgLogs"/>
         </Grid>
         <Button x:Name="btnReload" Content="RELOAD" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top" Click="btnReload_Click"/>
+        <CheckBox x:Name="cbUniqueTime" Content="Unique Time" HorizontalAlignment="Left" Margin="120,20,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbSearch" HorizontalAlignment="left" Margin="250,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" TextChanged="tbSearch_TextChanged"/>
+        <CheckBox x:Name="cbDay" Content="DAY" HorizontalAlignment="Left" Margin="450,20,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbDate" Content="DATE" HorizontalAlignment="Left" Margin="500,20,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbTime" Content="TIME" HorizontalAlignment="Left" Margin="550,20,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbType" Content="TYPE" HorizontalAlignment="Left" Margin="600,20,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbMessage" Content="MESSAGE" HorizontalAlignment="Left" Margin="650,20,0,0" VerticalAlignment="Top" IsChecked="True"/>
 
     </Grid>
 </Window>

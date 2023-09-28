@@ -52,8 +52,193 @@ namespace SPTC_APP.View
             InitializePanning();
             zoomSlider.Value = zoomScale;
             UpdateZoomText();
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
 
+        //ROUTED XAML EVENTS
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            CenterOffset();
+            AppState.WindowsCounter(true, sender);
+        }
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            int idnotsavedcount = 0;
+            int idnotprintedcunt = 0;
+            foreach (ID id in new ID[] { PrintPreview.mGrid1, PrintPreview.mGrid2, PrintPreview.mGrid3, PrintPreview.mGrid4 })
+            {
+                if (id != null)
+                {
+                    if (!id.isSaved)
+                    {
+                        idnotsavedcount = idnotsavedcount + 1;
+                    }
+                    if (id.FrontPrint == 0 || id.BackPrint == 0)
+                    {
+                        idnotprintedcunt = idnotprintedcunt + 1;
+                    }
+                }
+            }
+
+            if (idnotprintedcunt > 0)
+            {
+                if (ControlWindow.ShowDialog("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotprintedcunt > 1 ? "s were" : " was")} not printed!", Icons.NOTIFY))
+                {
+                    ResetPrintData();
+                    (new PrintPreview()).Show();
+                    this.Close();
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            if (idnotsavedcount > 0)
+            {
+                if (ControlWindow.ShowDialog("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotsavedcount > 1 ? "s were" : " was")} not saved!", Icons.NOTIFY))
+                {
+                    ResetPrintData();
+                    (new PrintPreview()).Show();
+                    this.Close();
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+
+
+            ResetPrintData();
+            (new PrintPreview()).Show();
+            this.Close();
+        }
+        private void btnAddNew_Click(object sender, RoutedEventArgs e)
+        {
+            if (idcount < 4)
+            {
+                (new GenerateID()).Show();
+                this.Close();
+            }
+        }
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (idcount >= 1)
+            {
+                if (isFront)
+                {
+                    PrintPaper printpaper = new PrintPaper();
+                    if (printpaper.StartPrint(new ID[] { mGrid1, mGrid2, mGrid3, mGrid4 }, true))
+                    {
+                        EventLogger.Post($"OUT :: Print Front page");
+                    }
+                    else
+                    {
+                        EventLogger.Post($"OUT :: Print Front page Failed");
+                    }
+                }
+                else
+                {
+                    PrintPaper printpaper = new PrintPaper();
+                    if (printpaper.StartPrint(new ID[] { mGrid2, mGrid1, mGrid4, mGrid3 }, false))
+                    {
+                        EventLogger.Post($"OUT :: Print Back page");
+                    }
+                    else
+                    {
+                        EventLogger.Post($"OUT :: Print Back page Failed");
+                    }
+                }
+            }
+
+            checkIdCount();
+        }
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            AppState.mainwindow?.Show();
+            //App.Current.Shutdown();
+        }
+        private void btnPage1_Click(object sender, RoutedEventArgs e)
+        {
+            lblPageNum.Content = "Page 1 of 2";
+            btnPage1.IsEnabled = false;
+            btnPage2.IsEnabled = true;
+            g1Border.BorderBrush = Brushes.Black;
+            g2Border.BorderBrush = Brushes.Black;
+            g3Border.BorderBrush = Brushes.Black;
+            g4Border.BorderBrush = Brushes.Black;
+
+            // Switch is in the False state
+            btnPrintCurrent.Content = "PRINT PAGE 1";
+            isFront = true;
+            RenderIDs();
+        }
+        private void btnPage2_Click(object sender, RoutedEventArgs e)
+        {
+            SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#33000000"));
+            lblPageNum.Content = "Page 2 of 2";
+            btnPage1.IsEnabled = true;
+            btnPage2.IsEnabled = false;
+            g1Border.BorderBrush = brush;
+            g2Border.BorderBrush = brush;
+            g3Border.BorderBrush = brush;
+            g4Border.BorderBrush = brush;
+
+            // Switch is in the True state
+            btnPrintCurrent.Content = "PRINT PAGE 2";
+            isFront = false;
+            RenderIDs();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SaveAndClearID();
+        }
+        private void btnPrintBoth_Click(object sender, RoutedEventArgs e)
+        {
+            if (idcount >= 1)
+            {
+                PrintPaper printpaper = new PrintPaper();
+                if (printpaper.StartPrint(new ID[] { mGrid1, mGrid2, mGrid3, mGrid4 }, true))
+                {
+                    EventLogger.Post($"OUT :: Print Front page");
+                    if (printpaper.StartPrint(new ID[] { mGrid2, mGrid1, mGrid4, mGrid3 }, false))
+                    {
+                        EventLogger.Post($"OUT :: Print Back page");
+                        checkIdCount();
+                    }
+                    else
+                    {
+                        EventLogger.Post($"OUT :: Print Back page FAILED");
+                    }
+
+                }
+                else
+                {
+                    EventLogger.Post($"OUT :: Print Front and Back page FAILED");
+                }
+
+                printpaper.Show();
+                printpaper.Close();
+                RenderIDs();
+            }
+        }
+        private void btnSaveAnID_Click(object sender, RoutedEventArgs e)
+        {
+            if (zoomedIn != null)
+            {
+                zoomedIn.SaveInfo();
+                EventLogger.Post("OUT :: ID : " + zoomedIn.franchise.BodyNumber + " FRONT: " + zoomedIn.FrontPrint + " BACK: " + zoomedIn.BackPrint);
+            }
+        }
+
+
+
+        //ID EVENTS
         private void RenderIDs()
         {
             if (isFront)
@@ -149,7 +334,6 @@ namespace SPTC_APP.View
                 }
             }
         }
-
         private System.Windows.Controls.Image CreateNoIDImage()
         {
             return new System.Windows.Controls.Image
@@ -162,216 +346,6 @@ namespace SPTC_APP.View
                 Opacity = 0.2
             };
         }
-
-        private void Button_expand(object sender, RoutedEventArgs e)
-        {
-            /*Button button = (Button)sender;
-            Grid grid = FindVisualChild<Grid>(button);
-            if (grid != null)
-            {
-                System.Windows.Controls.Image image = FindVisualChild<System.Windows.Controls.Image>(grid);
-                if (image != null)
-                {
-                    if (image.Source is BitmapImage bitmapImage)
-                    {
-                        string imagePath = "/View/Images/no_id.png";
-                        if (bitmapImage.UriSource.ToString() != imagePath)
-                        {
-                            preview.Source = image.Source;
-                        }
-                    }
-                    else
-                    {
-                        preview.Source = image.Source;
-                    }
-                }
-            }*/
-        }
-
-        private static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
-        {
-            int childCount = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < childCount; i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
-
-                if (child is T typedChild)
-                    return typedChild;
-
-                T childOfChild = FindVisualChild<T>(child);
-                if (childOfChild != null)
-                    return childOfChild;
-            }
-
-            return null;
-        }
-
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            int idnotsavedcount = 0;
-            int idnotprintedcunt = 0;
-            foreach (ID id in new ID[] { PrintPreview.mGrid1, PrintPreview.mGrid2, PrintPreview.mGrid3, PrintPreview.mGrid4 })
-            {
-                if (id != null)
-                {
-                    if(!id.isSaved)
-                    {
-                        idnotsavedcount = idnotsavedcount + 1;
-                    }
-                    if(id.FrontPrint == 0 || id.BackPrint == 0)
-                    {
-                        idnotprintedcunt = idnotprintedcunt + 1;
-                    }
-                }
-            }
-
-            if (idnotprintedcunt > 0)
-            {
-                if (ControlWindow.ShowDialog("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotprintedcunt>1?"s were":" was")} not printed!",  Icons.NOTIFY))
-                {
-                    ResetPrintData();
-                    (new PrintPreview()).Show();
-                    this.Close();
-                    return;
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            if (idnotsavedcount > 0)
-            {
-                if(ControlWindow.ShowDialog("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotsavedcount > 1 ? "s were" : " was")} not saved!", Icons.NOTIFY))
-                {
-                    ResetPrintData();
-                    (new PrintPreview()).Show();
-                    this.Close();
-                    return;
-                } else
-                {
-                    return;
-                }
-            }
-
-            
-
-            ResetPrintData();
-            (new PrintPreview()).Show();
-            this.Close();
-        }
-
-        private string numtext(int i)
-        {
-            switch(i)
-            {
-                case 1: return "One";
-                case 2: return "Two";
-                case 3: return "Three";
-                case 4: return "Four";
-                default: return "No";
-            }
-        }
-
-        private void btnAddNew_Click(object sender, RoutedEventArgs e)
-        {
-            if (idcount < 4)
-            {
-                (new GenerateID()).Show();
-                this.Close();
-            }
-        }
-
-        private void btnPrint_Click(object sender, RoutedEventArgs e)
-        {
-
-            if(idcount >= 1)
-            {
-                if (isFront)
-                {
-                    PrintPaper printpaper = new PrintPaper();
-                    if (printpaper.StartPrint(new ID[] { mGrid1, mGrid2, mGrid3, mGrid4 }, true))
-                    {
-                        EventLogger.Post($"OUT :: Print Front page");
-                    } else
-                    {
-                        EventLogger.Post($"OUT :: Print Front page Failed");
-                    }
-                }
-                else
-                {
-                    PrintPaper printpaper = new PrintPaper();
-                    if (printpaper.StartPrint(new ID[] { mGrid2, mGrid1, mGrid4, mGrid3 }, false))
-                    {
-                        EventLogger.Post($"OUT :: Print Back page");
-                    } else {
-                        EventLogger.Post($"OUT :: Print Back page Failed");
-                    }
-                }
-            }
-            
-            checkIdCount();
-        }
-
-        private void SaveAndClearID()
-        {
-            //Save to database and clear print paper
-            PrintPreview.mGrid1?.SaveInfo();
-            PrintPreview.mGrid2?.SaveInfo();
-            PrintPreview.mGrid3?.SaveInfo();
-            PrintPreview.mGrid4?.SaveInfo();
-
-            foreach (ID id in new ID[] { PrintPreview.mGrid1, PrintPreview.mGrid2, PrintPreview.mGrid3, PrintPreview.mGrid4 }) {
-                if(id != null)
-                {
-                    EventLogger.Post("OUT :: ID : " + id.franchise.BodyNumber + " FRONT: " + id.FrontPrint  + " BACK: " +  id.BackPrint);
-
-                }
-            }
-            ResetPrintData();
-            checkIdCount();
-        }
-
-        private void btnExit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            AppState.mainwindow?.Show();
-            //App.Current.Shutdown();
-        }
-
-        private void checkIdCount()
-        {
-            if (idcount == 0)
-            {
-                Grid0Content.Visibility = Visibility.Visible;
-                btnPrint.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                Grid0Content.Visibility = Visibility.Collapsed;
-                btnPrint.Visibility = Visibility.Visible;
-                if (mGrid1 != null) {
-                    if (mGrid1.FrontPrint >= 1 && mGrid1.BackPrint >= 1)
-                    {
-                        btnClear.IsEnabled = true;
-                        btnClear.Visibility = Visibility.Visible;
-                    }
-                } else
-                {
-                    btnClear.Visibility = Visibility.Collapsed;
-                }
-            }
-        }
-
-        private void ResetPrintData()
-        {
-            PrintPreview.mGrid1 = null;
-            PrintPreview.mGrid2 = null;
-            PrintPreview.mGrid3 = null;
-            PrintPreview.mGrid4 = null;
-            PrintPreview.idcount = 0;
-        }
-
         public void NewID(ID id)
         {
 
@@ -396,145 +370,67 @@ namespace SPTC_APP.View
             checkIdCount();
         }
 
-        private void btnPage1_Click(object sender, RoutedEventArgs e)
-        {
-            lblPageNum.Content = "Page 1 of 2";
-            btnPage1.IsEnabled = false;
-            btnPage2.IsEnabled = true;
-            g1Border.BorderBrush = Brushes.Black;
-            g2Border.BorderBrush = Brushes.Black;
-            g3Border.BorderBrush = Brushes.Black;
-            g4Border.BorderBrush = Brushes.Black;
 
-            // Switch is in the False state
-            btnPrintCurrent.Content = "PRINT PAGE 1";
-            isFront = true;
-            RenderIDs();
-        }
-
-        private void btnPage2_Click(object sender, RoutedEventArgs e)
+        //HELPER FUNCTIONS
+        private string numtext(int i)
         {
-            SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#33000000"));
-            lblPageNum.Content = "Page 2 of 2";
-            btnPage1.IsEnabled = true;
-            btnPage2.IsEnabled = false;
-            g1Border.BorderBrush = brush;
-            g2Border.BorderBrush = brush;
-            g3Border.BorderBrush = brush;
-            g4Border.BorderBrush = brush;
-
-            // Switch is in the True state
-            btnPrintCurrent.Content = "PRINT PAGE 2";
-            isFront = false;
-            RenderIDs();
-        }
-
-        //Zoom Functionality
-        private void InitializePanning()
-        {
-            scrollViewer.PreviewMouseDown += OnMouseDown;
-            scrollViewer.PreviewMouseMove += OnMouseMove;
-            scrollViewer.PreviewMouseUp += OnMouseUp;
-        }
-        private void CenterOffset()
-        {
-            scrollViewer.ScrollToVerticalOffset(scrollViewer.ScrollableHeight / 2);
-            scrollViewer.ScrollToHorizontalOffset(scrollViewer.ScrollableWidth / 2);
-        }
-        private void OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            switch(i)
             {
-                var contentArea = new Rect(0, 0, scrollViewer.ViewportWidth, scrollViewer.ViewportHeight);
+                case 1: return "One";
+                case 2: return "Two";
+                case 3: return "Three";
+                case 4: return "Four";
+                default: return "No";
+            }
+        }
+        private void SaveAndClearID()
+        {
+            //Save to database and clear print paper
+            PrintPreview.mGrid1?.SaveInfo();
+            PrintPreview.mGrid2?.SaveInfo();
+            PrintPreview.mGrid3?.SaveInfo();
+            PrintPreview.mGrid4?.SaveInfo();
 
-                if (contentArea.Contains(e.GetPosition(scrollViewer)))
+            foreach (ID id in new ID[] { PrintPreview.mGrid1, PrintPreview.mGrid2, PrintPreview.mGrid3, PrintPreview.mGrid4 }) {
+                if(id != null)
                 {
-                    isPanning = true;
-                    panOrigin = e.GetPosition(scrollViewer);
-                    Mouse.OverrideCursor = Cursors.Hand;
-                    scrollViewer.CaptureMouse();
+                    EventLogger.Post("OUT :: ID : " + id.franchise.BodyNumber + " FRONT: " + id.FrontPrint  + " BACK: " +  id.BackPrint);
+
+                }
+            }
+            ResetPrintData();
+            checkIdCount();
+        }
+        private void checkIdCount()
+        {
+            if (idcount == 0)
+            {
+                Grid0Content.Visibility = Visibility.Visible;
+                btnPrint.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                Grid0Content.Visibility = Visibility.Collapsed;
+                btnPrint.Visibility = Visibility.Visible;
+                if (mGrid1 != null) {
+                    if (mGrid1.FrontPrint >= 1 && mGrid1.BackPrint >= 1)
+                    {
+                        btnClear.IsEnabled = true;
+                        btnClear.Visibility = Visibility.Visible;
+                    }
+                } else
+                {
+                    btnClear.Visibility = Visibility.Collapsed;
                 }
             }
         }
-        private void OnMouseMove(object sender, MouseEventArgs e)
+        private void ResetPrintData()
         {
-            if (isPanning && scrollViewer.IsMouseCaptured)
-            {
-                Point currentPos = e.GetPosition(scrollViewer);
-                double deltaX = currentPos.X - panOrigin.X;
-                double deltaY = currentPos.Y - panOrigin.Y;
-
-                scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset - deltaX);
-                scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - deltaY);
-
-                panOrigin = currentPos;
-
-
-                canvasPageCtrl.FadeIn(1);
-                canvasSaveAnID.FadeOut(1);
-            }
-        }
-        private void OnMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (isPanning)
-            {
-                isPanning = false;
-                Mouse.OverrideCursor = Cursors.Arrow;
-                scrollViewer.ReleaseMouseCapture();
-            }
-        }
-        private void UpdateZoom(double newZoom)
-        {
-            zoomScale = Math.Max(0.1, newZoom);
-            zoomSlider.Value = zoomScale;
-            UpdateZoomTransform();
-        }
-        private void UpdateZoomTransform()
-        {
-            ScaleTransform scaleTransform = new ScaleTransform(zoomScale, zoomScale);
-            zoomableGrid.LayoutTransform = scaleTransform;
-            UpdateZoomText();
-        }
-        private void UpdateZoomText()
-        {
-            if (zoomTextBlock != null)
-            {
-                zoomTextBlock.Content = $"Zoom: {Math.Round(zoomScale * 100)}%";
-            }
-        }
-        private void ZoomIn_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateZoom(zoomScale + 0.1);
-        }
-        private void ZoomOut_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateZoom(zoomScale - 0.1);
-        }
-        private void ResetZoom_Click(object sender, RoutedEventArgs e)
-        {
-            isReset = true;
-            if(canvasSaveAnID.Visibility == Visibility.Visible)
-            {
-                canvasSaveAnID.FadeOut(1);
-                canvasPageCtrl.FadeIn(1);
-            }
-            UpdateZoom(1.0);
-            CenterOffset();
-        }
-        private void ZoomSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            UpdateZoom(zoomSlider.Value);
-        }
-        private void ScrollViewer_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (zoomScale == 1)
-            {
-                if (e.OriginalSource is Image image)
-                {
-                    ZoomToImage(image);
-                    e.Handled = true;
-                }
-            }
+            PrintPreview.mGrid1 = null;
+            PrintPreview.mGrid2 = null;
+            PrintPreview.mGrid3 = null;
+            PrintPreview.mGrid4 = null;
+            PrintPreview.idcount = 0;
         }
         private void ZoomToImage(Image image)
         {
@@ -580,52 +476,136 @@ namespace SPTC_APP.View
 
                     canvasPageCtrl.FadeOut(1);
                     canvasSaveAnID.FadeIn(1);
-                    
-                } else
+
+                }
+                else
                 {
                     //ControlWindow.ShowDialog("Note: ", "Pwede rito maglagay ng functionality", Icons.NOTIFY);
                 }
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+
+
+        //ZOOM EVENTS
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            SaveAndClearID();
-        }
-        private void btnPrintBoth_Click(object sender, RoutedEventArgs e)
-        {
-            if (idcount >= 1)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
-                PrintPaper printpaper = new PrintPaper();
-                if (printpaper.StartPrint(new ID[] { mGrid1, mGrid2, mGrid3, mGrid4 }, true))
-                {
-                    EventLogger.Post($"OUT :: Print Front page");
-                    if (printpaper.StartPrint(new ID[] { mGrid2, mGrid1, mGrid4, mGrid3 }, false))
-                    {
-                        EventLogger.Post($"OUT :: Print Back page");
-                        checkIdCount();
-                    }
-                    else
-                    {
-                        EventLogger.Post($"OUT :: Print Back page FAILED");
-                    }
+                var contentArea = new Rect(0, 0, scrollViewer.ViewportWidth, scrollViewer.ViewportHeight);
 
-                }
-                else
+                if (contentArea.Contains(e.GetPosition(scrollViewer)))
                 {
-                    EventLogger.Post($"OUT :: Print Front and Back page FAILED");
+                    isPanning = true;
+                    panOrigin = e.GetPosition(scrollViewer);
+                    Mouse.OverrideCursor = Cursors.Hand;
+                    scrollViewer.CaptureMouse();
                 }
+            }
+        }
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (isPanning && scrollViewer.IsMouseCaptured)
+            {
+                Point currentPos = e.GetPosition(scrollViewer);
+                double deltaX = currentPos.X - panOrigin.X;
+                double deltaY = currentPos.Y - panOrigin.Y;
 
-                printpaper.Show();
-                printpaper.Close();
-                RenderIDs();
+                scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset - deltaX);
+                scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - deltaY);
+
+                panOrigin = currentPos;
+
+
+                canvasPageCtrl.FadeIn(1);
+                canvasSaveAnID.FadeOut(1);
+            }
+        }
+        private void OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (isPanning)
+            {
+                isPanning = false;
+                Mouse.OverrideCursor = Cursors.Arrow;
+                scrollViewer.ReleaseMouseCapture();
+            }
+        }
+        private void ZoomIn_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateZoom(zoomScale + 0.1);
+        }
+        private void ZoomOut_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateZoom(zoomScale - 0.1);
+        }
+        private void ResetZoom_Click(object sender, RoutedEventArgs e)
+        {
+            isReset = true;
+            if (canvasSaveAnID.Visibility == Visibility.Visible)
+            {
+                canvasSaveAnID.FadeOut(1);
+                canvasPageCtrl.FadeIn(1);
+            }
+            UpdateZoom(1.0);
+            CenterOffset();
+        }
+        private void ZoomSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            UpdateZoom(zoomSlider.Value);
+        }
+        private void ScrollViewer_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (zoomScale == 1)
+            {
+                if (e.OriginalSource is Image image)
+                {
+                    ZoomToImage(image);
+                    e.Handled = true;
+                }
             }
         }
 
+        
+        
+        //ZOOM FUNCTIONS
+        private void InitializePanning()
+        {
+            scrollViewer.PreviewMouseDown += OnMouseDown;
+            scrollViewer.PreviewMouseMove += OnMouseMove;
+            scrollViewer.PreviewMouseUp += OnMouseUp;
+        }
+        private void CenterOffset()
+        {
+            scrollViewer.ScrollToVerticalOffset(scrollViewer.ScrollableHeight / 2);
+            scrollViewer.ScrollToHorizontalOffset(scrollViewer.ScrollableWidth / 2);
+        }
+        private void UpdateZoom(double newZoom)
+        {
+            zoomScale = Math.Max(0.1, newZoom);
+            zoomSlider.Value = zoomScale;
+            UpdateZoomTransform();
+        }
+        private void UpdateZoomTransform()
+        {
+            ScaleTransform scaleTransform = new ScaleTransform(zoomScale, zoomScale);
+            zoomableGrid.LayoutTransform = scaleTransform;
+            UpdateZoomText();
+        }
+        private void UpdateZoomText()
+        {
+            if (zoomTextBlock != null)
+            {
+                zoomTextBlock.Content = $"Zoom: {Math.Round(zoomScale * 100)}%";
+            }
+        }
         private void frontPage_Loaded(object sender, RoutedEventArgs e)
         {
             CenterOffset();
         }
-
+        private void frontPage_Loaded(object sender, SizeChangedEventArgs e)
+        {
+            CenterOffset();
+        }
         private void scrollViewer_LayoutUpdated(object sender, EventArgs e)
         {
             if (isReset)
@@ -634,7 +614,6 @@ namespace SPTC_APP.View
                 isReset = false;
             }
         }
-
         private void scrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             bool isCtrlPressed = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
@@ -660,24 +639,6 @@ namespace SPTC_APP.View
             }
             e.Handled = true;
         }
-
-        private void frontPage_Loaded(object sender, SizeChangedEventArgs e)
-        {
-            CenterOffset();
-        }
-
-        private void Window_ContentRendered(object sender, EventArgs e)
-        {
-            CenterOffset();
-        }
-
-        private void btnSaveAnID_Click(object sender, RoutedEventArgs e)
-        {
-            if(zoomedIn != null)
-            {
-                zoomedIn.SaveInfo();
-                EventLogger.Post("OUT :: ID : " + zoomedIn.franchise.BodyNumber + " FRONT: " + zoomedIn.FrontPrint + " BACK: " + zoomedIn.BackPrint);
-            }
-        }
+        
     }
 }

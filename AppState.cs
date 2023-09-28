@@ -128,7 +128,7 @@ namespace SPTC_APP
             {
                 AppState.SaveToJson();
                 string windowList = string.Join(", ", OpenedWindows.Select(w => w.ToString()));
-                EventLogger.Post($"OUT :: Opened Window Count = {AppState.OpenedWindows.Count}, Opened Windows: [ {windowList} ]");
+                //EventLogger.Post($"OUT :: Opened Window Count = {AppState.OpenedWindows.Count}, Opened Windows: [ {windowList} ]"); 
             }
         }
         public static async Task<bool> LoadDatabase()
@@ -230,7 +230,7 @@ namespace SPTC_APP
                     REGISTRATION_NO = data.REGISTRATION_NO;
                     PRINT_AJUSTMENTS = data.PRINT_AJUSTMENTS;
                     DEFAULT_CAMERA = data.DEFAULT_CAMERA;
-                    ALL_EMPLOYEES = data.ALL_EMPLOYEES;
+                    ALL_EMPLOYEES = JsonConvert.DeserializeObject<string[]>(data.ALL_EMPLOYEES.ToString());
 
                 }
                 catch (Exception e)

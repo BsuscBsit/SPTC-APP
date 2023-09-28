@@ -466,12 +466,12 @@
                 </Border>
             </Canvas>
         </Grid>
-        <Grid Grid.RowSpan="4" d:IsHidden="True">
+        <Grid Grid.RowSpan="4">
             <Grid
                 x:Name="Grid0Content"
                 Width="568.8"
                 Height="550.4"
-                Visibility="Visible">
+                Visibility="Hidden">
                 <Image Source="/View/Images/bg_dialog.png" Stretch="UniformToFill">
                     <Image.OpacityMask>
                         <VisualBrush>

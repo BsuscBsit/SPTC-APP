@@ -13,8 +13,10 @@ namespace SPTC_APP.View
             AppState.LoadFromJson();
 
             EventLogger.Post("OUT :: <----- START UP ----->");
-            Controller.StartInitialization(this, pbLoading, tbDebugLog);
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+            ContentRendered += (sender, e) => {
+                Controller.StartInitialization(this, pbLoading, tbDebugLog);
+                AppState.WindowsCounter(true, sender);
+            };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
 
         }

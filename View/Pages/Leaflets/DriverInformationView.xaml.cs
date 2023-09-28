@@ -13,13 +13,13 @@ namespace SPTC_APP.View.Pages.Leaflets
         public DriverInformationView()
         {
             InitializeComponent();
-            lblbodyNumber.Content = MainBody.selectedFranchise.BodyNumber;
-            lblDriverName.Content = MainBody.selectedFranchise.Driver;
-            lblDateOfBIrth.Content = MainBody.selectedFranchise.Driver?.birthday.ToLongDateString();
-            lblPlateNo.Content = MainBody.selectedFranchise.LicenseNO;
-            lblMTOPNo.Content = MainBody.selectedFranchise.MTOPNo;
+            lblbodyNumber.Content = MainBody.selectedFranchise?.BodyNumber;
+            lblDriverName.Content = MainBody.selectedFranchise?.Driver;
+            lblDateOfBIrth.Content = MainBody.selectedFranchise?.Driver?.birthday.ToLongDateString();
+            lblPlateNo.Content = MainBody.selectedFranchise?.LicenseNO;
+            lblMTOPNo.Content = MainBody.selectedFranchise?.MTOPNo;
 
-            imgProfilePic.ImageSource = MainBody.selectedFranchise.Driver?.image?.GetSource();
+            imgProfilePic.ImageSource = MainBody.selectedFranchise?.Driver?.image?.GetSource();
         }
 
         public Grid Fetch()

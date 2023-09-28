@@ -15,13 +15,13 @@ namespace SPTC_APP.View.Pages.Leaflets
         public FranchiseInformationView()
         {
             InitializeComponent();
-            lblbodyNumber.Content = MainBody.selectedFranchise.BodyNumber;
-            lblOperatorName.Content = MainBody.selectedFranchise.Operator;
-            lblDateOfBIrth.Content = MainBody.selectedFranchise.Operator?.birthday.ToLongDateString();
-            lblPlateNo.Content = MainBody.selectedFranchise.LicenseNO;
-            lblMTOPNo.Content = MainBody.selectedFranchise.MTOPNo;
+            lblbodyNumber.Content = MainBody.selectedFranchise?.BodyNumber;
+            lblOperatorName.Content = MainBody.selectedFranchise?.Operator;
+            lblDateOfBIrth.Content = MainBody.selectedFranchise?.Operator?.birthday.ToLongDateString();
+            lblPlateNo.Content = MainBody.selectedFranchise?.LicenseNO;
+            lblMTOPNo.Content = MainBody.selectedFranchise?.MTOPNo;
 
-            imgProfilePic.ImageSource = MainBody.selectedFranchise.Operator?.image?.GetSource();
+            imgProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
         }
 
         public Grid Fetch()

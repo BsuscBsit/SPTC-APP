@@ -276,7 +276,7 @@
     <Compile Include="View\Pages\Leaflets\TableView.xaml.cs">
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\InputFranchiseView.xaml.cs">
+    <Compile Include="View\Pages\Input\InputFranchiseView.xaml.cs">
       <DependentUpon>InputFranchiseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\MainBody.xaml.cs">
@@ -363,7 +363,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Pages\InputFranchiseView.xaml">
+    <Page Include="View\Pages\Input\InputFranchiseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

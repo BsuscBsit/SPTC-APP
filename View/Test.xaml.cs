@@ -18,6 +18,9 @@ using SPTC_APP.View.Controls;
 using SPTC_APP.View.Pages;
 using Image = SPTC_APP.Objects.Image;
 using SPTC_APP.View.IDGenerator.Extra;
+using SPTC_APP.View.IDGenerator.Hidden;
+using SPTC_APP.View.Pages.Leaflets;
+using SPTC_APP.View.Pages.Input;
 
 namespace SPTC_APP.View
 {
@@ -31,7 +34,7 @@ namespace SPTC_APP.View
             tabControl.SelectionChanged += TabControl_SelectionChanged;
             imgSignatureo.Source = AppState.FetchChairmanSign();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
-           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
 
         //Test for VideoCamera
@@ -77,9 +80,77 @@ namespace SPTC_APP.View
                 {
                     btnFranchise_Click(null, null);
                 }
+                if(selectedTab.Header.ToString() ==  "Test Windows")
+                {
+                    LoadWindowButtons();
+                }
             }
 
         }
+
+        private void LoadWindowButtons()
+        {
+            WindowGrid.Children.Clear();
+            List<Window> windows = new List<Window>()
+            {
+                new DatabaseConfigInput(),
+                new Login(),
+                //new SplashScreen(), //DO NOT TEST THIS, This calls COntroller imedietely without after opening
+                new ControlWindow(),
+                new SignPad(),
+                new BackID(),
+                new FrontID(),
+                new PrintPaper(),
+                new GeneratedIDPreview(),
+                new PrintPreview(),
+                new GenerateID(),
+                new DashboardView(),
+                new DriverInformationView(),
+                new FranchiseInformationView(),
+                new Modules(Modules.HISTORY),
+                new TableView(Table.FRANCHISE),
+                new InputFranchiseView(),
+                new MainBody(),
+                new LogsWindow(),
+                new Test()
+            };
+
+
+            int buttonsPerRow = 3;
+            WindowGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+            WindowGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+            WindowGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+            for (int i = 0; i < windows.Count; i++)
+            {
+                Button btnwindow = new Button();
+                btnwindow.Height = 20;
+                btnwindow.Width = ActualWidth / 3;
+                btnwindow.Content = windows[i].ToString().Split('.').Last();
+                btnwindow.Tag = windows[i];
+                btnwindow.Click += (sender, e) => { ((sender as Button).Tag as Window).Show(); };
+                btnwindow.Margin = new Thickness(10);
+                int row = i / buttonsPerRow;
+                int col = i % buttonsPerRow;
+                if (col == 0)
+                {
+                    WindowGrid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+                }
+
+                Grid.SetRow(btnwindow, row);
+                Grid.SetColumn(btnwindow, col);
+
+                WindowGrid.Children.Add(btnwindow);
+            }
+
+
+        }
+        private void UpdateLogin()
+        {
+            lblName.Content = $"My Name is {AppState.USER?.name.wholename}";
+            lblAddress.Content = $"I am from {AppState.USER?.address}";
+            lblPosition.Content = $"I am a {AppState.USER?.position}";
+        }
+
 
         private void OnStylusDown(object sender, StylusDownEventArgs e)
         {
@@ -96,43 +167,23 @@ namespace SPTC_APP.View
 
             inkCanvas.DefaultDrawingAttributes = drawingAttributes;
         }
-
         private void OnStylusMove(object sender, StylusEventArgs e)
         {
             StylusPointCollection points = e.GetStylusPoints(inkCanvas);
             Stroke newStroke = new Stroke(points);
             inkCanvas.Strokes.Add(newStroke);
         }
-
         private void OnStylusUp(object sender, StylusEventArgs e)
         {
             inkCanvas.ReleaseStylusCapture();
         }
 
 
-        private void UpdateLogin()
-        {
-            lblName.Content = $"My Name is {AppState.USER?.name.wholename}";
-            lblAddress.Content = $"I am from {AppState.USER?.address}";
-            lblPosition.Content = $"I am a {AppState.USER?.position}";
-        }
-
-
-        //SAMPLE ONLY, use DataTable on next Iterati
-
-        /*foreach(Franchise f in fetchedData)
-        {
-            if(f.Driver_day != null)
-            {
-                (new GenerateID(f, true)).Show();
-            }
-        }*/
-
+        
         private void dgList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
         }
-
         private async void btnFranchise_Click(object sender, RoutedEventArgs e)
         {
             int batchSize = 5;
@@ -174,7 +225,6 @@ namespace SPTC_APP.View
                 pageIndex++;
             }
         }
-
         private async void btnDriver_Click(object sender, RoutedEventArgs e)
         {
 
@@ -215,7 +265,6 @@ namespace SPTC_APP.View
                 pageIndex++;
             }
         }
-
         private async void btnOperator_Click(object sender, RoutedEventArgs e)
         {
 
@@ -254,7 +303,6 @@ namespace SPTC_APP.View
                 pageIndex++;
             }
         }
-
         private async void btnEmployee_Click(object sender, RoutedEventArgs e)
         {
 
@@ -291,15 +339,12 @@ namespace SPTC_APP.View
                 pageIndex++;
             }
         }
-
-
         private void btnMain_Click(object sender, RoutedEventArgs e)
         {
             MainBody body = (new MainBody());
             AppState.mainwindow = body;
             body.Show();
         }
-
         private void btnSaveSign_Click(object sender, RoutedEventArgs e)
         {
             // Set the background of the inkCanvas to transparent
@@ -382,7 +427,6 @@ namespace SPTC_APP.View
 
             imgSignatureo.Source = AppState.FetchChairmanSign();
         }
-
         private void btnClean_Click(object sender, RoutedEventArgs e)
         {
             if ((new Clean(RequestQuery.CLEAN_ADDRESS)).Start())
@@ -395,17 +439,20 @@ namespace SPTC_APP.View
 
             
         }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             SignPad sp = new SignPad();
             sp.ShowDialog();
         }
-
         private void btnOpenLogs_Click(object sender, RoutedEventArgs e)
         {
             (new LogsWindow()).Show();
         }
+
+
+
+
+
 
 
 

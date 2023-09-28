@@ -128,7 +128,7 @@ namespace SPTC_APP
             {
                 AppState.SaveToJson();
                 string windowList = string.Join(", ", OpenedWindows.Select(w => w.ToString()));
-                //EventLogger.Post($"OUT :: Opened Window Count = {AppState.OpenedWindows.Count}, Opened Windows: [ {windowList} ]"); 
+                EventLogger.Post($"OUT :: Opened Window Count = {AppState.OpenedWindows.Count}, Opened Windows: [ {windowList} ]"); 
             }
         }
         public static async Task<bool> LoadDatabase()

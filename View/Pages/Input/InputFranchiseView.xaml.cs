@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SPTC_APP.Objects;
 
-namespace SPTC_APP.View.Pages
+namespace SPTC_APP.View.Pages.Input
 {
     /// <summary>
     /// Interaction logic for TupleView.xaml
@@ -25,7 +25,7 @@ namespace SPTC_APP.View.Pages
         {
             InitializeComponent();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
-           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             bDay.DisplayDate = DateTime.Now;
             AppState.mainwindow?.Hide();
         }

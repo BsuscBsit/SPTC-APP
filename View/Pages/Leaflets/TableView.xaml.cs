@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
+using SPTC_APP.View.Pages.Input;
 
 namespace SPTC_APP.View.Pages.Leaflets
 {

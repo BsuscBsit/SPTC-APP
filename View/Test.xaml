@@ -63,10 +63,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem
-                Height="20"
-                VerticalAlignment="Bottom"
-                Header="Test List">
+            <TabItem Header="Test List">
                 <Grid x:Name="list2" Background="#FFE5E5E5">
                     <TextBox
                         x:Name="tbResult"
@@ -89,6 +86,11 @@
                         Margin="632,18,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Test Windows">
+                <Grid x:Name="WindowGrid">
+                    
                 </Grid>
             </TabItem>
         </TabControl>

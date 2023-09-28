@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SPTC_APP.View.Controls;
 
 namespace SPTC_APP.View.IDGenerator.Extra
 {
@@ -26,72 +27,36 @@ namespace SPTC_APP.View.IDGenerator.Extra
     {
         bool isMaximized = true;
         bool noticeHasChanged = false;
-        private Rect? actualDimensions;
         private const double windowWidth = 640;
         private const double windowHeight = 390.4;
-        private Style roundedStyle;
-        private Style normalStyle;
-
+        private WindowStateHelper wsh;
 
         public RenderTargetBitmap signatureBitmapResult;
 
         public SignPad()
         {
             InitializeComponent();
-            InitProps();
-            MaximizeWindow();
-        }
-
-        private void InitProps()
-        {
-            actualDimensions = new Rect(
-                (SystemParameters.PrimaryScreenWidth - windowWidth) / 2,
-                (SystemParameters.PrimaryScreenHeight - windowHeight) / 2,
-                windowWidth, windowHeight);
-
-            roundedStyle = Application.Current.Resources["Minified"] as Style;
-            normalStyle = Application.Current.Resources["Maximized"] as Style;
         }
 
         private void btnWindowResizer_Click(object sender, RoutedEventArgs e)
         {
             if (isMaximized)
             {
+                DraggingHelper.DragWindow(borderTopBar);
                 borderTopBar.CornerRadius = new CornerRadius(12, 12, 0, 0);
-
-                RestoreWindow();
+                wsh.ResizeTo(WindowStateHelper.WindowPosition.CENTER, windowWidth, windowHeight);
                 isMaximized = false;
             }
             else
             {
+                DraggingHelper.DisableDragWindow(borderTopBar);
                 borderTopBar.CornerRadius = new CornerRadius(0);
-                MaximizeWindow();
+                wsh.MaximizeWindow(false);
                 isMaximized = true;
             }
         }
 
-        private void RestoreWindow()
-        {
-            // Restore the window to its original dimensions and style
-            this.Left = actualDimensions.Value.Left;
-            this.Top = actualDimensions.Value.Top;
-            this.Width = actualDimensions.Value.Width;
-            this.Height = actualDimensions.Value.Height;
-            this.Style = roundedStyle;
-        }
-
-        private void MaximizeWindow()
-        {
-            // Maximize the window to the working area dimensions and style
-            Rect workingArea = SystemParameters.WorkArea;
-            this.Left = workingArea.Left;
-            this.Top = workingArea.Top;
-            this.Width = workingArea.Width;
-            this.Height = workingArea.Height;
-            this.Style = normalStyle;
-        }
-
-        private void btnSaveStroke_Click(object sender, RoutedEventArgs e)
+        private async void btnSaveStroke_Click(object sender, RoutedEventArgs e)
         {
             if (inkSign.Strokes.Count > 0)
             {
@@ -152,7 +117,12 @@ namespace SPTC_APP.View.IDGenerator.Extra
             {
                 textblockNotice.FadeIn(0.2);
                 textblockNotice.Text = "Please draw your signature before saving.";
-                noticeHasChanged = true;
+                await Task.Delay(TimeSpan.FromSeconds(2));
+                if(inkSign.Strokes.Count < 1)
+                {
+                    textblockNotice.FadeIn(0.2);
+                    textblockNotice.Text = "Use your stylus to draw your signature inside the box. Keep your signature within the provided area.";
+                }
             }
         }
 
@@ -187,6 +157,12 @@ namespace SPTC_APP.View.IDGenerator.Extra
         private void inkSign_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
         {
             textblockNotice.FadeOut(0.2);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            wsh = new WindowStateHelper(this);
+            wsh.MaximizeWindow(false);
         }
     }
 

@@ -233,8 +233,10 @@
     </Compile>
     <Compile Include="View\Controls\DataGridHelper.cs" />
     <Compile Include="View\Controls\DialogHelper.cs" />
+    <Compile Include="View\Controls\DraggingHelper.cs" />
     <Compile Include="View\Controls\OutlinedText.cs" />
     <Compile Include="View\Controls\Scaler.cs" />
+    <Compile Include="View\Controls\WindowStateHelper.cs" />
     <Compile Include="View\IDGenerator\Extra\SignPad.xaml.cs">
       <DependentUpon>SignPad.xaml</DependentUpon>
     </Compile>

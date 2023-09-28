@@ -265,11 +265,11 @@ namespace SPTC_APP.View
         {
             switch(i)
             {
-                case 1: return "One"; break;
-                case 2: return "Two"; break;
-                case 3: return "Three"; break;
-                case 4: return "Four"; break;
-                default: return "No"; break;
+                case 1: return "One";
+                case 2: return "Two";
+                case 3: return "Three";
+                case 4: return "Four";
+                default: return "No";
             }
         }
 

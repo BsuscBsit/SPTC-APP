@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -27,9 +28,11 @@ namespace SPTC_APP.View.Styling
             element.BeginAnimation(UIElement.OpacityProperty, fadeOutAnimation);
         }
 
-        public static void FadeIn(this UIElement element, double durationSeconds = 1, Action completedCallback = null)
+        public static async void FadeIn(this UIElement element, double durationSeconds = 1, Action callback = null, Action completedCallback = null)
         {
+            element.Opacity = 0;
             element.Visibility = Visibility.Visible;
+            callback?.Invoke();
             DoubleAnimation fadeInAnimation = new DoubleAnimation
             {
                 From = 0.0,
@@ -42,6 +45,7 @@ namespace SPTC_APP.View.Styling
                 completedCallback?.Invoke();
             };
 
+            await Task.Delay(TimeSpan.FromSeconds(1));
             element.BeginAnimation(UIElement.OpacityProperty, fadeInAnimation);
         }
 

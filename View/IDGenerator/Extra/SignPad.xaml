@@ -13,7 +13,7 @@
     AllowsTransparency="True"
     Style="{StaticResource Maximized}"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Loaded="Window_Loaded">
     <!--  Window Height was set to Auto to get the final value before defining.  -->
     <!--  Also change the dimensions in Constructor.  -->
     <Grid>
@@ -30,7 +30,6 @@
                     VerticalAlignment="Center"
                     Background="White"
                     CornerRadius="7">
-                    <!--  To enlarge, adjust the Window instead.  -->
                     <Grid>
                         <Grid Margin="1,1,0,0">
                             <Border Margin="35,35,35,35" BorderThickness="1">
@@ -103,6 +102,7 @@
                         </Grid>
                         <Viewbox UseLayoutRounding="True">
                             <!--  Set the initial size of the InkCanvas to reflect the actual size needed.  -->
+                            <!--  To enlarge, adjust the Window instead.  -->
                             <InkCanvas
                                 x:Name="inkSign"
                                 Width="600"
@@ -115,19 +115,20 @@
             </Grid>
         </Grid>
         <Grid>
-            <Grid
-                ClipToBounds="True"
-                UseLayoutRounding="True">
+            <Grid ClipToBounds="True" UseLayoutRounding="True">
                 <Border
                     x:Name="borderOfButtons"
                     Height="95"
+                    Margin="0,-35,0,0"
                     Padding="21,10,14,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
                     Background="White"
                     BorderBrush="Gray"
                     BorderThickness="1"
                     CornerRadius="10"
                     MouseEnter="canvasButtons_MouseEnter"
-                    MouseLeave="canvasButtons_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-35,0,0">
+                    MouseLeave="canvasButtons_MouseLeave">
                     <Border.Effect>
                         <DropShadowEffect
                             BlurRadius="15"
@@ -210,13 +211,13 @@
                             Style="{DynamicResource CommonButtonStyle}" />
                     </StackPanel>
                 </Border>
-
             </Grid>
             <Border
                 x:Name="borderTopBar"
                 Grid.Row="0"
                 Height="40"
-                Background="{StaticResource BrushYellow}" VerticalAlignment="Top" />
+                VerticalAlignment="Top"
+                Background="{StaticResource BrushYellow}" />
         </Grid>
     </Grid>
 </Window>

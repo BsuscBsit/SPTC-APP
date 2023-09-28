@@ -24,6 +24,8 @@ namespace SPTC_APP.View.Pages
         public InputFranchiseView()
         {
             InitializeComponent();
+            Activated += (sender, e) => { AppState.WindowsCounter(true); };
+            Closing += (sender, e) => { AppState.WindowsCounter(false); };
             bDay.DisplayDate = DateTime.Now;
             AppState.mainwindow?.Hide();
         }

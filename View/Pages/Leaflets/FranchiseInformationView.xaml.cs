@@ -15,6 +15,8 @@ namespace SPTC_APP.View.Pages.Leaflets
         public FranchiseInformationView()
         {
             InitializeComponent();
+            Activated += (sender, e) => { AppState.WindowsCounter(true); };
+            Closing += (sender, e) => { AppState.WindowsCounter(false); };
             lblbodyNumber.Content = MainBody.selectedFranchise.BodyNumber;
             lblOperatorName.Content = MainBody.selectedFranchise.Operator;
             lblDateOfBIrth.Content = MainBody.selectedFranchise.Operator?.birthday.ToLongDateString();

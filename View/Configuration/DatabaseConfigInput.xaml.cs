@@ -22,6 +22,8 @@ namespace SPTC_APP.View
 
             // Load the last user input values
             LoadLastUserInput();
+            Activated += (sender, e) => { AppState.WindowsCounter(true); };
+            Closing += (sender, e) => { AppState.WindowsCounter(false); };
         }
 
         private void LoadLastUserInput()

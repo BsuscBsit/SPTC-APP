@@ -37,6 +37,8 @@ namespace SPTC_APP.View.IDGenerator.Extra
             InitializeComponent();
             InitProps();
             MaximizeWindow();
+            Activated += (sender, e) => { AppState.WindowsCounter(true); };
+            Closing += (sender, e) => { AppState.WindowsCounter(false); };
         }
 
         private void InitProps()

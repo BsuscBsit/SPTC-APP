@@ -671,12 +671,6 @@ namespace SPTC_APP.View
             CenterOffset();
         }
 
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            
-            base.OnClosing(e);
-        }
-
         private void btnSaveAnID_Click(object sender, RoutedEventArgs e)
         {
             if(zoomedIn != null)

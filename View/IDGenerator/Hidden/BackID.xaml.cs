@@ -11,6 +11,8 @@ namespace SPTC_APP.View
         public BackID()
         {
             InitializeComponent();
+            Activated += (sender, e) => { AppState.WindowsCounter(true); };
+            Closing += (sender, e) => { AppState.WindowsCounter(false); };
         }
         public void Populate(Franchise franchise, General type)
         {

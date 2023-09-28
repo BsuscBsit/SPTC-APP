@@ -21,6 +21,8 @@ namespace SPTC_APP.View.IDGenerator.Hidden
         public PrintPaper()
         {
             InitializeComponent();
+            Activated += (sender, e) => { AppState.WindowsCounter(true); };
+            Closing += (sender, e) => { AppState.WindowsCounter(false); };
             ChangeHW();
             borders = new Border[4];
             borders[0] = brd1;

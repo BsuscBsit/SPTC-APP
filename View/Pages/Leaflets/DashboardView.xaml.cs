@@ -18,7 +18,9 @@ namespace SPTC_APP.View.Pages.Leaflets
         public DashboardView()
         {
             InitializeComponent();
-            
+            Activated += (sender, e) => { AppState.WindowsCounter(true); };
+            Closing += (sender, e) => { AppState.WindowsCounter(false); };
+
         }
         public async Task<Grid> Fetch()
         {

@@ -10,9 +10,11 @@ namespace SPTC_APP.View
         public SplashScreen()
         {
             InitializeComponent();
-            
-                Controller.StartInitialization(this, pbLoading, tbDebugLog);
-            
+            Controller.StartInitialization(this, pbLoading, tbDebugLog);
+            Activated += (sender, e) => { AppState.WindowsCounter(true); };
+            Closing += (sender, e) => { AppState.WindowsCounter(false); };
         }
+
+        
     }
 }

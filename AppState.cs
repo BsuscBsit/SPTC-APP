@@ -42,6 +42,18 @@ namespace SPTC_APP
 
         public static Window mainwindow = null;
 
+        private static int WindowCount = 0;
+        public static int WindowsCounter(bool isOpen)
+        {
+            if (isOpen)
+            {
+                return WindowCount = WindowCount + 1;
+            } else
+            {
+                return WindowCount = WindowCount - 1;
+            }
+        }
+
         public static async Task<bool> LoadDatabase()
         {
             try

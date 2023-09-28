@@ -13,6 +13,8 @@ namespace SPTC_APP.View.Pages.Leaflets
         public DriverInformationView()
         {
             InitializeComponent();
+            Activated += (sender, e) => { AppState.WindowsCounter(true); };
+            Closing += (sender, e) => { AppState.WindowsCounter(false); };
             lblbodyNumber.Content = MainBody.selectedFranchise.BodyNumber;
             lblDriverName.Content = MainBody.selectedFranchise.Driver;
             lblDateOfBIrth.Content = MainBody.selectedFranchise.Driver?.birthday.ToLongDateString();

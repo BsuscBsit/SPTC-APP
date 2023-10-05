@@ -59,6 +59,21 @@ namespace SPTC_APP.Objects
             private set { }
         }
 
+        public string legalName
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(middlename))
+                {
+                    string middleInitials = string.Join("", middlename.Split(' ').Select(part => part[0]));
+                    return $"{firstname} {middleInitials}. {lastname} {suffix}".Trim();
+                }
+
+                return $"{firstname} {lastname} {suffix}".Trim();
+            }
+            private set { }
+        }
+
 
         private Upsert name;
 

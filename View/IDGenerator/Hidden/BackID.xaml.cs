@@ -18,32 +18,32 @@ namespace SPTC_APP.View
         {
             if (type == General.OPERATOR)
             {
-                lblName.Content = franchise.Operator.name.wholename.ToUpper();
+                lblName.Content = franchise.Operator.name?.legalName?.ToUpper();
 
                 lblLicense.Content = franchise.LicenseNO;
                 lblBodyNum.Content = franchise.BodyNumber;
                 lblEmePer.Content = franchise.Operator.emergencyPerson;
-                lblAddressBuilding.Content = franchise.Operator.address.addressline1;
-                lblAddressStreet.Content = franchise.Operator.address.addressline2;
+                lblAddressBuilding.Content = franchise.Operator.address?.addressline1;
+                lblAddressStreet.Content = franchise.Operator.address?.addressline2;
                 lblContact.Content = franchise.Operator.emergencyContact;
                 if (franchise.Operator.signature != null)
                 {
-                    imgSign.Source = franchise.Operator.signature.GetSource();
+                    imgSign.Source = franchise.Operator.signature?.GetSource();
                 }
             }
             else
             {
-                lblName.Content = franchise.Driver.name.wholename.ToUpper();
+                lblName.Content = franchise.Driver.name?.legalName?.ToUpper();
 
                 lblLicense.Content = franchise.LicenseNO;
                 lblBodyNum.Content = franchise.BodyNumber;
                 lblEmePer.Content = franchise.Driver.emergencyPerson;
-                lblAddressBuilding.Content = franchise.Driver.address.addressline1;
-                lblAddressStreet.Content = franchise.Driver.address.addressline2;
+                lblAddressBuilding.Content = franchise.Driver.address?.addressline1;
+                lblAddressStreet.Content = franchise.Driver.address?.addressline2;
                 lblContact.Content = franchise.Driver.emergencyContact;
                 if (franchise.Driver.signature != null)
                 {
-                    imgSign.Source = franchise.Driver.signature.GetSource();
+                    imgSign.Source = franchise.Driver.signature?.GetSource();
                 }
             }
         }

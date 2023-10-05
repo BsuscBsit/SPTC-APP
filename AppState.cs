@@ -23,7 +23,6 @@ namespace SPTC_APP
         public static string DEFAULT_PASSWORD;
         public static string DEFAULT_ADDRESSLINE2;
         public static string EXPIRATION_DATE;
-        public static string CHAIRMAN;
         public static string REGISTRATION_NO;
         public static double PRINT_AJUSTMENTS;
         public static bool LOG_WINDOW;
@@ -129,7 +128,6 @@ namespace SPTC_APP
             }
             if (AppState.OpenedWindows.Count > 0)
             {
-                AppState.SaveToJson();
                 string windowList = string.Join(", ", OpenedWindows.Select(w => w.ToString()));
                 if (LOG_WINDOW)
                 {
@@ -203,7 +201,6 @@ namespace SPTC_APP
             DEFAULT_PASSWORD = "Admin1234";
             DEFAULT_ADDRESSLINE2 = "Sapang Palay San Jose Del Monte, Bulacan";
             EXPIRATION_DATE = "2023 - 2024";
-            CHAIRMAN = "ROLLY M. LABINDAO";
             REGISTRATION_NO = "9520-03006397";
             PRINT_AJUSTMENTS = 0;
             DEFAULT_CAMERA = 0;
@@ -220,7 +217,6 @@ namespace SPTC_APP
                 DEFAULT_PASSWORD,
                 DEFAULT_ADDRESSLINE2,
                 EXPIRATION_DATE,
-                CHAIRMAN,
                 REGISTRATION_NO,
                 PRINT_AJUSTMENTS,
                 LOG_WINDOW,
@@ -263,7 +259,6 @@ namespace SPTC_APP
                     DEFAULT_PASSWORD = data.DEFAULT_PASSWORD;
                     DEFAULT_ADDRESSLINE2 = data.DEFAULT_ADDRESSLINE2;
                     EXPIRATION_DATE = data.EXPIRATION_DATE;
-                    CHAIRMAN = data.CHAIRMAN;
                     REGISTRATION_NO = data.REGISTRATION_NO;
                     PRINT_AJUSTMENTS = data.PRINT_AJUSTMENTS;
                     LOG_WINDOW = data.LOG_WINDOW;
@@ -279,9 +274,12 @@ namespace SPTC_APP
             else
             {
                 PopulateDefaults();
-                AppState.SaveToJson();
                 if (File.Exists(APPSTATE_PATH))
                 {
+                    AppState.LoadFromJson();
+                } else
+                {
+                    AppState.SaveToJson();
                     AppState.LoadFromJson();
                 }
             }
@@ -291,11 +289,11 @@ namespace SPTC_APP
 
 
 
-        public static System.Windows.Media.ImageSource FetchChairmanSign()
+        public static Employee FetchChairman()
         {
             Employee chair = Retrieve.GetDataUsingQuery<Employee>(RequestQuery.GET_CURRENT_CHAIRMAN).FirstOrDefault();
             //EventLogger.Post($"OUT :: {chair?.sign?.ToString()}");
-            return chair?.sign?.GetSource() ?? null;
+            return chair;
         }
         private static double RetrieveIncomeForMonth(int month)
         {

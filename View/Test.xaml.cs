@@ -32,7 +32,7 @@ namespace SPTC_APP.View
             InitializeComponent();
             EventLogger.Post("VIEW :: TEST Window");
             tabControl.SelectionChanged += TabControl_SelectionChanged;
-            imgSignatureo.Source = AppState.FetchChairmanSign();
+            imgSignatureo.Source = AppState.FetchChairman()?.sign?.GetSource();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
@@ -425,7 +425,7 @@ namespace SPTC_APP.View
             inkCanvas.Strokes.Clear();
             inkCanvas.Background = Brushes.White;
 
-            imgSignatureo.Source = AppState.FetchChairmanSign();
+            imgSignatureo.Source = AppState.FetchChairman()?.sign?.GetSource();
         }
         private void btnClean_Click(object sender, RoutedEventArgs e)
         {

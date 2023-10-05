@@ -146,7 +146,7 @@ namespace SPTC_APP.View
         }
         private void UpdateLogin()
         {
-            lblName.Content = $"My Name is {AppState.USER?.name.wholename}";
+            lblName.Content = $"My Name is {AppState.USER?.name?.wholename}";
             lblAddress.Content = $"I am from {AppState.USER?.address}";
             lblPosition.Content = $"I am a {AppState.USER?.position}";
         }
@@ -441,8 +441,11 @@ namespace SPTC_APP.View
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            SignPad sp = new SignPad();
-            sp.ShowDialog();
+            /*Ledger.Loan loan = new Ledger.Loan();
+            loan.WriteInto(1, DateTime.Today, 123456, "TEST", 123, 123, 123);
+            PaymentDetails<Ledger.Loan> paymentDetails = new PaymentDetails<Ledger.Loan>();
+            paymentDetails.WriteInto(loan, true, true, DateTime.Today, "200192992", 456, 10, "TEST ACTUAL PAYMENT");
+            paymentDetails.Save();*/
         }
         private void btnOpenLogs_Click(object sender, RoutedEventArgs e)
         {

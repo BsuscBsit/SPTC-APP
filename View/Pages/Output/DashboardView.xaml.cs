@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace SPTC_APP.View.Pages.Output
     /// </summary>
     public partial class DashboardView : Window
     {
+       
+
         public DashboardView()
         {
             InitializeComponent();
@@ -167,10 +170,12 @@ namespace SPTC_APP.View.Pages.Output
         }
         private void DrawPieChart()
         {
-            var list = AppState.MonthlyIncome;
-            double total = list.Values.Sum();
-            int currentMonthIndex = DateTime.Now.Month - 1;
-            int startMonthIndex = (currentMonthIndex) % 12;
+            
+            var sortedlist = AppState.ThisMonthsChart.OrderByDescending(x => x.Value).ToList();
+            var dictionary = sortedlist.ToDictionary(x => x.Key, x => x.Value);
+
+            double total = dictionary.Values.Sum();
+            int startMonthIndex = 0;
             double currentAngle = -90;
 
             double centerX = cvPieCircle.Center.X;
@@ -178,11 +183,10 @@ namespace SPTC_APP.View.Pages.Output
             double radius = cvPieCircle.RadiusX;
 
 
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < dictionary.Count; i++)
             {
-                int adjustedIndex = (startMonthIndex + i) % 12; 
 
-                double sweepAngle = (list.Values.ElementAt(adjustedIndex) / total) * 360;
+                double sweepAngle = (dictionary.Values.ElementAt(i) / total) * 360;
 
                 Path path = new Path
                 {
@@ -190,7 +194,7 @@ namespace SPTC_APP.View.Pages.Output
                     Opacity = 0.5,
                     Stroke = Brushes.Transparent,
                     StrokeThickness = 1.5,
-                    Tag = list.Keys.ElementAt(adjustedIndex),
+                    Tag = dictionary.Keys.ElementAt(i),
                     Data = new PathGeometry
                     {
                         Figures = new PathFigureCollection
@@ -222,6 +226,7 @@ namespace SPTC_APP.View.Pages.Output
                 };
 
                 path.MouseEnter += Path_MouseEnter;
+                path.MouseLeave += Path_MouseLeave;
 
                 cvPieChart.Children.Add(path);
 
@@ -230,14 +235,19 @@ namespace SPTC_APP.View.Pages.Output
         }
 
         private Path lasthoveredPie;
-
+        private void Path_MouseLeave(object sender, MouseEventArgs e)
+        {
+            tbPieChartTitle.Content = "Total Revenue";
+            tbPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
+        }
         private void Path_MouseEnter(object sender, MouseEventArgs e)
         {
-            tbPieChart.Content = sender.ToString();
+            
             if (sender is Path path)
             {
-                string month = path.Tag?.ToString() ?? "";
-                tbPieChart.Content = AppState.MonthlyIncome.TryGetValue(month, out var value)? value.ToString(): "0";
+                string tag = path.Tag?.ToString() ?? "No Data";
+                tbPieChartTitle.Content = tag;
+                tbPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).TryGetValue(tag, out var value)? value.ToString(): "0";
                 (sender as Path).Stroke = Brushes.Black;
                 if (lasthoveredPie != null)
                 {
@@ -246,7 +256,6 @@ namespace SPTC_APP.View.Pages.Output
                 lasthoveredPie = sender as Path;
             }
         }
-
         private Brush RandomColor(int i)
         {
             List<Brush> brushes = new List<Brush> { Brushes.Cyan, Brushes.Blue, Brushes.DarkBlue };

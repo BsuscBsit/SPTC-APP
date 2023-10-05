@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2023 at 05:06 AM
+-- Generation Time: Oct 05, 2023 at 02:16 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -58,7 +58,6 @@ CREATE TABLE `tbl_driver` (
   `contact_no` varchar(11) DEFAULT NULL,
   `emergency_person` varchar(255) DEFAULT NULL,
   `emergency_number` varchar(11) DEFAULT NULL,
-  `isDayShift` tinyint(1) NOT NULL DEFAULT 1,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -228,7 +227,8 @@ CREATE TABLE `tbl_payment_details` (
   `id` int(11) NOT NULL,
   `ledger_id` int(11) NOT NULL DEFAULT -1,
   `isDownPayment` tinyint(1) NOT NULL DEFAULT 0,
-  `ledger_type` int(11) NOT NULL DEFAULT 0,
+  `isDivPat` tinyint(1) NOT NULL DEFAULT 0,
+  `ledger_type` varchar(20) DEFAULT NULL,
   `date` date NOT NULL DEFAULT current_timestamp(),
   `reference_no` int(11) NOT NULL DEFAULT -1,
   `deposit` double NOT NULL DEFAULT 0,
@@ -434,7 +434,7 @@ ALTER TABLE `tbl_driver`
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_franchise`

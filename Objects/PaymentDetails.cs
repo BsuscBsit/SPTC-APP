@@ -97,11 +97,10 @@ namespace SPTC_APP.Objects
 
         public int Save()
         {
-            if (this.paymentDetails != null)
+            if (this.paymentDetails == null)
             {
                 paymentDetails = new Upsert(Table.PAYMENT_DETAILS, id);
             }
-            paymentDetails.Insert(Field.LEDGER_TYPE, saveLedger());
             paymentDetails.Insert(Field.IS_DOWN_PAYMENT, isDownPayment);
             paymentDetails.Insert(Field.IS_DIV_PAT, isDivPat);
             paymentDetails.Insert(Field.DATE, date);
@@ -109,6 +108,11 @@ namespace SPTC_APP.Objects
             paymentDetails.Insert(Field.DEPOSIT, deposit);
             paymentDetails.Insert(Field.PENALTIES, penalties);
             paymentDetails.Insert(Field.REMARKS, remarks);
+            if (ledger != null)
+            {
+                paymentDetails.Insert(Field.LEDGER_ID, saveLedger());
+                paymentDetails.Insert(Field.LEDGER_TYPE, typeof(T).Name.ToLower());
+            }
             paymentDetails.Save();
             id = paymentDetails.id;
 

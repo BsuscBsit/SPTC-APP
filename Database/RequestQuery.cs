@@ -164,7 +164,6 @@ namespace SPTC_APP.Database
         // DRIVER
         public const string EM_CONTACT_PERSON = "emergency_person";
         public const string EM_CONTACT_NUMBER = "emergency_number";
-        public const string ISDAYSHIFT = "isDayShift";
 
         // POSITION
         public const string CAN_CREATE = "can_create";
@@ -173,8 +172,8 @@ namespace SPTC_APP.Database
 
         // PAYMENT DETAILS
         public const string LEDGER_ID = "ledger_id";
-        public const string IS_DOWN_PAYMENT = "is_down_payment";
-        public const string IS_DIV_PAT = "is_div_pat";
+        public const string IS_DOWN_PAYMENT = "isDownPayment";
+        public const string IS_DIV_PAT = "isDivPat";
         public const string LEDGER_TYPE = "ledger_type";
         public const string REFERENCE_NO = "reference_no";
         public const string DEPOSIT = "deposit";

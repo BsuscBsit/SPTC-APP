@@ -17,19 +17,7 @@ namespace SPTC_APP.Objects
         public DateTime birthday { get; set; }
         public string emergencyPerson { get; set; }
         public string emergencyContact { get; set; }
-        public bool isDayShift { get; set; }
-
-        public string Shift
-        {
-            get
-            {
-                return (isDayShift) ? "Day" : "Night";
-            }
-            private set
-            {
-
-            }
-        }
+        
 
         private Upsert mDriver;
 
@@ -54,12 +42,11 @@ namespace SPTC_APP.Objects
             this.birthday = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE_OF_BIRTH);
             this.emergencyPerson = Retrieve.GetValueOrDefault<string>(reader, Field.EM_CONTACT_PERSON);
             this.emergencyContact = Retrieve.GetValueOrDefault<string>(reader, Field.EM_CONTACT_NUMBER);
-            this.isDayShift = Retrieve.GetValueOrDefault<bool>(reader, Field.ISDAYSHIFT);
 
             Populate(Retrieve.GetValueOrDefault<int>(reader, Field.NAME_ID), Retrieve.GetValueOrDefault<int>(reader, Field.ADDRESS_ID), Retrieve.GetValueOrDefault<int>(reader, Field.IMAGE_ID), Retrieve.GetValueOrDefault<int>(reader, Field.SIGN_ID));
         }
 
-        public bool WriteInto(Name name, Address address, Image image, Image sign, string remarks, DateTime bday, string emergencyPerson, string emergencyContact, bool isDay = true)
+        public bool WriteInto(Name name, Address address, Image image, Image sign, string remarks, DateTime bday, string emergencyPerson, string emergencyContact)
         {
             this.name = name;
             this.address = address;
@@ -69,7 +56,6 @@ namespace SPTC_APP.Objects
             this.birthday = bday;
             this.emergencyPerson = emergencyPerson;
             this.emergencyContact = emergencyContact;
-            this.isDayShift = isDay;
             return true;
         }
         private void Populate(int lname, int laddress, int limage, int lsignature)
@@ -93,7 +79,6 @@ namespace SPTC_APP.Objects
             mDriver.Insert(Field.DATE_OF_BIRTH, birthday);
             mDriver.Insert(Field.EM_CONTACT_PERSON, this.emergencyPerson);
             mDriver.Insert(Field.EM_CONTACT_NUMBER, this.emergencyContact);
-            mDriver.Insert(Field.ISDAYSHIFT, this.isDayShift);
             if (this.name != null)
             {
                 mDriver.Insert(Field.NAME_ID, this.name.Save());

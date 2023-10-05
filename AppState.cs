@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View;
@@ -25,6 +26,7 @@ namespace SPTC_APP
         public static string CHAIRMAN;
         public static string REGISTRATION_NO;
         public static double PRINT_AJUSTMENTS;
+        public static bool LOG_WINDOW;
         public static int DEFAULT_CAMERA;
         public static string[] ALL_EMPLOYEES;
 
@@ -34,6 +36,7 @@ namespace SPTC_APP
         public static bool IS_ADMIN = false;
         public static Employee USER = null;
         public static Dictionary<string, double> MonthlyIncome;
+        public static List<KeyValuePair<string, double>> ThisMonthsChart;
 
         //Toggle on defore deploying
         public static bool isDeployment = false;
@@ -128,10 +131,31 @@ namespace SPTC_APP
             {
                 AppState.SaveToJson();
                 string windowList = string.Join(", ", OpenedWindows.Select(w => w.ToString()));
-                EventLogger.Post($"OUT :: Opened Window Count = {AppState.OpenedWindows.Count}, Opened Windows: [ {windowList} ]"); 
+                if (LOG_WINDOW)
+                {
+                    EventLogger.Post($"OUT :: Opened Window Count = {AppState.OpenedWindows.Count}, Opened Windows: [ {windowList} ]");
+                }
             }
         }
         public static async Task<bool> LoadDatabase()
+        {
+            try
+            {
+                await LoadMonthlyIncome();
+
+                await LoadMonthChart();
+
+                await Task.Delay(50);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                EventLogger.Post($"ERR :: Exception in Loading Database{ex.Message}");
+                return false;
+            }
+        }
+        private static async Task<bool> LoadMonthlyIncome()
         {
             try
             {
@@ -149,16 +173,27 @@ namespace SPTC_APP
                     { "Oct", RetrieveIncomeForMonth(10) },
                     { "Nov", RetrieveIncomeForMonth(11) },
                     { "Dec", RetrieveIncomeForMonth(12) }
-                };
-                await Task.Delay(50);
-                return true;
-            }
-            catch (Exception ex)
+             };
+            } catch(MySqlException e)
             {
-                // Handle any exceptions
-                EventLogger.Post($"ERR :: Exception in Loading Database{ex.Message}");
-                return false;
+                EventLogger.Post($"DTB :: MySQLException in Loading Database{e.Message}");
             }
+            return true;
+        }
+        public static async Task<bool> LoadMonthChart(int month = -1)
+        {
+            if(month == -1)
+            {
+                month = DateTime.Today.Month;
+            }
+
+            ThisMonthsChart = new List<KeyValuePair<string, double>> {
+                    new KeyValuePair<string, double>("Share Capital", 3503.77),
+                    new KeyValuePair <string, double>("Loan", 4002.50),
+                    new KeyValuePair <string, double>("Expenses", 800)
+             };
+
+            return true;
         }
         public static void PopulateDefaults()
         {
@@ -172,6 +207,7 @@ namespace SPTC_APP
             REGISTRATION_NO = "9520-03006397";
             PRINT_AJUSTMENTS = 0;
             DEFAULT_CAMERA = 0;
+            LOG_WINDOW = false;
             ALL_EMPLOYEES = new string[] { "General Manager", "Secretary", "Treasurer", "Bookeeper", "Chairman" };
         }
         public static void SaveToJson()
@@ -187,6 +223,7 @@ namespace SPTC_APP
                 CHAIRMAN,
                 REGISTRATION_NO,
                 PRINT_AJUSTMENTS,
+                LOG_WINDOW,
                 DEFAULT_CAMERA,
                 ALL_EMPLOYEES,
             };
@@ -229,6 +266,7 @@ namespace SPTC_APP
                     CHAIRMAN = data.CHAIRMAN;
                     REGISTRATION_NO = data.REGISTRATION_NO;
                     PRINT_AJUSTMENTS = data.PRINT_AJUSTMENTS;
+                    LOG_WINDOW = data.LOG_WINDOW;
                     DEFAULT_CAMERA = data.DEFAULT_CAMERA;
                     ALL_EMPLOYEES = JsonConvert.DeserializeObject<string[]>(data.ALL_EMPLOYEES.ToString());
 

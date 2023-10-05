@@ -38,16 +38,17 @@
         <Border BorderBrush="Black" Background="White" CornerRadius="5" BorderThickness="1" Margin="20, 0, 0, 20" HorizontalAlignment="Left" VerticalAlignment="Bottom">
             <Canvas x:Name="cvBarChart" Background="White" Width="480" Height="240" Margin="60, 60, 20, 20" />
         </Border>
-        <Border BorderBrush="Black" Background="White" CornerRadius="5" BorderThickness="1" Margin="0,0,20,20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="190" Width="190">
+        <Border BorderBrush="Black" Background="White" CornerRadius="5" BorderThickness="1" Margin="0,0,20,20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="250" Width="190">
             <Grid>
-                <Canvas x:Name="cvPieChart" Background="White" Width="175" Height="175">
+                <Canvas x:Name="cvPieChart" Background="White" Width="175" Height="175" VerticalAlignment="Bottom" Margin="5">
                     <Path Stroke="Black" StrokeThickness="1" Fill="LightGray">
                         <Path.Data>
                             <EllipseGeometry x:Name="cvPieCircle" Center="87.5, 87.5" RadiusX="87" RadiusY="87"/>
                         </Path.Data>
                     </Path>
                 </Canvas>
-                <Label x:Name="tbPieChart" Content="0" Style="{StaticResource CommonTitlePreset}" FontSize="16" Height="30" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label x:Name="tbPieChartTitle" Content="" Style="{StaticResource CommonTitlePreset}" FontSize="16" FontWeight="Bold" Foreground="Black" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label x:Name="tbPieChart" Content="0" Style="{StaticResource CommonTitlePreset}" FontSize="16" Height="30" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0"/>
             </Grid>
         </Border>
     </Grid>

@@ -56,7 +56,6 @@ namespace SPTC_APP.Database
             if (id == -1)
             {
                 InsertDataToDatabase();
-
             }
             else
             {
@@ -131,7 +130,8 @@ namespace SPTC_APP.Database
                             if (tableName == Table.NAME)
                             {
                                 id = GetExistingRecordId(fieldValues);
-                            } else if (tableName == Table.IMAGE)
+                            } 
+                            else if (tableName == Table.IMAGE)
                             {
                                 Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
                                 {
@@ -139,7 +139,8 @@ namespace SPTC_APP.Database
                                 };
 
                                 id = GetExistingRecordId(uniqueAttributes);
-                            } else if (tableName == Table.ADDRESS)
+                            } 
+                            else if (tableName == Table.ADDRESS)
                             {
                                 Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
                                 {
@@ -176,6 +177,13 @@ namespace SPTC_APP.Database
                                     { Field.NAME_ID, fieldValues.TryGetValue(Field.NAME_ID, out var temp) ? temp : -1 },
                                     { Field.OWNER_ID, fieldValues.TryGetValue(Field.OWNER_ID, out temp) ? temp : -1 },
                                     { Field.ENTITY_TYPE, fieldValues.TryGetValue(Field.ENTITY_TYPE, out temp) ? temp : "" },
+                                };
+                            }
+                            else if(tableName == Table.PAYMENT_DETAILS)
+                            {
+                                Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
+                                {
+                                    { Field.REFERENCE_NO, fieldValues.TryGetValue(Field.REFERENCE_NO, out var temp) ? temp : -1 },
                                 };
                             }
 

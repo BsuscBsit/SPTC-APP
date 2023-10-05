@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace SPTC_APP.View.Pages.Leaflets
+namespace SPTC_APP.View.Pages.Output
 {
     public partial class Modules : Window
     {

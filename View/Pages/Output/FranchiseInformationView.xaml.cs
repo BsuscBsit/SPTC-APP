@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace SPTC_APP.View.Pages.Leaflets
+namespace SPTC_APP.View.Pages.Output
 {
     /// <summary>
     /// Interaction logic for FranchiseInformationView.xaml

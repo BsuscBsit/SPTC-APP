@@ -3,7 +3,7 @@ using SPTC_APP.Objects;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SPTC_APP.View.Pages.Leaflets
+namespace SPTC_APP.View.Pages.Output
 {
     /// <summary>
     /// Interaction logic for DriverInformationView.xaml

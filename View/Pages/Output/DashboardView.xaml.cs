@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace SPTC_APP.View.Pages.Leaflets
+namespace SPTC_APP.View.Pages.Output
 {
     /// <summary>
     /// Interaction logic for DashboardView.xaml
@@ -22,7 +22,8 @@ namespace SPTC_APP.View.Pages.Leaflets
         }
         public async Task<Grid> Fetch()
         {
-            DrawChart();
+            DrawBarChart();
+            DrawPieChart();
             //UpdateTableAsync();
             if (mainpanel.Parent != null)
             {
@@ -47,17 +48,18 @@ namespace SPTC_APP.View.Pages.Leaflets
             (new Test()).Show();
         }
 
-        private void DrawChart()
+        private void DrawBarChart()
         {
-            cvChart.Children.Clear();
+            var list = AppState.MonthlyIncome;
+            cvBarChart.Children.Clear();
 
             int currentMonthIndex = DateTime.Now.Month - 1; 
             int startMonthIndex = (currentMonthIndex + 1) % 12;
 
-            double maxBalance = AppState.MonthlyIncome.Values.Max();
-            double minBalance = AppState.MonthlyIncome.Values.Min();
+            double maxBalance = list.Values.Max();
+            double minBalance = list.Values.Min();
 
-            double barWidth = cvChart.Width / AppState.MonthlyIncome.Count;
+            double barWidth = cvBarChart.Width / list.Count;
 
             double maxMagnitude = Math.Pow(10, Math.Floor(Math.Log10(maxBalance)));
 
@@ -70,7 +72,7 @@ namespace SPTC_APP.View.Pages.Leaflets
             double roundedMax = Math.Ceiling(maxBalance / roundingAdjustment) * roundingAdjustment;
             double roundedMin = Math.Ceiling(minBalance / roundingAdjustment) * roundingAdjustment;
 
-            double barHeightScale = cvChart.Height / roundedMax;
+            double barHeightScale = cvBarChart.Height / roundedMax;
 
             double[] roundedValues = { roundedMin, roundedMax, (roundedMax + roundedMin) / 2 };
 
@@ -78,7 +80,7 @@ namespace SPTC_APP.View.Pages.Leaflets
 
             for (int i = 0; i < 3; i++)
             {
-                yPositions[i] = cvChart.Height * (1 - (roundedValues[i] / maxBalance));
+                yPositions[i] = cvBarChart.Height * (1 - (roundedValues[i] / maxBalance));
 
                 TextBlock textBlock = new TextBlock
                 {
@@ -90,7 +92,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                 Canvas.SetTop(textBlock, yPositions[i] - 8);
                 Canvas.SetLeft(textBlock, -65);
 
-                cvChart.Children.Add(textBlock);
+                cvBarChart.Children.Add(textBlock);
             }
 
             foreach (double yPos in yPositions)
@@ -98,7 +100,7 @@ namespace SPTC_APP.View.Pages.Leaflets
                 Line line = new Line
                 {
                     X1 = 0,
-                    X2 = cvChart.Width,
+                    X2 = cvBarChart.Width,
                     Y1 = yPos,
                     Y2 = yPos,
                     Stroke = Brushes.Gray,
@@ -107,31 +109,31 @@ namespace SPTC_APP.View.Pages.Leaflets
                     StrokeDashArray = new DoubleCollection(new double[] { 3, 1 })
                 };
 
-                cvChart.Children.Add(line);
+                cvBarChart.Children.Add(line);
             }
 
 
-            for (int i = 0; i < AppState.MonthlyIncome.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
                 int adjustedIndex = (startMonthIndex + i) % 12;
-                double barHeight = AppState.MonthlyIncome.Values.ElementAt(adjustedIndex) * barHeightScale;
+                double barHeight = list.Values.ElementAt(adjustedIndex) * barHeightScale;
 
                 CustomRectangle customRect = new CustomRectangle(barWidth, barHeight, adjustedIndex == currentMonthIndex, adjustedIndex);
-                customRect.TextBlock.Text = AppState.MonthlyIncome.Keys.ElementAt(adjustedIndex);
-                customRect.Rect.Tag = AppState.MonthlyIncome.Values.ElementAt(adjustedIndex);
+                customRect.TextBlock.Text = list.Keys.ElementAt(adjustedIndex);
+                customRect.Rect.Tag = list.Values.ElementAt(adjustedIndex);
                 customRect.SetPosition(i * barWidth + 5, 0, barHeight);
 
-                cvChart.Children.Add(customRect.Rect);
-                cvChart.Children.Add(customRect.TextBlock);
+                cvBarChart.Children.Add(customRect.Rect);
+                cvBarChart.Children.Add(customRect.TextBlock);
                 
-                if(AppState.MonthlyIncome.Keys.ElementAt(adjustedIndex) == "Dec")
+                if(list.Keys.ElementAt(adjustedIndex) == "Dec")
                 {
                     Line line = new Line
                     {
                         X1 = 2 + barWidth * (i+1),
                         X2 = 2 + barWidth * (i+1),
                         Y1 = -10,
-                        Y2 = cvChart.Height,
+                        Y2 = cvBarChart.Height,
                         Stroke = Brushes.Gray,
                         Opacity = 0.6,
                         StrokeThickness = 2,
@@ -153,8 +155,8 @@ namespace SPTC_APP.View.Pages.Leaflets
 
                     Canvas.SetLeft(TblYear, ((barWidth) * (i+1)) - TblYear.Width/2);
                     Canvas.SetTop(TblYear, 0 - 25);
-                    cvChart.Children.Add(TblYear);
-                    cvChart.Children.Add(line);
+                    cvBarChart.Children.Add(TblYear);
+                    cvBarChart.Children.Add(line);
                 }
 
             }
@@ -163,7 +165,93 @@ namespace SPTC_APP.View.Pages.Leaflets
 
 
         }
+        private void DrawPieChart()
+        {
+            var list = AppState.MonthlyIncome;
+            double total = list.Values.Sum();
+            int currentMonthIndex = DateTime.Now.Month - 1;
+            int startMonthIndex = (currentMonthIndex) % 12;
+            double currentAngle = -90;
 
+            double centerX = cvPieCircle.Center.X;
+            double centerY = cvPieCircle.Center.Y;
+            double radius = cvPieCircle.RadiusX;
+
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                int adjustedIndex = (startMonthIndex + i) % 12; 
+
+                double sweepAngle = (list.Values.ElementAt(adjustedIndex) / total) * 360;
+
+                Path path = new Path
+                {
+                    Fill = i == 0? Brushes.Red : RandomColor(i),
+                    Opacity = 0.5,
+                    Stroke = Brushes.Transparent,
+                    StrokeThickness = 1.5,
+                    Tag = list.Keys.ElementAt(adjustedIndex),
+                    Data = new PathGeometry
+                    {
+                        Figures = new PathFigureCollection
+                {
+                    new PathFigure
+                    {
+                        StartPoint = new Point(centerX, centerY),
+                        Segments = new PathSegmentCollection
+                        {
+                            new LineSegment
+                            {
+                                Point = new Point(centerX + radius * Math.Cos(currentAngle * Math.PI / 180), centerY + radius * Math.Sin(currentAngle * Math.PI / 180))
+                            },
+                            new ArcSegment
+                            {
+                                Point = new Point(centerX + radius * Math.Cos((currentAngle + sweepAngle) * Math.PI / 180), centerY + radius * Math.Sin((currentAngle + sweepAngle) * Math.PI / 180)),
+                                Size = new Size(radius, radius),
+                                IsLargeArc = sweepAngle > 180,
+                                SweepDirection = SweepDirection.Clockwise
+                            },
+                            new LineSegment
+                            {
+                                Point = new Point(centerX, centerY)
+                            }
+                        }
+                    }
+                }
+                    }
+                };
+
+                path.MouseEnter += Path_MouseEnter;
+
+                cvPieChart.Children.Add(path);
+
+                currentAngle += sweepAngle;
+            }
+        }
+
+        private Path lasthoveredPie;
+
+        private void Path_MouseEnter(object sender, MouseEventArgs e)
+        {
+            tbPieChart.Content = sender.ToString();
+            if (sender is Path path)
+            {
+                string month = path.Tag?.ToString() ?? "";
+                tbPieChart.Content = AppState.MonthlyIncome.TryGetValue(month, out var value)? value.ToString(): "0";
+                (sender as Path).Stroke = Brushes.Black;
+                if (lasthoveredPie != null)
+                {
+                    lasthoveredPie.Stroke = Brushes.Transparent;
+                }
+                lasthoveredPie = sender as Path;
+            }
+        }
+
+        private Brush RandomColor(int i)
+        {
+            List<Brush> brushes = new List<Brush> { Brushes.Cyan, Brushes.Blue, Brushes.DarkBlue };
+            return brushes[i%brushes.Count];
+        }
         public class CustomRectangle
         {
             public Rectangle Rect { get; private set; }
@@ -230,11 +318,11 @@ namespace SPTC_APP.View.Pages.Leaflets
                 ((Canvas)rect.Parent).Children.Remove(hoverTextBox);
             }
         }
-
         private async void btnReload_Click(object sender, RoutedEventArgs e)
         {
             await AppState.LoadDatabase();
-            DrawChart();
+            DrawBarChart();
+            DrawPieChart();
         }
     }
 }

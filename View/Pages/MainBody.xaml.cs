@@ -7,7 +7,7 @@ using System.Windows.Media;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
-using SPTC_APP.View.Pages.Leaflets;
+using SPTC_APP.View.Pages.Output;
 
 namespace SPTC_APP.View.Pages
 {

@@ -8,7 +8,7 @@ using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
 using SPTC_APP.View.Pages.Input;
 
-namespace SPTC_APP.View.Pages.Leaflets
+namespace SPTC_APP.View.Pages.Output
 {
     /// <summary>
     /// Interaction logic for TableView.xaml

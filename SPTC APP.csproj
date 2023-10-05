@@ -261,19 +261,19 @@
     <Compile Include="View\LogsWindow.xaml.cs">
       <DependentUpon>LogsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Leaflets\DashboardView.xaml.cs">
+    <Compile Include="View\Pages\Output\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Leaflets\DriverInformationView.xaml.cs">
+    <Compile Include="View\Pages\Output\DriverInformationView.xaml.cs">
       <DependentUpon>DriverInformationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Leaflets\FranchiseInformationView.xaml.cs">
+    <Compile Include="View\Pages\Output\FranchiseInformationView.xaml.cs">
       <DependentUpon>FranchiseInformationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Leaflets\Modules.xaml.cs">
+    <Compile Include="View\Pages\Output\Modules.xaml.cs">
       <DependentUpon>Modules.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Leaflets\TableView.xaml.cs">
+    <Compile Include="View\Pages\Output\TableView.xaml.cs">
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Input\InputFranchiseView.xaml.cs">
@@ -343,23 +343,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Leaflets\DashboardView.xaml">
+    <Page Include="View\Pages\Output\DashboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Leaflets\DriverInformationView.xaml">
+    <Page Include="View\Pages\Output\DriverInformationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Pages\Leaflets\FranchiseInformationView.xaml">
+    <Page Include="View\Pages\Output\FranchiseInformationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Leaflets\Modules.xaml">
+    <Page Include="View\Pages\Output\Modules.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Leaflets\TableView.xaml">
+    <Page Include="View\Pages\Output\TableView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

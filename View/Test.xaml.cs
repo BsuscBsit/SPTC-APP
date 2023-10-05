@@ -19,7 +19,7 @@ using SPTC_APP.View.Pages;
 using Image = SPTC_APP.Objects.Image;
 using SPTC_APP.View.IDGenerator.Extra;
 using SPTC_APP.View.IDGenerator.Hidden;
-using SPTC_APP.View.Pages.Leaflets;
+using SPTC_APP.View.Pages.Output;
 using SPTC_APP.View.Pages.Input;
 
 namespace SPTC_APP.View

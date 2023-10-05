@@ -147,7 +147,7 @@ namespace SPTC_APP.View
         private void UpdateLogin()
         {
             lblName.Content = $"My Name is {AppState.USER?.name?.wholename}";
-            lblAddress.Content = $"I am from {AppState.USER?.address}";d
+            lblAddress.Content = $"I am from {AppState.USER?.address}";
             lblPosition.Content = $"I am a {AppState.USER?.position}";
         }
 

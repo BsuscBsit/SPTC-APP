@@ -119,8 +119,9 @@
                                             VerticalAlignment="Bottom"
                                             BorderBrush="black"
                                             BorderThickness="1">
-                                            <Grid x:Name="grid1">
+                                            <Grid>
                                                 <Image
+                                                    x:Name="img1"
                                                     Margin="0,0,0,0"
                                                     Opacity="0.2"
                                                     Source="/View/Images/no_id.png"
@@ -140,8 +141,9 @@
                                             VerticalAlignment="Bottom"
                                             BorderBrush="black"
                                             BorderThickness="1">
-                                            <Grid x:Name="grid2">
+                                            <Grid>
                                                 <Image
+                                                    x:Name="img2"
                                                     Margin="0,0,0,0"
                                                     Opacity="0.2"
                                                     Source="/View/Images/no_id.png"
@@ -161,8 +163,9 @@
                                             VerticalAlignment="Top"
                                             BorderBrush="black"
                                             BorderThickness="1">
-                                            <Grid x:Name="grid3">
+                                            <Grid>
                                                 <Image
+                                                    x:Name="img3"
                                                     Margin="0,0,0,0"
                                                     Opacity="0.2"
                                                     Source="/View/Images/no_id.png"
@@ -182,8 +185,9 @@
                                             VerticalAlignment="Top"
                                             BorderBrush="Black"
                                             BorderThickness="1">
-                                            <Grid x:Name="grid4">
+                                            <Grid>
                                                 <Image
+                                                    x:Name="img4"
                                                     Margin="0,0,0,0"
                                                     Opacity="0.2"
                                                     Source="/View/Images/no_id.png"

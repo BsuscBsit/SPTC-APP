@@ -24,7 +24,7 @@ namespace SPTC_APP.View
             InitializeComponent();
             AppState.mainwindow?.Hide();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
-           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
 
         public void ReturnControl(GenerateID prev)
@@ -57,8 +57,8 @@ namespace SPTC_APP.View
         public void Save(ID id)
         {
             this.id = id;
-            imgFront.Source = id.RenderFrontID().Source;
-            imgBack.Source = id.RenderBackID().Source;
+            imgFront.Source = id.RenderFrontID();
+            imgBack.Source = id.RenderBackID();
         }
     }
 
@@ -69,6 +69,9 @@ namespace SPTC_APP.View
         public int FrontPrint = 0;
         public int BackPrint = 0;
         public bool isSaved = false;
+        private System.Windows.Controls.Image front;
+        private System.Windows.Controls.Image back;
+
 
         public ID(Franchise franchise, General type)
         {
@@ -86,41 +89,63 @@ namespace SPTC_APP.View
             BackPrint = BackPrint + 1;
         }
 
-        public System.Windows.Controls.Image RenderFrontID()
+        public void Render(bool isFront)
         {
-            FrontID page = new FrontID();
-            page.Populate(franchise, type);
-            page.Show();
-            int renderScale = 4;
+            
+            if (isFront)
+            {
+                FrontID page = new FrontID();
+                page.Populate(franchise, type);
+                page.Show();
+                int renderScale = 4;
 
-            var renderTargetBitmap = new RenderTargetBitmap((int)(page.DesiredSize.Width * renderScale), (int)(page.DesiredSize.Height * renderScale), 96 * renderScale, 96 * renderScale, PixelFormats.Pbgra32);
-            renderTargetBitmap.Render(page);
+                var renderTargetBitmap = new RenderTargetBitmap((int)(page.DesiredSize.Width * renderScale), (int)(page.DesiredSize.Height * renderScale), 96 * renderScale, 96 * renderScale, PixelFormats.Pbgra32);
+                renderTargetBitmap.Render(page);
 
-            var image = new System.Windows.Controls.Image();
-            image.Source = renderTargetBitmap;
+                var image = new System.Windows.Controls.Image();
+                image.Source = renderTargetBitmap;
 
-            page.Close();
+                page.Close();
 
-            return image;
+                front = image;
+            } else
+            {
+                BackID page = new BackID();
+
+                page.Populate(franchise, type);
+                page.Show();
+
+                int renderScale = 4;
+
+                var renderTargetBitmap = new RenderTargetBitmap((int)(page.DesiredSize.Width * renderScale), (int)(page.DesiredSize.Height * renderScale), 96 * renderScale, 96 * renderScale, PixelFormats.Pbgra32);
+                renderTargetBitmap.Render(page);
+
+                var image = new System.Windows.Controls.Image();
+                image.Source = renderTargetBitmap;
+
+                page.Close();
+
+                back = image;
+            }
         }
-        public System.Windows.Controls.Image RenderBackID()
+
+        public ImageSource RenderFrontID()
         {
-            BackID page = new BackID();
+            if (front == null)
+            {
+                Render(true);
+            }
 
-            page.Populate(franchise, type);
-            page.Show();
+            return front.Source;
+        }
+        public ImageSource RenderBackID()
+        {
+            if (back == null)
+            {
+                Render(false);
+            }
 
-            int renderScale = 4;
-
-            var renderTargetBitmap = new RenderTargetBitmap((int)(page.DesiredSize.Width * renderScale), (int)(page.DesiredSize.Height * renderScale), 96 * renderScale, 96 * renderScale, PixelFormats.Pbgra32);
-            renderTargetBitmap.Render(page);
-
-            var image = new System.Windows.Controls.Image();
-            image.Source = renderTargetBitmap;
-
-            page.Close();
-
-            return image;
+            return back.Source;
         }
 
         public void SaveInfo()

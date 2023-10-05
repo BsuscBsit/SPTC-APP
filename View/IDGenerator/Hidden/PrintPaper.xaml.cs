@@ -57,7 +57,7 @@ namespace SPTC_APP.View.IDGenerator.Hidden
                     borders[i].Child = new Image();
                     if (arr[i] != null)
                     {
-                        borders[i].Child = arr[i].RenderFrontID();
+                        ((Image)borders[i].Child).Source = arr[i].RenderFrontID();
                         borders[i].BorderThickness = new Thickness(1.5);
                     }
                 }
@@ -81,10 +81,13 @@ namespace SPTC_APP.View.IDGenerator.Hidden
                     if (arr[i] != null)
                     {
 
-                        borders[i].Child = arr[i].RenderBackID();
+                        ((Image) borders[i].Child).Source = arr[i].RenderBackID();
+                        borders[i].BorderThickness = new Thickness(0);
                     }
 
                 }
+                Thickness newMargin = new Thickness(AppState.PRINT_AJUSTMENTS, 0, 0, 0);
+                frontPage.Margin = newMargin;
 
                 frontPage.HorizontalAlignment = HorizontalAlignment.Right;
             }

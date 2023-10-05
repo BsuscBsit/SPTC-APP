@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using SPTC_APP.Objects;
+using SPTC_APP.Properties;
 using SPTC_APP.View.IDGenerator.Hidden;
 using SPTC_APP.View.Styling;
 using Image = System.Windows.Controls.Image;
@@ -22,6 +24,38 @@ namespace SPTC_APP.View
         private static ID mGrid2 = null;
         private static ID mGrid3 = null;
         private static ID mGrid4 = null;
+
+        private Dictionary<ID, Image> ImageDictionary
+        {
+            get
+            {
+                Dictionary<ID, Image> result = new Dictionary<ID, Image>();
+
+                if (mGrid1 != null)
+                {
+                    result[mGrid1] = isFront ? img1 : img2;
+                }
+
+                if (mGrid2 != null)
+                {
+                    result[mGrid2] = isFront ? img2 : img1;
+                }
+
+                if (mGrid3 != null)
+                {
+                    result[mGrid3] = isFront ? img3 : img4;
+                }
+
+                if (mGrid4 != null)
+                {
+                    result[mGrid4] = isFront ? img4 : img3;
+                }
+
+                return result;
+            }
+        }
+
+
         private static int idcount = 0;
 
         //Zoom Variables
@@ -241,110 +275,19 @@ namespace SPTC_APP.View
         //ID EVENTS
         private void RenderIDs()
         {
-            if (isFront)
+            foreach(Image image in new Image[] {img1, img2, img3, img4 })
             {
-                if (mGrid1 != null)
-                {
-                    grid1.Children.Clear();
-                    grid1.Children.Add(mGrid1.RenderFrontID());
-                }
-                else
-                {
-                    grid1.Children.Clear();
-                    grid1.Children.Add(CreateNoIDImage());
-                }
-
-                if (mGrid2 != null)
-                {
-                    grid2.Children.Clear();
-                    grid2.Children.Add(mGrid2.RenderFrontID());
-                }
-                else
-                {
-                    grid2.Children.Clear();
-                    grid2.Children.Add(CreateNoIDImage());
-                }
-
-                if (mGrid3 != null)
-                {
-                    grid3.Children.Clear();
-                    grid3.Children.Add(mGrid3.RenderFrontID());
-                }
-                else
-                {
-                    grid3.Children.Clear();
-                    grid3.Children.Add(CreateNoIDImage());
-                }
-
-                if (mGrid4 != null)
-                {
-                    grid4.Children.Clear();
-                    grid4.Children.Add(mGrid4.RenderFrontID());
-                }
-                else
-                {
-                    grid4.Children.Clear();
-                    grid4.Children.Add(CreateNoIDImage());
-                }
+                image.Source = new BitmapImage(new Uri("pack://application:,,,/View/Images/no_id.png"));
+                image.Tag = "NullImage";
+                image.Opacity = 0.2;
             }
-            else
+
+            foreach(var item in ImageDictionary)
             {
-                if (mGrid2 != null)
-                {
-                    grid1.Children.Clear();
-                    grid1.Children.Add(mGrid2.RenderBackID());
-                }
-                else
-                {
-                    grid1.Children.Clear();
-                    grid1.Children.Add(CreateNoIDImage());
-                }
-
-                if (mGrid1 != null)
-                {
-                    grid2.Children.Clear();
-                    grid2.Children.Add(mGrid1.RenderBackID());
-                }
-                else
-                {
-                    grid2.Children.Clear();
-                    grid2.Children.Add(CreateNoIDImage());
-                }
-
-                if (mGrid4 != null)
-                {
-                    grid3.Children.Clear();
-                    grid3.Children.Add(mGrid4.RenderBackID());
-                }
-                else
-                {
-                    grid3.Children.Clear();
-                    grid3.Children.Add(CreateNoIDImage());
-                }
-
-                if (mGrid3 != null)
-                {
-                    grid4.Children.Clear();
-                    grid4.Children.Add(mGrid3.RenderBackID());
-                }
-                else
-                {
-                    grid4.Children.Clear();
-                    grid4.Children.Add(CreateNoIDImage());
-                }
+                item.Value.Source = isFront ? item.Key.RenderFrontID() : item.Key.RenderBackID();
+                item.Value.Tag = "HasImage";
+                item.Value.Opacity = 1;
             }
-        }
-        private System.Windows.Controls.Image CreateNoIDImage()
-        {
-            return new System.Windows.Controls.Image
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(0),
-                VerticalAlignment = VerticalAlignment.Center,
-                Source = new BitmapImage(new Uri("/View/Images/no_id.png", UriKind.Relative)),
-                Tag = "NullImage",
-                Opacity = 0.2
-            };
         }
         public void NewID(ID id)
         {
@@ -439,27 +382,27 @@ namespace SPTC_APP.View
                 int tho = 0;
                 int tvo = 0;
                 bool pan = false;
-                switch (((Grid)image.Parent).Name)
+                switch ((image).Name)
                 {
-                    case "grid1":
+                    case "img1":
                         tho = 85;
                         tvo = 90;
                         pan = (image.Tag?.ToString() != "NullImage");
                         zoomedIn = (isFront) ? mGrid1 : mGrid2;
                         break;
-                    case "grid2":
+                    case "img2":
                         tho = 420;
                         tvo = 90;
                         pan = (image.Tag?.ToString() != "NullImage");
                         zoomedIn = (!isFront) ? mGrid1 : mGrid2;
                         break;
-                    case "grid3":
+                    case "img3":
                         tho = 85;
                         tvo = 545;
                         pan = (image.Tag?.ToString() != "NullImage");
                         zoomedIn = (isFront) ? mGrid3 : mGrid3;
                         break;
-                    case "grid4":
+                    case "img4":
                         tho = 420;
                         tvo = 545;
                         pan = (image.Tag?.ToString() != "NullImage");

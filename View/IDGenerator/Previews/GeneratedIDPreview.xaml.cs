@@ -65,7 +65,7 @@ namespace SPTC_APP.View
     public class ID
     {
         public Franchise franchise;
-        private General type;
+        public General type;
         public int FrontPrint = 0;
         public int BackPrint = 0;
         public bool isSaved = false;

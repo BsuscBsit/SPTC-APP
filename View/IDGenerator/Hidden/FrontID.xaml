@@ -134,15 +134,14 @@
                         FontWeight="Bold"
                         Foreground="#FFC00000" />
                 </StackPanel>
-                <StackPanel
-                    Grid.Row="4"
-                    Margin="0,0,0,4"
-                    Orientation="Vertical">
+                <Grid Grid.Row="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
                     <Viewbox
                         x:Name="viewbox2"
-                        Height="1"
-                        Margin="0,0,0,-15"
-                        Stretch="Fill">
+                        Stretch="Fill" VerticalAlignment="Top" Height="65" Margin="0,0,0,-14">
                         <local:OutlinedTextBlock
                             x:Name="lblPosition"
                             Margin="1,0,1,0"
@@ -154,11 +153,11 @@
                             Text="DRIVER"
                             TextWrapping="Wrap" />
                     </Viewbox>
-                    <Viewbox
+                    <StackPanel Grid.Row="1">
+                        <Viewbox
                         x:Name="viewbox3"
-                        Height="1"
                         Stretch="Fill">
-                        <local:OutlinedTextBlock
+                            <local:OutlinedTextBlock
                             x:Name="lblName"
                             Margin="2,0,2,0"
                             Fill="#1D314E"
@@ -169,46 +168,54 @@
                             StrokeThickness="0.3"
                             Text="SAN DIEGO, CHRISTIAN V."
                             TextWrapping="Wrap">
-                            <local:OutlinedTextBlock.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform />
-                                    <SkewTransform AngleX="-5" AngleY="0" />
-                                    <RotateTransform />
-                                    <TranslateTransform />
-                                </TransformGroup>
-                            </local:OutlinedTextBlock.RenderTransform>
-                        </local:OutlinedTextBlock>
-                    </Viewbox>
-                </StackPanel>
-                <Grid Grid.Row="5" UseLayoutRounding="True" Margin="0,-5,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="80" />
-                    </Grid.RowDefinitions>
-                    <Viewbox Grid.Row="0" Margin="0,0,0,10">
-                        <Image x:Name="imgChairmanSignature" />
-                    </Viewbox>
-                    <StackPanel
-                        Grid.Row="0"
+                                <local:OutlinedTextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform AngleX="-5" AngleY="0" />
+                                        <RotateTransform />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </local:OutlinedTextBlock.RenderTransform>
+                            </local:OutlinedTextBlock>
+                        </Viewbox>
+                        <Rectangle
+                        x:Name="hdiv1"
+                        Fill="Black"
+                        Visibility="Collapsed" Height="2" Width="304" />
+
+                    </StackPanel>
+                    <Grid
+                    UseLayoutRounding="True" Margin="0,20,0,0" Grid.Row="1" Height="65">
+                        <Viewbox Margin="0,0,0,10">
+                            <Image x:Name="imgChairmanSignature" Source="/View/Images/BTarnpzpc.png" />
+                        </Viewbox>
+                        <StackPanel
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom">
-                        <Label
+                            <Label
                             x:Name="lblChairman"
+                            Padding="5,5,5,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Bottom"
                             Content="ROLLY M. LABINDAO"
                             FontFamily="Bookman Old Style"
-                            FontWeight="Bold" Padding="5,5,5,0" />
-                        <Label
+                            FontWeight="Bold" />
+                            <Label
                             x:Name="label7"
+                            Padding="5,0,5,5"
                             HorizontalAlignment="Center"
                             Content="Chairman"
                             FontFamily="Bell MT"
-                            Foreground="#FFC00000" Padding="5,0,5,5" />
-                    </StackPanel>
+                            Foreground="#FFC00000" />
+                        </StackPanel>
 
+                    </Grid>
+                    <StackPanel
+                    Orientation="Vertical"/>
                 </Grid>
             </Grid>
             <Label
+                x:Name="lblDesignerPetmalu"
                 Margin="-1,0,0,-2"
                 VerticalAlignment="Bottom"
                 Content="AllenLiao-Morado2022"

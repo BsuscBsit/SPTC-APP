@@ -45,7 +45,7 @@ namespace SPTC_APP.View
         public GenerateID()
         {
             InitializeComponent();
-           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             AppState.mainwindow?.Hide();
             tboxAddressS.Text = AppState.DEFAULT_ADDRESSLINE2;
             bDay.SelectedDate = DateTime.Today;
@@ -272,6 +272,7 @@ namespace SPTC_APP.View
                     imgSignPic.Source = sp.signatureBitmapResult;
                     hasSign = true;
                     btnStartPad.Content = "Clear";
+                    vbSignPH.Visibility = Visibility.Hidden;
                 }
                 else
                 {
@@ -279,10 +280,12 @@ namespace SPTC_APP.View
                     //hasSign = false;
 
                     btnStartPad.Content = "Start Pad";
+                    vbSignPH.Visibility = Visibility.Visible;
                 }
             } else
             {
                 btnStartPad.Content = "Start Pad";
+                vbSignPH.Visibility = Visibility.Visible;
                 imgSignPic.Source = null;
                 hasSign = false;
             }
@@ -373,7 +376,7 @@ namespace SPTC_APP.View
             if (Preview_WarnDone(e))
             {
                 this.StopCamera();
-                if (tboxLnum.Text.Length > 0 && tboxFn.Text.Length > 0 && tboxLn.Text.Length > 0 && tboxAddressB.Text.Length > 0 && tboxAddressS.Text.Length > 0 && tboxEmePer.Text.Length > 0 && tboxPhone.Text.Length > 0)
+                if (tboxLnum.Text.Length > 0 && tboxFn.Text.Length > 0 && tboxLn.Text.Length > 0)
                 {
                     GeneratedIDPreview print = new GeneratedIDPreview();
                     print.ReturnControl(this);

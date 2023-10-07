@@ -266,7 +266,7 @@ namespace SPTC_APP.View
             if (zoomedIn != null)
             {
                 zoomedIn.SaveInfo();
-                ControlWindow.Show($"ID Saved!", $"Body#: ({zoomedIn.franchise.BodyNumber}) {zoomedIn.type.ToString()}")
+                ControlWindow.Show($"ID Saved!", $"Body#: ({zoomedIn.franchise.BodyNumber}) {zoomedIn.type.ToString()}");
                 EventLogger.Post("OUT :: ID : " + zoomedIn.franchise.BodyNumber + " FRONT: " + zoomedIn.FrontPrint + " BACK: " + zoomedIn.BackPrint);
             }
         }

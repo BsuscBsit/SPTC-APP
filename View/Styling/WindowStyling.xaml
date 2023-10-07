@@ -50,9 +50,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window">
-                    <Border
-                        Background="{StaticResource BrushSoftGrey1}"
-                        ClipToBounds="True">
+                    <Border Background="{StaticResource BrushSoftGrey1}" ClipToBounds="True">
                         <ContentPresenter />
                     </Border>
                 </ControlTemplate>

@@ -1,5 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 using SPTC_APP.Objects;
+using System.Windows.Controls;
 
 namespace SPTC_APP.View
 {
@@ -8,11 +10,14 @@ namespace SPTC_APP.View
     /// </summary>
     public partial class BackID : Window
     {
-        public BackID()
+        LayoutVersion layout;
+        
+        public BackID(LayoutVersion layout = LayoutVersion.VER2023)
         {
             InitializeComponent();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
-           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            this.layout = layout;
         }
         public void Populate(Franchise franchise, General type)
         {
@@ -50,6 +55,19 @@ namespace SPTC_APP.View
 
         private void window_Loaded(object sender, RoutedEventArgs e)
         {
+            switch (layout)
+            {
+                case LayoutVersion.VER2022:
+                    ver2022();
+                break;
+                case LayoutVersion.VER2023:
+                    ver2023();
+                break;
+            }
+        }
+        
+        private void ver2022()
+        {
             label1.FontSize = Scaler.PtToPx(11);
             label2.FontSize = Scaler.PtToPx(11);
 
@@ -72,10 +90,53 @@ namespace SPTC_APP.View
             lblName.FontSize = Scaler.PtToPx(12);
 
             imgSign.Height = Scaler.InToDip(0.6);
-            //viewbox1.Height = Scaler.InToDip();
         }
+        private void ver2023()
+        {
+            Color primary = (Color)ColorConverter.ConvertFromString("#1D314E");
+
+            grpEmePerHead.Visibility = Visibility.Collapsed;
+            grpEmePer.Visibility = Visibility.Collapsed;
+            grpAddress.Visibility = Visibility.Collapsed;
+            grpContact.Visibility = Visibility.Collapsed;
+            hdiv3.Visibility = Visibility.Visible;
+
+            Grid.SetRow(grpLicense, 1);
+            Grid.SetRow(grpExpDate, 2);
+            Grid.SetRow(grpBodyNo, 0);
+
+            label1.FontSize = Scaler.PtToPx(10);
+            label1.FontWeight = FontWeights.Bold;
+            label1.Foreground = new SolidColorBrush(primary);
+            hdiv1.Height = 2;
+
+            label2.FontSize = Scaler.PtToPx(10);
+            label2.FontWeight = FontWeights.Bold;
+            label2.Foreground = new SolidColorBrush(primary);
+            hdiv2.Height = 2;
+
+            label3.Content = "SPTC No.";
+            label3.FontSize = Scaler.PtToPx(12);
+            label3.FontWeight = FontWeights.Bold;
+            label3.Foreground = new SolidColorBrush(primary);
+            label3.Margin = new Thickness(Scaler.InToDip(0.1), 0, 0, Scaler.InToDip(0.2));
+
+            label9.FontSize = Scaler.PtToPx(10);
+            label9.FontWeight = FontWeights.Bold;
+            label9.Foreground = new SolidColorBrush(primary);
+            hdiv7.Height = 2;
+
+            lbodyView.Height = Scaler.PtToPx(100);
+            lblLicense.FontSize = Scaler.PtToPx(15);
+            lblXPDate.FontSize = Scaler.PtToPx(10);
+            lblName.FontSize = Scaler.PtToPx(10);
 
 
+        }
+        public enum LayoutVersion
+        {
+            VER2022, VER2023,
+        }
 
     }
 

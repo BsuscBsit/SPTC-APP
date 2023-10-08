@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -16,8 +17,10 @@ namespace SPTC_APP.View.Pages.Output
     /// </summary>
     public partial class DashboardView : Window
     {
-       
 
+
+        private Path clickedPie;
+        private bool pieClicked = false;
         public DashboardView()
         {
             InitializeComponent();
@@ -168,6 +171,7 @@ namespace SPTC_APP.View.Pages.Output
 
 
         }
+
         private void DrawPieChart()
         {
             
@@ -192,53 +196,76 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     Fill = i == 0? Brushes.Red : RandomColor(i),
                     Opacity = 0.5,
-                    Stroke = Brushes.Transparent,
-                    StrokeThickness = 1.5,
                     Tag = dictionary.Keys.ElementAt(i),
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 0,
                     Data = new PathGeometry
                     {
                         Figures = new PathFigureCollection
-                {
-                    new PathFigure
-                    {
-                        StartPoint = new Point(centerX, centerY),
-                        Segments = new PathSegmentCollection
                         {
-                            new LineSegment
+                            new PathFigure
                             {
-                                Point = new Point(centerX + radius * Math.Cos(currentAngle * Math.PI / 180), centerY + radius * Math.Sin(currentAngle * Math.PI / 180))
-                            },
-                            new ArcSegment
-                            {
-                                Point = new Point(centerX + radius * Math.Cos((currentAngle + sweepAngle) * Math.PI / 180), centerY + radius * Math.Sin((currentAngle + sweepAngle) * Math.PI / 180)),
-                                Size = new Size(radius, radius),
-                                IsLargeArc = sweepAngle > 180,
-                                SweepDirection = SweepDirection.Clockwise
-                            },
-                            new LineSegment
-                            {
-                                Point = new Point(centerX, centerY)
+                                StartPoint = new Point(centerX, centerY),
+                                Segments = new PathSegmentCollection
+                                {
+                                    new LineSegment
+                                    {
+                                        Point = new Point(centerX + radius * Math.Cos(currentAngle * Math.PI / 180), centerY + radius * Math.Sin(currentAngle * Math.PI / 180))
+                                    },
+                                    new ArcSegment
+                                    {
+                                        Point = new Point(centerX + radius * Math.Cos((currentAngle + sweepAngle) * Math.PI / 180), centerY + radius * Math.Sin((currentAngle + sweepAngle) * Math.PI / 180)),
+                                        Size = new Size(radius, radius),
+                                        IsLargeArc = sweepAngle > 180,
+                                        SweepDirection = SweepDirection.Clockwise
+                                    },
+                                    new LineSegment
+                                    {
+                                        Point = new Point(centerX, centerY)
+                                    }
+                                }
                             }
                         }
-                    }
-                }
                     }
                 };
 
                 path.MouseEnter += Path_MouseEnter;
                 path.MouseLeave += Path_MouseLeave;
+                path.MouseDown += Path_MouseDown;
 
                 cvPieChart.Children.Add(path);
 
                 currentAngle += sweepAngle;
             }
         }
-
-        private Path lasthoveredPie;
+        private void Path_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!pieClicked)
+            {
+                pieClicked = true;
+                clickedPie = sender as Path;
+            } else
+            {
+                pieClicked = false;
+                clickedPie = null;
+            }
+        }
         private void Path_MouseLeave(object sender, MouseEventArgs e)
         {
-            tbPieChartTitle.Content = "Total Revenue";
-            tbPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
+            if (sender is Path path)
+            {
+                if (!pieClicked)
+                {
+                    tbPieChartTitle.Content = "Total Revenue";
+                    tbPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
+                }
+                path.StrokeThickness = 0;
+                if(clickedPie != null)
+                {
+                    clickedPie.StrokeThickness = 2.5;
+                }
+                
+            }
         }
         private void Path_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -248,14 +275,10 @@ namespace SPTC_APP.View.Pages.Output
                 string tag = path.Tag?.ToString() ?? "No Data";
                 tbPieChartTitle.Content = tag;
                 tbPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).TryGetValue(tag, out var value)? value.ToString(): "0";
-                (sender as Path).Stroke = Brushes.Black;
-                if (lasthoveredPie != null)
-                {
-                    lasthoveredPie.Stroke = Brushes.Transparent;
-                }
-                lasthoveredPie = sender as Path;
+                path.StrokeThickness = 3.5;
             }
         }
+
         private Brush RandomColor(int i)
         {
             List<Brush> brushes = new List<Brush> { Brushes.Cyan, Brushes.Blue, Brushes.DarkBlue };

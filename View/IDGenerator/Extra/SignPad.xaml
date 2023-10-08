@@ -11,9 +11,10 @@
     HorizontalAlignment="Center"
     VerticalAlignment="Center"
     AllowsTransparency="True"
+    Loaded="Window_Loaded"
     Style="{StaticResource Maximized}"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" Loaded="Window_Loaded">
+    mc:Ignorable="d">
     <!--  Window Height was set to Auto to get the final value before defining.  -->
     <!--  Also change the dimensions in Constructor.  -->
     <Grid>
@@ -208,7 +209,11 @@
                             Width="40"
                             Height="40"
                             Click="btnWindowResizer_Click"
-                            Style="{DynamicResource CommonButtonStyle}" />
+                            Style="{DynamicResource CommonButtonStyle}" >
+                            <Viewbox Width="19">
+                                <ContentControl Content="{StaticResource Expand}" x:Name="resizerContent"/>
+                            </Viewbox>
+                        </Button>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -217,7 +222,7 @@
                 Grid.Row="0"
                 Height="40"
                 VerticalAlignment="Top"
-                Background="{StaticResource BrushYellow}" />
+                Background="{StaticResource BrushYellow}" Margin="0.5,0,0.6,0" />
         </Grid>
     </Grid>
 </Window>

@@ -44,6 +44,7 @@ namespace SPTC_APP.View.IDGenerator.Extra
         {
             if (isMaximized)
             {
+                resizerContent.Content = this.FindResource("Expand");
                 DraggingHelper.DragWindow(borderTopBar);
                 borderTopBar.CornerRadius = new CornerRadius(12, 12, 0, 0);
                 wsh.ResizeTo(WindowStateHelper.WindowPosition.CENTER, windowWidth, windowHeight);
@@ -51,6 +52,7 @@ namespace SPTC_APP.View.IDGenerator.Extra
             }
             else
             {
+                resizerContent.Content = this.FindResource("Shrink");
                 DraggingHelper.DisableDragWindow(borderTopBar);
                 borderTopBar.CornerRadius = new CornerRadius(0);
                 wsh.MaximizeWindow(false);
@@ -165,6 +167,7 @@ namespace SPTC_APP.View.IDGenerator.Extra
         {
             wsh = new WindowStateHelper(this);
             wsh.MaximizeWindow(false);
+            resizerContent.Content = this.FindResource("Shrink");
         }
     }
 

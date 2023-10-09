@@ -287,8 +287,8 @@ namespace SPTC_APP.View.Pages.Output
             if(MainBody.selectedFranchise != null)
             {
                 if(table == Table.DRIVER) 
-                { 
-
+                {
+                    (new ViolationInput()).Show();
                 }
             }
         }

@@ -237,7 +237,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private void AddFranchiseButton_Click(object sender, RoutedEventArgs e)
         {
-            (new InputFranchiseView()).Show();
+            (new InputFranchiseView()).ShowDialog();
         }
 
 
@@ -273,11 +273,11 @@ namespace SPTC_APP.View.Pages.Output
             {
                 if (table == Table.OPERATOR)
                 {
-                    (new GenerateID(MainBody.selectedFranchise, false)).Show();
+                    (new GenerateID(MainBody.selectedFranchise, false)).ShowDialog();
                 }
                 else if (table == Table.DRIVER)
                 {
-                    (new GenerateID(MainBody.selectedFranchise, true)).Show();
+                    (new GenerateID(MainBody.selectedFranchise, true)).ShowDialog();
                 }
             }
         }
@@ -288,7 +288,7 @@ namespace SPTC_APP.View.Pages.Output
             {
                 if(table == Table.DRIVER) 
                 {
-                    (new ViolationInput()).Show();
+                    (new ViolationInput()).ShowDialog();
                 }
             }
         }

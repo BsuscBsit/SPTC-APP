@@ -10,9 +10,11 @@ namespace SPTC_APP.Database
     public static class RequestQuery
     {
 
-        public static string LOGIN_EMPLOYEE = $"SELECT * FROM {Table.EMPLOYEE} AS e LEFT JOIN {Table.POSITION} p ON p.{Field.ID} = e.{Field.POSITION_ID} WHERE p.{Field.TITLE} = ? AND e.{Field.PASSWORD} = ? AND e.{Field.ISDELETED} = 0";
+        public static string LOGIN_EMPLOYEE = $"SELECT * FROM {Table.EMPLOYEE} AS e LEFT JOIN {Table.POSITION} p ON p.{Field.ID} = e.{Field.POSITION_ID} WHERE p.{Field.TITLE} = ? AND e.{Field.PASSWORD} = ? AND e.{Where.ALL_NOTDELETED}";
 
         public static string GET_CURRENT_CHAIRMAN = $"SELECT * FROM {Table.EMPLOYEE} AS e LEFT JOIN {Table.POSITION} p ON p.{Field.ID} = e.{Field.POSITION_ID} WHERE p.{Field.TITLE} = \"Chairman\" AND e.{Field.ISDELETED} = 0";
+        public static string GET_LIST_OF_POSITION = $"SELECT {Field.TITLE} FROM {Table.POSITION} WHERE {Where.ALL_NOTDELETED}";
+
 
         public static string CLEAN_NAME = $"DELETE n FROM {Table.NAME} AS n LEFT JOIN {Table.OPERATOR} AS o ON n.{Field.ID} = o.{Field.NAME_ID} LEFT JOIN {Table.DRIVER} AS d ON n.{Field.ID} = d.{Field.NAME_ID} LEFT JOIN {Table.EMPLOYEE} AS e ON n.{Field.ID} = e.{Field.NAME_ID} WHERE o.{Field.NAME_ID} IS NULL AND d.{Field.NAME_ID} IS NULL AND e.{Field.NAME_ID} IS NULL;";
 
@@ -23,10 +25,10 @@ namespace SPTC_APP.Database
         public static string SEARCH(string text) =>
             $"SELECT * FROM {Table.FRANCHISE} f LEFT JOIN {Table.OPERATOR} O ON f.{Field.OPERATOR_ID}=O.{Field.ID} LEFT JOIN {Table.DRIVER} D ON f.{Field.DRIVER_ID}=D.{Field.ID} " +
             $"LEFT JOIN {Table.NAME} OName ON O.{Field.NAME_ID}=OName.{Field.ID} LEFT JOIN {Table.NAME} DName ON D.{Field.NAME_ID}=DName.{Field.ID} " +
-            $"WHERE f.{Field.BODY_NUMBER} LIKE \"%{text}%\" OR OName.{Field.LASTNAME} LIKE \"%{text}%\" OR DName.{Field.LASTNAME} LIKE \"%{text}%\" AND f.{Field.ISDELETED} = 0 LIMIT 0, 10";
+            $"WHERE f.{Field.BODY_NUMBER} LIKE \"%{text}%\" OR OName.{Field.LASTNAME} LIKE \"%{text}%\" OR DName.{Field.LASTNAME} LIKE \"%{text}%\" AND f.{Where.ALL_NOTDELETED} LIMIT 0, 10";
 
         public static string GET_ALL_PAYMENT_IN_MONTH(int month, int year) =>
-            $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} <> -1 AND {Field.ISDELETED} = 0";
+            $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
         
 
         public static string GetEnumDescription(CRUDControl value)

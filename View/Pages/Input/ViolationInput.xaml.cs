@@ -23,6 +23,8 @@ namespace SPTC_APP.View.Pages.Input
         public ViolationInput()
         {
             InitializeComponent();
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             AppState.mainwindow?.Hide();
         }
 

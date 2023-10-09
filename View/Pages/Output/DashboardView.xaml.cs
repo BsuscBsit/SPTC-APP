@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,12 +47,12 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnGererate_Click(object sender, RoutedEventArgs e)
         {
-            (new PrintPreview()).Show();
+            (new PrintPreview()).ShowDialog();
         }
 
         private void btnTest_Click(object sender, RoutedEventArgs e)
         {
-            (new Test()).Show();
+            (new Test()).ShowDialog();
         }
 
         private void DrawBarChart()
@@ -103,19 +104,22 @@ namespace SPTC_APP.View.Pages.Output
 
             foreach (double yPos in yPositions)
             {
-                Line line = new Line
+                if (!double.IsNaN(yPos) && !double.IsInfinity(yPos))
                 {
-                    X1 = 0,
-                    X2 = cvBarChart.Width,
-                    Y1 = yPos,
-                    Y2 = yPos,
-                    Stroke = Brushes.Gray,
-                    Opacity = 0.6,
-                    StrokeThickness = 2,
-                    StrokeDashArray = new DoubleCollection(new double[] { 3, 1 })
-                };
+                    Line line = new Line
+                    {
+                        X1 = 0,
+                        X2 = cvBarChart.Width,
+                        Y1 = yPos,
+                        Y2 = yPos,
+                        Stroke = Brushes.Gray,
+                        Opacity = 0.6,
+                        StrokeThickness = 2,
+                        StrokeDashArray = new DoubleCollection(new double[] { 3, 1 })
+                    };
 
-                cvBarChart.Children.Add(line);
+                    cvBarChart.Children.Add(line);
+                }
             }
 
 
@@ -171,7 +175,6 @@ namespace SPTC_APP.View.Pages.Output
 
 
         }
-
         private void DrawPieChart()
         {
             

@@ -91,10 +91,10 @@ namespace SPTC_APP
         public static void Logout(Window window)
         {
             IS_ADMIN = false;
-            USER = null;
             EventLogger.Post($"USER :: Logout Success");
             (new Login()).Show();
             AppState.mainwindow = null;
+            USER = null;
             window.Close();
         }
 
@@ -205,7 +205,6 @@ namespace SPTC_APP
             PRINT_AJUSTMENTS = 0;
             DEFAULT_CAMERA = 0;
             LOG_WINDOW = false;
-            ALL_EMPLOYEES = new string[] { "General Manager", "Secretary", "Treasurer", "Bookeeper", "Chairman" };
         }
         public static void SaveToJson()
         {
@@ -221,7 +220,6 @@ namespace SPTC_APP
                 PRINT_AJUSTMENTS,
                 LOG_WINDOW,
                 DEFAULT_CAMERA,
-                ALL_EMPLOYEES,
             };
 
             if (File.Exists(APPSTATE_PATH))
@@ -263,13 +261,18 @@ namespace SPTC_APP
                     PRINT_AJUSTMENTS = data.PRINT_AJUSTMENTS;
                     LOG_WINDOW = data.LOG_WINDOW;
                     DEFAULT_CAMERA = data.DEFAULT_CAMERA;
-                    ALL_EMPLOYEES = JsonConvert.DeserializeObject<string[]>(data.ALL_EMPLOYEES.ToString());
+                    DatabaseConnection.GetConnection();
+                    ALL_EMPLOYEES = Retrieve.GetDataUsingQuery<string>(RequestQuery.GET_LIST_OF_POSITION).ToArray();
+                }
+                catch (MySqlException ex)
+                {
 
                 }
                 catch (Exception e)
                 {
                     EventLogger.Post("ERR :: Exception in JSON : " + e.Message);
                 }
+                
             }
             else
             {
@@ -283,7 +286,8 @@ namespace SPTC_APP
                     AppState.LoadFromJson();
                 }
             }
-            Employees = new List<string> { ALL_EMPLOYEES?[0], ALL_EMPLOYEES?[1], ALL_EMPLOYEES?[2], ALL_EMPLOYEES?[3] };
+            if(ALL_EMPLOYEES.Length >= 4)
+                Employees = new List<string> { ALL_EMPLOYEES?[0], ALL_EMPLOYEES?[1], ALL_EMPLOYEES?[2], ALL_EMPLOYEES?[3] };
         }
 
 
@@ -321,7 +325,7 @@ namespace SPTC_APP
             await Task.Delay(10000);
             return true;
         }
-        
+
     }
 
 }

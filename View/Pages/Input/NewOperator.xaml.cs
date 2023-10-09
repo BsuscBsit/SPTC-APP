@@ -23,6 +23,8 @@ namespace SPTC_APP.View.Pages.Input
         public NewOperator()
         {
             InitializeComponent();
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             AppState.mainwindow?.Hide();
         }
         protected override void OnClosing(CancelEventArgs e)

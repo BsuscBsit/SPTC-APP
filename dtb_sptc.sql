@@ -260,7 +260,7 @@ INSERT INTO `tbl_position` (`id`, `title`, `can_create`, `can_edit`, `can_delete
 (1, 'General Manager', 1, 1, 1, 0),
 (2, 'Secretary', 0, 0, 0, 0),
 (3, 'Treasurer', 0, 0, 0, 0),
-(4, 'Book Keeper', 0, 0, 0, 0),
+(4, 'Bookeeper', 0, 0, 0, 0),
 (5, 'Chairman', 0, 0, 0, 0);
 
 -- --------------------------------------------------------

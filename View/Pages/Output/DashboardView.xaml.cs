@@ -49,12 +49,10 @@ namespace SPTC_APP.View.Pages.Output
         {
             (new PrintPreview()).ShowDialog();
         }
-
         private void btnTest_Click(object sender, RoutedEventArgs e)
         {
             (new Test()).ShowDialog();
         }
-
         private void DrawBarChart()
         {
             var list = AppState.MonthlyIncome;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Objects;
@@ -15,6 +16,7 @@ namespace SPTC_APP.View
             EventLogger.Post("OUT :: <----- START UP ----->");
             ContentRendered += (sender, e) => {
                 Controller.StartInitialization(this, pbLoading, tbDebugLog);
+                AppState.LoadFromJson();
                 AppState.WindowsCounter(true, sender);
             };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };

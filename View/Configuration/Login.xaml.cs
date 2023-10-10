@@ -16,6 +16,7 @@ namespace SPTC_APP.View
         public Login()
         {
             InitializeComponent();
+            AppState.LoadFromJson();
             if(!AppState.isDeployment && !AppState.isDeployment_IDGeneration) pbPassword.Password = "Admin1234";
             cbUser.ItemsSource = AppState.Employees;
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };

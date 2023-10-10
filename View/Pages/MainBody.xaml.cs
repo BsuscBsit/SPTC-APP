@@ -42,6 +42,7 @@ namespace SPTC_APP.View.Pages
 
         private void Btn_Settings(object sender, RoutedEventArgs e)
         {
+            (new SettingsView()).ShowDialog();
             ClickColorControl(sender as Button);
         }
 

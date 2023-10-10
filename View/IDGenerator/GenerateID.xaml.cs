@@ -116,8 +116,8 @@ namespace SPTC_APP.View
                         bDay.DataContext = drv.birthday;
                         bDay.Text = drv.birthday.ToString();
                     }
-                    tboxEmePer.Text = drv.emergencyPerson;
-                    tboxPhone.Text = drv.emergencyContact;
+                    /*tboxEmePer.Text = drv.emergencyPerson;
+                    tboxPhone.Text = drv.emergencyContact;*/
                     tboxBnum.Text = franchise.BodyNumber;
                     tboxLnum.Text = franchise.LicenseNO;
                 }
@@ -158,8 +158,8 @@ namespace SPTC_APP.View
                         bDay.DataContext = drv.birthday;
                         bDay.Text = drv.birthday.ToString();
                     }
-                    tboxEmePer.Text = drv.emergencyPerson;
-                    tboxPhone.Text = drv.emergencyContact;
+                    /*tboxEmePer.Text = drv.emergencyPerson;
+                    tboxPhone.Text = drv.emergencyContact;*/
                     tboxBnum.Text = franchise.BodyNumber;
                     tboxLnum.Text = franchise.LicenseNO;
                 }
@@ -414,13 +414,13 @@ namespace SPTC_APP.View
                             Address address = @obj.address;
                             address.addressline1 = tboxAddressB.Text;
                             address.addressline2 = tboxAddressS.Text;
-                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
+                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, "", "");
                         }
                         else
                         {
                             Name name = new Name(prefix, tboxFn.Text, tboxMn.Text, tboxLn.Text, "");
                             Address address = new Address(tboxAddressB.Text, tboxAddressS.Text);
-                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
+                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, "", "");
                         }
 
                         franchise.WriteInto(tboxBnum.Text, null, @obj, tboxLnum.Text);
@@ -463,13 +463,13 @@ namespace SPTC_APP.View
                             Address address = @obj.address;
                             address.addressline1 = tboxAddressB.Text;
                             address.addressline2 = tboxAddressS.Text;
-                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
+                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, "", "");
                         }
                         else
                         {
                             Name name = new Name(prefix, tboxFn.Text, tboxMn.Text, tboxLn.Text, "");
                             Address address = new Address(tboxAddressB.Text, tboxAddressS.Text);
-                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, tboxEmePer.Text, tboxPhone.Text);
+                            @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, "", "");
                         }
 
 
@@ -574,8 +574,6 @@ namespace SPTC_APP.View
             tboxLnum.Text = "C07-05-001168";
             tboxBnum.Text = "99999";
             tboxAddressB.Text = "Block 9999, Lot 9999, Phase 9999 Area ABC123";
-            tboxEmePer.Text = "FirstName LastName";
-            tboxPhone.Text = "09123456789";
 
         }
 

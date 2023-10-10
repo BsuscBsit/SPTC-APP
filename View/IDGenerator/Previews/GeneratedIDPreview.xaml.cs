@@ -35,13 +35,13 @@ namespace SPTC_APP.View
         private void btnCancel(object sender, RoutedEventArgs e)
         {
             (new PrintPreview()).Show();
-            previous.Close();
+            previous?.Close();
             this.Close();
         }
 
         private void btnBack(object sender, RoutedEventArgs e)
         {
-            previous.Show();
+            previous?.Show();
             this.Close();
         }
 
@@ -50,7 +50,7 @@ namespace SPTC_APP.View
             PrintPreview print = new PrintPreview();
             print.NewID(id);
             print.Show();
-            previous.Close();
+            previous?.Close();
             this.Close();
         }
 

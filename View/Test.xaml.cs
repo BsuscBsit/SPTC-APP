@@ -112,7 +112,8 @@ namespace SPTC_APP.View
                 new InputFranchiseView(),
                 new MainBody(),
                 new LogsWindow(),
-                new Test()
+                new Test(),
+                new SettingsView()
             };
 
 
@@ -127,7 +128,7 @@ namespace SPTC_APP.View
                 btnwindow.Width = ActualWidth / 3;
                 btnwindow.Content = windows[i].ToString().Split('.').Last();
                 btnwindow.Tag = windows[i];
-                btnwindow.Click += (sender, e) => { ((sender as Button).Tag as Window).ShowDialog(); };
+                btnwindow.Click += (sender, e) => { ((sender as Button).Tag as Window).ShowDialog(); LoadWindowButtons(); };
                 btnwindow.Margin = new Thickness(10);
                 int row = i / buttonsPerRow;
                 int col = i % buttonsPerRow;

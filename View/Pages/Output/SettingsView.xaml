@@ -1,0 +1,18 @@
+﻿<Window x:Class="SPTC_APP.View.Pages.Output.SettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SPTC_APP.View.Pages.Output"
+        mc:Ignorable="d"
+        Title="SettingsView" Width="450" Height="400">
+    <Grid>
+        <ScrollViewer Margin="0, 0, 0, 70">
+            <StackPanel x:Name="SettingsPanel" >
+
+            </StackPanel>
+        </ScrollViewer>
+        <Button x:Name="btnCancel" Content="CANCEL" Width="120" Height="30" Margin="40, 0, 0, 20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="btnCancel_Click"/>
+        <Button x:Name="btnSave" Content="SAVE" Width="120" Height="30" Margin="0, 0, 40, 20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnSave_Click"/>
+    </Grid>
+</Window>

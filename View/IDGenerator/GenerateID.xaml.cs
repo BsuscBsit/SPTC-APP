@@ -107,6 +107,7 @@ namespace SPTC_APP.View
                     if (drv.signature != null)
                     {
                         imgSignPic.Source = drv.signature.GetSource();
+                        vbSignPH.Visibility = Visibility.Hidden;
                         hasSign = true;
 
                     }
@@ -150,6 +151,7 @@ namespace SPTC_APP.View
                     if (drv.signature != null)
                     {
                         imgSignPic.Source = drv.signature.GetSource();
+                        vbSignPH.Visibility = Visibility.Hidden;
                         hasSign = true;
                     }
                     if (drv.birthday != null)
@@ -328,6 +330,7 @@ namespace SPTC_APP.View
                 bitmapImage.EndInit();
 
                 imgSignPic.Source = bitmapImage;
+                vbSignPH.Visibility = Visibility.Hidden;
                 hasSign = true;
             }
         }
@@ -536,20 +539,35 @@ namespace SPTC_APP.View
                     // Convert the frame to a BitmapSource and display it
                     System.Drawing.Bitmap frame = (System.Drawing.Bitmap)eventArgs.Frame.Clone();
 
+                    // Calculate the cropping rectangle to center the image horizontally
+                    double frameWidth = frame.Width;
+                    double frameHeight = frame.Height;
+                    double aspectRatio = 1.0; // 1:1 aspect ratio
+                    double croppedWidth = Math.Min(frameWidth, frameHeight * aspectRatio);
+                    double left = (frameWidth - croppedWidth) / 2;
+
+                    // Crop the frame
+                    System.Drawing.Bitmap croppedFrame = frame.Clone(new System.Drawing.RectangleF(
+                        (float)left,
+                        0,
+                        (float)croppedWidth,
+                        (float)frameHeight), frame.PixelFormat);
+
                     // Convert to BitmapSource
-                    var hBitmap = frame.GetHbitmap();
+                    var hBitmap = croppedFrame.GetHbitmap();
                     BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
                         hBitmap,
                         IntPtr.Zero,
                         Int32Rect.Empty,
                         BitmapSizeOptions.FromEmptyOptions());
 
-                    // Display the captured frame in imgIDPic
+                    // Display the cropped frame in imgIDPic
                     imgIDPic.Source = bitmapSource;
                     lastCapturedImage = bitmapSource;
 
-                    // Dispose of the frame to release resources
+                    // Dispose of the frames to release resources
                     frame.Dispose();
+                    croppedFrame.Dispose();
 
                     // Freeze the BitmapSource to release its resources
                     bitmapSource.Freeze();
@@ -558,7 +576,6 @@ namespace SPTC_APP.View
                 });
             }
         }
-
 
 
         //UNIQUE METHODS

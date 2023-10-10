@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2023 at 02:16 PM
+-- Generation Time: Oct 10, 2023 at 11:07 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -29,15 +29,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tbl_address` (
   `id` int(11) NOT NULL,
-  `address_line1` varchar(255) DEFAULT NULL,
-  `address_line2` varchar(255) DEFAULT NULL,
-  `house_no` varchar(255) DEFAULT NULL,
-  `street_name` varchar(50) DEFAULT NULL,
-  `barangay_subdivision` varchar(50) DEFAULT NULL,
-  `city_municipality` varchar(50) DEFAULT NULL,
-  `postal_code` varchar(10) DEFAULT NULL,
-  `province` varchar(50) DEFAULT NULL,
-  `country` varchar(50) DEFAULT NULL,
+  `address_line1` varchar(50) DEFAULT NULL,
+  `address_line2` varchar(50) DEFAULT NULL,
+  `house_no` varchar(20) DEFAULT NULL,
+  `street_name` varchar(20) DEFAULT NULL,
+  `barangay_subdivision` varchar(20) DEFAULT NULL,
+  `city_municipality` varchar(20) DEFAULT NULL,
+  `postal_code` varchar(6) DEFAULT NULL,
+  `province` varchar(20) DEFAULT NULL,
+  `country` varchar(20) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -53,10 +53,10 @@ CREATE TABLE `tbl_driver` (
   `address_id` int(11) NOT NULL DEFAULT -1,
   `image_id` int(11) NOT NULL DEFAULT -1,
   `sign_id` int(11) DEFAULT -1,
-  `remarks` varchar(255) DEFAULT NULL,
-  `date_of_birth` date NOT NULL DEFAULT current_timestamp(),
+  `remarks` varchar(100) DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
   `contact_no` varchar(11) DEFAULT NULL,
-  `emergency_person` varchar(255) DEFAULT NULL,
+  `emergency_person` varchar(50) DEFAULT NULL,
   `emergency_number` varchar(11) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -75,10 +75,10 @@ CREATE TABLE `tbl_employee` (
   `image_id` int(11) NOT NULL DEFAULT -1,
   `password` varchar(50) DEFAULT NULL,
   `position_id` int(11) NOT NULL DEFAULT -1,
-  `start_date` date DEFAULT current_timestamp(),
+  `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
-  `contact_no` varchar(20) DEFAULT NULL,
+  `contact_no` varchar(11) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -87,11 +87,11 @@ CREATE TABLE `tbl_employee` (
 --
 
 INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `sign_id`, `image_id`, `password`, `position_id`, `start_date`, `end_date`, `date_of_birth`, `contact_no`, `isDeleted`) VALUES
-(1, 1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, '2023-06-26', NULL, NULL, NULL, 0),
-(2, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 2, '2023-06-26', NULL, NULL, NULL, 0),
-(3, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, '2023-06-26', NULL, NULL, NULL, 0),
-(4, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, '2023-06-26', NULL, NULL, NULL, 0),
-(5, -1, -1, -1, -1, NULL, 5, '2023-09-27', NULL, NULL, NULL, 0);
+(1, 1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, NULL, NULL, NULL, NULL, 0),
+(2, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 2, NULL, NULL, NULL, NULL, 0),
+(3, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, NULL, NULL, NULL, NULL, 0),
+(4, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, NULL, NULL, NULL, NULL, 0),
+(5, -1, -1, -1, -1, NULL, 5, NULL, NULL, NULL, NULL, 0);
 
 ----------------------------------------------------------
 
@@ -105,12 +105,12 @@ CREATE TABLE `tbl_franchise` (
   `operator_id` int(11) NOT NULL DEFAULT -1,
   `driver_id` int(11) NOT NULL DEFAULT -1,
   `owner_id` int(11) NOT NULL DEFAULT -1,
-  `buying_date` date NOT NULL DEFAULT current_timestamp(),
+  `buying_date` date DEFAULT NULL,
   `last_franchise_id` int(11) NOT NULL DEFAULT -1,
-  `mtop_no` varchar(50) DEFAULT NULL,
+  `mtop_no` varchar(20) DEFAULT NULL,
   `license_no` varchar(20) DEFAULT NULL,
-  `voters_id_number` varchar(255) DEFAULT NULL,
-  `tin_number` varchar(255) DEFAULT NULL,
+  `voters_id_number` varchar(50) DEFAULT NULL,
+  `tin_number` varchar(50) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -122,7 +122,7 @@ CREATE TABLE `tbl_franchise` (
 
 CREATE TABLE `tbl_id_history` (
   `id` int(11) NOT NULL,
-  `date` date DEFAULT current_timestamp(),
+  `date` date DEFAULT NULL,
   `owner_id` int(11) NOT NULL DEFAULT -1,
   `entity_type` varchar(10) NOT NULL DEFAULT 'OPERATOR',
   `name_id` int(11) NOT NULL DEFAULT -1,
@@ -138,7 +138,7 @@ CREATE TABLE `tbl_id_history` (
 CREATE TABLE `tbl_image` (
   `id` int(11) NOT NULL,
   `image_source_bin` mediumblob DEFAULT NULL,
-  `image_name` varchar(255) DEFAULT NULL,
+  `image_name` varchar(20) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -151,9 +151,9 @@ CREATE TABLE `tbl_image` (
 CREATE TABLE `tbl_loan_ledger` (
   `id` int(11) NOT NULL,
   `franchise_id` int(11) NOT NULL DEFAULT -1,
-  `date` date NOT NULL DEFAULT current_timestamp(),
+  `date` date DEFAULT NULL,
   `amount` double NOT NULL DEFAULT 0,
-  `details` varchar(255) DEFAULT NULL,
+  `details` varchar(100) DEFAULT NULL,
   `monthly_interest` double NOT NULL DEFAULT 0,
   `monthly_principal` double NOT NULL DEFAULT 0,
   `payment_dues` double NOT NULL DEFAULT 0,
@@ -169,12 +169,12 @@ CREATE TABLE `tbl_loan_ledger` (
 CREATE TABLE `tbl_long_term_loan_ledger` (
   `id` int(11) NOT NULL,
   `franchise_id` int(11) NOT NULL DEFAULT -1,
-  `date` date NOT NULL DEFAULT current_timestamp(),
+  `date` date DEFAULT NULL,
   `terms_of_payment_month` int(11) NOT NULL DEFAULT 1,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `amount_loaned` double NOT NULL DEFAULT 0,
-  `details` varchar(255) DEFAULT NULL,
+  `details` varchar(100) DEFAULT NULL,
   `processing_fee` double NOT NULL DEFAULT 0,
   `capital_buildup` double NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
@@ -189,10 +189,10 @@ CREATE TABLE `tbl_long_term_loan_ledger` (
 CREATE TABLE `tbl_name` (
   `id` int(11) NOT NULL,
   `sex` tinyint(1) DEFAULT 0,
-  `first_name` varchar(50) DEFAULT NULL,
-  `middle_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `suffix` varchar(50) DEFAULT NULL,
+  `first_name` varchar(20) DEFAULT NULL,
+  `middle_name` varchar(20) DEFAULT NULL,
+  `last_name` varchar(20) DEFAULT NULL,
+  `suffix` varchar(10) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -208,10 +208,10 @@ CREATE TABLE `tbl_operator` (
   `address_id` int(11) NOT NULL DEFAULT -1,
   `image_id` int(11) NOT NULL DEFAULT -1,
   `sign_id` int(11) DEFAULT -1,
-  `remarks` varchar(255) DEFAULT NULL,
-  `date_of_birth` date NOT NULL DEFAULT current_timestamp(),
+  `remarks` varchar(100) DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
   `contact_no` varchar(11) DEFAULT NULL,
-  `emergency_person` varchar(255) DEFAULT NULL,
+  `emergency_person` varchar(50) DEFAULT NULL,
   `emergency_number` varchar(11) DEFAULT NULL,
   `isOwner` tinyint(1) NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
@@ -229,11 +229,11 @@ CREATE TABLE `tbl_payment_details` (
   `isDownPayment` tinyint(1) NOT NULL DEFAULT 0,
   `isDivPat` tinyint(1) NOT NULL DEFAULT 0,
   `ledger_type` varchar(20) DEFAULT NULL,
-  `date` date NOT NULL DEFAULT current_timestamp(),
+  `date` date DEFAULT NULL,
   `reference_no` int(11) NOT NULL DEFAULT -1,
   `deposit` double NOT NULL DEFAULT 0,
   `penalties` double NOT NULL DEFAULT 0,
-  `remarks` varchar(255) DEFAULT NULL,
+  `remarks` varchar(100) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -272,7 +272,7 @@ INSERT INTO `tbl_position` (`id`, `title`, `can_create`, `can_edit`, `can_delete
 CREATE TABLE `tbl_share_capital_ledger` (
   `id` int(11) NOT NULL,
   `franchise_id` int(11) NOT NULL DEFAULT -1,
-  `date` date NOT NULL DEFAULT current_timestamp(),
+  `date` date DEFAULT NULL,
   `beginning_balance` double NOT NULL DEFAULT 0,
   `last_balance` double NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
@@ -289,10 +289,10 @@ CREATE TABLE `tbl_violation` (
   `franchise_id` int(11) NOT NULL DEFAULT -1,
   `violation_level_count` int(11) NOT NULL DEFAULT 0,
   `violation_type_id` int(11) NOT NULL DEFAULT -1,
-  `date` date NOT NULL DEFAULT current_timestamp(),
+  `date` date DEFAULT NULL,
   `suspension_start` date DEFAULT NULL,
   `suspention_end` date DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
+  `remarks` varchar(100) DEFAULT NULL,
   `name_id` int(11) NOT NULL DEFAULT -1,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -306,7 +306,7 @@ CREATE TABLE `tbl_violation` (
 CREATE TABLE `tbl_violation_type` (
   `id` int(11) NOT NULL,
   `title` varchar(50) DEFAULT NULL,
-  `details` varchar(255) DEFAULT NULL,
+  `details` varchar(100) DEFAULT NULL,
   `num_of_days` int(11) NOT NULL DEFAULT 0,
   `is_for_driver` tinyint(1) NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0

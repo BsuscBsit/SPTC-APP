@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2023 at 11:07 AM
+-- Generation Time: Oct 11, 2023 at 10:12 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -93,7 +93,7 @@ INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `sign_id`, `image_id`
 (4, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, NULL, NULL, NULL, NULL, 0),
 (5, -1, -1, -1, -1, NULL, 5, NULL, NULL, NULL, NULL, 0);
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_franchise`

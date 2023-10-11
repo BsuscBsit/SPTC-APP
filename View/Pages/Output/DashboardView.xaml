@@ -36,19 +36,29 @@
                 VerticalAlignment="Top"
                 Content="RELOAD" Click="btnReload_Click"/>
         <Border BorderBrush="Black" Background="White" CornerRadius="5" BorderThickness="1" Margin="20, 0, 0, 20" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <Canvas x:Name="cvBarChart" Background="White" Width="480" Height="240" Margin="60, 60, 20, 20" />
+            <Canvas x:Name="cvBarChart" Background="White" Width="480" Height="150" Margin="60, 60, 20, 20" />
         </Border>
         <Border BorderBrush="Black" Background="White" CornerRadius="5" BorderThickness="1" Margin="0,0,20,20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="250" Width="190">
             <Grid>
                 <Canvas x:Name="cvPieChart" Background="White" Width="175" Height="175" VerticalAlignment="Bottom" Margin="5">
-                    <Path Stroke="Black" StrokeThickness="1" Fill="LightGray">
+                    <Path Fill="LightGray">
                         <Path.Data>
                             <EllipseGeometry x:Name="cvPieCircle" Center="87.5, 87.5" RadiusX="87" RadiusY="87"/>
                         </Path.Data>
                     </Path>
+                    <Canvas Canvas.ZIndex="1">
+                        <Path Fill="White">
+                            <Path.Data>
+                                <EllipseGeometry Center="87.5, 87.5" RadiusX="40" RadiusY="40"/>
+                            </Path.Data>
+                        </Path>
+                        <Label x:Name="lblPercent" Content="100%" Style="{StaticResource LargestTitlePreset}" FontSize="18" Foreground="Gray" Height="30" Width="60" Margin="57.5, 72, 0, 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </Canvas>
+                    
                 </Canvas>
-                <Label x:Name="tbPieChartTitle" Content="" Style="{StaticResource CommonTitlePreset}" FontSize="16" FontWeight="Bold" Foreground="Black" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Label x:Name="tbPieChart" Content="0" Style="{StaticResource CommonTitlePreset}" FontSize="16" Height="30" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0"/>
+
+                <Label x:Name="lblPieChartTitle" Content="" Style="{StaticResource CommonTitlePreset}" FontSize="16" FontWeight="Bold" Foreground="Black" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label x:Name="lblPieChart" Content="0" Style="{StaticResource CommonTitlePreset}" FontSize="16" Height="30" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0"/>
             </Grid>
         </Border>
     </Grid>

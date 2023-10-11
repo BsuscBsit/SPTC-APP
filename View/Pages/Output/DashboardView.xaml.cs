@@ -64,7 +64,7 @@ namespace SPTC_APP.View.Pages.Output
             double maxBalance = list.Values.Max();
             double minBalance = list.Values.Min();
 
-            double barWidth = cvBarChart.Width / list.Count;
+            double barWidth = (cvBarChart.Width / list.Count);
 
             double maxMagnitude = Math.Pow(10, Math.Floor(Math.Log10(maxBalance)));
 
@@ -129,7 +129,7 @@ namespace SPTC_APP.View.Pages.Output
                 CustomRectangle customRect = new CustomRectangle(barWidth, barHeight, adjustedIndex == currentMonthIndex, adjustedIndex);
                 customRect.TextBlock.Text = list.Keys.ElementAt(adjustedIndex);
                 customRect.Rect.Tag = list.Values.ElementAt(adjustedIndex);
-                customRect.SetPosition(i * barWidth + 5, 0, barHeight);
+                customRect.SetPosition(i * barWidth + 15, 0, barHeight);
 
                 cvBarChart.Children.Add(customRect.Rect);
                 cvBarChart.Children.Add(customRect.TextBlock);
@@ -180,7 +180,6 @@ namespace SPTC_APP.View.Pages.Output
             var dictionary = sortedlist.ToDictionary(x => x.Key, x => x.Value);
 
             double total = dictionary.Values.Sum();
-            int startMonthIndex = 0;
             double currentAngle = -90;
 
             double centerX = cvPieCircle.Center.X;
@@ -238,6 +237,10 @@ namespace SPTC_APP.View.Pages.Output
 
                 currentAngle += sweepAngle;
             }
+
+
+         
+
         }
         private void Path_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -248,7 +251,17 @@ namespace SPTC_APP.View.Pages.Output
             } else
             {
                 pieClicked = false;
-                clickedPie = null;
+                if(sender as Path == clickedPie)
+                {
+                    clickedPie.StrokeThickness = 0;
+                    clickedPie = null;
+                } else
+                {
+                    clickedPie.StrokeThickness = 0;
+                    clickedPie = null;
+                    pieClicked = true;
+                    clickedPie = sender as Path;
+                }
             }
         }
         private void Path_MouseLeave(object sender, MouseEventArgs e)
@@ -257,13 +270,14 @@ namespace SPTC_APP.View.Pages.Output
             {
                 if (!pieClicked)
                 {
-                    tbPieChartTitle.Content = "Total Revenue";
-                    tbPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
+                    lblPieChartTitle.Content = "Total Revenue";
+                    lblPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
+                    lblPercent.Content = "100%";
                 }
                 path.StrokeThickness = 0;
                 if(clickedPie != null)
                 {
-                    clickedPie.StrokeThickness = 2.5;
+                    clickedPie.StrokeThickness = 3.5;
                 }
                 
             }
@@ -274,8 +288,10 @@ namespace SPTC_APP.View.Pages.Output
             if (sender is Path path)
             {
                 string tag = path.Tag?.ToString() ?? "No Data";
-                tbPieChartTitle.Content = tag;
-                tbPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).TryGetValue(tag, out var value)? value.ToString(): "0";
+                lblPieChartTitle.Content = tag;
+                double val = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).TryGetValue(tag, out var value)? value: 0;
+                lblPieChart.Content = val.ToString(".00");
+                lblPercent.Content = Math.Round(((val / AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()) * 100)) + "%";
                 path.StrokeThickness = 3.5;
             }
         }
@@ -295,12 +311,12 @@ namespace SPTC_APP.View.Pages.Output
             {
                 Rect = new Rectangle
                 {
-                    Width = barWidth - 5,
+                    Width = barWidth - 15,
                     Height = barHeight,
                     Fill = isCurrentMonth ? Brushes.Red : Brushes.Blue,
                     Opacity = (adjustedIndex % 3 == 0) ? 0.8 : 0.4,
-                    RadiusX = 5,
-                    RadiusY = 5,
+                    RadiusX = 2,
+                    RadiusY = 2,
                 };
 
                 TextBlock = new TextBlock

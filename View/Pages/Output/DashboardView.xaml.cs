@@ -372,6 +372,9 @@ namespace SPTC_APP.View.Pages.Output
             await AppState.LoadDatabase();
             DrawBarChart();
             DrawPieChart();
+            lblPieChartTitle.Content = "Total Revenue";
+            lblPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
+            lblPercent.Content = "100%";
         }
     }
 }

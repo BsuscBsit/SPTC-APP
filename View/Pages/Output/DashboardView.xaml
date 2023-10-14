@@ -57,7 +57,7 @@
                     
                 </Canvas>
 
-                <Label x:Name="lblPieChartTitle" Content="" Style="{StaticResource CommonTitlePreset}" FontSize="16" FontWeight="Bold" Foreground="Black" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label x:Name="lblPieChartTitle" Content="Total Revenue: " Style="{StaticResource CommonTitlePreset}" FontSize="16" FontWeight="Bold" Foreground="Black" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Label x:Name="lblPieChart" Content="0" Style="{StaticResource CommonTitlePreset}" FontSize="16" Height="30" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0"/>
             </Grid>
         </Border>

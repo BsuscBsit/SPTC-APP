@@ -139,9 +139,9 @@ namespace SPTC_APP
         {
             try
             {
-                await LoadMonthlyIncome();
+                await LoadMonthlyIncome(DateTime.Now.Year);
 
-                await LoadMonthChart();
+                await LoadMonthChart(DateTime.Now.Month, DateTime.Now.Year);
 
                 await Task.Delay(50);
                 return true;
@@ -153,46 +153,50 @@ namespace SPTC_APP
                 return false;
             }
         }
-        private static async Task<bool> LoadMonthlyIncome()
+        private static Task<bool> LoadMonthlyIncome(int year)
         {
             try
             {
                 MonthlyIncome = new Dictionary<string, double>
                 {
-                    { "Jan", RetrieveIncomeForMonth(1) },
-                    { "Feb", RetrieveIncomeForMonth(2) },
-                    { "Mar", RetrieveIncomeForMonth(3) },
-                    { "Apr", RetrieveIncomeForMonth(4) },
-                    { "May", RetrieveIncomeForMonth(5) },
-                    { "Jun", RetrieveIncomeForMonth(6) },
-                    { "Jul", RetrieveIncomeForMonth(7) },
-                    { "Aug", RetrieveIncomeForMonth(8) },
-                    { "Sep", RetrieveIncomeForMonth(9) },
-                    { "Oct", RetrieveIncomeForMonth(10) },
-                    { "Nov", RetrieveIncomeForMonth(11) },
-                    { "Dec", RetrieveIncomeForMonth(12) }
-             };
+                    { "Jan", RetrieveIncomeForMonth(1, year) },
+                    { "Feb", RetrieveIncomeForMonth(2, year) },
+                    { "Mar", RetrieveIncomeForMonth(3, year) },
+                    { "Apr", RetrieveIncomeForMonth(4, year) },
+                    { "May", RetrieveIncomeForMonth(5, year) },
+                    { "Jun", RetrieveIncomeForMonth(6, year) },
+                    { "Jul", RetrieveIncomeForMonth(7, year) },
+                    { "Aug", RetrieveIncomeForMonth(8, year) },
+                    { "Sep", RetrieveIncomeForMonth(9, year) },
+                    { "Oct", RetrieveIncomeForMonth(10, year) },
+                    { "Nov", RetrieveIncomeForMonth(11, year) },
+                    { "Dec", RetrieveIncomeForMonth(12, year) },
+                };
             } catch(MySqlException e)
             {
                 EventLogger.Post($"DTB :: MySQLException in Loading Database{e.Message}");
             }
-            return true;
+            return Task.FromResult(true);
         }
-        public static async Task<bool> LoadMonthChart(int month = -1)
+        private static Task<bool> LoadMonthChart(int month, int year)
         {
-            if(month == -1)
+            try
             {
-                month = DateTime.Today.Month;
+                ThisMonthsChart = new List<KeyValuePair<string, double>> {
+                        new KeyValuePair<string, double>("Share Capital", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(Table.SHARE_CAPITAL, month, year)).FirstOrDefault()),
+                        new KeyValuePair <string, double>("Loan", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(Table.LOAN, month, year)).FirstOrDefault()),
+                        new KeyValuePair <string, double>("Long Term Loan", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(Table.LONG_TERM_LOAN, month, year)).FirstOrDefault())
+                };
+            }
+            catch(MySqlException e)
+            {
+                EventLogger.Post($"DTB :: MySQLException in Loading Database{e.Message}");
             }
 
-            ThisMonthsChart = new List<KeyValuePair<string, double>> {
-                    new KeyValuePair<string, double>("Share Capital", 3503.77),
-                    new KeyValuePair <string, double>("Loan", 4002.50),
-                    new KeyValuePair <string, double>("Expenses", 800)
-             };
-
-            return true;
+            return Task.FromResult(true);
         }
+        
+        
         public static void PopulateDefaults()
         {
             APPSTATE_PATH = "Config\\AppState.json";
@@ -299,11 +303,8 @@ namespace SPTC_APP
             //EventLogger.Post($"OUT :: {chair?.sign?.ToString()}");
             return chair;
         }
-        private static double RetrieveIncomeForMonth(int month)
+        private static double RetrieveIncomeForMonth(int month, int year)
         {
-            int year = DateTime.Now.Year;
-
-            // Check if the requested month is in the future (next year)
             if (month > DateTime.Now.Month)
             {
                 year--;
@@ -326,6 +327,14 @@ namespace SPTC_APP
             return true;
         }
 
+        public static async Task<bool> LoadMonthlyIncomeOfYear(int year)
+        {
+            return await LoadMonthlyIncome(year);
+        }
+        public static async Task<bool> LoadMothChartOf(int month, int year)
+        {
+            return await LoadMonthChart(month, year);
+        }
     }
 
 }

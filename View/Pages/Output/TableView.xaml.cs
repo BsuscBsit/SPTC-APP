@@ -20,12 +20,13 @@ namespace SPTC_APP.View.Pages.Output
         {
             InitializeComponent();
             this.table = table;
-            if(table == Table.FRANCHISE)
+            if(table == Table.FRANCHISE || table == Table.DRIVER)
             {
-                AddFranchiseButton.Visibility = Visibility.Visible;
+                btnAdd.Visibility = Visibility.Visible;
+                btnAdd.Content = "ADD " + table;
             } else
             {
-                AddFranchiseButton.Visibility = Visibility.Collapsed;
+                btnAdd.Visibility = Visibility.Collapsed;
             }
             UpdateDefaultSidePanel();
         }
@@ -235,10 +236,6 @@ namespace SPTC_APP.View.Pages.Output
             return franchisePanel;
         }
 
-        private void AddFranchiseButton_Click(object sender, RoutedEventArgs e)
-        {
-            (new InputFranchiseView()).ShowDialog();
-        }
 
 
         private void btnManage_Click(object sender, RoutedEventArgs e)
@@ -286,11 +283,17 @@ namespace SPTC_APP.View.Pages.Output
         {
             if(MainBody.selectedFranchise != null)
             {
-                if(table == Table.DRIVER) 
-                {
+                if(table == Table.DRIVER)
                     (new ViolationInput()).ShowDialog();
-                }
             }
+        }
+
+        private void btnAddClick(object sender, RoutedEventArgs e)
+        {
+            if(table == Table.FRANCHISE)
+                (new InputFranchiseView()).ShowDialog();
+           //if(table == Table.DRIVER)
+                
         }
     }
 }

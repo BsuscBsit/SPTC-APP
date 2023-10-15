@@ -29,7 +29,8 @@ namespace SPTC_APP.Database
 
         public static string GET_ALL_PAYMENT_IN_MONTH(int month, int year) =>
             $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
-        
+        public static string GET_ALL_PAYMENT_IN_MONTH(string table, int month, int year) =>
+            $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_TYPE} = '{table}' AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
 
         public static string GetEnumDescription(CRUDControl value)
         {
@@ -55,6 +56,7 @@ namespace SPTC_APP.Database
                 return stringBuilder.ToString();
             }
         }
+
 
     }
 
@@ -96,7 +98,7 @@ namespace SPTC_APP.Database
         public const string THEREIS_DRIVER = "driver_id != -1 AND isDeleted = 0";
 
 
-        
+
     }
     public static class Field
     {

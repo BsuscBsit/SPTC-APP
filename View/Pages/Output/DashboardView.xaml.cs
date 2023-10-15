@@ -19,14 +19,41 @@ namespace SPTC_APP.View.Pages.Output
     public partial class DashboardView : Window
     {
 
-
         private Path clickedPie;
         private bool pieClicked = false;
+
+
+        private string[] monthAbbreviations = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
+
+        private int pieMonth;
+        private int pieYear;
+
         public DashboardView()
         {
             InitializeComponent();
-
+            btnPieForward.Visibility = Visibility.Collapsed;
+            pieMonth = DateTime.Now.Month;
+            pieYear = DateTime.Now.Year;
         }
+
+        private async void UpdateLFContent(int currentMonth, int currentYear)
+        {
+
+            if (currentMonth == DateTime.Now.Month && currentYear == DateTime.Now.Year)
+            {
+                btnPieForward.Visibility = Visibility.Collapsed;
+            } else
+            {
+                btnPieForward.Visibility = Visibility.Visible;
+            }
+            pieMonth = currentMonth;
+            pieYear = currentYear;
+
+            await AppState.LoadMothChartOf(pieMonth, pieYear);
+
+            DrawPieChart();
+        }
+
         public async Task<Grid> Fetch()
         {
             DrawBarChart();
@@ -175,9 +202,13 @@ namespace SPTC_APP.View.Pages.Output
         }
         private void DrawPieChart()
         {
-            
+            cvPieChart.Children.Clear();
+            lblPieChartTitle.Content = "Total Revenue: ";
+            lblPieChart.Content = ((double)AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()).ToString("0.00");
+            lblPercent.Content = "100%";
             var sortedlist = AppState.ThisMonthsChart.OrderByDescending(x => x.Value).ToList();
             var dictionary = sortedlist.ToDictionary(x => x.Key, x => x.Value);
+            lblMonth.Content = monthAbbreviations[pieMonth-1] + ", " + pieYear;
 
             double total = dictionary.Values.Sum();
             double currentAngle = -90;
@@ -271,7 +302,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (!pieClicked)
                 {
                     lblPieChartTitle.Content = "Total Revenue";
-                    lblPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
+                    lblPieChart.Content = ((double) AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()).ToString("0.00");
                     lblPercent.Content = "100%";
                 }
                 path.StrokeThickness = 0;
@@ -375,6 +406,35 @@ namespace SPTC_APP.View.Pages.Output
             lblPieChartTitle.Content = "Total Revenue";
             lblPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
             lblPercent.Content = "100%";
+        }
+
+        private void btnPieBackward_Click(object sender, RoutedEventArgs e)
+        {
+            if (pieMonth == 1)
+            {
+                pieMonth = 12;
+                pieYear--;
+            }
+            else
+            {
+                pieMonth--;
+            }
+
+            UpdateLFContent(pieMonth, pieYear);
+        }
+        private void btnPieForward_Click(object sender, RoutedEventArgs e)
+        {
+            if (pieMonth >= 12)
+            {
+                pieMonth = 1;
+                pieYear++;
+            }
+            else
+            {
+                pieMonth++;
+            }
+
+            UpdateLFContent(pieMonth, pieYear);
         }
     }
 }

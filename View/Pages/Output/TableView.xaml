@@ -114,12 +114,12 @@
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <Button x:Name="AddFranchiseButton" Content="ADD FRANCHISE" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="110" Height="32"
+        <Button x:Name="btnAdd" Content="ADD" Style="{DynamicResource ControlledButtonStyle}" HorizontalAlignment="Left" Margin="80,35,0,0" VerticalAlignment="Top" Width="110" Height="32"
                     FontFamily="hevitica "
                     FontWeight="ExtraBold"
                     Visibility="Visible"
                     FontSize="10"
-                    Background="Yellow" Click="AddFranchiseButton_Click"
+                    Background="Yellow" Click="btnAddClick"
                     />
     </Grid>
 

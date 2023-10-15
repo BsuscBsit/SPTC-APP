@@ -20,10 +20,14 @@ namespace SPTC_APP.View.Pages.Output
         {
             InitializeComponent();
             this.table = table;
-            if(table == Table.FRANCHISE || table == Table.DRIVER)
+            if (table == Table.FRANCHISE)
             {
                 btnAdd.Visibility = Visibility.Visible;
-                btnAdd.Content = "ADD " + table;
+                btnAdd.Content = "ADD FRANCHISE";
+            } else if (table == Table.DRIVER) 
+            {
+                btnAdd.Visibility = Visibility.Visible;
+                btnAdd.Content = "ADD DRIVER";
             } else
             {
                 btnAdd.Visibility = Visibility.Collapsed;

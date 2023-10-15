@@ -27,10 +27,11 @@ namespace SPTC_APP
         public static double PRINT_AJUSTMENTS;
         public static bool LOG_WINDOW;
         public static int DEFAULT_CAMERA;
-        public static string[] ALL_EMPLOYEES;
+
 
 
         //NOT SAVED EXTERNALLY
+        public static string[] ALL_EMPLOYEES;
         public static List<string> Employees;
         public static bool IS_ADMIN = false;
         public static Employee USER = null;
@@ -270,7 +271,7 @@ namespace SPTC_APP
                 }
                 catch (MySqlException ex)
                 {
-
+                    EventLogger.Post("ERR :: MySqlException in JSON : " + ex.Message);
                 }
                 catch (Exception e)
                 {

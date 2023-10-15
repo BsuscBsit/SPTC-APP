@@ -140,7 +140,7 @@ namespace SPTC_APP.View.Pages.Output
         private bool ShouldExcludeField(FieldInfo field)
         {
             // Add your exclusion criteria here based on field names or any other conditions
-            string[] excludedFieldNames = { "Employees", "IS_ADMIN", "USER", "MonthlyIncome", "ThisMonthsChart", "isDeployment", "isDeployment_IDGeneration", "mainwindow", "", "", "", "", "", "" };
+            string[] excludedFieldNames = { "ALL_EMPLOYEES", "Employees", "IS_ADMIN", "USER", "MonthlyIncome", "ThisMonthsChart", "isDeployment", "isDeployment_IDGeneration", "mainwindow", "", "", "", "", "", "" };
             return excludedFieldNames.Contains(field.Name);
         }
 

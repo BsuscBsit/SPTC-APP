@@ -36,23 +36,39 @@ namespace SPTC_APP.View.Pages.Output
             pieYear = DateTime.Now.Year;
         }
 
-        private async void UpdateLFContent(int currentMonth, int currentYear)
+        private async Task UpdateLFContent(int currentMonth, int currentYear)
         {
-
-            if (currentMonth == DateTime.Now.Month && currentYear == DateTime.Now.Year)
+            await Task.Run(async() =>
             {
-                btnPieForward.Visibility = Visibility.Collapsed;
-            } else
-            {
-                btnPieForward.Visibility = Visibility.Visible;
-            }
-            pieMonth = currentMonth;
-            pieYear = currentYear;
+                if (currentMonth == DateTime.Now.Month && currentYear == DateTime.Now.Year)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        btnPieForward.Visibility = Visibility.Collapsed;
+                    });
 
-            await AppState.LoadMothChartOf(pieMonth, pieYear);
+                }
+                else
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        btnPieForward.Visibility = Visibility.Visible;
+                    });
 
-            DrawPieChart();
+                }
+
+                pieMonth = currentMonth;
+                pieYear = currentYear;
+
+                await AppState.LoadMothChartOf(pieMonth, pieYear);
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    DrawPieChart();
+                });
+            });
         }
+
 
         public async Task<Grid> Fetch()
         {
@@ -407,8 +423,7 @@ namespace SPTC_APP.View.Pages.Output
             lblPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
             lblPercent.Content = "100%";
         }
-
-        private void btnPieBackward_Click(object sender, RoutedEventArgs e)
+        private async void btnPieBackward_Click(object sender, RoutedEventArgs e)
         {
             if (pieMonth == 1)
             {
@@ -420,9 +435,9 @@ namespace SPTC_APP.View.Pages.Output
                 pieMonth--;
             }
 
-            UpdateLFContent(pieMonth, pieYear);
+            await UpdateLFContent(pieMonth, pieYear);
         }
-        private void btnPieForward_Click(object sender, RoutedEventArgs e)
+        private async void btnPieForward_Click(object sender, RoutedEventArgs e)
         {
             if (pieMonth >= 12)
             {
@@ -434,7 +449,10 @@ namespace SPTC_APP.View.Pages.Output
                 pieMonth++;
             }
 
-            UpdateLFContent(pieMonth, pieYear);
+            await UpdateLFContent(pieMonth, pieYear);
         }
+
+        
+       
     }
 }

@@ -145,7 +145,6 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
                     new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
                     new ColumnConfiguration("Operator", "OPERATOR", width: 100),
-                    new ColumnConfiguration("Driver.Shift", "SHIFT", width: 100),
                 };
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
 

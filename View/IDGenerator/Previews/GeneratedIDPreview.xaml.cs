@@ -156,13 +156,13 @@ namespace SPTC_APP.View
             if(type == General.OPERATOR)
             {
                 IDHistory<Operator> history = new IDHistory<Operator>();
-                history.WriteInto(franchise.Operator.id, franchise.Operator, franchise.Operator.name.id, (FrontPrint > 0 && BackPrint > 0) ? true: false);
+                history.WriteInto(franchise.Operator.id, franchise.Operator, franchise.id, (FrontPrint > 0 && BackPrint > 0) ? true: false);
 
                 history.Save();
             } else
             {
                 IDHistory<Driver> history = new IDHistory<Driver>();
-                history.WriteInto(franchise.Driver.id, franchise.Driver, franchise.Driver.name.id, (FrontPrint > 0 && BackPrint > 0) ? true: false);
+                history.WriteInto(franchise.Driver.id, franchise.Driver, franchise.id, (FrontPrint > 0 && BackPrint > 0) ? true: false);
 
                 history.Save();
             }

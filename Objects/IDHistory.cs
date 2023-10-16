@@ -14,7 +14,7 @@ namespace SPTC_APP.Objects
         public int id { get; private set; }
         public DateTime date { get; set; }
         public T Owner { get; set; }
-        public int name { get; set; }
+        public int franchise_id { get; set; }
         public bool isPrinted { get; set; }
         public bool isDeleted { get; set; }
 
@@ -29,7 +29,7 @@ namespace SPTC_APP.Objects
         {
             this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
             this.date = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE);
-            this.name = Retrieve.GetValueOrDefault<int>(reader, Field.NAME_ID);
+            this.franchise_id = Retrieve.GetValueOrDefault<int>(reader, Field.FRANCHISE_ID);
             this.isPrinted = Retrieve.GetValueOrDefault<bool>(reader, Field.IS_PRINTED);
 
             Populate(Retrieve.GetValueOrDefault<int>(reader, Field.OWNER_ID));
@@ -44,11 +44,11 @@ namespace SPTC_APP.Objects
             }
         }
 
-        public void WriteInto(int id, T owner, int name, bool isPrinted)
+        public void WriteInto(int id, T owner, int franchise_id, bool isPrinted)
         {
             this.date = DateTime.Now;
             this.Owner = owner;
-            this.name = name;
+            this.franchise_id = franchise_id;
             this.isPrinted = isPrinted;
         }
         private string getOwnerType()
@@ -83,7 +83,7 @@ namespace SPTC_APP.Objects
             }
             idHistory.Insert(Field.DATE, date);
             
-            idHistory.Insert(Field.NAME_ID, name);
+            idHistory.Insert(Field.FRANCHISE_ID, franchise_id);
             idHistory.Insert(Field.IS_PRINTED, isPrinted);
             if (this.Owner != null)
             {
@@ -96,7 +96,14 @@ namespace SPTC_APP.Objects
             return id;
         }
 
-
+        public Franchise GetFranchise()
+        {
+            if(franchise_id != -1)
+            {
+                return Retrieve.GetData<Franchise>(Table.FRANCHISE, Select.ALL, Where.ID_, new MySqlParameter("id", franchise_id)).FirstOrDefault();
+            }
+            return new Franchise();
+        }
         public bool Delete()
         {
             if (idHistory == null)

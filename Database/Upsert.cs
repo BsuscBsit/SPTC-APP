@@ -178,6 +178,7 @@ namespace SPTC_APP.Database
                                     { Field.OWNER_ID, fieldValues.TryGetValue(Field.OWNER_ID, out temp) ? temp : -1 },
                                     { Field.ENTITY_TYPE, fieldValues.TryGetValue(Field.ENTITY_TYPE, out temp) ? temp : "" },
                                 };
+                                id = GetExistingRecordId(uniqueAttributes);
                             }
                             else if(tableName == Table.PAYMENT_DETAILS)
                             {
@@ -185,6 +186,7 @@ namespace SPTC_APP.Database
                                 {
                                     { Field.REFERENCE_NO, fieldValues.TryGetValue(Field.REFERENCE_NO, out var temp) ? temp : -1 },
                                 };
+                                id = GetExistingRecordId(uniqueAttributes);
                             }
 
                             else

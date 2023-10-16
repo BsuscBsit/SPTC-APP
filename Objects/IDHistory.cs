@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
 
 namespace SPTC_APP.Objects
 {
-    public class IDHistory
+    public class IDHistory<T>
     {
         public int id { get; private set; }
         public DateTime date { get; set; }
-        private int Owner_id { get; set; }
-        public General entityType { get; set; }
+        public T Owner { get; set; }
         public int name { get; set; }
+        public bool isPrinted { get; set; }
         public bool isDeleted { get; set; }
 
         private Upsert idHistory;
@@ -28,17 +29,50 @@ namespace SPTC_APP.Objects
         {
             this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
             this.date = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE);
-            this.Owner_id = Retrieve.GetValueOrDefault<int>(reader, Field.OWNER_ID);
-            this.entityType = (Retrieve.GetValueOrDefault<string>(reader, Field.ENTITY_TYPE).Equals("OPERATOR"))? General.OPERATOR : General.DRIVER;
             this.name = Retrieve.GetValueOrDefault<int>(reader, Field.NAME_ID);
+            this.isPrinted = Retrieve.GetValueOrDefault<bool>(reader, Field.IS_PRINTED);
+
+            Populate(Retrieve.GetValueOrDefault<int>(reader, Field.OWNER_ID));
         }
 
-        public void WriteInto(int id, General entity_type, int name)
+        private void Populate(int ownerID)
+        {
+            if (ownerID >= 0)
+            {
+
+                this.Owner = (Retrieve.GetData<T>(getOwnerType(), Select.ALL, Where.ID_, new MySqlParameter("id", ownerID))).FirstOrDefault();
+            }
+        }
+
+        public void WriteInto(int id, T owner, int name, bool isPrinted)
         {
             this.date = DateTime.Now;
-            this.Owner_id = id;
-            this.entityType = entity_type;
+            this.Owner = owner;
             this.name = name;
+            this.isPrinted = isPrinted;
+        }
+        private string getOwnerType()
+        {
+            if (Owner is Driver)
+            {
+                return Table.DRIVER;
+            } else if (Owner is Operator)
+            {
+                return Table.OPERATOR;
+            }
+            return "";
+        }
+        private int getOwnerId()
+        {
+            if (Owner is Driver drv)
+            {
+                return drv.id;
+            }
+            else if (Owner is Operator optr)
+            {
+                return optr.id;
+            } 
+            return -1;
         }
 
         public int Save()
@@ -48,19 +82,20 @@ namespace SPTC_APP.Objects
                 idHistory = new Upsert(Table.IDHISTORY, id);
             }
             idHistory.Insert(Field.DATE, date);
-            idHistory.Insert(Field.OWNER_ID, Owner_id);
-            idHistory.Insert(Field.ENTITY_TYPE, (entityType == General.OPERATOR) ? "OPERATOR": "DRIVER");
+            
             idHistory.Insert(Field.NAME_ID, name);
+            idHistory.Insert(Field.IS_PRINTED, isPrinted);
+            if (this.Owner != null)
+            {
+                idHistory.Insert(Field.OWNER_ID, getOwnerId());
+                idHistory.Insert(Field.ENTITY_TYPE, typeof(T).Name.ToLower());
+            }
             idHistory.Save();
             id = idHistory.id;
 
             return id;
         }
 
-        public T GetOwner<T>(string table)
-        {
-            return Retrieve.GetData<T>(table, Select.ALL, Where.ID_NOTDELETED, new MySqlParameter(Field.ID, Owner_id)).FirstOrDefault();
-        }
 
         public bool Delete()
         {

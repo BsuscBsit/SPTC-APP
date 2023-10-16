@@ -7,13 +7,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
+using System.ComponentModel;
 
 namespace SPTC_APP.Objects
 {
     public enum General
     {
         FRANCHISE,
+
+        [Description("OPERATOR")]
         OPERATOR,
+
+        [Description("DRIVER")]
         DRIVER,
 
 
@@ -33,6 +38,7 @@ namespace SPTC_APP.Objects
         FETCH_FRANCHISE_USING_BODYNUMBER,
         FETCH_PAYMENT_DETAILS_USING_ID,
         NEW_PAYMENT_DETAILS,
+
     }
 
 

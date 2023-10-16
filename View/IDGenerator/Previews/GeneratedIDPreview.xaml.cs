@@ -152,15 +152,20 @@ namespace SPTC_APP.View
         {
             franchise.Save();
 
-            IDHistory history = new IDHistory();
+            
             if(type == General.OPERATOR)
             {
-                history.WriteInto(franchise.Operator.id, General.OPERATOR, franchise.Operator.name.id);
+                IDHistory<Operator> history = new IDHistory<Operator>();
+                history.WriteInto(franchise.Operator.id, franchise.Operator, franchise.Operator.name.id, (FrontPrint > 0 && BackPrint > 0) ? true: false);
+
+                history.Save();
             } else
             {
-                history.WriteInto(franchise.Driver.id, General.DRIVER, franchise.Driver.name.id);
+                IDHistory<Driver> history = new IDHistory<Driver>();
+                history.WriteInto(franchise.Driver.id, franchise.Driver, franchise.Driver.name.id, (FrontPrint > 0 && BackPrint > 0) ? true: false);
+
+                history.Save();
             }
-            history.Save();
             isSaved = true;
         }
     }

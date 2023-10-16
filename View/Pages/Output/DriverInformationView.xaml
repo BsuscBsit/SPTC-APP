@@ -142,47 +142,6 @@
                 FontFamily="Arial"
                 FontWeight="Bold"
                 FontSize="10"/>
-            <Button
-               x:Name="btnShareCapital"
-                Background="White"
-                Height="26"
-                Margin="51,0,532,111"
-                VerticalAlignment="Bottom"  
-                Content="Share Capital Ledger" Grid.Row="1"
-                FontFamily="Arial"
-                FontWeight="Bold"
-                FontSize="9"/>
-            <Button
-               x:Name="btnLoan"
-                Background="White"
-                Height="26"
-                Margin="51,0,532,80"
-                VerticalAlignment="Bottom"  
-                Content="Loan Ledger" Grid.Row="1"
-                FontFamily="Arial"
-                FontWeight="Bold"
-                FontSize="10"/>
-
-            <Button
-               x:Name="btnLTLoan"
-                Background="White"
-                Height="26"
-                Margin="51,0,532,49"
-                VerticalAlignment="Bottom"  
-                Content="LT Loan Ledger" Grid.Row="1"
-                FontFamily="Arial"
-                FontWeight="Bold"
-                FontSize="10" />
-            <Button
-               x:Name="btnTransactionHistory"
-                Background="White"
-                Height="26"
-                Margin="51,0,532,18"
-                VerticalAlignment="Bottom"  
-                Content="Transfer History" Grid.Row="1"
-                FontFamily="Arial"
-                FontWeight="Bold"
-                FontSize="10"/>
         </Grid>
         <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="37,26,0,0" VerticalAlignment="Top" Click="btnBack_Click"/>
     </Grid>

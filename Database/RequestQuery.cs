@@ -40,6 +40,7 @@ namespace SPTC_APP.Database
 
             return attributes.Length > 0 ? attributes[0].Description : value.ToString();
         }
+
         public static string Protect(string input)
         {
             using (MD5 md5 = MD5.Create())
@@ -209,6 +210,7 @@ namespace SPTC_APP.Database
 
 
         //IDHISTORY
+        public const string IS_PRINTED = "is_printed";
     }
 
     public enum CRUDControl

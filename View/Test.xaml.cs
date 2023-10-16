@@ -342,6 +342,7 @@ namespace SPTC_APP.View
         }
         private void btnMain_Click(object sender, RoutedEventArgs e)
         {
+            AppState.LoadDatabase();
             MainBody body = (new MainBody());
             AppState.mainwindow = body;
             body.Show();

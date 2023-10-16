@@ -6,11 +6,14 @@ using SPTC_APP.View;
 using SPTC_APP.View.Pages;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using static SPTC_APP.Objects.Ledger;
 
 namespace SPTC_APP
 {
@@ -184,9 +187,9 @@ namespace SPTC_APP
             try
             {
                 ThisMonthsChart = new List<KeyValuePair<string, double>> {
-                        new KeyValuePair<string, double>("Share Capital", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(Table.SHARE_CAPITAL, month, year)).FirstOrDefault()),
-                        new KeyValuePair <string, double>("Loan", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(Table.LOAN, month, year)).FirstOrDefault()),
-                        new KeyValuePair <string, double>("Long Term Loan", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(Table.LONG_TERM_LOAN, month, year)).FirstOrDefault())
+                        new KeyValuePair<string, double>("Share Capital", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(typeof(ShareCapital).Name.ToLower(), month, year)).FirstOrDefault()),
+                        new KeyValuePair <string, double>("Loan", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(typeof(Loan).Name.ToLower(), month, year)).FirstOrDefault()),
+                        new KeyValuePair <string, double>("Long Term Loan", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(typeof(LongTermLoan).Name.ToLower(), month, year)).FirstOrDefault())
                 };
             }
             catch(MySqlException e)
@@ -335,6 +338,15 @@ namespace SPTC_APP
         public static async Task<bool> LoadMothChartOf(int month, int year)
         {
             return await LoadMonthChart(month, year);
+        }
+
+        public static string GetEnumDescription(General value)
+        {
+            FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
+
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            return attributes.Length > 0 ? attributes[0].Description : value.ToString();
         }
     }
 

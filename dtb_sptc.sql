@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2023 at 10:12 AM
+-- Generation Time: Oct 16, 2023 at 03:38 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -87,7 +87,7 @@ CREATE TABLE `tbl_employee` (
 --
 
 INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `sign_id`, `image_id`, `password`, `position_id`, `start_date`, `end_date`, `date_of_birth`, `contact_no`, `isDeleted`) VALUES
-(1, 1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, NULL, NULL, NULL, NULL, 0),
+(1, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, NULL, NULL, NULL, NULL, 0),
 (2, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 2, NULL, NULL, NULL, NULL, 0),
 (3, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, NULL, NULL, NULL, NULL, 0),
 (4, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, NULL, NULL, NULL, NULL, 0),
@@ -125,7 +125,8 @@ CREATE TABLE `tbl_id_history` (
   `date` date DEFAULT NULL,
   `owner_id` int(11) NOT NULL DEFAULT -1,
   `entity_type` varchar(10) NOT NULL DEFAULT 'OPERATOR',
-  `name_id` int(11) NOT NULL DEFAULT -1,
+  `franchise_id` int(11) NOT NULL DEFAULT -1,
+  `is_printed` tinyint(1) NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -228,7 +229,7 @@ CREATE TABLE `tbl_payment_details` (
   `ledger_id` int(11) NOT NULL DEFAULT -1,
   `isDownPayment` tinyint(1) NOT NULL DEFAULT 0,
   `isDivPat` tinyint(1) NOT NULL DEFAULT 0,
-  `ledger_type` varchar(20) DEFAULT NULL,
+  `ledger_type` varchar(30) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `reference_no` int(11) NOT NULL DEFAULT -1,
   `deposit` double NOT NULL DEFAULT 0,
@@ -348,7 +349,7 @@ ALTER TABLE `tbl_franchise`
 --
 ALTER TABLE `tbl_id_history`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `owner_id` (`owner_id`,`entity_type`,`name_id`);
+  ADD UNIQUE KEY `owner_id` (`owner_id`,`entity_type`,`franchise_id`);
 
 --
 -- Indexes for table `tbl_image`

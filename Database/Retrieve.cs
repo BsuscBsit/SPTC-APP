@@ -193,16 +193,19 @@ namespace SPTC_APP.Database
             {
                 using (MySqlConnection connection = DatabaseConnection.GetConnection())
                 {
-                    connection.Open();
-
-                    MySqlCommand command = new MySqlCommand(query, connection);
-
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    if (DatabaseConnection.HasConnection())
                     {
-                        while (reader.Read())
+                        connection.Open();
+
+                        MySqlCommand command = new MySqlCommand(query, connection);
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            T item = ReadData<T>(reader);
-                            results.Add(item);
+                            while (reader.Read())
+                            {
+                                T item = ReadData<T>(reader);
+                                results.Add(item);
+                            }
                         }
                     }
 

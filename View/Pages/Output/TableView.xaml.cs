@@ -39,18 +39,15 @@ namespace SPTC_APP.View.Pages.Output
         {
             if (table == Table.FRANCHISE)
             {
-                //USAGE:: CHange side panel design
                 btnManage.Visibility = Visibility.Visible;
             }
             if (table == Table.OPERATOR)
             {
-                //USAGE:: CHange side panel design
                 btnEditProfile.Visibility = Visibility.Visible;
                 btnGenerateid.Visibility = Visibility.Visible;
             }
             if (table == Table.DRIVER)
             {
-                //USAGE:: CHange side panel design
                 btnEditProfile.Visibility = Visibility.Visible;
                 btnGenerateid.Visibility = Visibility.Visible;
                 btnAddViolation.Visibility = Visibility.Visible;
@@ -59,6 +56,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private async Task UpdateTableAsync()
         {
+            TableGrid.Items.Clear();
             if (table == Table.FRANCHISE)
             {
                 int batchSize = 5;
@@ -87,7 +85,7 @@ namespace SPTC_APP.View.Pages.Output
                     foreach (var obj in batch)
                     {
                         TableGrid.Items.Add(obj);
-                        //await Task.Delay(200);
+                        //await Task.Delay(2000);
                     }
 
                     //await Task.Delay(200);
@@ -225,7 +223,8 @@ namespace SPTC_APP.View.Pages.Output
 
         public async Task<Grid> Fetch()
         {
-            await UpdateTableAsync();
+            Task task = UpdateTableAsync();
+            await Task.Delay(5);
             if (franchisePanel.Parent != null)
             {
                 Window currentParent = franchisePanel.Parent as Window;
@@ -234,12 +233,15 @@ namespace SPTC_APP.View.Pages.Output
                     currentParent.Content = null;
                 }
             }
-            await Task.Delay(50);
             this.Close();
             return franchisePanel;
         }
 
-
+        public async void BackUpdate()
+        {
+            Task task = UpdateTableAsync();
+            await Task.Delay(5);
+        }
 
         private void btnManage_Click(object sender, RoutedEventArgs e)
         {
@@ -247,27 +249,28 @@ namespace SPTC_APP.View.Pages.Output
             {
                 if (table == Table.FRANCHISE)
                 {
-                    franchisePanel.Children.Add((new FranchiseInformationView()).Fetch());
+                    franchisePanel.Children.Add((new FranchiseInformationView(this)).Fetch());
                 }
             }
         }
 
-        private void btnEditProfile_Click(object sender, RoutedEventArgs e)
+        private async void btnEditProfile_Click(object sender, RoutedEventArgs e)
         {
             if (MainBody.selectedFranchise != null)
             {
                 if (table == Table.OPERATOR)
                 {
-                    franchisePanel.Children.Add((new FranchiseInformationView()).Fetch());
+                    (new EditProfile(MainBody.selectedFranchise, General.OPERATOR)).ShowDialog();
                 }
                 else if (table == Table.DRIVER)
                 {
-                    franchisePanel.Children.Add((new DriverInformationView()).Fetch());
+                    (new EditProfile(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
                 }
             }
+            await UpdateTableAsync();
         }
 
-        private void btnGenerateid_Click(object sender, RoutedEventArgs e)
+        private async void btnGenerateid_Click(object sender, RoutedEventArgs e)
         {
             if (MainBody.selectedFranchise != null)
             {
@@ -280,23 +283,25 @@ namespace SPTC_APP.View.Pages.Output
                     (new GenerateID(MainBody.selectedFranchise, true)).ShowDialog();
                 }
             }
+            await UpdateTableAsync();
         }
 
-        private void btnAddViolation_Click(object sender, RoutedEventArgs e)
+        private async void btnAddViolation_Click(object sender, RoutedEventArgs e)
         {
             if(MainBody.selectedFranchise != null)
             {
                 if(table == Table.DRIVER)
                     (new ViolationInput()).ShowDialog();
             }
+            await UpdateTableAsync();
         }
 
-        private void btnAddClick(object sender, RoutedEventArgs e)
+        private async void btnAddClick(object sender, RoutedEventArgs e)
         {
             if(table == Table.FRANCHISE)
                 (new InputFranchiseView()).ShowDialog();
-           //if(table == Table.DRIVER)
-                
+            //if(table == Table.DRIVER)
+            await UpdateTableAsync();
         }
     }
 }

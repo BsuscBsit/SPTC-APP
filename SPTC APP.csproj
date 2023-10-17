@@ -261,20 +261,17 @@
     <Compile Include="View\LogsWindow.xaml.cs">
       <DependentUpon>LogsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Input\ChangeOperator.xaml.cs">
-      <DependentUpon>ChangeOperator.xaml</DependentUpon>
+    <Compile Include="View\Pages\Input\EditProfile.xaml.cs">
+      <DependentUpon>EditProfile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Input\NewOperator.xaml.cs">
-      <DependentUpon>NewOperator.xaml</DependentUpon>
+    <Compile Include="View\Pages\Input\NewOptr_Drv.xaml.cs">
+      <DependentUpon>NewOptr_Drv.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Input\ViolationInput.xaml.cs">
       <DependentUpon>ViolationInput.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Output\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Pages\Output\DriverInformationView.xaml.cs">
-      <DependentUpon>DriverInformationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Output\FranchiseInformationView.xaml.cs">
       <DependentUpon>FranchiseInformationView.xaml</DependentUpon>
@@ -355,11 +352,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Input\ChangeOperator.xaml">
+    <Page Include="View\Pages\Input\EditProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Input\NewOperator.xaml">
+    <Page Include="View\Pages\Input\NewOptr_Drv.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -370,10 +367,6 @@
     <Page Include="View\Pages\Output\DashboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Pages\Output\DriverInformationView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Pages\Output\FranchiseInformationView.xaml">
       <SubType>Designer</SubType>

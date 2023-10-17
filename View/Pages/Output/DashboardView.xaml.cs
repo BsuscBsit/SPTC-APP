@@ -74,7 +74,6 @@ namespace SPTC_APP.View.Pages.Output
         {
             DrawBarChart();
             DrawPieChart();
-            //UpdateTableAsync();
             if (mainpanel.Parent != null)
             {
                 Window currentParent = mainpanel.Parent as Window;
@@ -83,7 +82,7 @@ namespace SPTC_APP.View.Pages.Output
                     currentParent.Content = null;
                 }
             }
-            await Task.Delay(50);
+            await Task.Delay(5);
             this.Close();
             return mainpanel;
         }

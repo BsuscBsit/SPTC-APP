@@ -31,7 +31,7 @@
                            FontWeight="SemiBold"
                            FontSize="14"
                            FontFamily="Inter" Margin="406,101,87,366"/>
-            <TextBox x:Name="tboxOperatorsFname"               
+            <TextBox x:Name="tboxsFname"               
                             Text="" 
                             Width="164"
                             Height="30"
@@ -49,7 +49,7 @@
                 FontSize="14"
                 FontFamily="Inter" Margin="406,160,97,306"/>
 
-            <TextBox x:Name="tboxOperatorsMname"               
+            <TextBox x:Name="tboxsMname"               
                 Text="" 
                 Width="164"
                 Height="30"

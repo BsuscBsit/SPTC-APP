@@ -269,8 +269,10 @@ namespace SPTC_APP
                     PRINT_AJUSTMENTS = data.PRINT_AJUSTMENTS;
                     LOG_WINDOW = data.LOG_WINDOW;
                     DEFAULT_CAMERA = data.DEFAULT_CAMERA;
-                    DatabaseConnection.GetConnection();
-                    ALL_EMPLOYEES = Retrieve.GetDataUsingQuery<string>(RequestQuery.GET_LIST_OF_POSITION).ToArray();
+                    if (DatabaseConnection.HasConnection())
+                    {
+                        ALL_EMPLOYEES = Retrieve.GetDataUsingQuery<string>(RequestQuery.GET_LIST_OF_POSITION).ToArray();
+                    }
                 }
                 catch (MySqlException ex)
                 {

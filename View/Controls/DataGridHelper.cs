@@ -13,12 +13,12 @@ namespace SPTC_APP.View.Controls
 public class DataGridHelper<T>
     {
         private DataGrid dataGrid;
-        private List<T> stack;
+        //private List<T> stack;
 
-        public DataGridHelper(DataGrid dataGrid, List<ColumnConfiguration> columnConfigurations)
+        public DataGridHelper(DataGrid ldataGrid, List<ColumnConfiguration> columnConfigurations)
         {
-            this.dataGrid = dataGrid;
-            this.stack = new List<T>();
+            this.dataGrid = ldataGrid;
+            //this.stack = new List<T>();
             // Clear existing columns
             dataGrid.Columns.Clear();
             dataGrid.Focusable = true;
@@ -36,14 +36,14 @@ public class DataGridHelper<T>
                     CellStyle = new System.Windows.Style
                     {
                         Setters =
-            {
-                new Setter(System.Windows.Controls.Control.BackgroundProperty, config.BackgroundColor),
-                new Setter(System.Windows.Controls.Control.FontWeightProperty, config.FontWeight),
-                new Setter(System.Windows.Controls.Control.FontSizeProperty, config.FontSize),
-                new Setter(System.Windows.Controls.Control.HeightProperty, config.Height)
-            }
+                        {
+                            new Setter(System.Windows.Controls.Control.BackgroundProperty, config.BackgroundColor),
+                            new Setter(System.Windows.Controls.Control.FontWeightProperty, config.FontWeight),
+                            new Setter(System.Windows.Controls.Control.FontSizeProperty, config.FontSize),
+                            new Setter(System.Windows.Controls.Control.HeightProperty, config.Height)
+                        }
                     },
-                    Visibility = config.Visibility // Apply the visibility setting
+                    Visibility = config.Visibility 
                 };
 
                 dataGrid.Columns.Add(column);
@@ -65,7 +65,7 @@ public class DataGridHelper<T>
         public double FontSize { get; }
         public System.Windows.Media.Brush BackgroundColor { get; }
         public System.Windows.FontWeight FontWeight { get; }
-        public Visibility Visibility { get; } // New property for visibility
+        public Visibility Visibility { get; } 
 
         public ColumnConfiguration(
             string bindingPath,
@@ -76,7 +76,7 @@ public class DataGridHelper<T>
             double fontSize = 10,
             System.Windows.Media.Brush backgroundColor = null,
             System.Windows.FontWeight? fontWeight = null,
-            Visibility visibility = Visibility.Visible) // Default visibility is Visible
+            Visibility visibility = Visibility.Visible) 
         {
             BindingPath = bindingPath;
             Header = header;
@@ -86,7 +86,6 @@ public class DataGridHelper<T>
             FontSize = fontSize;
             BackgroundColor = backgroundColor ?? System.Windows.Media.Brushes.LightGray;
 
-            // Check if fontWeight is provided, otherwise use the default value
             FontWeight = fontWeight.HasValue ? fontWeight.Value : System.Windows.FontWeights.Normal;
 
             Visibility = visibility;

@@ -17,7 +17,14 @@ namespace SPTC_APP.Objects
         public DateTime birthday { get; set; }
         public string emergencyPerson { get; set; }
         public string emergencyContact { get; set; }
-
+        public bool isSuspended
+        {
+            get
+            {
+                return Retrieve.GetDataUsingQuery<bool>(RequestQuery.CHECK_IF_SUSPSENDED(AppState.GetEnumDescription(General.OPERATOR), Field.DRIVER_ID, id)).FirstOrDefault();
+            }
+            private set { }
+        }
         private Upsert mOperator;
 
         public Operator()

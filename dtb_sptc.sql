@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2023 at 03:38 AM
+-- Generation Time: Oct 17, 2023 at 06:22 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -87,7 +87,7 @@ CREATE TABLE `tbl_employee` (
 --
 
 INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `sign_id`, `image_id`, `password`, `position_id`, `start_date`, `end_date`, `date_of_birth`, `contact_no`, `isDeleted`) VALUES
-(1, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, NULL, NULL, NULL, NULL, 0),
+(1, 1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, NULL, NULL, NULL, NULL, 0),
 (2, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 2, NULL, NULL, NULL, NULL, 0),
 (3, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, NULL, NULL, NULL, NULL, 0),
 (4, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, NULL, NULL, NULL, NULL, 0),
@@ -292,7 +292,7 @@ CREATE TABLE `tbl_violation` (
   `violation_type_id` int(11) NOT NULL DEFAULT -1,
   `date` date DEFAULT NULL,
   `suspension_start` date DEFAULT NULL,
-  `suspention_end` date DEFAULT NULL,
+  `suspension_end` date DEFAULT NULL,
   `remarks` varchar(100) DEFAULT NULL,
   `name_id` int(11) NOT NULL DEFAULT -1,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
@@ -309,7 +309,7 @@ CREATE TABLE `tbl_violation_type` (
   `title` varchar(50) DEFAULT NULL,
   `details` varchar(100) DEFAULT NULL,
   `num_of_days` int(11) NOT NULL DEFAULT 0,
-  `is_for_driver` tinyint(1) NOT NULL DEFAULT 0,
+  `entity_type` varchar(20) NOT NULL DEFAULT 'DRIVER',
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -413,7 +413,8 @@ ALTER TABLE `tbl_violation`
 -- Indexes for table `tbl_violation_type`
 --
 ALTER TABLE `tbl_violation_type`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `title` (`title`,`num_of_days`,`entity_type`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables

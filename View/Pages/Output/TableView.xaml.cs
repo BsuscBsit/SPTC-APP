@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
@@ -51,6 +52,7 @@ namespace SPTC_APP.View.Pages.Output
                 btnEditProfile.Visibility = Visibility.Visible;
                 btnGenerateid.Visibility = Visibility.Visible;
                 btnAddViolation.Visibility = Visibility.Visible;
+                
             }
         }
 
@@ -202,10 +204,19 @@ namespace SPTC_APP.View.Pages.Output
                     Reference.Content = MainBody.selectedFranchise.owner;
                     DriverName.Content = MainBody.selectedFranchise.Driver;
                     imgUserProfilePic.ImageSource = MainBody.selectedFranchise.Operator?.image?.GetSource();
+                    if (MainBody.selectedFranchise.Operator.isSuspended)
+                    {
+                        lblIsSuspended.Content = "YES";
+                        lblIsSuspended.Foreground = Brushes.Red;
+                    } else
+                    {
+                        lblIsSuspended.Content = "NO";
+                        lblIsSuspended.Foreground = Brushes.Green;
+                    }
                 }
                 else if (table == Table.DRIVER)
                 {
-                     MainBody.selectedFranchise = (Franchise)grid.SelectedItems[0];
+                    MainBody.selectedFranchise = (Franchise)grid.SelectedItems[0];
                     OperatorName.Content = MainBody.selectedFranchise.Driver;
                     bodynum.Content = MainBody.selectedFranchise.BodyNumber;
                     LoanBalance.Content = 0;
@@ -213,6 +224,15 @@ namespace SPTC_APP.View.Pages.Output
                     Reference.Content = MainBody.selectedFranchise.owner;
                     DriverName.Content = MainBody.selectedFranchise.Driver;
                     imgUserProfilePic.ImageSource = MainBody.selectedFranchise.Driver?.image?.GetSource();
+                    if (MainBody.selectedFranchise.Driver.isSuspended)
+                    {
+                        lblIsSuspended.Content = "YES";
+                        lblIsSuspended.Foreground = Brushes.Red;
+                    } else
+                    {
+                        lblIsSuspended.Content = "NO";
+                        lblIsSuspended.Foreground = Brushes.Green;
+                    }
 
                 }
 
@@ -291,7 +311,7 @@ namespace SPTC_APP.View.Pages.Output
             if(MainBody.selectedFranchise != null)
             {
                 if(table == Table.DRIVER)
-                    (new ViolationInput()).ShowDialog();
+                    (new ViolationInput(MainBody.selectedFranchise)).ShowDialog();
             }
             await UpdateTableAsync();
         }

@@ -559,7 +559,7 @@ namespace SPTC_APP.Objects
             this.title = Retrieve.GetValueOrDefault<string>(reader, Field.TITLE);
             this.details = Retrieve.GetValueOrDefault<string>(reader, Field.DETAILS);
             this.numOfDays = Retrieve.GetValueOrDefault<int>(reader, Field.NUM_OF_DAYS);
-            this.entityType = (Retrieve.GetValueOrDefault<string>(reader, Field.ENTITY_TYPE).Equals("OPERATOR")) ? General.OPERATOR : General.DRIVER;
+            this.entityType = (Retrieve.GetValueOrDefault<string>(reader, Field.ENTITY_TYPE).Equals("DRIVER")) ? General.DRIVER : General.OPERATOR;
         }
 
         public int Save()
@@ -572,7 +572,7 @@ namespace SPTC_APP.Objects
             violationType.Insert(Field.TITLE, title);
             violationType.Insert(Field.DETAILS, details);
             violationType.Insert(Field.NUM_OF_DAYS, numOfDays);
-            violationType.Insert(Field.ENTITY_TYPE, (entityType == General.OPERATOR) ? "OPERATOR" : "DRIVER");
+            violationType.Insert(Field.ENTITY_TYPE, (entityType == General.DRIVER) ? "DRIVER" : "OPERATOR");
             violationType.Save();
             id = violationType.id;
 

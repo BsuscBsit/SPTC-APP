@@ -31,6 +31,10 @@
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
+            <Label Content="Is Suspended: " HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top"
+                FontWeight="Medium"
+                FontSize="9"
+                Foreground="DarkGray"/>
             <Label Content="Reference :" HorizontalAlignment="Left" Margin="19,216,0,0" VerticalAlignment="Top"
                     FontWeight="Medium"
                     FontSize="9"
@@ -64,6 +68,13 @@
                     FontFamily="Arial"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
+            <Label x:Name="lblIsSuspended"  Content="NO" HorizontalAlignment="Left" Margin="110,183,0,0" VerticalAlignment="Top"
+                Foreground="GREEN"
+                FontWeight="Black"
+                FontFamily="Arial"
+                FontStretch="SemiExpanded"
+                FontSize="9"/>
+            
             <Label x:Name="Reference" Content="Gabriel Manriza" HorizontalAlignment="Left" Margin="99,213,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="DemiBold"

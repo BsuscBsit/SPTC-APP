@@ -188,6 +188,16 @@ namespace SPTC_APP.Database
                                 };
                                 id = GetExistingRecordId(uniqueAttributes);
                             }
+                            else if (tableName == Table.VIOLATION_TYPE)
+                            {
+                                Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
+                                {
+                                    { Field.TITLE, fieldValues.TryGetValue(Field.TITLE, out var temp) ? temp : "" },
+                                    { Field.NUM_OF_DAYS, fieldValues.TryGetValue(Field.NUM_OF_DAYS, out temp) ? temp : 0 },
+                                    {Field.ENTITY_TYPE, fieldValues.TryGetValue(Field.ENTITY_TYPE, out temp)? temp: "DRIVER" }
+                                };
+                                id = GetExistingRecordId(uniqueAttributes);
+                            }
 
                             else
                             {

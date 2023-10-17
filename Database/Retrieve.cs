@@ -242,11 +242,21 @@ namespace SPTC_APP.Database
                 if (!reader.IsDBNull(0))
                 {
                     object value = reader.GetValue(0);
-                    return (T)value;
-                } else
+                    if (type == typeof(bool))
+                    {
+                        return (T)(object)((int)value == 1);
+                    }
+                    else
+                    {
+                        return (T)value;
+                    }
+                }
+                else
                 {
                     return default(T);
                 }
+
+
             }
             else
             {

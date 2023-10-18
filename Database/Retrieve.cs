@@ -108,6 +108,7 @@ namespace SPTC_APP.Database
                         while (reader.Read())
                         {
                             T item = ReadData<T>(reader);
+                            
                             results.Add(item);
                         }
                     }
@@ -117,19 +118,9 @@ namespace SPTC_APP.Database
             }
             catch (MySqlException ex)
             {
-                EventLogger.Post($"DTB :: {ex.Message}");
+                EventLogger.Post($"DTB :: Get Data : {ex.Message}");
 
-                if (results.Count == 0)
-                {
-                    if (typeof(T).IsClass && constructor != null)
-                    {
-                        results.Add((T)constructor.Invoke(null));
-                    }
-                    else
-                    {
-                        results.Add(default(T));
-                    }
-                }
+                
 
                 return results;
             }
@@ -167,17 +158,7 @@ namespace SPTC_APP.Database
             {
                 EventLogger.Post($"DTB :: Pagination : {ex.Message}");
 
-                if (results.Count == 0)
-                {
-                    if (typeof(T).IsClass && constructor != null)
-                    {
-                        results.Add((T)constructor.Invoke(null));
-                    }
-                    else
-                    {
-                        results.Add(default(T));
-                    }
-                }
+                
 
                 return results;
             }
@@ -214,19 +195,9 @@ namespace SPTC_APP.Database
             }
             catch (MySqlException ex)
             {
-                EventLogger.Post($"DTB :: {ex.Message}");
+                EventLogger.Post($"DTB :: Query : {ex.Message}");
 
-                if (results.Count == 0)
-                {
-                    if (typeof(T).IsClass && constructor != null)
-                    {
-                        results.Add((T)constructor.Invoke(null));
-                    }
-                    else
-                    {
-                        results.Add(default(T));
-                    }
-                }
+                
 
                 return results;
             }
@@ -236,7 +207,7 @@ namespace SPTC_APP.Database
         {
             Type type = typeof(T);
 
-            if (type == typeof(double) || type == typeof(int) || type == typeof(float) ||
+            if(type == typeof(double) || type == typeof(int) || type == typeof(float) ||
                 type == typeof(bool) || type == typeof(decimal) || type == typeof(string))
             {
                 if (!reader.IsDBNull(0))
@@ -299,14 +270,12 @@ namespace SPTC_APP.Database
                 }
                 else
                 {
-                    // Log a message indicating that the column was not found
                     EventLogger.Post($"ERR :: Column '{columnName}' not found");
                     return default(T);
                 }
             }
             catch (Exception ex)
             {
-                // Add extra logging to see the value of 'ordinal'
                 EventLogger.Post($"ERR :: Reader<{typeof(T)}>{columnName} {ex.Message}, ordinal = {ordinal}");
                 return default(T);
             }

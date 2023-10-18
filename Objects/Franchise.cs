@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Documents;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
+using Table = SPTC_APP.Database.Table;
 
 namespace SPTC_APP.Objects
 {
@@ -121,6 +124,39 @@ namespace SPTC_APP.Objects
             franchise.Insert(Field.ISDELETED, true);
             franchise.Save();
             return true;
+        }
+
+        public List<Ledger.ShareCapital> GetShareCapitals()
+        {
+            return Retrieve.GetDataUsingQuery<Ledger.ShareCapital>(RequestQuery.GET_LEDGER_LIST(Table.SHARE_CAPITAL, id));
+        }
+
+        public List<PaymentDetails<Ledger.ShareCapital>> GetShareCapitalLedger()
+        {
+                return Retrieve.GetDataUsingQuery<PaymentDetails<Ledger.ShareCapital>>(RequestQuery.GET_LEDGER_PAYMENT(Table.SHARE_CAPITAL, typeof(Ledger.ShareCapital).Name.ToUpper(), id));
+        }
+        public List<PaymentDetails<Ledger.Loan>> GetLoanLedger()
+        {
+            return Retrieve.GetDataUsingQuery<PaymentDetails<Ledger.Loan>>(RequestQuery.GET_LEDGER_PAYMENT(Table.LOAN, typeof(Ledger.Loan).Name.ToUpper(), id));
+        }
+        public List<PaymentDetails<Ledger.LongTermLoan>> GetlTLoanLedger()
+        {
+            return Retrieve.GetDataUsingQuery<PaymentDetails<Ledger.LongTermLoan>>(RequestQuery.GET_LEDGER_PAYMENT(Table.LONG_TERM_LOAN, typeof(Ledger.LongTermLoan).Name.ToUpper(), id));
+        }
+
+        public double GetTotalShareCapital()
+        {
+            return GetShareCapitalLedger().Sum(tmp => tmp.deposit);
+        }
+
+        public double GetTotalLoan()
+        {
+            return GetLoanLedger().Sum(tmp => tmp.deposit);
+        }
+
+        public double GetTotalLTLoan()
+        {
+            return GetlTLoanLedger().Sum(tmp => tmp.deposit);
         }
 
     }

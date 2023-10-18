@@ -106,7 +106,7 @@ namespace SPTC_APP.View
                 new GenerateID(),
                 new DashboardView(),
                 new FranchiseInformationView(),
-                new Modules(Modules.HISTORY),
+                //new Modules(Modules.HISTORY),
                 new TableView(Table.FRANCHISE),
                 new InputFranchiseView(),
                 new MainBody(),

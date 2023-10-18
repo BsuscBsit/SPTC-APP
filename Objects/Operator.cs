@@ -21,7 +21,7 @@ namespace SPTC_APP.Objects
         {
             get
             {
-                return Retrieve.GetDataUsingQuery<bool>(RequestQuery.CHECK_IF_SUSPSENDED(AppState.GetEnumDescription(General.OPERATOR), Field.DRIVER_ID, id)).FirstOrDefault();
+                return Retrieve.GetDataUsingQuery<bool>(RequestQuery.CHECK_IF_SUSPENDED(AppState.GetEnumDescription(General.OPERATOR), Field.DRIVER_ID, id)).FirstOrDefault();
             }
             private set { }
         }

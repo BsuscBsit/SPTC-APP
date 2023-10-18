@@ -89,7 +89,7 @@ namespace SPTC_APP.View.Pages.Output
         {
             ClickColorControl(sender);
             ModuleGrid.Children.Clear();
-            ModuleGrid.Children.Add((new Modules(moduleName)).Fetch());
+            ModuleGrid.Children.Add((new Modules(moduleName, MainBody.selectedFranchise)).Fetch());
         }
 
         private void btnHistory_Click(object sender, RoutedEventArgs e)

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="FranchiseInformationView">
     <Grid x:Name="FranchisePanel" Height="560" Width="786" Background="LightGray">
-        <Grid x:Name="franchiseInformation" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="402" Background="White" Margin="0,0,20,20" Width="680" >
+        <Grid x:Name="franchiseInformation" HorizontalAlignment="Left" VerticalAlignment="Center" Height="428" Background="White" Margin="49,0,0,0" Width="708" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="104*"/>
                 <RowDefinition Height="229*"/>
@@ -82,11 +82,11 @@
                     FontStretch="SemiExpanded"
                     FontSize="9" Grid.RowSpan="2"/>
 
-            <Label Content="Driver Day " HorizontalAlignment="Left" Margin="235,15,0,0" VerticalAlignment="Top"
+            <Label Content="Driver Day " HorizontalAlignment="Left" Margin="235,4,0,0" VerticalAlignment="Top"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray" Grid.Row="1"/>
-            <Label Content="Blk.1 Lot 12 Sapang Palay, CSJDM, Bulacan" HorizontalAlignment="Left" Margin="325,15,0,0" VerticalAlignment="Top"
+            <Label Content="Blk.1 Lot 12 Sapang Palay, CSJDM, Bulacan" HorizontalAlignment="Left" Margin="325,6,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Helvetica"
@@ -113,7 +113,7 @@
             <Button 
                 x:Name="btnCertificate"
                 Height="25"
-                Margin="538,0,28,266"
+                Margin="538,0,28,284"
                 VerticalAlignment="Bottom"  
                 Content="Certificate"
                 FontFamily="Arial"
@@ -206,7 +206,25 @@
                 FontFamily="Arial"
                 FontWeight="Bold"
                 FontSize="10" Click="btnTransactionHistory_Click"/>
-            <Grid x:Name="ModuleGrid" Grid.Row="1" Margin="158,59,0,0"/>
+
+
+
+            <Grid x:Name="ModuleGrid" Grid.Row="1" Margin="0,0,15,45" Width="512" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="200"/>
+
+            <Button
+               x:Name="btnAddButton"
+                Style="{DynamicResource ControlledButtonStyle}"
+                BorderThickness="1"
+                Background="White"
+                Height="26"
+                Width="100"
+                VerticalAlignment="Bottom"  
+                HorizontalAlignment="Right"
+                Content="ADD RECORD" Grid.Row="1"
+                FontFamily="Arial"
+                FontWeight="Bold"
+                FontSize="10" Margin="0,0,32,18"/>
+
         </Grid>
         <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="37,26,0,0" VerticalAlignment="Top" Click="btnBack_Click"/>
     </Grid>

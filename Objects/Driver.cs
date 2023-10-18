@@ -22,7 +22,7 @@ namespace SPTC_APP.Objects
             get
             {
                 EventLogger.Post($"OUT :: {id}");
-                return Retrieve.GetDataUsingQuery<bool>(RequestQuery.CHECK_IF_SUSPSENDED(AppState.GetEnumDescription(General.DRIVER), Field.DRIVER_ID, id)).FirstOrDefault();
+                return Retrieve.GetDataUsingQuery<bool>(RequestQuery.CHECK_IF_SUSPENDED(AppState.GetEnumDescription(General.DRIVER), Field.DRIVER_ID, id)).FirstOrDefault();
             } 
             private set{ } 
         }

@@ -1,4 +1,5 @@
 ﻿using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using System;
 using System.Diagnostics;
 using System.Drawing;

@@ -15,14 +15,14 @@ namespace SPTC_APP.Objects
         public Operator Operator { get; set; }
         public string LicenseNO { get; set; }
         public Driver Driver { get; set; }
-        public Name owner { get; set; }
+        public Name Owner { get; set; }
         public Franchise lastFranchiseId { get; set; }
-
         public DateTime BuyingDate { get; set; }
-
         public string MTOPNo { get; set; }
         public double ShareCapital { get; set; }
         public double MonthlyDues { get; set; }
+        public object LoanBalance { get { return 0; } }
+        public object LongTermLoanBalance { get { return 0; } }
 
         private Upsert franchise;
 
@@ -31,7 +31,7 @@ namespace SPTC_APP.Objects
             franchise = new Upsert(Table.FRANCHISE, -1);
             Operator = null;
             Driver = null;
-            owner = null;
+            Owner = null;
             lastFranchiseId = null;
             BuyingDate = DateTime.Now;
         }
@@ -42,7 +42,7 @@ namespace SPTC_APP.Objects
         {
             Operator = null;
             Driver = null;
-            owner = null;
+            Owner = null;
             lastFranchiseId = null;
             franchise = null;
             this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
@@ -62,7 +62,7 @@ namespace SPTC_APP.Objects
             if (driverID >= 0)
                 this.Driver = (Retrieve.GetData<Driver>(Table.DRIVER, Select.ALL, Where.ID_, new MySqlParameter("id", driverID))).FirstOrDefault();
             if (nameID >= 0)
-                this.owner = (Retrieve.GetData<Name>(Table.NAME, Select.ALL, Where.ID_, new MySqlParameter("id", nameID))).FirstOrDefault();
+                this.Owner = (Retrieve.GetData<Name>(Table.NAME, Select.ALL, Where.ID_, new MySqlParameter("id", nameID))).FirstOrDefault();
             if (lastFranchiseID >= 0)
                 this.lastFranchiseId = (Retrieve.GetData<Franchise>(Table.FRANCHISE, Select.ALL, Where.ID_, new MySqlParameter("id", lastFranchiseID))).FirstOrDefault();
         }
@@ -88,18 +88,30 @@ namespace SPTC_APP.Objects
             if (this.Operator != null)
             {
                 franchise.Insert(Field.OPERATOR_ID, this.Operator.Save());
+            } else
+            {
+                franchise.Insert(Field.OPERATOR_ID, -1);
             }
             if (this.Driver != null)
             {
                 franchise.Insert(Field.DRIVER_ID, this.Driver.Save());
-            }
-            if (this.owner != null)
+            } else
             {
-                franchise.Insert(Field.OWNER_ID, this.owner.Save());
+                franchise.Insert(Field.DRIVER_ID, -1);
+            }
+            if (this.Owner != null)
+            {
+                franchise.Insert(Field.OWNER_ID, this.Owner.Save());
+            } else
+            {
+                franchise.Insert(Field.OWNER_ID, -1);
             }
             if (this.lastFranchiseId != null)
             {
                 franchise.Insert(Field.LAST_FRANCHISE_ID, this.lastFranchiseId.Save());
+            } else
+            {
+                franchise.Insert(Field.LAST_FRANCHISE_ID, -1);
             }
             franchise.Save();
             id = franchise.id;

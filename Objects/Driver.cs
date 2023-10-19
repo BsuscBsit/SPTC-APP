@@ -17,14 +17,18 @@ namespace SPTC_APP.Objects
         public DateTime birthday { get; set; }
         public string emergencyPerson { get; set; }
         public string emergencyContact { get; set; }
-
+        public DateTime dateOfMembership = DateTime.MinValue;
         public Franchise franchise { get; set; }
         
-
+        public int violationCount { 
+            get
+            {
+                return Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_VIOLATION_COUNT_OF(name.id)).FirstOrDefault();
+            } 
+        }
         public bool isSuspended {
             get
             {
-                EventLogger.Post($"OUT :: {id}");
                 return Retrieve.GetDataUsingQuery<bool>(RequestQuery.CHECK_IF_SUSPENDED(AppState.GetEnumDescription(General.DRIVER), Field.DRIVER_ID, id)).FirstOrDefault();
             } 
             private set{ } 
@@ -52,6 +56,7 @@ namespace SPTC_APP.Objects
             this.birthday = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE_OF_BIRTH);
             this.emergencyPerson = Retrieve.GetValueOrDefault<string>(reader, Field.EM_CONTACT_PERSON);
             this.emergencyContact = Retrieve.GetValueOrDefault<string>(reader, Field.EM_CONTACT_NUMBER);
+            this.dateOfMembership = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE_OF_MEM);
 
             Populate(Retrieve.GetValueOrDefault<int>(reader, Field.NAME_ID), Retrieve.GetValueOrDefault<int>(reader, Field.ADDRESS_ID), Retrieve.GetValueOrDefault<int>(reader, Field.IMAGE_ID), Retrieve.GetValueOrDefault<int>(reader, Field.SIGN_ID));
         }
@@ -66,6 +71,7 @@ namespace SPTC_APP.Objects
             this.birthday = bday;
             this.emergencyPerson = emergencyPerson;
             this.emergencyContact = emergencyContact;
+            this.dateOfMembership = DateTime.Now;
             return true;
         }
         private void Populate(int lname, int laddress, int limage, int lsignature)
@@ -89,6 +95,7 @@ namespace SPTC_APP.Objects
             mDriver.Insert(Field.DATE_OF_BIRTH, birthday);
             mDriver.Insert(Field.EM_CONTACT_PERSON, this.emergencyPerson);
             mDriver.Insert(Field.EM_CONTACT_NUMBER, this.emergencyContact);
+            mDriver.Insert(Field.DATE_OF_MEM, dateOfMembership);
             if (this.name != null)
             {
                 mDriver.Insert(Field.NAME_ID, this.name.Save());

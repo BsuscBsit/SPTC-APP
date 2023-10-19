@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
+using SPTC_APP.View.Controls;
 
 namespace SPTC_APP.Objects
 {
     public class PaymentDetails<T>
     {
         public int id { get; private set; }
+
+        private int ledgerId;
         public T ledger { get; set; }
         public bool isDownPayment { get; set; }
         public bool isDivPat { get; set; }
@@ -16,6 +20,55 @@ namespace SPTC_APP.Objects
         public double deposit { get; set; }
         public double penalties { get; set; }
         public string remarks { get; set; }
+        public string displayDate { 
+            get
+            {
+                return date.ToString("MMMM dd, yyyy");
+            }
+        }
+
+        public double principal
+        {
+            get
+            {
+                UpdateLedger();
+                if (ledger is Ledger.Loan)
+                {
+                    return (ledger as Ledger.Loan).monthlyPrincipal;
+                } 
+                if(ledger is Ledger.LongTermLoan)
+                {
+                    return (ledger as Ledger.LongTermLoan).capitalBuildup;
+                }
+                return 0;
+            }
+        }
+        public double interest
+        {
+            get
+            {
+                UpdateLedger();
+                if (ledger is Ledger.Loan)
+                {
+                    return (ledger as Ledger.Loan).monthlyInterest;
+                }
+                if (ledger is Ledger.LongTermLoan)
+                {
+                    return (ledger as Ledger.LongTermLoan).processingFee;
+                }
+                return 0;
+            }
+        }
+
+
+        public double withdraw
+        {
+            get
+            {
+                return (deposit < 0) ? deposit : 0;
+            }
+            set { }
+        }
 
         private Upsert paymentDetails;
 
@@ -33,6 +86,7 @@ namespace SPTC_APP.Objects
             {
                 return Table.LONG_TERM_LOAN;
             }
+            
             return null;
         }
 
@@ -70,15 +124,17 @@ namespace SPTC_APP.Objects
             this.penalties = Retrieve.GetValueOrDefault<double>(reader, Field.PENALTIES);
             this.remarks = Retrieve.GetValueOrDefault<string>(reader, Field.REMARKS);
 
-            Populate(Retrieve.GetValueOrDefault<int>(reader, Field.LEDGER_ID));
+            this.ledgerId = Retrieve.GetValueOrDefault<int>(reader, Field.LEDGER_ID);
         }
 
-        private void Populate(int ledgerID)
+        public void UpdateLedger()
         {
-            if (ledgerID >= 0)
+            if (ledgerId >= 0)
             {
-
-                this.ledger = (Retrieve.GetData<T>(getLedgerType(), Select.ALL, Where.ID_, new MySqlParameter("id", ledgerID))).FirstOrDefault();
+                if (ledger == null)
+                {
+                    this.ledger = (dynamic)Retrieve.GetData<Ledger.Loan>(Table.LOAN, Select.ALL, Where.ID_, new MySqlParameter("id", ledgerId)).FirstOrDefault();
+                }
             }
         }
 

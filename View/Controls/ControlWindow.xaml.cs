@@ -1,4 +1,6 @@
-﻿using SPTC_APP.View.Controls;
+﻿using SPTC_APP.Objects;
+using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +13,8 @@ namespace SPTC_APP.View
     public partial class ControlWindow : Window
     {
         private bool isDialog = false;
+        private bool isThreeway = false;
+        public int ResultingCode = -1;
         public ControlWindow(string header = "", string content = "", Icons icons = Icons.DEFAULT)
         {
             InitializeComponent();
@@ -19,10 +23,22 @@ namespace SPTC_APP.View
             this.tblockContent.Text = content;
             DraggingHelper.DragWindow(topBar);
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
-           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
 
-        public static void Show(string header, string content, Icons icons = Icons.DEFAULT)
+        public ControlWindow(string header, string content, string middlebtn, string rightbtn, Icons icons = Icons.DEFAULT)
+        {
+            InitializeComponent();
+            this.SetIcon(icons);
+            this.lblHeader.Content = header;
+            this.tblockContent.Text = content;
+            btnOK.Content = rightbtn;
+            btnMiddle.Content = middlebtn;
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+        }
+
+        public static void ShowStatic(string header, string content, Icons icons = Icons.DEFAULT)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -34,25 +50,42 @@ namespace SPTC_APP.View
             });
             //return control;
         }
-        public static bool ShowDialog(string header, string content, Icons icons = Icons.DEFAULT)
+        public static int ShowDialogStatic(string header, string content, string middlebtn, string rightbtn, Icons icons = Icons.DEFAULT)
+        {
+            return Application.Current.Dispatcher.Invoke(() =>
+            {
+                ControlWindow control = new ControlWindow(header, content, middlebtn, rightbtn, icons);
+                control.Cancellable();
+                control.Threeway();
+                control.ShowDialog();
+                return control.ResultingCode;
+            });
+        }
+
+        
+
+        public static bool ShowDialogStatic(string header, string content, Icons icons = Icons.DEFAULT)
         {
             bool? res = Application.Current.Dispatcher.Invoke(() =>
             {
-                ControlWindow control = new ControlWindow();
-                control.SetIcon(icons);
-                control.lblHeader.Content = header;
-                control.tblockContent.Text = content;
+                ControlWindow control = new ControlWindow(header, content, icons);
                 control.Cancellable();
                 return (control.ShowDialog());
             });
-            return res??false;
+            return res ?? false;
         }
 
         private void Cancellable()
         {
-            //Set cancel visibility here
             isDialog = true;
             btnCancel.Visibility = Visibility.Visible;
+            btnOK.Width = 120;
+        }
+
+        private void Threeway()
+        {
+            isThreeway = true;
+            btnMiddle.Visibility = Visibility.Visible;
             btnOK.Width = 120;
         }
 
@@ -80,7 +113,15 @@ namespace SPTC_APP.View
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
 
-            this.DialogResult = false;
+            if(isThreeway && isDialog)
+            {
+                this.DialogResult = null;
+                this.ResultingCode = -1;
+            }
+            else
+            {
+                this.DialogResult = false;
+            }
             this.Close();
         }
 
@@ -89,6 +130,17 @@ namespace SPTC_APP.View
             if (this.isDialog)
             {
                 this.DialogResult = true;
+                this.ResultingCode = 1;
+            }
+            this.Close();
+        }
+
+        private void btnMiddle_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.isDialog)
+            {
+                this.DialogResult = false;
+                this.ResultingCode = 0;
             }
             this.Close();
         }

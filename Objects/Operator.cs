@@ -17,6 +17,16 @@ namespace SPTC_APP.Objects
         public DateTime birthday { get; set; }
         public string emergencyPerson { get; set; }
         public string emergencyContact { get; set; }
+        public bool isSuspended
+        {
+            get
+            {
+                return Retrieve.GetDataUsingQuery<bool>(RequestQuery.CHECK_IF_SUSPENDED(AppState.GetEnumDescription(General.OPERATOR), Field.DRIVER_ID, id)).FirstOrDefault();
+            }
+            private set { }
+        }
+        public Franchise franchise { get; set; }
+
 
         private Upsert mOperator;
 
@@ -115,6 +125,12 @@ namespace SPTC_APP.Objects
             mOperator.Insert(Field.ISDELETED, true);
             mOperator.Save();
             return true;
+        }
+
+        public void UpdateFranchise()
+        {
+            this.franchise = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.OPERATOR, Field.OPERATOR_ID, id)).FirstOrDefault();
+            EventLogger.Post($"OUT :: {id} {Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.OPERATOR, Field.OPERATOR_ID, id)).Count}");
         }
     }
 }

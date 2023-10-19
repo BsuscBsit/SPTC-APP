@@ -17,6 +17,7 @@ namespace SPTC_APP.View.Pages
     public partial class MainBody : Window
     {
         private Button selectedButton = null;
+
         public static Franchise selectedFranchise = null;
         public MainBody()
         {
@@ -48,40 +49,42 @@ namespace SPTC_APP.View.Pages
 
         private async void FranchiseButton_Click(object sender, RoutedEventArgs e)
         {
+            ClickColorControl(sender as Button);
             TablePanelSwap.Children.Clear();
             TablePanelSwap.Children.Add(await (new TableView(Table.FRANCHISE)).Fetch());
-            ClickColorControl(sender as Button);
+            
         }
 
         private async void DashBoard_Click(object sender, RoutedEventArgs e)
         {
+            ClickColorControl(sender as Button);
             TablePanelSwap.Children.Clear();
             TablePanelSwap.Children.Add(await (new DashboardView()).Fetch());
-            ClickColorControl(sender as Button);
+            
         }
 
         private async void OperatorButton_Click(object sender, RoutedEventArgs e)
         {
-            TablePanelSwap.Children.Clear();
-            TablePanelSwap.Children.Add(await(new TableView(Table.OPERATOR)).Fetch());
             ClickColorControl(sender as Button);
+            TablePanelSwap.Children.Clear();
+            TablePanelSwap.Children.Add(await (new TableView(Table.OPERATOR)).Fetch());
+           
         }
 
         private async void DriverButton_Click(object sender, RoutedEventArgs e)
         {
+            ClickColorControl(sender as Button);
             TablePanelSwap.Children.Clear();
             TablePanelSwap.Children.Add(await (new TableView(Table.DRIVER)).Fetch());
-            ClickColorControl(sender as Button);
+            
         }
 
         private void BtnBoardMember_Click(object sender, RoutedEventArgs e)
         {
+            ClickColorControl(sender as Button);
             TablePanelSwap.Children.Clear();
             //TablePanelSwap.Children.Add(await(new TableView(Table.DRIVER)).Fetch());
-            ClickColorControl(sender as Button);
         }
-
-
 
 
 
@@ -132,7 +135,7 @@ namespace SPTC_APP.View.Pages
             {
                 lsSuggestion.Visibility = Visibility.Collapsed;
             }
-            await Task.Delay(50);
+            await Task.Delay(5);
         }
 
         private void GetFranchiseInList()
@@ -148,7 +151,7 @@ namespace SPTC_APP.View.Pages
 
                             new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
                             new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
-                            new ColumnConfiguration("Driver.name.wholename", "Driver NAME", width: 140),
+                            new ColumnConfiguration("Driver.name.wholename", "DRIVER NAME", width: 140),
                         };
                     DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(lsSuggestion, columnConfigurations);
 
@@ -171,6 +174,8 @@ namespace SPTC_APP.View.Pages
         {
             if (((DataGrid)sender).SelectedItem is Franchise fran)
             {
+                lsSuggestion.Visibility = Visibility.Collapsed;
+                cbSearch.Text = "";
                 if (fran.BodyNumber != null)
                 {
                     TablePanelSwap.Children.Clear();
@@ -178,6 +183,7 @@ namespace SPTC_APP.View.Pages
                     TablePanelSwap.Children.Add(await (new TableView(Table.FRANCHISE)).Fetch());
                     MainBody.selectedFranchise = fran;
                     TablePanelSwap.Children.Add((new FranchiseInformationView()).Fetch());
+                    
                 }
             }
         }

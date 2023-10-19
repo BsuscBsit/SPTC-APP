@@ -14,7 +14,7 @@ namespace SPTC_APP.Objects
         public DateTime? suspensionStart { get; set; }
         public DateTime? suspensionEnd { get; set; }
         public string remarks { get; set; }
-        public int nameId { get; set; }
+        public int name_id { get; set; }
 
         private Upsert violation;
 
@@ -34,7 +34,18 @@ namespace SPTC_APP.Objects
             this.suspensionStart = Retrieve.GetValueOrDefault<DateTime?>(reader, Field.SUSPENSION_START);
             this.suspensionEnd = Retrieve.GetValueOrDefault<DateTime?>(reader, Field.SUSPENSION_END);
             this.remarks = Retrieve.GetValueOrDefault<string>(reader, Field.REMARKS);
-            this.nameId = Retrieve.GetValueOrDefault<int>(reader, Field.NAME_ID);
+            this.name_id = Retrieve.GetValueOrDefault<int>(reader, Field.NAME_ID);
+        }
+
+        public void WriteInto(int franchise_id, int violation_type_id, DateTime violation_date, DateTime start, DateTime end, string remarks, int name_id)
+        {
+            this.franchiseId = franchise_id;
+            this.violationTypeId = violation_type_id;
+            this.violationDate = violation_date;
+            this.suspensionStart = start;
+            this.suspensionEnd = end;
+            this.remarks = remarks;
+            this.name_id = name_id;
         }
 
         public int Save()
@@ -50,7 +61,7 @@ namespace SPTC_APP.Objects
             violation.Insert(Field.SUSPENSION_START, suspensionStart);
             violation.Insert(Field.SUSPENSION_END, suspensionEnd);
             violation.Insert(Field.REMARKS, remarks);
-            violation.Insert(Field.NAME_ID, nameId);
+            violation.Insert(Field.NAME_ID, name_id);
             violation.Save();
             id = violation.id;
 

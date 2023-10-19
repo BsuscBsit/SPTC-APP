@@ -255,7 +255,7 @@ namespace SPTC_APP.View
                     }
                     catch (Exception ex)
                     {
-                        ControlWindow.Show("Camera Error", $"An error occurred: {ex.Message}", Icons.ERROR);
+                        ControlWindow.ShowStatic("Camera Error", $"An error occurred: {ex.Message}", Icons.ERROR);
                         pbCameraOpen.Visibility = Visibility.Hidden;
                     }
                 }
@@ -361,7 +361,7 @@ namespace SPTC_APP.View
                 warn = (cameraWarning ? "Camera" : "") + (cameraWarning && signPadWarning ? " and " : "") + (signPadWarning ? "Sign Pad" : "");
                 //warn += " has been initiated but no " + (warn.Length == 6 ? "image was" : "") + " captured. Are you certain you want to proceed?";
                 warn = !string.IsNullOrEmpty(warn) ? (warn + " has been initiated but, no" + (warn.Length < 7 ? " image was" : (warn.Length < 10 ? " input was" : " inputs were")) + " captured. \nAre you certain you want to proceed?") : warn;
-                if(ControlWindow.ShowDialog("Continue?", warn, Icons.NOTIFY))
+                if(ControlWindow.ShowDialogStatic("Continue?", warn, Icons.NOTIFY))
                 {
                     return true;
                 }
@@ -504,7 +504,7 @@ namespace SPTC_APP.View
                     {
                         imgSignPic.Source = null;
                     }
-                    ControlWindow.Show("Input Fields incomplete!", "Missing some required inputs.");
+                    ControlWindow.ShowStatic("Input Fields incomplete!", "Missing some required inputs.");
                 }
             }
         }
@@ -534,7 +534,7 @@ namespace SPTC_APP.View
             }
             catch (Exception e)
             {
-                ControlWindow.Show("Camera Error", e.Message, Icons.ERROR);
+                ControlWindow.ShowStatic("Camera Error", e.Message, Icons.ERROR);
             }
         }
         private void videoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)

@@ -25,6 +25,11 @@ namespace SPTC_APP.Database
             return connection;
         }
 
+        public static bool HasConnection()
+        {
+            return connectionString != null || connectionString != "";
+        }
+
         public static string GetEnumDescription(ConnectionLogs value)
         {
             FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
@@ -42,8 +47,8 @@ namespace SPTC_APP.Database
 
             public Builder(string host, string port, string database, string username, string password)
             {
-                //connectionString = $"Server={host};Port={port};Database={database};Uid={username};Pwd={password};";
-                connectionString = $"Server={host};Database={database};Uid={username};Pwd={password};";
+                connectionString = $"Server={host};Port={port};Database={database};Uid={username};Pwd={password};";
+                //connectionString = $"Server={host};Database={database};Uid={username};Pwd={password};";
             }
 
 
@@ -73,7 +78,7 @@ namespace SPTC_APP.Database
                                 }
                             });
 
-                            int timeoutMilliseconds = 10000; // Adjust as needed
+                            int timeoutMilliseconds = 10000;
 
                             if (Task.WaitAll(new[] { openTask }, timeoutMilliseconds))
                             {
@@ -86,7 +91,7 @@ namespace SPTC_APP.Database
                             }
                             else
                             {
-                                mySqlConnection.Close(); // Close the connection if it times out
+                                mySqlConnection.Close();
                                 Log = ConnectionLogs.TIMEOUT;
                                 return false;
                             }

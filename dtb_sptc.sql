@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2023 at 10:12 AM
+-- Generation Time: Oct 17, 2023 at 06:22 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -125,7 +125,8 @@ CREATE TABLE `tbl_id_history` (
   `date` date DEFAULT NULL,
   `owner_id` int(11) NOT NULL DEFAULT -1,
   `entity_type` varchar(10) NOT NULL DEFAULT 'OPERATOR',
-  `name_id` int(11) NOT NULL DEFAULT -1,
+  `franchise_id` int(11) NOT NULL DEFAULT -1,
+  `is_printed` tinyint(1) NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -228,7 +229,7 @@ CREATE TABLE `tbl_payment_details` (
   `ledger_id` int(11) NOT NULL DEFAULT -1,
   `isDownPayment` tinyint(1) NOT NULL DEFAULT 0,
   `isDivPat` tinyint(1) NOT NULL DEFAULT 0,
-  `ledger_type` varchar(20) DEFAULT NULL,
+  `ledger_type` varchar(30) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `reference_no` int(11) NOT NULL DEFAULT -1,
   `deposit` double NOT NULL DEFAULT 0,
@@ -291,7 +292,7 @@ CREATE TABLE `tbl_violation` (
   `violation_type_id` int(11) NOT NULL DEFAULT -1,
   `date` date DEFAULT NULL,
   `suspension_start` date DEFAULT NULL,
-  `suspention_end` date DEFAULT NULL,
+  `suspension_end` date DEFAULT NULL,
   `remarks` varchar(100) DEFAULT NULL,
   `name_id` int(11) NOT NULL DEFAULT -1,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
@@ -308,7 +309,7 @@ CREATE TABLE `tbl_violation_type` (
   `title` varchar(50) DEFAULT NULL,
   `details` varchar(100) DEFAULT NULL,
   `num_of_days` int(11) NOT NULL DEFAULT 0,
-  `is_for_driver` tinyint(1) NOT NULL DEFAULT 0,
+  `entity_type` varchar(20) NOT NULL DEFAULT 'DRIVER',
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -348,7 +349,7 @@ ALTER TABLE `tbl_franchise`
 --
 ALTER TABLE `tbl_id_history`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `owner_id` (`owner_id`,`entity_type`,`name_id`);
+  ADD UNIQUE KEY `owner_id` (`owner_id`,`entity_type`,`franchise_id`);
 
 --
 -- Indexes for table `tbl_image`
@@ -412,7 +413,8 @@ ALTER TABLE `tbl_violation`
 -- Indexes for table `tbl_violation_type`
 --
 ALTER TABLE `tbl_violation_type`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `title` (`title`,`num_of_days`,`entity_type`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables

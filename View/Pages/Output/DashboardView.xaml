@@ -46,18 +46,20 @@
                             <EllipseGeometry x:Name="cvPieCircle" Center="87.5, 87.5" RadiusX="87" RadiusY="87"/>
                         </Path.Data>
                     </Path>
-                    <Canvas Canvas.ZIndex="1">
-                        <Path Fill="White">
-                            <Path.Data>
-                                <EllipseGeometry Center="87.5, 87.5" RadiusX="40" RadiusY="40"/>
-                            </Path.Data>
-                        </Path>
-                        <Label x:Name="lblPercent" Content="100%" Style="{StaticResource LargestTitlePreset}" FontSize="18" Foreground="Gray" Height="30" Width="60" Margin="57.5, 72, 0, 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                    </Canvas>
                     
                 </Canvas>
-
-                <Label x:Name="lblPieChartTitle" Content="" Style="{StaticResource CommonTitlePreset}" FontSize="16" FontWeight="Bold" Foreground="Black" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Canvas  Width="175" Height="175" VerticalAlignment="Bottom" Margin="5">
+                    <Path Fill="White">
+                        <Path.Data>
+                            <EllipseGeometry Center="87.5, 87.5" RadiusX="40" RadiusY="40"/>
+                        </Path.Data>
+                    </Path>
+                    <Label x:Name="lblPercent" Content="100%" Style="{StaticResource LargestTitlePreset}" FontSize="18" Foreground="Gray" Height="30" Width="60" Margin="57.5, 72, 0, 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label x:Name="lblMonth" Content="JAN" Style="{StaticResource CommonTitlePreset}" FontSize="10" Foreground="Gray" Height="22" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Canvas.Left="58" Canvas.Top="88" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                </Canvas>
+                <Button x:Name="btnPieBackward" Content="Prev" Height="20" Width="30" Margin="10,218,148,10" FontSize="12" Click="btnPieBackward_Click"/>
+                <Button x:Name="btnPieForward" Content="Next" Height="20" Width="30" Margin="152,218,6,10" FontSize="12" Visibility="Collapsed" Click="btnPieForward_Click"/>
+                <Label x:Name="lblPieChartTitle" Content="Total Revenue: " Style="{StaticResource CommonTitlePreset}" FontSize="16" FontWeight="Bold" Foreground="Black" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Label x:Name="lblPieChart" Content="0" Style="{StaticResource CommonTitlePreset}" FontSize="16" Height="30" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0"/>
             </Grid>
         </Border>

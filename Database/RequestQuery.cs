@@ -22,6 +22,10 @@ namespace SPTC_APP.Database
 
         public static string CLEAN_IMAGE = $"DELETE i FROM {Table.IMAGE} AS i LEFT JOIN {Table.OPERATOR} AS o ON i.{Field.ID} = o.{Field.IMAGE_ID} OR i.{Field.ID} = o.{Field.SIGN_ID} LEFT JOIN {Table.DRIVER} AS d ON i.{Field.ID} = d.{Field.IMAGE_ID} OR i.{Field.ID} = d.{Field.SIGN_ID} LEFT JOIN {Table.EMPLOYEE} AS e ON i.{Field.ID} = e.{Field.IMAGE_ID} OR i.{Field.ID} = e.{Field.SIGN_ID} WHERE (o.{Field.IMAGE_ID} IS NULL AND o.{Field.SIGN_ID} IS NULL) AND (d.{Field.IMAGE_ID} IS NULL AND d.{Field.SIGN_ID} IS NULL) AND (e.{Field.IMAGE_ID} IS NULL AND e.{Field.SIGN_ID} IS NULL);";
 
+        public static string GET_DRIVERS_WITHOUT_FRANCHISE = $"SELECT d.* FROM {Table.DRIVER} AS d LEFT JOIN {Table.FRANCHISE} AS f ON f.{Field.DRIVER_ID} = d.{Field.ID} WHERE f.{Field.DRIVER_ID} IS NULL AND d.{Where.ALL_NOTDELETED}";
+        public static string GET_FRANCHISE_WITH_DRIVER = $"SELECT * FROM {Table.FRANCHISE} WHERE {Field.DRIVER_ID} <> -1 AND {Where.ALL}";
+
+
         public static string SEARCH(string text) =>
             $"SELECT * FROM {Table.FRANCHISE} f LEFT JOIN {Table.OPERATOR} O ON f.{Field.OPERATOR_ID}=O.{Field.ID} LEFT JOIN {Table.DRIVER} D ON f.{Field.DRIVER_ID}=D.{Field.ID} " +
             $"LEFT JOIN {Table.NAME} OName ON O.{Field.NAME_ID}=OName.{Field.ID} LEFT JOIN {Table.NAME} DName ON D.{Field.NAME_ID}=DName.{Field.ID} " +
@@ -29,7 +33,22 @@ namespace SPTC_APP.Database
 
         public static string GET_ALL_PAYMENT_IN_MONTH(int month, int year) =>
             $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
-        
+        public static string GET_ALL_PAYMENT_IN_MONTH(string table, int month, int year) =>
+            $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_TYPE} = '{table}' AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
+        public static string CHECK_IF_SUSPENDED(string entity, string field, int id) =>
+            $"SELECT CASE WHEN EXISTS ( SELECT 1 FROM {Table.VIOLATION} AS v LEFT JOIN {Table.FRANCHISE} AS f ON f.{Field.ID} = v.{Field.FRANCHISE_ID} LEFT JOIN {Table.VIOLATION_TYPE} AS vt ON v.{Field.VIOLATION_TYPE_ID} = vt.{Field.ID} WHERE vt.{Field.ENTITY_TYPE} = \"{entity}\" AND f.{field} = {id} AND CURDATE() BETWEEN v.{Field.SUSPENSION_START} AND v.{Field.SUSPENSION_END} ) THEN TRUE ELSE FALSE END AS IsSuspended;";
+
+        public static string GET_LEDGER_LIST(string table, int id) =>
+            $"SELECT * FROM {table} WHERE {Field.FRANCHISE_ID} = {id} AND {Where.ALL_NOTDELETED} ORDER BY {Field.DATE} DESC";
+
+        public static string GET_LEDGER_PAYMENT(string table, string type, int id) =>
+            $"SELECT * FROM {Table.PAYMENT_DETAILS} AS pd LEFT JOIN {table} AS scl ON pd.{Field.LEDGER_ID} = scl.{Field.ID} AND pd.{Field.LEDGER_TYPE} = \"{type}\" WHERE scl.{Field.FRANCHISE_ID} = {id} AND pd.{Where.ALL_NOTDELETED} ORDER BY pd.{Field.DATE} DESC";
+        public static string GET_FRANCHISE_OF(string table, string field, int id) => $"SELECT * FROM {Table.FRANCHISE} JOIN {table} AS o ON o.{Field.ID} = {field} WHERE o.{Field.ID} = {id}";
+
+
+
+
+
 
         public static string GetEnumDescription(CRUDControl value)
         {
@@ -39,6 +58,7 @@ namespace SPTC_APP.Database
 
             return attributes.Length > 0 ? attributes[0].Description : value.ToString();
         }
+
         public static string Protect(string input)
         {
             using (MD5 md5 = MD5.Create())
@@ -91,12 +111,6 @@ namespace SPTC_APP.Database
         public const string ID_ = "id=?";
         public const string ID_NOTDELETED = "id=? AND isDeleted=0";
         public const string ID_DELETED = "id=? AND isDeleted=1";
-
-        public const string THEREIS_OPERATOR = "operator_id != -1 AND isDeleted = 0";
-        public const string THEREIS_DRIVER = "driver_id != -1 AND isDeleted = 0";
-
-
-        
     }
     public static class Field
     {
@@ -207,6 +221,7 @@ namespace SPTC_APP.Database
 
 
         //IDHISTORY
+        public const string IS_PRINTED = "is_printed";
     }
 
     public enum CRUDControl

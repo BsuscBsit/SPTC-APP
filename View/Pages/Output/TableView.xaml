@@ -31,6 +31,10 @@
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
+            <Label Content="Is Suspended: " HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top"
+                FontWeight="Medium"
+                FontSize="9"
+                Foreground="DarkGray"/>
             <Label Content="Reference :" HorizontalAlignment="Left" Margin="19,216,0,0" VerticalAlignment="Top"
                     FontWeight="Medium"
                     FontSize="9"
@@ -64,6 +68,13 @@
                     FontFamily="Arial"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
+            <Label x:Name="lblIsSuspended"  Content="NO" HorizontalAlignment="Left" Margin="110,183,0,0" VerticalAlignment="Top"
+                Foreground="GREEN"
+                FontWeight="Black"
+                FontFamily="Arial"
+                FontStretch="SemiExpanded"
+                FontSize="9"/>
+            
             <Label x:Name="Reference" Content="Gabriel Manriza" HorizontalAlignment="Left" Margin="99,213,0,0" VerticalAlignment="Top"
                     Foreground="Black"
                     FontWeight="DemiBold"
@@ -114,12 +125,12 @@
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <Button x:Name="AddFranchiseButton" Content="ADD FRANCHISE" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="110" Height="32"
+        <Button x:Name="btnAdd" Content="ADD" Style="{DynamicResource ControlledButtonStyle}" HorizontalAlignment="Left" Margin="80,35,0,0" VerticalAlignment="Top" Width="110" Height="32"
                     FontFamily="hevitica "
                     FontWeight="ExtraBold"
                     Visibility="Visible"
                     FontSize="10"
-                    Background="Yellow" Click="AddFranchiseButton_Click"
+                    Background="Yellow" Click="btnAddClick"
                     />
     </Grid>
 

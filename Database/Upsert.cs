@@ -174,10 +174,11 @@ namespace SPTC_APP.Database
                             {
                                 Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
                                 {
-                                    { Field.NAME_ID, fieldValues.TryGetValue(Field.NAME_ID, out var temp) ? temp : -1 },
+                                    { Field.FRANCHISE_ID, fieldValues.TryGetValue(Field.FRANCHISE_ID, out var temp) ? temp : -1 },
                                     { Field.OWNER_ID, fieldValues.TryGetValue(Field.OWNER_ID, out temp) ? temp : -1 },
                                     { Field.ENTITY_TYPE, fieldValues.TryGetValue(Field.ENTITY_TYPE, out temp) ? temp : "" },
                                 };
+                                id = GetExistingRecordId(uniqueAttributes);
                             }
                             else if(tableName == Table.PAYMENT_DETAILS)
                             {
@@ -185,6 +186,17 @@ namespace SPTC_APP.Database
                                 {
                                     { Field.REFERENCE_NO, fieldValues.TryGetValue(Field.REFERENCE_NO, out var temp) ? temp : -1 },
                                 };
+                                id = GetExistingRecordId(uniqueAttributes);
+                            }
+                            else if (tableName == Table.VIOLATION_TYPE)
+                            {
+                                Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
+                                {
+                                    { Field.TITLE, fieldValues.TryGetValue(Field.TITLE, out var temp) ? temp : "" },
+                                    { Field.NUM_OF_DAYS, fieldValues.TryGetValue(Field.NUM_OF_DAYS, out temp) ? temp : 0 },
+                                    {Field.ENTITY_TYPE, fieldValues.TryGetValue(Field.ENTITY_TYPE, out temp)? temp: "DRIVER" }
+                                };
+                                id = GetExistingRecordId(uniqueAttributes);
                             }
 
                             else

@@ -7,13 +7,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
+using System.ComponentModel;
+using System.Text;
 
 namespace SPTC_APP.Objects
 {
     public enum General
     {
         FRANCHISE,
+
+        [Description("OPERATOR")]
         OPERATOR,
+
+        [Description("DRIVER")]
         DRIVER,
 
 
@@ -33,6 +39,7 @@ namespace SPTC_APP.Objects
         FETCH_FRANCHISE_USING_BODYNUMBER,
         FETCH_PAYMENT_DETAILS_USING_ID,
         NEW_PAYMENT_DETAILS,
+
     }
 
 
@@ -48,13 +55,20 @@ namespace SPTC_APP.Objects
         {
             get
             {
-                if (!string.IsNullOrEmpty(middlename))
+                try
                 {
-                    string middleInitials = string.Join("", middlename.Split(' ').Select(part => part[0]));
-                    return $"{lastname}, {firstname} {middleInitials}. {suffix}".Trim();
-                }
+                    string middleInitials = GetInitials(middlename);
 
-                return $"{lastname}, {firstname} {suffix}".Trim();
+                    // Check if middle initials exist to determine if the period should be included
+                    string middleInitialsFormatted = string.IsNullOrEmpty(middleInitials) ? string.Empty : $"{middleInitials}. ";
+
+                    return $"{lastname}, {firstname} {middleInitialsFormatted}{suffix}".Trim();
+                }
+                catch (Exception e)
+                {
+                    EventLogger.Post("ERR :: Name error: " + e.ToString());
+                    return $"{lastname}, {firstname} {suffix}".Trim();
+                }
             }
             private set { }
         }
@@ -63,16 +77,41 @@ namespace SPTC_APP.Objects
         {
             get
             {
-                if (!string.IsNullOrEmpty(middlename))
+                try
                 {
-                    string middleInitials = string.Join("", middlename.Split(' ').Select(part => part[0]));
-                    return $"{firstname} {middleInitials}. {lastname} {suffix}".Trim();
-                }
+                    string middleInitials = GetInitials(middlename);
 
-                return $"{firstname} {lastname} {suffix}".Trim();
+                    // Check if middle initials exist to determine if the period should be included
+                    string middleInitialsFormatted = string.IsNullOrEmpty(middleInitials) ? string.Empty : $"{middleInitials}. ";
+
+                    return $"{firstname} {middleInitialsFormatted}{lastname} {suffix}".Trim();
+                }
+                catch (Exception e)
+                {
+                    EventLogger.Post("ERR :: Name error: " + e.ToString());
+                    return $"{firstname} {lastname} {suffix}".Trim();
+                }
             }
             private set { }
         }
+
+        private string GetInitials(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return string.Empty;
+
+            string[] parts = name.Trim().Split(' ');
+            StringBuilder initials = new StringBuilder();
+
+            foreach (string part in parts)
+            {
+                if (!string.IsNullOrEmpty(part))
+                    initials.Append(part[0]);
+            }
+
+            return initials.ToString();
+        }
+
 
 
         private Upsert name;
@@ -222,9 +261,9 @@ namespace SPTC_APP.Objects
             {
                 return $"{addressline1} {addressline2}";
             }
-            else if (!string.IsNullOrEmpty(houseNo) || !string.IsNullOrEmpty(streetname) || !string.IsNullOrEmpty(barangay) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(province) || !string.IsNullOrEmpty(zipcode) || !string.IsNullOrEmpty(country))
+            else if (!string.IsNullOrEmpty(houseNo) || !string.IsNullOrEmpty(streetname) || !string.IsNullOrEmpty(barangay) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(province) || !string.IsNullOrEmpty(country))
             {
-                return $"{houseNo} {streetname}, {barangay}, {city}, {province}, {country}";
+                return $"{houseNo} {streetname}, {barangay} {city}, {province}".Trim();
             }
             else
             {
@@ -244,6 +283,14 @@ namespace SPTC_APP.Objects
             return false;
         }
 
+        internal void UpdateAddressLines()
+        {
+            if (!string.IsNullOrEmpty(houseNo) || !string.IsNullOrEmpty(streetname) || !string.IsNullOrEmpty(barangay) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(province) || !string.IsNullOrEmpty(country))
+            {
+                addressline1 = $"{houseNo} {streetname}".Trim();
+                addressline2 = $"{barangay} {city}, {province}".Trim();
+            }
+        }
     }
 
     public class Image
@@ -512,7 +559,7 @@ namespace SPTC_APP.Objects
             this.title = Retrieve.GetValueOrDefault<string>(reader, Field.TITLE);
             this.details = Retrieve.GetValueOrDefault<string>(reader, Field.DETAILS);
             this.numOfDays = Retrieve.GetValueOrDefault<int>(reader, Field.NUM_OF_DAYS);
-            this.entityType = (Retrieve.GetValueOrDefault<string>(reader, Field.ENTITY_TYPE).Equals("OPERATOR")) ? General.OPERATOR : General.DRIVER;
+            this.entityType = (Retrieve.GetValueOrDefault<string>(reader, Field.ENTITY_TYPE).Equals("DRIVER")) ? General.DRIVER : General.OPERATOR;
         }
 
         public int Save()
@@ -525,7 +572,7 @@ namespace SPTC_APP.Objects
             violationType.Insert(Field.TITLE, title);
             violationType.Insert(Field.DETAILS, details);
             violationType.Insert(Field.NUM_OF_DAYS, numOfDays);
-            violationType.Insert(Field.ENTITY_TYPE, (entityType == General.OPERATOR) ? "OPERATOR" : "DRIVER");
+            violationType.Insert(Field.ENTITY_TYPE, (entityType == General.DRIVER) ? "DRIVER" : "OPERATOR");
             violationType.Save();
             id = violationType.id;
 

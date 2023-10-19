@@ -105,9 +105,8 @@ namespace SPTC_APP.View
                 new PrintPreview(),
                 new GenerateID(),
                 new DashboardView(),
-                new DriverInformationView(),
                 new FranchiseInformationView(),
-                new Modules(Modules.HISTORY),
+                //new Modules(Modules.HISTORY),
                 new TableView(Table.FRANCHISE),
                 new InputFranchiseView(),
                 new MainBody(),
@@ -340,8 +339,9 @@ namespace SPTC_APP.View
                 pageIndex++;
             }
         }
-        private void btnMain_Click(object sender, RoutedEventArgs e)
+        private async void btnMain_Click(object sender, RoutedEventArgs e)
         {
+            await AppState.LoadDatabase();
             MainBody body = (new MainBody());
             AppState.mainwindow = body;
             body.Show();

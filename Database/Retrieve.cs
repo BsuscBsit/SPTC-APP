@@ -216,6 +216,9 @@ namespace SPTC_APP.Database
                     if (type == typeof(bool))
                     {
                         return (T)(object)((int)value == 1);
+                    } else if (type == typeof(int))
+                    {
+                        return (T)(object)Int32.Parse((string)value.ToString());
                     }
                     else
                     {

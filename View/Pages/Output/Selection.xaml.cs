@@ -25,6 +25,8 @@ namespace SPTC_APP.View.Pages.Output
     {
 
         Franchise franchise;
+        Driver selectedDriver;
+        Franchise swapFranchise;
         General type;
         public Selection(Franchise franchise, General type)
         {
@@ -34,7 +36,10 @@ namespace SPTC_APP.View.Pages.Output
             AppState.mainwindow?.Hide();
             this.franchise = franchise;
             this.type = type;
-
+            if(franchise?.Driver != null)
+            {
+                lblName.Content = $"Current Driver: {franchise.Driver}";
+            }
             DisplayDrivers();
         }
 
@@ -54,11 +59,11 @@ namespace SPTC_APP.View.Pages.Output
                 };
             DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(dgDrivers, columnConfigurations);
 
-            foreach (var obj in drivers)
+            foreach (Driver obj in drivers)
             {
                 dgDrivers.Items.Add(obj);
             }
-            List<Franchise> franchise = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_WITH_DRIVER);
+            List<Franchise> franchises = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_WITH_DRIVER);
 
             List<ColumnConfiguration> columnConfigurations1 = new List<ColumnConfiguration>
                 {
@@ -67,10 +72,47 @@ namespace SPTC_APP.View.Pages.Output
                 };
             DataGridHelper<Franchise> dataGridHelper1 = new DataGridHelper<Franchise>(dgDrivers_franchise, columnConfigurations1);
 
-            foreach(var obj in franchise)
+            foreach(Franchise obj in franchises)
             {
                 dgDrivers_franchise.Items.Add(obj);
             }
+        }
+
+        private void dgDrivers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Driver drv = (sender as DataGrid).SelectedItem as Driver;
+            selectedDriver = drv;
+            lblSwap.Content = $"Selected Driver: {drv}";
+            
+        }
+
+        private void dgDrivers_franchise_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Franchise fran = (sender as DataGrid).SelectedItem as Franchise;
+            selectedDriver = fran.Driver;
+            swapFranchise = fran;
+            lblSwap.Content = $"Selected Driver: {fran.Driver}";
+            
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (ControlWindow.ShowDialogStatic("Changing Driver.", "Do you want to continue with the changes?", Icons.DEFAULT))
+            {
+                franchise.Driver = selectedDriver;
+                if(swapFranchise != null)
+                {
+                    swapFranchise.Driver = null;
+                    swapFranchise.Save();
+                }
+                franchise.Save();
+                this.Close(); 
+            }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

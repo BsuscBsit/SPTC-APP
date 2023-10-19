@@ -17,6 +17,9 @@ namespace SPTC_APP.Objects
         public DateTime birthday { get; set; }
         public string emergencyPerson { get; set; }
         public string emergencyContact { get; set; }
+        public DateTime dateOfMembership = DateTime.MinValue;
+        public string tinNumber { get; set; }
+        public string votersNumbewr { get; set; }
         public bool isSuspended
         {
             get
@@ -47,7 +50,9 @@ namespace SPTC_APP.Objects
             this.birthday = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE_OF_BIRTH);
             this.emergencyPerson = Retrieve.GetValueOrDefault<string>(reader, Field.EM_CONTACT_PERSON);
             this.emergencyContact = Retrieve.GetValueOrDefault<string>(reader, Field.EM_CONTACT_NUMBER);
-
+            this.dateOfMembership = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE_OF_MEM);
+            this.tinNumber = Retrieve.GetValueOrDefault<string>(reader, Field.TIN_NUMBER);
+            this.votersNumbewr = Retrieve.GetValueOrDefault<string>(reader, Field.VOTERS_ID_NUMBER);
             Populate(Retrieve.GetValueOrDefault<int>(reader, Field.NAME_ID), Retrieve.GetValueOrDefault<int>(reader, Field.ADDRESS_ID), Retrieve.GetValueOrDefault<int>(reader, Field.IMAGE_ID), Retrieve.GetValueOrDefault<int>(reader, Field.SIGN_ID));
         }
 
@@ -63,7 +68,7 @@ namespace SPTC_APP.Objects
                 this.signature = (Retrieve.GetData<Image>(Table.IMAGE, Select.ALL, Where.ID_, new MySqlParameter("id", lsignature))).FirstOrDefault();
         }
 
-        public bool WriteInto(Name name, Address address, Image image, Image sign, string remarks, DateTime datetime, string emergencyPerson, string emergencyContact)
+        public bool WriteInto(Name name, Address address, Image image, Image sign, string remarks, DateTime datetime, string emergencyPerson, string emergencyContact, string tn = "", string vn = "")
         {
             this.name = name;
             this.address = address;
@@ -73,6 +78,9 @@ namespace SPTC_APP.Objects
             this.birthday = datetime;
             this.emergencyPerson = emergencyPerson;
             this.emergencyContact = emergencyContact;
+            this.dateOfMembership = DateTime.Now;
+            this.tinNumber = tn;
+            this.votersNumbewr = vn;
             return true;
         }
 
@@ -86,6 +94,9 @@ namespace SPTC_APP.Objects
             mOperator.Insert(Field.DATE_OF_BIRTH, birthday);
             mOperator.Insert(Field.EM_CONTACT_PERSON, emergencyPerson);
             mOperator.Insert(Field.EM_CONTACT_NUMBER, emergencyContact);
+            mOperator.Insert(Field.DATE_OF_MEM, dateOfMembership);
+            mOperator.Insert(Field.TIN_NUMBER, tinNumber);
+            mOperator.Insert(Field.VOTERS_ID_NUMBER, votersNumbewr);
             if (this.name != null)
             {
                 mOperator.Insert(Field.NAME_ID, this.name.Save());
@@ -130,7 +141,7 @@ namespace SPTC_APP.Objects
         public void UpdateFranchise()
         {
             this.franchise = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.OPERATOR, Field.OPERATOR_ID, id)).FirstOrDefault();
-            EventLogger.Post($"OUT :: {id} {Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.OPERATOR, Field.OPERATOR_ID, id)).Count}");
+            //EventLogger.Post($"OUT :: {id} {Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.OPERATOR, Field.OPERATOR_ID, id)).Count}");
         }
     }
 }

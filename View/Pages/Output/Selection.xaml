@@ -7,10 +7,15 @@
         mc:Ignorable="d"
         Title="Selection" Height="450" Width="800">
     <Grid>
+        <Label x:Name="lblName" Content="Current Driver: None" HorizontalAlignment="Center" Margin="0,16,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblSwap" Content="Selected Driver: None" HorizontalAlignment="Center" Margin="0,0,0,100" VerticalAlignment="Bottom"/>
+
         <Label Content="List of Drivers without Franchise" HorizontalAlignment="Left" Margin="150,35,0,0" VerticalAlignment="Top"/>
 
         <Label Content="List of Drivers with Franchise" HorizontalAlignment="Left" Margin="469,34,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="dgDrivers" Margin="99,66,400,138"/>
-        <DataGrid x:Name="dgDrivers_franchise" Margin="416,66,83,138"/>
+        <DataGrid x:Name="dgDrivers" Margin="99,66,400,138" SelectionChanged="dgDrivers_SelectionChanged"/>
+        <DataGrid x:Name="dgDrivers_franchise" Margin="416,66,83,138" SelectionChanged="dgDrivers_franchise_SelectionChanged"/>
+        <Button x:Name="btnCancel" Height="39" Width="120" Content="CANCEL" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="119,0,0,34" Click="btnCancel_Click"/>
+        <Button x:Name="btnSave" Height="39" Background="Yellow" Content="SAVE" Width="120" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="566,0,0,34" Click="btnSave_Click"/>
     </Grid>
 </Window>

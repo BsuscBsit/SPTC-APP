@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,6 +42,8 @@ namespace SPTC_APP.View.Pages.Output
 
         private void UpdateDefaultSidePanel()
         {
+
+            franchiseInformation.Visibility = Visibility.Collapsed;
             if (table == Table.FRANCHISE)
             {
                 btnManage.Visibility = Visibility.Visible;
@@ -107,7 +110,7 @@ namespace SPTC_APP.View.Pages.Output
                 int pageIndex = 0;
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("name.wholename", "NAME", width: 140),
+                    new ColumnConfiguration("name.legalName", "NAME", width: 140),
                     new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", width: 80),
                     new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", width: 100),
                     new ColumnConfiguration("franchise.ShareCapital", "SHARE CAPITAL", width: 100),
@@ -146,7 +149,7 @@ namespace SPTC_APP.View.Pages.Output
 
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("name.wholename", "NAME", width: 140),
+                    new ColumnConfiguration("name.legalName", "NAME", width: 140),
                     new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", width: 80),
                     new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", width: 100),
                     new ColumnConfiguration("franchise.Operator", "OPERATOR", width: 100),
@@ -191,63 +194,63 @@ namespace SPTC_APP.View.Pages.Output
             {
                 if (table == Table.FRANCHISE)
                 {
-                    MainBody.selectedFranchise = (Franchise)grid.SelectedItems[0];
-                    OperatorName.Content = MainBody.selectedFranchise.Operator;
-                    bodynum.Content = MainBody.selectedFranchise.BodyNumber;
-                    LoanBalance.Content = 0;
-                    LTLBalance.Content = 0;
-                    Reference.Content = MainBody.selectedFranchise.owner;
-                    DriverName.Content = MainBody.selectedFranchise.Driver;
-                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise.Operator?.image?.GetSource();
-                }
-                else if(table == Table.OPERATOR)
-                {
-                    MainBody.selectedFranchise = ((Operator)grid.SelectedItems[0]).franchise;
-                    oholder = (Operator)grid.SelectedItems[0];
-                    OperatorName.Content = oholder.name?.legalName ;
-                    bodynum.Content = MainBody.selectedFranchise?.BodyNumber;
-                    LoanBalance.Content = 0;
-                    LTLBalance.Content = 0;
-
-                    Reference.Content = MainBody.selectedFranchise?.owner;
-                    DriverName.Content = MainBody.selectedFranchise?.Driver;
+                    MainBody.selectedFranchise = (Franchise)grid.SelectedItem;
+                    ValuePairFI(lblF1, "Operator Name: ", lblI1, MainBody.selectedFranchise?.Operator?.ToString() ?? "");
+                    ValuePairFI(lblF2, "Date Of Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
+                    ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber.ToString() ?? "");
+                    ValuePairFI(lblF4, "Loan Balance: ", lblI4, MainBody.selectedFranchise?.LoanBalance.ToString() ?? "");
+                    ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, MainBody.selectedFranchise?.LongTermLoanBalance.ToString() ?? "");
+                    ValuePairFI(lblF6, "Reference: ", lblI6, MainBody.selectedFranchise?.Owner?.ToString() ?? "");
+                    ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
                     imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
-                    if (MainBody.selectedFranchise?.Operator.isSuspended ?? false)
-                    {
-                        lblIsSuspended.Content = "YES";
-                        lblIsSuspended.Foreground = Brushes.Red;
-                    } else
-                    {
-                        lblIsSuspended.Content = "NO";
-                        lblIsSuspended.Foreground = Brushes.Green;
-                    }
+                }
+                else if (table == Table.OPERATOR)
+                {
+                    MainBody.selectedFranchise = ((Operator)grid.SelectedItem).franchise;
+                    oholder = (Operator)grid.SelectedItem;
+                    ValuePairFI(lblF1, "Operator Name: ", lblI1, oholder?.name?.legalName?.ToString());
+                    ValuePairFI(lblF2, "Date Of Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
+                    ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber.ToString() ?? "");
+                    ValuePairFI(lblF4, "Loan Balance: ", lblI4, MainBody.selectedFranchise?.LoanBalance.ToString() ?? "");
+                    ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, MainBody.selectedFranchise?.LongTermLoanBalance.ToString() ?? "");
+                    ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber.ToString() ?? "");
+                    ValuePairFI(lblF6, "VOTERS ID No.: ", lblI6, MainBody.selectedFranchise?.Operator?.votersNumbewr.ToString() ?? "");
+                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
                 }
                 else if (table == Table.DRIVER)
                 {
-                    MainBody.selectedFranchise = ((Driver)grid.SelectedItems[0]).franchise;
-                    dholder = (Driver)grid.SelectedItems[0];
-                    OperatorName.Content = dholder.name?.legalName;
-                    bodynum.Content = MainBody.selectedFranchise?.BodyNumber;
-                    LoanBalance.Content = 0;
-                    LTLBalance.Content = 0;
-                    Reference.Content = MainBody.selectedFranchise?.owner;
-                    DriverName.Content = MainBody.selectedFranchise?.Driver;
+                    MainBody.selectedFranchise = ((Driver)grid.SelectedItem).franchise;
+                    dholder = (Driver)grid.SelectedItem;
+                    ValuePairFI(lblF1, "Driver's Name: ", lblI1, dholder?.name?.legalName?.ToString());
+                    ValuePairFI(lblF2, "Date of Membership: ", lblI2, MainBody.selectedFranchise?.Driver?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
+                    ValuePairFI(lblF3, "Address: ", lblI3, MainBody.selectedFranchise?.Driver?.address?.ToString() ?? "");
+                    ValuePairFI(lblF4, "Body No.: ", lblI4, MainBody.selectedFranchise?.BodyNumber.ToString() ?? "");
+                    ValuePairFI(lblF5, "License No: ", lblI5, MainBody.selectedFranchise?.LicenseNO.ToString() ?? "");
+                    ValuePairFI(lblF6, "Violation:  ", lblI6, MainBody.selectedFranchise?.Driver?.violationCount.ToString() ?? "");
                     imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Driver?.image?.GetSource();
-                    if (MainBody.selectedFranchise?.Driver.isSuspended ?? false)
+                    if (MainBody.selectedFranchise?.Driver?.isSuspended ?? false)
                     {
-                        lblIsSuspended.Content = "YES";
-                        lblIsSuspended.Foreground = Brushes.Red;
-                    } else
-                    {
-                        lblIsSuspended.Content = "NO";
-                        lblIsSuspended.Foreground = Brushes.Green;
+                        ValuePairFI(lblF7, "Is Suspended:", lblI7, "YES");
+                        lblI7.Foreground = Brushes.Red;
+                        lblI7.FontWeight = FontWeights.Black;
                     }
-
+                    else
+                    {
+                        ValuePairFI(lblF7, "Is Suspended:", lblI7, "NO");
+                        lblI7.Foreground = Brushes.Green;
+                        lblI7.FontWeight = FontWeights.Black;
+                    }
                 }
-
             }
 
+
             franchiseInformation.Visibility = Visibility.Visible;
+        }
+
+        private void ValuePairFI(Label lblF, string name, Label lblI, string value)
+        {
+            lblF.Content = name;
+            lblI.Content = (string.IsNullOrEmpty(value)) ? "N/A" : value;
         }
 
         public async Task<Grid> Fetch()

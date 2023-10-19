@@ -93,15 +93,6 @@
                     FontStretch="SemiExpanded"
                     FontSize="9" Grid.Row="1"/>
             <Button 
-                x:Name="btnChangeOperator"
-                Height="25"
-                Margin="538,0,28,63"
-                VerticalAlignment="Bottom"  
-                Content="Change Operator"
-                FontFamily="Arial"
-                FontWeight="Bold"
-                FontSize="10" Click="btnChangeOperator_Click"/>
-            <Button 
                 x:Name="btnChangeDriver"
                 Height="25"
                 Margin="538,0,28,25"

@@ -18,6 +18,9 @@ namespace SPTC_APP.Objects
         public string emergencyPerson { get; set; }
         public string emergencyContact { get; set; }
 
+        public Franchise franchise { get; set; }
+        
+
         public bool isSuspended {
             get
             {
@@ -125,6 +128,10 @@ namespace SPTC_APP.Objects
             mDriver.Insert(Field.ISDELETED, true);
             mDriver.Save();
             return true;
+        }
+        public void UpdateFranchise()
+        {
+            this.franchise = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.OPERATOR, Field.OPERATOR_ID, id)).FirstOrDefault();
         }
     }
 }

@@ -66,7 +66,7 @@ namespace SPTC_APP.View
             }
             catch (Exception ex)
             {
-                ControlWindow.Show("Error: ", ex.Message, Icons.ERROR);
+                ControlWindow.ShowStatic("Error: ", ex.Message, Icons.ERROR);
             }
         }
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)

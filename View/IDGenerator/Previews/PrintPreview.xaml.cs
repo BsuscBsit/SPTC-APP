@@ -116,7 +116,7 @@ namespace SPTC_APP.View
 
             if (idnotprintedcunt > 0)
             {
-                if (ControlWindow.ShowDialog("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotprintedcunt > 1 ? "s were" : " was")} not printed!", Icons.NOTIFY))
+                if (ControlWindow.ShowDialogStatic("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotprintedcunt > 1 ? "s were" : " was")} not printed!", Icons.NOTIFY))
                 {
                     ResetPrintData();
                     (new PrintPreview()).Show();
@@ -131,7 +131,7 @@ namespace SPTC_APP.View
 
             if (idnotsavedcount > 0)
             {
-                if (ControlWindow.ShowDialog("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotsavedcount > 1 ? "s were" : " was")} not saved!", Icons.NOTIFY))
+                if (ControlWindow.ShowDialogStatic("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotsavedcount > 1 ? "s were" : " was")} not saved!", Icons.NOTIFY))
                 {
                     ResetPrintData();
                     (new PrintPreview()).Show();
@@ -266,7 +266,7 @@ namespace SPTC_APP.View
             if (zoomedIn != null)
             {
                 zoomedIn.SaveInfo();
-                ControlWindow.Show($"ID Saved!", $"Body#: ({zoomedIn.franchise.BodyNumber}) {zoomedIn.type.ToString()}", Icons.NOTIFY);
+                ControlWindow.ShowStatic($"ID Saved!", $"Body#: ({zoomedIn.franchise.BodyNumber}) {zoomedIn.type.ToString()}", Icons.NOTIFY);
                 EventLogger.Post("OUT :: ID : " + zoomedIn.franchise.BodyNumber + " FRONT: " + zoomedIn.FrontPrint + " BACK: " + zoomedIn.BackPrint);
             }
         }

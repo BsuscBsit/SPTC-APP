@@ -65,7 +65,7 @@ namespace SPTC_APP.View
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             id.SaveInfo();
-            ControlWindow.Show($"ID Saved!", $"Body#: ({id.franchise.BodyNumber}) {id.type.ToString()}", Icons.NOTIFY);
+            ControlWindow.ShowStatic($"ID Saved!", $"Body#: ({id.franchise.BodyNumber}) {id.type.ToString()}", Icons.NOTIFY);
             EventLogger.Post("OUT :: ID : " + id.franchise.BodyNumber + " FRONT: " + id.FrontPrint + " BACK: " + id.BackPrint);
             btnSave.IsEnabled = !id.isSaved;
         }

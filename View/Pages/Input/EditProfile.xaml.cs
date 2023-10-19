@@ -11,48 +11,53 @@ namespace SPTC_APP.View.Pages.Input
     /// </summary>
     public partial class EditProfile : Window
     {
+        private Driver dholder;
+        private Operator oholder;
         Franchise franchise;
         General type;
-        public EditProfile(Franchise franchise, General type)
+        public EditProfile(Franchise franchise, dynamic lholder, General type)
         {
             InitializeComponent();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            
             this.franchise = franchise;
             this.type = type;
             AppState.mainwindow?.Hide();
             if(type == General.DRIVER)
             {
-                Driver drv = franchise.Driver;
-                tboxsFname.Text = drv.name.firstname;
-                tboxsMname.Text = drv.name.middlename;
-                tboxsLname.Text = drv.name.lastname;
+                Driver drv = lholder as Driver;
+                tboxsFname.Text = drv.name?.firstname;
+                tboxsMname.Text = drv.name?.middlename;
+                tboxsLname.Text = drv.name?.lastname;
                 dpBirthday.DisplayDate = drv.birthday;
                 dpBirthday.DataContext = drv.birthday;
                 dpBirthday.Text = drv.birthday.ToString();
-                cbGender.SelectedIndex = drv.name.sex ? 1: 0;
+                cbGender.SelectedIndex = drv.name?.sex ?? false ? 1: 0;
                 tboxsContactNum.Text = drv.emergencyContact;
-                tboxsCountry.Text = drv.address.country;
-                tboxsProvince.Text = drv.address.province;
-                tboxsCity.Text = drv.address.city;
-                tboxsBarangay.Text = drv.address.barangay;
-                tboxStreetName.Text = drv.address.streetname;
+                tboxsCountry.Text = drv.address?.country;
+                tboxsProvince.Text = drv.address?.province;
+                tboxsCity.Text = drv.address?.city;
+                tboxsBarangay.Text = drv.address?.barangay;
+                tboxStreetName.Text = drv.address?.streetname;
+                this.dholder = drv;
             } else if (type == General.OPERATOR)
             {
-                Operator optr = franchise.Operator;
-                tboxsFname.Text = optr.name.firstname;
-                tboxsMname.Text = optr.name.middlename;
-                tboxsLname.Text = optr.name.lastname;
+                Operator optr = lholder as Operator;
+                tboxsFname.Text = optr.name?.firstname;
+                tboxsMname.Text = optr.name?.middlename;
+                tboxsLname.Text = optr.name?.lastname;
                 dpBirthday.DisplayDate = optr.birthday;
                 dpBirthday.DataContext = optr.birthday;
                 dpBirthday.Text = optr.birthday.ToString();
-                cbGender.SelectedIndex = optr.name.sex ? 1 : 0;
+                cbGender.SelectedIndex = optr.name?.sex ?? false ? 1 : 0;
                 tboxsContactNum.Text = optr.emergencyContact;
-                tboxsCountry.Text = optr.address.country;
-                tboxsProvince.Text = optr.address.province;
-                tboxsCity.Text = optr.address.city;
-                tboxsBarangay.Text = optr.address.barangay;
-                tboxStreetName.Text = optr.address.streetname;
+                tboxsCountry.Text = optr.address?.country;
+                tboxsProvince.Text = optr.address?.province;
+                tboxsCity.Text = optr.address?.city;
+                tboxsBarangay.Text = optr.address?.barangay;
+                tboxStreetName.Text = optr.address?.streetname;
+                this.oholder = optr;
             }
         }
 
@@ -72,11 +77,15 @@ namespace SPTC_APP.View.Pages.Input
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
 
-            if (ControlWindow.ShowDialog("Updating Fields.", "Confirm to save changes.", Icons.NOTIFY))
+            if (ControlWindow.ShowDialogStatic("Updating Fields.", "Confirm to save changes.", Icons.NOTIFY))
             {
                 if (type == General.DRIVER)
                 {
-                    Driver drv = franchise.Driver;
+                    Driver drv = (franchise?.Driver == null)? dholder: franchise.Driver;
+                    if (drv.name == null)
+                        drv.name = new Name();
+                    if(drv.address == null)
+                        drv.address = new Address();
                     drv.name.firstname = tboxsFname.Text;
                     drv.name.middlename = tboxsMname.Text;
                     drv.name.lastname = tboxsLname.Text;
@@ -89,11 +98,25 @@ namespace SPTC_APP.View.Pages.Input
                     drv.address.barangay = tboxsBarangay.Text;
                     drv.address.streetname = tboxStreetName.Text;
                     drv.address.UpdateAddressLines();
+
+                    if (franchise != null)
+                    {
+                        franchise.Save();
+                    }
+                    else
+                    {
+                        drv.Save();
+
+                    }
+
                 }
                 else if (type == General.OPERATOR)
                 {
-                    Operator optr = franchise.Operator;
-                    optr.name.firstname = tboxsFname.Text;
+                    Operator optr = (franchise?.Operator == null) ? oholder : franchise.Operator;
+                    if (optr.name == null)
+                        optr.name = new Name();
+                    if (optr.address == null)
+                        optr.name.firstname = tboxsFname.Text;
                     optr.name.middlename = tboxsMname.Text;
                     optr.name.lastname = tboxsLname.Text;
                     optr.birthday = (DateTime)dpBirthday.SelectedDate;
@@ -105,8 +128,16 @@ namespace SPTC_APP.View.Pages.Input
                     optr.address.barangay = tboxsBarangay.Text;
                     optr.address.streetname = tboxStreetName.Text;
                     optr.address.UpdateAddressLines();
+                    if (franchise != null)
+                    {
+                        franchise.Save();
+                    }
+                    else
+                    {
+                        optr.Save();
+
+                    }
                 }
-                franchise.Save();
                 this.Close();
             } else
             {

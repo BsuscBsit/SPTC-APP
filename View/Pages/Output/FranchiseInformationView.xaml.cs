@@ -31,11 +31,6 @@ namespace SPTC_APP.View.Pages.Output
             lblMTOPNo.Content = MainBody.selectedFranchise?.MTOPNo;
 
             imgProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
-
-            if (MainBody.selectedFranchise.Operator == null)
-            {
-                btnChangeOperator.Content = "NEW OPERATOR";
-            }
             if (MainBody.selectedFranchise.Driver == null)
             {
                 btnChangeDriver.Content = "NEW DRIVER";
@@ -129,28 +124,29 @@ namespace SPTC_APP.View.Pages.Output
             HandleButtonClick(Modules.TRANSFER, sender as Button);
         }
 
-        private void btnChangeOperator_Click(object sender, RoutedEventArgs e)
-        {
-            if(MainBody.selectedFranchise.Operator == null)
-            {
-                (new NewOptr_Drv(MainBody.selectedFranchise, General.OPERATOR)).ShowDialog();
-                UpdateContent();
-            } else
-            {
-                //(new EditProfile(MainBody.selectedFranchise, General.OPERATOR)).Show();
-                UpdateContent();
-            }
-        }
-
         private void btnChangeDriver_Click(object sender, RoutedEventArgs e)
         {
-            if (MainBody.selectedFranchise.Driver == null)
+            if (MainBody.selectedFranchise.Driver != null)
             {
-                (new NewOptr_Drv(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
-                UpdateContent();
+                int result = ControlWindow.ShowDialogStatic("Change Driver", "New or Existing?", "EXISTING", "NEW", Icons.DEFAULT);
+
+                if (result == -1) 
+                {
+                    
+                }
+                else if(result == 1)
+                {
+                    (new NewOptr_Drv(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
+                    UpdateContent();
+                }
+                else if (result == 0)
+                {
+                    (new Selection(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
+                    UpdateContent();
+                }
             } else
             {
-                //(new EditProfile(MainBody.selectedFranchise, General.OPERATOR)).Show();
+                (new NewOptr_Drv(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
                 UpdateContent();
             }
         } 

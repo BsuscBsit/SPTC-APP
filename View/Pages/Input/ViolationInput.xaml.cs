@@ -48,7 +48,7 @@ namespace SPTC_APP.View.Pages.Input
         {
             if (selectedViolationType != null)
             {
-                if (ControlWindow.ShowDialog("Adding Violation.", "Confirm?.", Icons.NOTIFY))
+                if (ControlWindow.ShowDialogStatic("Adding Violation.", "Confirm?.", Icons.NOTIFY))
                 {
                     DateTime violationDate = (dpViolationDate.SelectedDate != null)? (DateTime)dpViolationDate.SelectedDate: DateTime.Today;
                     DateTime startDate = calendarSelect.SelectedDates.FirstOrDefault();

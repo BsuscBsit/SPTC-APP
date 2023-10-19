@@ -82,12 +82,14 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
         <Button
             x:Name="btnOK"
-            Grid.Column="1"
+            Grid.Column="2"
             Height="40"
-            Width="172"
+            Width="180"
+            Margin="0, 0, 0, 0"
             Content="OK"
             Style="{DynamicResource CommonButtonStyle}" Click="btnOK_Click" />
         <Button
@@ -99,6 +101,15 @@
             Margin="0, 0, 20,0"
             Content="CANCEL"
             Style="{DynamicResource CommonButtonStyle}" Click="btnCancel_Click" />
+        <Button
+            x:Name="btnMiddle"
+            Grid.Column="1"
+            Width="120"
+            Height="40"
+            Visibility="Collapsed"
+            Margin="0, 0, 20,0"
+            Content=""
+            Style="{DynamicResource CommonButtonStyle}" Click="btnMiddle_Click" />
         </Grid>
     </Grid>
 </Window>

@@ -25,6 +25,9 @@ namespace SPTC_APP.Objects
             }
             private set { }
         }
+        public Franchise franchise { get; set; }
+
+
         private Upsert mOperator;
 
         public Operator()
@@ -122,6 +125,12 @@ namespace SPTC_APP.Objects
             mOperator.Insert(Field.ISDELETED, true);
             mOperator.Save();
             return true;
+        }
+
+        public void UpdateFranchise()
+        {
+            this.franchise = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.OPERATOR, Field.OPERATOR_ID, id)).FirstOrDefault();
+            EventLogger.Post($"OUT :: {id} {Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.OPERATOR, Field.OPERATOR_ID, id)).Count}");
         }
     }
 }

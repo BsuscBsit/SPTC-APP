@@ -31,7 +31,7 @@ namespace SPTC_APP.Objects
             }
             catch (Exception ex)
             {
-                ControlWindow.Show("Error writing to log file", ex.Message);
+                ControlWindow.ShowStatic("Error writing to log file", ex.Message);
             }
         }
 
@@ -46,7 +46,7 @@ namespace SPTC_APP.Objects
                 }
                 catch (Exception ex)
                 {
-                    ControlWindow.Show("Error creating log file", ex.Message);
+                    ControlWindow.ShowStatic("Error creating log file", ex.Message);
                 }
             }
         }

@@ -17,6 +17,9 @@ namespace SPTC_APP.View.Pages.Output
     public partial class TableView : Window
     {
         private string table;
+        private Operator oholder;
+        private Driver dholder;
+
         public TableView(string table)
         {
             InitializeComponent();
@@ -59,9 +62,10 @@ namespace SPTC_APP.View.Pages.Output
         private async Task UpdateTableAsync()
         {
             TableGrid.Items.Clear();
+            TableGrid.Items.Clear();
             if (table == Table.FRANCHISE)
             {
-                int batchSize = 5;
+                int batchSize = AppState.TABLE_BATCH_SIZE;
                 int pageIndex = 0;
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
@@ -99,30 +103,31 @@ namespace SPTC_APP.View.Pages.Output
             }
             else if (table == Table.OPERATOR)
             {
-                int batchSize = 5;
+                int batchSize = AppState.TABLE_BATCH_SIZE;
                 int pageIndex = 0;
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("Operator.name.wholename", "NAME", width: 140),
-                    new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-                    new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
-                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
-                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
+                    new ColumnConfiguration("name.wholename", "NAME", width: 140),
+                    new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", width: 80),
+                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", width: 100),
+                    new ColumnConfiguration("franchise.ShareCapital", "SHARE CAPITAL", width: 100),
+                    new ColumnConfiguration("franchise.MonthlyDues", "MONTHLY DUE", width: 100),
                 };
-                DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
+                DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(TableGrid, columnConfigurations);
 
 
                 while (true)
                 {
-                    List<Franchise> batch = await Task.Run(() =>
+                    List<Operator> batch = await Task.Run(() =>
                     {
-                        return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_OPERATOR, pageIndex * batchSize, batchSize)).data;
+                        return (new TableObject<Operator>(Table.OPERATOR, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
                     });
 
                     if (batch.Count == 0)
                         break;
                     foreach (var obj in batch)
                     {
+                        obj.UpdateFranchise();
                         TableGrid.Items.Add(obj);
                         //await Task.Delay(200);
                     }
@@ -136,25 +141,26 @@ namespace SPTC_APP.View.Pages.Output
             }
             else if (table == Table.DRIVER)
             {
-                int batchSize = 5;
+                int batchSize = AppState.TABLE_BATCH_SIZE;
                 int pageIndex = 0;
 
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("Driver.name.wholename", "NAME", width: 140),
-                    new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-                    new ColumnConfiguration("LicenseNO", "PLATE NO.", width: 100),
-                    new ColumnConfiguration("Operator", "OPERATOR", width: 100),
+                    new ColumnConfiguration("name.wholename", "NAME", width: 140),
+                    new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", width: 80),
+                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", width: 100),
+                    new ColumnConfiguration("franchise.Operator", "OPERATOR", width: 100),
                 };
-                DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
+                DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(TableGrid, columnConfigurations);
 
 
 
                 while (true)
                 {
-                    List<Franchise> batch = await Task.Run(() =>
+                    List<Driver> batch = await Task.Run(() =>
                     {
-                        return (new TableObject<Franchise>(Table.FRANCHISE, Where.THEREIS_DRIVER, pageIndex * batchSize, batchSize)).data;
+
+                        return (new TableObject<Driver>(Table.DRIVER, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
                     });
 
                     if (batch.Count == 0)
@@ -162,6 +168,7 @@ namespace SPTC_APP.View.Pages.Output
 
                     foreach(var obj in batch)
                     {
+                        obj.UpdateFranchise();
                         TableGrid.Items.Add(obj);
                         //await Task.Delay(200);
                     }
@@ -195,16 +202,17 @@ namespace SPTC_APP.View.Pages.Output
                 }
                 else if(table == Table.OPERATOR)
                 {
-                    MainBody.selectedFranchise = (Franchise)grid.SelectedItems[0];
-                    OperatorName.Content = MainBody.selectedFranchise.Operator;
-                    bodynum.Content = MainBody.selectedFranchise.BodyNumber;
+                    MainBody.selectedFranchise = ((Operator)grid.SelectedItems[0]).franchise;
+                    oholder = (Operator)grid.SelectedItems[0];
+                    OperatorName.Content = oholder.name?.legalName ;
+                    bodynum.Content = MainBody.selectedFranchise?.BodyNumber;
                     LoanBalance.Content = 0;
                     LTLBalance.Content = 0;
 
-                    Reference.Content = MainBody.selectedFranchise.owner;
-                    DriverName.Content = MainBody.selectedFranchise.Driver;
-                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise.Operator?.image?.GetSource();
-                    if (MainBody.selectedFranchise.Operator.isSuspended)
+                    Reference.Content = MainBody.selectedFranchise?.owner;
+                    DriverName.Content = MainBody.selectedFranchise?.Driver;
+                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
+                    if (MainBody.selectedFranchise?.Operator.isSuspended ?? false)
                     {
                         lblIsSuspended.Content = "YES";
                         lblIsSuspended.Foreground = Brushes.Red;
@@ -216,15 +224,16 @@ namespace SPTC_APP.View.Pages.Output
                 }
                 else if (table == Table.DRIVER)
                 {
-                    MainBody.selectedFranchise = (Franchise)grid.SelectedItems[0];
-                    OperatorName.Content = MainBody.selectedFranchise.Driver;
-                    bodynum.Content = MainBody.selectedFranchise.BodyNumber;
+                    MainBody.selectedFranchise = ((Driver)grid.SelectedItems[0]).franchise;
+                    dholder = (Driver)grid.SelectedItems[0];
+                    OperatorName.Content = dholder.name?.legalName;
+                    bodynum.Content = MainBody.selectedFranchise?.BodyNumber;
                     LoanBalance.Content = 0;
                     LTLBalance.Content = 0;
-                    Reference.Content = MainBody.selectedFranchise.owner;
-                    DriverName.Content = MainBody.selectedFranchise.Driver;
-                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise.Driver?.image?.GetSource();
-                    if (MainBody.selectedFranchise.Driver.isSuspended)
+                    Reference.Content = MainBody.selectedFranchise?.owner;
+                    DriverName.Content = MainBody.selectedFranchise?.Driver;
+                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Driver?.image?.GetSource();
+                    if (MainBody.selectedFranchise?.Driver.isSuspended ?? false)
                     {
                         lblIsSuspended.Content = "YES";
                         lblIsSuspended.Foreground = Brushes.Red;
@@ -244,7 +253,7 @@ namespace SPTC_APP.View.Pages.Output
         public async Task<Grid> Fetch()
         {
             Task task = UpdateTableAsync();
-            await Task.Delay(5);
+            await Task.Delay(1);
             if (franchisePanel.Parent != null)
             {
                 Window currentParent = franchisePanel.Parent as Window;
@@ -260,10 +269,10 @@ namespace SPTC_APP.View.Pages.Output
         public async void BackUpdate()
         {
             Task task = UpdateTableAsync();
-            await Task.Delay(5);
+            await Task.Delay(1);
         }
 
-        private void btnManage_Click(object sender, RoutedEventArgs e)
+        private async void btnManage_Click(object sender, RoutedEventArgs e)
         {
             if (MainBody.selectedFranchise != null)
             {
@@ -271,25 +280,28 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     franchisePanel.Children.Add((new FranchiseInformationView(this)).Fetch());
                 }
+                await UpdateTableAsync();
+            }
+            else
+            {
+                ControlWindow.ShowStatic("No Franchise detected!", "Cannot proceed. Dreate new Franchise first", Icons.ERROR);
             }
         }
 
         private async void btnEditProfile_Click(object sender, RoutedEventArgs e)
         {
-            if (MainBody.selectedFranchise != null)
+            if (table == Table.OPERATOR)
             {
-                if (table == Table.OPERATOR)
-                {
-                    (new EditProfile(MainBody.selectedFranchise, General.OPERATOR)).ShowDialog();
-                }
-                else if (table == Table.DRIVER)
-                {
-                    (new EditProfile(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
-                }
+                (new EditProfile(MainBody.selectedFranchise, oholder, General.OPERATOR)).ShowDialog();
             }
-            await UpdateTableAsync();
-        }
+            else if (table == Table.DRIVER)
+            {
+                (new EditProfile(MainBody.selectedFranchise, dholder, General.DRIVER)).ShowDialog();
+            }
 
+            await UpdateTableAsync();
+            
+        }
         private async void btnGenerateid_Click(object sender, RoutedEventArgs e)
         {
             if (MainBody.selectedFranchise != null)
@@ -302,25 +314,32 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     (new GenerateID(MainBody.selectedFranchise, true)).ShowDialog();
                 }
+                await UpdateTableAsync();
             }
-            await UpdateTableAsync();
+            else
+            {
+                ControlWindow.ShowStatic("No Franchise detected!", "Cannot proceed. Create new Franchise first", Icons.ERROR);
+            }
         }
-
         private async void btnAddViolation_Click(object sender, RoutedEventArgs e)
         {
             if(MainBody.selectedFranchise != null)
             {
                 if(table == Table.DRIVER)
                     (new ViolationInput(MainBody.selectedFranchise)).ShowDialog();
+                await UpdateTableAsync();
             }
-            await UpdateTableAsync();
+            else
+            {
+                ControlWindow.ShowStatic("No Franchise detected!", "Cannot proceed. Dreate new Franchise first", Icons.ERROR);
+            }
         }
-
         private async void btnAddClick(object sender, RoutedEventArgs e)
         {
             if(table == Table.FRANCHISE)
                 (new InputFranchiseView()).ShowDialog();
-            //if(table == Table.DRIVER)
+            if (table == Table.DRIVER)
+                (new NewOptr_Drv(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
             await UpdateTableAsync();
         }
     }

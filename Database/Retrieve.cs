@@ -281,8 +281,5 @@ namespace SPTC_APP.Database
             }
 
         }
-
-
-
     }
 }

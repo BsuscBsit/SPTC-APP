@@ -30,6 +30,7 @@ namespace SPTC_APP
         public static double PRINT_AJUSTMENTS;
         public static bool LOG_WINDOW;
         public static int DEFAULT_CAMERA;
+        public static int TABLE_BATCH_SIZE;
 
 
 
@@ -48,8 +49,6 @@ namespace SPTC_APP
         public static Window mainwindow = null;
 
         private static HashSet<Window> OpenedWindows = new HashSet<Window>();
-
-
 
 
         public static void Login(string username, string password, Window window)
@@ -213,6 +212,7 @@ namespace SPTC_APP
             PRINT_AJUSTMENTS = 0;
             DEFAULT_CAMERA = 0;
             LOG_WINDOW = false;
+            TABLE_BATCH_SIZE = 2;
         }
         public static void SaveToJson()
         {
@@ -228,6 +228,7 @@ namespace SPTC_APP
                 PRINT_AJUSTMENTS,
                 LOG_WINDOW,
                 DEFAULT_CAMERA,
+                TABLE_BATCH_SIZE,
             };
 
             if (File.Exists(APPSTATE_PATH))
@@ -247,7 +248,7 @@ namespace SPTC_APP
                 }
                 catch (Exception ex)
                 {
-                    ControlWindow.Show("Error creating log file", ex.Message);
+                    ControlWindow.ShowStatic("Error creating log file", ex.Message);
                 }
             }
         }
@@ -269,6 +270,7 @@ namespace SPTC_APP
                     PRINT_AJUSTMENTS = data.PRINT_AJUSTMENTS;
                     LOG_WINDOW = data.LOG_WINDOW;
                     DEFAULT_CAMERA = data.DEFAULT_CAMERA;
+                    TABLE_BATCH_SIZE = data.TABLE_BATCH_SIZE;
                     if (DatabaseConnection.HasConnection())
                     {
                         ALL_EMPLOYEES = Retrieve.GetDataUsingQuery<string>(RequestQuery.GET_LIST_OF_POSITION).ToArray();

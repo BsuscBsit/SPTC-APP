@@ -75,7 +75,7 @@ namespace SPTC_APP.Objects
                     } else
                     {
                         progressBar.Value = 10;
-                        if(ControlWindow.ShowDialog("Somethings Wrong!", "Database takes too long to respond. Retry?", Icons.ERROR))
+                        if(ControlWindow.ShowDialogStatic("Somethings Wrong!", "Database takes too long to respond. Retry?", Icons.ERROR))
                         {
                             
                             ShowSplashScreenAndCloseCurrent(window);
@@ -179,14 +179,14 @@ namespace SPTC_APP.Objects
         {
             if (logType == ConnectionLogs.CANNOT_CONNECT)
             {
-                ControlWindow.Show(DatabaseConnection.GetEnumDescription(logType), "Check if database is online");
+                ControlWindow.ShowStatic(DatabaseConnection.GetEnumDescription(logType), "Check if database is online");
             }
             else if (logType == ConnectionLogs.WRONG_PASSWORD)
             {
-                ControlWindow.Show(DatabaseConnection.GetEnumDescription(logType), "Input the correct password and try again");
+                ControlWindow.ShowStatic(DatabaseConnection.GetEnumDescription(logType), "Input the correct password and try again");
             } else if(logType == ConnectionLogs.EXCEPTION_OCCURED)
             {
-                ControlWindow.Show(DatabaseConnection.GetEnumDescription(logType), "Something wentwrong. try again");
+                ControlWindow.ShowStatic(DatabaseConnection.GetEnumDescription(logType), "Something wentwrong. try again");
             }
             EventLogger.Post($"LOG :: {DatabaseConnection.GetEnumDescription(logType)}");
         }

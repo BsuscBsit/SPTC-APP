@@ -15,7 +15,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border
+        <Border x:Name="topBar"
             Grid.Row="0"
             Height="40"
             VerticalAlignment="Center"

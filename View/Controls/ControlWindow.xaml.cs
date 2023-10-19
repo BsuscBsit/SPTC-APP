@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using SPTC_APP.View.Controls;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,6 +17,7 @@ namespace SPTC_APP.View
             this.SetIcon(icons);
             this.lblHeader.Content = header;
             this.tblockContent.Text = content;
+            DraggingHelper.DragWindow(topBar);
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }

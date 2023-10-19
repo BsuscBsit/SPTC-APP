@@ -289,12 +289,7 @@
                                             To="{StaticResource ColorGrey}"
                                             Duration="0" />
                                         <DoubleAnimation
-                                            Storyboard.TargetName="TheBG"
-                                            Storyboard.TargetProperty="Opacity"
-                                            To="0.7"
-                                            Duration="0" />
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="TheBorder"
+                                            Storyboard.TargetName="MainGrid"
                                             Storyboard.TargetProperty="Opacity"
                                             To="0.7"
                                             Duration="0" />

@@ -236,6 +236,7 @@
     <Compile Include="View\Controls\DraggingHelper.cs" />
     <Compile Include="View\Controls\OutlinedText.cs" />
     <Compile Include="View\Controls\Scaler.cs" />
+    <Compile Include="View\Controls\ToolTipHelper.cs" />
     <Compile Include="View\Controls\WindowStateHelper.cs" />
     <Compile Include="View\IDGenerator\Extra\SignPad.xaml.cs">
       <DependentUpon>SignPad.xaml</DependentUpon>

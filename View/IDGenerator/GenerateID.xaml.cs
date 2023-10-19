@@ -40,7 +40,6 @@ namespace SPTC_APP.View
         private Franchise franchise;
         bool isUpdate = false;
 
-
         //CONSTRUCTORS
         public GenerateID()
         {
@@ -63,6 +62,7 @@ namespace SPTC_APP.View
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
             if(!AppState.isDeployment && !AppState.isDeployment_IDGeneration) GenerateDummy();
+            GenerateDummy();
         }
         public GenerateID(Franchise franchise, bool isDriver)
         {
@@ -77,14 +77,12 @@ namespace SPTC_APP.View
             //btnStartPad.IsEnabled = false;
             
             this.isDriver = isDriver;
-            MySwitch.Visibility = Visibility.Hidden;
+            MySwitch.IsEnabled = false;
             if (isDriver)
             {
-                drvOrOprt.Content = "DRIVER";
-                lblPhoto.Content = "Driver's Photo";
-                lblsign.Content = "Driver's Signature";
                 if (franchise.Driver != null)
                 {
+                    MySwitch.IsChecked = false;
                     var drv = franchise.Driver;
                     if(drv.name != null)
                     {
@@ -124,11 +122,9 @@ namespace SPTC_APP.View
                 }
             } else
             {
-                drvOrOprt.Content = "OPERATOR";
-                lblPhoto.Content = "Operator's Photo";
-                lblsign.Content = "Operator's Signature";
                 if (franchise.Operator != null)
                 {
+                    MySwitch.IsChecked = true;
                     var drv = franchise.Operator;
                     if (drv.name != null)
                     {
@@ -212,17 +208,30 @@ namespace SPTC_APP.View
         }
         private void MySwitch_Back(object sender, RoutedEventArgs e)
         {
-                // Switch is in the True state
-                isDriver = false;
+            // Switch is in the True state
+            isDriver = false;
+            if (MySwitch.IsEnabled)
+            {
                 drvOrOprt.Content = "Create this ID for\nOperator.";
-            
+            }
+            else
+            {
+                drvOrOprt.Content = "This ID will be created for\nOperator.";
+            }
         }
         private void MySwitch_Front(object sender, RoutedEventArgs e)
         {
-                // Switch is in the False state
-                isDriver = true;
+            // Switch is in the False state
+            isDriver = true;
+            if (MySwitch.IsEnabled)
+            {
                 drvOrOprt.Content = "Create this ID for\nDriver.";
-            
+            }
+            else
+            {
+                drvOrOprt.Content = "This ID will be created for\nDriver.";
+            }
+
         }
         private async void BtnStartCam_Click(object sender, RoutedEventArgs e)
         {
@@ -234,7 +243,7 @@ namespace SPTC_APP.View
                     {
                         hasPhoto = false;
                         btnStartCam.IsEnabled = false;
-                        ((System.Windows.Controls.Button)sender).Content = "Capture Image";
+                        ((System.Windows.Controls.Button)sender).Content = "Capture";
                         pbCameraOpen.Visibility = Visibility.Visible;
                         pbCameraOpen.Value = pbCameraOpen.Minimum;
                         pbCameraOpen.IsIndeterminate = true;
@@ -257,7 +266,7 @@ namespace SPTC_APP.View
                         imgIDPic.Source = lastCapturedImage;
                     }
                     hasPhoto = true;
-
+                    ((System.Windows.Controls.Button)sender).Content = "Retake Photo";
                     this.StopCamera();
                     pbCameraOpen.Value = 100;
                     pbCameraOpen.IsIndeterminate = false;
@@ -609,7 +618,38 @@ namespace SPTC_APP.View
             }
         }
 
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                e.Handled = true;
+                TextBox tb = sender as TextBox;
+                tb?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+            }
+        }
 
+        private void SetToolTips()
+        {
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void InitToolTip()
+        {
+            /*Text
+
+            setToolTip(tboxFn, "first name");
+            setToolTip(tboxMn, "middle name");
+            setToolTip(tboxLn, "last name");
+            setToolTip(tboxBnum, "body / SPTC number");
+            setToolTip(tboxLnum, "license number");
+            setToolTip(tboxLn, "last name");
+            setToolTip(cbGender, "");*/
+        }
     }
 
 }

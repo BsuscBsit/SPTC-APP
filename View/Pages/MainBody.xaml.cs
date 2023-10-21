@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,6 +20,11 @@ namespace SPTC_APP.View.Pages
         private Button selectedButton = null;
 
         public static Franchise selectedFranchise = null;
+        private TableView Ftable, Otable, Dtable;
+
+
+
+
         public MainBody()
         {
             InitializeComponent();
@@ -51,7 +57,8 @@ namespace SPTC_APP.View.Pages
         {
             ClickColorControl(sender as Button);
             TablePanelSwap.Children.Clear();
-            TablePanelSwap.Children.Add(await (new TableView(Table.FRANCHISE)).Fetch());
+            Ftable = (new TableView(Table.FRANCHISE));
+            TablePanelSwap.Children.Add(await Ftable.Fetch());
             
         }
 
@@ -67,7 +74,8 @@ namespace SPTC_APP.View.Pages
         {
             ClickColorControl(sender as Button);
             TablePanelSwap.Children.Clear();
-            TablePanelSwap.Children.Add(await (new TableView(Table.OPERATOR)).Fetch());
+            Otable = (new TableView(Table.OPERATOR));
+            TablePanelSwap.Children.Add(await Otable.Fetch());
            
         }
 
@@ -75,7 +83,8 @@ namespace SPTC_APP.View.Pages
         {
             ClickColorControl(sender as Button);
             TablePanelSwap.Children.Clear();
-            TablePanelSwap.Children.Add(await (new TableView(Table.DRIVER)).Fetch());
+            Dtable = (new TableView(Table.DRIVER));
+            TablePanelSwap.Children.Add(await Dtable.Fetch());
             
         }
 
@@ -105,22 +114,74 @@ namespace SPTC_APP.View.Pages
         //SEARCH functionality
         private async void cbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
+
             //SEARCH
             if (cbSearch.Text.Length > 0)
             {
+                string searchText = cbSearch.Text.ToLower();
                 if (selectedButton != null)
                 {
-                    if (selectedButton  == FranchiseButton)
+                    if (selectedButton != DashBoard)
                     {
+                        if (TablePanelSwap.Children[0] is Grid grid)
+                        {
+                            if (grid.Children[0] is DataGrid datagrid)
+                            {
+                                if (selectedButton == FranchiseButton)
+                                {
+                                    List<Franchise> franchises = new List<Franchise>();
+                                    foreach (Franchise f in datagrid.Items)
+                                    {
+                                        franchises.Add(f);
+                                    }
 
-                    } 
-                    else if(selectedButton == OperatorButton)
-                    {
+                                    franchises = franchises.OrderByDescending(f =>
+                                        f.BodyNumber.ToString().Contains(searchText) ||
+                                        (f.Operator?.ToString()?.ToLower()?.Contains(searchText) ?? false) ||
+                                        (f.Driver?.ToString()?.ToLower()?.Contains(searchText) ?? false)
+                                        ).ThenBy(f => f.BodyNumber).ToList();
+                                    datagrid.Items.Clear();
+                                    foreach (Franchise f in franchises)
+                                    {
+                                        datagrid.Items.Add(f);
+                                    }
+                                }
+                                else if (selectedButton == OperatorButton)
+                                {
+                                    List<Operator> operators = new List<Operator>();
+                                    foreach (Operator o in datagrid.Items)
+                                    {
+                                        operators.Add(o);
+                                    }
 
-                    }
-                    else if (selectedButton == DriverButton)
-                    {
+                                    operators = operators.OrderByDescending(o =>
+                                        (o.ToString()?.ToLower()?.Contains(searchText) ?? false)
+                                        ).ThenBy(o => o.ToString()).ToList();
+                                    datagrid.Items.Clear();
+                                    foreach (Operator o in operators)
+                                    {
+                                        datagrid.Items.Add(o);
+                                    }
+                                }
+                                else if (selectedButton == DriverButton)
+                                {
+                                    List<Driver> drivers = new List<Driver>();
+                                    foreach (Driver d in datagrid.Items)
+                                    {
+                                        drivers.Add(d);
+                                    }
 
+                                    drivers = drivers.OrderByDescending(d =>
+                                        (d.ToString()?.ToLower()?.Contains(searchText) ?? false)
+                                        ).ThenBy(o => o.ToString()).ToList();
+                                    datagrid.Items.Clear();
+                                    foreach (Driver d in drivers)
+                                    {
+                                        datagrid.Items.Add(d);
+                                    }
+                                }
+                            }
+                        }
                     }
                     else
                     {
@@ -180,7 +241,8 @@ namespace SPTC_APP.View.Pages
                 {
                     TablePanelSwap.Children.Clear();
                     ClickColorControl(FranchiseButton);
-                    TablePanelSwap.Children.Add(await (new TableView(Table.FRANCHISE)).Fetch());
+                    Ftable = (new TableView(Table.FRANCHISE));
+                    TablePanelSwap.Children.Add(await Ftable.Fetch());
                     MainBody.selectedFranchise = fran;
                     TablePanelSwap.Children.Add((new FranchiseInformationView()).Fetch());
                     

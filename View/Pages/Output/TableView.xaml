@@ -9,6 +9,18 @@
      Width="786" Height="560"
     mc:Ignorable="d" WindowStyle="None">
     <Grid x:Name="franchisePanel" HorizontalAlignment="Right" Background="LightGray" VerticalAlignment="Bottom"  Width="786" Height="560">
+        
+        <DataGrid x:Name="TableGrid" HorizontalAlignment="Left" Height="458" Margin="20,0,0,20" VerticalAlignment="Bottom" Width="545">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="FontFamily" Value="Arial"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="10"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+
         <Grid x:Name="franchiseInformation" HorizontalAlignment="Right" Height="458" Background="White" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="182" Visibility="Visible">
             <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="72,10,0,0">
                 <Ellipse.Fill>
@@ -113,16 +125,6 @@
         </Grid>
 
 
-        <DataGrid x:Name="TableGrid" HorizontalAlignment="Left" Height="458" Margin="20,0,0,20" VerticalAlignment="Bottom" Width="545">
-            <DataGrid.Resources>
-                <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="FontFamily" Value="Arial"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="FontSize" Value="10"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                </Style>
-            </DataGrid.Resources>
-        </DataGrid>
         <Button x:Name="btnAdd" Content="ADD" Style="{DynamicResource ControlledButtonStyle}" HorizontalAlignment="Left" Margin="80,35,0,0" VerticalAlignment="Top" Width="110" Height="32"
                     FontFamily="hevitica "
                     FontWeight="ExtraBold"

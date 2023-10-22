@@ -48,7 +48,7 @@ namespace SPTC_APP.View
         private void btnContinue(object sender, RoutedEventArgs e)
         {
             id.SaveInfo();
-            ControlWindow.ShowStatic($"ID Saved!", $"Body#: ({id.franchise.BodyNumber}) {id.type.ToString()}", Icons.NOTIFY);
+            //ControlWindow.ShowStatic($"ID Saved!", $"Body#: ({id.franchise.BodyNumber}) {id.type.ToString()}", Icons.NOTIFY);
             EventLogger.Post("OUT :: ID : " + id.franchise.BodyNumber + " FRONT: " + id.FrontPrint + " BACK: " + id.BackPrint);
             PrintPreview print = new PrintPreview();
             print.NewID(id);

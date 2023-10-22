@@ -67,6 +67,8 @@ namespace SPTC_APP.View.Pages.Output
         {
             TableGrid.Items.Clear();
             TableGrid.Items.Clear();
+
+            TableGrid.SelectedCellsChanged += TableSelectedChanged;
             if (table == Table.FRANCHISE)
             {
                 int batchSize = AppState.TABLE_BATCH_SIZE;

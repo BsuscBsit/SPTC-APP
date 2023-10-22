@@ -17,7 +17,7 @@ namespace SPTC_APP.Objects
         public DateTime birthday { get; set; }
         public string emergencyPerson { get; set; }
         public string emergencyContact { get; set; }
-        public DateTime dateOfMembership = DateTime.MinValue;
+        public DateTime dateOfMembership = DateTime.Now;
         public string tinNumber { get; set; }
         public string votersNumbewr { get; set; }
         public bool isSuspended

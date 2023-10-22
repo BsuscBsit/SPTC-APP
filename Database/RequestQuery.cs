@@ -27,9 +27,9 @@ namespace SPTC_APP.Database
 
 
         public static string SEARCH(string text) =>
-            $"SELECT * FROM {Table.FRANCHISE} f LEFT JOIN {Table.OPERATOR} O ON f.{Field.OPERATOR_ID}=O.{Field.ID} LEFT JOIN {Table.DRIVER} D ON f.{Field.DRIVER_ID}=D.{Field.ID} " +
+            $"SELECT f.* FROM {Table.FRANCHISE} f LEFT JOIN {Table.OPERATOR} O ON f.{Field.OPERATOR_ID}=O.{Field.ID} LEFT JOIN {Table.DRIVER} D ON f.{Field.DRIVER_ID}=D.{Field.ID} " +
             $"LEFT JOIN {Table.NAME} OName ON O.{Field.NAME_ID}=OName.{Field.ID} LEFT JOIN {Table.NAME} DName ON D.{Field.NAME_ID}=DName.{Field.ID} " +
-            $"WHERE f.{Field.BODY_NUMBER} LIKE \"%{text}%\" OR OName.{Field.LASTNAME} LIKE \"%{text}%\" OR DName.{Field.LASTNAME} LIKE \"%{text}%\" AND f.{Where.ALL_NOTDELETED} LIMIT 0, 10";
+            $"WHERE f.{Field.BODY_NUMBER} LIKE \"%{text}%\" OR OName.{Field.LASTNAME} LIKE \"%{text}%\" OR DName.{Field.LASTNAME} LIKE \"%{text}%\" AND f.id = ( SELECT MAX(id) FROM tbl_franchise WHERE body_number = f.body_number ) AND f.{Where.ALL_NOTDELETED} LIMIT 0, 5";
 
         public static string GET_ALL_PAYMENT_IN_MONTH(int month, int year) =>
             $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";

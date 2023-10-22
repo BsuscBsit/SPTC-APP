@@ -9,7 +9,7 @@
         Width="800"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None">
-    <Grid x:Name="franchisePanel" HorizontalAlignment="Right" Background="WhiteSmoke" Width="800">
+    <Grid x:Name="franchiseInfo" HorizontalAlignment="Right" Background="WhiteSmoke" Width="800">
         <Rectangle Height="40" Stroke="#FEF301" Fill="#FEF301"  VerticalAlignment="Top" Width="NaN"/>
         <Label 
                Content="FRANCHISE INFORMATION" 
@@ -20,7 +20,7 @@
                FontWeight="SemiBold"
                FontSize="20"
                FontFamily="Inter"
-               Margin="28,45,0,425"/>
+               Margin="23,70,0,488"/>
         <Label Content="Franchise Requirement." 
                            Height="Auto" 
                            HorizontalAlignment="Left" 

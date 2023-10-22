@@ -8,24 +8,14 @@
         Title="DashboardView">
     <Grid x:Name="mainpanel"  Height="450" Width="800">
         <Button
-                x:Name="btnGererate"
+                x:Name="btnPrint"
                 Width="175"
                 Height="40"
                 Margin="0,80,30,0"
                 HorizontalAlignment="Right"
             Style="{StaticResource CommonButtonStyle}"
                 VerticalAlignment="Top"
-                Click="btnGererate_Click"
-                Content="GENERATE ID"/>
-        <Button
-                x:Name="btnTest"
-                Width="175"
-                Height="40"
-                Margin="0,134,30,0"
-                HorizontalAlignment="Right"
-            Style="{StaticResource CommonButtonStyle}"
-                VerticalAlignment="Top"
-                Content="TEST" Click="btnTest_Click"/>
+                Content="ID PRINTING" Click="btnPrint_Click"/>
         <Button
                 x:Name="btnReload"
                 Width="175"

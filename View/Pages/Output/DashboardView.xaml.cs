@@ -87,14 +87,7 @@ namespace SPTC_APP.View.Pages.Output
             return mainpanel;
         }
 
-        private void btnGererate_Click(object sender, RoutedEventArgs e)
-        {
-            (new PrintPreview()).ShowDialog();
-        }
-        private void btnTest_Click(object sender, RoutedEventArgs e)
-        {
-            (new Test()).ShowDialog();
-        }
+        
         private void DrawBarChart()
         {
             var list = AppState.MonthlyIncome;
@@ -451,7 +444,9 @@ namespace SPTC_APP.View.Pages.Output
             await UpdateLFContent(pieMonth, pieYear);
         }
 
-        
-       
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            (new PrintPreview()).Show();
+        }
     }
 }

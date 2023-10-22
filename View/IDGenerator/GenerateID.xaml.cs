@@ -67,7 +67,7 @@ namespace SPTC_APP.View
         public GenerateID(Franchise franchise, bool isDriver)
         {
             InitializeComponent();
-           Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             AppState.mainwindow?.Hide();
             bDay.SelectedDate = DateTime.Today;
             this.franchise = franchise;
@@ -75,7 +75,7 @@ namespace SPTC_APP.View
             EventLogger.Post("VIEW :: ID GENERATE Window id="+franchise.id);
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             //btnStartPad.IsEnabled = false;
-            
+            tboxBnum.IsEnabled = false;
             this.isDriver = isDriver;
             MySwitch.IsEnabled = false;
             if (isDriver)
@@ -119,6 +119,7 @@ namespace SPTC_APP.View
                     tboxPhone.Text = drv.emergencyContact;*/
                     tboxBnum.Text = franchise.BodyNumber;
                     tboxLnum.Text = franchise.LicenseNO;
+                    MySwitch_Front(MySwitch, null);
                 }
             } else
             {
@@ -160,6 +161,7 @@ namespace SPTC_APP.View
                     tboxPhone.Text = drv.emergencyContact;*/
                     tboxBnum.Text = franchise.BodyNumber;
                     tboxLnum.Text = franchise.LicenseNO;
+                    MySwitch_Back(MySwitch, null);
                 }
             }
 
@@ -399,7 +401,7 @@ namespace SPTC_APP.View
                         SPTC_APP.Objects.Image sign = null;
                         if (hasPhoto)
                         {
-                            image = new SPTC_APP.Objects.Image(imgIDPic.Source, $"Drv - {tboxFn.Text}");
+                            image = new SPTC_APP.Objects.Image(imgIDPic.Source, $"Drv - {tboxFn.Text}{tboxMn.Text}{tboxLn.Text}");
                         }
                         else
                         {
@@ -407,7 +409,7 @@ namespace SPTC_APP.View
                         }
                         if (hasSign)
                         {
-                            sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign - {tboxFn.Text}");
+                            sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign Drv - {tboxFn.Text}{tboxMn.Text}{tboxLn.Text}");
                         }
                         else
                         {
@@ -429,13 +431,13 @@ namespace SPTC_APP.View
                             @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, "", "");
                         }
                         else
-                        {
+                        {   
                             Name name = new Name(prefix, tboxFn.Text, tboxMn.Text, tboxLn.Text, "");
                             Address address = new Address(tboxAddressB.Text, tboxAddressS.Text);
                             @obj.WriteInto(name, address, image, sign, "", (DateTime)bDay.SelectedDate, "", "");
                         }
 
-                        franchise.WriteInto(tboxBnum.Text, null, @obj, tboxLnum.Text);
+                        franchise.WriteInto(tboxBnum.Text, franchise?.Operator, @obj, tboxLnum.Text);
 
                         ID id = new ID(franchise, Objects.General.DRIVER);
                         print.Save(id);
@@ -449,7 +451,7 @@ namespace SPTC_APP.View
                         SPTC_APP.Objects.Image sign = null;
                         if (hasPhoto)
                         {
-                            image = new SPTC_APP.Objects.Image(imgIDPic.Source, $"Oprt - {tboxFn.Text}");
+                            image = new SPTC_APP.Objects.Image(imgIDPic.Source, $"Oprt - {tboxFn.Text}{tboxMn.Text}{tboxLn.Text}");
                         }
                         else
                         {
@@ -457,7 +459,7 @@ namespace SPTC_APP.View
                         }
                         if (hasSign)
                         {
-                            sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign - {tboxFn.Text}");
+                            sign = new SPTC_APP.Objects.Image(imgSignPic.Source, $"Sign Oprt - {tboxFn.Text}{tboxMn.Text}{tboxLn.Text}");
                         }
                         else
                         {
@@ -485,7 +487,7 @@ namespace SPTC_APP.View
                         }
 
 
-                        franchise.WriteInto(tboxBnum.Text, @obj, null, tboxLnum.Text);
+                        franchise.WriteInto(tboxBnum.Text, @obj, franchise?.Driver, tboxLnum.Text);
 
                         ID id = new ID(franchise, Objects.General.OPERATOR);
                         print.Save(id);

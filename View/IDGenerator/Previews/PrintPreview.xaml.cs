@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using SPTC_APP.Objects;
 using SPTC_APP.Properties;
 using SPTC_APP.View.IDGenerator.Hidden;
+using SPTC_APP.View.IDGenerator.Previews;
 using SPTC_APP.View.Styling;
 using Image = System.Windows.Controls.Image;
 
@@ -154,7 +155,7 @@ namespace SPTC_APP.View
         {
             if (idcount < 4)
             {
-                (new GenerateID()).Show();
+                (new IDSelection()).Show();
                 this.Close();
             }
         }

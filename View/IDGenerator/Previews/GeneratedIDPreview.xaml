@@ -85,21 +85,12 @@
                 Grid.Column="1"
                 Width="150"
                 Height="40"
+                Margin="20, 0, 20, 0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Click="btnBack"
                 Content="BACK"
                 Style="{DynamicResource CommonButtonStyle}" />
-            <Button
-                x:Name="btnSave"
-                Grid.Column="2"
-                Width="150"
-                Height="40"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Click="btnSave_Click"
-                Content="SAVE"
-                Style="{DynamicResource CommonButtonStyle}" />      
             <Button
                 x:Name="btnContinued"
                 Grid.Column="3"

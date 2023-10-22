@@ -47,6 +47,9 @@ namespace SPTC_APP.View
 
         private void btnContinue(object sender, RoutedEventArgs e)
         {
+            id.SaveInfo();
+            ControlWindow.ShowStatic($"ID Saved!", $"Body#: ({id.franchise.BodyNumber}) {id.type.ToString()}", Icons.NOTIFY);
+            EventLogger.Post("OUT :: ID : " + id.franchise.BodyNumber + " FRONT: " + id.FrontPrint + " BACK: " + id.BackPrint);
             PrintPreview print = new PrintPreview();
             print.NewID(id);
             print.Show();
@@ -59,14 +62,6 @@ namespace SPTC_APP.View
             this.id = id;
             imgFront.Source = id.RenderFrontID();
             imgBack.Source = id.RenderBackID();
-            btnSave.IsEnabled = !id.isSaved;
-        }
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            id.SaveInfo();
-            ControlWindow.ShowStatic($"ID Saved!", $"Body#: ({id.franchise.BodyNumber}) {id.type.ToString()}", Icons.NOTIFY);
-            EventLogger.Post("OUT :: ID : " + id.franchise.BodyNumber + " FRONT: " + id.FrontPrint + " BACK: " + id.BackPrint);
             btnSave.IsEnabled = !id.isSaved;
         }
     }

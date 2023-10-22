@@ -107,6 +107,8 @@ namespace SPTC_APP.Database
         public const string ID_ = "id=?";
         public const string ID_NOTDELETED = "id=? AND isDeleted=0";
         public const string ID_DELETED = "id=? AND isDeleted=1";
+
+        public static string DRIVER_AND_OPERATOR = $"({Field.DRIVER_ID} <> -1 OR {Field.OPERATOR_ID} <> -1) AND {Field.ISDELETED}=0";
     }
     public static class Field
     {

@@ -83,6 +83,28 @@ namespace SPTC_APP.View.Pages.Input
                     optr.address.UpdateAddressLines();
                     franchise.Operator = optr;
                 }
+                else if (type == General.TRANSFER_FRANCHISE_OWNERSHIP)
+                {
+                    Franchise newFranchise = franchise;
+                    newFranchise.Operator = new Operator();
+                    newFranchise.Operator.name = new Name();
+                    newFranchise.Operator.address = new Address();
+                    newFranchise.Operator.name.firstname = tboxsFname.Text;
+                    newFranchise.Operator.name.middlename = tboxsMname.Text;
+                    newFranchise.Operator.name.lastname = tboxsLname.Text;
+                    newFranchise.Operator.birthday = (DateTime)dpBirthday.SelectedDate;
+                    newFranchise.Operator.emergencyContact = tboxsContactNum.Text;
+                    newFranchise.Operator.name.sex = cbGender.SelectedIndex == 1;
+                    newFranchise.Operator.address.country = tboxsCountry.Text;
+                    newFranchise.Operator.address.province = tboxsProvince.Text;
+                    newFranchise.Operator.address.city = tboxsCity.Text;
+                    newFranchise.Operator.address.barangay = tboxsBarangay.Text;
+                    newFranchise.Operator.address.streetname = tboxStreetName.Text;
+                    newFranchise.Operator.address.UpdateAddressLines();
+                        
+                    newFranchise.lastFranchiseId = franchise.id;
+                    newFranchise.Save();
+                }
                 franchise.Save();
                 this.Close();
             }

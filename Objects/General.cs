@@ -40,6 +40,9 @@ namespace SPTC_APP.Objects
         FETCH_PAYMENT_DETAILS_USING_ID,
         NEW_PAYMENT_DETAILS,
 
+
+        [Description("OPERATOR ( TRANSFER TO... )")]
+        TRANSFER_FRANCHISE_OWNERSHIP,
     }
 
 

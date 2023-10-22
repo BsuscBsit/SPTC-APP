@@ -92,11 +92,13 @@ namespace SPTC_APP.Database
         public const string VIOLATION = "tbl_violation";
         public const string IDHISTORY = "tbl_id_history";
 
+        public const string FRANCHISE_S = "tbl_franchise f";
+
     }
     public static class Select
     {
         public const string ALL = "*";
-
+        public const string F = "f.*";
         public const string BODY_NUMBER = "body_number";
     }
     public static class Where
@@ -107,8 +109,9 @@ namespace SPTC_APP.Database
         public const string ID_ = "id=?";
         public const string ID_NOTDELETED = "id=? AND isDeleted=0";
         public const string ID_DELETED = "id=? AND isDeleted=1";
-
+        public const string LATEST_FRANCHISE = "f.id = ( SELECT MAX(id) FROM tbl_franchise WHERE body_number = f.body_number ) AND f.isDeleted=0";
         public static string DRIVER_AND_OPERATOR = $"({Field.DRIVER_ID} <> -1 OR {Field.OPERATOR_ID} <> -1) AND {Field.ISDELETED}=0";
+
     }
     public static class Field
     {

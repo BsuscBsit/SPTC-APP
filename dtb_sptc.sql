@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2023 at 01:10 PM
+-- Generation Time: Oct 22, 2023 at 07:22 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -217,8 +217,8 @@ CREATE TABLE `tbl_operator` (
   `emergency_number` varchar(11) DEFAULT NULL,
   `isOwner` tinyint(1) NOT NULL DEFAULT 0,
   `date_of_mem` date DEFAULT NULL,
-  `tin_number` varchar(50) NOT NULL DEFAULT '',
-  `voters_id_number` varchar(50) NOT NULL DEFAULT '',
+  `tin_number` varchar(50) DEFAULT NULL,
+  `voters_id_number` varchar(50) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

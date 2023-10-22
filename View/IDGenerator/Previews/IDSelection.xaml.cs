@@ -32,7 +32,6 @@ namespace SPTC_APP.View.IDGenerator.Previews
         }
         protected override void OnClosing(CancelEventArgs e)
         {
-            AppState.mainwindow?.Show();
             base.OnClosing(e);
         }
         private void LoadFranchises()

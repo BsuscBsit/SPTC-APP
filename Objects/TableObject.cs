@@ -14,7 +14,7 @@ namespace SPTC_APP.Objects
         public List<T> data;
         public string tableName;
 
-        public TableObject(string table, string where, int startIndex = -1, int batchSize = -1)
+        public TableObject(string table, string select, string where, int startIndex = -1, int batchSize = -1)
         {
             
             data = new List<T>();
@@ -28,10 +28,10 @@ namespace SPTC_APP.Objects
                     List<T> objectList = new List<T>();
                     if (startIndex != -1 && batchSize != -1)
                     {
-                        objectList.AddRange(Retrieve.GetPaginationData<T>(tableName, Select.ALL, where, startIndex, batchSize));
+                        objectList.AddRange(Retrieve.GetPaginationData<T>(tableName, select, where, startIndex, batchSize));
                     } else
                     {
-                        objectList.AddRange(Retrieve.GetData<T>(tableName, Select.ALL, where));
+                        objectList.AddRange(Retrieve.GetData<T>(tableName, select, where));
                     }
                     data = objectList;
                 }

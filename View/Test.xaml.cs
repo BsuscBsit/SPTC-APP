@@ -208,7 +208,7 @@ namespace SPTC_APP.View
             {
                 List<Franchise> batch = await Task.Run(() =>
                 {
-                    return (new TableObject<Franchise>(Table.FRANCHISE, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                    return (new TableObject<Franchise>(Table.FRANCHISE, Select.ALL, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
                 });
 
                 if (batch.Count == 0)
@@ -248,7 +248,7 @@ namespace SPTC_APP.View
             {
                 List<Driver> batch = await Task.Run(() =>
                 {
-                    return (new TableObject<Driver>(Table.DRIVER, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                    return (new TableObject<Driver>(Table.DRIVER, Select.ALL, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
                 });
 
                 if (batch.Count == 0)
@@ -287,7 +287,7 @@ namespace SPTC_APP.View
             {
                 List<Operator> batch = await Task.Run(() =>
                 {
-                    return (new TableObject<Operator>(Table.OPERATOR, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                    return (new TableObject<Operator>(Table.OPERATOR,Select.ALL, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
                 });
 
                 if (batch.Count == 0)
@@ -323,7 +323,7 @@ namespace SPTC_APP.View
             {
                 List<Employee> batch = await Task.Run(() =>
                 {
-                    return (new TableObject<Employee>(Table.EMPLOYEE, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                    return (new TableObject<Employee>(Table.EMPLOYEE,Select.ALL, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
                 });
 
                 if (batch.Count == 0)

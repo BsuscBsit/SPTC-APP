@@ -87,7 +87,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     List<Franchise> batch = await Task.Run(() =>
                     {
-                        return (new TableObject<Franchise>(Table.FRANCHISE, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                        return (new TableObject<Franchise>(Table.FRANCHISE_S, Select.F, Where.LATEST_FRANCHISE, pageIndex * batchSize, batchSize)).data;
                     });
 
                     if (batch.Count == 0)
@@ -124,7 +124,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     List<Operator> batch = await Task.Run(() =>
                     {
-                        return (new TableObject<Operator>(Table.OPERATOR, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                        return (new TableObject<Operator>(Table.OPERATOR, Select.ALL, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
                     });
 
                     if (batch.Count == 0)
@@ -164,7 +164,7 @@ namespace SPTC_APP.View.Pages.Output
                     List<Driver> batch = await Task.Run(() =>
                     {
 
-                        return (new TableObject<Driver>(Table.DRIVER, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                        return (new TableObject<Driver>(Table.DRIVER, Select.ALL, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
                     });
 
                     if (batch.Count == 0)

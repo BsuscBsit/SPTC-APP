@@ -52,7 +52,9 @@ namespace SPTC_APP.View.Pages.Input
             franchise.MTOPNo = tboxMTOPplateNum.Text;
             franchise.LicenseNO = tboxLTOplateNum.Text;
             franchise.BuyingDate = bDay.DisplayDate;
-            franchise.Save();
+            (new NewOptr_Drv(franchise, General.OPERATOR)).Show();
+            this.Close();
+
         }
     }
 }

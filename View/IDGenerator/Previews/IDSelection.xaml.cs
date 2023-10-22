@@ -3,6 +3,7 @@ using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -21,13 +22,19 @@ namespace SPTC_APP.View.IDGenerator.Previews
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             LoadFranchises();
-            foreach(var item in PrintPreview.GetPrintIDs())
+
+            AppState.mainwindow?.Hide();
+            foreach (var item in PrintPreview.GetPrintIDs())
             {
                 string res = item.Value ? "Driver" : "Operator";
                 tbCurrentPrintQueue.Text += $"\n B#: {item.Key} : {res}"; 
             }
         }
-
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            AppState.mainwindow?.Show();
+            base.OnClosing(e);
+        }
         private void LoadFranchises()
         {
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
@@ -107,6 +114,11 @@ namespace SPTC_APP.View.IDGenerator.Previews
                 drvOrOprt.Content = "This ID will be created for\nDriver.";
             }
 
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

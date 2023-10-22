@@ -55,7 +55,7 @@ namespace SPTC_APP.View.Pages.Output
             
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("name.wholename", "NAME", width: 140),
+                    new ColumnConfiguration("name.legalName", "NAME", width: 140),
                 };
             DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(dgDrivers, columnConfigurations);
 
@@ -67,7 +67,7 @@ namespace SPTC_APP.View.Pages.Output
 
             List<ColumnConfiguration> columnConfigurations1 = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("Driver.name.wholename", "NAME", width: 140),
+                    new ColumnConfiguration("Driver.name.legalName", "NAME", width: 140),
                     new ColumnConfiguration("BodyNumber", "CURRENT BODY NO.", width: 80),
                 };
             DataGridHelper<Franchise> dataGridHelper1 = new DataGridHelper<Franchise>(dgDrivers_franchise, columnConfigurations1);
@@ -91,7 +91,7 @@ namespace SPTC_APP.View.Pages.Output
             Franchise fran = (sender as DataGrid).SelectedItem as Franchise;
             selectedDriver = fran.Driver;
             swapFranchise = fran;
-            lblSwap.Content = $"Selected Driver: {fran.Driver}";
+            lblSwap.Content = $"Selected Driver: {fran.Driver?.name?.legalName}";
             
         }
 

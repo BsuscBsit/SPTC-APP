@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SPTC_APP.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,7 +60,11 @@ namespace SPTC_APP.View.Controls
             try
             {
                 element.ToolTip = tt;
-            } catch(Exception e) {}
+            } catch(Exception e) 
+            {
+                EventLogger.Post($"ERR: {e.Message}");
+            }
+
         }
     }
 }

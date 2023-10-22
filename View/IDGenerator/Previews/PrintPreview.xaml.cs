@@ -315,6 +315,19 @@ namespace SPTC_APP.View
             checkIdCount();
         }
 
+        public static Dictionary<string, bool> GetPrintIDs()
+        {
+            Dictionary<string, bool> dict = new Dictionary<string, bool>();
+            foreach (ID id in new ID[] { PrintPreview.mGrid1, PrintPreview.mGrid2, PrintPreview.mGrid3, PrintPreview.mGrid4 })
+            {
+                if(id != null)
+                {
+                    dict.Add(id.franchise?.BodyNumber.ToString(), id.type == General.DRIVER);
+                }
+            }
+            return dict;
+        }
+
 
         //HELPER FUNCTIONS
         private string numtext(int i)

@@ -289,14 +289,14 @@
     <Compile Include="View\Pages\Output\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Output\TableView.xaml.cs">
-      <DependentUpon>TableView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Pages\Input\InputFranchiseView.xaml.cs">
       <DependentUpon>InputFranchiseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\MainBody.xaml.cs">
       <DependentUpon>MainBody.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\Output\TableView.xaml.cs">
+      <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Styling\AnimationHelper.cs" />
     <Compile Include="View\Test.xaml.cs">
@@ -395,10 +395,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Output\TableView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\Pages\Input\InputFranchiseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -406,6 +402,10 @@
     <Page Include="View\Pages\MainBody.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\Output\TableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Styling\ColorScheme.xaml">
       <SubType>Designer</SubType>

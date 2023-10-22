@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,11 +28,13 @@ namespace SPTC_APP.View.Pages.Output
             {
                 btnAdd.Visibility = Visibility.Visible;
                 btnAdd.Content = "ADD FRANCHISE";
-            } else if (table == Table.DRIVER) 
+            }
+            else if (table == Table.DRIVER)
             {
                 btnAdd.Visibility = Visibility.Visible;
                 btnAdd.Content = "ADD DRIVER";
-            } else
+            }
+            else
             {
                 btnAdd.Visibility = Visibility.Collapsed;
             }
@@ -58,7 +59,7 @@ namespace SPTC_APP.View.Pages.Output
                 btnEditProfile.Visibility = Visibility.Visible;
                 btnGenerateid.Visibility = Visibility.Visible;
                 btnAddViolation.Visibility = Visibility.Visible;
-                
+
             }
         }
 
@@ -135,7 +136,7 @@ namespace SPTC_APP.View.Pages.Output
                         //await Task.Delay(200);
                     }
 
-                   // await Task.Delay(200);
+                    // await Task.Delay(200);
 
                     pageIndex++;
                 }
@@ -169,7 +170,7 @@ namespace SPTC_APP.View.Pages.Output
                     if (batch.Count == 0)
                         break;
 
-                    foreach(var obj in batch)
+                    foreach (var obj in batch)
                     {
                         obj.UpdateFranchise();
                         TableGrid.Items.Add(obj);
@@ -303,7 +304,7 @@ namespace SPTC_APP.View.Pages.Output
             }
 
             await UpdateTableAsync();
-            
+
         }
         private async void btnGenerateid_Click(object sender, RoutedEventArgs e)
         {
@@ -326,9 +327,9 @@ namespace SPTC_APP.View.Pages.Output
         }
         private async void btnAddViolation_Click(object sender, RoutedEventArgs e)
         {
-            if(MainBody.selectedFranchise != null)
+            if (MainBody.selectedFranchise != null)
             {
-                if(table == Table.DRIVER)
+                if (table == Table.DRIVER)
                     (new ViolationInput(MainBody.selectedFranchise)).ShowDialog();
                 await UpdateTableAsync();
             }
@@ -339,7 +340,7 @@ namespace SPTC_APP.View.Pages.Output
         }
         private async void btnAddClick(object sender, RoutedEventArgs e)
         {
-            if(table == Table.FRANCHISE)
+            if (table == Table.FRANCHISE)
                 (new InputFranchiseView()).ShowDialog();
             if (table == Table.DRIVER)
                 (new NewOptr_Drv(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();

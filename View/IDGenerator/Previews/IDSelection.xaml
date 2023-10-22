@@ -9,6 +9,7 @@
     <Grid>
         <DataGrid x:Name="dgListFranchise" Width="400" Height="400" Margin="161,10,239,24" SelectionChanged="dgListFranchise_SelectionChanged"/>
 
+        <TextBlock x:Name="tbCurrentPrintQueue" HorizontalAlignment="Left" Margin="16,68,0,0" TextWrapping="Wrap" Text="Current Printing Queue: " VerticalAlignment="Top" Height="118"/>
         <TextBlock x:Name="tbSelectedFranchise" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,140" Width="175" TextWrapping="Wrap" Text="Selected: N/A" />
         <StackPanel
             Height="50"

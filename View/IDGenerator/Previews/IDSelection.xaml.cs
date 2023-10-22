@@ -21,6 +21,11 @@ namespace SPTC_APP.View.IDGenerator.Previews
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             LoadFranchises();
+            foreach(var item in PrintPreview.GetPrintIDs())
+            {
+                string res = item.Value ? "Driver" : "Operator";
+                tbCurrentPrintQueue.Text += $"\n B#: {item.Key} : {res}"; 
+            }
         }
 
         private void LoadFranchises()

@@ -62,7 +62,6 @@ namespace SPTC_APP.View
             this.id = id;
             imgFront.Source = id.RenderFrontID();
             imgBack.Source = id.RenderBackID();
-            btnSave.IsEnabled = !id.isSaved;
         }
     }
 

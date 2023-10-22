@@ -126,27 +126,20 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnChangeDriver_Click(object sender, RoutedEventArgs e)
         {
-            if (MainBody.selectedFranchise.Driver != null)
-            {
-                int result = ControlWindow.ShowDialogStatic("Change Driver", "New or Existing?", "EXISTING", "NEW", Icons.DEFAULT);
+            int result = ControlWindow.ShowDialogStatic("Change Driver", "New or Existing?", "EXISTING", "NEW", Icons.DEFAULT);
 
-                if (result == -1) 
-                {
-                    
-                }
-                else if(result == 1)
-                {
-                    (new NewOptr_Drv(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
-                    UpdateContent();
-                }
-                else if (result == 0)
-                {
-                    (new Selection(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
-                    UpdateContent();
-                }
-            } else
+            if (result == -1) 
+            {
+                 
+            }
+            else if(result == 1)
             {
                 (new NewOptr_Drv(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
+                UpdateContent();
+            }
+            else if (result == 0)
+            {
+                (new Selection(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
                 UpdateContent();
             }
         } 

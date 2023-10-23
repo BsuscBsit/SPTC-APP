@@ -143,7 +143,7 @@
                 FontStretch="SemiExpanded"
                 FontSize="9"/>
         </Grid>
-        <Grid x:Name="CodingGrid" Height="140" Width="477" Visibility="Hidden">
+        <Grid x:Name="CodingGrid" Height="140" Width="477" Visibility="Visible">
             <Label Content="0-1 MONDAY " HorizontalAlignment="Left" Margin="47,0,0,0" VerticalAlignment="Top"
                 FontWeight="Normal"
                 FontFamily="Arial"
@@ -214,28 +214,34 @@
                 FontFamily="Arial"
                 FontStretch="SemiExpanded"
                 FontSize="11"/>
-
             <Label Content="SAT" HorizontalAlignment="Left" Margin="359,68,0,0" VerticalAlignment="Top"
                 Foreground="Black"
                 FontWeight="DemiBold"
                 FontFamily="Arial"
                 FontStretch="SemiExpanded"
                 FontSize="11" RenderTransformOrigin="0.742,-0.478"/>
-
             <Label Content="SUN" HorizontalAlignment="Left" Margin="412,68,0,0" VerticalAlignment="Top"
                 Foreground="Black"
                 FontWeight="DemiBold"
                 FontFamily="Arial"
                 FontStretch="SemiExpanded"
                 FontSize="11"/>
-            <Label Content="101" HorizontalAlignment="Left" Margin="29,94,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblBodyNum" Content="101" HorizontalAlignment="Left" Margin="29,94,0,0" VerticalAlignment="Top"
                 Foreground="Black"
                 FontWeight="SemiBold"
                 FontFamily="Arial"
                 FontStretch="SemiExpanded"
                 FontSize="12" RenderTransformOrigin="0.333,0.455"/>
+
+            <Image x:Name="imgMon" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="115, 0, 0, 20"/>
+            <Image x:Name="imgTue" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="165, 0, 0, 20"/>
+            <Image x:Name="imgWed" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="215, 0, 0, 20"/>
+            <Image x:Name="imgThu" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="265, 0, 0, 20"/>
+            <Image x:Name="imgFri" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="315, 0, 0, 20"/>
+            <Image x:Name="imgSat" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="365, 0, 0, 20"/>
+            <Image x:Name="imgSun" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="415, 0, 0, 20"/>
         </Grid>
-        <Grid x:Name="HistoryGrid" Width="512" Height="200" Visibility="Visible">
+        <Grid x:Name="HistoryGrid" Width="512" Height="200" Visibility="Hidden">
             <DataGrid x:Name="dgHistory" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="512">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Image = System.Windows.Controls.Image;
 
 namespace SPTC_APP.View.Pages.Output
 {
@@ -143,6 +145,33 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgHistory.Items.Add(tmp);
                 }
+            }
+            else if(strmod == CODING)
+            {
+                lblBodyNum.Content = franchise.BodyNumber;
+                List<Image> imgs = new List<Image> { imgMon, imgTue, imgWed, imgThu, imgFri };
+
+                for (int i = 0; i < imgs.Count; i++)
+                { 
+                    if (int.TryParse(franchise.BodyNumber, out int bodyNumber))
+                    {
+                        int lastDigit = bodyNumber % 10;
+
+                        if (i % 5 == lastDigit / 2) 
+                        {
+                            Uri uri = new Uri("../../Images/icons/cross.png", UriKind.Relative);
+                            BitmapImage bitmapImage = new BitmapImage(uri);
+                            imgs[i].Source = bitmapImage;
+                        }
+                        else
+                        {
+                            Uri uri = new Uri("../../Images/icons/check.png", UriKind.Relative);
+                            BitmapImage bitmapImage = new BitmapImage(uri);
+                            imgs[i].Source = bitmapImage;
+                        }
+                    }
+                }
+
             }
         }
 

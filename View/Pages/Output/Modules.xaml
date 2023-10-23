@@ -149,7 +149,7 @@
                 FontFamily="Arial"
                 FontSize="11"
                 Foreground="DarkGray"/>
-            <Label Content="2-3 WEDNESDAY " HorizontalAlignment="Left" Margin="186,0,0,0" VerticalAlignment="Top"
+            <Label Content="4-5 WEDNESDAY " HorizontalAlignment="Left" Margin="186,0,0,0" VerticalAlignment="Top"
                 FontWeight="Normal"
                 FontFamily="Arial"
                 FontSize="11"

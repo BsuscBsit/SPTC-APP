@@ -59,8 +59,9 @@ namespace SPTC_APP.View.Pages.Output
 
         private void RenderFranchiseInformation()
         {
-            if(strmod == SHARECAPITAL)
-            {
+            if (strmod == SHARECAPITAL)
+            { 
+                dgLedger.Items.Clear();
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
                     
@@ -78,8 +79,10 @@ namespace SPTC_APP.View.Pages.Output
                     dgLedger.Items.Add(tmp);
                 }
                 lblTotalLedger.Content = franchise.GetTotalShareCapital().ToString("0.00");
-            } else if (strmod == LOAN)
+            } 
+            else if (strmod == LOAN)
             {
+                dgLedger.Items.Clear();
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
@@ -98,8 +101,10 @@ namespace SPTC_APP.View.Pages.Output
                     dgLedger.Items.Add(tmp);
                 }
                 lblTotalLedger.Content = franchise.GetTotalLoan().ToString("0.00");
-            } else if (strmod == LTLOAN)
+            } 
+            else if (strmod == LTLOAN)
             {
+                dgLedger.Items.Clear();
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
@@ -118,6 +123,26 @@ namespace SPTC_APP.View.Pages.Output
                     dgLedger.Items.Add(tmp);
                 }
                 lblTotalLedger.Content = franchise.GetTotalLTLoan().ToString("0.00");
+            }
+            else if(strmod == HISTORY)
+            {
+                dgHistory.Items.Clear();
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+                {
+                    
+                    new ColumnConfiguration("date", "DATE", width: 100),
+                    new ColumnConfiguration("ledgerType", "LEDGER TYPE", width: 80),
+                    new ColumnConfiguration("referenceNo", "REFERENCE NO.", width: 100),
+                    new ColumnConfiguration("balance", "BALANCE", width: 100),
+                    new ColumnConfiguration("payment", "PAYMENT", width: 100),
+                };
+                DataGridHelper<PaymentHistory> dataGridHelper = new DataGridHelper<PaymentHistory>(dgHistory, columnConfigurations);
+
+
+                foreach(var tmp in franchise.GetPaymentList())
+                {
+                    dgHistory.Items.Add(tmp);
+                }
             }
         }
 

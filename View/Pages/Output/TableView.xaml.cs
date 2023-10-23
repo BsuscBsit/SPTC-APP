@@ -201,8 +201,8 @@ namespace SPTC_APP.View.Pages.Output
                     ValuePairFI(lblF1, "Operator Name: ", lblI1, MainBody.selectedFranchise?.Operator?.ToString() ?? "");
                     ValuePairFI(lblF2, "Date Of Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber.ToString() ?? "");
-                    ValuePairFI(lblF4, "Loan Balance: ", lblI4, MainBody.selectedFranchise?.LoanBalance.ToString() ?? "");
-                    ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, MainBody.selectedFranchise?.LongTermLoanBalance.ToString() ?? "");
+                    ValuePairFI(lblF4, "Loan Balance: ", lblI4, MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "");
+                    ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "");
                     ValuePairFI(lblF6, "Reference: ", lblI6, MainBody.selectedFranchise?.Owner?.ToString() ?? "");
                     ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
                     imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
@@ -214,8 +214,8 @@ namespace SPTC_APP.View.Pages.Output
                     ValuePairFI(lblF1, "Operator Name: ", lblI1, oholder?.name?.legalName?.ToString());
                     ValuePairFI(lblF2, "Date Of Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber.ToString() ?? "");
-                    ValuePairFI(lblF4, "Loan Balance: ", lblI4, MainBody.selectedFranchise?.LoanBalance.ToString() ?? "");
-                    ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, MainBody.selectedFranchise?.LongTermLoanBalance.ToString() ?? "");
+                    ValuePairFI(lblF4, "Loan Balance: ", lblI4, MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "");
+                    ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "");
                     ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber.ToString() ?? "");
                     ValuePairFI(lblF6, "VOTERS ID No.: ", lblI6, MainBody.selectedFranchise?.Operator?.votersNumbewr.ToString() ?? "");
                     imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();

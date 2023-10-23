@@ -195,6 +195,7 @@ namespace SPTC_APP.Database
         public const string REFERENCE_NO = "reference_no";
         public const string DEPOSIT = "deposit";
         public const string PENALTIES = "penalties";
+        public const string BALANCE = "balance";
 
         // LOAN
         public const string AMOUNT = "amount";

@@ -15,17 +15,19 @@ namespace SPTC_APP.Objects
         public T ledger { get; set; }
         public bool isDownPayment { get; set; }
         public bool isDivPat { get; set; }
-        public DateTime date { get; set; }
+        public DateTime? date { get; set; }
         public string referenceNo { get; set; }
         public double deposit { get; set; }
         public double penalties { get; set; }
         public string remarks { get; set; }
+        public double balance { get; set; }
         public string displayDate { 
             get
             {
-                return date.ToString("MMMM dd, yyyy");
+                return date?.ToString("MMMM dd, yyyy");
             }
         }
+
 
         public double principal
         {
@@ -123,7 +125,7 @@ namespace SPTC_APP.Objects
             this.deposit = Retrieve.GetValueOrDefault<double>(reader, Field.DEPOSIT);
             this.penalties = Retrieve.GetValueOrDefault<double>(reader, Field.PENALTIES);
             this.remarks = Retrieve.GetValueOrDefault<string>(reader, Field.REMARKS);
-
+            this.balance = Retrieve.GetValueOrDefault<double>(reader, Field.BALANCE);
             this.ledgerId = Retrieve.GetValueOrDefault<int>(reader, Field.LEDGER_ID);
         }
 
@@ -138,7 +140,7 @@ namespace SPTC_APP.Objects
             }
         }
 
-        public bool WriteInto(T lledger, bool isDP, bool isDVP, DateTime ldate, string lreferenceNo, double ldeposit, double lpenalties, string lremarks)
+        public bool WriteInto(T lledger, bool isDP, bool isDVP, DateTime ldate, string lreferenceNo, double ldeposit, double lpenalties, string lremarks, double balance)
         {
             this.ledger = lledger;
             this.isDownPayment = isDP;
@@ -148,6 +150,7 @@ namespace SPTC_APP.Objects
             this.deposit = ldeposit;
             this.penalties = lpenalties;
             this.remarks = lremarks;
+            this.balance = balance;
             return true;
         }
 
@@ -164,6 +167,7 @@ namespace SPTC_APP.Objects
             paymentDetails.Insert(Field.DEPOSIT, deposit);
             paymentDetails.Insert(Field.PENALTIES, penalties);
             paymentDetails.Insert(Field.REMARKS, remarks);
+            paymentDetails.Insert(Field.BEGINNING_BALANCE, balance);
             if (ledger != null)
             {
                 paymentDetails.Insert(Field.LEDGER_ID, saveLedger());
@@ -188,6 +192,24 @@ namespace SPTC_APP.Objects
             paymentDetails.Insert(Field.ISDELETED, true);
             paymentDetails.Save();
             return true;
+        }
+    }
+
+    public class PaymentHistory
+    {
+        public string date { get; set; }
+        public string ledgerType { get; set; }
+        public string referenceNo { get; set; }
+        public string balance { get; set; }
+        public string payment { get; set; }
+
+        public PaymentHistory(string date, string obj, string referenceNo, double balance, double payment)
+        {
+            this.date = date;
+            this.ledgerType = obj;
+            this.referenceNo = referenceNo;
+            this.balance = "P " + balance.ToString("0.00");
+            this.payment = "P " + payment.ToString("0.00");
         }
     }
 }

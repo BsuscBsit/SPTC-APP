@@ -235,94 +235,17 @@
                 FontStretch="SemiExpanded"
                 FontSize="12" RenderTransformOrigin="0.333,0.455"/>
         </Grid>
-        <Grid x:Name="HistoryGrid" Width="473" Height="131" Visibility="Hidden">
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="131" VerticalAlignment="Top" Width="473"/>
-
-            <Label Content="DATE" HorizontalAlignment="Left" Margin="13,6,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content="LEDGER TYPE" HorizontalAlignment="Left" Margin="103,6,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content="REFERENCE NO." HorizontalAlignment="Left" Margin="223,6,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content="BALANCE" HorizontalAlignment="Left" Margin="332,6,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content="PAYMENT" HorizontalAlignment="Left" Margin="401,6,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 02 - 01 - 2023" HorizontalAlignment="Left" Margin="0,44,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" SHARE CAPITAL" HorizontalAlignment="Left" Margin="102,44,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 27736277" HorizontalAlignment="Left" Margin="245,44,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 10,000" HorizontalAlignment="Left" Margin="335,44,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 130.00" HorizontalAlignment="Left" Margin="408,44,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 09 - 04 - 2023" HorizontalAlignment="Left" Margin="0,74,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content="LOAN" HorizontalAlignment="Left" Margin="125,74,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 28538541" HorizontalAlignment="Left" Margin="245,74,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 400.00" HorizontalAlignment="Left" Margin="408,74,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-
+        <Grid x:Name="HistoryGrid" Width="512" Height="200" Visibility="Visible">
+            <DataGrid x:Name="dgHistory" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="512">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontFamily" Value="Arial"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="10"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
         </Grid>
     </Grid>
 </Window>

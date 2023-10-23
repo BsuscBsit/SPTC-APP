@@ -31,7 +31,7 @@ namespace SPTC_APP.View.Pages.Output
             lblMTOPNo.Content = MainBody.selectedFranchise?.MTOPNo;
 
             imgProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
-            if (MainBody.selectedFranchise.Driver == null)
+            if (MainBody.selectedFranchise?.Driver == null)
             {
                 btnChangeDriver.Content = "NEW DRIVER";
             }

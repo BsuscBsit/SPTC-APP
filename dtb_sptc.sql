@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2023 at 07:22 AM
+-- Generation Time: Oct 23, 2023 at 03:47 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -29,15 +29,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tbl_address` (
   `id` int(11) NOT NULL,
-  `address_line1` varchar(50) DEFAULT NULL,
-  `address_line2` varchar(50) DEFAULT NULL,
-  `house_no` varchar(20) DEFAULT NULL,
-  `street_name` varchar(20) DEFAULT NULL,
-  `barangay_subdivision` varchar(20) DEFAULT NULL,
-  `city_municipality` varchar(20) DEFAULT NULL,
-  `postal_code` varchar(6) DEFAULT NULL,
-  `province` varchar(20) DEFAULT NULL,
-  `country` varchar(20) DEFAULT NULL,
+  `address_line1` varchar(50) NOT NULL DEFAULT '',
+  `address_line2` varchar(50) NOT NULL DEFAULT '',
+  `house_no` varchar(20) DEFAULT '',
+  `street_name` varchar(20) DEFAULT '',
+  `barangay_subdivision` varchar(20) DEFAULT '',
+  `city_municipality` varchar(20) DEFAULT '',
+  `postal_code` varchar(6) DEFAULT '',
+  `province` varchar(20) DEFAULT '',
+  `country` varchar(20) DEFAULT '',
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -140,7 +140,7 @@ CREATE TABLE `tbl_id_history` (
 CREATE TABLE `tbl_image` (
   `id` int(11) NOT NULL,
   `image_source_bin` mediumblob DEFAULT NULL,
-  `image_name` varchar(20) DEFAULT NULL,
+  `image_name` varchar(20) DEFAULT '',
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -190,11 +190,11 @@ CREATE TABLE `tbl_long_term_loan_ledger` (
 
 CREATE TABLE `tbl_name` (
   `id` int(11) NOT NULL,
-  `sex` tinyint(1) DEFAULT 0,
-  `first_name` varchar(20) DEFAULT NULL,
-  `middle_name` varchar(20) DEFAULT NULL,
-  `last_name` varchar(20) DEFAULT NULL,
-  `suffix` varchar(10) DEFAULT NULL,
+  `sex` tinyint(1) NOT NULL DEFAULT 0,
+  `first_name` varchar(20) NOT NULL DEFAULT '',
+  `middle_name` varchar(20) NOT NULL DEFAULT '',
+  `last_name` varchar(20) NOT NULL DEFAULT '',
+  `suffix` varchar(10) NOT NULL DEFAULT '',
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -239,6 +239,7 @@ CREATE TABLE `tbl_payment_details` (
   `deposit` double NOT NULL DEFAULT 0,
   `penalties` double NOT NULL DEFAULT 0,
   `remarks` varchar(100) DEFAULT NULL,
+  `balance` double NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -310,7 +311,7 @@ CREATE TABLE `tbl_violation` (
 
 CREATE TABLE `tbl_violation_type` (
   `id` int(11) NOT NULL,
-  `title` varchar(50) DEFAULT NULL,
+  `title` varchar(50) NOT NULL DEFAULT '',
   `details` varchar(100) DEFAULT NULL,
   `num_of_days` int(11) NOT NULL DEFAULT 0,
   `entity_type` varchar(20) NOT NULL DEFAULT 'DRIVER',

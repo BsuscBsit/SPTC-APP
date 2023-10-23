@@ -21,8 +21,8 @@ namespace SPTC_APP.Objects
         public string MTOPNo { get; set; }
         public double ShareCapital { get; set; }
         public double MonthlyDues { get; set; }
-        public object LoanBalance { get { return 0; } }
-        public object LongTermLoanBalance { get { return 0; } }
+        public double LoanBalance { get { return GetLoans().Sum(tmp => tmp.amount ) - GetTotalLoan(); } }
+        public double LongTermLoanBalance { get { return GetLTLoans().Sum(tmp => tmp.amountLoaned) - GetTotalLTLoan(); } }
 
         private Upsert franchise;
 
@@ -132,10 +132,18 @@ namespace SPTC_APP.Objects
         {
             return Retrieve.GetDataUsingQuery<Ledger.ShareCapital>(RequestQuery.GET_LEDGER_LIST(Table.SHARE_CAPITAL, id));
         }
+        public List<Ledger.Loan> GetLoans()
+        {
+            return Retrieve.GetDataUsingQuery<Ledger.Loan>(RequestQuery.GET_LEDGER_LIST(Table.LOAN, id));
+        }
+        public List<Ledger.LongTermLoan> GetLTLoans()
+        {
+            return Retrieve.GetDataUsingQuery<Ledger.LongTermLoan>(RequestQuery.GET_LEDGER_LIST(Table.LONG_TERM_LOAN, id));
+        }
 
         public List<PaymentDetails<Ledger.ShareCapital>> GetShareCapitalLedger()
         {
-                return Retrieve.GetDataUsingQuery<PaymentDetails<Ledger.ShareCapital>>(RequestQuery.GET_LEDGER_PAYMENT(Table.SHARE_CAPITAL, typeof(Ledger.ShareCapital).Name.ToUpper(), id));
+            return Retrieve.GetDataUsingQuery<PaymentDetails<Ledger.ShareCapital>>(RequestQuery.GET_LEDGER_PAYMENT(Table.SHARE_CAPITAL, typeof(Ledger.ShareCapital).Name.ToUpper(), id));
         }
         public List<PaymentDetails<Ledger.Loan>> GetLoanLedger()
         {
@@ -159,6 +167,27 @@ namespace SPTC_APP.Objects
         public double GetTotalLTLoan()
         {
             return GetlTLoanLedger().Sum(tmp => tmp.deposit);
+        }
+
+        public List<PaymentHistory> GetPaymentList()
+        {
+            List<PaymentHistory> mainlist = new List<PaymentHistory>();
+            
+            foreach(var res in GetShareCapitalLedger())
+            {
+                mainlist.Add((new PaymentHistory(res.displayDate, Ledger.SHARE_CAPITAL, res.referenceNo, res.balance, res.deposit)));
+            }
+            foreach (var res in GetLoanLedger())
+            {
+                mainlist.Add((new PaymentHistory(res.displayDate, Ledger.LOAN, res.referenceNo, res.balance, res.deposit)));
+            }
+            foreach (var res in GetlTLoanLedger())
+            {
+                mainlist.Add((new PaymentHistory(res.displayDate, Ledger.LT_LOAN, res.referenceNo, res.balance, res.deposit)));
+            }
+
+            EventLogger.Post($"OUT :: {mainlist.Count}");
+            return mainlist;
         }
 
     }

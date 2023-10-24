@@ -19,10 +19,11 @@ namespace SPTC_APP.Objects
         public int lastFranchiseId { get; set; } = -1;
         public DateTime BuyingDate { get; set; }
         public string MTOPNo { get; set; }
-        public double ShareCapital { get; set; }
+        public double ShareCapital { get { return GetTotalShareCapital(); } }
         public double MonthlyDues { get; set; }
         public double LoanBalance { get { return GetLoans().Sum(tmp => tmp.amount ) - GetTotalLoan(); } }
         public double LongTermLoanBalance { get { return GetLTLoans().Sum(tmp => tmp.amountLoaned) - GetTotalLTLoan(); } }
+        public string displayBuyingDate { get { return BuyingDate.ToString("MMMM dd, yyyy"); } }
 
         private Upsert franchise;
 
@@ -190,5 +191,16 @@ namespace SPTC_APP.Objects
             return mainlist;
         }
 
+        internal double SaveShareCapital()
+        {
+            Ledger.ShareCapital share = GetShareCapitals()?.FirstOrDefault() ?? null;
+            if(share != null)
+            {
+                share.lastBalance = GetTotalShareCapital();
+                share.Save();
+                return share.lastBalance;
+            }
+            return 0;
+        }
     }
 }

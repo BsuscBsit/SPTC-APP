@@ -116,6 +116,9 @@ namespace SPTC_APP.View.Pages.Input
                         
                     newFranchise.lastFranchiseId = franchise.id;
                     newFranchise.Save();
+                    Ledger.ShareCapital capital = new Ledger.ShareCapital();
+                    capital.WriteInto(newFranchise.id, DateTime.Now, franchise.SaveShareCapital(), 0);
+                    capital.Save();
                 }
                 if (franchise != null)
                 {

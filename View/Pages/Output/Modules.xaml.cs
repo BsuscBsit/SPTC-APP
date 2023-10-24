@@ -197,7 +197,23 @@ namespace SPTC_APP.View.Pages.Output
                         dgDriverViolation.Items.Add(vio);
                     }
                 }
+            }
+            else if(strmod == TRANSFER)
+            {
+                dgTransfer.Items.Clear();
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+                {
 
+                    new ColumnConfiguration("Operator.name.legalname", "OWNER", width: 100),
+                    new ColumnConfiguration("displayBuyingDate", "DATE", width: 80),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
+                };
+                new DataGridHelper<PaymentHistory>(dgTransfer, columnConfigurations);
+                List<Franchise> franchises = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_ALL_FRANCHISE_WITH_BODYNUM(franchise.BodyNumber));
+                foreach (var fran in franchises)
+                {
+                    dgDriverViolation.Items.Add(fran);
+                }
             }
         }
 
@@ -215,12 +231,5 @@ namespace SPTC_APP.View.Pages.Output
             module.Visibility = Visibility.Visible;
             return module;
         }
-
-        private void TestButton_Click(object sender, RoutedEventArgs e)
-        {
-            TestButton.Background = Brushes.Green;
-        }
     }
-
-    
 }

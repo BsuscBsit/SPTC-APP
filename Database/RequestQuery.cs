@@ -47,9 +47,8 @@ namespace SPTC_APP.Database
         public static string GET_FRANCHISE_OF(string table, string field, int id) => $"SELECT * FROM {Table.FRANCHISE} JOIN {table} AS o ON o.{Field.ID} = {field} WHERE o.{Field.ID} = {id}";
         public static string GET_VIOLATION_COUNT_OF(int id) => $"SELECT COUNT(*) FROM {Table.VIOLATION} WHERE {Field.NAME_ID} = {id} AND {Where.ALL_NOTDELETED}";
         public static string GET_VIOLATION_LIST_OF(int id, int name_id) => $"SELECT * FROM {Table.VIOLATION} WHERE {Field.FRANCHISE_ID} = {id} AND {Field.NAME_ID} = {name_id} AND {Field.ISDELETED} = 0";
-
-
-        internal static string GET_TOTAL(string table) => $"SELECT COUNT(*) FROM {table} WHERE {Field.ISDELETED} = 0";
+        public static string GET_TOTAL(string table) => $"SELECT COUNT(*) FROM {table} WHERE {Where.ALL_NOTDELETED}";
+        public static string GET_ALL_FRANCHISE_WITH_BODYNUM(string bodyNumber) => $"SELECT * FROM {Table.FRANCHISE} WHERE {Field.BODY_NUMBER} = {bodyNumber} AND {Where.ALL_NOTDELETED}";
 
         public static string GetEnumDescription(CRUDControl value)
         {
@@ -115,6 +114,7 @@ namespace SPTC_APP.Database
         public const string ID_NOTDELETED = "id=? AND isDeleted=0";
         public const string ID_DELETED = "id=? AND isDeleted=1";
         public const string LATEST_FRANCHISE = "f.id = ( SELECT MAX(id) FROM tbl_franchise WHERE body_number = f.body_number ) AND f.isDeleted=0";
+        public const string HAS_OPERATOR = "operator_id <> -1 AND body_number = (SELECT MAX(body)) AND isDeleted=0";
         public static string DRIVER_AND_OPERATOR = $"({Field.DRIVER_ID} <> -1 OR {Field.OPERATOR_ID} <> -1) AND {Field.ISDELETED}=0";
 
     }

@@ -89,38 +89,55 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnHistory_Click(object sender, RoutedEventArgs e)
         {
+            btnAddButton.Visibility = Visibility.Collapsed;
             HandleButtonClick(Modules.HISTORY, sender as Button);
             
         }
 
         private void btnCoding_Click(object sender, RoutedEventArgs e)
         {
+            btnAddButton.Visibility = Visibility.Collapsed;
             HandleButtonClick(Modules.CODING, sender as Button);
         }
 
         private void btnViolation_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (MainBody.selectedFranchise?.Driver != null)
+            {
+                btnAddButton.Content = "ADD RECORD";
+                btnAddButton.Visibility = Visibility.Visible;
+            } else
+            {
+                btnAddButton.Visibility = Visibility.Collapsed;
+            }
             HandleButtonClick(Modules.VIOLATION, sender as Button);
         }
 
         private void btnShareCapital_Click(object sender, RoutedEventArgs e)
         {
+            btnAddButton.Content = "ADD RECORD";
+            btnAddButton.Visibility = Visibility.Visible;
             HandleButtonClick(Modules.SHARECAPITAL, sender as Button);
         }
 
         private void btnLoan_Click(object sender, RoutedEventArgs e)
         {
+            btnAddButton.Content = "ADD RECORD";
+            btnAddButton.Visibility = Visibility.Visible;
             HandleButtonClick(Modules.LOAN, sender as Button);
         }
 
         private void btnLTLoan_Click(object sender, RoutedEventArgs e)
         {
+            btnAddButton.Content = "ADD RECORD";
+            btnAddButton.Visibility = Visibility.Visible;
             HandleButtonClick(Modules.LTLOAN, sender as Button);
         }
 
         private void btnTransactionHistory_Click(object sender, RoutedEventArgs e)
         {
+            btnAddButton.Content = "TRANSFER";
+            btnAddButton.Visibility = Visibility.Visible;
             HandleButtonClick(Modules.TRANSFER, sender as Button);
         }
 
@@ -142,6 +159,30 @@ namespace SPTC_APP.View.Pages.Output
                 (new Selection(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
                 UpdateContent();
             }
-        } 
+        }
+
+        private void btnAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedButton == btnViolation)
+            {
+
+            }
+            else if (selectedButton == btnShareCapital)
+            {
+
+            }
+            else if (selectedButton == btnLoan)
+            {
+
+            }
+            else if (selectedButton == btnLTLoan)
+            {
+
+            }
+            else if (selectedButton == btnTransactionHistory)
+            {
+                (new NewOptr_Drv(MainBody.selectedFranchise, General.TRANSFER_FRANCHISE_OWNERSHIP)).Show();
+            }
+        }
     }
 }

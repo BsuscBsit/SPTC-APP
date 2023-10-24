@@ -8,8 +8,17 @@
         Title="Modules" Height="450" Width="800">
     <Grid>
 
-        <Grid x:Name="TransferGrid" Visibility="Hidden">
-            <Button x:Name="TestButton" Content="TEST" Width="100" Height="20" Click="TestButton_Click"/>
+        <Grid x:Name="TransferGrid" Visibility="Visible" Width="512" Height="200">
+            <DataGrid x:Name="dgTransfer" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Width="512">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontFamily" Value="Arial"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="10"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
         </Grid>
        
         <Grid x:Name="gridLedger" Width="512" Height="200" Visibility="Hidden">

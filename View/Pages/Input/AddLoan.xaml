@@ -32,7 +32,7 @@
                            FontSize="14"
                            FontFamily="Inter" Margin="100,143,393,336"/>
 
-        <DatePicker x:Name="dpBirthdate"
+        <DatePicker x:Name="dpBdate"
                             Width="164"
                             Height="30"
                             HorizontalAlignment="Stretch"
@@ -73,13 +73,13 @@
             FontSize="14"
             FontFamily="Inter" Margin="514,143,-11,334" RenderTransformOrigin="0.308,-0.389"/>
 
-        <TextBox x:Name="tboxsContactNum"               
+        <TextBox x:Name="tboxInterest"              
             Text="" 
             Width="164"
             Height="30"
             HorizontalAlignment="Stretch" 
             VerticalAlignment="Center" Margin="514,173,82,301"/>
-        
+
         <Label Content="Penalty: "
             Grid.Column="0"
             Height="Auto" 
@@ -105,7 +105,7 @@
             FontSize="14"
             FontFamily="Inter" Margin="306,238,197,239" RenderTransformOrigin="0.308,-0.389"/>
 
-        <TextBox x:Name="tboxss"               
+        <TextBox x:Name="tboxAmount"               
             Text="" 
             Width="164"
             Height="30"
@@ -125,6 +125,18 @@
                     FontWeight="Bold"
                     FontFamily="Hetivica"
                     Background="Yellow" Margin="479,341,146,123" Click="btnSave_Click"/>
+        <Label Content="Reference No.: "
+            Grid.Column="0"
+            Height="Auto" 
+            VerticalAlignment="Top"
+            FontWeight="SemiBold"
+            FontSize="14"
+            FontFamily="Inter" Margin="514,233,-11,0" RenderTransformOrigin="0.308,-0.389"/>
+        <TextBox x:Name="tboxRefNo"               
+            Text="" 
+            Width="164"
+            Height="30" 
+            VerticalAlignment="Top" Margin="514,265,82,0"/>
 
 
     </Grid>

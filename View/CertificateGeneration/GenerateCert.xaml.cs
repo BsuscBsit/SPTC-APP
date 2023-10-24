@@ -23,5 +23,20 @@ namespace SPTC_APP.View.CertificateGeneration
         {
             InitializeComponent();
         }
+
+        private void cbViolations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

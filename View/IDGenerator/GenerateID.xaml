@@ -34,9 +34,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="15" />
-                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="15" />
-                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="15" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -104,7 +104,7 @@
                         x:Name="tboxFn"
                         Grid.Row="1"
                         Grid.Column="1"
-                        Width="NaN"
+                        Width="140"
                         Height="31"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
@@ -129,7 +129,7 @@
                         GotFocus="TextBoxGotFocus_Yey"
                         Style="{DynamicResource CommonTextBoxStyle}"
                         TabIndex="1"
-                        Text="" KeyDown="TextBox_KeyDown" />
+                        Text="" KeyDown="TextBox_KeyDown" Width="140" />
                     <Label
                         Grid.Row="3"
                         Grid.Column="0"
@@ -149,7 +149,7 @@
                         VerticalAlignment="Center"
                         GotFocus="TextBoxGotFocus_Yey"
                         Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="2" KeyDown="TextBox_KeyDown" />
+                        TabIndex="2" KeyDown="TextBox_KeyDown" Width="140" />
                     <Label
                         x:Name="lblH1"
                         Grid.Row="7"
@@ -170,7 +170,7 @@
                         IsReadOnly="True"
                         IsTabStop="False"
                         SelectedIndex="0"
-                        Style="{DynamicResource CommonComboBox}">
+                        Style="{DynamicResource CommonComboBox}" Width="140">
                         <ComboBoxItem Content="MALE" />
                         <ComboBoxItem Content="FEMALE" />
                     </ComboBox>
@@ -195,7 +195,7 @@
                         Background="White"
                         BorderBrush="Gray"
                         BorderThickness="1"
-                        CornerRadius="5">
+                        CornerRadius="5" Width="140">
                         <DatePicker
                             x:Name="bDay"
                             Grid.Column="1"
@@ -225,7 +225,7 @@
                         GotFocus="TextBoxGotFocus_Yey"
                         Style="{DynamicResource CommonTextBoxStyle}"
                         TabIndex="4"
-                        Text="" KeyDown="TextBox_KeyDown" />
+                        Text="" KeyDown="TextBox_KeyDown" Width="140" />
                     <Grid
                         Grid.Row="6"
                         Grid.ColumnSpan="2"
@@ -264,7 +264,7 @@
                         GotFocus="TextBoxGotFocus_Yey"
                         Style="{DynamicResource CommonTextBoxStyle}"
                         TabIndex="3"
-                        Text="" KeyDown="TextBox_KeyDown" />
+                        Text="" KeyDown="TextBox_KeyDown" Width="140" />
                     <Label
                         x:Name="lblH3"
                         Grid.Row="9"
@@ -284,7 +284,7 @@
                         GotFocus="TextBoxGotFocus_Yey"
                         Style="{DynamicResource CommonTextBoxStyle}"
                         TabIndex="5"
-                        Text="" KeyDown="TextBox_KeyDown" />
+                        Text="" KeyDown="TextBox_KeyDown" Width="140" />
                     <Label
                         x:Name="lblH4"
                         Grid.Row="10"
@@ -304,7 +304,7 @@
                         VerticalAlignment="Center"
                         GotFocus="TextBoxGotFocus_Yey"
                         Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="6" KeyDown="TextBox_KeyDown" />
+                        TabIndex="6" KeyDown="TextBox_KeyDown" Width="140" />
 
                 </Grid>
             </Grid>
@@ -473,7 +473,7 @@
                     Checked="MySwitch_Back"
                     Style="{DynamicResource ToggleButtonStyle}"
                     TabIndex="9"
-                    Unchecked="MySwitch_Front" />
+                    Unchecked="MySwitch_Front" IsEnabled="False" />
                 <Label
                     x:Name="drvOrOprt"
                     Margin="10,0,0,0"

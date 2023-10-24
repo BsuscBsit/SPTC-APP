@@ -218,7 +218,7 @@ namespace SPTC_APP.View
             }
             else
             {
-                drvOrOprt.Content = "This ID will be created for\nOperator.";
+                drvOrOprt.Content = "This ID will be created\nfor Operator.";
             }
         }
         private void MySwitch_Front(object sender, RoutedEventArgs e)
@@ -231,7 +231,7 @@ namespace SPTC_APP.View
             }
             else
             {
-                drvOrOprt.Content = "This ID will be created for\nDriver.";
+                drvOrOprt.Content = "This ID will be created\nfor Driver.";
             }
 
         }

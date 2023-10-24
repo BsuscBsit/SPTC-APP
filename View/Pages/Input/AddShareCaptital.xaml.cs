@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SPTC_APP.Objects;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,19 +21,43 @@ namespace SPTC_APP.View.Pages.Input
     /// </summary>
     public partial class AddShareCaptital : Window
     {
-        public AddShareCaptital()
+        private Franchise franchise;
+        public AddShareCaptital(Franchise franchise)
         {
             InitializeComponent();
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+            Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            AppState.mainwindow?.Hide();
+            this.franchise = franchise;
+            dpBdate.DisplayDate = DateTime.Now;
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            AppState.mainwindow?.Show();
+            base.OnClosing(e);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
+            if (ControlWindow.ShowDialogStatic("Adding new record", "Confirm?", Icons.NOTIFY))
+            {
+                PaymentDetails<Ledger.ShareCapital> capital = new PaymentDetails<Ledger.ShareCapital>();
+                Ledger.ShareCapital share = new Ledger.ShareCapital();
+                if(franchise.GetShareCapitals()?.FirstOrDefault() != null)
+                {
+                    share = franchise.GetShareCapitals().FirstOrDefault();
+                }
+                capital.WriteInto(share, false, false, dpBdate.DisplayDate, tboxRefNo.Text, Double.Parse(tboxAmount.Text), 0, "", share.lastBalance + Double.Parse(tboxAmount.Text));
+                share.lastBalance = share.lastBalance + Double.Parse(tboxAmount.Text);
+                share.Save();
+                capital.Save();
+                this.Close();
+            }
         }
     }
 }

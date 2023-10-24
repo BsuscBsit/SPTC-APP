@@ -126,11 +126,6 @@ namespace SPTC_APP.View.Pages.Input
                 }
                 this.Close();
             }
-            else
-            {
-
-            }
-
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

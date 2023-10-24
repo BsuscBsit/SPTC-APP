@@ -33,7 +33,7 @@
                            FontSize="14"
                            FontFamily="Inter" Margin="100,198,393,281"/>
 
-        <DatePicker x:Name="dpBirthdate"
+        <DatePicker x:Name="dpBdate"
                             Width="164"
                             Height="30"
                             HorizontalAlignment="Stretch"
@@ -68,7 +68,7 @@
 
 
 
-        <Label Content="DIV/PAT Ref "
+        <Label Content="Amount: "
             Grid.Column="0"
             Height="Auto" 
             HorizontalAlignment="Stretch" 
@@ -77,7 +77,7 @@
             FontSize="14"
             FontFamily="Inter" Margin="526,198,-23,279" RenderTransformOrigin="0.308,-0.389"/>
 
-        <TextBox x:Name="tboxsContactNum"               
+        <TextBox x:Name="tboxAmount"               
             Text="" 
             Width="164"
             Height="30"
@@ -97,6 +97,18 @@
                     FontWeight="Bold"
                     FontFamily="Hetivica"
                     Background="Yellow" Margin="479,341,146,123" Click="btnSave_Click"/>
+        <Label Content="Reference No.: "
+            Grid.Column="0"
+            Height="Auto" 
+            VerticalAlignment="Top"
+            FontWeight="SemiBold"
+            FontSize="14"
+            FontFamily="Inter" Margin="293,268,210,0" RenderTransformOrigin="0.308,-0.389"/>
+        <TextBox x:Name="tboxRefNo"               
+            Text="" 
+            Width="164"
+            Height="30" 
+            VerticalAlignment="Top" Margin="293,300,303,0"/>
 
 
 

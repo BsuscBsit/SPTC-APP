@@ -1,4 +1,5 @@
-﻿using SPTC_APP.Objects;
+﻿using SPTC_APP.Database;
+using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
 using System;
 using System.Collections.Generic;
@@ -170,6 +171,27 @@ namespace SPTC_APP.View.Pages.Output
                             imgs[i].Source = bitmapImage;
                         }
                     }
+                }
+
+            }
+            else if(strmod == VIOLATION)
+            {
+                dgDriverViolation.Items.Clear();
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+                {
+
+                    new ColumnConfiguration("violationLevelCount", "NO.", width: 100),
+                    new ColumnConfiguration("violationType", "VIOLATION", width: 80),
+                    new ColumnConfiguration("dDate", "DATE", width: 100),
+                    new ColumnConfiguration("dDateStart", "FROM: ", width: 100),
+                    new ColumnConfiguration("dDateEnd", "TO: ", width: 100),
+                    new ColumnConfiguration("remarks", "REMARKS", width: 100),
+                };
+                new DataGridHelper<PaymentHistory>(dgDriverViolation, columnConfigurations);
+                List<Violation> violationList = Retrieve.GetDataUsingQuery<Violation>(RequestQuery.GET_VIOLATION_LIST_OF(franchise.id, franchise.Driver?.name?.id ?? -1));
+                foreach(var vio in violationList)
+                {
+                    dgDriverViolation.Items.Add(vio);
                 }
 
             }

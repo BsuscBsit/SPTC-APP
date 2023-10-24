@@ -152,10 +152,10 @@ namespace SPTC_APP.Objects
                 name = new Upsert(Table.NAME, id);
             }
             name.Insert("sex", sex);
-            name.Insert("first_name", firstname);
-            name.Insert("middle_name", middlename);
-            name.Insert("last_name", lastname);
-            name.Insert("suffix", suffix);
+            name.Insert("first_name", firstname ?? "");
+            name.Insert("middle_name", middlename ?? "");
+            name.Insert("last_name", lastname ?? "");
+            name.Insert("suffix", suffix ?? "");
             name.Save();
             id = name.id;
 
@@ -244,8 +244,8 @@ namespace SPTC_APP.Objects
                 address = new Upsert(Table.ADDRESS, id);
             }
 
-            address.Insert(Field.ADDRESSLINE1, this.addressline1);
-            address.Insert(Field.ADDRESSLINE2, this.addressline2);
+            address.Insert(Field.ADDRESSLINE1, this.addressline1 ?? "");
+            address.Insert(Field.ADDRESSLINE2, this.addressline2 ?? "");
             address.Insert(Field.HOUSENO, houseNo);
             address.Insert(Field.STREETNAME, streetname);
             address.Insert(Field.BARANGAY, barangay);

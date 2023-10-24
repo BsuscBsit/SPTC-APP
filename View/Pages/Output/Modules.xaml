@@ -43,7 +43,7 @@
 
 
         </Grid>
-        <Grid x:Name="ViolationGrid" Width="492" Height="100" Visibility="Hidden">
+        <Grid x:Name="ViolationGrid" Width="492" Height="200" Visibility="Hidden">
             <Label Content="Driver's Name " HorizontalAlignment="Left" Margin="10,-2,0,0" VerticalAlignment="Top"
                 FontWeight="Medium"
                 FontSize="8"
@@ -65,85 +65,9 @@
                 FontFamily="Arial"
                 FontStretch="SemiExpanded"
                 FontSize="8" RenderTransformOrigin="0.463,1.421"/>
-
-
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="66" Margin="0,33,0,0" VerticalAlignment="Top" Width="492"/>
-
-
-            <Label Content="NO. OF OFFENCE" HorizontalAlignment="Left" Margin="0,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9" />
-            <Label Content="VIOLATION" HorizontalAlignment="Left" Margin="102,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="DATE" HorizontalAlignment="Left" Margin="188,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="FROM" HorizontalAlignment="Left" Margin="268,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="TO" HorizontalAlignment="Left" Margin="353,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="REMARKS" HorizontalAlignment="Left" Margin="413,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="1" HorizontalAlignment="Left" Margin="35,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9" />
-            <Label Content="KALAWIT" HorizontalAlignment="Left" Margin="107,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="01 - 24 - 2023" HorizontalAlignment="Left" Margin="172,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="01 - 24 - 2023" HorizontalAlignment="Left" Margin="256,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="02 - 24 - 2023" HorizontalAlignment="Left" Margin="336,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="1 MONTH" HorizontalAlignment="Left" Margin="413,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
+            <DataGrid x:Name="dgDriverViolation" HorizontalAlignment="Left" Height="166" Margin="0,33,0,0" VerticalAlignment="Top" Width="492"/>
         </Grid>
-        <Grid x:Name="CodingGrid" Height="140" Width="477" Visibility="Visible">
+        <Grid x:Name="CodingGrid" Height="140" Width="477" Visibility="Hidden">
             <Label Content="0-1 MONDAY " HorizontalAlignment="Left" Margin="47,0,0,0" VerticalAlignment="Top"
                 FontWeight="Normal"
                 FontFamily="Arial"

@@ -62,7 +62,13 @@ namespace SPTC_APP.View.Pages.Input
                     drv.address.barangay = tboxsBarangay.Text;
                     drv.address.streetname = tboxStreetName.Text;
                     drv.address.UpdateAddressLines();
-                    franchise.Driver = drv;
+                    if (franchise != null)
+                    {
+                        franchise.Driver = drv;
+                    } else
+                    {
+                        drv.Save();
+                    }
                 }
                 else if (type == General.OPERATOR)
                 {
@@ -81,7 +87,13 @@ namespace SPTC_APP.View.Pages.Input
                     optr.address.barangay = tboxsBarangay.Text;
                     optr.address.streetname = tboxStreetName.Text;
                     optr.address.UpdateAddressLines();
-                    franchise.Operator = optr;
+                    if (franchise != null)
+                    {
+                        franchise.Operator = optr;
+                    } else
+                    {
+                        optr.Save();
+                    }
                 }
                 else if (type == General.TRANSFER_FRANCHISE_OWNERSHIP)
                 {
@@ -105,7 +117,10 @@ namespace SPTC_APP.View.Pages.Input
                     newFranchise.lastFranchiseId = franchise.id;
                     newFranchise.Save();
                 }
-                franchise.Save();
+                if (franchise != null)
+                {
+                    franchise.Save();
+                }
                 this.Close();
             }
             else

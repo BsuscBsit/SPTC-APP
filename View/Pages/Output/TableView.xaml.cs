@@ -94,6 +94,7 @@ namespace SPTC_APP.View.Pages.Output
 
                     if (batch.Count == 0)
                         break;
+
                     foreach (var obj in batch)
                     {
                         TableGrid.Items.Add(obj);
@@ -131,6 +132,7 @@ namespace SPTC_APP.View.Pages.Output
 
                     if (batch.Count == 0)
                         break;
+
                     foreach (var obj in batch)
                     {
                         obj.UpdateFranchise();
@@ -213,11 +215,11 @@ namespace SPTC_APP.View.Pages.Output
                     oholder = (Operator)grid.SelectedItem;
                     ValuePairFI(lblF1, "Operator Name: ", lblI1, oholder?.name?.legalName?.ToString());
                     ValuePairFI(lblF2, "Date Of Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
-                    ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber.ToString() ?? "");
+                    ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber?.ToString() ?? "");
                     ValuePairFI(lblF4, "Loan Balance: ", lblI4, MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "");
                     ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "");
-                    ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber.ToString() ?? "");
-                    ValuePairFI(lblF6, "VOTERS ID No.: ", lblI6, MainBody.selectedFranchise?.Operator?.votersNumbewr.ToString() ?? "");
+                    ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
+                    ValuePairFI(lblF6, "VOTERS ID No.: ", lblI6, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
                     imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
                 }
                 else if (table == Table.DRIVER)
@@ -227,8 +229,8 @@ namespace SPTC_APP.View.Pages.Output
                     ValuePairFI(lblF1, "Driver's Name: ", lblI1, dholder?.name?.legalName?.ToString());
                     ValuePairFI(lblF2, "Date of Membership: ", lblI2, MainBody.selectedFranchise?.Driver?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Address: ", lblI3, MainBody.selectedFranchise?.Driver?.address?.ToString() ?? "");
-                    ValuePairFI(lblF4, "Body No.: ", lblI4, MainBody.selectedFranchise?.BodyNumber.ToString() ?? "");
-                    ValuePairFI(lblF5, "License No: ", lblI5, MainBody.selectedFranchise?.LicenseNO.ToString() ?? "");
+                    ValuePairFI(lblF4, "Body No.: ", lblI4, MainBody.selectedFranchise?.BodyNumber?.ToString() ?? "");
+                    ValuePairFI(lblF5, "License No: ", lblI5, MainBody.selectedFranchise?.LicenseNO?.ToString() ?? "");
                     ValuePairFI(lblF6, "Violation:  ", lblI6, MainBody.selectedFranchise?.Driver?.violationCount.ToString() ?? "");
                     imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Driver?.image?.GetSource();
                     if (MainBody.selectedFranchise?.Driver?.isSuspended ?? false)
@@ -243,6 +245,16 @@ namespace SPTC_APP.View.Pages.Output
                         lblI7.Foreground = Brushes.Green;
                         lblI7.FontWeight = FontWeights.Black;
                     }
+                }
+                if (MainBody.selectedFranchise == null)
+                {
+                    btnAddViolation.IsEnabled = false;
+                    btnGenerateid.IsEnabled = false;
+                }
+                else
+                {
+                    btnAddViolation.IsEnabled = true;
+                    btnGenerateid.IsEnabled = true;
                 }
             }
 

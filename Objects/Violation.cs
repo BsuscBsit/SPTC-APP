@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
 using System;
+using System.Linq;
 
 namespace SPTC_APP.Objects
 {
@@ -15,6 +16,27 @@ namespace SPTC_APP.Objects
         public DateTime? suspensionEnd { get; set; }
         public string remarks { get; set; }
         public int name_id { get; set; }
+
+        public string dDate
+        {
+            get { return violationDate.ToString("MMM dd, yyyy"); }
+        }
+        public string dDateStart
+        {
+            get { return suspensionStart?.ToString("MMM dd, yyyy"); }
+        }
+        public string dDateEnd
+        {
+            get { return suspensionEnd?.ToString("MMM dd, yyyy"); }
+        }
+
+        public string violationType
+        {
+            get
+            {
+                return Retrieve.GetData<ViolationType>(Table.VIOLATION_TYPE, Select.ALL, Where.ID_NOTDELETED, new MySqlParameter(Field.ID, violationTypeId)).FirstOrDefault().title.ToString();
+            }
+        }
 
         private Upsert violation;
 

@@ -23,7 +23,7 @@ namespace SPTC_APP.Objects
         public int violationCount { 
             get
             {
-                return Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_VIOLATION_COUNT_OF(name.id)).FirstOrDefault();
+                return Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_VIOLATION_COUNT_OF(name?.id ?? -1)).FirstOrDefault();
             } 
         }
         public bool isSuspended {
@@ -138,7 +138,7 @@ namespace SPTC_APP.Objects
         }
         public void UpdateFranchise()
         {
-            this.franchise = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.OPERATOR, Field.OPERATOR_ID, id)).FirstOrDefault();
+            this.franchise = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.DRIVER, Field.DRIVER_ID, id)).FirstOrDefault();
         }
     }
 }

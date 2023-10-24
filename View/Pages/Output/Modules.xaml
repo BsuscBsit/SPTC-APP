@@ -8,8 +8,17 @@
         Title="Modules" Height="450" Width="800">
     <Grid>
 
-        <Grid x:Name="TransferGrid" Visibility="Hidden">
-            <Button x:Name="TestButton" Content="TEST" Width="100" Height="20" Click="TestButton_Click"/>
+        <Grid x:Name="TransferGrid" Visibility="Visible" Width="512" Height="200">
+            <DataGrid x:Name="dgTransfer" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Width="512">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontFamily" Value="Arial"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="10"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
         </Grid>
        
         <Grid x:Name="gridLedger" Width="512" Height="200" Visibility="Hidden">
@@ -43,12 +52,12 @@
 
 
         </Grid>
-        <Grid x:Name="ViolationGrid" Width="492" Height="100" Visibility="Hidden">
+        <Grid x:Name="ViolationGrid" Width="492" Height="200" Visibility="Hidden">
             <Label Content="Driver's Name " HorizontalAlignment="Left" Margin="10,-2,0,0" VerticalAlignment="Top"
                 FontWeight="Medium"
                 FontSize="8"
                 Foreground="DarkGray"/>
-            <Label Content="Arnold De Vera" HorizontalAlignment="Left" Margin="66,-2,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblDriverName" Content="" HorizontalAlignment="Left" Margin="66,-2,0,0" VerticalAlignment="Top"
                 Foreground="Black"
                 FontWeight="DemiBold"
                 FontFamily="Arial"
@@ -65,83 +74,7 @@
                 FontFamily="Arial"
                 FontStretch="SemiExpanded"
                 FontSize="8" RenderTransformOrigin="0.463,1.421"/>
-
-
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="66" Margin="0,33,0,0" VerticalAlignment="Top" Width="492"/>
-
-
-            <Label Content="NO. OF OFFENCE" HorizontalAlignment="Left" Margin="0,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9" />
-            <Label Content="VIOLATION" HorizontalAlignment="Left" Margin="102,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="DATE" HorizontalAlignment="Left" Margin="188,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="FROM" HorizontalAlignment="Left" Margin="268,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="TO" HorizontalAlignment="Left" Margin="353,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="REMARKS" HorizontalAlignment="Left" Margin="413,35,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="1" HorizontalAlignment="Left" Margin="35,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9" />
-            <Label Content="KALAWIT" HorizontalAlignment="Left" Margin="107,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="01 - 24 - 2023" HorizontalAlignment="Left" Margin="172,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="01 - 24 - 2023" HorizontalAlignment="Left" Margin="256,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="02 - 24 - 2023" HorizontalAlignment="Left" Margin="336,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
-            <Label Content="1 MONTH" HorizontalAlignment="Left" Margin="413,63,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
+            <DataGrid x:Name="dgDriverViolation" HorizontalAlignment="Left" Height="166" Margin="0,33,0,0" VerticalAlignment="Top" Width="492"/>
         </Grid>
         <Grid x:Name="CodingGrid" Height="140" Width="477" Visibility="Hidden">
             <Label Content="0-1 MONDAY " HorizontalAlignment="Left" Margin="47,0,0,0" VerticalAlignment="Top"
@@ -149,7 +82,7 @@
                 FontFamily="Arial"
                 FontSize="11"
                 Foreground="DarkGray"/>
-            <Label Content="2-3 WEDNESDAY " HorizontalAlignment="Left" Margin="186,0,0,0" VerticalAlignment="Top"
+            <Label Content="4-5 WEDNESDAY " HorizontalAlignment="Left" Margin="186,0,0,0" VerticalAlignment="Top"
                 FontWeight="Normal"
                 FontFamily="Arial"
                 FontSize="11"
@@ -214,115 +147,44 @@
                 FontFamily="Arial"
                 FontStretch="SemiExpanded"
                 FontSize="11"/>
-
             <Label Content="SAT" HorizontalAlignment="Left" Margin="359,68,0,0" VerticalAlignment="Top"
                 Foreground="Black"
                 FontWeight="DemiBold"
                 FontFamily="Arial"
                 FontStretch="SemiExpanded"
                 FontSize="11" RenderTransformOrigin="0.742,-0.478"/>
-
             <Label Content="SUN" HorizontalAlignment="Left" Margin="412,68,0,0" VerticalAlignment="Top"
                 Foreground="Black"
                 FontWeight="DemiBold"
                 FontFamily="Arial"
                 FontStretch="SemiExpanded"
                 FontSize="11"/>
-            <Label Content="101" HorizontalAlignment="Left" Margin="29,94,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblBodyNum" Content="101" HorizontalAlignment="Left" Margin="29,94,0,0" VerticalAlignment="Top"
                 Foreground="Black"
                 FontWeight="SemiBold"
                 FontFamily="Arial"
                 FontStretch="SemiExpanded"
                 FontSize="12" RenderTransformOrigin="0.333,0.455"/>
+
+            <Image x:Name="imgMon" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="115, 0, 0, 20"/>
+            <Image x:Name="imgTue" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="165, 0, 0, 20"/>
+            <Image x:Name="imgWed" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="215, 0, 0, 20"/>
+            <Image x:Name="imgThu" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="265, 0, 0, 20"/>
+            <Image x:Name="imgFri" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="315, 0, 0, 20"/>
+            <Image x:Name="imgSat" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="365, 0, 0, 20"/>
+            <Image x:Name="imgSun" Source="../../Images/icons/check.png" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="415, 0, 0, 20"/>
         </Grid>
-        <Grid x:Name="HistoryGrid" Width="473" Height="131" Visibility="Hidden">
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="131" VerticalAlignment="Top" Width="473"/>
-
-            <Label Content="DATE" HorizontalAlignment="Left" Margin="13,6,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content="LEDGER TYPE" HorizontalAlignment="Left" Margin="103,6,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content="REFERENCE NO." HorizontalAlignment="Left" Margin="223,6,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content="BALANCE" HorizontalAlignment="Left" Margin="332,6,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content="PAYMENT" HorizontalAlignment="Left" Margin="401,6,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 02 - 01 - 2023" HorizontalAlignment="Left" Margin="0,44,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" SHARE CAPITAL" HorizontalAlignment="Left" Margin="102,44,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 27736277" HorizontalAlignment="Left" Margin="245,44,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 10,000" HorizontalAlignment="Left" Margin="335,44,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 130.00" HorizontalAlignment="Left" Margin="408,44,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 09 - 04 - 2023" HorizontalAlignment="Left" Margin="0,74,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content="LOAN" HorizontalAlignment="Left" Margin="125,74,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 28538541" HorizontalAlignment="Left" Margin="245,74,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-            <Label Content=" 400.00" HorizontalAlignment="Left" Margin="408,74,0,0" VerticalAlignment="Top"
-                Foreground="Black"
-                FontWeight="DemiBold"
-                FontFamily="Helvetica"
-                FontStretch="SemiExpanded"
-                FontSize="11"/>
-
+        <Grid x:Name="HistoryGrid" Width="512" Height="200" Visibility="Hidden">
+            <DataGrid x:Name="dgHistory" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="512">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontFamily" Value="Arial"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="10"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
         </Grid>
     </Grid>
 </Window>

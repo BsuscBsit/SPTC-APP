@@ -141,7 +141,6 @@ namespace SPTC_APP.Objects
         public void UpdateFranchise()
         {
             this.franchise = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.OPERATOR, Field.OPERATOR_ID, id)).FirstOrDefault();
-            //EventLogger.Post($"OUT :: {id} {Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_FRANCHISE_OF(Table.OPERATOR, Field.OPERATOR_ID, id)).Count}");
         }
     }
 }

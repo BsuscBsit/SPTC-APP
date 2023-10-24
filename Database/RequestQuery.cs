@@ -25,6 +25,7 @@ namespace SPTC_APP.Database
         public static string GET_DRIVERS_WITHOUT_FRANCHISE = $"SELECT d.* FROM {Table.DRIVER} AS d LEFT JOIN {Table.FRANCHISE} AS f ON f.{Field.DRIVER_ID} = d.{Field.ID} WHERE f.{Field.DRIVER_ID} IS NULL AND d.{Where.ALL_NOTDELETED}";
         public static string GET_FRANCHISE_WITH_DRIVER = $"SELECT * FROM {Table.FRANCHISE} WHERE {Field.DRIVER_ID} <> -1 AND {Where.ALL}";
 
+        public static string GET_TOTAL_SHARES = $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE {Field.LEDGER_TYPE} = \"SHARECAPITAL\" AND {Where.ALL_NOTDELETED}";
 
         public static string SEARCH(string text) =>
             $"SELECT f.* FROM {Table.FRANCHISE} f LEFT JOIN {Table.OPERATOR} O ON f.{Field.OPERATOR_ID}=O.{Field.ID} LEFT JOIN {Table.DRIVER} D ON f.{Field.DRIVER_ID}=D.{Field.ID} " +
@@ -45,6 +46,9 @@ namespace SPTC_APP.Database
             $"SELECT * FROM {Table.PAYMENT_DETAILS} AS pd LEFT JOIN {table} AS scl ON pd.{Field.LEDGER_ID} = scl.{Field.ID} AND pd.{Field.LEDGER_TYPE} = \"{type}\" WHERE scl.{Field.FRANCHISE_ID} = {id} AND pd.{Where.ALL_NOTDELETED} ORDER BY pd.{Field.DATE} DESC";
         public static string GET_FRANCHISE_OF(string table, string field, int id) => $"SELECT * FROM {Table.FRANCHISE} JOIN {table} AS o ON o.{Field.ID} = {field} WHERE o.{Field.ID} = {id}";
         public static string GET_VIOLATION_COUNT_OF(int id) => $"SELECT COUNT(*) FROM {Table.VIOLATION} WHERE {Field.NAME_ID} = {id} AND {Where.ALL_NOTDELETED}";
+        public static string GET_VIOLATION_LIST_OF(int id, int name_id) => $"SELECT * FROM {Table.VIOLATION} WHERE {Field.FRANCHISE_ID} = {id} AND {Field.NAME_ID} = {name_id} AND {Field.ISDELETED} = 0";
+        public static string GET_TOTAL(string table) => $"SELECT COUNT(*) FROM {table} WHERE {Where.ALL_NOTDELETED}";
+        public static string GET_ALL_FRANCHISE_WITH_BODYNUM(string bodyNumber) => $"SELECT * FROM {Table.FRANCHISE} WHERE {Field.BODY_NUMBER} = {bodyNumber} AND {Where.ALL_NOTDELETED}";
 
         public static string GetEnumDescription(CRUDControl value)
         {
@@ -110,6 +114,7 @@ namespace SPTC_APP.Database
         public const string ID_NOTDELETED = "id=? AND isDeleted=0";
         public const string ID_DELETED = "id=? AND isDeleted=1";
         public const string LATEST_FRANCHISE = "f.id = ( SELECT MAX(id) FROM tbl_franchise WHERE body_number = f.body_number ) AND f.isDeleted=0";
+        public const string HAS_OPERATOR = "operator_id <> -1 AND body_number = (SELECT MAX(body)) AND isDeleted=0";
         public static string DRIVER_AND_OPERATOR = $"({Field.DRIVER_ID} <> -1 OR {Field.OPERATOR_ID} <> -1) AND {Field.ISDELETED}=0";
 
     }
@@ -195,6 +200,7 @@ namespace SPTC_APP.Database
         public const string REFERENCE_NO = "reference_no";
         public const string DEPOSIT = "deposit";
         public const string PENALTIES = "penalties";
+        public const string BALANCE = "balance";
 
         // LOAN
         public const string AMOUNT = "amount";

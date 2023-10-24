@@ -1,4 +1,5 @@
-﻿using SPTC_APP.Objects;
+﻿using SPTC_APP.Database;
+using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Image = System.Windows.Controls.Image;
 
 namespace SPTC_APP.View.Pages.Output
 {
@@ -59,8 +62,9 @@ namespace SPTC_APP.View.Pages.Output
 
         private void RenderFranchiseInformation()
         {
-            if(strmod == SHARECAPITAL)
-            {
+            if (strmod == SHARECAPITAL)
+            { 
+                dgLedger.Items.Clear();
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
                     
@@ -78,8 +82,10 @@ namespace SPTC_APP.View.Pages.Output
                     dgLedger.Items.Add(tmp);
                 }
                 lblTotalLedger.Content = franchise.GetTotalShareCapital().ToString("0.00");
-            } else if (strmod == LOAN)
+            } 
+            else if (strmod == LOAN)
             {
+                dgLedger.Items.Clear();
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
@@ -98,8 +104,10 @@ namespace SPTC_APP.View.Pages.Output
                     dgLedger.Items.Add(tmp);
                 }
                 lblTotalLedger.Content = franchise.GetTotalLoan().ToString("0.00");
-            } else if (strmod == LTLOAN)
+            } 
+            else if (strmod == LTLOAN)
             {
+                dgLedger.Items.Clear();
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
@@ -119,6 +127,94 @@ namespace SPTC_APP.View.Pages.Output
                 }
                 lblTotalLedger.Content = franchise.GetTotalLTLoan().ToString("0.00");
             }
+            else if(strmod == HISTORY)
+            {
+                dgHistory.Items.Clear();
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+                {
+                    
+                    new ColumnConfiguration("date", "DATE", width: 100),
+                    new ColumnConfiguration("ledgerType", "LEDGER TYPE", width: 80),
+                    new ColumnConfiguration("referenceNo", "REFERENCE NO.", width: 100),
+                    new ColumnConfiguration("balance", "BALANCE", width: 100),
+                    new ColumnConfiguration("payment", "PAYMENT", width: 100),
+                };
+                DataGridHelper<PaymentHistory> dataGridHelper = new DataGridHelper<PaymentHistory>(dgHistory, columnConfigurations);
+
+
+                foreach(var tmp in franchise.GetPaymentList())
+                {
+                    dgHistory.Items.Add(tmp);
+                }
+            }
+            else if(strmod == CODING)
+            {
+                lblBodyNum.Content = franchise.BodyNumber;
+                List<Image> imgs = new List<Image> { imgMon, imgTue, imgWed, imgThu, imgFri };
+
+                for (int i = 0; i < imgs.Count; i++)
+                { 
+                    if (int.TryParse(franchise.BodyNumber, out int bodyNumber))
+                    {
+                        int lastDigit = bodyNumber % 10;
+
+                        if (i % 5 == lastDigit / 2) 
+                        {
+                            Uri uri = new Uri("../../Images/icons/cross.png", UriKind.Relative);
+                            BitmapImage bitmapImage = new BitmapImage(uri);
+                            imgs[i].Source = bitmapImage;
+                        }
+                        else
+                        {
+                            Uri uri = new Uri("../../Images/icons/check.png", UriKind.Relative);
+                            BitmapImage bitmapImage = new BitmapImage(uri);
+                            imgs[i].Source = bitmapImage;
+                        }
+                    }
+                }
+
+            }
+            else if(strmod == VIOLATION)
+            {
+                dgDriverViolation.Items.Clear();
+                lblDriverName.Content = franchise.Driver?.name?.legalName?.ToString() ?? "N/A";
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+                {
+
+                    new ColumnConfiguration("violationLevelCount", "NO.", width: 100),
+                    new ColumnConfiguration("violationType", "VIOLATION", width: 80),
+                    new ColumnConfiguration("dDate", "DATE", width: 100),
+                    new ColumnConfiguration("dDateStart", "FROM: ", width: 100),
+                    new ColumnConfiguration("dDateEnd", "TO: ", width: 100),
+                    new ColumnConfiguration("remarks", "REMARKS", width: 100),
+                };
+                new DataGridHelper<PaymentHistory>(dgDriverViolation, columnConfigurations);
+                if (franchise.Driver != null)
+                {
+                    List<Violation> violationList = Retrieve.GetDataUsingQuery<Violation>(RequestQuery.GET_VIOLATION_LIST_OF(franchise.id, franchise.Driver.name?.id ?? -1));
+                    foreach (var vio in violationList)
+                    {
+                        dgDriverViolation.Items.Add(vio);
+                    }
+                }
+            }
+            else if(strmod == TRANSFER)
+            {
+                dgTransfer.Items.Clear();
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+                {
+
+                    new ColumnConfiguration("Operator.name.legalname", "OWNER", width: 100),
+                    new ColumnConfiguration("displayBuyingDate", "DATE", width: 80),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
+                };
+                new DataGridHelper<PaymentHistory>(dgTransfer, columnConfigurations);
+                List<Franchise> franchises = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_ALL_FRANCHISE_WITH_BODYNUM(franchise.BodyNumber));
+                foreach (var fran in franchises)
+                {
+                    dgDriverViolation.Items.Add(fran);
+                }
+            }
         }
 
         public Grid Fetch()
@@ -135,12 +231,5 @@ namespace SPTC_APP.View.Pages.Output
             module.Visibility = Visibility.Visible;
             return module;
         }
-
-        private void TestButton_Click(object sender, RoutedEventArgs e)
-        {
-            TestButton.Background = Brushes.Green;
-        }
     }
-
-    
 }

@@ -6,6 +6,9 @@ namespace SPTC_APP.Objects
 {
     public class Ledger
     {
+        public const string SHARE_CAPITAL = "SHARE CAPITAL";
+        public const string LOAN = "LOAN";
+        public const string LT_LOAN = "LT_LOAN";
         public class Loan
         {
             public int id { get; private set; }
@@ -87,7 +90,6 @@ namespace SPTC_APP.Objects
                 return false;
             }
         }
-
         public class ShareCapital
         {
             public int id { get; private set; }
@@ -154,7 +156,6 @@ namespace SPTC_APP.Objects
                 return false;
             }
         }
-
         public class LongTermLoan
         {
             public int id { get; private set; }

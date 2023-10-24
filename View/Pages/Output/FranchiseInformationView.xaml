@@ -204,6 +204,7 @@
 
             <Button
                x:Name="btnAddButton"
+                Visibility="Collapsed"
                 Style="{DynamicResource ControlledButtonStyle}"
                 BorderThickness="1"
                 Background="White"
@@ -214,7 +215,7 @@
                 Content="ADD RECORD" Grid.Row="1"
                 FontFamily="Arial"
                 FontWeight="Bold"
-                FontSize="10" Margin="0,0,32,18"/>
+                FontSize="10" Margin="0,0,32,18" Click="btnAddButton_Click"/>
 
         </Grid>
         <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="37,26,0,0" VerticalAlignment="Top" Click="btnBack_Click"/>

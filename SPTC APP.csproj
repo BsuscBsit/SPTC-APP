@@ -575,5 +575,11 @@
   <ItemGroup>
     <Resource Include="Add Driver.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Images\icons\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Images\icons\cross.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

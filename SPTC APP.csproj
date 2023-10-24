@@ -277,17 +277,8 @@
     <Compile Include="View\Pages\Input\AddShareCaptital.xaml.cs">
       <DependentUpon>AddShareCaptital.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Input\ChangeDriver.xaml.cs">
-      <DependentUpon>ChangeDriver.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Pages\Input\ChangeOptr.xaml.cs">
-      <DependentUpon>ChangeOptr.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Pages\Input\EditProfile.xaml.cs">
       <DependentUpon>EditProfile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Pages\Input\NewDriver.xaml.cs">
-      <DependentUpon>NewDriver.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Input\NewOptr_Drv.xaml.cs">
       <DependentUpon>NewOptr_Drv.xaml</DependentUpon>
@@ -403,19 +394,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Input\ChangeDriver.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Pages\Input\ChangeOptr.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Pages\Input\EditProfile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Pages\Input\NewDriver.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -565,15 +544,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Images\BTarnpzpc.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ChangeDriver.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="changeoprt.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Add Driver.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Images\icons\check.png" />

@@ -24,11 +24,17 @@ namespace SPTC_APP.View.IDGenerator.Previews
             LoadFranchises();
 
             AppState.mainwindow?.Hide();
-            foreach (var item in PrintPreview.GetPrintIDs())
+            if (PrintPreview.GetPrintIDs().Count > 0)
             {
-                string res = item.Value ? "Driver" : "Operator";
-                tbCurrentPrintQueue.Text += $"\n B#: {item.Key} : {res}"; 
+                tbCurrentPrintQueue.Content = "";
+                tbCurrentPrintQueue.FontStyle = FontStyles.Normal;
+                foreach (var item in PrintPreview.GetPrintIDs())
+                {
+                    string res = item.Value ? "Driver" : "Operator";
+                    tbCurrentPrintQueue.Content += $"\n B#: {item.Key} : {res}";
+                }
             }
+            DraggingHelper.DragWindow(topBar);
         }
         protected override void OnClosing(CancelEventArgs e)
         {

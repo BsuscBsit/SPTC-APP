@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf.WellKnownTypes;
+using SPTC_APP.Database;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,6 +35,9 @@ namespace SPTC_APP.View.Pages.Output
             btnPieForward.Visibility = Visibility.Collapsed;
             pieMonth = DateTime.Now.Month;
             pieYear = DateTime.Now.Year;
+            tbTotalOperator.Text = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_TOTAL(Table.OPERATOR)).FirstOrDefault().ToString();
+            tbTotalDriver.Text = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_TOTAL(Table.DRIVER)).FirstOrDefault().ToString();
+            tbTotalShares.Text = "P " + Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_TOTAL_SHARES).FirstOrDefault().ToString("0.00");
         }
 
         private async Task UpdateLFContent(int currentMonth, int currentYear)
@@ -447,6 +451,11 @@ namespace SPTC_APP.View.Pages.Output
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
             (new PrintPreview()).Show();
+        }
+
+        private void btnViewFullDetails_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

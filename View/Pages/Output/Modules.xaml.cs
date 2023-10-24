@@ -177,6 +177,7 @@ namespace SPTC_APP.View.Pages.Output
             else if(strmod == VIOLATION)
             {
                 dgDriverViolation.Items.Clear();
+                lblDriverName.Content = franchise.Driver?.name?.legalName?.ToString() ?? "N/A";
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
@@ -188,10 +189,13 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("remarks", "REMARKS", width: 100),
                 };
                 new DataGridHelper<PaymentHistory>(dgDriverViolation, columnConfigurations);
-                List<Violation> violationList = Retrieve.GetDataUsingQuery<Violation>(RequestQuery.GET_VIOLATION_LIST_OF(franchise.id, franchise.Driver?.name?.id ?? -1));
-                foreach(var vio in violationList)
+                if (franchise.Driver != null)
                 {
-                    dgDriverViolation.Items.Add(vio);
+                    List<Violation> violationList = Retrieve.GetDataUsingQuery<Violation>(RequestQuery.GET_VIOLATION_LIST_OF(franchise.id, franchise.Driver.name?.id ?? -1));
+                    foreach (var vio in violationList)
+                    {
+                        dgDriverViolation.Items.Add(vio);
+                    }
                 }
 
             }

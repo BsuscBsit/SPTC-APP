@@ -220,6 +220,10 @@ namespace SPTC_APP.Database
                     {
                         return (T)(object)Int32.Parse((string)value.ToString());
                     }
+                    else if (type == typeof(double))
+                    {
+                        return (T)(object)Double.Parse((string)value.ToString());
+                    }
                     else
                     {
                         return (T)value;

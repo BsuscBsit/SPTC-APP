@@ -48,7 +48,7 @@
                 FontWeight="Medium"
                 FontSize="8"
                 Foreground="DarkGray"/>
-            <Label Content="Arnold De Vera" HorizontalAlignment="Left" Margin="66,-2,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblDriverName" Content="" HorizontalAlignment="Left" Margin="66,-2,0,0" VerticalAlignment="Top"
                 Foreground="Black"
                 FontWeight="DemiBold"
                 FontFamily="Arial"

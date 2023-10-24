@@ -1,0 +1,131 @@
+﻿<Window x:Class="SPTC_APP.View.Pages.Input.AddLoan"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SPTC_APP.View.Pages.Input"
+        mc:Ignorable="d" Width="760" >
+    <Grid x:Name="AddShareCapital" HorizontalAlignment="Right" Width="760" Background="WhiteSmoke">
+        <Rectangle Height="40" Stroke="#FEF301" Fill="#FEF301"  VerticalAlignment="Top" Width="NaN"/>
+        <Label 
+               Content="ADD LOAN" 
+               Height="Auto" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Center"
+               Foreground="Gray" 
+               FontSize="20"
+               FontFamily="Inter"
+               Margin="65,61,0,409"/>
+
+        <Grid Margin="0,0,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Label Content="Date: "
+                           Grid.Column="0"
+                           Height="25" 
+                           HorizontalAlignment="Stretch" 
+                           VerticalAlignment="Center"
+                           FontWeight="SemiBold"
+                           FontSize="14"
+                           FontFamily="Inter" Margin="100,143,393,336"/>
+
+        <DatePicker x:Name="dpBirthdate"
+                            Width="164"
+                            Height="30"
+                            HorizontalAlignment="Stretch"
+                            Background="White"
+                            Margin="100,173,496,301"/>
+
+
+        <Label Content="Principal: "
+            Grid.Column="0"
+            Height="Auto" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center"
+            FontWeight="SemiBold"
+            FontSize="14"
+            FontFamily="Inter" Margin="306,143,197,334"/>
+        <ComboBox
+            x:Name="cbGender"
+            Grid.Column="0"
+            Height="31"
+            Margin="306,172,290,301"
+            VerticalAlignment="Center"
+            IsReadOnly="True"
+            IsTabStop="False"
+            SelectedIndex="0"
+            Style="{DynamicResource CommonComboBox}">
+            <ComboBoxItem Content="CASH" />
+            <ComboBoxItem Content="CHEQUE" />
+        </ComboBox>
+
+
+
+        <Label Content="Interest: "
+            Grid.Column="0"
+            Height="Auto" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center"
+            FontWeight="SemiBold"
+            FontSize="14"
+            FontFamily="Inter" Margin="514,143,-11,334" RenderTransformOrigin="0.308,-0.389"/>
+
+        <TextBox x:Name="tboxsContactNum"               
+            Text="" 
+            Width="164"
+            Height="30"
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center" Margin="514,173,82,301"/>
+        
+        <Label Content="Penalty: "
+            Grid.Column="0"
+            Height="Auto" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center"
+            FontWeight="SemiBold"
+            FontSize="14"
+            FontFamily="Inter" Margin="100,238,403,239" RenderTransformOrigin="0.308,-0.389"/>
+
+        <TextBox x:Name="tboxs"               
+            Text="" 
+            Width="164"
+            Height="30"
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center" Margin="100,265,496,209"/>
+
+        <Label Content="Amount: "
+            Grid.Column="0"
+            Height="Auto" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center"
+            FontWeight="SemiBold"
+            FontSize="14"
+            FontFamily="Inter" Margin="306,238,197,239" RenderTransformOrigin="0.308,-0.389"/>
+
+        <TextBox x:Name="tboxss"               
+            Text="" 
+            Width="164"
+            Height="30"
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center" Margin="306,265,290,209"/>
+
+
+
+
+
+        <Button x:Name="btnCancel" Content="CANCEL" Width="135" Height="40"
+                    FontWeight="Bold"
+                    FontFamily="Hetivica"
+                    Background="White" Margin="141,341,484,123" Click="btnCancel_Click"/>
+
+        <Button x:Name="btnSave" Content="SAVE" Width="135" Height="40"
+                    FontWeight="Bold"
+                    FontFamily="Hetivica"
+                    Background="Yellow" Margin="479,341,146,123" Click="btnSave_Click"/>
+
+
+    </Grid>
+</Window>

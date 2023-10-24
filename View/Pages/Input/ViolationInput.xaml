@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SPTC_APP.View.Pages.Input"
         mc:Ignorable="d" Width="760">
-    <Grid x:Name="franchisePanel" HorizontalAlignment="Right" Width="760" Background="WhiteSmoke">
+    <Grid x:Name="AddViolation" HorizontalAlignment="Right" Width="760" Background="WhiteSmoke">
         <Rectangle Height="40" Stroke="#FEF301" Fill="#FEF301"  VerticalAlignment="Top" Width="NaN"/>
         <Label 
                Content="VIOLATION" 

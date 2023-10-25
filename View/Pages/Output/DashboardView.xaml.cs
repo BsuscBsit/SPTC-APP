@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using SPTC_APP.Database;
+using SPTC_APP.Objects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -214,9 +215,9 @@ namespace SPTC_APP.View.Pages.Output
         }
         private void DrawPieChart()
         {
-            cvPieChart.Children.Clear();
+            //cvPieChart.Children.Clear();
             lblPieChartTitle.Content = "Total Revenue: ";
-            lblPieChart.Content = ((double)AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()).ToString("0.00");
+            lblPieChart.Content = ((double) AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()).ToString("0.00");
             lblPercent.Content = "100%";
             var sortedlist = AppState.ThisMonthsChart.OrderByDescending(x => x.Value).ToList();
             var dictionary = sortedlist.ToDictionary(x => x.Key, x => x.Value);
@@ -232,13 +233,12 @@ namespace SPTC_APP.View.Pages.Output
 
             for (int i = 0; i < dictionary.Count; i++)
             {
-
                 double sweepAngle = (dictionary.Values.ElementAt(i) / total) * 360;
-
+                
                 Path path = new Path
                 {
                     Fill = i == 0? Brushes.Red : RandomColor(i),
-                    Opacity = 0.5,
+                    Opacity = 1,
                     Tag = dictionary.Keys.ElementAt(i),
                     Stroke = Brushes.Black,
                     StrokeThickness = 0,
@@ -272,6 +272,8 @@ namespace SPTC_APP.View.Pages.Output
                     }
                 };
 
+                //EventLogger.Post($"OUT :: {path.Data.ToString()}{path.Fill}");
+
                 path.MouseEnter += Path_MouseEnter;
                 path.MouseLeave += Path_MouseLeave;
                 path.MouseDown += Path_MouseDown;
@@ -280,10 +282,6 @@ namespace SPTC_APP.View.Pages.Output
 
                 currentAngle += sweepAngle;
             }
-
-
-         
-
         }
         private void Path_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -333,7 +331,7 @@ namespace SPTC_APP.View.Pages.Output
                 string tag = path.Tag?.ToString() ?? "No Data";
                 lblPieChartTitle.Content = tag;
                 double val = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).TryGetValue(tag, out var value)? value: 0;
-                lblPieChart.Content = val.ToString(".00");
+                lblPieChart.Content = val.ToString("0.00");
                 lblPercent.Content = Math.Round(((val / AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()) * 100)) + "%";
                 path.StrokeThickness = 3.5;
             }
@@ -455,7 +453,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnViewFullDetails_Click(object sender, RoutedEventArgs e)
         {
-
+            btnReload_Click(sender, e);
         }
     }
 }

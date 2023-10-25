@@ -186,9 +186,9 @@ namespace SPTC_APP
             try
             {
                 ThisMonthsChart = new List<KeyValuePair<string, double>> {
-                        new KeyValuePair<string, double>("Share Capital", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(typeof(ShareCapital).Name.ToLower(), month, year)).FirstOrDefault()),
-                        new KeyValuePair <string, double>("Loan", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(typeof(Loan).Name.ToLower(), month, year)).FirstOrDefault()),
-                        new KeyValuePair <string, double>("Long Term Loan", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH(typeof(LongTermLoan).Name.ToLower(), month, year)).FirstOrDefault())
+                        new KeyValuePair<string, double>("SHARECAPITAL", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", month, year)).FirstOrDefault()),
+                        new KeyValuePair <string, double>("LOAN", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("LOAN", month, year)).FirstOrDefault()),
+                        new KeyValuePair <string, double>("LONGTERMLOAN", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("LONGTERMLOAN", month, year)).FirstOrDefault())
                 };
             }
             catch(MySqlException e)

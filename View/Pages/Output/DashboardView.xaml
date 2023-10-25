@@ -55,7 +55,6 @@
                             <EllipseGeometry x:Name="cvPieCircle" Center="87.5, 87.5" RadiusX="87" RadiusY="87"/>
                         </Path.Data>
                     </Path>
-
                 </Canvas>
                 <Canvas  Width="175" Height="175" VerticalAlignment="Bottom" Margin="5">
                     <Path Fill="White">

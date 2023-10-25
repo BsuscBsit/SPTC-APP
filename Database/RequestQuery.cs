@@ -35,7 +35,7 @@ namespace SPTC_APP.Database
         public static string GET_ALL_PAYMENT_IN_MONTH(int month, int year) =>
             $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
         public static string GET_ALL_PAYMENT_IN_MONTH(string table, int month, int year) =>
-            $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_TYPE} = '{table}' AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
+            $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_TYPE} = \"{table}\" AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
         public static string CHECK_IF_SUSPENDED(string entity, string field, int id) =>
             $"SELECT CASE WHEN EXISTS ( SELECT 1 FROM {Table.VIOLATION} AS v LEFT JOIN {Table.FRANCHISE} AS f ON f.{Field.ID} = v.{Field.FRANCHISE_ID} LEFT JOIN {Table.VIOLATION_TYPE} AS vt ON v.{Field.VIOLATION_TYPE_ID} = vt.{Field.ID} WHERE vt.{Field.ENTITY_TYPE} = \"{entity}\" AND f.{field} = {id} AND CURDATE() BETWEEN v.{Field.SUSPENSION_START} AND v.{Field.SUSPENSION_END} ) THEN TRUE ELSE FALSE END AS IsSuspended;";
 

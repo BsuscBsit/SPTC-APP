@@ -10,9 +10,10 @@
     MinWidth="1000"
     MinHeight="600"
     Icon="../../View/Images/icons/logo.ico"
+    SizeToContent="WidthAndHeight"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-    mc:Ignorable="d" SizeToContent="WidthAndHeight">
+    mc:Ignorable="d">
 
     <Grid Background="Beige">
         <Rectangle
@@ -279,8 +280,8 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Background="White"
-            LostFocus="cbSearch_LostFocus"
             GotFocus="cbSearch_GotFocus"
+            LostFocus="cbSearch_LostFocus"
             Style="{DynamicResource CommonTextBoxStyle}"
             TextChanged="cbSearch_TextChanged" />
 
@@ -290,7 +291,7 @@
             Margin="0,84,20,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Visibility="Collapsed"
-            SelectionChanged="lsSuggestion_SelectionChanged"/>
+            SelectionChanged="lsSuggestion_SelectionChanged"
+            Visibility="Collapsed" />
     </Grid>
 </Window>

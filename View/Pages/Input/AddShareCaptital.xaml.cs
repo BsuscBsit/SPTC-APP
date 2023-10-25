@@ -51,11 +51,14 @@ namespace SPTC_APP.View.Pages.Input
                 if(franchise.GetShareCapitals()?.FirstOrDefault() != null)
                 {
                     share = franchise.GetShareCapitals().FirstOrDefault();
+                } else
+                {
+                    share.WriteInto(franchise.id, DateTime.Now, 0, 0);
                 }
                 capital.WriteInto(share, false, false, dpBdate.DisplayDate, tboxRefNo.Text, Double.Parse(tboxAmount.Text), 0, "", share.lastBalance + Double.Parse(tboxAmount.Text));
+                capital.Save();
                 share.lastBalance = share.lastBalance + Double.Parse(tboxAmount.Text);
                 share.Save();
-                capital.Save();
                 this.Close();
             }
         }

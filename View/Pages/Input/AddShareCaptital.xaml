@@ -103,12 +103,12 @@
             VerticalAlignment="Top"
             FontWeight="SemiBold"
             FontSize="14"
-            FontFamily="Inter" Margin="293,268,210,0" RenderTransformOrigin="0.308,-0.389"/>
+            FontFamily="Inter" Margin="293,294,210,0" RenderTransformOrigin="0.308,-0.389"/>
         <TextBox x:Name="tboxRefNo"               
             Text="" 
             Width="164"
             Height="30" 
-            VerticalAlignment="Top" Margin="293,300,303,0"/>
+            VerticalAlignment="Top" Margin="293,320,303,0"/>
 
 
 

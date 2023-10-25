@@ -29,6 +29,7 @@ namespace SPTC_APP.View.Pages.Output
             lblDateOfBIrth.Content = MainBody.selectedFranchise?.Operator?.birthday.ToLongDateString();
             lblPlateNo.Content = MainBody.selectedFranchise?.LicenseNO;
             lblMTOPNo.Content = MainBody.selectedFranchise?.MTOPNo;
+            lblDriverName.Content = MainBody.selectedFranchise?.Driver?.name?.legalName ?? "N/A";
 
             imgProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
             if (MainBody.selectedFranchise?.Driver == null)
@@ -169,7 +170,7 @@ namespace SPTC_APP.View.Pages.Output
             }
             else if (selectedButton == btnShareCapital)
             {
-
+                (new AddShareCaptital(MainBody.selectedFranchise)).Show();
             }
             else if (selectedButton == btnLoan)
             {

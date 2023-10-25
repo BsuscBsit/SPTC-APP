@@ -167,11 +167,11 @@ namespace SPTC_APP.Objects
             paymentDetails.Insert(Field.DEPOSIT, deposit);
             paymentDetails.Insert(Field.PENALTIES, penalties);
             paymentDetails.Insert(Field.REMARKS, remarks);
-            paymentDetails.Insert(Field.BEGINNING_BALANCE, balance);
+            paymentDetails.Insert(Field.BALANCE, balance);
             if (ledger != null)
             {
                 paymentDetails.Insert(Field.LEDGER_ID, saveLedger());
-                paymentDetails.Insert(Field.LEDGER_TYPE, typeof(T).Name.ToLower());
+                paymentDetails.Insert(Field.LEDGER_TYPE, typeof(T).Name.ToUpper());
             }
             paymentDetails.Save();
             id = paymentDetails.id;

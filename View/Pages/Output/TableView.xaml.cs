@@ -75,7 +75,7 @@ namespace SPTC_APP.View.Pages.Output
                 int pageIndex = 0;
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("Operator.name.legalName", "OPERATOR NAME", width: 140),
+                    new ColumnConfiguration("Operator.name.legalName", "OPERATOR NAME", width: 140, backgroundColor: Brushes.LightBlue),
                     new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
                     new ColumnConfiguration("MTOPNo", "MTOP NO.", width: 100),

@@ -71,7 +71,7 @@ public class DataGridHelper<T>
             string bindingPath,
             string header,
             double width = 100,
-            double height = 20,
+            double height = 30,
             double maxWidth = 200,
             double fontSize = 10,
             System.Windows.Media.Brush backgroundColor = null,
@@ -84,7 +84,7 @@ public class DataGridHelper<T>
             Height = height;
             MaxWidth = maxWidth;
             FontSize = fontSize;
-            BackgroundColor = backgroundColor ?? System.Windows.Media.Brushes.LightGray;
+            BackgroundColor = backgroundColor ?? System.Windows.Media.Brushes.White;
 
             FontWeight = fontWeight.HasValue ? fontWeight.Value : System.Windows.FontWeights.Normal;
 

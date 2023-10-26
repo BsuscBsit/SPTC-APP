@@ -215,7 +215,7 @@ namespace SPTC_APP.View.Pages.Output
         }
         private void DrawPieChart()
         {
-            //cvPieChart.Children.Clear();
+            cvPieChart.Children.Clear();
             lblPieChartTitle.Content = "Total Revenue: ";
             lblPieChart.Content = ((double) AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()).ToString("0.00");
             lblPercent.Content = "100%";

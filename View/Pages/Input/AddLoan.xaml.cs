@@ -30,6 +30,7 @@ namespace SPTC_APP.View.Pages.Input
             AppState.mainwindow?.Hide();
             this.franchise = franchise;
             dpBdate.DisplayDate = DateTime.Now;
+            dpBdate.SelectedDate = DateTime.Now;
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -47,20 +48,20 @@ namespace SPTC_APP.View.Pages.Input
             if (ControlWindow.ShowDialogStatic("Adding new record", "Confirm?", Icons.NOTIFY))
             {
                 PaymentDetails<Ledger.Loan> capital = new PaymentDetails<Ledger.Loan>();
-                Ledger.Loan share = new Ledger.Loan();
-                if (franchise.GetShareCapitals()?.FirstOrDefault() != null)
+                Ledger.Loan loan = new Ledger.Loan();
+                if (franchise.GetLoans()?.FirstOrDefault() != null)
                 {
-                    share = franchise.GetLoans().FirstOrDefault();
-                    capital.WriteInto(share, false, false, dpBdate.DisplayDate, tboxRefNo.Text, Double.Parse(tboxAmount.Text), 0, "", share.amount - Double.Parse(tboxAmount.Text));
-                    share.amount = share.amount + Double.Parse(tboxAmount.Text);
-                    share.Save();
+                    loan = franchise.GetLoans().FirstOrDefault();
+                    capital.WriteInto(loan, false, false, dpBdate.DisplayDate, tboxRefNo.Text, Double.Parse(tboxAmount.Text), Double.Parse(tbPenalty.Text), "", loan.amount - Double.Parse(tboxAmount.Text));
+                    loan.amount = loan.amount + Double.Parse(tboxAmount.Text);
+                    loan.Save();
+                    capital.Save();
                 } else
                 {
-                    share.WriteInto(franchise.id, DateTime.Now, Double.Parse(tboxAmount.Text), "", Double.Parse(tboxInterest.Text), 0, 0);
-                    share.Save();
+                    loan.WriteInto(franchise.id, DateTime.Now, Double.Parse(tboxAmount.Text), "", Double.Parse(tboxInterest.Text), 0, 0);
+                    loan.Save();
                 }
                 
-                capital.Save();
                 this.Close();
             }
         }

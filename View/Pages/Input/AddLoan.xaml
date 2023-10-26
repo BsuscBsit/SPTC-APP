@@ -89,7 +89,7 @@
             FontSize="14"
             FontFamily="Inter" Margin="100,238,403,239" RenderTransformOrigin="0.308,-0.389"/>
 
-        <TextBox x:Name="tboxs"               
+        <TextBox x:Name="tbPenalty"               
             Text="" 
             Width="164"
             Height="30"

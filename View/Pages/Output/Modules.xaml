@@ -15,7 +15,7 @@
             x:Name="TransferGrid"
             Width="512"
             Height="200"
-            Visibility="Visible">
+            Visibility="Hidden">
             <DataGrid
                 x:Name="dgTransfer"
                 Width="512"
@@ -62,6 +62,7 @@
 
 
             <Label
+                x:Name="lblTotal"
                 Margin="380,0,0,10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"

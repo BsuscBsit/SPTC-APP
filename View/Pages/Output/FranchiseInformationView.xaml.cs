@@ -124,6 +124,10 @@ namespace SPTC_APP.View.Pages.Output
         private void btnLoan_Click(object sender, RoutedEventArgs e)
         {
             btnAddButton.Content = "ADD RECORD";
+            if (MainBody.selectedFranchise.GetLoans().Count <= 0)
+            {
+                btnAddButton.Content = "APPLY FOR LOAN";
+            }
             btnAddButton.Visibility = Visibility.Visible;
             HandleButtonClick(Modules.LOAN, sender as Button);
         }
@@ -131,6 +135,10 @@ namespace SPTC_APP.View.Pages.Output
         private void btnLTLoan_Click(object sender, RoutedEventArgs e)
         {
             btnAddButton.Content = "ADD RECORD";
+            if (MainBody.selectedFranchise.GetLTLoans().Count <= 0)
+            {
+                btnAddButton.Content = "APPLY FOR LOAN";
+            }
             btnAddButton.Visibility = Visibility.Visible;
             HandleButtonClick(Modules.LTLOAN, sender as Button);
         }
@@ -174,11 +182,11 @@ namespace SPTC_APP.View.Pages.Output
             }
             else if (selectedButton == btnLoan)
             {
-
+                (new AddLoan(MainBody.selectedFranchise)).Show();
             }
             else if (selectedButton == btnLTLoan)
             {
-
+                (new AddLTLoan(MainBody.selectedFranchise)).Show();
             }
             else if (selectedButton == btnTransactionHistory)
             {

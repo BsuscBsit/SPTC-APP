@@ -22,6 +22,18 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <Label Content="Reference No.: "
+                Grid.Column="0"
+                Height="Auto" 
+                VerticalAlignment="Center"
+                FontWeight="SemiBold"
+                FontSize="14"
+                FontFamily="Inter" Margin="514,0,-21,0" RenderTransformOrigin="0.308,-0.389" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="tboxRefNo"               
+                Text="" 
+                Width="164"
+                Height="30" 
+                VerticalAlignment="Top" Margin="514,265,72,0"/>
         </Grid>
         <Label Content="Date: "
                            Grid.Column="0"
@@ -32,7 +44,7 @@
                            FontSize="14"
                            FontFamily="Inter" Margin="100,143,393,336"/>
 
-        <DatePicker x:Name="dpBirthdate"
+        <DatePicker x:Name="dpBdate"
                             Width="164"
                             Height="30"
                             HorizontalAlignment="Stretch"
@@ -73,7 +85,7 @@
             FontSize="14"
             FontFamily="Inter" Margin="514,143,-11,334" RenderTransformOrigin="0.308,-0.389"/>
 
-        <TextBox x:Name="tboxsContactNum"               
+        <TextBox x:Name="tbInterenst"               
             Text="" 
             Width="164"
             Height="30"
@@ -89,7 +101,7 @@
             FontSize="14"
             FontFamily="Inter" Margin="100,238,403,239" RenderTransformOrigin="0.308,-0.389"/>
 
-        <TextBox x:Name="tboxs"               
+        <TextBox x:Name="tboxPenalty"               
             Text="" 
             Width="164"
             Height="30"
@@ -105,7 +117,7 @@
             FontSize="14"
             FontFamily="Inter" Margin="306,238,197,239" RenderTransformOrigin="0.308,-0.389"/>
 
-        <TextBox x:Name="tboxss"               
+        <TextBox x:Name="tboxAmount"               
             Text="" 
             Width="164"
             Height="30"

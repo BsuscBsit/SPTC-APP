@@ -103,7 +103,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgLedger.Items.Add(tmp);
                 }
-                lblTotalLedger.Content = franchise.GetTotalLoan().ToString("0.00");
+                lblTotalLedger.Content = franchise.LoanBalance;
             } 
             else if (strmod == LTLOAN)
             {
@@ -125,7 +125,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgLedger.Items.Add(tmp);
                 }
-                lblTotalLedger.Content = franchise.GetTotalLTLoan().ToString("0.00");
+                lblTotalLedger.Content = franchise.LongTermLoanBalance;
             }
             else if(strmod == HISTORY)
             {

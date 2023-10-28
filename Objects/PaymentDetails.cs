@@ -33,13 +33,14 @@ namespace SPTC_APP.Objects
         {
             get
             {
-                UpdateLedger();
                 if (ledger is Ledger.Loan)
                 {
+                    UpdateLedger();
                     return (ledger as Ledger.Loan).monthlyPrincipal;
                 } 
                 if(ledger is Ledger.LongTermLoan)
                 {
+                    UpdateLTLedger();
                     return (ledger as Ledger.LongTermLoan).capitalBuildup;
                 }
                 return 0;
@@ -49,13 +50,14 @@ namespace SPTC_APP.Objects
         {
             get
             {
-                UpdateLedger();
                 if (ledger is Ledger.Loan)
                 {
+                    UpdateLedger();
                     return (ledger as Ledger.Loan).monthlyInterest;
                 }
                 if (ledger is Ledger.LongTermLoan)
                 {
+                    UpdateLTLedger();
                     return (ledger as Ledger.LongTermLoan).processingFee;
                 }
                 return 0;
@@ -136,6 +138,17 @@ namespace SPTC_APP.Objects
                 if (ledger == null)
                 {
                     this.ledger = (dynamic)Retrieve.GetData<Ledger.Loan>(Table.LOAN, Select.ALL, Where.ID_, new MySqlParameter("id", ledgerId)).FirstOrDefault();
+                }
+            }
+        }
+
+        public void UpdateLTLedger()
+        {
+            if (ledgerId >= 0)
+            {
+                if (ledger == null)
+                {
+                    this.ledger = (dynamic)Retrieve.GetData<Ledger.LongTermLoan>(Table.LONG_TERM_LOAN, Select.ALL, Where.ID_, new MySqlParameter("id", ledgerId)).FirstOrDefault();
                 }
             }
         }

@@ -39,6 +39,11 @@ namespace SPTC_APP.View.Pages.Output
             tbTotalOperator.Text = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_TOTAL(Table.OPERATOR)).FirstOrDefault().ToString();
             tbTotalDriver.Text = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_TOTAL(Table.DRIVER)).FirstOrDefault().ToString();
             tbTotalShares.Text = "P " + Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_TOTAL_SHARES).FirstOrDefault().ToString("0.00");
+
+            if ((AppState.USER?.position?.accesses[9] ?? false))
+            {
+                btnPrint.Visibility = Visibility.Visible;
+            }
         }
 
         private async Task UpdateLFContent(int currentMonth, int currentYear)

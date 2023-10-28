@@ -20,6 +20,15 @@ namespace SPTC_APP.View.Pages.Output
             InitializeComponent();
             UpdateContent();
             this.tableview = tableview;
+            btnAddButton.Visibility = Visibility.Hidden;
+            if((AppState.USER?.position?.accesses[0] ?? false))
+            {
+                btnChangeDriver.Visibility = Visibility.Visible;
+            }
+            if ((AppState.USER?.position?.accesses[8] ?? false))
+            {
+                btnDeleteFranchise.Visibility = Visibility.Visible;
+            }
         }
 
         private void UpdateContent()
@@ -103,50 +112,65 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnViolation_Click(object sender, RoutedEventArgs e)
         {
-            if (MainBody.selectedFranchise?.Driver != null)
+            if ((AppState.USER?.position?.accesses[12] ?? false))
             {
-                btnAddButton.Content = "ADD RECORD";
-                btnAddButton.Visibility = Visibility.Visible;
-            } else
-            {
-                btnAddButton.Visibility = Visibility.Collapsed;
+
+                if (MainBody.selectedFranchise?.Driver != null)
+                {
+                    btnAddButton.Content = "ADD RECORD";
+                    btnAddButton.Visibility = Visibility.Visible;
+                }
             }
             HandleButtonClick(Modules.VIOLATION, sender as Button);
         }
 
         private void btnShareCapital_Click(object sender, RoutedEventArgs e)
         {
-            btnAddButton.Content = "ADD RECORD";
-            btnAddButton.Visibility = Visibility.Visible;
+            if ((AppState.USER?.position?.accesses[18] ?? false))
+            {
+                btnAddButton.Content = "ADD RECORD";
+                btnAddButton.Visibility = Visibility.Visible;
+            }
             HandleButtonClick(Modules.SHARECAPITAL, sender as Button);
         }
 
         private void btnLoan_Click(object sender, RoutedEventArgs e)
         {
-            btnAddButton.Content = "ADD RECORD";
-            if (MainBody.selectedFranchise.GetLoans().Count <= 0)
+            if ((AppState.USER?.position?.accesses[18] ?? false))
             {
-                btnAddButton.Content = "APPLY FOR LOAN";
+                btnAddButton.Content = "ADD RECORD";
+                if (MainBody.selectedFranchise.GetLoans().Count <= 0)
+                {
+                    btnAddButton.Content = "APPLY FOR LOAN";
+                }
+
+                btnAddButton.Visibility = Visibility.Visible;
             }
-            btnAddButton.Visibility = Visibility.Visible;
             HandleButtonClick(Modules.LOAN, sender as Button);
         }
 
         private void btnLTLoan_Click(object sender, RoutedEventArgs e)
         {
-            btnAddButton.Content = "ADD RECORD";
-            if (MainBody.selectedFranchise.GetLTLoans().Count <= 0)
+            if ((AppState.USER?.position?.accesses[18] ?? false))
             {
-                btnAddButton.Content = "APPLY FOR LOAN";
+                btnAddButton.Content = "ADD RECORD";
+                if (MainBody.selectedFranchise.GetLTLoans().Count <= 0)
+                {
+                    btnAddButton.Content = "APPLY FOR LOAN";
+                }
+
+                btnAddButton.Visibility = Visibility.Visible;
             }
-            btnAddButton.Visibility = Visibility.Visible;
             HandleButtonClick(Modules.LTLOAN, sender as Button);
         }
 
         private void btnTransactionHistory_Click(object sender, RoutedEventArgs e)
         {
-            btnAddButton.Content = "TRANSFER";
-            btnAddButton.Visibility = Visibility.Visible;
+            if ((AppState.USER?.position?.accesses[1] ?? false))
+            {
+                btnAddButton.Content = "TRANSFER";
+                btnAddButton.Visibility = Visibility.Visible;
+            }
             HandleButtonClick(Modules.TRANSFER, sender as Button);
         }
 
@@ -174,7 +198,7 @@ namespace SPTC_APP.View.Pages.Output
         {
             if (selectedButton == btnViolation)
             {
-
+                (new ViolationInput(MainBody.selectedFranchise)).Show();
             }
             else if (selectedButton == btnShareCapital)
             {
@@ -192,6 +216,11 @@ namespace SPTC_APP.View.Pages.Output
             {
                 (new NewOptr_Drv(MainBody.selectedFranchise, General.TRANSFER_FRANCHISE_OWNERSHIP)).Show();
             }
+        }
+
+        private void btnDeleteFranchise_Click(object sender, RoutedEventArgs e)
+        {
+            MainBody.selectedFranchise.delete();
         }
     }
 }

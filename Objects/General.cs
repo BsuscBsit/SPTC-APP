@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
 using System.ComponentModel;
 using System.Text;
+using System.Collections.Generic;
 
 namespace SPTC_APP.Objects
 {
@@ -473,21 +474,17 @@ namespace SPTC_APP.Objects
     {
         public int id { get; private set; }
         public string title;
-        public bool canCreate;
-        public bool canEdit;
-        public bool canDelete;
+        public List<bool> accesses;
         private Upsert position;
         public Position()
         {
             position = new Upsert(Table.POSITION, -1);
         }
 
-        public Position(string title, bool canCreate, bool canEdit, bool canDelete)
+        public Position(string title)
         {
             this.title = title;
-            this.canCreate = canCreate;
-            this.canEdit = canEdit;
-            this.canDelete = canDelete;
+            this.accesses = null;
             this.position = new Upsert(Table.POSITION, -1);
         }
 
@@ -495,9 +492,17 @@ namespace SPTC_APP.Objects
         {
             this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
             this.title = Retrieve.GetValueOrDefault<string>(reader, Field.TITLE);
-            this.canCreate = Retrieve.GetValueOrDefault<bool>(reader, Field.CAN_CREATE);
-            this.canEdit = Retrieve.GetValueOrDefault<bool>(reader, Field.CAN_EDIT);
-            this.canDelete = Retrieve.GetValueOrDefault<bool>(reader, Field.CAN_DELETE);
+            this.accesses = new List<bool>();
+            for (int i = 2; i < reader.FieldCount - 1; i++)
+            {
+                if (reader.IsDBNull(i))
+                {
+                    break;
+                }
+
+                accesses.Add(reader.GetBoolean(i));
+            }
+            //EventLogger.Post($"OUT :: {accesses.Count}: [ {string.Join(", ", accesses)} ]");
         }
 
         public int Save()
@@ -508,9 +513,6 @@ namespace SPTC_APP.Objects
             }
 
             position.Insert(Field.TITLE, title);
-            position.Insert(Field.CAN_CREATE, canCreate);
-            position.Insert(Field.CAN_EDIT, canEdit);
-            position.Insert(Field.CAN_DELETE, canDelete);
             position.Save();
             id = position.id;
 

@@ -38,7 +38,7 @@ namespace SPTC_APP.View.IDGenerator.Previews
         }
         protected override void OnClosing(CancelEventArgs e)
         {
-            AppState.mainwindow?.Show();
+            //AppState.mainwindow?.Show();
             base.OnClosing(e);
         }
         private void LoadFranchises()
@@ -124,6 +124,7 @@ namespace SPTC_APP.View.IDGenerator.Previews
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            AppState.mainwindow?.Show();
             this.Close();
         }
     }

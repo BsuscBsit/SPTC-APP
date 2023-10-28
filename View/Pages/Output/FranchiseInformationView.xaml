@@ -97,11 +97,21 @@
                 Height="25"
                 Margin="538,0,28,25"
                 VerticalAlignment="Bottom"  
-                Content="Change Driver"
+                Content="CHANGE DRIVER"
+                Visibility="Hidden"
                 FontFamily="Arial"
                 FontWeight="Bold"
                 FontSize="10" Click="btnChangeDriver_Click"/>
-
+            <Button 
+                x:Name="btnDeleteFranchise"
+                Height="25"
+                Margin="538,0,28,65"
+                VerticalAlignment="Bottom"
+                Visibility="Hidden"
+                Content="DELETE"
+                FontFamily="Arial"
+                FontWeight="Bold"
+                FontSize="10" Click="btnDeleteFranchise_Click"/>
             <Button
                 x:Name="btnHistory"
                 Height="26"

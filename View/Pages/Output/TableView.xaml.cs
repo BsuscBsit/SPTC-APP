@@ -24,12 +24,13 @@ namespace SPTC_APP.View.Pages.Output
         {
             InitializeComponent();
             this.table = table;
-            if (table == Table.FRANCHISE)
+            if (table == Table.FRANCHISE && (AppState.USER?.position?.accesses[2] ?? false))
             {
                 btnAdd.Visibility = Visibility.Visible;
                 btnAdd.Content = "ADD FRANCHISE";
+                
             }
-            else if (table == Table.DRIVER)
+            else if (table == Table.DRIVER && (AppState.USER?.position?.accesses[0] ?? false))
             {
                 btnAdd.Visibility = Visibility.Visible;
                 btnAdd.Content = "ADD DRIVER";
@@ -51,14 +52,29 @@ namespace SPTC_APP.View.Pages.Output
             }
             if (table == Table.OPERATOR)
             {
-                btnEditProfile.Visibility = Visibility.Visible;
-                btnGenerateid.Visibility = Visibility.Visible;
+                if ((AppState.USER?.position?.accesses[4] ?? false))
+                {
+                    btnEditProfile.Visibility = Visibility.Visible;
+                }
+                if ((AppState.USER?.position?.accesses[9] ?? false))
+                {
+                    btnGenerateid.Visibility = Visibility.Visible;
+                }
             }
             if (table == Table.DRIVER)
             {
-                btnEditProfile.Visibility = Visibility.Visible;
-                btnGenerateid.Visibility = Visibility.Visible;
-                btnAddViolation.Visibility = Visibility.Visible;
+                if ((AppState.USER?.position?.accesses[3] ?? false))
+                {
+                    btnEditProfile.Visibility = Visibility.Visible;
+                }
+                if ((AppState.USER?.position?.accesses[9] ?? false))
+                {
+                    btnGenerateid.Visibility = Visibility.Visible;
+                }
+                if ((AppState.USER?.position?.accesses[12] ?? false))
+                {
+                    btnAddViolation.Visibility = Visibility.Visible;
+                }
 
             }
         }
@@ -246,6 +262,7 @@ namespace SPTC_APP.View.Pages.Output
                         lblI7.FontWeight = FontWeights.Black;
                     }
                 }
+                
                 if (MainBody.selectedFranchise == null)
                 {
                     btnAddViolation.IsEnabled = false;

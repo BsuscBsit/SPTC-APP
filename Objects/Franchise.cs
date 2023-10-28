@@ -187,7 +187,7 @@ namespace SPTC_APP.Objects
                 mainlist.Add((new PaymentHistory(res.displayDate, Ledger.LT_LOAN, res.referenceNo, res.balance, res.deposit)));
             }
 
-            EventLogger.Post($"OUT :: {mainlist.Count}");
+            //EventLogger.Post($"OUT :: {mainlist.Count}");
             return mainlist;
         }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2023 at 03:47 AM
+-- Generation Time: Oct 28, 2023 at 04:46 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -252,9 +252,26 @@ CREATE TABLE `tbl_payment_details` (
 CREATE TABLE `tbl_position` (
   `id` int(11) NOT NULL,
   `title` varchar(50) DEFAULT NULL,
-  `can_create` tinyint(1) NOT NULL DEFAULT 0,
-  `can_edit` tinyint(1) NOT NULL DEFAULT 0,
-  `can_delete` tinyint(1) NOT NULL DEFAULT 0,
+  `can_cnd` tinyint(1) NOT NULL DEFAULT 0,
+  `can_cno` tinyint(1) NOT NULL DEFAULT 0,
+  `can_cnf` tinyint(1) NOT NULL DEFAULT 0,
+  `can_udp` tinyint(1) NOT NULL DEFAULT 0,
+  `can_uop` tinyint(1) NOT NULL DEFAULT 0,
+  `can_ufp` tinyint(1) NOT NULL DEFAULT 0,
+  `can_dd` tinyint(1) NOT NULL DEFAULT 0,
+  `can_do` tinyint(1) NOT NULL DEFAULT 0,
+  `can_df` tinyint(1) NOT NULL DEFAULT 0,
+  `can_ig` tinyint(1) NOT NULL DEFAULT 0,
+  `can_cd` tinyint(1) NOT NULL DEFAULT 0,
+  `can_co` tinyint(1) NOT NULL DEFAULT 0,
+  `can_adv` tinyint(1) NOT NULL DEFAULT 0,
+  `can_isl` tinyint(1) NOT NULL DEFAULT 0,
+  `can_ill` tinyint(1) NOT NULL DEFAULT 0,
+  `can_itl` tinyint(1) NOT NULL DEFAULT 0,
+  `can_ud` tinyint(1) NOT NULL DEFAULT 0,
+  `can_ubm` tinyint(1) NOT NULL DEFAULT 0,
+  `can_rp` tinyint(1) NOT NULL DEFAULT 0,
+  `can_pi` tinyint(1) NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -262,12 +279,12 @@ CREATE TABLE `tbl_position` (
 -- Dumping data for table `tbl_position`
 --
 
-INSERT INTO `tbl_position` (`id`, `title`, `can_create`, `can_edit`, `can_delete`, `isDeleted`) VALUES
-(1, 'General Manager', 1, 1, 1, 0),
-(2, 'Secretary', 0, 0, 0, 0),
-(3, 'Treasurer', 0, 0, 0, 0),
-(4, 'Bookeeper', 0, 0, 0, 0),
-(5, 'Chairman', 0, 0, 0, 0);
+INSERT INTO `tbl_position` (`id`, `title`, `can_cnd`, `can_cno`, `can_cnf`, `can_udp`, `can_uop`, `can_ufp`, `can_dd`, `can_do`, `can_df`, `can_ig`, `can_cd`, `can_co`, `can_adv`, `can_isl`, `can_ill`, `can_itl`, `can_ud`, `can_ubm`, `can_rp`, `can_pi`, `isDeleted`) VALUES
+(1, 'General Manager', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0),
+(2, 'Secretary', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 'Treasurer', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(4, 'Bookeeper', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(5, 'Chairman', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 

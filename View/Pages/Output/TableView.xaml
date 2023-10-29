@@ -108,6 +108,9 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Button x:Name="btnManage" Style="{DynamicResource CommonButtonStyle}" Content="MANAGE" Grid.Row="0" Margin="5" Visibility="Collapsed"
                         Width="150"
@@ -125,6 +128,21 @@
                         Width="150"
                         FontWeight="Bold"
                         Background="White" HorizontalAlignment="Left" Click="btnAddViolation_Click" />
+                <Button x:Name="btnAddShareCapital" Style="{DynamicResource CommonButtonStyle}" Content="PAY SHARE CAPITAL" Grid.Row="4" Margin="5" Visibility="Collapsed"
+                    Width="150"
+                    FontWeight="Bold"
+                    FontSize="12"
+                    Background="Yellow" Click="btnAddShareCapital_Click"/>
+                <Button x:Name="btnAddLoan" Style="{DynamicResource CommonButtonStyle}" Content="PAY LOAN" Grid.Row="5" Margin="5" Visibility="Collapsed"
+                    Width="150"
+                    FontWeight="Bold"
+                    FontSize="12"
+                    Background="Yellow" Click="btnAddLoan_Click"/>
+                <Button x:Name="btnAddLTLoan" Style="{DynamicResource CommonButtonStyle}" Content="PAY LT LOAN" Grid.Row="6" Margin="5" Visibility="Collapsed"
+                    Width="150"
+                    FontWeight="Bold"
+                    FontSize="12"
+                    Background="Yellow" Click="btnAddLTLoan_Click"/>
             </Grid>
         </Grid>
 

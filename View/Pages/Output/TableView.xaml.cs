@@ -40,6 +40,21 @@ namespace SPTC_APP.View.Pages.Output
             {
                 btnAdd.Visibility = Visibility.Collapsed;
             }
+
+            if (AppState.USER?.position?.title == AppState.Employees[3] && table == Table.FRANCHISE)
+            {
+                btnAddShareCapital.Visibility = Visibility.Visible;
+                if (MainBody.selectedFranchise.GetLoans().Count <= 0)
+                {
+                    btnAddLoan.Content = "APPLY FOR LOAN";
+                }
+                btnAddLoan.Visibility = Visibility.Visible;
+                if (MainBody.selectedFranchise.GetLTLoans().Count <= 0)
+                {
+                    btnAddLoan.Content = "APPLY FOR LTLOAN";
+                }
+                btnAddLTLoan.Visibility = Visibility.Visible;
+            }
             UpdateDefaultSidePanel();
         }
 
@@ -172,9 +187,10 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
                     new ColumnConfiguration("name.legalName", "NAME", width: 140),
+                    new ColumnConfiguration("address", "ADDRESS", width: 100),
                     new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", width: 80),
-                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", width: 100),
-                    new ColumnConfiguration("franchise.Operator", "OPERATOR", width: 100),
+                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", width: 80),
+                    new ColumnConfiguration("franchise.Operator", "OPERATOR", width: 120),
                 };
                 DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(TableGrid, columnConfigurations);
 
@@ -451,6 +467,21 @@ namespace SPTC_APP.View.Pages.Output
             if (table == Table.DRIVER)
                 (new NewOptr_Drv(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
             await UpdateTableAsync();
+        }
+
+        private void btnAddShareCapital_Click(object sender, RoutedEventArgs e)
+        {
+            (new AddShareCaptital(MainBody.selectedFranchise)).Show();
+        }
+
+        private void btnAddLoan_Click(object sender, RoutedEventArgs e)
+        {
+            (new AddLoan(MainBody.selectedFranchise)).Show();
+        }
+
+        private void btnAddLTLoan_Click(object sender, RoutedEventArgs e)
+        {
+            (new AddLTLoan(MainBody.selectedFranchise)).Show();
         }
     }
 }

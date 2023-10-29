@@ -165,7 +165,7 @@ namespace SPTC_APP.Objects
 
         public override string ToString()
         {
-            return wholename ?? string.Empty;
+            return legalName ?? string.Empty;
         }
 
         public bool Delete()

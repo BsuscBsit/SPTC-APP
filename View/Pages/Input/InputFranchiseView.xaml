@@ -59,12 +59,12 @@
                            FontWeight="SemiBold"
                            FontSize="14"
                            FontFamily="Inter" Margin="80,209,413,259"/>
-            <TextBox x:Name="Req1"               
-                            Text="" 
+            <TextBox x:Name="Req1"
+                     Text="TIN No."
                             Width="164"
                             Height="30"
                             HorizontalAlignment="Stretch" 
-                            VerticalAlignment="Center" Margin="80,235,506,229">
+                            VerticalAlignment="Center" Margin="80,235,506,229" IsReadOnly="True">
 
             </TextBox>
             <Label Content="Requirement 2 : "
@@ -76,27 +76,11 @@
                            FontSize="14"
                            FontFamily="Inter" Margin="80,273,413,195"/>
             <TextBox x:Name="Req2"               
-                            Text="" 
+                            Text="Voters ID" 
                             Width="164"
                             Height="30"
                             HorizontalAlignment="Stretch" 
-                            VerticalAlignment="Center" Margin="80,298,506,166">
-
-            </TextBox>
-            <Label Content="Requirement 3 : "
-                           Grid.Column="0"
-                           Height="Auto" 
-                           HorizontalAlignment="Stretch" 
-                           VerticalAlignment="Center"
-                           FontWeight="SemiBold"
-                           FontSize="14"
-                           FontFamily="Inter" Margin="80,338,413,130"/>
-            <TextBox x:Name="Req3"               
-                            Text="" 
-                            Width="164"
-                            Height="30"
-                            HorizontalAlignment="Stretch" 
-                            VerticalAlignment="Center" Margin="80,364,506,100">
+                            VerticalAlignment="Center" Margin="80,298,506,166" IsReadOnly="True">
 
             </TextBox>
         </Grid>
@@ -142,20 +126,6 @@
                 Height="30"
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Center" Margin="290,300,306,174"/>
-        <Label Content="ID Number : "
-                Grid.Column="0"
-                Height="Auto" 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Center"
-                FontWeight="SemiBold"
-                FontSize="14"
-                FontFamily="Inter" Margin="290,338,213,139"/>
-        <TextBox x:Name="tboxIDNum3"               
-                Text="" 
-                Width="164"
-                Height="30"
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Center" Margin="290,365,306,109"/>
         <Label Content="LTO Plate Number : "
                 Grid.Column="0"
                 Height="Auto" 
@@ -170,48 +140,6 @@
                 Height="30"
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Center" Margin="500,161,96,313"/>
-        <Label Content="Expiration Date : "
-                Grid.Column="0"
-                Height="Auto" 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Center"
-                FontWeight="SemiBold"
-                FontSize="14"
-                FontFamily="Inter" Margin="500,209,3,268"/>
-        <TextBox x:Name="tboxExprationDate1"               
-                Text="" 
-                Width="164"
-                Height="30"
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Center" Margin="500,235,96,239"/>
-        <Label Content="Expiration Date : "
-                Grid.Column="0"
-                Height="Auto" 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Center"
-                FontWeight="SemiBold"
-                FontSize="14"
-                FontFamily="Inter" Margin="500,275,3,202"/>
-        <TextBox x:Name="tboxExprationDate2"               
-                Text="" 
-                Width="164"
-                Height="30"
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Center" Margin="500,300,96,174"/>
-        <Label Content="Expiration Date : "
-                Grid.Column="0"
-                Height="Auto" 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Center"
-                FontWeight="SemiBold"
-                FontSize="14"
-                FontFamily="Inter" Margin="503,340,0,137"/>
-        <TextBox x:Name="tboxExprationDate3"               
-                Text="" 
-                Width="164"
-                Height="30"
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Center" Margin="500,365,96,109"/>
         <Label Content="Date of Issued:"
                            Grid.Column="0"
                            Height="Auto" 

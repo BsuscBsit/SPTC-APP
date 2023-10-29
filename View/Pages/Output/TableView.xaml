@@ -21,76 +21,81 @@
         </DataGrid>
 
         <Grid x:Name="franchiseInformation" HorizontalAlignment="Right" Height="458" Background="White" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="182" Visibility="Visible">
-            <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="72,10,0,0">
+            <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,10,0,0" StrokeThickness="1" StrokeStartLineCap="Round" Stroke="Black" >
                 <Ellipse.Fill>
-                    <ImageBrush x:Name="imgUserProfilePic" ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
+                    <ImageBrush ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <Label x:Name="lblF1" Content="Operators Name" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top"
+            <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,10,0,0" StrokeThickness="1" StrokeStartLineCap="Round" Stroke="Black" >
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="imgUserProfilePic"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Label x:Name="lblF1" Content="" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Visibility="Hidden"
                        FontWeight="Medium"
                         FontSize="9"
                        Foreground="DarkGray"/>
-            <Label x:Name="lblF2" Content="Body No." HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblF2" Content="" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" Visibility="Hidden"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
-            <Label x:Name="lblF3" Content="Loan Balance" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblF3" Content="" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Visibility="Hidden"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
-            <Label x:Name="lblF4" Content="LTL Balance" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblF4" Content="" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Visibility="Hidden"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
-            <Label x:Name="lblF7" Content="Is Suspended: " HorizontalAlignment="Left" Margin="13,268,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblF7" Content="" HorizontalAlignment="Left" Margin="10,268,0,0" VerticalAlignment="Top" Visibility="Hidden"
                 FontWeight="Medium"
                 FontSize="9"
                 Foreground="DarkGray"/>
-            <Label x:Name="lblF5" Content="Reference :" HorizontalAlignment="Left" Margin="19,216,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblF5" Content="" HorizontalAlignment="Left" Margin="10,216,0,0" VerticalAlignment="Top" Visibility="Hidden"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
-            <Label x:Name="lblF6" Content="Driver" HorizontalAlignment="Left" Margin="22,248,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblF6" Content="" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Visibility="Hidden"
                     FontWeight="Medium"
                     FontSize="9"
                     Foreground="DarkGray"/>
-            <Rectangle Height="1" Margin="0,202,0,0" Stroke="LightGray" VerticalAlignment="Top" />
-            <Label x:Name="lblI1" Content="Juan Dela Cruz" HorizontalAlignment="Left" Margin="93,81,0,0" VerticalAlignment="Top"
+            <Rectangle Height="1" Margin="0,145,0,0" Stroke="LightGray" VerticalAlignment="Top" />
+            <Label x:Name="lblI1" Content="" HorizontalAlignment="Left" Margin="85,81,0,0" VerticalAlignment="Top" Visibility="Hidden"
                        Foreground="Black"
                        FontWeight="DemiBold"
                        FontFamily="Arial"
                        FontStretch="SemiExpanded"
                        FontSize="9"/>
-            <Label x:Name="lblI2" Content="103" HorizontalAlignment="Left" Margin="110,112,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblI2" Content="" HorizontalAlignment="Left" Margin="85,112,0,0" VerticalAlignment="Top" Visibility="Hidden"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Arial"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
-            <Label x:Name="lblI3"  Content="10,000" HorizontalAlignment="Left" Margin="110,137,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblI3"  Content="" HorizontalAlignment="Left" Margin="85,163,0,0" VerticalAlignment="Top" Visibility="Hidden"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Arial"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
-            <Label x:Name="lblI4"  Content="90,500" HorizontalAlignment="Left" Margin="110,162,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblI4"  Content="" HorizontalAlignment="Left" Margin="85,192,0,0" VerticalAlignment="Top" Visibility="Hidden"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Arial"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
-            <Label x:Name="lblI7"  Content="NO" HorizontalAlignment="Left" Margin="113,269,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblI7"  Content="" HorizontalAlignment="Left" Margin="85,270,0,0" VerticalAlignment="Top" Visibility="Hidden"
                 FontFamily="Arial"
                 FontStretch="SemiExpanded"
                 FontSize="9"/>
 
-            <Label x:Name="lblI5" Content="Gabriel Manriza" HorizontalAlignment="Left" Margin="86,0,0,0" VerticalAlignment="Center"
+            <Label x:Name="lblI5" Content="" HorizontalAlignment="Left" Margin="85,0,0,0" VerticalAlignment="Center" Visibility="Hidden"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Helvetica"
                     FontStretch="SemiExpanded"
                     FontSize="9"/>
-            <Label x:Name="lblI6" Content="Diero Estrella" HorizontalAlignment="Left" Margin="90,248,0,0" VerticalAlignment="Top"
+            <Label x:Name="lblI6" Content="" HorizontalAlignment="Left" Margin="85,248,0,0" VerticalAlignment="Top" Visibility="Hidden"
                     Foreground="Black"
                     FontWeight="DemiBold"
                     FontFamily="Helvetica"

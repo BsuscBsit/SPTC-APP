@@ -52,6 +52,9 @@ namespace SPTC_APP.View.Pages.Input
             franchise.MTOPNo = tboxMTOPplateNum.Text;
             franchise.LicenseNO = tboxLTOplateNum.Text;
             franchise.BuyingDate = bDay.DisplayDate;
+            franchise.Operator = new Operator();
+            franchise.Operator.tinNumber = tboxIDNum1.Text;
+            franchise.Operator.votersNumbewr = tboxIDNum2.Text;
             (new NewOptr_Drv(franchise, General.OPERATOR)).Show();
             this.Close();
 

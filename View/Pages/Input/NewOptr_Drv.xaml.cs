@@ -72,7 +72,7 @@ namespace SPTC_APP.View.Pages.Input
                 }
                 else if (type == General.OPERATOR)
                 {
-                    Operator optr = new Operator();
+                    Operator optr = (franchise?.Operator != null)? franchise.Operator:new Operator();
                     optr.name = new Name();
                     optr.address = new Address();
                     optr.name.firstname = tboxsFname.Text;
@@ -87,9 +87,13 @@ namespace SPTC_APP.View.Pages.Input
                     optr.address.barangay = tboxsBarangay.Text;
                     optr.address.streetname = tboxStreetName.Text;
                     optr.address.UpdateAddressLines();
+
                     if (franchise != null)
                     {
                         franchise.Operator = optr;
+                        Ledger.ShareCapital capital = new Ledger.ShareCapital();
+                        capital.WriteInto(franchise.Save(), DateTime.Now, 0, 0);
+                        capital.Save();
                     } else
                     {
                         optr.Save();

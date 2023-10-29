@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
@@ -217,26 +218,70 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     MainBody.selectedFranchise = (Franchise)grid.SelectedItem;
                     ValuePairFI(lblF1, "Operator Name: ", lblI1, MainBody.selectedFranchise?.Operator?.ToString() ?? "");
-                    ValuePairFI(lblF2, "Date Of Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
+                    ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber.ToString() ?? "");
-                    ValuePairFI(lblF4, "Loan Balance: ", lblI4, MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "");
-                    ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "");
-                    ValuePairFI(lblF6, "Reference: ", lblI6, MainBody.selectedFranchise?.Owner?.ToString() ?? "");
-                    ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
-                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
+
+                    if (AppState.USER?.position?.title == AppState.Employees[0])
+                    {
+                        ValuePairFI(lblF4, "Loan Balance: ", lblI4, "P "+MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, "P "+MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF6, "Reference: ", lblI6, MainBody.selectedFranchise?.Owner?.ToString() ?? "");
+                        ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
+                        
+                    } else if(AppState.USER?.position?.title == AppState.Employees[1])
+                    {
+
+                    } else if(AppState.USER?.position?.title == AppState.Employees[2])
+                    {
+
+                    } else if(AppState.USER?.position?.title == AppState.Employees[3])
+                    {
+
+                    }
+                    if (MainBody.selectedFranchise?.Operator?.image?.GetSource() != null)
+                    {
+                        imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
+                    } 
+                    else
+                    {
+                        imgUserProfilePic.ImageSource = null;
+                    }
                 }
                 else if (table == Table.OPERATOR)
                 {
                     MainBody.selectedFranchise = ((Operator)grid.SelectedItem).franchise;
                     oholder = (Operator)grid.SelectedItem;
                     ValuePairFI(lblF1, "Operator Name: ", lblI1, oholder?.name?.legalName?.ToString());
-                    ValuePairFI(lblF2, "Date Of Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
+                    ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber?.ToString() ?? "");
-                    ValuePairFI(lblF4, "Loan Balance: ", lblI4, MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "");
-                    ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "");
-                    ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
-                    ValuePairFI(lblF6, "VOTERS ID No.: ", lblI6, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
-                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
+
+                    if (AppState.USER?.position?.title == AppState.Employees[0])
+                    {
+                        ValuePairFI(lblF4, "Loan Balance: ", lblI4, "P " + MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, "P " + MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
+                        ValuePairFI(lblF7, "VOTERS ID No.: ", lblI7, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
+                    }
+                    else if (AppState.USER?.position?.title == AppState.Employees[1])
+                    {
+
+                    }
+                    else if (AppState.USER?.position?.title == AppState.Employees[2])
+                    {
+
+                    }
+                    else if (AppState.USER?.position?.title == AppState.Employees[3])
+                    {
+
+                    }
+                    if (MainBody.selectedFranchise?.Operator?.image?.GetSource() != null)
+                    {
+                        imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
+                    }
+                    else
+                    {
+                        imgUserProfilePic.ImageSource = null;
+                    }
                 }
                 else if (table == Table.DRIVER)
                 {
@@ -248,7 +293,14 @@ namespace SPTC_APP.View.Pages.Output
                     ValuePairFI(lblF4, "Body No.: ", lblI4, MainBody.selectedFranchise?.BodyNumber?.ToString() ?? "");
                     ValuePairFI(lblF5, "License No: ", lblI5, MainBody.selectedFranchise?.LicenseNO?.ToString() ?? "");
                     ValuePairFI(lblF6, "Violation:  ", lblI6, MainBody.selectedFranchise?.Driver?.violationCount.ToString() ?? "");
-                    imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Driver?.image?.GetSource();
+                    if (MainBody.selectedFranchise?.Driver?.image?.GetSource() != null)
+                    {
+                        imgUserProfilePic.ImageSource = MainBody.selectedFranchise?.Driver?.image?.GetSource();
+                    }
+                    else
+                    {
+                        imgUserProfilePic.ImageSource = null;
+                    }
                     if (MainBody.selectedFranchise?.Driver?.isSuspended ?? false)
                     {
                         ValuePairFI(lblF7, "Is Suspended:", lblI7, "YES");
@@ -281,6 +333,8 @@ namespace SPTC_APP.View.Pages.Output
 
         private void ValuePairFI(Label lblF, string name, Label lblI, string value)
         {
+            lblF.Visibility = Visibility.Visible;
+            lblI.Visibility = Visibility.Visible;
             lblF.Content = name;
             lblI.Content = (string.IsNullOrEmpty(value)) ? "N/A" : value;
         }

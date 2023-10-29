@@ -30,6 +30,7 @@ namespace SPTC_APP.View.Pages.Input
             AppState.mainwindow?.Hide();
             this.franchise = franchise;
             dpBdate.DisplayDate = DateTime.Now;
+            tboxAmount.Text = AppState.TOTAL_SHARE_PER_MONTH.ToString();
         }
         protected override void OnClosing(CancelEventArgs e)
         {

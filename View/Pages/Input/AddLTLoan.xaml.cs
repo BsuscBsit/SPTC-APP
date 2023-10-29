@@ -23,7 +23,7 @@ namespace SPTC_APP.View.Pages.Input
     {
 
         Franchise franchise;
-        public AddLTLoan(Franchise franchise)
+        public AddLTLoan(Franchise franchise, bool isApply = false)
         {
             InitializeComponent();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };

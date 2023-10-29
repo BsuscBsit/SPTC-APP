@@ -29,19 +29,19 @@ namespace SPTC_APP.Objects
         }
 
 
-        public double principal
+        public double paymentDues
         {
             get
             {
                 if (ledger is Ledger.Loan)
                 {
                     UpdateLedger();
-                    return (ledger as Ledger.Loan).monthlyPrincipal;
+                    return (ledger as Ledger.Loan).paymentDues;
                 } 
                 if(ledger is Ledger.LongTermLoan)
                 {
                     UpdateLTLedger();
-                    return (ledger as Ledger.LongTermLoan).capitalBuildup;
+                    return (ledger as Ledger.LongTermLoan).paymentDues;
                 }
                 return 0;
             }

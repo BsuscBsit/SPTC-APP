@@ -31,6 +31,7 @@ namespace SPTC_APP
         public static bool LOG_WINDOW;
         public static int DEFAULT_CAMERA;
         public static int TABLE_BATCH_SIZE;
+        public static double TOTAL_SHARE_PER_MONTH;
 
 
 
@@ -213,6 +214,7 @@ namespace SPTC_APP
             DEFAULT_CAMERA = 0;
             LOG_WINDOW = false;
             TABLE_BATCH_SIZE = 2;
+            TOTAL_SHARE_PER_MONTH = 100;
         }
         public static void SaveToJson()
         {
@@ -229,6 +231,7 @@ namespace SPTC_APP
                 LOG_WINDOW,
                 DEFAULT_CAMERA,
                 TABLE_BATCH_SIZE,
+                TOTAL_SHARE_PER_MONTH,
             };
 
             if (File.Exists(APPSTATE_PATH))
@@ -271,6 +274,7 @@ namespace SPTC_APP
                     LOG_WINDOW = data.LOG_WINDOW;
                     DEFAULT_CAMERA = data.DEFAULT_CAMERA;
                     TABLE_BATCH_SIZE = data.TABLE_BATCH_SIZE;
+                    TOTAL_SHARE_PER_MONTH = data.TOTAL_SHARE_PER_MONTH;
                     if (DatabaseConnection.HasConnection())
                     {
                         ALL_EMPLOYEES = Retrieve.GetDataUsingQuery<string>(RequestQuery.GET_LIST_OF_POSITION).ToArray();
@@ -298,7 +302,7 @@ namespace SPTC_APP
                     AppState.LoadFromJson();
                 }
             }
-            if(ALL_EMPLOYEES.Length >= 4)
+            if((ALL_EMPLOYEES?.Length ?? 0) >= 4)
                 Employees = new List<string> { ALL_EMPLOYEES?[0], ALL_EMPLOYEES?[1], ALL_EMPLOYEES?[2], ALL_EMPLOYEES?[3] };
         }
 

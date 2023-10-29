@@ -2,6 +2,7 @@
 using SPTC_APP.Objects;
 using SPTC_APP.View.Pages.Input;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;

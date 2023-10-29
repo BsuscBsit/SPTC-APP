@@ -38,9 +38,10 @@ namespace SPTC_APP.Database
             $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_TYPE} = \"{table}\" AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
         public static string CHECK_IF_SUSPENDED(string entity, string field, int id) =>
             $"SELECT CASE WHEN EXISTS ( SELECT 1 FROM {Table.VIOLATION} AS v LEFT JOIN {Table.FRANCHISE} AS f ON f.{Field.ID} = v.{Field.FRANCHISE_ID} LEFT JOIN {Table.VIOLATION_TYPE} AS vt ON v.{Field.VIOLATION_TYPE_ID} = vt.{Field.ID} WHERE vt.{Field.ENTITY_TYPE} = \"{entity}\" AND f.{field} = {id} AND CURDATE() BETWEEN v.{Field.SUSPENSION_START} AND v.{Field.SUSPENSION_END} ) THEN TRUE ELSE FALSE END AS IsSuspended;";
-
+        public static string GET_SHARE_LEDGER_LIST(int id) =>
+            $"SELECT * FROM {Table.SHARE_CAPITAL} WHERE {Field.FRANCHISE_ID} = {id} AND {Where.ALL_NOTDELETED} ORDER BY {Field.DATE} DESC";
         public static string GET_LEDGER_LIST(string table, int id) =>
-            $"SELECT * FROM {table} WHERE {Field.FRANCHISE_ID} = {id} AND {Where.ALL_NOTDELETED} ORDER BY {Field.DATE} DESC";
+            $"SELECT * FROM {table} WHERE {Field.FRANCHISE_ID} = {id} AND {Field.IS_FULLY_PAID}=0 AND {Where.ALL_NOTDELETED} ORDER BY {Field.DATE} DESC";
 
         public static string GET_LEDGER_PAYMENT(string table, string type, int id) =>
             $"SELECT * FROM {Table.PAYMENT_DETAILS} AS pd LEFT JOIN {table} AS scl ON pd.{Field.LEDGER_ID} = scl.{Field.ID} AND pd.{Field.LEDGER_TYPE} = \"{type}\" WHERE scl.{Field.FRANCHISE_ID} = {id} AND pd.{Where.ALL_NOTDELETED} ORDER BY pd.{Field.DATE} DESC";
@@ -133,6 +134,7 @@ namespace SPTC_APP.Database
         public const string END_DATE = "end_date";
         public const string TITLE = "title";
         public const string ENTITY_TYPE = "entity_type";
+        public const string IS_FULLY_PAID = "isFullyPaid";
 
         // Foreign Keys
         public const string EMPLOYEE_ID = "user_id";

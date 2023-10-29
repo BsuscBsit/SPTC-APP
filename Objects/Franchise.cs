@@ -20,9 +20,9 @@ namespace SPTC_APP.Objects
         public DateTime BuyingDate { get; set; }
         public string MTOPNo { get; set; }
         public double ShareCapital { get { return GetTotalShareCapital(); } }
-        public double MonthlyDues { get; set; }
-        public double LoanBalance { get { return GetLoans().Sum(tmp => tmp.amount ) - GetTotalLoan(); } }
-        public double LongTermLoanBalance { get { return GetLTLoans().Sum(tmp => tmp.amountLoaned) - GetTotalLTLoan(); } }
+        public double MonthlyDues { get { return (GetLoans()?.FirstOrDefault()?.paymentDues ?? 0) + (GetLTLoans()?.FirstOrDefault()?.paymentDues ?? 0) + AppState.TOTAL_SHARE_PER_MONTH; } }
+        public double LoanBalance { get { return GetLoans()?.FirstOrDefault()?.amount ?? 0; } }
+        public double LongTermLoanBalance { get { return GetLTLoans()?.FirstOrDefault()?.amountLoaned ?? 0; } }
         public string displayBuyingDate { get { return BuyingDate.ToString("MMMM dd, yyyy"); } }
 
         private Upsert franchise;
@@ -131,7 +131,7 @@ namespace SPTC_APP.Objects
 
         public List<Ledger.ShareCapital> GetShareCapitals()
         {
-            return Retrieve.GetDataUsingQuery<Ledger.ShareCapital>(RequestQuery.GET_LEDGER_LIST(Table.SHARE_CAPITAL, id));
+            return Retrieve.GetDataUsingQuery<Ledger.ShareCapital>(RequestQuery.GET_SHARE_LEDGER_LIST(id));
         }
         public List<Ledger.Loan> GetLoans()
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
+using static SPTC_APP.Objects.Ledger;
 
 namespace SPTC_APP.Objects
 {
@@ -17,8 +18,10 @@ namespace SPTC_APP.Objects
             public double amount { get; set; }
             public string details { get; set; }
             public double monthlyInterest { get; set; }
-            public double monthlyPrincipal { get; set; }
+            public double termsofpayment { get; set; }
             public double paymentDues { get; set; }
+
+            public bool isFullyPaid { get; set; } = false;
 
             private Upsert loan;
 
@@ -36,7 +39,7 @@ namespace SPTC_APP.Objects
                 this.amount = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT);
                 this.details = Retrieve.GetValueOrDefault<string>(reader, Field.DETAILS);
                 this.monthlyInterest = Retrieve.GetValueOrDefault<double>(reader, Field.MONTHLY_INTEREST);
-                this.monthlyPrincipal = Retrieve.GetValueOrDefault<double>(reader, Field.MONTHLY_PRINCIPAL);
+                this.termsofpayment = Retrieve.GetValueOrDefault<double>(reader, Field.TERMS_OF_PAYMENT_MONTH);
                 this.paymentDues = Retrieve.GetValueOrDefault<double>(reader, Field.PAYMENT_DUES);
             }
             public bool WriteInto(
@@ -45,7 +48,7 @@ namespace SPTC_APP.Objects
                     double amount,
                     string details,
                     double monthlyInterest,
-                    double monthlyPrincipal,
+                    int termsofpayment,
                     double paymentDues)
             {
                 this.franchiseId = franchiseId;
@@ -53,7 +56,7 @@ namespace SPTC_APP.Objects
                 this.amount = amount;
                 this.details = details;
                 this.monthlyInterest = monthlyInterest;
-                this.monthlyPrincipal = monthlyPrincipal;
+                this.termsofpayment = termsofpayment;
                 this.paymentDues = paymentDues;
                 return true;
             }
@@ -70,8 +73,9 @@ namespace SPTC_APP.Objects
                 loan.Insert(Field.AMOUNT, amount);
                 loan.Insert(Field.DETAILS, details);
                 loan.Insert(Field.MONTHLY_INTEREST, monthlyInterest);
-                loan.Insert(Field.MONTHLY_PRINCIPAL, monthlyPrincipal);
+                loan.Insert(Field.TERMS_OF_PAYMENT_MONTH, termsofpayment);
                 loan.Insert(Field.PAYMENT_DUES, paymentDues);
+                loan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
                 loan.Save();
                 id = loan.id;
 
@@ -168,6 +172,9 @@ namespace SPTC_APP.Objects
             public string details { get; set; }
             public double processingFee { get; set; }
             public double capitalBuildup { get; set; }
+            public double paymentDues { get; set; }
+            public bool isFullyPaid { get; set; } = false;
+
 
             private Upsert longTermLoan;
 
@@ -189,6 +196,7 @@ namespace SPTC_APP.Objects
                 this.details = Retrieve.GetValueOrDefault<string>(reader, Field.DETAILS);
                 this.processingFee = Retrieve.GetValueOrDefault<double>(reader, Field.PROCESSING_FEE);
                 this.capitalBuildup = Retrieve.GetValueOrDefault<double>(reader, Field.CAPITAL_BUILDUP);
+                this.paymentDues = Retrieve.GetValueOrDefault<double>(reader, Field.PAYMENT_DUES);
             }
             public bool WriteInto(
                     int franchiseId,
@@ -210,6 +218,7 @@ namespace SPTC_APP.Objects
                 this.details = details;
                 this.processingFee = processingFee;
                 this.capitalBuildup = capitalBuildup;
+                this.paymentDues = paymentDues;
                 return true;
             }
 
@@ -228,6 +237,8 @@ namespace SPTC_APP.Objects
                 longTermLoan.Insert(Field.DETAILS, details);
                 longTermLoan.Insert(Field.PROCESSING_FEE, processingFee);
                 longTermLoan.Insert(Field.CAPITAL_BUILDUP, capitalBuildup);
+                longTermLoan.Insert(Field.PAYMENT_DUES, paymentDues);
+                longTermLoan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
                 longTermLoan.Save();
                 id = longTermLoan.id;
 

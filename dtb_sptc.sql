@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2023 at 04:46 AM
+-- Generation Time: Oct 29, 2023 at 02:44 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -157,8 +157,9 @@ CREATE TABLE `tbl_loan_ledger` (
   `amount` double NOT NULL DEFAULT 0,
   `details` varchar(100) DEFAULT NULL,
   `monthly_interest` double NOT NULL DEFAULT 0,
-  `monthly_principal` double NOT NULL DEFAULT 0,
   `payment_dues` double NOT NULL DEFAULT 0,
+  `terms_of_payment_month` int(11) NOT NULL DEFAULT 1,
+  `isFullyPaid` tinyint(1) NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -179,6 +180,8 @@ CREATE TABLE `tbl_long_term_loan_ledger` (
   `details` varchar(100) DEFAULT NULL,
   `processing_fee` double NOT NULL DEFAULT 0,
   `capital_buildup` double NOT NULL DEFAULT 0,
+  `payment_dues` double NOT NULL DEFAULT 0,
+  `isFullyPaid` tinyint(1) NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

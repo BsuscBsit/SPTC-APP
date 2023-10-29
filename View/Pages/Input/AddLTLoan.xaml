@@ -4,139 +4,117 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SPTC_APP.View.Pages.Input"
-        mc:Ignorable="d" Width="760" >
+        mc:Ignorable="d" Width="760" Height="450" >
     <Grid x:Name="AddShareCapital" HorizontalAlignment="Right" Width="760" Background="WhiteSmoke">
         <Rectangle Height="40" Stroke="#FEF301" Fill="#FEF301"  VerticalAlignment="Top" Width="NaN"/>
         <Label 
-               Content="ADD LT LOAN" 
-               Height="Auto" 
-               HorizontalAlignment="Left" 
-               VerticalAlignment="Center"
-               Foreground="Gray" 
-               FontSize="20"
-               FontFamily="Inter"
-               Margin="65,61,0,409"/>
-
-        <Grid Margin="0,0,10,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Reference No.: "
-                Grid.Column="0"
-                Height="Auto" 
-                VerticalAlignment="Center"
-                FontWeight="SemiBold"
-                FontSize="14"
-                FontFamily="Inter" Margin="514,0,-21,0" RenderTransformOrigin="0.308,-0.389" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="tboxRefNo"               
-                Text="" 
-                Width="164"
-                Height="30" 
-                VerticalAlignment="Top" Margin="514,265,72,0"/>
-        </Grid>
+            Content="ADD LONG TERM LOAN" 
+            Height="Auto" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Foreground="Gray" 
+            FontSize="20"
+            FontFamily="Inter"
+            Margin="65,61,0,0"/>
         <Label Content="Date: "
-                           Grid.Column="0"
-                           Height="25" 
-                           HorizontalAlignment="Stretch" 
-                           VerticalAlignment="Center"
-                           FontWeight="SemiBold"
-                           FontSize="14"
-                           FontFamily="Inter" Margin="100,143,393,336"/>
+             Height="25" 
+             HorizontalAlignment="Left" 
+             VerticalAlignment="Top"
+             FontWeight="SemiBold"
+             FontSize="14"
+             FontFamily="Inter" Margin="100,143,0, 0"/>
 
         <DatePicker x:Name="dpBdate"
-                            Width="164"
-                            Height="30"
-                            HorizontalAlignment="Stretch"
-                            Background="White"
-                            Margin="100,173,496,301"/>
+             Width="164"
+             Height="30"
+             HorizontalAlignment="left"
+             VerticalAlignment="Top"
+             Background="White"
+             Margin="100,173,0, 0"/>
 
+        <Label Content="Monthly Interest: "
+            x:Name="lblInterest"
+         Height="Auto" 
+         VerticalAlignment="Top"
+         HorizontalAlignment="Left"
+         FontWeight="SemiBold"
+         FontSize="14"
+         FontFamily="Inter" Margin="298,235,0,0"/>
 
-        <Label Content="Principal: "
-            Grid.Column="0"
-            Height="Auto" 
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Center"
-            FontWeight="SemiBold"
-            FontSize="14"
-            FontFamily="Inter" Margin="306,143,197,334"/>
-        <ComboBox
-            x:Name="cbGender"
-            Grid.Column="0"
-            Height="31"
-            Margin="306,172,290,301"
-            VerticalAlignment="Center"
-            IsReadOnly="True"
-            IsTabStop="False"
-            SelectedIndex="0"
-            Style="{DynamicResource CommonComboBox}">
-            <ComboBoxItem Content="CASH" />
-            <ComboBoxItem Content="CHEQUE" />
-        </ComboBox>
-
-
-
-        <Label Content="Interest: "
-            Grid.Column="0"
-            Height="Auto" 
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Center"
-            FontWeight="SemiBold"
-            FontSize="14"
-            FontFamily="Inter" Margin="514,143,-11,334" RenderTransformOrigin="0.308,-0.389"/>
-
-        <TextBox x:Name="tbInterenst"               
-            Text="" 
-            Width="164"
-            Height="30"
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Center" Margin="514,173,82,301"/>
+        <TextBox x:Name="tboxInterest"              
+         Text="" 
+         Width="164"
+         Height="30" 
+         VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,265,0,0"/>
 
         <Label Content="Penalty: "
-            Grid.Column="0"
-            Height="Auto" 
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Center"
-            FontWeight="SemiBold"
-            FontSize="14"
-            FontFamily="Inter" Margin="100,238,403,239" RenderTransformOrigin="0.308,-0.389"/>
+         x:Name="lblTerms"
+         Grid.Column="0"
+         Height="Auto" 
+         VerticalAlignment="Top"
+         HorizontalAlignment="Left"
+         FontWeight="SemiBold"
+         FontSize="14"
+         FontFamily="Inter" Margin="100,235,0,0"/>
 
-        <TextBox x:Name="tboxPenalty"               
-            Text="" 
-            Width="164"
-            Height="30"
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Center" Margin="100,265,496,209"/>
+        <TextBox x:Name="tbPenalty"               
+         Text="" 
+         Width="164"
+         Height="30" 
+         VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,265,0,0"/>
 
         <Label Content="Amount: "
-            Grid.Column="0"
-            Height="Auto" 
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Center"
-            FontWeight="SemiBold"
-            FontSize="14"
-            FontFamily="Inter" Margin="306,238,197,239" RenderTransformOrigin="0.308,-0.389"/>
+         Height="Auto" 
+         VerticalAlignment="Top"
+         HorizontalAlignment="Left"
+         FontWeight="SemiBold"
+         FontSize="14"
+         FontFamily="Inter" Margin="298,146,0,0" />
 
         <TextBox x:Name="tboxAmount"               
-            Text="" 
-            Width="164"
-            Height="30"
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Center" Margin="306,265,290,209"/>
-
-
-
-
+         Text="" 
+         Width="164"
+         Height="30" 
+         VerticalAlignment="Top" HorizontalAlignment="Left" Margin="298,173,0,0"/>
+        <Label Content="Reference No.: "
+         Height="Auto" 
+         VerticalAlignment="Top"
+         HorizontalAlignment="Left"
+         FontWeight="SemiBold"
+         FontSize="14"
+         FontFamily="Inter" Margin="499,141,0,0"/>
+        <TextBox x:Name="tboxRefNo"               
+         Text="" 
+         Width="164"
+         Height="30" 
+         VerticalAlignment="Top" HorizontalAlignment="Left" Margin="499,173, 0,0"/>
 
         <Button x:Name="btnCancel" Content="CANCEL" Width="135" Height="40"
-                    FontWeight="Bold"
-                    FontFamily="Hetivica"
-                    Background="White" Margin="141,341,484,123" Click="btnCancel_Click"/>
+                 FontWeight="Bold"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 FontFamily="Hetivica"
+                 Background="White" Margin="141,341,0,0" Click="btnCancel_Click"/>
 
         <Button x:Name="btnSave" Content="SAVE" Width="135" Height="40"
-                    FontWeight="Bold"
-                    FontFamily="Hetivica"
-                    Background="Yellow" Margin="479,341,146,123" Click="btnSave_Click"/>
+                 FontWeight="Bold"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 FontFamily="Hetivica"
+                 Background="Yellow" Margin="479,341,0,0" Click="btnSave_Click"/>
+        <Label Content="Processing Fee: "
+            x:Name="lblProcessingFee"
+            Height="Auto" 
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            FontWeight="SemiBold"
+            FontSize="14"
+            FontFamily="Inter" Margin="499,235,0,0"/>
+        <TextBox x:Name="tbProcessingFee"               
+            Text="" 
+            Width="164"
+            Height="30" 
+            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="499,265,0,0"/>
 
 
     </Grid>

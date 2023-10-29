@@ -207,7 +207,7 @@ namespace SPTC_APP.Objects
                     double amountLoaned,
                     string details,
                     double processingFee,
-                    double capitalBuildup)
+                    double paymentDues)
             {
                 this.franchiseId = franchiseId;
                 this.date = dateLoaned;
@@ -217,7 +217,6 @@ namespace SPTC_APP.Objects
                 this.amountLoaned = amountLoaned;
                 this.details = details;
                 this.processingFee = processingFee;
-                this.capitalBuildup = capitalBuildup;
                 this.paymentDues = paymentDues;
                 return true;
             }

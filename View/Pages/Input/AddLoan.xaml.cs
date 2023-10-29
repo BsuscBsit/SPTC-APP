@@ -36,6 +36,7 @@ namespace SPTC_APP.View.Pages.Input
             if (isApply)
             {
                 lblTerms.Content = "Term length in months: ";
+                tbPenalty.Text = "12";
             } else
             {
                 tboxInterest.Visibility = Visibility.Collapsed;

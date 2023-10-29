@@ -172,20 +172,9 @@ namespace SPTC_APP.Objects
 
         public List<PaymentHistory> GetPaymentList()
         {
-            List<PaymentHistory> mainlist = new List<PaymentHistory>();
+            List<PaymentHistory> mainlist = Retrieve.GetDataUsingQuery<PaymentHistory>(RequestQuery.GET_ALL_PAYMENTS_ID(id));
             
-            foreach(var res in GetShareCapitalLedger())
-            {
-                mainlist.Add((new PaymentHistory(res.displayDate, Ledger.SHARE_CAPITAL, res.referenceNo, res.balance, res.deposit)));
-            }
-            foreach (var res in GetLoanLedger())
-            {
-                mainlist.Add((new PaymentHistory(res.displayDate, Ledger.LOAN, res.referenceNo, res.balance, res.deposit)));
-            }
-            foreach (var res in GetlTLoanLedger())
-            {
-                mainlist.Add((new PaymentHistory(res.displayDate, Ledger.LT_LOAN, res.referenceNo, res.balance, res.deposit)));
-            }
+            
 
             //EventLogger.Post($"OUT :: {mainlist.Count}");
             return mainlist;

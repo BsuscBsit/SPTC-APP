@@ -21,6 +21,8 @@ namespace SPTC_APP.Objects
         public double penalties { get; set; }
         public string remarks { get; set; }
         public double balance { get; set; }
+        public bool isApply { get; set; } = false;
+        public string ledgername { get; set; }
         public string displayDate { 
             get
             {
@@ -184,7 +186,14 @@ namespace SPTC_APP.Objects
             if (ledger != null)
             {
                 paymentDetails.Insert(Field.LEDGER_ID, saveLedger());
-                paymentDetails.Insert(Field.LEDGER_TYPE, typeof(T).Name.ToUpper());
+                if (isApply)
+                {
+                    paymentDetails.Insert(Field.LEDGER_TYPE, ledgername);
+                }
+                else
+                {
+                    paymentDetails.Insert(Field.LEDGER_TYPE, typeof(T).Name.ToUpper());
+                }
             }
             paymentDetails.Save();
             id = paymentDetails.id;
@@ -216,13 +225,21 @@ namespace SPTC_APP.Objects
         public string balance { get; set; }
         public string payment { get; set; }
 
-        public PaymentHistory(string date, string obj, string referenceNo, double balance, double payment)
+        /*public PaymentHistory(string date, string obj, string referenceNo, double balance, double payment)
         {
             this.date = date;
             this.ledgerType = obj;
             this.referenceNo = referenceNo;
             this.balance = "P " + balance.ToString("0.00");
             this.payment = "P " + payment.ToString("0.00");
+        }*/
+        public PaymentHistory(MySqlDataReader reader)
+        {
+            this.date = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE).ToString("MMM dd, yyyy");
+            this.ledgerType = Retrieve.GetValueOrDefault<string>(reader, Field.LEDGER_TYPE);
+            this.referenceNo = Retrieve.GetValueOrDefault<string>(reader, Field.REFERENCE_NO);
+            this.balance = "P " + Retrieve.GetValueOrDefault<double>(reader, Field.BALANCE);
+            this.payment = "P " + Retrieve.GetValueOrDefault<double>(reader, Field.DEPOSIT);
         }
     }
 }

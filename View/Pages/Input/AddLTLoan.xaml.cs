@@ -67,19 +67,19 @@ namespace SPTC_APP.View.Pages.Input
                 double penalty = Double.TryParse(tbPenalty.Text, out penalty) ? penalty : 0;
                 if (amount > 0)
                 {
-                    PaymentDetails<Ledger.LongTermLoan> capital = new PaymentDetails<Ledger.LongTermLoan>();
+                    PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
                     Ledger.LongTermLoan loan = new Ledger.LongTermLoan();
                     if (franchise.GetLTLoans()?.FirstOrDefault() != null)
                     {
                         loan = franchise.GetLTLoans().FirstOrDefault();
-                        capital.WriteInto(loan, false, false, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", loan.amountLoaned - amount);
+                        loanPayment.WriteInto(loan, false, false, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", loan.amountLoaned - amount);
                         loan.amountLoaned = loan.amountLoaned - Double.Parse(tboxAmount.Text);
                         if (loan.amountLoaned <= 0)
                         {
                             loan.isFullyPaid = true;
                         }
                         loan.Save();
-                        capital.Save();
+                        loanPayment.Save();
                     }
                     else
                     {
@@ -87,6 +87,10 @@ namespace SPTC_APP.View.Pages.Input
                         double totalamount = monthlydue * penalty;
                         loan.WriteInto(franchise.id, DateTime.Now, Int32.Parse(penalty.ToString()), DateTime.Now, DateTime.Now.AddMonths(Int32.Parse(penalty.ToString())), totalamount, "", Double.Parse(tbProcessingFee.Text),  monthlydue);
                         loan.Save();
+                        loanPayment.WriteInto(loan, false, false, dpBdate.DisplayDate, tboxRefNo.Text, -amount, penalty, "", loan.amountLoaned);
+                        loanPayment.isApply = true;
+                        loanPayment.ledgername = Ledger.APPLY_LT_LOAN;
+                        loanPayment.Save();
                     }
 
                     this.Close();

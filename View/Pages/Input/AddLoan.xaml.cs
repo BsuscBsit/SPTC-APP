@@ -84,6 +84,10 @@ namespace SPTC_APP.View.Pages.Input
                         double totalamount = monthlydue * penalty;
                         loan.WriteInto(franchise.id, DateTime.Now, totalamount, "",interest, Int32.Parse(penalty.ToString()), monthlydue);
                         loan.Save();
+                        loanPayment.WriteInto(loan, false, false, dpBdate.DisplayDate, tboxRefNo.Text, -amount, penalty, "", loan.amount);
+                        loanPayment.isApply = true;
+                        loanPayment.ledgername = Ledger.APPLY_LOAN;
+                        loanPayment.Save();
                     }
 
                     this.Close();

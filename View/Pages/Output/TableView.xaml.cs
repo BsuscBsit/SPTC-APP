@@ -41,15 +41,15 @@ namespace SPTC_APP.View.Pages.Output
                 btnAdd.Visibility = Visibility.Collapsed;
             }
 
-            if (AppState.USER?.position?.title == AppState.Employees[3] && table == Table.FRANCHISE)
+            if (AppState.USER?.position?.title == AppState.Employees[2] && table == Table.OPERATOR)
             {
                 btnAddShareCapital.Visibility = Visibility.Visible;
-                if (MainBody.selectedFranchise.GetLoans().Count <= 0)
+                if (MainBody.selectedFranchise?.GetLoans()?.Count <= 0)
                 {
                     btnAddLoan.Content = "APPLY FOR LOAN";
                 }
                 btnAddLoan.Visibility = Visibility.Visible;
-                if (MainBody.selectedFranchise.GetLTLoans().Count <= 0)
+                if (MainBody.selectedFranchise?.GetLTLoans()?.Count <= 0)
                 {
                     btnAddLoan.Content = "APPLY FOR LTLOAN";
                 }

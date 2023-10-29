@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2023 at 05:04 AM
+-- Generation Time: Oct 29, 2023 at 06:09 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -284,9 +284,9 @@ CREATE TABLE `tbl_position` (
 
 INSERT INTO `tbl_position` (`id`, `title`, `can_cnd`, `can_cno`, `can_cnf`, `can_udp`, `can_uop`, `can_ufp`, `can_dd`, `can_do`, `can_df`, `can_ig`, `can_cd`, `can_co`, `can_adv`, `can_isl`, `can_ill`, `can_itl`, `can_ud`, `can_ubm`, `can_rp`, `can_pi`, `isDeleted`) VALUES
 (1, 'General Manager', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0),
-(2, 'Secretary', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
-(3, 'Treasurer', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(4, 'Bookeeper', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(2, 'Secretary', 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0),
+(3, 'Treasurer', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0),
+(4, 'Bookeeper', 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0),
 (5, 'Chairman', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------

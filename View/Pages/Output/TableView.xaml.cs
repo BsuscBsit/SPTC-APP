@@ -218,7 +218,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     MainBody.selectedFranchise = (Franchise)grid.SelectedItem;
                     ValuePairFI(lblF1, "Operator Name: ", lblI1, MainBody.selectedFranchise?.Operator?.ToString() ?? "");
-                    ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
+                    ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber.ToString() ?? "");
 
                     if (AppState.USER?.position?.title == AppState.Employees[0])
@@ -228,15 +228,27 @@ namespace SPTC_APP.View.Pages.Output
                         ValuePairFI(lblF6, "Reference: ", lblI6, MainBody.selectedFranchise?.Owner?.ToString() ?? "");
                         ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
                         
-                    } else if(AppState.USER?.position?.title == AppState.Employees[1])
+                    } 
+                    else if(AppState.USER?.position?.title == AppState.Employees[1])
                     {
-
-                    } else if(AppState.USER?.position?.title == AppState.Employees[2])
+                        ValuePairFI(lblF4, "TIN No.: ", lblI4, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
+                        ValuePairFI(lblF5, "VOTERS ID No.: ", lblI5, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
+                        ValuePairFI(lblF6, "Reference: ", lblI6, MainBody.selectedFranchise?.Owner?.ToString() ?? "");
+                        ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
+                    }
+                    else if(AppState.USER?.position?.title == AppState.Employees[2])
                     {
-
-                    } else if(AppState.USER?.position?.title == AppState.Employees[3])
+                        ValuePairFI(lblF4, "Share Capital: ", lblI4, "P " + MainBody.selectedFranchise?.ShareCapital.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF5, "Loan Balance: ", lblI5, "P " + MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF6, "LT Loan Balance: ", lblI6, "P " + MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF7, "Total Due for "+DateTime.Now.ToString("MMM")+": ", lblI7, "P " + MainBody.selectedFranchise?.MonthlyDues.ToString("0.00") ?? "");
+                    } 
+                    else if(AppState.USER?.position?.title == AppState.Employees[3])
                     {
-
+                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.LicenseNO ?? "");
+                        ValuePairFI(lblF5, "MTOP No.: ", lblI5, MainBody.selectedFranchise?.MTOPNo ?? "");
+                        ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
+                        ValuePairFI(lblF7, "VOTERS ID No.: ", lblI7, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
                     }
                     if (MainBody.selectedFranchise?.Operator?.image?.GetSource() != null)
                     {
@@ -252,7 +264,7 @@ namespace SPTC_APP.View.Pages.Output
                     MainBody.selectedFranchise = ((Operator)grid.SelectedItem).franchise;
                     oholder = (Operator)grid.SelectedItem;
                     ValuePairFI(lblF1, "Operator Name: ", lblI1, oholder?.name?.legalName?.ToString());
-                    ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
+                    ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber?.ToString() ?? "");
 
                     if (AppState.USER?.position?.title == AppState.Employees[0])
@@ -264,15 +276,24 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[1])
                     {
-
+                        ValuePairFI(lblF4, "TIN No.: ", lblI4, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
+                        ValuePairFI(lblF5, "VOTERS ID No.: ", lblI5, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
+                        ValuePairFI(lblF6, "Reference: ", lblI6, MainBody.selectedFranchise?.Owner?.ToString() ?? "");
+                        ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[2])
                     {
-
+                        ValuePairFI(lblF4, "Share Capital: ", lblI4, "P " + MainBody.selectedFranchise?.ShareCapital.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF5, "Loan Balance: ", lblI5, "P " + MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF6, "LT Loan Balance: ", lblI6, "P " + MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF7, "Total Due for " + DateTime.Now.ToString("MMM") + ": ", lblI7, "P " + MainBody.selectedFranchise?.MonthlyDues.ToString("0.00") ?? "");
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[3])
                     {
-
+                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.LicenseNO ?? "");
+                        ValuePairFI(lblF5, "MTOP No.: ", lblI5, MainBody.selectedFranchise?.MTOPNo ?? "");
+                        ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
+                        ValuePairFI(lblF7, "VOTERS ID No.: ", lblI7, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
                     }
                     if (MainBody.selectedFranchise?.Operator?.image?.GetSource() != null)
                     {
@@ -288,7 +309,7 @@ namespace SPTC_APP.View.Pages.Output
                     MainBody.selectedFranchise = ((Driver)grid.SelectedItem).franchise;
                     dholder = (Driver)grid.SelectedItem;
                     ValuePairFI(lblF1, "Driver's Name: ", lblI1, dholder?.name?.legalName?.ToString());
-                    ValuePairFI(lblF2, "Date of Membership: ", lblI2, MainBody.selectedFranchise?.Driver?.dateOfMembership.ToString("MMMM dd, yyyy") ?? "");
+                    ValuePairFI(lblF2, "Date of Membership: ", lblI2, MainBody.selectedFranchise?.Driver?.dateOfMembership.ToString("MMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Address: ", lblI3, MainBody.selectedFranchise?.Driver?.address?.ToString() ?? "");
                     ValuePairFI(lblF4, "Body No.: ", lblI4, MainBody.selectedFranchise?.BodyNumber?.ToString() ?? "");
                     ValuePairFI(lblF5, "License No: ", lblI5, MainBody.selectedFranchise?.LicenseNO?.ToString() ?? "");

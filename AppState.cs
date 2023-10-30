@@ -1,4 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using AForge.Video;
+using AForge.Video.DirectShow;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
@@ -32,6 +34,7 @@ namespace SPTC_APP
         public static int DEFAULT_CAMERA;
         public static int TABLE_BATCH_SIZE;
         public static double TOTAL_SHARE_PER_MONTH;
+        public static string CAMERA_RESOLUTION;
 
 
 
@@ -215,6 +218,7 @@ namespace SPTC_APP
             LOG_WINDOW = false;
             TABLE_BATCH_SIZE = 2;
             TOTAL_SHARE_PER_MONTH = 100;
+            CAMERA_RESOLUTION = "";
         }
         public static void SaveToJson()
         {
@@ -232,6 +236,7 @@ namespace SPTC_APP
                 DEFAULT_CAMERA,
                 TABLE_BATCH_SIZE,
                 TOTAL_SHARE_PER_MONTH,
+                CAMERA_RESOLUTION,
             };
 
             if (File.Exists(APPSTATE_PATH))
@@ -275,6 +280,7 @@ namespace SPTC_APP
                     DEFAULT_CAMERA = data.DEFAULT_CAMERA;
                     TABLE_BATCH_SIZE = data.TABLE_BATCH_SIZE;
                     TOTAL_SHARE_PER_MONTH = data.TOTAL_SHARE_PER_MONTH;
+                    CAMERA_RESOLUTION = data.CAMERA_RESOLUTION;
                     if (DatabaseConnection.HasConnection())
                     {
                         ALL_EMPLOYEES = Retrieve.GetDataUsingQuery<string>(RequestQuery.GET_LIST_OF_POSITION).ToArray();
@@ -305,8 +311,6 @@ namespace SPTC_APP
             if((ALL_EMPLOYEES?.Length ?? 0) >= 4)
                 Employees = new List<string> { ALL_EMPLOYEES?[0], ALL_EMPLOYEES?[1], ALL_EMPLOYEES?[2], ALL_EMPLOYEES?[3] };
         }
-
-
 
 
         public static Employee FetchChairman()
@@ -355,6 +359,17 @@ namespace SPTC_APP
             DescriptionAttribute[] attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
             return attributes.Length > 0 ? attributes[0].Description : value.ToString();
+        }
+
+        public static List<VideoCapabilities> GetResolutionList()
+        {
+            FilterInfoCollection videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            VideoCaptureDevice videoSource = new VideoCaptureDevice(videoDevices[AppState.DEFAULT_CAMERA].MonikerString);
+            if (videoDevices.Count == 0)
+            {
+                EventLogger.Post("ERR :: No video devices found.");
+            }
+            return videoSource.VideoCapabilities.OrderByDescending(c => c.FrameSize.Width * c.FrameSize.Height).ToList();
         }
     }
 

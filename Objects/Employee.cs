@@ -15,7 +15,7 @@ namespace SPTC_APP.Objects
         public Position position { get; set; }
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
-        public DateTime birthday { get; set; }
+        public DateTime birthday { get; set; } = DateTime.Now;
         public string contactNo { get; set; }
 
         private Upsert employee;

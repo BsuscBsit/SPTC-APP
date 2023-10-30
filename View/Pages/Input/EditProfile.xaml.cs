@@ -18,12 +18,11 @@ namespace SPTC_APP.View.Pages.Input
         public EditProfile(Franchise franchise, dynamic lholder, General type)
         {
             InitializeComponent();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             
             this.franchise = franchise;
             this.type = type;
-            AppState.mainwindow?.Hide();
             if(type == General.DRIVER)
             {
                 Driver drv = lholder as Driver;

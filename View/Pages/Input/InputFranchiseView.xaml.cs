@@ -24,10 +24,9 @@ namespace SPTC_APP.View.Pages.Input
         public InputFranchiseView()
         {
             InitializeComponent();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             bDay.DisplayDate = DateTime.Now;
-            AppState.mainwindow?.Hide();
         }
 
         protected override void OnClosing(CancelEventArgs e)

@@ -26,9 +26,8 @@ namespace SPTC_APP.View.Pages.Input
         public NewOptr_Drv(Franchise franchise, General type)
         {
             InitializeComponent();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
-            AppState.mainwindow?.Hide();
             this.franchise = franchise;
             this.type = type;
             lblTitle.Content = "NEW " + AppState.GetEnumDescription(type);

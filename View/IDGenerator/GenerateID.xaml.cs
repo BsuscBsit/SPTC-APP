@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -45,7 +46,6 @@ namespace SPTC_APP.View
         {
             InitializeComponent();
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
-            AppState.mainwindow?.Hide();
             tboxAddressS.Text = AppState.DEFAULT_ADDRESSLINE2;
             bDay.SelectedDate = DateTime.Today;
             EventLogger.Post("VIEW :: ID GENERATE Window");
@@ -59,6 +59,24 @@ namespace SPTC_APP.View
                 return;
             }
             videoSource = new VideoCaptureDevice(videoDevices[AppState.DEFAULT_CAMERA].MonikerString);
+            if (AppState.CAMERA_RESOLUTION.Split('x').Length == 2)
+            {
+                int height = Int32.Parse(AppState.CAMERA_RESOLUTION.Split('x')[0]);
+                int width = Int32.Parse(AppState.CAMERA_RESOLUTION.Split('x')[1]);
+                bool hasRes = false;
+                foreach (VideoCapabilities res in AppState.GetResolutionList())
+                {
+                    if (res.FrameSize.Height == height && res.FrameSize.Width == width)
+                    {
+                        videoSource.VideoResolution = res;
+                        hasRes = true;
+                    }
+                }
+                if (!hasRes)
+                {
+                    videoSource.VideoResolution = AppState.GetResolutionList().FirstOrDefault();
+                }
+            }
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
             if(!AppState.isDeployment && !AppState.isDeployment_IDGeneration) GenerateDummy();
@@ -68,7 +86,6 @@ namespace SPTC_APP.View
         {
             InitializeComponent();
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
-            AppState.mainwindow?.Hide();
             bDay.SelectedDate = DateTime.Today;
             this.franchise = franchise;
             isUpdate = true;
@@ -180,7 +197,25 @@ namespace SPTC_APP.View
                 btnStartPad.Content = "Start Pad";
             }
 
-            videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
+            videoSource = new VideoCaptureDevice(videoDevices[AppState.DEFAULT_CAMERA].MonikerString);
+            if (AppState.CAMERA_RESOLUTION.Split('x').Length == 2)
+            {
+                int height = Int32.Parse(AppState.CAMERA_RESOLUTION.Split('x')[0]);
+                int width = Int32.Parse(AppState.CAMERA_RESOLUTION.Split('x')[1]);
+                bool hasRes = false;
+                foreach (VideoCapabilities res in AppState.GetResolutionList())
+                {
+                    if (res.FrameSize.Height == height && res.FrameSize.Width == width)
+                    {
+                        videoSource.VideoResolution = res;
+                        hasRes = true;
+                    }
+                }
+                if (!hasRes)
+                {
+                    videoSource.VideoResolution = AppState.GetResolutionList().FirstOrDefault();
+                }
+            }
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
 
         }
@@ -189,8 +224,12 @@ namespace SPTC_APP.View
         private async void Window_ContentRendered(object sender, EventArgs e)
         {
             AppState.WindowsCounter(true, sender);
+
+            AppState.mainwindow?.Hide();
             await Task.Delay(TimeSpan.FromSeconds(0.2));
+
             tboxFn.Focus();
+
         }
         
         protected override void OnClosing(CancelEventArgs e)
@@ -652,6 +691,7 @@ namespace SPTC_APP.View
             setToolTip(tboxLn, "last name");
             setToolTip(cbGender, "");*/
         }
+
     }
 
 }

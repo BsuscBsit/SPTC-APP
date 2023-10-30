@@ -364,7 +364,6 @@ namespace SPTC_APP.View.Pages.Output
                 }
             }
 
-
             franchiseInformation.Visibility = Visibility.Visible;
         }
 

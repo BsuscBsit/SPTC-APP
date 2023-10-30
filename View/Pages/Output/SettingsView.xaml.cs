@@ -1,4 +1,5 @@
-﻿using SPTC_APP.Objects;
+﻿using AForge.Video.DirectShow;
+using SPTC_APP.Objects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,10 +27,9 @@ namespace SPTC_APP.View.Pages.Output
         public SettingsView()
         {
             InitializeComponent();
-            AppState.mainwindow?.Hide();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); GenerateSettingsUI(); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
-            
+            GenerateSettingsUI();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -39,10 +39,8 @@ namespace SPTC_APP.View.Pages.Output
         }
         private void GenerateSettingsUI()
         {
-            SettingsPanel.Children.Clear();
+           
             FieldInfo[] fields = typeof(AppState).GetFields(BindingFlags.Public | BindingFlags.Static);
-
-            //make a way to excclude some values
 
             foreach (FieldInfo field in fields)
             {
@@ -64,13 +62,24 @@ namespace SPTC_APP.View.Pages.Output
                 };
 
                 stackPanel.Children.Add(label);
-
-                if (field.FieldType == typeof(string))
+                if(field.Name == "CAMERA_RESOLUTION")
+                {
+                    foreach (VideoCapabilities vc in AppState.GetResolutionList())
+                    {
+                        cbResolution.Items.Add($"{vc.FrameSize.Height}x{vc.FrameSize.Width}");
+                    }
+                    
+                    cbResolution.SelectedItem = (string)field.GetValue(null);
+                    cbResolution.Visibility = Visibility.Visible;
+                }
+                else if (field.FieldType == typeof(string))
                 {
                     TextBox textBox = new TextBox
                     {
                         Text = (string)field.GetValue(null),
-                        Width = 200
+                        Width = 200,
+                        Height = 31,
+                        Style = (Style)Application.Current.FindResource("CommonTextBoxStyle"),
                     };
 
                     textBox.TextChanged += (sender, e) =>
@@ -82,11 +91,14 @@ namespace SPTC_APP.View.Pages.Output
 
                     SettingsPanel.Children.Add(stackPanel);
                 }
-                if (field.FieldType == typeof(bool))
+                else if (field.FieldType == typeof(bool))
                 {
                     CheckBox checkBox = new CheckBox
                     {
-                        IsChecked = (bool)field.GetValue(null)
+                        IsChecked = (bool)field.GetValue(null),
+                        Width = 31,
+                        Height = 31,
+                        //Style = (Style)Application.Current.FindResource("CommonTextBoxStyle"),
                     };
 
                     checkBox.Checked += (sender, e) =>
@@ -107,7 +119,9 @@ namespace SPTC_APP.View.Pages.Output
                     TextBox textBox = new TextBox
                     {
                         Text = field.GetValue(null).ToString(),
-                        Width = 200
+                        Width = 200,
+                        Height = 31,
+                        Style = (Style)Application.Current.FindResource("CommonTextBoxStyle"),
                     };
 
                     textBox.TextChanged += (sender, e) =>
@@ -122,30 +136,17 @@ namespace SPTC_APP.View.Pages.Output
 
                     SettingsPanel.Children.Add(stackPanel);
                 }
-                else if (field.FieldType == typeof(string[]))
-                {
-                    ListBox listBox = new ListBox
-                    {
-                        ItemsSource = (string[])field.GetValue(null),
-                        Width = 200,
-                        MaxHeight = 200
-                    };
-
-                    stackPanel.Children.Add(listBox);
-
-                    SettingsPanel.Children.Add(stackPanel);
-                }
             }
         }
         private bool ShouldExcludeField(FieldInfo field)
         {
-            // Add your exclusion criteria here based on field names or any other conditions
-            string[] excludedFieldNames = { "ALL_EMPLOYEES", "Employees", "IS_ADMIN", "USER", "MonthlyIncome", "ThisMonthsChart", "isDeployment", "isDeployment_IDGeneration", "mainwindow", "", "", "", "", "", "" };
+            string[] excludedFieldNames = { "ALL_EMPLOYEES", "Employees", "IS_ADMIN", "USER", "MonthlyIncome", "ThisMonthsChart", "isDeployment", "isDeployment_IDGeneration", "mainwindow", "", "", "", "", "" };
             return excludedFieldNames.Contains(field.Name);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            AppState.CAMERA_RESOLUTION = cbResolution.Text;
             AppState.SaveToJson();
             this.Close();
         }

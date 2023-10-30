@@ -22,8 +22,9 @@ namespace SPTC_APP.View
         public GeneratedIDPreview()
         {
             InitializeComponent();
-            AppState.mainwindow?.Hide();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender);
+                AppState.mainwindow?.Hide();
+            };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
         }
 

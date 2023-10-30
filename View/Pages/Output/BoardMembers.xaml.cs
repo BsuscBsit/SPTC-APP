@@ -1,5 +1,6 @@
 ﻿using SPTC_APP.Database;
 using SPTC_APP.Objects;
+using SPTC_APP.View.Pages.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -213,11 +214,11 @@ namespace SPTC_APP.View.Pages.Output
                     int result = ControlWindow.ShowDialogStatic("Manage Employee", $"Employee name: {employee.name?.legalName ?? noname}", "EDIT", "CHANGE", Icons.NOTIFY);
                     if (result == 0)
                     {
-
+                        (new EditEmployee(employee, true, true)).Show();
                     }
                     else if (result == 1)
                     {
-
+                        (new EditEmployee(employee, false, true)).Show();
                     }
                     else
                     {
@@ -228,7 +229,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     if(ControlWindow.ShowDialogStatic("Edit Profile", $"Board Member: {employee.name?.legalName ?? noname}", Icons.NOTIFY))
                     {
-
+                        (new EditEmployee(employee, true, false)).Show();
                     }
                 }
             }

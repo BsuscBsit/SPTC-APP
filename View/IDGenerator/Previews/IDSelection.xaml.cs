@@ -104,7 +104,7 @@ namespace SPTC_APP.View.IDGenerator.Previews
             }
             else
             {
-                drvOrOprt.Content = "This ID will be created for\nOperator.";
+                drvOrOprt.Content = "ID for Operator.";
             }
         }
         private void MySwitch_Front(object sender, RoutedEventArgs e)
@@ -117,7 +117,7 @@ namespace SPTC_APP.View.IDGenerator.Previews
             }
             else
             {
-                drvOrOprt.Content = "This ID will be created for\nDriver.";
+                drvOrOprt.Content = "ID for Driver.";
             }
 
         }

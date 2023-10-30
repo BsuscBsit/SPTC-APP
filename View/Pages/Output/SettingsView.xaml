@@ -8,11 +8,26 @@
         Title="SettingsView" Width="450" Height="400">
     <Grid>
         <ScrollViewer Margin="0, 0, 0, 70">
-            <StackPanel x:Name="SettingsPanel" >
-
+            <StackPanel>
+                <StackPanel x:Name="SettingsPanel">
+                    
+                </StackPanel>
+                <StackPanel x:Name="stResolution" Orientation="Horizontal" Margin="10, 0, 0, 10" Visibility="Hidden">
+                    <TextBlock Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Text="CAMERA RESOLUTION"/>
+                    <ComboBox
+                            x:Name="cbResolution"
+                            Height="31"
+                            Margin="0,4,0,4"
+                            VerticalAlignment="Center"
+                            IsReadOnly="True"
+                            IsTabStop="False"
+                            SelectedIndex="0"
+                            Style="{DynamicResource CommonComboBox}" Width="140">
+                    </ComboBox>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        <Button x:Name="btnCancel" Content="CANCEL" Width="120" Height="30" Margin="40, 0, 0, 20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="btnCancel_Click"/>
-        <Button x:Name="btnSave" Content="SAVE" Width="120" Height="30" Margin="0, 0, 40, 20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnSave_Click"/>
+        <Button x:Name="btnCancel" Content="CANCEL" Style="{StaticResource CommonButtonStyle}" Width="140" Height="31" Margin="40, 0, 0, 20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="btnCancel_Click"/>
+        <Button x:Name="btnSave" Content="SAVE" Style="{StaticResource CommonButtonStyle}" Width="140" Height="31" Margin="0, 0, 40, 20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnSave_Click"/>
     </Grid>
 </Window>

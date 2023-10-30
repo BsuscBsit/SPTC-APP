@@ -71,7 +71,6 @@ namespace SPTC_APP.View
         public PrintPreview()
         {
             InitializeComponent();
-            AppState.mainwindow?.Hide();
             isFront = true;
             RenderIDs();
             checkIdCount();
@@ -95,6 +94,7 @@ namespace SPTC_APP.View
         {
             CenterOffset();
             AppState.WindowsCounter(true, sender);
+            AppState.mainwindow?.Hide();
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {

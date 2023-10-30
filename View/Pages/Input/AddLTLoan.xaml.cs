@@ -27,9 +27,8 @@ namespace SPTC_APP.View.Pages.Input
         public AddLTLoan(Franchise franchise)
         {
             InitializeComponent();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
-            AppState.mainwindow?.Hide();
             this.isApply = (franchise.GetLTLoans()?.FirstOrDefault() == null);
             this.franchise = franchise;
             dpBdate.DisplayDate = DateTime.Now;

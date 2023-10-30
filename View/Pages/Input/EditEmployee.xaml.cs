@@ -155,6 +155,8 @@ namespace SPTC_APP.View.Pages.Input
                 if (sp.ShowDialog() ?? false)
                 {
                     imgSignPic.Source = sp.signatureBitmapResult;
+                    imgSignPic.Height = sp.signatureBitmapResult.Height;
+                    imgSignPic.Width = sp.signatureBitmapResult.Width;
                     hasSign = true;
                     btnStartPad.Content = "Clear";
                     vbSignPH.Visibility = Visibility.Hidden;

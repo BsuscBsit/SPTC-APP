@@ -401,7 +401,7 @@
                                             x:Name="imgSignPic"
                                             Width="400"
                                             Height="208"
-                                            Stretch="UniformToFill"
+                                            Stretch="Fill"
                                             Visibility="Visible" />
 
                                 </Viewbox>

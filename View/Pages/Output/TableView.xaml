@@ -21,12 +21,12 @@
         </DataGrid>
 
         <Grid x:Name="franchiseInformation" HorizontalAlignment="Right" Height="458" Background="White" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="182" Visibility="Visible">
-            <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,10,0,0" StrokeThickness="1" StrokeStartLineCap="Round" Stroke="Black" >
+            <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,10,0,0" StrokeThickness="1" Stroke="Black" >
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,10,0,0" StrokeThickness="1" StrokeStartLineCap="Round" Stroke="Black" >
+            <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,10,0,0" StrokeThickness="1" Stroke="Black" >
                 <Ellipse.Fill>
                     <ImageBrush x:Name="imgUserProfilePic"/>
                 </Ellipse.Fill>

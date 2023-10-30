@@ -289,6 +289,9 @@
     <Compile Include="View\Pages\Input\ViolationInput.xaml.cs">
       <DependentUpon>ViolationInput.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\Output\BoardMembers.xaml.cs">
+      <DependentUpon>BoardMembers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\Output\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
@@ -407,6 +410,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\Input\ViolationInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\Output\BoardMembers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -88,11 +88,11 @@ namespace SPTC_APP.View.Pages
             
         }
 
-        private void BtnBoardMember_Click(object sender, RoutedEventArgs e)
+        private async void BtnBoardMember_Click(object sender, RoutedEventArgs e)
         {
             ClickColorControl(sender as Button);
             TablePanelSwap.Children.Clear();
-            //TablePanelSwap.Children.Add(await(new TableView(Table.DRIVER)).Fetch());
+            TablePanelSwap.Children.Add(await (new BoardMembers()).Fetch());
         }
 
 
@@ -105,9 +105,17 @@ namespace SPTC_APP.View.Pages
             {
                 selectedButton.Background = Brushes.White;
             }
-
+            
             button.Background = Brushes.Yellow;
             selectedButton = button;
+            if (selectedButton == BtnBoardMember)
+            {
+                cbSearch.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                cbSearch.Visibility = Visibility.Visible;
+            }
         }
 
 

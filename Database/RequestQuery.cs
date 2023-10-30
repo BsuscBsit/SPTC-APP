@@ -28,6 +28,8 @@ namespace SPTC_APP.Database
 
         public static string GET_TOTAL_SHARES = $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE {Field.LEDGER_TYPE} = \"SHARECAPITAL\" AND {Where.ALL_NOTDELETED}";
 
+        public static string GET_ALL_EMPLOYEES = $"SELECT * FROM {Table.EMPLOYEE} WHERE {Where.ALL_NOTDELETED}";
+
         public static string SEARCH(string text) =>
             $"SELECT f.* FROM {Table.FRANCHISE} f LEFT JOIN {Table.OPERATOR} O ON f.{Field.OPERATOR_ID}=O.{Field.ID} LEFT JOIN {Table.DRIVER} D ON f.{Field.DRIVER_ID}=D.{Field.ID} " +
             $"LEFT JOIN {Table.NAME} OName ON O.{Field.NAME_ID}=OName.{Field.ID} LEFT JOIN {Table.NAME} DName ON D.{Field.NAME_ID}=DName.{Field.ID} " +

@@ -88,7 +88,7 @@ namespace SPTC_APP
                 }
 
 
-                EventLogger.Post($"USER :: Login Success: USER({username})");
+                EventLogger.Post($"USER :: Login Success: USER({username}) NAME({employee.name?.ToString()})");
                 window.Close();
             }
         }

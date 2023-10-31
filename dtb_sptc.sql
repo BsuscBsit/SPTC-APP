@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2023 at 06:09 AM
+-- Generation Time: Oct 31, 2023 at 12:30 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -88,11 +88,12 @@ CREATE TABLE `tbl_employee` (
 --
 
 INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `sign_id`, `image_id`, `password`, `position_id`, `start_date`, `end_date`, `date_of_birth`, `contact_no`, `isDeleted`) VALUES
-(1, 1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, NULL, NULL, NULL, NULL, 0),
+(1, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, NULL, NULL, NULL, NULL, 0),
 (2, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 2, NULL, NULL, NULL, NULL, 0),
 (3, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, NULL, NULL, NULL, NULL, 0),
 (4, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, NULL, NULL, NULL, NULL, 0),
 (5, -1, -1, -1, -1, NULL, 5, NULL, NULL, NULL, NULL, 0);
+
 
 -- --------------------------------------------------------
 
@@ -140,7 +141,7 @@ CREATE TABLE `tbl_id_history` (
 CREATE TABLE `tbl_image` (
   `id` int(11) NOT NULL,
   `image_source_bin` mediumblob DEFAULT NULL,
-  `image_name` varchar(20) DEFAULT '',
+  `image_name` varchar(50) NOT NULL DEFAULT '',
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

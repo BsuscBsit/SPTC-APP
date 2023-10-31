@@ -13,7 +13,7 @@
         <Label Content="Middlename:" HorizontalAlignment="Left" Margin="181,54,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbMname" HorizontalAlignment="Left" Margin="181,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="31" Style="{StaticResource CommonTextBoxStyle}"/>
         <Label Content="Lastname:" HorizontalAlignment="Left" Margin="340,54,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbLname" HorizontalAlignment="Left" Margin="341,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="31" Style="{StaticResource CommonTextBoxStyle}"/>
+        <TextBox x:Name="tbLname" HorizontalAlignment="Left" Margin="341,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="31" Style="{StaticResource CommonTextBoxStyle}" TextChanged="tbLname_TextChanged"/>
 
         <Label Content="Sex:" HorizontalAlignment="Left" Margin="21,114,0,0" VerticalAlignment="Top"/>
         <ComboBox
@@ -34,7 +34,7 @@
         <Border
          x:Name="grpBday"
          Height="33"
-         Margin="181,150,0,0"
+         Margin="181,144,0,0"
          Padding="5,0,5,0"
          VerticalAlignment="Top"
          HorizontalAlignment="Left"
@@ -50,6 +50,9 @@
             IsTabStop="False"
             KeyboardNavigation.TabNavigation="None" Margin="0,-6,0,6"/>
         </Border>
+        <Label Content="Position:" HorizontalAlignment="Left" Margin="339,118,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbPosTitle" HorizontalAlignment="Left" Margin="340,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="30" Style="{StaticResource CommonTextBoxStyle}" IsEnabled="False"/>
+        
         <Label Content="Address Line 1:" HorizontalAlignment="Left" Margin="21,182,0,0" VerticalAlignment="Top" Width="145"/>
         <TextBox x:Name="tbAddressLine1" HorizontalAlignment="Left" Margin="21,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="31" Style="{StaticResource CommonTextBoxStyle}"/>
         <Label Content="Address Line 2:" HorizontalAlignment="Left" Margin="251,182,0,0" VerticalAlignment="Top" Width="145"/>
@@ -206,5 +209,6 @@
             Content="SAVE"
             Style="{DynamicResource CommonButtonStyle}"
             TabIndex="11" Width="178" HorizontalAlignment="Left" />
+
     </Grid>
 </Window>

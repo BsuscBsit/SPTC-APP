@@ -187,7 +187,7 @@ namespace SPTC_APP.View.Pages.Output
                 if ((AppState.USER?.position?.accesses[17] ?? false)){
                     Button editButton = new Button
                     {
-                        Content = isManage ? "MANAGE" : "EDIT",
+                        Content = isManage ? ((employee.position.title == AppState.USER.position.title)?"PROFILE": "MANAGE") : "EDIT",
                         Height = 25,
                         Width = 70,
                         Style = (Style)Application.Current.FindResource("ControlledButtonStyle"),
@@ -209,20 +209,33 @@ namespace SPTC_APP.View.Pages.Output
             private void EditClick(object sender, RoutedEventArgs e)
             {
                 string noname = "???";
-                if (isManage)
+                if (isManage )
                 {
-                    int result = ControlWindow.ShowDialogStatic("Manage Employee", $"Employee name: {employee.name?.legalName ?? noname}", "EDIT", "CHANGE", Icons.NOTIFY);
-                    if (result == 0)
+                    if (AppState.IS_ADMIN)
                     {
-                        (new EditEmployee(employee, true, true)).Show();
-                    }
-                    else if (result == 1)
-                    {
-                        (new EditEmployee(employee, false, true)).Show();
-                    }
-                    else
-                    {
+                        int result = ControlWindow.ShowDialogStatic("Manage Employee", $"Employee name: {employee.name?.legalName ?? noname}", "EDIT", "CHANGE", Icons.NOTIFY);
+                        if (result == 0)
+                        {
+                            (new EditEmployee(employee, true, true)).Show();
+                        }
+                        else if (result == 1)
+                        {
+                            (new EditEmployee(employee, false, true)).Show();
+                        }
+                        else
+                        {
 
+                        }
+                    } else
+                    {
+                        if (employee.position.title == AppState.USER.position.title)
+                        {
+                            (new EditEmployee(employee, true, false)).Show();
+                        }
+                        else
+                        {
+                            ControlWindow.ShowStatic("Manage Employee", "Cannot Edit Employee Information.\nRequest Admin assistance.", Icons.ERROR);
+                        }
                     }
                 }
                 else

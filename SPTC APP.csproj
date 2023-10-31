@@ -280,6 +280,9 @@
     <Compile Include="View\Pages\Input\EditEmployee.xaml.cs">
       <DependentUpon>EditEmployee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\Input\EditPositionAccess.xaml.cs">
+      <DependentUpon>EditPositionAccess.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\Input\EditProfile.xaml.cs">
       <DependentUpon>EditProfile.xaml</DependentUpon>
     </Compile>
@@ -404,6 +407,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\Input\EditEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\Input\EditPositionAccess.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

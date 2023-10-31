@@ -78,7 +78,11 @@ namespace SPTC_APP.View.Pages.Input
                 if (isManage)
                 {
                     lblTitle.Content = $"EDIT {employee.position?.title ?? string.Empty} PROFILE: ";
+                } else
+                {
+                    tbPosTitle.IsEnabled = (employee.position?.title?.ToString() ?? "") != AppState.ALL_EMPLOYEES[4];
                 }
+                tbPosTitle.Text = employee.position?.title?.ToString() ?? "";
                 tbFname.Text = employee.name?.firstname ?? "";
                 tbMname.Text = employee.name?.middlename ?? "";
                 tbLname.Text = employee.name?.lastname ?? "";
@@ -220,27 +224,72 @@ namespace SPTC_APP.View.Pages.Input
                 hasSign = true;
             }
         }
-
         private void btnPreview_Click(object sender, RoutedEventArgs e)
         {
-            if (isEdit)
-            {
-                employee.name = (employee.name != null) ? employee.name : new Name();
-                employee.address = (employee.address != null) ? employee.address : new Address();
+            if (tbFname.Text.Length > 0 && tbMname.Text.Length > 0 && tbLname.Text.Length > 0 && tbAddressLine1.Text.Length > 0 && tbAddressLine2.Text.Length > 0) {
+                if (isEdit)
+                {
+                    employee.name = (employee.name != null) ? employee.name : new Name();
+                    employee.address = (employee.address != null) ? employee.address : new Address();
+                    employee.image = (employee.image != null) ? employee.image : null;
+                    employee.sign = (employee.sign != null) ? employee.sign : null;
+                } else
+                {
+                    Position position = employee.position;
+                    if (isManage)
+                    {
+                        position = new Position();
+                        position.title = tbPosTitle.Text;
+                    }
+                    employee = new Employee();
+                    employee.position = position;
+                    employee.name = new Name();
+                    employee.address = new Address();
+                    employee.image = new Image();
+                }
+                employee.name.firstname = tbFname.Text;
+                employee.name.middlename = tbMname.Text;
+                employee.name.lastname = tbLname.Text;
+                employee.name.sex = cbGender.SelectedIndex == 1;
+
+                employee.address.addressline1 = tbAddressLine1.Text;
+                employee.address.addressline2 = tbAddressLine2.Text;
+                if (hasPhoto)
+                {
+                    employee.image = new Image(imgIDPic.Source, $"Image {employee.position.title}");
+                }
+                if (hasSign)
+                {
+                    employee.sign = new Image(imgSignPic.Source, $"Signature {employee.position.title}");
+                }
+                if (isManage)
+                {
+                    if (AppState.IS_ADMIN)
+                    {
+                        (new EditPositionAccess(employee)).Show();
+                    }
+                    else
+                    {
+                        employee.Save();
+                    }
+                } else
+                {
+                    employee.Save();
+                }
             } else
             {
-
-            }
-            if(isManage)
-            {
-
-            } else
-            {
-
+                if (!hasPhoto)
+                {
+                    imgIDPic.Source = null;
+                }
+                if (!hasSign)
+                {
+                    imgSignPic.Source = null;
+                }
+                ControlWindow.ShowStatic("Input Fields incomplete!", "Missing some required inputs.");
             }
             this.Close();
         }
-
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -316,5 +365,9 @@ namespace SPTC_APP.View.Pages.Input
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool DeleteObject(IntPtr hObject);
 
+        private void tbLname_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
     }
 }

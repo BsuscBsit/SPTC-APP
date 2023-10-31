@@ -69,6 +69,18 @@ namespace SPTC_APP.View.Pages.Input
             {
                 fillUp();
             }
+            if (isManage)
+            {
+                tbPosTitle.Text = employee.position?.title?.ToString() ?? "";
+                tbPosTitle.IsEnabled = false;
+               
+            } else
+            {
+                if (isEdit)
+                {
+                    tbPosTitle.IsEnabled = true;
+                }
+            }
         }
 
         private void fillUp()
@@ -78,9 +90,6 @@ namespace SPTC_APP.View.Pages.Input
                 if (isManage)
                 {
                     lblTitle.Content = $"EDIT {employee.position?.title ?? string.Empty} PROFILE: ";
-                } else
-                {
-                    tbPosTitle.IsEnabled = (employee.position?.title?.ToString() ?? "") != AppState.ALL_EMPLOYEES[4];
                 }
                 tbPosTitle.Text = employee.position?.title?.ToString() ?? "";
                 tbFname.Text = employee.name?.firstname ?? "";
@@ -236,11 +245,7 @@ namespace SPTC_APP.View.Pages.Input
                 } else
                 {
                     Position position = employee.position;
-                    if (isManage)
-                    {
-                        position = new Position();
-                        position.title = tbPosTitle.Text;
-                    }
+                    employee.delete();
                     employee = new Employee();
                     employee.position = position;
                     employee.name = new Name();

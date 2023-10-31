@@ -515,7 +515,30 @@ namespace SPTC_APP.Objects
             position.Insert(Field.TITLE, title);
             position.Save();
             id = position.id;
+            string updateQuery = $"UPDATE {Table.POSITION} SET " +
+                "can_cnd = " + (accesses[0] ? "1" : "0") + ", " +
+                "can_cno = " + (accesses[1] ? "1" : "0") + ", " +
+                "can_cnf = " + (accesses[2] ? "1" : "0") + ", " +
+                "can_udp = " + (accesses[3] ? "1" : "0") + ", " +
+                "can_uop = " + (accesses[4] ? "1" : "0") + ", " +
+                "can_ufp = " + (accesses[5] ? "1" : "0") + ", " +
+                "can_dd = " + (accesses[6] ? "1" : "0") + ", " +
+                "can_do = " + (accesses[7] ? "1" : "0") + ", " +
+                "can_df = " + (accesses[8] ? "1" : "0") + ", " +
+                "can_ig = " + (accesses[9] ? "1" : "0") + ", " +
+                "can_cd = " + (accesses[10] ? "1" : "0") + ", " +
+                "can_co = " + (accesses[11] ? "1" : "0") + ", " +
+                "can_adv = " + (accesses[12] ? "1" : "0") + ", " +
+                "can_isl = " + (accesses[13] ? "1" : "0") + ", " +
+                "can_ill = " + (accesses[14] ? "1" : "0") + ", " +
+                "can_itl = " + (accesses[15] ? "1" : "0") + ", " +
+                "can_ud = " + (accesses[16] ? "1" : "0") + ", " +
+                "can_ubm = " + (accesses[17] ? "1" : "0") + ", " +
+                "can_rp = " + (accesses[18] ? "1" : "0") + ", " +
+                "can_pi = " + (accesses[19] ? "1" : "0") +
+                $" WHERE id = {id}; SELECT * FROM {Table.POSITION}";
 
+            Retrieve.GetDataUsingQuery<Position>(updateQuery);
             return id;
         }
 

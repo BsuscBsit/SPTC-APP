@@ -30,11 +30,14 @@ namespace SPTC_APP.View.Pages.Input
             this.employee = employee;
             if(employee.position != null)
             {
-                List<bool> arr = employee.position.accesses;
+                List<bool> arr = employee.position?.accesses ?? null;
                 int i = 0;
                 foreach(CheckBox check in new CheckBox[] {cbDCreate, cbOCreate, cbFCreate, cbDEdit, cbOEdit, cbFEdit, cbDDelete, cbODelete, cbFDelete, cbIDGen, cbDChange, cbOChange, cbDViolation, cbShare, cbLoan, cbLTLoan, cbDashboard, cbAdmin, cbPayment })
                 {
-                    check.IsChecked = arr[i++];
+                    if (arr != null)
+                    {
+                        check.IsChecked = arr[i++];
+                    }
                 }
                 if (employee.position.title.Length > 0)
                 {

@@ -225,8 +225,8 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="Password"
-                            FontFamily="Inter"
-                            Foreground="Gray" />
+                            FontFamily="Cascadia Mono Light"
+                            Foreground="Gray" FontWeight="SemiBold" />
                         <Border
                             BorderBrush="Gray"
                             BorderThickness="1"

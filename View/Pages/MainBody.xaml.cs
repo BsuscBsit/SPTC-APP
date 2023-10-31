@@ -9,6 +9,7 @@ using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
 using SPTC_APP.View.Pages.Output;
+using SPTC_APP.View.Styling;
 
 namespace SPTC_APP.View.Pages
 {
@@ -237,6 +238,50 @@ namespace SPTC_APP.View.Pages
         {
             lsSuggestion.Visibility = Visibility.Collapsed;
             cbSearch.Text = "";
+        }
+
+        private void paneExpander_Click(object sender, RoutedEventArgs e)
+        {
+            if(paneExpander.IsChecked == false)
+            {
+
+                AnimationHelper.FadeOut(username, 0.2, () =>
+                {
+                    AnimationHelper.FadeOut(userImageHolder, 0.2, () =>
+                    {
+                        userImageHolder.Width = 50;
+                        userImageHolder.Height = 50;
+                        username.Visibility = Visibility.Collapsed;
+                        AnimationHelper.FadeIn(userImageHolder);
+                    });
+                    AnimationHelper.AnimateWidth(sidePanel, 82);
+                    AnimationHelper.FadeOut(lblDashB);
+                    AnimationHelper.FadeOut(lblFran);
+                    AnimationHelper.FadeOut(lblOp);
+                    AnimationHelper.FadeOut(lblDrv);
+                    AnimationHelper.FadeOut(lblBM);
+                    AnimationHelper.FadeOut(lblSett);
+                    AnimationHelper.FadeOut(lblLogout);
+                });
+            }
+            else
+            {
+                AnimationHelper.FadeOut(userImageHolder, 0.2, () =>
+                {
+                    userImageHolder.Width = 100;
+                    userImageHolder.Height = 100;
+                    AnimationHelper.FadeIn(username, 0.2);
+                    AnimationHelper.FadeIn(userImageHolder);
+                });
+                AnimationHelper.AnimateWidth(sidePanel, 225);
+                AnimationHelper.FadeIn(lblDashB, 0.3);
+                AnimationHelper.FadeIn(lblFran, 0.3);
+                AnimationHelper.FadeIn(lblOp, 0.3);
+                AnimationHelper.FadeIn(lblDrv, 0.3);
+                AnimationHelper.FadeIn(lblBM, 0.3);
+                AnimationHelper.FadeIn(lblSett, 0.3);
+                AnimationHelper.FadeIn(lblLogout, 0.3);
+            }
         }
 
         private async void lsSuggestion_SelectionChanged(object sender, SelectionChangedEventArgs e)

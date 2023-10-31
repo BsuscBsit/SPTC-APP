@@ -319,4 +319,53 @@
         </Canvas>
     </Viewbox>
 
+    <Viewbox x:Key="HomeIcon" Width="25">
+        <Canvas Width="13" Height="13.5">
+            <Path
+                Data="M2.3214285714285716,5.571428571428571 L2.3214285714285716,11.607142857142858 H10.678571428571429 V5.571428571428571"
+                Fill="{DynamicResource BrushSoftGrey3}"
+                StrokeLineJoin="Round"
+                StrokeThickness="1" />
+            <Path
+                Data="M1.7642857142857143,7.428571428571429 L6.5,1.3928571428571428 L11.535714285714286,7.428571428571429"
+                Fill="{DynamicResource BrushSoftGrey3}"
+                StrokeLineJoin="Round"
+                StrokeThickness="1" />
+            <Path
+                Data="M2.3214285714285716,5.571428571428571 L2.3214285714285716,11.607142857142858 H10.678571428571429 V5.571428571428571"
+                Stroke="{DynamicResource BrushGrey}"
+                StrokeLineJoin="Round"
+                StrokeThickness="1" />
+            <Path
+                Data="M0.4642857142857143,7.428571428571429 L6.5,1.3928571428571428 L12.535714285714286,7.428571428571429"
+                Stroke="{DynamicResource BrushMildBlack}"
+                StrokeLineJoin="Round"
+                StrokeThickness="1" />
+        </Canvas>
+    </Viewbox>
+
+    <Viewbox x:Key="FranchiseIcon" Width="25">
+        <Canvas Width="13" Height="11">
+            <Canvas>
+                <Canvas>
+                    <Path
+                        Data="F1 M 0.500,10.108 L 0.500,1.494 C 0.500,0.945 0.945,0.500 1.494,0.500 L 5.161,0.500 C 5.629,0.487 6.042,0.801 6.155,1.256 L 6.463,2.488 L 11.583,2.488 C 12.132,2.488 12.576,2.933 12.576,3.482 C 12.576,3.482 12.576,3.482 12.576,3.482 L 12.576,10.108 C 12.576,10.656 12.132,11.101 11.583,11.101 C 11.583,11.101 11.583,11.101 11.583,11.101 L 1.494,11.101 C 0.945,11.101 0.500,10.656 0.500,10.108 C 0.500,10.108 0.500,10.108 0.500,10.108 Z"
+                        Fill="{DynamicResource BrushSoftGrey3}"
+                        Stroke="{DynamicResource BrushGrey}"
+                        StrokeEndLineCap="Round"
+                        StrokeLineJoin="Round"
+                        StrokeStartLineCap="Round"
+                        StrokeThickness="1.0" />
+                    <Path
+                        Data="F1 M 11.602,5.641 L 1.475,5.641 C 0.936,5.641 0.500,6.078 0.500,6.616 L 0.500,10.127 C 0.500,10.665 0.936,11.101 1.475,11.101 L 11.602,11.101 C 12.140,11.101 12.576,10.665 12.576,10.127 L 12.576,6.616 C 12.576,6.078 12.140,5.641 11.602,5.641 Z"
+                        Stroke="{DynamicResource BrushMildBlack}"
+                        StrokeEndLineCap="Round"
+                        StrokeLineJoin="Round"
+                        StrokeStartLineCap="Round"
+                        StrokeThickness="1.0" />
+                </Canvas>
+            </Canvas>
+        </Canvas>
+    </Viewbox>
+
 </ResourceDictionary>

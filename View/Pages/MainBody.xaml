@@ -6,274 +6,481 @@
     xmlns:local="clr-namespace:SPTC_APP.View.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Sapang Palay Tricycle Cooperative"
+    Width="1000"
     Height="600"
     MinWidth="1000"
     MinHeight="600"
+    AllowsTransparency="True"
     Icon="../../View/Images/icons/logo.ico"
     SizeToContent="WidthAndHeight"
+    Style="{StaticResource Minified}"
     WindowStartupLocation="CenterScreen"
-    WindowStyle="None"
     mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PaneExpander" TargetType="ToggleButton">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="Foreground" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Border Background="White" CornerRadius="0,15,15,0">
+                                <Viewbox Height="16" VerticalAlignment="Center">
+                                    <Grid>
+                                        <Path
+                                            x:Name="arrowLeft"
+                                            Width="8"
+                                            Height="15"
+                                            Data="M8,0 L0,7.5 L8,15 Z"
+                                            Fill="{StaticResource BrushBlack}"
+                                            Opacity="0">
+                                            <Path.Effect>
+                                                <DropShadowEffect
+                                                    Direction="0"
+                                                    Opacity="0"
+                                                    ShadowDepth="0"
+                                                    Color="{DynamicResource ColorSoftGrey2}" />
+                                            </Path.Effect>
+                                        </Path>
+                                        <Path
+                                            x:Name="arrowRight"
+                                            Width="8"
+                                            Height="15"
+                                            Data="M0,0 L8,7.5 L0,15 Z"
+                                            Fill="{StaticResource BrushBlack}"
+                                            Opacity="1">
+                                            <Path.Effect>
+                                                <DropShadowEffect
+                                                    Direction="0"
+                                                    Opacity="0"
+                                                    ShadowDepth="0"
+                                                    Color="{DynamicResource ColorSoftGrey2}" />
+                                            </Path.Effect>
+                                        </Path>
+                                    </Grid>
+                                </Viewbox>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="arrowRight"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="arrowLeft"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="1"
+                                                    Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="arrowRight"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="1"
+                                                    Duration="0:0:0.2" />
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="arrowLeft"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0"
+                                                    Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsChecked" Value="False" />
+                                        <Condition Property="IsMouseOver" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="arrowRight"
+                                                    Storyboard.TargetProperty="Effect.Opacity"
+                                                    To="3"
+                                                    Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiTrigger.EnterActions>
+                                    <MultiTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="arrowRight"
+                                                    Storyboard.TargetProperty="Effect.Opacity"
+                                                    To="0"
+                                                    Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiTrigger.ExitActions>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsChecked" Value="True" />
+                                        <Condition Property="IsMouseOver" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="arrowLeft"
+                                                    Storyboard.TargetProperty="Effect.Opacity"
+                                                    To="3"
+                                                    Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiTrigger.EnterActions>
+                                    <MultiTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="arrowLeft"
+                                                    Storyboard.TargetProperty="Effect.Opacity"
+                                                    To="0"
+                                                    Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiTrigger.ExitActions>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-    <Grid Background="Beige">
-        <Rectangle
-            Width="NaN"
-            Height="40"
-            VerticalAlignment="Top"
-            Fill="#FEF301"
-            Stroke="#FEF301" />
-
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Style="{StaticResource TopBarStyle}" />
         <Grid
             x:Name="sidePanel"
-            Width="214"
-            Margin="0,40,0,0"
-            HorizontalAlignment="Left"
-            Background="White">
-            <Ellipse
-                Width="48"
-                Height="48"
-                Margin="11,6,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top">
-                <Ellipse.Fill>
-                    <ImageBrush x:Name="userImage" ImageSource="../Images/icons/person.png" />
-                </Ellipse.Fill>
-            </Ellipse>
-            <Label
-                x:Name="username"
-                Width="151"
-                Margin="59,17,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="General Manager"
-                FontFamily="Inter"
-                FontSize="16"
-                FontWeight="SemiBold"
-                Foreground="Gray" />
-            <Rectangle
-                Height="1"
-                Margin="5,60,5,0"
-                VerticalAlignment="Top"
-                Stroke="DarkGray" />
-            <Button
-                x:Name="DashBoard"
-                Height="40"
-                Margin="12,81,12,0"
-                VerticalAlignment="Top"
-                BorderThickness="0"
-                Click="DashBoard_Click"
-                Style="{StaticResource ControlledButtonStyle}">
-                <Grid Width="200">
-                    <Image
-                        Width="32"
-                        Height="32"
-                        Margin="15,4,0,4"
-                        HorizontalAlignment="Left"
-                        Source="../Images/icons/home.png" />
-                    <Label
-                        Margin="49,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Content="Dashboard"
-                        FontFamily="Inter"
-                        FontSize="16"
-                        FontWeight="SemiBold"
-                        Foreground="Black" />
+            Grid.Row="1"
+            Width="82">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border
+                Grid.RowSpan="8"
+                Grid.Column="0"
+                Background="White"
+                CornerRadius="0,0,0,15" />
+            <ToggleButton
+                x:Name="paneExpander"
+                Grid.RowSpan="8"
+                Grid.Column="1"
+                Grid.ColumnSpan="1"
+                Width="21"
+                Height="150"
+                VerticalAlignment="Center"
+                Click="paneExpander_Click"
+                Style="{DynamicResource PaneExpander}" />
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="127.2" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid
+                    Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Ellipse x:Name="userImageHolder" Grid.Row="0" Height="50" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Ellipse.Fill>
+                            <ImageBrush x:Name="userImage" ImageSource="../Images/icons/person.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Label Grid.Row="1"
+                        x:Name="username"
+                        HorizontalAlignment="Center"
+                        Content="General Manager"
+                        Foreground="{StaticResource BrushBlack}"
+                        Style="{StaticResource SubTitlePreset}" Visibility="Collapsed" VerticalAlignment="Center" />
                 </Grid>
-            </Button>
-            <Label
-                Width="151"
-                Margin="12,148,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="MENU"
-                FontFamily="Inter"
-                FontSize="16"
-                FontWeight="SemiBold"
-                Foreground="Gray" />
-            <Grid x:Name="menu" Margin="0,177,0,158">
-                <Rectangle
-                    Height="1"
-                    Margin="5,45,5,0"
+                <Button
+                    x:Name="DashBoard"
+                    Grid.Row="2"
+                    Height="40"
+                    Margin="10,0,10,0"
                     VerticalAlignment="Top"
-                    Stroke="DarkGray" />
-                <Rectangle
-                    Height="1"
-                    Margin="5,95,5,0"
-                    VerticalAlignment="Top"
-                    Stroke="DarkGray" />
-                <Rectangle
-                    Height="1"
-                    Margin="5,145,5,0"
-                    VerticalAlignment="Top"
-                    Stroke="DarkGray" />
+                    Background="#FFDAC283"
+                    BorderThickness="0"
+                    Click="DashBoard_Click"
+                    Style="{StaticResource ControlledButtonStyle}">
+                    <Grid Width="189.6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7" />
+                            <ColumnDefinition Width="25" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ContentControl
+                            Grid.Column="1"
+                            Margin="-1,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="{StaticResource HomeIcon}" />
+                        <Label
+                            x:Name="lblDashB"
+                            Grid.Column="3"
+                            Padding="0,5,5,5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Dashboard"
+                            Foreground="{StaticResource BrushBlack}"
+                            Style="{StaticResource SubTitlePreset}"
+                            Visibility="Hidden" />
+                    </Grid>
+                </Button>
+            </Grid>
+            <Grid x:Name="menu" Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <Button
                     x:Name="FranchiseButton"
+                    Grid.Row="0"
                     Height="40"
-                    Margin="15,0,9,0"
-                    VerticalAlignment="Top"
+                    Margin="10,0,10,5"
+                    Background="#FFDAC283"
                     BorderThickness="0"
                     Click="FranchiseButton_Click"
                     Style="{StaticResource ControlledButtonStyle}">
-                    <Grid Width="200">
-                        <Image
-                            Width="32"
-                            Height="32"
-                            Margin="15,4,0,4"
-                            HorizontalAlignment="Left"
-                            Source="../Images/icons/paper.png" />
+                    <Grid Width="189.6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7" />
+                            <ColumnDefinition Width="25" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ContentControl
+                            Grid.Column="1"
+                            Width="30"
+                            Height="30"
+                            Margin="-2.2,0,0,0"
+                            Content="{StaticResource FranchiseIcon}" />
                         <Label
-                            Margin="55,0,0,0"
+                            x:Name="lblFran"
+                            Grid.Column="3"
+                            Padding="0,5,5,5"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="Franchise"
-                            FontFamily="Inter"
-                            FontSize="16"
-                            FontWeight="SemiBold"
-                            Foreground="Black" />
+                            Foreground="{StaticResource BrushBlack}"
+                            Style="{StaticResource SubTitlePreset}"
+                            Visibility="Hidden" />
                     </Grid>
                 </Button>
                 <Button
                     x:Name="OperatorButton"
+                    Grid.Row="1"
                     Height="40"
-                    Margin="15,50,9,0"
-                    VerticalAlignment="Top"
+                    Margin="10,5,10,5"
+                    Background="#FFDAC283"
                     BorderThickness="0"
                     Click="OperatorButton_Click"
                     Style="{StaticResource ControlledButtonStyle}">
-                    <Grid Width="200">
-                        <Image
-                            Width="32"
-                            Height="32"
-                            Margin="15,4,0,4"
-                            HorizontalAlignment="Left"
-                            Source="../Images/icons/operator.png" />
+                    <Grid Width="189.6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7" />
+                            <ColumnDefinition Width="25" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ContentControl
+                            Grid.Column="1"
+                            Width="30"
+                            Height="30" />
                         <Label
-                            Margin="55,4,0,0"
+                            x:Name="lblOp"
+                            Grid.Column="3"
+                            Padding="0,5,5,5"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
+                            VerticalAlignment="Center"
                             Content="Operator"
-                            FontFamily="Inter"
-                            FontSize="16"
-                            FontWeight="SemiBold"
-                            Foreground="Black" />
+                            Foreground="{StaticResource BrushBlack}"
+                            Style="{StaticResource SubTitlePreset}"
+                            Visibility="Hidden" />
                     </Grid>
                 </Button>
                 <Button
                     x:Name="DriverButton"
+                    Grid.Row="2"
                     Height="40"
-                    Margin="15,100,9,0"
-                    VerticalAlignment="Top"
+                    Margin="10,5,10,5"
+                    Background="#FFDAC283"
                     BorderThickness="0"
                     Click="DriverButton_Click"
                     Style="{StaticResource ControlledButtonStyle}">
-                    <Grid Width="200">
-                        <Image
-                            Width="32"
-                            Height="32"
-                            Margin="15,4,0,4"
-                            HorizontalAlignment="Left"
-                            Source="../Images/icons/tricycle.png" />
+                    <Grid Width="189.6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7" />
+                            <ColumnDefinition Width="25" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ContentControl
+                            Grid.Column="1"
+                            Width="30"
+                            Height="30" />
                         <Label
-                            Margin="55,0,0,0"
+                            x:Name="lblDrv"
+                            Grid.Column="3"
+                            Padding="0,5,5,5"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="Driver"
-                            FontFamily="Inter"
-                            FontSize="16"
-                            FontWeight="SemiBold"
-                            Foreground="Black" />
+                            Foreground="{StaticResource BrushBlack}"
+                            Style="{StaticResource SubTitlePreset}"
+                            Visibility="Hidden" />
                     </Grid>
                 </Button>
                 <Button
                     x:Name="BtnBoardMember"
+                    Grid.Row="3"
                     Height="40"
-                    Margin="15,150,9,0"
-                    VerticalAlignment="Top"
+                    Margin="10,5,10,0"
+                    Background="#FFDAC283"
                     BorderThickness="0"
                     Click="BtnBoardMember_Click"
                     Style="{StaticResource ControlledButtonStyle}">
-                    <Grid Width="200">
-                        <Image
-                            Width="32"
-                            Height="32"
-                            Margin="15,4,0,4"
-                            HorizontalAlignment="Left"
-                            Source="../Images/icons/group.png" />
+                    <Grid Width="189.6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7" />
+                            <ColumnDefinition Width="25" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ContentControl
+                            Grid.Column="1"
+                            Width="30"
+                            Height="30" />
                         <Label
-                            Margin="55,4,0,0"
+                            x:Name="lblBM"
+                            Grid.Column="3"
+                            Padding="0,5,5,5"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
+                            VerticalAlignment="Center"
                             Content="Board Members"
-                            FontFamily="Inter"
-                            FontSize="16"
-                            FontWeight="SemiBold"
-                            Foreground="Black" />
+                            Foreground="{StaticResource BrushBlack}"
+                            Style="{StaticResource SubTitlePreset}"
+                            Visibility="Hidden" />
                     </Grid>
                 </Button>
 
             </Grid>
             <Button
+                Grid.Row="5"
                 Height="40"
-                Margin="15,0,9,59"
+                Margin="10,0,10,5"
                 VerticalAlignment="Bottom"
+                Background="#FFDAC283"
                 BorderThickness="0"
                 Click="Btn_Settings"
                 Style="{StaticResource ControlledButtonStyle}">
-                <Grid Width="200">
-                    <Image
-                        Width="32"
-                        Height="32"
-                        Margin="15,4,0,4"
-                        HorizontalAlignment="Left"
-                        Source="../Images/icons/settings.png" />
+                <Grid Width="189.6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7" />
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ContentControl
+                        Grid.Column="1"
+                        Width="30"
+                        Height="30" />
                     <Label
-                        Margin="55,4,0,0"
+                        x:Name="lblSett"
+                        Grid.Column="3"
+                        Padding="0,5,5,5"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
+                        VerticalAlignment="Center"
                         Content="Settings"
-                        FontFamily="Inter"
-                        FontSize="16"
-                        FontWeight="SemiBold"
-                        Foreground="Black" />
+                        Foreground="{StaticResource BrushBlack}"
+                        Style="{StaticResource SubTitlePreset}"
+                        Visibility="Hidden" />
                 </Grid>
             </Button>
             <Button
+                Grid.Row="6"
                 Height="40"
-                Margin="15,0,9,9"
+                Margin="10,5,10,0"
                 VerticalAlignment="Bottom"
+                Background="#FFDAC283"
                 BorderThickness="0"
                 Click="Btn_Logout"
                 Style="{StaticResource ControlledButtonStyle}">
-                <Grid Width="200">
-                    <Image
-                        Width="32"
-                        Height="32"
-                        Margin="15,4,0,4"
-                        HorizontalAlignment="Left"
-                        Source="../Images/icons/logout.png" />
+                <Grid Width="189.6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7" />
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ContentControl
+                        Grid.Column="1"
+                        Width="30"
+                        Height="30" />
                     <Label
-                        Margin="55,4,0,0"
+                        x:Name="lblLogout"
+                        Grid.Column="3"
+                        Padding="0,5,5,5"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
+                        VerticalAlignment="Center"
                         Content="Logout"
-                        FontFamily="Inter"
-                        FontSize="16"
-                        FontWeight="SemiBold"
-                        Foreground="Black" />
+                        Foreground="{StaticResource BrushBlack}"
+                        Style="{StaticResource SubTitlePreset}"
+                        Visibility="Hidden" />
                 </Grid>
             </Button>
         </Grid>
         <Grid
             x:Name="TablePanelSwap"
-            Width="786"
-            Height="560"
-            Margin="214,40,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="0,0,0,25"
             Background="LightGray" />
         <TextBox
             x:Name="cbSearch"
+            Grid.Row="1"
+            Grid.Column="1"
             Width="400"
             Height="40"
             Margin="0,54,20,0"

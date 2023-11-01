@@ -238,7 +238,7 @@ namespace SPTC_APP.View.Pages.Output
 
             for (int i = 0; i < dictionary.Count; i++)
             {
-                double sweepAngle = (dictionary.Values.ElementAt(i) / total) * 360;
+                double sweepAngle = (dictionary.Values.ElementAt(i) / total) * 359.99;
                 
                 Path path = new Path
                 {

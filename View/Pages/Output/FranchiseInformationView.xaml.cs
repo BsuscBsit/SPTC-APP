@@ -222,6 +222,7 @@ namespace SPTC_APP.View.Pages.Output
         private void btnDeleteFranchise_Click(object sender, RoutedEventArgs e)
         {
             MainBody.selectedFranchise.delete();
+            (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE);
         }
     }
 }

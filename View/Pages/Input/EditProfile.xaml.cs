@@ -107,7 +107,7 @@ namespace SPTC_APP.View.Pages.Input
                         drv.Save();
 
                     }
-
+                    (AppState.mainwindow as MainBody).ResetWindow(General.DRIVER);
                 }
                 else if (type == General.OPERATOR)
                 {
@@ -136,6 +136,7 @@ namespace SPTC_APP.View.Pages.Input
                         optr.Save();
 
                     }
+                    (AppState.mainwindow as MainBody).ResetWindow(General.OPERATOR);
                 }
                 this.Close();
             } else

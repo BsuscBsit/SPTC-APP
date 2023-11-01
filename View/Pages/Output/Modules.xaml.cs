@@ -25,6 +25,8 @@ namespace SPTC_APP.View.Pages.Output
         private Grid module;
         private string strmod;
         private Franchise franchise;
+
+        private object selectedPayment;
         public Modules(string moduleName, Franchise franchise)
         {
             InitializeComponent();
@@ -230,6 +232,59 @@ namespace SPTC_APP.View.Pages.Output
             this.Close();
             module.Visibility = Visibility.Visible;
             return module;
+        }
+
+        private void dgLedger_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedPayment = null;
+            lblSelectedLedger.Content = "N/A";
+            btnDeletePayment.Visibility = Visibility.Collapsed;
+            if(module == gridLedger)
+            {
+                if(dgLedger.SelectedItem is PaymentDetails<Ledger.ShareCapital> sc)
+                {
+                    lblSelectedLedger.Content = "ref no.: " + sc.referenceNo;
+                    selectedPayment = sc;
+                    if (AppState.USER.position?.accesses[13] ?? false)
+                        btnDeletePayment.Visibility = Visibility.Visible;
+                }
+                else if (dgLedger.SelectedItem is PaymentDetails<Ledger.Loan> l)
+                {
+                    lblSelectedLedger.Content = "ref no.: " + l.referenceNo;
+                    selectedPayment = l;
+                    if (AppState.USER.position?.accesses[14] ?? false)
+                        btnDeletePayment.Visibility = Visibility.Visible;
+                }
+                else if (dgLedger.SelectedItem is PaymentDetails<Ledger.LongTermLoan> ltl)
+                {
+                    lblSelectedLedger.Content = "ref no.: " + ltl.referenceNo;
+                    selectedPayment = ltl;
+                    if (AppState.USER.position?.accesses[15] ?? false)
+                        btnDeletePayment.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void btnDeletePayment_Click(object sender, RoutedEventArgs e)
+        {
+            if(selectedPayment != null && ControlWindow.ShowDialogStatic("Deletion", $"Removing data {lblSelectedLedger.Content}"))
+            {
+                if (selectedPayment is PaymentDetails<Ledger.ShareCapital> sc)
+                {
+                    sc.delete();
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                }
+                else if (selectedPayment is PaymentDetails<Ledger.Loan> l)
+                {
+                    l.delete();
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                }
+                else if (selectedPayment is PaymentDetails<Ledger.LongTermLoan> ltl)
+                {
+                    ltl.delete();
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                }
+            }
         }
     }
 }

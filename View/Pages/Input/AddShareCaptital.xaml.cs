@@ -35,6 +35,7 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
+            (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
             base.OnClosing(e);
         }
 

@@ -483,7 +483,7 @@
             Grid.Column="1"
             Width="400"
             Height="40"
-            Margin="0,54,20,0"
+            Margin="0,20,20,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Background="White"

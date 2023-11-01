@@ -39,7 +39,7 @@
             x:Name="gridLedger"
             Width="512"
             Height="200"
-            Visibility="Visible">
+            Visibility="Hidden">
 
             <DataGrid
                 x:Name="dgLedger"
@@ -97,7 +97,7 @@
             x:Name="ViolationGrid"
             Width="492"
             Height="200"
-            Visibility="Hidden">
+            Visibility="Visible">
             <Label
                 Margin="10,-2,0,0"
                 HorizontalAlignment="Left"
@@ -108,35 +108,15 @@
                 Foreground="DarkGray" />
             <Label
                 x:Name="lblDriverName"
-                Margin="66,-2,0,0"
+                Margin="70,-1,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content=""
+                Content="N/A"
                 FontFamily="Arial"
                 FontSize="8"
                 FontStretch="SemiExpanded"
                 FontWeight="DemiBold"
                 Foreground="Black" />
-
-            <Label
-                Margin="10,13,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Shift "
-                FontSize="8"
-                FontWeight="Medium"
-                Foreground="DarkGray" />
-            <Label
-                Margin="66,13,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="DAY"
-                FontFamily="Arial"
-                FontSize="8"
-                FontStretch="SemiExpanded"
-                FontWeight="DemiBold"
-                Foreground="Black"
-                RenderTransformOrigin="0.463,1.421" />
             <DataGrid
                 x:Name="dgDriverViolation"
                 Width="492"

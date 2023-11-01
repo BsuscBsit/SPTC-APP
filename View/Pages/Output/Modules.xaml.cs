@@ -206,7 +206,7 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("Operator.name.legalname", "OWNER", width: 100),
+                    new ColumnConfiguration("Operator.name.legalName", "OWNER", width: 100),
                     new ColumnConfiguration("displayBuyingDate", "DATE", width: 80),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
                 };
@@ -214,7 +214,7 @@ namespace SPTC_APP.View.Pages.Output
                 List<Franchise> franchises = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_ALL_FRANCHISE_WITH_BODYNUM(franchise.BodyNumber));
                 foreach (var fran in franchises)
                 {
-                    dgDriverViolation.Items.Add(fran);
+                    dgTransfer.Items.Add(fran);
                 }
             }
         }

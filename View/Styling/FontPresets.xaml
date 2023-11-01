@@ -41,4 +41,11 @@
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="FontSize" Value="16" />
     </Style>
+    <Style x:Key="ButtonTextPresetLabel" TargetType="Label">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource BrushBlack}" />
+        <Setter Property="FontFamily" Value="Inter" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
 </ResourceDictionary>

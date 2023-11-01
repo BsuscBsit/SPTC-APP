@@ -28,7 +28,7 @@ namespace SPTC_APP.View.Styling
             element.BeginAnimation(UIElement.OpacityProperty, fadeOutAnimation);
         }
 
-        public static async void FadeIn(this UIElement element, double durationSeconds = 1, Action callback = null, Action completedCallback = null)
+        public static void FadeIn(this UIElement element, double durationSeconds = 1, Action callback = null, Action completedCallback = null)
         {
             element.Opacity = 0;
             element.Visibility = Visibility.Visible;
@@ -45,7 +45,7 @@ namespace SPTC_APP.View.Styling
                 completedCallback?.Invoke();
             };
 
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            //await Task.Delay(TimeSpan.FromSeconds(durationSeconds));
             element.BeginAnimation(UIElement.OpacityProperty, fadeInAnimation);
         }
 

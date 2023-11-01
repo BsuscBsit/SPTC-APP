@@ -242,26 +242,23 @@ namespace SPTC_APP.View.Pages
 
         private void paneExpander_Click(object sender, RoutedEventArgs e)
         {
-            if(paneExpander.IsChecked == false)
+            paneExpander.IsEnabled = false;
+            if (paneExpander.IsChecked == false)
             {
-
-                AnimationHelper.FadeOut(username, 0.2, () =>
+                username.FadeOut(0.2, () =>
                 {
                     AnimationHelper.FadeOut(userImageHolder, 0.2, () =>
                     {
                         userImageHolder.Width = 50;
                         userImageHolder.Height = 50;
                         username.Visibility = Visibility.Collapsed;
-                        AnimationHelper.FadeIn(userImageHolder);
+                        AnimationHelper.FadeIn(userImageHolder, 0.2);
                     });
-                    AnimationHelper.AnimateWidth(sidePanel, 82);
-                    AnimationHelper.FadeOut(lblDashB);
-                    AnimationHelper.FadeOut(lblFran);
-                    AnimationHelper.FadeOut(lblOp);
-                    AnimationHelper.FadeOut(lblDrv);
-                    AnimationHelper.FadeOut(lblBM);
-                    AnimationHelper.FadeOut(lblSett);
-                    AnimationHelper.FadeOut(lblLogout);
+                    sidePanel.AnimateWidth(82, 0.2, async () =>
+                    {
+                        await Task.Delay(TimeSpan.FromSeconds(1));
+                        paneExpander.IsEnabled = true;
+                    });
                 });
             }
             else
@@ -270,17 +267,15 @@ namespace SPTC_APP.View.Pages
                 {
                     userImageHolder.Width = 100;
                     userImageHolder.Height = 100;
-                    AnimationHelper.FadeIn(username, 0.2);
-                    AnimationHelper.FadeIn(userImageHolder);
+                    username.FadeIn(0.1);
+                    AnimationHelper.FadeIn(userImageHolder, 0.2);
+
+                    sidePanel.AnimateWidth(225, 0.2, async () =>
+                    {
+                        await Task.Delay(TimeSpan.FromSeconds(1));
+                        paneExpander.IsEnabled = true;
+                    });
                 });
-                AnimationHelper.AnimateWidth(sidePanel, 225);
-                AnimationHelper.FadeIn(lblDashB, 0.3);
-                AnimationHelper.FadeIn(lblFran, 0.3);
-                AnimationHelper.FadeIn(lblOp, 0.3);
-                AnimationHelper.FadeIn(lblDrv, 0.3);
-                AnimationHelper.FadeIn(lblBM, 0.3);
-                AnimationHelper.FadeIn(lblSett, 0.3);
-                AnimationHelper.FadeIn(lblLogout, 0.3);
             }
         }
 

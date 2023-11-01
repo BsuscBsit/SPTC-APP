@@ -1,6 +1,7 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
+using SPTC_APP.View.Styling;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,9 +37,9 @@ namespace SPTC_APP.View.Pages.Output
             btnPieForward.Visibility = Visibility.Collapsed;
             pieMonth = DateTime.Now.Month;
             pieYear = DateTime.Now.Year;
-            tbTotalOperator.Text = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_TOTAL(Table.OPERATOR)).FirstOrDefault().ToString();
-            tbTotalDriver.Text = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_TOTAL(Table.DRIVER)).FirstOrDefault().ToString();
-            tbTotalShares.Text = "P " + Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_TOTAL_SHARES).FirstOrDefault().ToString("0.00");
+            tbTotalOperator.Content = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_TOTAL(Table.OPERATOR)).FirstOrDefault().ToString();
+            tbTotalDriver.Content = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_TOTAL(Table.DRIVER)).FirstOrDefault().ToString();
+            tbTotalShares.Content = "\u20B1 " + Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_TOTAL_SHARES).FirstOrDefault().ToString("0.00");
 
             if ((AppState.USER?.position?.accesses[9] ?? false))
             {
@@ -459,6 +460,38 @@ namespace SPTC_APP.View.Pages.Output
         private void btnViewFullDetails_Click(object sender, RoutedEventArgs e)
         {
             btnReload_Click(sender, e);
+        }
+
+        private void btnActions_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (menuExpanded.IsChecked == true)
+            {
+                actionMenu.AnimateHeight(40, 0.2);
+                menuExpanded.IsChecked = false;
+            }
+            else
+            {
+                actionMenu.AnimateHeight(211.6, 0.2);
+                menuExpanded.IsChecked = true;
+            }
+        }
+
+        private void actionMenu_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if(menuExpanded.IsChecked == true)
+            {
+                actionMenu.AnimateHeight(40, 0.2);
+                menuExpanded.IsChecked = false;
+            }
+        }
+
+        private void actionMenu_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if(menuExpanded.IsChecked == false)
+            {
+                actionMenu.AnimateHeight(211.6, 0.2);
+                menuExpanded.IsChecked = true;
+            }
         }
     }
 }

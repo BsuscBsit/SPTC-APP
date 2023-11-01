@@ -34,7 +34,7 @@ namespace SPTC_APP.View.Pages.Output
         public DashboardView()
         {
             InitializeComponent();
-            btnPieForward.Visibility = Visibility.Collapsed;
+            btnPieForward.IsEnabled = false;
             pieMonth = DateTime.Now.Month;
             pieYear = DateTime.Now.Year;
             tbTotalOperator.Content = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_TOTAL(Table.OPERATOR)).FirstOrDefault().ToString();
@@ -55,7 +55,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        btnPieForward.Visibility = Visibility.Collapsed;
+                        btnPieForward.IsEnabled = false;
                     });
 
                 }
@@ -63,7 +63,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        btnPieForward.Visibility = Visibility.Visible;
+                        btnPieForward.IsEnabled = true;
                     });
 
                 }

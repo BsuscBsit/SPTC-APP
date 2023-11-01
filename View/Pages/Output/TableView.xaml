@@ -7,9 +7,16 @@
         mc:Ignorable="d"
         Title="TableView">
 
-    <Grid x:Name="franchisePanel" HorizontalAlignment="Right" Background="LightGray" VerticalAlignment="Bottom"  Width="786" Height="560">
-
-        <DataGrid x:Name="TableGrid" HorizontalAlignment="Left" Height="458" Margin="20,0,0,20" VerticalAlignment="Bottom" Width="545">
+    <Grid x:Name="franchisePanel">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" Grid.Column="0" x:Name="TableGrid" Margin="0,0,0,12" MinWidth="400">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="FontFamily" Value="Arial"/>
@@ -20,7 +27,7 @@
             </DataGrid.Resources>
         </DataGrid>
 
-        <Grid x:Name="franchiseInformation" HorizontalAlignment="Right" Height="458" Background="White" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="182" Visibility="Visible">
+        <Grid Grid.Row="0" Grid.Column="1" x:Name="franchiseInformation" Background="White" Visibility="Visible" Margin="24,0,0,12">
             <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,10,0,0" StrokeThickness="1" Stroke="Black" >
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
@@ -147,12 +154,12 @@
         </Grid>
 
 
-        <Button x:Name="btnAdd" Content="ADD" Style="{DynamicResource ControlledButtonStyle}" HorizontalAlignment="Left" Margin="80,35,0,0" VerticalAlignment="Top" Width="110" Height="32"
+        <Button x:Name="btnAdd" Content="ADD" Style="{DynamicResource ControlledButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110" Height="32"
                     FontFamily="hevitica "
                     FontWeight="ExtraBold"
                     Visibility="Visible"
                     FontSize="10"
-                    Background="Yellow" Click="btnAddClick"
+                    Background="Yellow" Click="btnAddClick" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,12,0,0"
                     />
     </Grid>
 </Window>

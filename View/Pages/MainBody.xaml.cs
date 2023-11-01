@@ -44,11 +44,16 @@ namespace SPTC_APP.View.Pages
         {
             switch (where)
             {
-                case General.FRANCHISE: 
-                    FranchiseButton_Click(FranchiseButton, null);
+                case General.FRANCHISE:
+                    TablePanelSwap.Children.Clear();
+                    Franchise fran = MainBody.selectedFranchise;
+                    ClickColorControl(FranchiseButton);
+                    MainBody.selectedFranchise = fran;
+                    Ftable = (new TableView(Table.FRANCHISE));
+                    TablePanelSwap.Children.Add(await Ftable.Fetch());
                     if (hasSelection && MainBody.selectedFranchise != null)
                     {
-                        TablePanelSwap.Children.Add((new FranchiseInformationView()).Fetch());
+                        TablePanelSwap.Children.Add((new FranchiseInformationView(Ftable)).Fetch());
                     }
                     break;
                 case General.OPERATOR: OperatorButton_Click(OperatorButton, null); break;
@@ -313,7 +318,7 @@ namespace SPTC_APP.View.Pages
                     Ftable = (new TableView(Table.FRANCHISE));
                     TablePanelSwap.Children.Add(await Ftable.Fetch());
                     MainBody.selectedFranchise = fran;
-                    TablePanelSwap.Children.Add((new FranchiseInformationView()).Fetch());
+                    TablePanelSwap.Children.Add((new FranchiseInformationView(Ftable)).Fetch());
                     
                 }
             }

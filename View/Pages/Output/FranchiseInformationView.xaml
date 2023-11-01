@@ -99,6 +99,7 @@
                 VerticalAlignment="Bottom"  
                 Content="CHANGE DRIVER"
                 Visibility="Hidden"
+                Style="{StaticResource ControlledButtonStyle}"
                 FontFamily="Arial"
                 FontWeight="Bold"
                 FontSize="10" Click="btnChangeDriver_Click"/>
@@ -108,10 +109,23 @@
                 Margin="538,0,28,65"
                 VerticalAlignment="Bottom"
                 Visibility="Hidden"
+                Background="Red"
+                Style="{StaticResource ControlledButtonStyle}"
                 Content="DELETE"
                 FontFamily="Arial"
                 FontWeight="Bold"
                 FontSize="10" Click="btnDeleteFranchise_Click"/>
+            <Button 
+                x:Name="btnEditFranchise"
+                Height="25"
+                Margin="538,0,28,95"
+                VerticalAlignment="Bottom"
+                Visibility="Collapsed"
+                Style="{StaticResource ControlledButtonStyle}"
+                Content="EDIT"
+                FontFamily="Arial"
+                FontWeight="Bold"
+                FontSize="10" Click="btnEditFranchise_Click"/>
             <Button
                 x:Name="btnHistory"
                 Height="26"

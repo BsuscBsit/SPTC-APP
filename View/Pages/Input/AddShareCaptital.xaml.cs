@@ -35,7 +35,6 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
-            (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
             base.OnClosing(e);
         }
 
@@ -61,6 +60,7 @@ namespace SPTC_APP.View.Pages.Input
                 capital.Save();
                 share.lastBalance = share.lastBalance + Double.Parse(tboxAmount.Text);
                 share.Save();
+                (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 this.Close();
             }
         }

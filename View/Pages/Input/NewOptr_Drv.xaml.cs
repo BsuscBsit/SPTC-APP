@@ -102,7 +102,10 @@ namespace SPTC_APP.View.Pages.Input
                 }
                 else if (type == General.TRANSFER_FRANCHISE_OWNERSHIP)
                 {
-                    Franchise newFranchise = franchise;
+                    Franchise newFranchise = new Franchise();
+                    newFranchise.BodyNumber = franchise.BodyNumber;
+                    newFranchise.MTOPNo = franchise.MTOPNo;
+                    newFranchise.LicenseNO = franchise.LicenseNO;
                     newFranchise.Operator = new Operator();
                     newFranchise.Operator.name = new Name();
                     newFranchise.Operator.address = new Address();

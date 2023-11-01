@@ -19,8 +19,8 @@ namespace SPTC_APP.View.Pages.Output
         public FranchiseInformationView(TableView tableview = null)
         {
             InitializeComponent();
-            UpdateContent();
             this.tableview = tableview;
+            UpdateContent();
             btnAddButton.Visibility = Visibility.Hidden;
             if((AppState.USER?.position?.accesses[0] ?? false))
             {
@@ -29,6 +29,10 @@ namespace SPTC_APP.View.Pages.Output
             if ((AppState.USER?.position?.accesses[8] ?? false))
             {
                 btnDeleteFranchise.Visibility = Visibility.Visible;
+            }
+            if ((AppState.USER?.position?.accesses[5] ?? false))
+            {
+                btnEditFranchise.Visibility = Visibility.Visible;
             }
         }
 
@@ -223,6 +227,11 @@ namespace SPTC_APP.View.Pages.Output
         {
             MainBody.selectedFranchise.delete();
             (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE);
+        }
+
+        private void btnEditFranchise_Click(object sender, RoutedEventArgs e)
+        {
+            (new InputFranchiseView(MainBody.selectedFranchise)).Show();
         }
     }
 }

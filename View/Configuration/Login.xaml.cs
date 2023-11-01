@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using SPTC_APP.Objects;
@@ -21,11 +22,19 @@ namespace SPTC_APP.View
             cbUser.ItemsSource = AppState.Employees;
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            FocusPb();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             AppState.Login(cbUser.Text, pbPassword.Password, this);
+            pbPassword.Focus();
+        }
+      
+        private async void FocusPb()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            pbPassword.Focus();
         }
 
         // Styling

@@ -66,6 +66,44 @@ namespace SPTC_APP.View.Styling
 
             element.BeginAnimation(FrameworkElement.MarginProperty, marginAnimation);
         }
+
+        public static void AnimateWidth(this FrameworkElement element, double toVal, double durationSeconds = 1, Action completedCallback = null)
+        { 
+            DoubleAnimation doubleAnimation = new DoubleAnimation
+            {
+                From = element.Width,
+                To = toVal,
+                Duration = TimeSpan.FromSeconds(durationSeconds),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            doubleAnimation.Completed += (sender, e) =>
+            {
+                completedCallback?.Invoke();
+            };
+
+            element.BeginAnimation(FrameworkElement.WidthProperty, doubleAnimation);
+        }
+
+        public static void AnimateHeight(this FrameworkElement element, double toVal, double durationSeconds = 1, Action completedCallback = null)
+        {
+            DoubleAnimation doubleAnimation = new DoubleAnimation
+            {
+                From = element.Height,
+                To = toVal,
+                Duration = TimeSpan.FromSeconds(durationSeconds),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            doubleAnimation.Completed += (sender, e) =>
+            {
+                completedCallback?.Invoke();
+            };
+
+            element.BeginAnimation(FrameworkElement.HeightProperty, doubleAnimation);
+        }
+
+
     }
 
 }

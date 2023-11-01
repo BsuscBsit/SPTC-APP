@@ -46,6 +46,7 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
+            
             base.OnClosing(e);
         }
 
@@ -88,7 +89,7 @@ namespace SPTC_APP.View.Pages.Input
                         loanPayment.ledgername = Ledger.APPLY_LOAN;
                         loanPayment.Save();
                     }
-
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                     this.Close();
                 } else
                 {

@@ -60,6 +60,7 @@ namespace SPTC_APP.View.Pages.Input
                 capital.Save();
                 share.lastBalance = share.lastBalance + Double.Parse(tboxAmount.Text);
                 share.Save();
+                (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 this.Close();
             }
         }

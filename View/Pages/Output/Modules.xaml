@@ -48,7 +48,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 BorderBrush="Black"
-                BorderThickness="1">
+                BorderThickness="1" SelectionChanged="dgLedger_SelectionChanged">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="FontFamily" Value="Arial" />
@@ -59,8 +59,14 @@
                 </DataGrid.Resources>
             </DataGrid>
 
-
-
+            <Border BorderBrush="Black" CornerRadius="2" BorderThickness="1" Height="30" Width="350" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5, 0, 0, 5">
+                <Grid>
+                    <Label Content="Selected: " VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource SubTitlePreset}" FontSize="13"/>
+                    <Label x:Name="lblSelectedLedger" Content="N/A" Margin="60, 0, 0, 0" VerticalAlignment="Center" HorizontalAlignment="Left"  Style="{StaticResource CommonTitlePreset}" FontSize="13" />
+                    <Button x:Name="btnDeletePayment" Width="100" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" Content="DELETE" Background="Red" Margin="0, 0, 10, 0" Visibility="Collapsed" Click="btnDeletePayment_Click"/>
+                </Grid>
+            </Border>
+            
             <Label
                 x:Name="lblTotal"
                 Margin="380,0,0,10"
@@ -73,7 +79,7 @@
 
             <Label
                 x:Name="lblTotalLedger"
-                Margin="428,0,0,10"
+                Margin="428,0,0,8"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Content="30.00"
@@ -91,7 +97,7 @@
             x:Name="ViolationGrid"
             Width="492"
             Height="200"
-            Visibility="Hidden">
+            Visibility="Visible">
             <Label
                 Margin="10,-2,0,0"
                 HorizontalAlignment="Left"
@@ -102,35 +108,15 @@
                 Foreground="DarkGray" />
             <Label
                 x:Name="lblDriverName"
-                Margin="66,-2,0,0"
+                Margin="70,-1,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content=""
+                Content="N/A"
                 FontFamily="Arial"
                 FontSize="8"
                 FontStretch="SemiExpanded"
                 FontWeight="DemiBold"
                 Foreground="Black" />
-
-            <Label
-                Margin="10,13,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Shift "
-                FontSize="8"
-                FontWeight="Medium"
-                Foreground="DarkGray" />
-            <Label
-                Margin="66,13,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="DAY"
-                FontFamily="Arial"
-                FontSize="8"
-                FontStretch="SemiExpanded"
-                FontWeight="DemiBold"
-                Foreground="Black"
-                RenderTransformOrigin="0.463,1.421" />
             <DataGrid
                 x:Name="dgDriverViolation"
                 Width="492"

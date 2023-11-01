@@ -68,6 +68,7 @@ namespace SPTC_APP.View.Pages.Input
                     {
                         drv.Save();
                     }
+                    (AppState.mainwindow as MainBody).ResetWindow(General.DRIVER);
                 }
                 else if (type == General.OPERATOR)
                 {
@@ -97,10 +98,14 @@ namespace SPTC_APP.View.Pages.Input
                     {
                         optr.Save();
                     }
+                    (AppState.mainwindow as MainBody).ResetWindow(General.OPERATOR);
                 }
                 else if (type == General.TRANSFER_FRANCHISE_OWNERSHIP)
                 {
-                    Franchise newFranchise = franchise;
+                    Franchise newFranchise = new Franchise();
+                    newFranchise.BodyNumber = franchise.BodyNumber;
+                    newFranchise.MTOPNo = franchise.MTOPNo;
+                    newFranchise.LicenseNO = franchise.LicenseNO;
                     newFranchise.Operator = new Operator();
                     newFranchise.Operator.name = new Name();
                     newFranchise.Operator.address = new Address();
@@ -122,11 +127,13 @@ namespace SPTC_APP.View.Pages.Input
                     Ledger.ShareCapital capital = new Ledger.ShareCapital();
                     capital.WriteInto(newFranchise.id, DateTime.Now, franchise.SaveShareCapital(), 0);
                     capital.Save();
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE);
                 }
                 if (franchise != null)
                 {
                     franchise.Save();
                 }
+
                 this.Close();
             }
         }

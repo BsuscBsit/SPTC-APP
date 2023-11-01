@@ -286,14 +286,8 @@
     <Compile Include="View\Pages\Input\EditProfile.xaml.cs">
       <DependentUpon>EditProfile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Input\EmployeeAccess.xaml.cs">
-      <DependentUpon>EmployeeAccess.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Pages\Input\NewOptr_Drv.xaml.cs">
       <DependentUpon>NewOptr_Drv.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Pages\Input\TransferFranchise.xaml.cs">
-      <DependentUpon>TransferFranchise.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Input\ViolationInput.xaml.cs">
       <DependentUpon>ViolationInput.xaml</DependentUpon>
@@ -418,15 +412,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Input\EmployeeAccess.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Pages\Input\NewOptr_Drv.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Pages\Input\TransferFranchise.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

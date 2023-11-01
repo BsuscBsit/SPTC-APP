@@ -40,6 +40,7 @@ namespace SPTC_APP.Objects
         FETCH_FRANCHISE_USING_BODYNUMBER,
         FETCH_PAYMENT_DETAILS_USING_ID,
         NEW_PAYMENT_DETAILS,
+        BOARD_MEMBER,
 
 
         [Description("OPERATOR ( TRANSFER TO... )")]

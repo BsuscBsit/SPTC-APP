@@ -40,7 +40,28 @@ namespace SPTC_APP.View.Pages
             this.Close();
         }
 
-
+        public async void ResetWindow(General where, bool hasSelection = false)
+        {
+            switch (where)
+            {
+                case General.FRANCHISE:
+                    TablePanelSwap.Children.Clear();
+                    Franchise fran = MainBody.selectedFranchise;
+                    ClickColorControl(FranchiseButton);
+                    MainBody.selectedFranchise = fran;
+                    Ftable = (new TableView(Table.FRANCHISE));
+                    TablePanelSwap.Children.Add(await Ftable.Fetch());
+                    if (hasSelection && MainBody.selectedFranchise != null)
+                    {
+                        TablePanelSwap.Children.Add((new FranchiseInformationView(Ftable)).Fetch());
+                    }
+                    break;
+                case General.OPERATOR: OperatorButton_Click(OperatorButton, null); break;
+                case General.DRIVER: DriverButton_Click(DriverButton, null); break;
+                case General.BOARD_MEMBER: BtnBoardMember_Click(BtnBoardMember, null); break;
+                default: DashBoard_Click(DashBoard, null); break;
+            }
+        }
 
         //Side panel buttons
         private void Btn_Logout(object sender, RoutedEventArgs e)
@@ -292,7 +313,7 @@ namespace SPTC_APP.View.Pages
                     Ftable = (new TableView(Table.FRANCHISE));
                     TablePanelSwap.Children.Add(await Ftable.Fetch());
                     MainBody.selectedFranchise = fran;
-                    TablePanelSwap.Children.Add((new FranchiseInformationView()).Fetch());
+                    TablePanelSwap.Children.Add((new FranchiseInformationView(Ftable)).Fetch());
                     
                 }
             }

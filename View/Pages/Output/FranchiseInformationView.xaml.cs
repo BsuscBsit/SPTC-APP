@@ -121,7 +121,13 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     btnAddButton.Content = "ADD RECORD";
                     btnAddButton.Visibility = Visibility.Visible;
+                } else
+                {
+                    btnAddButton.Visibility = Visibility.Collapsed;
                 }
+            } else
+            {
+                btnAddButton.Visibility = Visibility.Collapsed;
             }
             HandleButtonClick(Modules.VIOLATION, sender as Button);
         }
@@ -132,6 +138,9 @@ namespace SPTC_APP.View.Pages.Output
             {
                 btnAddButton.Content = "ADD RECORD";
                 btnAddButton.Visibility = Visibility.Visible;
+            } else
+            {
+                btnAddButton.Visibility = Visibility.Collapsed;
             }
             HandleButtonClick(Modules.SHARECAPITAL, sender as Button);
         }
@@ -148,6 +157,10 @@ namespace SPTC_APP.View.Pages.Output
 
                 btnAddButton.Visibility = Visibility.Visible;
             }
+            else
+            {
+                btnAddButton.Visibility = Visibility.Collapsed;
+            }
             HandleButtonClick(Modules.LOAN, sender as Button);
         }
 
@@ -163,6 +176,10 @@ namespace SPTC_APP.View.Pages.Output
 
                 btnAddButton.Visibility = Visibility.Visible;
             }
+            else
+            {
+                btnAddButton.Visibility = Visibility.Collapsed;
+            }
             HandleButtonClick(Modules.LTLOAN, sender as Button);
         }
 
@@ -172,6 +189,10 @@ namespace SPTC_APP.View.Pages.Output
             {
                 btnAddButton.Content = "TRANSFER";
                 btnAddButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnAddButton.Visibility = Visibility.Collapsed;
             }
             HandleButtonClick(Modules.TRANSFER, sender as Button);
         }

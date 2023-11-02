@@ -213,7 +213,6 @@ namespace SPTC_APP.View.Pages.Output
 
         private void TableSelectedChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            MainBody.selectedFranchise = null;
             DataGrid grid = (DataGrid)sender;
 
             if (grid.SelectedItems.Count > 0)

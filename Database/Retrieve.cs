@@ -119,9 +119,11 @@ namespace SPTC_APP.Database
             catch (MySqlException ex)
             {
                 EventLogger.Post($"DTB :: Get Data : {ex.Message}");
-
-                
-
+                return results;
+            }
+            catch (Exception e)
+            {
+                EventLogger.Post($"ERR :: Get Data : {e.Message}");
                 return results;
             }
         }
@@ -157,9 +159,11 @@ namespace SPTC_APP.Database
             catch (MySqlException ex)
             {
                 EventLogger.Post($"DTB :: Pagination : {ex.Message}");
-
-                
-
+                return results;
+            }
+            catch(Exception e)
+            {
+                EventLogger.Post($"ERR :: Pagination : {e.Message}");
                 return results;
             }
         }
@@ -196,9 +200,11 @@ namespace SPTC_APP.Database
             catch (MySqlException ex)
             {
                 EventLogger.Post($"DTB :: Query : {ex.Message}");
-
-                
-
+                return results;
+            }
+            catch (Exception e)
+            {
+                EventLogger.Post($"ERR :: Query : {e.Message}");
                 return results;
             }
         }

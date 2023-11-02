@@ -156,6 +156,10 @@ namespace SPTC_APP.View.Pages
                 {
                     if (selectedButton != DashBoard)
                     {
+                        if(selectedButton == FranchiseButton && TablePanelSwap.Children.Count > 1)
+                        {
+                            GetFranchiseInList();
+                        }
                         if (TablePanelSwap.Children[0] is Grid grid)
                         {
                             if (grid.Children[0] is DataGrid datagrid)
@@ -214,7 +218,9 @@ namespace SPTC_APP.View.Pages
                                     }
                                 }
                             }
+                            
                         }
+                        
                     }
                     else
                     {

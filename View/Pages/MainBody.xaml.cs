@@ -53,7 +53,7 @@ namespace SPTC_APP.View.Pages
                     TablePanelSwap.Children.Add(await Ftable.Fetch());
                     if (hasSelection && MainBody.selectedFranchise != null)
                     {
-                        TablePanelSwap.Children.Add((new FranchiseInformationView(Ftable)).Fetch());
+                        TablePanelSwap.Children.Add((new FranchiseInformationView(TablePanelSwap)).Fetch());
                     }
                     break;
                 case General.OPERATOR: OperatorButton_Click(OperatorButton, null); break;
@@ -240,9 +240,9 @@ namespace SPTC_APP.View.Pages
                     List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                         {
 
-                            new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-                            new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
-                            new ColumnConfiguration("Driver.name.wholename", "DRIVER NAME", width: 140),
+                            new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80),
+                            new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", minWidth: 140),
+                            new ColumnConfiguration("Driver.name.wholename", "DRIVER NAME", minWidth: 140),
                         };
                     DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(lsSuggestion, columnConfigurations);
 
@@ -313,7 +313,7 @@ namespace SPTC_APP.View.Pages
                     Ftable = (new TableView(Table.FRANCHISE));
                     TablePanelSwap.Children.Add(await Ftable.Fetch());
                     MainBody.selectedFranchise = fran;
-                    TablePanelSwap.Children.Add((new FranchiseInformationView(Ftable)).Fetch());
+                    TablePanelSwap.Children.Add((new FranchiseInformationView(TablePanelSwap)).Fetch());
                     
                 }
             }

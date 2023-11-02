@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace SPTC_APP.View.Controls
 {
@@ -12,12 +13,10 @@ namespace SPTC_APP.View.Controls
     /// <typeparam name="T">This is for the specific Object Class that is to be displayed, Uses ToString() method for each parameter</typeparam>
 public class DataGridHelper<T>
     {
-        private DataGrid dataGrid;
         //private List<T> stack;
 
-        public DataGridHelper(DataGrid ldataGrid, List<ColumnConfiguration> columnConfigurations)
+        public DataGridHelper(DataGrid dataGrid, List<ColumnConfiguration> columnConfigurations)
         {
-            this.dataGrid = ldataGrid;
             //this.stack = new List<T>();
             // Clear existing columns
             dataGrid.Columns.Clear();
@@ -25,13 +24,30 @@ public class DataGridHelper<T>
             dataGrid.IsReadOnly = true;
             dataGrid.SelectionUnit = DataGridSelectionUnit.FullRow;
             dataGrid.AutoGenerateColumns = false;
+
+            Style rowStyle = new Style(typeof(DataGridRow));
+
+            DataTrigger selectedTrigger = new DataTrigger
+            {
+                Binding = new Binding("IsSelected"),
+                Value = true
+            };
+
+            selectedTrigger.Setters.Add(new Setter(DataGridRow.ForegroundProperty, Brushes.Red)); 
+
+            rowStyle.Triggers.Add(selectedTrigger);
+
+            dataGrid.RowStyle = rowStyle;
+
+
             foreach (var config in columnConfigurations)
             {
                 var column = new DataGridTextColumn
                 {
                     Header = config.Header,
                     Binding = new System.Windows.Data.Binding(config.BindingPath),
-                    Width = config.Width,
+                    Width = new DataGridLength(config.Width, DataGridLengthUnitType.Star),
+                    MinWidth = config.Width,
                     MaxWidth = config.MaxWidth,
                     CellStyle = new System.Windows.Style
                     {
@@ -48,6 +64,7 @@ public class DataGridHelper<T>
 
                 dataGrid.Columns.Add(column);
             }
+            
         }
 
     }
@@ -70,7 +87,7 @@ public class DataGridHelper<T>
         public ColumnConfiguration(
             string bindingPath,
             string header,
-            double width = 100,
+            double minWidth = 100,
             double height = 30,
             double maxWidth = 200,
             double fontSize = 10,
@@ -80,11 +97,11 @@ public class DataGridHelper<T>
         {
             BindingPath = bindingPath;
             Header = header;
-            Width = width;
+            Width = minWidth;
             Height = height;
             MaxWidth = maxWidth;
             FontSize = fontSize;
-            BackgroundColor = backgroundColor ?? System.Windows.Media.Brushes.White;
+            BackgroundColor = backgroundColor ?? System.Windows.Media.Brushes.DarkCyan;
 
             FontWeight = fontWeight.HasValue ? fontWeight.Value : System.Windows.FontWeights.Normal;
 

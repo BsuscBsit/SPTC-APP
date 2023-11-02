@@ -13,14 +13,11 @@
 
         <Grid
             x:Name="TransferGrid"
-            Width="512"
-            Height="200"
+            Width="Auto" Height="Auto"
             Visibility="Hidden">
             <DataGrid
                 x:Name="dgTransfer"
-                Width="512"
                 Height="160"
-                HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 BorderBrush="Black"
                 BorderThickness="1">
@@ -34,20 +31,15 @@
                 </DataGrid.Resources>
             </DataGrid>
         </Grid>
-
         <Grid
             x:Name="gridLedger"
-            Width="512"
-            Height="200"
+            Width="Auto"
+            Height="Auto"
             Visibility="Hidden">
-
             <DataGrid
                 x:Name="dgLedger"
-                Width="512"
-                Height="160"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
                 BorderBrush="Black"
+                Margin="0, 0, 0, 50"
                 BorderThickness="1" SelectionChanged="dgLedger_SelectionChanged">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -69,8 +61,8 @@
             
             <Label
                 x:Name="lblTotal"
-                Margin="380,0,0,10"
-                HorizontalAlignment="Left"
+                Margin="0,0,100,10"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Content="TOTAL : "
                 FontSize="9"
@@ -79,12 +71,14 @@
 
             <Label
                 x:Name="lblTotalLedger"
-                Margin="428,0,0,8"
-                HorizontalAlignment="Left"
+                Margin="0,0,10,10"
+                Width="90"
+                HorizontalContentAlignment="Center"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Content="30.00"
+                Content="0.00"
                 FontFamily="Hetivica"
-                FontSize="11"
+                FontSize="8"
                 FontWeight="Medium"
                 Foreground="Red" />
 
@@ -95,9 +89,8 @@
         </Grid>
         <Grid
             x:Name="ViolationGrid"
-            Width="492"
-            Height="200"
-            Visibility="Visible">
+            Width="Auto" Height="Auto"
+            Visibility="Hidden">
             <Label
                 Margin="10,-2,0,0"
                 HorizontalAlignment="Left"
@@ -119,17 +112,13 @@
                 Foreground="Black" />
             <DataGrid
                 x:Name="dgDriverViolation"
-                Width="492"
-                Height="166"
-                Margin="0,33,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top" />
+                Margin="0,33,0,0" />
         </Grid>
         <Grid
             x:Name="CodingGrid"
-            Width="477"
-            Height="140"
+            Width="Auto" Height="Auto"
             Visibility="Hidden">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label
                 Margin="47,0,0,0"
                 HorizontalAlignment="Left"
@@ -192,12 +181,12 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 BorderBrush="Black"
-                BorderThickness="1" />
+                BorderThickness="1">
+                <Grid>
 
-
-            <Label
+                    <Label
                 Width="60"
-                Margin="19,68,0,0"
+                Margin="19,30,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="BODY NO."
@@ -207,7 +196,7 @@
                 FontWeight="DemiBold"
                 Foreground="Black" />
             <Label
-                Margin="109,68,0,0"
+                Margin="109,8,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="MON"
@@ -217,7 +206,7 @@
                 FontWeight="DemiBold"
                 Foreground="Black" />
             <Label
-                Margin="159,68,0,0"
+                Margin="159,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="TUE"
@@ -227,7 +216,7 @@
                 FontWeight="DemiBold"
                 Foreground="Black" />
             <Label
-                Margin="209,67,0,0"
+                Margin="209,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="WED"
@@ -237,7 +226,7 @@
                 FontWeight="DemiBold"
                 Foreground="Black" />
             <Label
-                Margin="259,68,0,0"
+                Margin="259,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="THU"
@@ -247,7 +236,7 @@
                 FontWeight="DemiBold"
                 Foreground="Black" />
             <Label
-                Margin="309,68,0,0"
+                Margin="309,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="FRI"
@@ -257,7 +246,7 @@
                 FontWeight="DemiBold"
                 Foreground="Black" />
             <Label
-                Margin="359,68,0,0"
+                Margin="359,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="SAT"
@@ -268,7 +257,7 @@
                 Foreground="Black"
                 RenderTransformOrigin="0.742,-0.478" />
             <Label
-                Margin="412,68,0,0"
+                Margin="412,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="SUN"
@@ -346,18 +335,16 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Source="../../Images/icons/check.png" />
+                </Grid>
+              </Border>
+            </Grid>
         </Grid>
         <Grid
             x:Name="HistoryGrid"
-            Width="512"
-            Height="200"
+            Width="Auto" Height="Auto"
             Visibility="Hidden">
             <DataGrid
                 x:Name="dgHistory"
-                Width="512"
-                Height="200"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
                 BorderBrush="Black"
                 BorderThickness="1">
                 <DataGrid.Resources>

@@ -35,7 +35,7 @@
 
                         <Image x:Name="imgSignatureo"/>
                     </Viewbox>
-                    <Button Content="TEST BUTTON" HorizontalAlignment="Left" Margin="69,143,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+                    <Button Content="CLEAN NAME ADDRESS IMAGE" HorizontalAlignment="Left" Margin="69,143,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
                     <Button x:Name="btnOpenLogs" Content="LOG ENTRIES" HorizontalAlignment="Left" Margin="105,84,0,0" VerticalAlignment="Top" Click="btnOpenLogs_Click"/>
                 </Grid>
             </TabItem>
@@ -72,25 +72,25 @@
                         VerticalAlignment="Top"
                         Text="TextBox"
                         TextWrapping="Wrap" />
-                    <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
+                    <Grid HorizontalAlignment="Left" Margin="126,0,0,0" Grid.ColumnSpan="2">
                         <Button x:Name="btnFranchise" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Franchise" Height="22" Width="100" Click="btnFranchise_Click" Margin="141,0,0,.0"/>
                         <Button x:Name="btnDriver" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Driver" Height="22" Width="100" Margin="241,0,0,0" Click="btnDriver_Click"/>
                         <Button x:Name="btnOperator" HorizontalAlignment="Left" VerticalAlignment="Top"  Content="Operator" Height="22" Width="100" Margin="341,0,0,0" Click="btnOperator_Click"/>
                         <Button x:Name="btnEmployee" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Employee" Height="22" Width="100" Margin="441,0,0,0" Click="btnEmployee_Click"/>
                     </Grid>
-                    <Grid x:Name="DatagridList" Margin="0, 50, 0, 0" />
+                    <Grid x:Name="DatagridList" Margin="0, 50, 0, 0" Grid.ColumnSpan="2" />
                     <Image
                         x:Name="tmpImage"
                         Width="100"
                         Height="100"
-                        Margin="632,18,0,0"
+                        Margin="277,18,0,0"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Top" />
+                        VerticalAlignment="Top" Grid.Column="1" />
                 </Grid>
             </TabItem>
             <TabItem Header="Test Windows">
                 <Grid x:Name="WindowGrid">
-                    
+
                 </Grid>
             </TabItem>
         </TabControl>

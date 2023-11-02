@@ -90,7 +90,7 @@ namespace SPTC_APP.View
 
         private void LoadWindowButtons()
         {
-            WindowGrid.Children.Clear();
+           /* WindowGrid.Children.Clear();
             List<Window> windows = new List<Window>()
             {
                 new DatabaseConfigInput(),
@@ -141,7 +141,7 @@ namespace SPTC_APP.View
 
                 WindowGrid.Children.Add(btnwindow);
             }
-
+*/
 
         }
         private void UpdateLogin()
@@ -196,10 +196,10 @@ namespace SPTC_APP.View
             DatagridList.Children.Add(dataGrid);
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
-                new ColumnConfiguration("BodyNumber", "###", width: 30),
-                new ColumnConfiguration("LicenseNO", "Plate Number", width: 60, backgroundColor: Brushes.Yellow),
+                new ColumnConfiguration("BodyNumber", "###", minWidth: 30),
+                new ColumnConfiguration("LicenseNO", "Plate Number", minWidth: 60, backgroundColor: Brushes.Yellow),
                 new ColumnConfiguration("Operator", "Operator name"),
-                new ColumnConfiguration("Driver", "Driver name", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
+                new ColumnConfiguration("Driver", "Driver name", fontWeight: FontWeights.Black, minWidth: 100, maxWidth: 150),
             };
             DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(dataGrid, columnConfigurations);
 
@@ -235,10 +235,10 @@ namespace SPTC_APP.View
             DatagridList.Children.Add(dataGrid);
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
-                new ColumnConfiguration("name", "FullName", width: 30),
-                new ColumnConfiguration("birthday", "Date of Birth", width: 60, backgroundColor: Brushes.Yellow),
+                new ColumnConfiguration("name", "FullName", minWidth: 30),
+                new ColumnConfiguration("birthday", "Date of Birth", minWidth: 60, backgroundColor: Brushes.Yellow),
                 new ColumnConfiguration("emergencyPerson", "Em Person"),
-                new ColumnConfiguration("emergencyContact", "Em Contact", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
+                new ColumnConfiguration("emergencyContact", "Em Contact", fontWeight: FontWeights.Black, minWidth: 100, maxWidth: 150),
                 new ColumnConfiguration("isDayShift", "Is Day Shift")
             };
             DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(dataGrid, columnConfigurations);
@@ -276,10 +276,10 @@ namespace SPTC_APP.View
 
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
-                new ColumnConfiguration("name", "FullName", width: 30),
-                new ColumnConfiguration("birthday", "Date of Birth", width: 60, backgroundColor: Brushes.Yellow),
+                new ColumnConfiguration("name", "FullName", minWidth: 30),
+                new ColumnConfiguration("birthday", "Date of Birth", minWidth: 60, backgroundColor: Brushes.Yellow),
                 new ColumnConfiguration("emergencyPerson", "Em Person"),
-                new ColumnConfiguration("emergencyContact", "Em Contact", fontWeight: FontWeights.Black, width: 100, maxWidth: 150),
+                new ColumnConfiguration("emergencyContact", "Em Contact", fontWeight: FontWeights.Black, minWidth: 100, maxWidth: 150),
             };
             DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(dataGrid, columnConfigurations);
 
@@ -313,8 +313,8 @@ namespace SPTC_APP.View
             DatagridList.Children.Add(dataGrid);
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
-                new ColumnConfiguration("name", "FullName", width: 30),
-                new ColumnConfiguration("position", "Position", width: 60, backgroundColor: Brushes.Yellow)
+                new ColumnConfiguration("name", "FullName", minWidth: 30),
+                new ColumnConfiguration("position", "Position", minWidth: 60, backgroundColor: Brushes.Yellow)
             };
             DataGridHelper<Employee> dataGridHelper = new DataGridHelper<Employee>(dataGrid, columnConfigurations);
 
@@ -430,15 +430,31 @@ namespace SPTC_APP.View
         }
         private void btnClean_Click(object sender, RoutedEventArgs e)
         {
-            if ((new Clean(RequestQuery.CLEAN_ADDRESS)).Start())
+            if ((new Clean(RequestQuery.CLEAN_NAME)).Start())
             {
                 btnClean.Background = Brushes.Green;
             } else
             {
                 btnClean.Background = Brushes.Red;
             }
+            if ((new Clean(RequestQuery.CLEAN_ADDRESS)).Start())
+            {
+                btnClean.Background = Brushes.Green;
+            }
+            else
+            {
+                btnClean.Background = Brushes.Red;
+            }
+            if ((new Clean(RequestQuery.CLEAN_IMAGE)).Start())
+            {
+                btnClean.Background = Brushes.Green;
+            }
+            else
+            {
+                btnClean.Background = Brushes.Red;
+            }
 
-            
+
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {

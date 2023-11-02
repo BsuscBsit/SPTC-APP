@@ -70,11 +70,11 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
                     
-                    new ColumnConfiguration("displayDate", "DATE", width: 100),
-                    new ColumnConfiguration("referenceNo", "REF NO.", width: 80),
-                    new ColumnConfiguration("deposit", "DEPOSIT", width: 100),
-                    new ColumnConfiguration("withdraw", "WITHDRAW", width: 100),
-                    new ColumnConfiguration("deposit", "AMOUNT", width: 100),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
+                    new ColumnConfiguration("referenceNo", "REF NO.", minWidth: 80),
+                    new ColumnConfiguration("deposit", "DEPOSIT", minWidth: 100),
+                    new ColumnConfiguration("withdraw", "WITHDRAW", minWidth: 100),
+                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100),
                 };
                 DataGridHelper<PaymentDetails<Ledger.ShareCapital>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.ShareCapital>>(dgLedger, columnConfigurations);
 
@@ -91,12 +91,12 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("displayDate", "DATE", width: 100),
-                    new ColumnConfiguration("referenceNo", "REF NO.", width: 80),
-                    new ColumnConfiguration("principal", "PRINCIPAL", width: 100),
-                    new ColumnConfiguration("interest", "INTEREST", width: 100),
-                    new ColumnConfiguration("penalties", "PENALTIES", width: 100),
-                    new ColumnConfiguration("deposit", "AMOUNT", width: 100),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
+                    new ColumnConfiguration("referenceNo", "REF NO.", minWidth: 80),
+                    new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 100),
+                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100),
+                    new ColumnConfiguration("penalties", "PENALTIES", minWidth: 100),
+                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100),
                 };
                 DataGridHelper<PaymentDetails<Ledger.Loan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.Loan>>(dgLedger, columnConfigurations);
 
@@ -105,6 +105,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgLedger.Items.Add(tmp);
                 }
+                lblTotal.Content = "BALANCE :";
                 lblTotalLedger.Content = franchise.LoanBalance;
             } 
             else if (strmod == LTLOAN)
@@ -113,12 +114,12 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("displayDate", "DATE", width: 100),
-                    new ColumnConfiguration("referenceNo", "REF NO.", width: 80),
-                    new ColumnConfiguration("principal", "CAPITAL BUILDUP", width: 100),
-                    new ColumnConfiguration("interest", "FEES", width: 100),
-                    new ColumnConfiguration("penalties", "PENALTIES", width: 100),
-                    new ColumnConfiguration("deposit", "AMOUNT", width: 100),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
+                    new ColumnConfiguration("referenceNo", "REF NO.", minWidth: 80),
+                    new ColumnConfiguration("principal", "CAPITAL BUILDUP", minWidth: 100),
+                    new ColumnConfiguration("interest", "FEES", minWidth: 100),
+                    new ColumnConfiguration("penalties", "PENALTIES", minWidth: 100),
+                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100),
                 };
                 DataGridHelper<PaymentDetails<Ledger.LongTermLoan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.LongTermLoan>>(dgLedger, columnConfigurations);
 
@@ -135,11 +136,11 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
                     
-                    new ColumnConfiguration("date", "DATE", width: 100),
-                    new ColumnConfiguration("ledgerType", "LEDGER TYPE", width: 80),
-                    new ColumnConfiguration("referenceNo", "REFERENCE NO.", width: 100),
-                    new ColumnConfiguration("balance", "BALANCE", width: 100),
-                    new ColumnConfiguration("payment", "PAYMENT", width: 100),
+                    new ColumnConfiguration("date", "DATE", minWidth: 100),
+                    new ColumnConfiguration("ledgerType", "LEDGER TYPE", minWidth: 80),
+                    new ColumnConfiguration("referenceNo", "REFERENCE NO.", minWidth: 100),
+                    new ColumnConfiguration("balance", "BALANCE", minWidth: 100),
+                    new ColumnConfiguration("payment", "PAYMENT", minWidth: 100),
                 };
                 DataGridHelper<PaymentHistory> dataGridHelper = new DataGridHelper<PaymentHistory>(dgHistory, columnConfigurations);
 
@@ -183,12 +184,12 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("violationLevelCount", "NO.", width: 100),
-                    new ColumnConfiguration("violationType", "VIOLATION", width: 80),
-                    new ColumnConfiguration("dDate", "DATE", width: 100),
-                    new ColumnConfiguration("dDateStart", "FROM: ", width: 100),
-                    new ColumnConfiguration("dDateEnd", "TO: ", width: 100),
-                    new ColumnConfiguration("remarks", "REMARKS", width: 100),
+                    new ColumnConfiguration("violationLevelCount", "NO.", minWidth: 100),
+                    new ColumnConfiguration("violationType", "VIOLATION", minWidth: 80),
+                    new ColumnConfiguration("dDate", "DATE", minWidth: 100),
+                    new ColumnConfiguration("dDateStart", "FROM: ", minWidth: 100),
+                    new ColumnConfiguration("dDateEnd", "TO: ", minWidth: 100),
+                    new ColumnConfiguration("remarks", "REMARKS", minWidth: 100),
                 };
                 new DataGridHelper<PaymentHistory>(dgDriverViolation, columnConfigurations);
                 if (franchise.Driver != null)
@@ -206,9 +207,9 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("Operator.name.legalName", "OWNER", width: 100),
-                    new ColumnConfiguration("displayBuyingDate", "DATE", width: 80),
-                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
+                    new ColumnConfiguration("Operator.name.legalName", "OWNER", minWidth: 100),
+                    new ColumnConfiguration("displayBuyingDate", "DATE", minWidth: 80),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100),
                 };
                 new DataGridHelper<PaymentHistory>(dgTransfer, columnConfigurations);
                 List<Franchise> franchises = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_ALL_FRANCHISE_WITH_BODYNUM(franchise.BodyNumber));

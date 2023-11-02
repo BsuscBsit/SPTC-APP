@@ -54,7 +54,7 @@ namespace SPTC_APP.View.Pages.Output
             
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("name.legalName", "NAME", width: 140),
+                    new ColumnConfiguration("name.legalName", "NAME", minWidth: 140),
                 };
             DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(dgDrivers, columnConfigurations);
 
@@ -66,8 +66,8 @@ namespace SPTC_APP.View.Pages.Output
 
             List<ColumnConfiguration> columnConfigurations1 = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("Driver.name.legalName", "NAME", width: 140),
-                    new ColumnConfiguration("BodyNumber", "CURRENT BODY NO.", width: 80),
+                    new ColumnConfiguration("Driver.name.legalName", "NAME", minWidth: 140),
+                    new ColumnConfiguration("BodyNumber", "CURRENT BODY NO.", minWidth: 80),
                 };
             DataGridHelper<Franchise> dataGridHelper1 = new DataGridHelper<Franchise>(dgDrivers_franchise, columnConfigurations1);
 

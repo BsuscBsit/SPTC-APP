@@ -15,8 +15,8 @@ namespace SPTC_APP.View.Pages.Output
     public partial class FranchiseInformationView : Window
     {
         private Button selectedButton = null;
-        TableView tableview;
-        public FranchiseInformationView(TableView tableview = null)
+        Grid tableview;
+        public FranchiseInformationView(Grid tableview = null)
         {
             InitializeComponent();
             this.tableview = tableview;
@@ -74,10 +74,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (currentParent != null)
                 {
                     currentParent.Children.Remove(FranchisePanel);
-                    if (tableview != null)
-                    {
-                        tableview.BackUpdate();
-                    }
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE);
                 }
 
             }

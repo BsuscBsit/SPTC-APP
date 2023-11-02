@@ -45,9 +45,9 @@ namespace SPTC_APP.View.IDGenerator.Previews
         {
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
-                new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-                new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", width: 140),
-                new ColumnConfiguration("Driver.name.wholename", "DRIVER NAME", width: 140),
+                new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80),
+                new ColumnConfiguration("Operator.name.wholename", "OPERATOR NAME", minWidth: 140),
+                new ColumnConfiguration("Driver.name.wholename", "DRIVER NAME", minWidth: 140),
             };
             DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(dgListFranchise, columnConfigurations);
 

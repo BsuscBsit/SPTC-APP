@@ -41,20 +41,7 @@ namespace SPTC_APP.View.Pages.Output
                 btnAdd.Visibility = Visibility.Collapsed;
             }
 
-            if (AppState.USER?.position?.title == AppState.Employees[2] && table == Table.OPERATOR)
-            {
-                btnAddShareCapital.Visibility = Visibility.Visible;
-                if (MainBody.selectedFranchise?.GetLoans()?.Count <= 0)
-                {
-                    btnAddLoan.Content = "APPLY FOR LOAN";
-                }
-                btnAddLoan.Visibility = Visibility.Visible;
-                if (MainBody.selectedFranchise?.GetLTLoans()?.Count <= 0)
-                {
-                    btnAddLoan.Content = "APPLY FOR LTLOAN";
-                }
-                btnAddLTLoan.Visibility = Visibility.Visible;
-            }
+           
             UpdateDefaultSidePanel();
         }
 
@@ -79,6 +66,7 @@ namespace SPTC_APP.View.Pages.Output
             }
             if (table == Table.DRIVER)
             {
+                
                 if ((AppState.USER?.position?.accesses[3] ?? false))
                 {
                     btnEditProfile.Visibility = Visibility.Visible;
@@ -107,11 +95,11 @@ namespace SPTC_APP.View.Pages.Output
                 int pageIndex = 0;
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("Operator.name.legalName", "OPERATOR NAME", width: 140, backgroundColor: Brushes.LightBlue),
-                    new ColumnConfiguration("BodyNumber", "BODY NO.", width: 80),
-                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", width: 100),
-                    new ColumnConfiguration("MTOPNo", "MTOP NO.", width: 100),
-                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", width: 100),
+                    new ColumnConfiguration("Operator.name.legalName", "OPERATOR NAME", minWidth: 140, backgroundColor: Brushes.LightBlue),
+                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100),
+                    new ColumnConfiguration("MTOPNo", "MTOP NO.", minWidth: 100),
+                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100),
                 };
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
 
@@ -146,11 +134,11 @@ namespace SPTC_APP.View.Pages.Output
                 int pageIndex = 0;
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("name.legalName", "NAME", width: 140),
-                    new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", width: 80),
-                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", width: 100),
-                    new ColumnConfiguration("franchise.ShareCapital", "SHARE CAPITAL", width: 100),
-                    new ColumnConfiguration("franchise.MonthlyDues", "MONTHLY DUE", width: 100),
+                    new ColumnConfiguration("name.legalName", "NAME", minWidth: 140),
+                    new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80),
+                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", minWidth: 100),
+                    new ColumnConfiguration("franchise.ShareCapital", "SHARE CAPITAL", minWidth: 100),
+                    new ColumnConfiguration("franchise.MonthlyDues", "MONTHLY DUE", minWidth: 100),
                 };
                 DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(TableGrid, columnConfigurations);
 
@@ -186,11 +174,11 @@ namespace SPTC_APP.View.Pages.Output
 
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("name.legalName", "NAME", width: 140),
-                    new ColumnConfiguration("address", "ADDRESS", width: 100),
-                    new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", width: 80),
-                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", width: 80),
-                    new ColumnConfiguration("franchise.Operator", "OPERATOR", width: 120),
+                    new ColumnConfiguration("name.legalName", "NAME", minWidth: 140),
+                    new ColumnConfiguration("address", "ADDRESS", minWidth: 100),
+                    new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80),
+                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", minWidth: 80),
+                    new ColumnConfiguration("franchise.Operator", "OPERATOR", minWidth: 120),
                 };
                 DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(TableGrid, columnConfigurations);
 
@@ -363,6 +351,34 @@ namespace SPTC_APP.View.Pages.Output
                     btnGenerateid.IsEnabled = true;
                 }
             }
+            if (MainBody.selectedFranchise != null && table == Table.OPERATOR && AppState.USER?.position.title == AppState.Employees[2])
+            {
+                if ((AppState.USER?.position?.accesses[13] ?? false))
+                {
+                    btnAddShareCapital.Visibility = Visibility.Visible;
+                }
+                if ((AppState.USER?.position?.accesses[14] ?? false))
+                {
+                    if (MainBody.selectedFranchise?.GetLoans()?.Count <= 0)
+                    {
+                        btnAddLoan.Content = "APPLY FOR LOAN";
+                    }
+                    btnAddLoan.Visibility = Visibility.Visible;
+                }
+                if ((AppState.USER?.position?.accesses[15] ?? false))
+                {
+                    if (MainBody.selectedFranchise?.GetLTLoans()?.Count <= 0)
+                    {
+                        btnAddLoan.Content = "APPLY FOR LTLOAN";
+                    }
+                    btnAddLTLoan.Visibility = Visibility.Visible;
+                }
+            } else
+            {
+                btnAddShareCapital.Visibility = Visibility.Collapsed;
+                btnAddLoan.Visibility = Visibility.Collapsed;
+                btnAddLTLoan.Visibility = Visibility.Collapsed;
+            }
 
             franchiseInformation.Visibility = Visibility.Visible;
         }
@@ -391,19 +407,14 @@ namespace SPTC_APP.View.Pages.Output
             return franchisePanel;
         }
 
-        public async void BackUpdate()
-        {
-            Task task = UpdateTableAsync();
-            await Task.Delay(1);
-        }
-
         private async void btnManage_Click(object sender, RoutedEventArgs e)
         {
             if (MainBody.selectedFranchise != null)
             {
                 if (table == Table.FRANCHISE)
                 {
-                    franchisePanel.Children.Add((new FranchiseInformationView(this)).Fetch());
+                    if(franchisePanel.Parent is Grid par)
+                        par.Children.Add((new FranchiseInformationView(par)).Fetch());
                 }
                 await UpdateTableAsync();
             }

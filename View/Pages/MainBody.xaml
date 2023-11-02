@@ -507,13 +507,14 @@
             Grid.Row="2"
             Grid.Column="1"
             Margin="15,0,0,0" />
-        <TextBox
-            x:Name="cbSearch"
+        <Grid 
             Grid.Row="1"
             Grid.Column="1"
+            Margin="0,15,0,15">
+        <TextBox
+            x:Name="cbSearch"
             Width="400"
             Height="40"
-            Margin="0,15,0,15"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Background="White"
@@ -521,14 +522,16 @@
             LostFocus="cbSearch_LostFocus"
             Style="{DynamicResource CommonTextBoxStyle}"
             TextChanged="cbSearch_TextChanged" />
-
         <DataGrid
             x:Name="lsSuggestion"
             Width="400"
-            Margin="0,84,20,0"
+            Margin="0,40,0,0"
+            Panel.ZIndex="1"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             SelectionChanged="lsSuggestion_SelectionChanged"
-            Visibility="Collapsed" />
+            Visibility="Visible" />
+        </Grid>
+
     </Grid>
 </Window>

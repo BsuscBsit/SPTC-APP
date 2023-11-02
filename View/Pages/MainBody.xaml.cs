@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
@@ -29,10 +30,12 @@ namespace SPTC_APP.View.Pages
         public MainBody()
         {
             InitializeComponent();
-            username.Content = AppState.USER?.position?.title.ToString();
+            
             DashBoard_Click(DashBoard, null);
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            username.Content = AppState.USER?.position?.title.ToString();
+            userImage.ImageSource = AppState.USER?.image?.GetSource() ?? new BitmapImage(new Uri("pack://application:,,,/SPTC APP;component/View/Images/icons/person.png"));
         }
 
         private void imgClose_Click(object sender, RoutedEventArgs e)

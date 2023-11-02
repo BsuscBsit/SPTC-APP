@@ -71,9 +71,11 @@ namespace SPTC_APP.View.Pages.Input
         private void pbPassword_LostFocus(object sender, RoutedEventArgs e)
         {
             foreach (var ps in passwordArray) 
-            { 
-                if ((ps[2] as PasswordBox).Password.Length == 0)
-                    (ps[0] as Label).Visibility = Visibility.Visible;
+            {
+                if ((sender as PasswordBox) == ps[2]) {
+                    if ((ps[2] as PasswordBox).Password.Length == 0)
+                        (ps[0] as Label).Visibility = Visibility.Visible;
+                }
             }
         }
 
@@ -97,11 +99,14 @@ namespace SPTC_APP.View.Pages.Input
         {
             foreach (var ps in passwordArray)
             {
-                (ps[2] as PasswordBox).Visibility = Visibility.Visible;
-                (ps[1] as Label).Visibility = Visibility.Hidden;
-                if ((ps[2] as PasswordBox).Password.Length > 0)
+                if ((sender as Button) == (ps[3] as Button))
                 {
-                    (ps[2] as PasswordBox).Focus();
+                    (ps[2] as PasswordBox).Visibility = Visibility.Visible;
+                    (ps[1] as Label).Visibility = Visibility.Hidden;
+                    if ((ps[2] as PasswordBox).Password.Length > 0)
+                    {
+                        (ps[2] as PasswordBox).Focus();
+                    }
                 }
             }
         }
@@ -127,20 +132,18 @@ namespace SPTC_APP.View.Pages.Input
         {
             foreach (var ps in passwordArray)
             {
-                if ((ps[2] as PasswordBox).Password == string.Empty)
+                if ((sender as PasswordBox) == ps[2])
                 {
-                    (ps[3] as Button).Visibility = Visibility.Hidden;
-                }
-                else
-                {
-                    (ps[3] as Button).Visibility = Visibility.Visible;
+                    if ((ps[2] as PasswordBox).Password == string.Empty)
+                    {
+                        (ps[3] as Button).Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        (ps[3] as Button).Visibility = Visibility.Visible;
+                    }
                 }
             }
-        }
-
-        private void imgClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

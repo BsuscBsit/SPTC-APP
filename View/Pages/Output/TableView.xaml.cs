@@ -213,7 +213,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private void TableSelectedChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-
+            MainBody.selectedFranchise = null;
             DataGrid grid = (DataGrid)sender;
 
             if (grid.SelectedItems.Count > 0)
@@ -260,7 +260,7 @@ namespace SPTC_APP.View.Pages.Output
                     } 
                     else
                     {
-                        imgUserProfilePic.ImageSource = null;
+                        imgUserProfilePic.ImageSource = new BitmapImage(new Uri("pack://application:,,,/SPTC APP;component/View/Images/icons/person.png"));
                     }
                 }
                 else if (table == Table.OPERATOR)
@@ -290,7 +290,7 @@ namespace SPTC_APP.View.Pages.Output
                         ValuePairFI(lblF4, "Share Capital: ", lblI4, "P " + MainBody.selectedFranchise?.ShareCapital.ToString("0.00") ?? "0");
                         ValuePairFI(lblF5, "Loan Balance: ", lblI5, "P " + MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
                         ValuePairFI(lblF6, "LT Loan Balance: ", lblI6, "P " + MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
-                        ValuePairFI(lblF7, "Total Due for " + DateTime.Now.ToString("MMM") + ": ", lblI7, "P " + MainBody.selectedFranchise?.MonthlyDues.ToString("0.00") ?? "");
+                        ValuePairFI(lblF7, "Due for " + DateTime.Now.ToString("MMM") + ": ", lblI7, "P " + MainBody.selectedFranchise?.MonthlyDues.ToString("0.00") ?? "");
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[3])
                     {
@@ -305,7 +305,7 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     else
                     {
-                        imgUserProfilePic.ImageSource = null;
+                        imgUserProfilePic.ImageSource = new BitmapImage(new Uri("pack://application:,,,/SPTC APP;component/View/Images/icons/person.png"));
                     }
                 }
                 else if (table == Table.DRIVER)
@@ -324,7 +324,7 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     else
                     {
-                        imgUserProfilePic.ImageSource = null;
+                        imgUserProfilePic.ImageSource = new BitmapImage(new Uri("pack://application:,,,/SPTC APP;component/View/Images/icons/person.png"));
                     }
                     if (MainBody.selectedFranchise?.Driver?.isSuspended ?? false)
                     {

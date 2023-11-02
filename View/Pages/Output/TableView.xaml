@@ -27,15 +27,10 @@
             </DataGrid.Resources>
         </DataGrid>
 
-        <Grid Grid.Row="0" Grid.Column="1" x:Name="franchiseInformation" Background="White" Visibility="Visible" Margin="24,0,0,12">
-            <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,10,0,0" StrokeThickness="1" Stroke="Black" >
+        <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="franchiseInformation" Background="White" Visibility="Visible" Margin="10">
+            <Ellipse Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" StrokeThickness="1" Stroke="Black" >
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
-                </Ellipse.Fill>
-            </Ellipse>
-            <Ellipse Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,10,0,0" StrokeThickness="1" Stroke="Black" >
-                <Ellipse.Fill>
-                    <ImageBrush x:Name="imgUserProfilePic"/>
+                    <ImageBrush x:Name="imgUserProfilePic" ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
                 </Ellipse.Fill>
             </Ellipse>
             <Label x:Name="lblF1" Content="" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Visibility="Hidden"
@@ -153,7 +148,7 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="1" Background="Gray" Grid.ColumnSpan="2">
+        <Grid Grid.Row="1" Background="Gray" Grid.ColumnSpan="1">
         <Button x:Name="btnAdd" Content="ADD" Style="{DynamicResource ControlledButtonStyle}" HorizontalAlignment="Left" Width="120" Height="26"
                     FontFamily="hevitica "
                     FontWeight="ExtraBold"

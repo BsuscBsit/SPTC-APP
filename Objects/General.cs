@@ -264,11 +264,11 @@ namespace SPTC_APP.Objects
         {
             if (!string.IsNullOrEmpty(addressline1) && !string.IsNullOrEmpty(addressline2))
             {
-                return $"{addressline1} {addressline2}";
+                return $"{addressline1}\n{addressline2}";
             }
             else if (!string.IsNullOrEmpty(houseNo) || !string.IsNullOrEmpty(streetname) || !string.IsNullOrEmpty(barangay) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(province) || !string.IsNullOrEmpty(country))
             {
-                return $"{houseNo} {streetname}, {barangay} {city}, {province}".Trim();
+                return $"{houseNo} {streetname},\n {barangay} {city}, {province}".Trim();
             }
             else
             {

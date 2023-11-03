@@ -79,7 +79,7 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid x:Name="mainpanel">
+    <Grid x:Name="mainpanel" Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -131,13 +131,13 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Border
                                 Grid.RowSpan="2"
                                 Grid.Column="0"
-                                MinWidth="317.6"
+                                Width="Auto"
                                 Margin="10,10,0,10"
                                 Background="White"
                                 CornerRadius="10">
@@ -147,7 +147,7 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Label
@@ -157,7 +157,7 @@
                                         Padding="5,5,5,5"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Bottom"
-                                        Content="Number of operators:"
+                                        Content="Operators: "
                                         FontSize="14"
                                         Style="{StaticResource TextFieldLabelingPreset}" />
                                     <Label
@@ -167,7 +167,7 @@
                                         Padding="5,5,5,5"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Top"
-                                        Content="Number of drivers: "
+                                        Content="Drivers: "
                                         FontSize="14"
                                         Style="{StaticResource TextFieldLabelingPreset}" />
                                     <Label

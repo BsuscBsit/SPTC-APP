@@ -24,7 +24,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private Path clickedPie;
         private bool pieClicked = false;
-
+        private double total = 0;
 
         private string[] monthAbbreviations = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
 
@@ -221,21 +221,29 @@ namespace SPTC_APP.View.Pages.Output
         }
         private void DrawPieChart()
         {
-            cvPieChart.Children.Clear();
+            
             lblPieChartTitle.Content = "Total Revenue: ";
-            lblPieChart.Content = ((double) AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()).ToString("0.00");
+            
             lblPercent.Content = "100%";
-            var sortedlist = AppState.ThisMonthsChart.OrderByDescending(x => x.Value).ToList();
-            var dictionary = sortedlist.ToDictionary(x => x.Key, x => x.Value);
+            
+            var sortedList = AppState.ThisMonthsChart
+                .OrderBy(x => x.Key == "Expenses" ? 1 : 0)
+                .ThenByDescending(x => x.Value)
+                .ToList();
+            var dictionary = sortedList.ToDictionary(x => x.Key, x => x.Value);
             lblMonth.Content = monthAbbreviations[pieMonth-1] + ", " + pieYear;
 
-            double total = dictionary.Values.Sum();
+            this.total = dictionary.Values.Sum();
+            lblPieChart.Content = (total - dictionary.Values.Last()).ToString("0.00");
+            lblPieChart.Tag = (total - dictionary.Values.Last()).ToString("0.00");
             double currentAngle = -90;
 
             double centerX = cvPieCircle.Center.X;
             double centerY = cvPieCircle.Center.Y;
             double radius = cvPieCircle.RadiusX;
 
+            cvPieChart.Children.Clear();
+            cvPieChart.Children.Add(new Path { Fill = Brushes.LightGray, Data = new EllipseGeometry { Center = new Point(centerX, centerY), RadiusX = radius, RadiusY = radius } });
 
             for (int i = 0; i < dictionary.Count; i++)
             {
@@ -243,7 +251,7 @@ namespace SPTC_APP.View.Pages.Output
                 
                 Path path = new Path
                 {
-                    Fill = i == 0? Brushes.Red : RandomColor(i),
+                    Fill = (i == dictionary.Count - 1)? Brushes.LightGray : RandomColor(i),
                     Opacity = 1,
                     Tag = dictionary.Keys.ElementAt(i),
                     Stroke = Brushes.Black,
@@ -288,6 +296,7 @@ namespace SPTC_APP.View.Pages.Output
 
                 currentAngle += sweepAngle;
             }
+            lblPercent.Content = (total == 0)? "0%":"100%";
         }
         private void Path_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -318,8 +327,8 @@ namespace SPTC_APP.View.Pages.Output
                 if (!pieClicked)
                 {
                     lblPieChartTitle.Content = "Total Revenue";
-                    lblPieChart.Content = ((double) AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()).ToString("0.00");
-                    lblPercent.Content = "100%";
+                    lblPieChart.Content = lblPieChart.Tag.ToString();
+                    lblPercent.Content = (total == 0) ? "0%" : "100%";
                 }
                 path.StrokeThickness = 0;
                 if(clickedPie != null)

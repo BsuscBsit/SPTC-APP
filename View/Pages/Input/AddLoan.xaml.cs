@@ -36,11 +36,12 @@ namespace SPTC_APP.View.Pages.Input
             {
                 lblTerms.Content = "Term length in months: ";
                 tbPenalty.Text = "12";
+                lblTitle.Content = "APPLY FOR LONG TERM LOAN";
             } else
             {
                 tboxInterest.Visibility = Visibility.Collapsed;
                 lblInterest.Visibility = Visibility.Collapsed;
-                tboxAmount.Text = franchise.GetLoans().FirstOrDefault().paymentDues.ToString();
+                tboxAmount.Text = franchise.GetLoans().FirstOrDefault().paymentDues.ToString("0.00");
             }
         }
         protected override void OnClosing(CancelEventArgs e)

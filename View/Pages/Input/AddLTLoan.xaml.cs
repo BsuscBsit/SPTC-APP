@@ -36,6 +36,7 @@ namespace SPTC_APP.View.Pages.Input
             if (isApply)
             {
                 lblTerms.Content = "Term length in months: ";
+                lblTitle.Content = "APPLY FOR LONG TERM LOAN";
             }
             else
             {
@@ -43,7 +44,7 @@ namespace SPTC_APP.View.Pages.Input
                 lblInterest.Visibility = Visibility.Collapsed;
                 lblProcessingFee.Visibility = Visibility.Collapsed;
                 tbProcessingFee.Visibility = Visibility.Collapsed;
-                tboxAmount.Text = franchise.GetLTLoans().FirstOrDefault().paymentDues.ToString();
+                tboxAmount.Text = franchise.GetLTLoans().FirstOrDefault().paymentDues.ToString("0.00");
             }
         }
         protected override void OnClosing(CancelEventArgs e)

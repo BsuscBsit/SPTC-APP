@@ -148,7 +148,7 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="1" Background="Gray" Grid.ColumnSpan="1">
+        <Grid Grid.Row="1" Background="Black" Grid.ColumnSpan="1">
         <Button x:Name="btnAdd" Content="ADD" Style="{DynamicResource ControlledButtonStyle}" HorizontalAlignment="Left" Width="120" Height="26"
                     FontFamily="hevitica "
                     FontWeight="ExtraBold"

@@ -349,7 +349,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Column="0" Grid.Row="1" Background="Gray">
+        <Grid Grid.Column="0" Grid.Row="1" Background="Black">
         <Button
             x:Name="btnBack"
             HorizontalAlignment="Left"

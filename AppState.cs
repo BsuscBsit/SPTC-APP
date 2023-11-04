@@ -36,8 +36,6 @@ namespace SPTC_APP
         public static double TOTAL_SHARE_PER_MONTH;
         public static string CAMERA_RESOLUTION;
 
-
-
         //NOT SAVED EXTERNALLY
         public static string[] ALL_EMPLOYEES;
         public static List<string> Employees;

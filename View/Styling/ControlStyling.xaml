@@ -281,7 +281,7 @@
                                         <ColorAnimation
                                             Storyboard.TargetName="TheBorder"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                            To="{DynamicResource ColorSoftGrey2}"
+                                            To="{DynamicResource ColorSoftGrey1}"
                                             Duration="0" />
                                         <ColorAnimation
                                             Storyboard.TargetName="TheContent"
@@ -808,9 +808,54 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--  ComboBox Style E  -->
-
-
-
-
+    <Style x:Key="HidingShowingDropShadow" TargetType="Button">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Border
+                            x:Name="eff"
+                            Background="White"
+                            CornerRadius="12">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="12"
+                                    Direction="-90"
+                                    Opacity="1"
+                                    ShadowDepth="0"
+                                    Color="{StaticResource ColorSoftGrey3}" />
+                            </Border.Effect>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="eff"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0"
+                                            Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="eff"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="1"
+                                            Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

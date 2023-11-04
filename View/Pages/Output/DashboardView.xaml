@@ -17,23 +17,23 @@
                                 <Path
                                     x:Name="arrDown"
                                     Grid.Column="1"
-                                    Margin="0,0,11,0"
+                                    Margin="0,0,10,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Data="M0,0 L7,7 14,0"
                                     Opacity="1"
                                     Stroke="{StaticResource BrushBlack}"
-                                    StrokeThickness="2" />
+                                    StrokeThickness="1" />
                                 <Path
                                     x:Name="arrUp"
                                     Grid.Column="1"
-                                    Margin="0,0,11,0"
+                                    Margin="0,0,10,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Data="M0,7 L7,0 14,7"
                                     Opacity="0"
                                     Stroke="{StaticResource BrushBlack}"
-                                    StrokeThickness="2" />
+                                    StrokeThickness="1" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsChecked" Value="True">
@@ -81,6 +81,7 @@
     </Window.Resources>
     <Grid x:Name="mainpanel" Margin="15">
         <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -89,7 +90,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Border
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Margin="0,0,12,12">
             <Border.Effect>
@@ -203,23 +204,28 @@
                                 Content="Total share capital"
                                 FontSize="14"
                                 Style="{StaticResource TextFieldLabelingPreset}" />
-                            <Label
-                                x:Name="tbTotalShares"
+                            <Viewbox
                                 Grid.Row="1"
                                 Grid.Column="1"
-                                Margin="15,0,15,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Content="P 42342342342.0000"
-                                Foreground="{StaticResource BrushBlack}"
-                                Style="{StaticResource CommonTitlePreset}" />
+                                Margin="15,0,15,15"
+                                HorizontalAlignment="Left">
+                                <Label
+                                    x:Name="tbTotalShares"
+                                    Padding="15,5,5,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="P 42342342342.0000"
+                                    Foreground="{StaticResource BrushBlack}"
+                                    Style="{StaticResource CommonTitlePreset}" />
+
+                            </Viewbox>
                         </Grid>
                     </Border>
                 </Grid>
             </Border>
         </Border>
         <Border
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="0"
             Margin="0,12,12,0">
             <Border.Effect>
@@ -238,10 +244,18 @@
                 CornerRadius="10"
                 UseLayoutRounding="True">
                 <Viewbox Margin="15,15,15,15">
-                    <Grid Height="190" Width="530" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid
+                        Width="530"
+                        Height="190"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
                         <Canvas
-                        x:Name="cvBarChart"
-                        Background="White" Height="110" Width="455" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            x:Name="cvBarChart"
+                            Width="455"
+                            Height="110"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="White" />
                     </Grid>
                 </Viewbox>
             </Border>
@@ -249,7 +263,7 @@
         <Border
             Grid.RowSpan="2"
             Grid.Column="1"
-            Margin="12,64,0,0">
+            Margin="12,64,0,0" Grid.Row="1">
             <Border.Effect>
                 <DropShadowEffect
                     BlurRadius="20"
@@ -259,19 +273,19 @@
             </Border.Effect>
             <Border
                 x:Name="piechrtview"
-                Width="190"
+                Width="207"
                 HorizontalAlignment="Left"
                 Background="White"
                 BorderThickness="1"
                 CornerRadius="10">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="15" />
+                        <RowDefinition Height="19" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="15" />
+                        <RowDefinition Height="24" />
                     </Grid.RowDefinitions>
                     <Label
                         x:Name="lblPieChartTitle"
@@ -389,101 +403,108 @@
         <Canvas
             Grid.RowSpan="2"
             Grid.Column="1"
-            Width="190"
+            Width="207"
             Height="40"
             Margin="12,0,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top">
-            <Border
-                x:Name="actionMenu"
-                Width="190"
-                Height="40"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="White"
-                BorderBrush="{DynamicResource BrushBlack}"
-                BorderThickness="1"
-                CornerRadius="10"
-                MouseEnter="actionMenu_MouseEnter"
-                MouseLeave="actionMenu_MouseLeave">
-                <Grid
-                    Width="188"
-                    Height="209.6"
+            VerticalAlignment="Top" Grid.Row="1">
+            <Grid>
+                <Button
+                    x:Name="epektos"
+                    IsEnabled="False"
+                    Style="{DynamicResource HidingShowingDropShadow}" />
+                <Border
+                    x:Name="actionMenu"
+                    Width="207"
+                    Height="40"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Top">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Rectangle
-                        Grid.Row="1"
-                        Height="1"
-                        Margin="5,0,5,14"
-                        VerticalAlignment="Top"
-                        Fill="{DynamicResource BrushSoftGrey1}" />
-                    <Button
-                        x:Name="btnViewFullDetails"
-                        Grid.Row="2"
-                        Width="170"
-                        Height="40"
-                        Margin="0,0,0,5"
+                    VerticalAlignment="Center"
+                    Background="White"
+                    BorderBrush="{DynamicResource BrushBlack}"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    MouseEnter="actionMenu_MouseEnter"
+                    MouseLeave="actionMenu_MouseLeave"
+                    UseLayoutRounding="True">
+                    <Grid
+                        Width="188"
+                        Height="209.6"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Click="btnViewFullDetails_Click"
-                        Content="VIEW FULL DETAILS"
-                        Style="{StaticResource CommonButtonStyle}" />
-                    <Button
-                        x:Name="btnPrint"
-                        Grid.Row="3"
-                        Width="170"
-                        Height="40"
-                        Margin="0,5,0,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Click="btnPrint_Click"
-                        Content="ID PRINTING"
-                        Style="{StaticResource CommonButtonStyle}" />
-                    <Button
-                        x:Name="btnReload"
-                        Grid.Row="4"
-                        Width="170"
-                        Height="40"
-                        Margin="0,5,0,10"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Click="btnReload_Click"
-                        Content="RELOAD"
-                        Style="{StaticResource CommonButtonStyle}" />
-                    <Border
-                        x:Name="btnActions"
-                        Grid.Row="0"
-                        MouseDown="btnActions_MouseDown">
-                        <Grid Height="40">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <!--  Added for border's clickability  -->
-                            <Label Grid.ColumnSpan="2" />
-                            <Label
-                                Grid.ColumnSpan="1"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Content="ACTIONS"
-                                Style="{StaticResource ButtonTextPresetLabel}" />
-                            <!--  Props only  -->
-                            <ToggleButton
-                                x:Name="menuExpanded"
-                                Grid.Column="1"
-                                IsEnabled="False"
-                                Style="{StaticResource ToggleButtonDisplay}" />
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Border>
+                        VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Rectangle
+                            Grid.Row="1"
+                            Height="1"
+                            Margin="5,0,5,14"
+                            VerticalAlignment="Top"
+                            Fill="{DynamicResource BrushSoftGrey1}" />
+                        <Button
+                            x:Name="btnViewFullDetails"
+                            Grid.Row="2"
+                            Width="170"
+                            Height="40"
+                            Margin="0,0,0,5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Click="btnViewFullDetails_Click"
+                            Content="VIEW FULL DETAILS"
+                            Style="{StaticResource CommonButtonStyle}" />
+                        <Button
+                            x:Name="btnPrint"
+                            Grid.Row="3"
+                            Width="170"
+                            Height="40"
+                            Margin="0,5,0,5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Click="btnPrint_Click"
+                            Content="ID PRINTING"
+                            Style="{StaticResource CommonButtonStyle}" />
+                        <Button
+                            x:Name="btnReload"
+                            Grid.Row="4"
+                            Width="170"
+                            Height="40"
+                            Margin="0,5,0,10"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Click="btnReload_Click"
+                            Content="RELOAD"
+                            Style="{StaticResource CommonButtonStyle}" />
+                        <Border
+                            x:Name="btnActions"
+                            Grid.Row="0"
+                            MouseDown="btnActions_MouseDown">
+                            <Grid Height="40">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <!--  Added for border's clickability  -->
+                                <Label Grid.ColumnSpan="2" />
+                                <Label
+                                    Grid.ColumnSpan="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="ACTIONS"
+                                    Style="{StaticResource ButtonTextPresetLabel}" />
+                                <ToggleButton
+                                    x:Name="menuExpanded"
+                                    Grid.Column="1"
+                                    IsEnabled="False"
+                                    Style="{StaticResource ToggleButtonDisplay}" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+
+            </Grid>
 
         </Canvas>
     </Grid>

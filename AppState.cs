@@ -47,7 +47,7 @@ namespace SPTC_APP
         public static List<KeyValuePair<string, double>> ThisMonthsChart;
 
         //Toggle on defore deploying
-        public static bool isDeployment = true;
+        public static bool isDeployment = false;
         public static bool isDeployment_IDGeneration = false;
 
         public static Window mainwindow = null;
@@ -87,7 +87,8 @@ namespace SPTC_APP
                 }
                 if (!AppState.isDeployment_IDGeneration && !AppState.isDeployment)
                 {
-                    (new Test()).Show();
+                    (new MainBody()).Show();
+                    //(new Test()).Show();
                 }
 
 

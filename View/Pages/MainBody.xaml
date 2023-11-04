@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SPTC_APP.View.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="window1"
     Title="Sapang Palay Tricycle Cooperative"
     Width="1000"
     Height="600"
@@ -12,6 +13,7 @@
     MinHeight="600"
     AllowsTransparency="True"
     Icon="../../View/Images/icons/logo.ico"
+    MouseDown="Window_MouseDown"
     Style="{StaticResource Minified}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -187,7 +189,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="64" />
             <RowDefinition Height="*" />
             <RowDefinition Height="15" />
         </Grid.RowDefinitions>
@@ -328,10 +330,11 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <ContentControl
-                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
                             Width="30"
                             Height="30"
-                            Margin="-2.2,0,0,0"
+                            Margin="6,0,0,0"
+                            HorizontalAlignment="Left"
                             Content="{StaticResource FranchiseIcon}" />
                         <Label
                             x:Name="lblFran"
@@ -504,33 +507,103 @@
         </Grid>
         <Grid
             x:Name="TablePanelSwap"
-            Grid.Row="2"
-            Grid.Column="1"
-            Margin="15,0,0,0" />
-        <Grid 
             Grid.Row="1"
             Grid.Column="1"
-            Margin="0,15,0,15">
-            <TextBox
-                x:Name="cbSearch"
+            Margin="15,0,0,0" Grid.RowSpan="2" />
+        <Canvas
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="400"
+            Height="40"
+            Margin="0,12,0,12"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top">
+            <Border
+                x:Name="sbBorder"
                 Width="400"
                 Height="40"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
                 Background="White"
-                GotFocus="cbSearch_GotFocus"
-                LostFocus="cbSearch_LostFocus"
-                Style="{DynamicResource CommonTextBoxStyle}"
-                TextChanged="cbSearch_TextChanged" />
-            <DataGrid
-                x:Name="lsSuggestion"
-                Width="400"
-                Margin="0,40,0,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                SelectionChanged="lsSuggestion_SelectionChanged"
-                Visibility="Collapsed" />
-        </Grid>
+                BorderBrush="{StaticResource BrushBlack}"
+                BorderThickness="1,1,1,1"
+                CornerRadius="7">
+                <Grid>
+                    <Button
+                        x:Name="epektos"
+                        IsEnabled="False"
+                        Style="{DynamicResource HidingShowingDropShadow}" />
+                    <Border Background="White" CornerRadius="7" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            x:Name="lblSBHint"
+                            Grid.Row="0"
+                            Margin="15,0,0,0"
+                            Padding="0,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Content="Search Here..."
+                            Style="{StaticResource TextFieldLabelingPreset}" />
+                        <Rectangle
+                            Grid.Row="1"
+                            Height="2"
+                            Fill="{StaticResource BrushSoftGrey2}" />
+                        <DataGrid
+                            x:Name="lsSuggestion"
+                            Grid.Row="2"
+                            Width="368"
+                            Height="200"
+                            Margin="15,15,15,15"
+                            Padding="0,0,0,15"
+                            VerticalAlignment="Top"
+                            SelectionChanged="lsSuggestion_SelectionChanged" />
+                        <TextBox
+                            x:Name="cbSearch"
+                            Grid.Row="0"
+                            GotFocus="cbSearch_GotFocus"
+                            LostFocus="cbSearch_LostFocus_1"
+                            TextChanged="cbSearch_TextChanged">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="FontFamily" Value="Inter" />
+                                    <Setter Property="FontWeight" Value="SemiBold" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Grid>
+                                                    <ScrollViewer
+                                                        x:Name="PART_ContentHost"
+                                                        Margin="10,0,0,0"
+                                                        Padding="5,5,0,5"
+                                                        VerticalAlignment="Center"
+                                                        VerticalContentAlignment="Center"
+                                                        Background="#7FFFFFFF"
+                                                        HorizontalScrollBarVisibility="Hidden"
+                                                        UseLayoutRounding="True"
+                                                        VerticalScrollBarVisibility="Hidden" />
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Grid>
+                </Grid>
+
+
+            </Border>
+
+        </Canvas>
 
     </Grid>
 </Window>

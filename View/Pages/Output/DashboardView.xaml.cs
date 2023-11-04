@@ -473,24 +473,14 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnActions_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (menuExpanded.IsChecked == true)
-            {
-                actionMenu.AnimateHeight(40, 0.2);
-                menuExpanded.IsChecked = false;
-            }
-            else
-            {
-                actionMenu.AnimateHeight(211.6, 0.2);
-                menuExpanded.IsChecked = true;
-            }
+            menuExpander(menuExpanded.IsChecked == true);
         }
 
         private void actionMenu_MouseLeave(object sender, MouseEventArgs e)
         {
             if(menuExpanded.IsChecked == true)
             {
-                actionMenu.AnimateHeight(40, 0.2);
-                menuExpanded.IsChecked = false;
+                menuExpander(true);
             }
         }
 
@@ -498,9 +488,23 @@ namespace SPTC_APP.View.Pages.Output
         {
             if(menuExpanded.IsChecked == false)
             {
-                actionMenu.AnimateHeight(211.6, 0.2);
-                menuExpanded.IsChecked = true;
+                menuExpander(false);
             }
+        }
+
+        private void menuExpander(bool isExpanded)
+        {
+            if (isExpanded)
+            {
+                actionMenu.AnimateHeight(40, 0.2);
+                epektos.IsEnabled = false;
+            }
+            else
+            {
+                actionMenu.AnimateHeight(211.6, 0.2);
+                epektos.IsEnabled = true;
+            }
+            menuExpanded.IsChecked = !isExpanded;
         }
     }
 }

@@ -183,8 +183,7 @@
                     FontFamily="Arial"
                     FontSize="10"
                     FontWeight="Bold"
-                    Style="{StaticResource ControlledButtonStyle}"
-                    Visibility="Hidden" />
+                    Style="{StaticResource ControlledButtonStyle}" />
                 <Button
                     x:Name="btnDeleteFranchise"
                     Height="25"
@@ -198,8 +197,7 @@
                     FontFamily="Arial"
                     FontSize="10"
                     FontWeight="Bold"
-                    Style="{StaticResource ControlledButtonStyle}"
-                    Visibility="Hidden" />
+                    Style="{StaticResource ControlledButtonStyle}" />
                 <Button
                     x:Name="btnEditFranchise"
                     Height="25"
@@ -213,8 +211,7 @@
                     FontFamily="Arial"
                     FontSize="10"
                     FontWeight="Bold"
-                    Style="{StaticResource ControlledButtonStyle}"
-                    Visibility="Hidden" />
+                    Style="{StaticResource ControlledButtonStyle}" />
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -344,13 +341,12 @@
                         FontFamily="Arial"
                         FontSize="10"
                         FontWeight="Bold"
-                        Style="{DynamicResource ControlledButtonStyle}"
-                        Visibility="Collapsed" />
+                        Style="{DynamicResource ControlledButtonStyle}" />
                 </Grid>
             </Grid>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1" Background="Black">
-        <Button
+            <Button
             x:Name="btnBack"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"

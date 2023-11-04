@@ -432,8 +432,8 @@ namespace SPTC_APP.View
                     scrollViewer.ScrollToHorizontalOffset(tho + (offsetAfterSpace * 2));
                     scrollViewer.ScrollToVerticalOffset(tvo + (offsetAfterSpace * 2));
 
-                    canvasPageCtrl.FadeOut(1);
-                    canvasSaveAnID.FadeIn(1);
+                    canvasPageCtrl.FadeOut();
+                    canvasSaveAnID.FadeIn();
 
                 }
                 else
@@ -475,8 +475,8 @@ namespace SPTC_APP.View
                 panOrigin = currentPos;
 
 
-                canvasPageCtrl.FadeIn(1);
-                canvasSaveAnID.FadeOut(1);
+                canvasPageCtrl.FadeIn();
+                canvasSaveAnID.FadeOut();
             }
         }
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -501,8 +501,8 @@ namespace SPTC_APP.View
             isReset = true;
             if (canvasSaveAnID.Visibility == Visibility.Visible)
             {
-                canvasSaveAnID.FadeOut(1);
-                canvasPageCtrl.FadeIn(1);
+                canvasSaveAnID.FadeOut();
+                canvasPageCtrl.FadeIn();
             }
             UpdateZoom(1.0);
             CenterOffset();

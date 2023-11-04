@@ -233,7 +233,7 @@ namespace SPTC_APP.View.Pages
             }
             else
             {
-                lsSuggestion.Visibility = Visibility.Collapsed;
+                SearchBarResize(true);
             }
             await Task.Delay(5);
         }
@@ -245,7 +245,9 @@ namespace SPTC_APP.View.Pages
             {
                 if (tmp.Count > 0)
                 {
-                    lsSuggestion.Visibility = Visibility.Visible;
+                    lblSBHint.FadeOut(0.3);
+                    sbBorder.AnimateHeight(272, 0.3);
+                    epektos.IsEnabled = true;
                     List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                         {
 
@@ -260,14 +262,14 @@ namespace SPTC_APP.View.Pages
             }
             else
             {
-                lsSuggestion.Visibility = Visibility.Collapsed;
+                SearchBarResize(true);
             }
         }
 
         private void cbSearch_LostFocus(object sender, RoutedEventArgs e)
         {
-            lsSuggestion.Visibility = Visibility.Collapsed;
             cbSearch.Text = "";
+            SearchBarResize(true);
         }
 
         private void paneExpander_Click(object sender, RoutedEventArgs e)
@@ -277,35 +279,66 @@ namespace SPTC_APP.View.Pages
             {
                 username.FadeOut(0.2, () =>
                 {
-                    AnimationHelper.FadeOut(userImageHolder, 0.2, () =>
+                    userImageHolder.FadeOut(0.2, () =>
                     {
                         userImageHolder.Width = 50;
                         userImageHolder.Height = 50;
                         username.Visibility = Visibility.Collapsed;
-                        AnimationHelper.FadeIn(userImageHolder, 0.2);
+                        userImageHolder.FadeIn(0.2);
                     });
-                    sidePanel.AnimateWidth(82, 0.2, async () =>
+                    sidePanel.AnimateWidth(82, 0.2, () =>
                     {
-                        await Task.Delay(TimeSpan.FromSeconds(1));
                         paneExpander.IsEnabled = true;
                     });
                 });
             }
             else
             {
-                AnimationHelper.FadeOut(userImageHolder, 0.2, () =>
+                userImageHolder.FadeOut(0.2, () =>
                 {
                     userImageHolder.Width = 100;
                     userImageHolder.Height = 100;
                     username.FadeIn(0.1);
-                    AnimationHelper.FadeIn(userImageHolder, 0.2);
+                    userImageHolder.FadeIn(0.2);
 
-                    sidePanel.AnimateWidth(225, 0.2, async () =>
+                    sidePanel.AnimateWidth(225, 0.2, () =>
                     {
-                        await Task.Delay(TimeSpan.FromSeconds(1));
                         paneExpander.IsEnabled = true;
                     });
                 });
+            }
+        }
+        private void SearchBarResize(bool isMinimize = false)
+        {
+            
+            if(sbBorder.Height != double.NaN)
+            {
+                if(sbBorder.Height == 40 && !isMinimize)
+                {
+                    sbBorder.AnimateHeight(272, 0.3);
+                    epektos.IsEnabled = true;
+                } 
+                else
+                {
+                    sbBorder.AnimateHeight(40, 0.3);
+                    epektos.IsEnabled = false;
+                }
+            }
+        }
+
+        private void cbSearch_LostFocus_1(object sender, RoutedEventArgs e)
+        {
+            if(!(cbSearch.Text.Length > 0))
+            {
+                lblSBHint.FadeIn(0.3);
+            }
+        }
+
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (cbSearch.IsFocused)
+            {
+                SearchBarResize(true);
             }
         }
 
@@ -313,8 +346,8 @@ namespace SPTC_APP.View.Pages
         {
             if (((DataGrid)sender).SelectedItem is Franchise fran)
             {
-                lsSuggestion.Visibility = Visibility.Collapsed;
                 cbSearch.Text = "";
+                SearchBarResize();
                 if (fran.BodyNumber != null)
                 {
                     TablePanelSwap.Children.Clear();
@@ -330,6 +363,7 @@ namespace SPTC_APP.View.Pages
 
         private void cbSearch_GotFocus(object sender, RoutedEventArgs e)
         {
+            lblSBHint.FadeOut(0.3);
             cbSearch_TextChanged(sender, null);
         }
     }

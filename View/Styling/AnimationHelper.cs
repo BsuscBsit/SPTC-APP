@@ -1,110 +1,103 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-
+using System.Windows.Media.Effects;
+using System.Xml.Linq;
 
 namespace SPTC_APP.View.Styling
 {
     public static class AnimationHelper
     {
+        private static readonly EasingFunctionBase DefaultEasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut };
+
         public static void FadeOut(this UIElement element, double durationSeconds = 1, Action completedCallback = null)
         {
-            DoubleAnimation fadeOutAnimation = new DoubleAnimation
-            {
-                From = 1.0,
-                To = 0.0,
-                Duration = TimeSpan.FromSeconds(durationSeconds),
-            };
-
-            fadeOutAnimation.Completed += (sender, e) =>
-            {
-                element.Visibility = Visibility.Hidden;
-                completedCallback?.Invoke();
-            };
-
-            element.BeginAnimation(UIElement.OpacityProperty, fadeOutAnimation);
+            AnimateOpacity(element, element.Opacity, 0.0, durationSeconds, UIElement.OpacityProperty, completedCallback);
+            element.Visibility = Visibility.Hidden;
         }
 
-        public static void FadeIn(this UIElement element, double durationSeconds = 1, Action callback = null, Action completedCallback = null)
+        public static void FadeIn(this UIElement element, double durationSeconds = 1, Action beginningCallback = null, Action completedCallback = null)
         {
-            element.Opacity = 0;
+            beginningCallback?.Invoke();
             element.Visibility = Visibility.Visible;
-            callback?.Invoke();
-            DoubleAnimation fadeInAnimation = new DoubleAnimation
-            {
-                From = 0.0,
-                To = 1.0,
-                Duration = TimeSpan.FromSeconds(durationSeconds),
-            };
+            AnimateOpacity(element, 0.0, 1.0, durationSeconds, UIElement.OpacityProperty, completedCallback);
+        }
 
-            fadeInAnimation.Completed += (sender, e) =>
-            {
-                completedCallback?.Invoke();
-            };
+        public static void FadeOutDropShadow(this UIElement element, double durationSeconds = 1, Action completedCallback = null)
+        {
+            AnimateOpacity(element, element.Opacity, 0.0, durationSeconds, DropShadowEffect.OpacityProperty, completedCallback);
+        }
 
-            //await Task.Delay(TimeSpan.FromSeconds(durationSeconds));
-            element.BeginAnimation(UIElement.OpacityProperty, fadeInAnimation);
+        public static void FadeInDropShadow(this UIElement element, double durationSeconds = 1, Action beginningCallback = null, Action completedCallback = null)
+        {
+            beginningCallback?.Invoke();
+            AnimateOpacity(element, 0.0, 1.0, durationSeconds, DropShadowEffect.OpacityProperty, completedCallback);
         }
 
         public static void AnimateMargin(this FrameworkElement element, Thickness toMargin, double durationSeconds = 1, Action completedCallback = null)
         {
-            ThicknessAnimation marginAnimation = new ThicknessAnimation
+            var fromMargin = element.Margin;
+            var marginAnimation = new ThicknessAnimation
             {
-                From = element.Margin,
+                From = fromMargin,
                 To = toMargin,
                 Duration = TimeSpan.FromSeconds(durationSeconds),
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+                EasingFunction = DefaultEasingFunction
             };
 
-            marginAnimation.Completed += (sender, e) =>
-            {
-                completedCallback?.Invoke();
-            };
-
-            element.BeginAnimation(FrameworkElement.MarginProperty, marginAnimation);
+            AnimateProperty(element, FrameworkElement.MarginProperty, marginAnimation, completedCallback);
         }
 
         public static void AnimateWidth(this FrameworkElement element, double toVal, double durationSeconds = 1, Action completedCallback = null)
-        { 
-            DoubleAnimation doubleAnimation = new DoubleAnimation
-            {
-                From = element.Width,
-                To = toVal,
-                Duration = TimeSpan.FromSeconds(durationSeconds),
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
-            };
-
-            doubleAnimation.Completed += (sender, e) =>
-            {
-                completedCallback?.Invoke();
-            };
-
-            element.BeginAnimation(FrameworkElement.WidthProperty, doubleAnimation);
+        {
+            AnimateDoubleProperty(element, FrameworkElement.WidthProperty, element.Width, toVal, durationSeconds, DefaultEasingFunction, completedCallback);
         }
 
         public static void AnimateHeight(this FrameworkElement element, double toVal, double durationSeconds = 1, Action completedCallback = null)
         {
-            DoubleAnimation doubleAnimation = new DoubleAnimation
+            AnimateDoubleProperty(element, FrameworkElement.HeightProperty, element.Height, toVal, durationSeconds, DefaultEasingFunction, completedCallback);
+        }
+
+        private static void AnimateOpacity(UIElement element, double from, double to, double durationSeconds, DependencyProperty property, Action completedCallback)
+        {
+            var opacityAnimation = new DoubleAnimation
             {
-                From = element.Height,
-                To = toVal,
+                From = from,
+                To = to,
                 Duration = TimeSpan.FromSeconds(durationSeconds),
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
             };
 
-            doubleAnimation.Completed += (sender, e) =>
+            AnimateProperty(element, property, opacityAnimation, completedCallback);
+        }
+
+        private static void AnimateProperty(UIElement element, DependencyProperty property, AnimationTimeline animation, Action completedCallback)
+        {
+            animation.Completed += (sender, e) =>
             {
                 completedCallback?.Invoke();
             };
 
-            element.BeginAnimation(FrameworkElement.HeightProperty, doubleAnimation);
+            element.BeginAnimation(property, animation);
         }
 
+        private static void AnimateDoubleProperty(FrameworkElement element, DependencyProperty property, double from, double to, double durationSeconds, EasingFunctionBase easingFunction, Action completedCallback)
+        {
+            var doubleAnimation = new DoubleAnimation
+            {
+                From = from,
+                To = to,
+                Duration = TimeSpan.FromSeconds(durationSeconds),
+                EasingFunction = easingFunction
+            };
+
+            AnimateProperty(element, property, doubleAnimation, completedCallback);
+        }
 
     }
-
 }
- 
+

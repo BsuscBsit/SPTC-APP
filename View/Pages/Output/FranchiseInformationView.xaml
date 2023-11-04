@@ -7,358 +7,387 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="FranchiseInformationView"
     mc:Ignorable="d">
-    <Grid x:Name="FranchisePanel" Background="White">
+    <Grid x:Name="FranchisePanel">
         <Grid.RowDefinitions>
+            <RowDefinition Height="64" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="600"/>
-        </Grid.ColumnDefinitions>
-        <Grid
-            x:Name="franchiseInformation"
+        <Button
+            x:Name="btnBack"
             Grid.Row="0"
-            Grid.Column="0"
-         >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="160" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Ellipse
-                    Width="62"
-                    Height="60"
-                    Margin="158,68,0,0"
+            Width="100"
+            Height="30"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Click="btnBack_Click"
+            Style="{StaticResource CommonButtonStyle}">
+            <Grid Width="100">
+                <Path
+                    Margin="15,0,0,0"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
-                    <Ellipse.Fill>
-                        <ImageBrush x:Name="imgProfilePic" ImageSource="/SPTC APP;component/View/Images/icons/person.png" />
-                    </Ellipse.Fill>
-                </Ellipse>
+                    VerticalAlignment="Center"
+                    Data="M7,14 L0,7 7,0"
+                    Stroke="{StaticResource BrushBlack}"
+                    StrokeThickness="1" />
                 <Label
-                    Margin="15,10,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="Body No."
-                    FontSize="10"
-                    FontWeight="Medium"
-                    Foreground="DarkGray" />
-                <Label
-                    x:Name="lblbodyNumber"
-                    Margin="75,10,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="N/A"
-                    FontFamily="Arial"
-                    FontSize="16"
-                    FontStretch="SemiExpanded"
-                    FontWeight="DemiBold"
-                    Foreground="Black" />
-                <Label
-                    Margin="10,40,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="Plate No:"
-                    FontSize="10"
-                    FontWeight="Medium"
-                    Foreground="DarkGray" />
-                <Label
-                    x:Name="lblPlateNo"
-                    Margin="73,42,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="N/A"
-                    FontFamily="Arial"
-                    FontSize="10"
-                    FontStretch="SemiExpanded"
-                    FontWeight="SemiBold"
-                    Foreground="Black" />
-                <Label
-                    Margin="10,68,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="MTOP No:"
-                    FontSize="10"
-                    FontWeight="Medium"
-                    Foreground="DarkGray" />
-                <Label
-                    x:Name="lblMTOPNo"
-                    Margin="73,69,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="N/A"
-                    FontFamily="Arial"
-                    FontSize="10"
-                    FontStretch="SemiExpanded"
-                    FontWeight="SemiBold"
-                    Foreground="Black" />
-                <Label
-                    Margin="235,75,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="Operators Name :"
-                    FontSize="9"
-                    FontWeight="Medium"
-                    Foreground="DarkGray" />
-                <Label
-                    x:Name="lblOperatorName"
-                    Margin="325,73,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="N/A"
-                    FontFamily="Arial"
-                    FontSize="14"
-                    FontStretch="SemiExpanded"
-                    FontWeight="DemiBold"
-                    Foreground="Black" />
-                <Label
-                    Grid.RowSpan="2"
-                    Margin="235,97,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="Birthdate :"
-                    FontSize="9"
-                    FontWeight="Medium"
-                    Foreground="DarkGray" />
-                <Label
-                    x:Name="lblDateOfBIrth"
-                    Grid.RowSpan="2"
-                    Margin="325,99,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="N/A"
-                    FontFamily="Arial"
-                    FontSize="9"
-                    FontStretch="SemiExpanded"
-                    FontWeight="DemiBold"
-                    Foreground="Black" />
-                <Label
-                    Margin="235,119,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="Reference :"
-                    FontSize="9"
-                    FontWeight="Medium"
-                    Foreground="DarkGray" />
-                <Label
-                    Margin="325,121,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="N/A"
-                    FontFamily="Helvetica"
-                    FontSize="9"
-                    FontStretch="SemiExpanded"
-                    FontWeight="DemiBold"
-                    Foreground="Black" />
-
-                <Label
-                    Margin="235,138,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="Driver Name: "
-                    FontSize="9"
-                    FontWeight="Medium"
-                    Foreground="DarkGray" />
-                <Label
-                    x:Name="lblDriverName"
-                    Grid.Row="1"
-                    Margin="325,140,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="N/A"
-                    FontFamily="Helvetica"
-                    FontSize="9"
-                    FontStretch="SemiExpanded"
-                    FontWeight="DemiBold"
-                    Foreground="Black" />
-                <Button
-                    x:Name="btnChangeDriver"
-                    Height="25"
-                    Margin="0,0,28,25"
-                    Width="120"
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right"
-                    Click="btnChangeDriver_Click"
-                    Content="CHANGE DRIVER"
-                    FontFamily="Arial"
-                    FontSize="10"
-                    FontWeight="Bold"
-                    Style="{StaticResource ControlledButtonStyle}" />
-                <Button
-                    x:Name="btnDeleteFranchise"
-                    Height="25"
-                    Width="120"
-                    Margin="0,0,28,65"
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right"
-                    Background="Red"
-                    Click="btnDeleteFranchise_Click"
-                    Content="DELETE"
-                    FontFamily="Arial"
-                    FontSize="10"
-                    FontWeight="Bold"
-                    Style="{StaticResource ControlledButtonStyle}" />
-                <Button
-                    x:Name="btnEditFranchise"
-                    Height="25"
-                    Width="120"
-                    Margin="0,0,28,95"
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right"
-                    Click="btnEditFranchise_Click"
-                    Content="EDIT"
-                    Background="Green"
-                    FontFamily="Arial"
-                    FontSize="10"
-                    FontWeight="Bold"
-                    Style="{StaticResource ControlledButtonStyle}" />
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="Back" />
             </Grid>
-            <Grid Grid.Row="1">
+        </Button>
+        <Border
+            x:Name="epek"
+            Grid.Row="1"
+            Background="White"
+            CornerRadius="12">
+            <Border.Effect>
+                <DropShadowEffect
+                    BlurRadius="20"
+                    Direction="-90"
+                    ShadowDepth="5"
+                    Color="{StaticResource ColorSoftGrey1}" />
+            </Border.Effect>
+        </Border>
+        <Border
+            Grid.Row="1"
+            Background="White"
+            CornerRadius="10"
+            UseLayoutRounding="True">
+            <Grid Margin="15,15,15,15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" MinHeight="257.6" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Margin="0, 0, 0, 6">
+                <Grid
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,12,12,12"
+                    VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="Body No."
+                        FontSize="10"
+                        FontWeight="Medium"
+                        Foreground="DarkGray" />
+                    <Label
+                        x:Name="lblbodyNumber"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Content="N/A"
+                        FontFamily="Arial"
+                        FontSize="16"
+                        FontStretch="SemiExpanded"
+                        FontWeight="DemiBold"
+                        Foreground="Black" />
+                    <Label
+                        Grid.Row="1"
+                        Content="Plate No:"
+                        FontSize="10"
+                        FontWeight="Medium"
+                        Foreground="DarkGray" />
+                    <Label
+                        x:Name="lblPlateNo"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Content="N/A"
+                        FontFamily="Arial"
+                        FontSize="10"
+                        FontStretch="SemiExpanded"
+                        FontWeight="SemiBold"
+                        Foreground="Black" />
+                    <Label
+                        Grid.Row="2"
+                        Content="MTOP No:"
+                        FontSize="10"
+                        FontWeight="Medium"
+                        Foreground="DarkGray" />
+                    <Label
+                        x:Name="lblMTOPNo"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Content="N/A"
+                        FontFamily="Arial"
+                        FontSize="10"
+                        FontStretch="SemiExpanded"
+                        FontWeight="SemiBold"
+                        Foreground="Black" />
+
+                </Grid>
+                <Grid
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="12,50,12,12"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Ellipse
+                        Grid.RowSpan="4"
+                        Grid.Column="0"
+                        Width="62"
+                        Height="60"
+                        Margin="0,0,15,0">
+                        <Ellipse.Fill>
+                            <ImageBrush x:Name="imgProfilePic" ImageSource="/SPTC APP;component/View/Images/icons/person.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Label
+                        Grid.Column="1"
+                        Content="Operators Name :"
+                        FontSize="9"
+                        FontWeight="Medium"
+                        Foreground="DarkGray" />
+                    <Label
+                        x:Name="lblOperatorName"
+                        Grid.Column="2"
+                        Content="N/A"
+                        FontFamily="Arial"
+                        FontSize="14"
+                        FontStretch="SemiExpanded"
+                        FontWeight="DemiBold"
+                        Foreground="Black" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Content="Birthdate :"
+                        FontSize="9"
+                        FontWeight="Medium"
+                        Foreground="DarkGray" />
+                    <Label
+                        x:Name="lblDateOfBIrth"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Content="N/A"
+                        FontFamily="Arial"
+                        FontSize="9"
+                        FontStretch="SemiExpanded"
+                        FontWeight="DemiBold"
+                        Foreground="Black" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Content="Reference :"
+                        FontSize="9"
+                        FontWeight="Medium"
+                        Foreground="DarkGray" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Content="N/A"
+                        FontFamily="Helvetica"
+                        FontSize="9"
+                        FontStretch="SemiExpanded"
+                        FontWeight="DemiBold"
+                        Foreground="Black" />
+
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Content="Driver Name: "
+                        FontSize="9"
+                        FontWeight="Medium"
+                        Foreground="DarkGray" />
+                    <Label
+                        x:Name="lblDriverName"
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Content="N/A"
+                        FontFamily="Helvetica"
+                        FontSize="9"
+                        FontStretch="SemiExpanded"
+                        FontWeight="DemiBold"
+                        Foreground="Black" />
+                </Grid>
+                <StackPanel
+                    x:Name="actions"
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    Margin="12,12,0,12"
+                    VerticalAlignment="Top">
+                    <Button
+                        x:Name="btnDeleteFranchise"
+                        Width="130"
+                        Height="27"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Click="btnDeleteFranchise_Click"
+                        Content="DELETE"
+                        FontSize="12"
+                        Style="{StaticResource RedButtonStyle}" />
+                    <Button
+                        x:Name="btnEditFranchise"
+                        Width="130"
+                        Height="27"
+                        Margin="0,7,0,7"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Click="btnEditFranchise_Click"
+                        Content="EDIT"
+                        FontSize="12"
+                        Style="{StaticResource GreenButtonStyle}" />
+                    <Button
+                        x:Name="btnChangeDriver"
+                        Width="130"
+                        Height="27"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Click="btnChangeDriver_Click"
+                        Content="CHANGE DRIVER"
+                        FontSize="12"
+                        Style="{StaticResource CommonButtonStyle}" />
+
+                </StackPanel>
+                <StackPanel
+                    x:Name="tabs"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Height="233.6"
+                    Margin="20,12,12,12"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top">
                     <Button
                         x:Name="btnHistory"
-                        Height="26"
-                        Width="120"
-                        HorizontalAlignment="Left"
-                        Margin="20,0,0,180"
-                        VerticalAlignment="Bottom"
+                        Width="150"
+                        Height="27"
+                        Padding="1,5,5,1"
                         Background="White"
                         BorderThickness="1"
                         Click="btnHistory_Click"
                         Content="History"
-                        FontFamily="Arial"
-                        FontSize="10"
-                        FontWeight="Bold"
-                        Style="{DynamicResource ControlledButtonStyle}" />
-
+                        FontSize="12"
+                        Style="{StaticResource ControlledButtonStyle}" />
                     <Button
                         x:Name="btnCoding"
-                        Height="26"
-                         Width="120" HorizontalAlignment="Left"
-                        Margin="20,0,0,150"
-                        VerticalAlignment="Bottom"
+                        Width="150"
+                        Height="27"
+                        Margin="0,7,0,0"
+                        Padding="1,5,5,1"
                         Background="White"
                         BorderThickness="1"
                         Click="btnCoding_Click"
                         Content="Coding"
-                        FontFamily="Arial"
-                        FontSize="10"
-                        FontWeight="Bold"
-                        Style="{DynamicResource ControlledButtonStyle}" />
+                        FontSize="12"
+                        Style="{StaticResource ControlledButtonStyle}" />
                     <Button
                         x:Name="btnViolation"
-                        Height="26"  Width="120" HorizontalAlignment="Left"
-                        Margin="20,0,0,120"
-                        VerticalAlignment="Bottom"
+                        Width="150"
+                        Height="27"
+                        Margin="0,7,0,0"
+                        Padding="1,5,5,1"
                         Background="White"
                         BorderThickness="1"
                         Click="btnViolation_Click"
                         Content="Violation"
-                        FontFamily="Arial"
-                        FontSize="10"
-                        FontWeight="Bold"
-                        Style="{DynamicResource ControlledButtonStyle}" />
+                        FontSize="12"
+                        Style="{StaticResource ControlledButtonStyle}" />
                     <Button
                         x:Name="btnShareCapital"
-                        Height="26" Width="120" HorizontalAlignment="Left"
-                        Margin="20,0,0,90"
-                        VerticalAlignment="Bottom"
+                        Width="150"
+                        Height="27"
+                        Margin="0,7,0,0"
+                        Padding="1,5,5,1"
                         Background="White"
                         BorderThickness="1"
                         Click="btnShareCapital_Click"
                         Content="Share Capital Ledger"
-                        FontFamily="Arial"
-                        FontSize="9"
-                        FontWeight="Bold"
-                        Style="{DynamicResource ControlledButtonStyle}" />
+                        FontSize="12"
+                        Style="{StaticResource ControlledButtonStyle}" />
                     <Button
                         x:Name="btnLoan"
-                        Height="26" Width="120" HorizontalAlignment="Left"
-                        Margin="20,0,0,60"
-                        VerticalAlignment="Bottom"
+                        Width="150"
+                        Height="27"
+                        Margin="0,7,0,0"
+                        Padding="1,5,5,1"
                         Background="White"
                         BorderThickness="1"
                         Click="btnLoan_Click"
                         Content="Loan Ledger"
-                        FontFamily="Arial"
-                        FontSize="10"
-                        FontWeight="Bold"
-                        Style="{DynamicResource ControlledButtonStyle}" />
-
+                        FontSize="12"
+                        Style="{StaticResource ControlledButtonStyle}" />
                     <Button
                         x:Name="btnLTLoan"
-                        Height="26" Width="120" HorizontalAlignment="Left"
-                        Margin="20,0,0,30"
-                        VerticalAlignment="Bottom"
+                        Width="150"
+                        Height="27"
+                        Margin="0,7,0,0"
+                        Padding="1,5,5,1"
                         Background="White"
                         BorderThickness="1"
                         Click="btnLTLoan_Click"
                         Content="LT Loan Ledger"
-                        FontFamily="Arial"
-                        FontSize="10"
-                        FontWeight="Bold"
-                        Style="{DynamicResource ControlledButtonStyle}" />
+                        FontSize="12"
+                        Style="{StaticResource ControlledButtonStyle}" />
                     <Button
                         x:Name="btnTransactionHistory"
-                        Height="26" Width="120" HorizontalAlignment="Left"
-                        Margin="20,0,0,0"
-                        VerticalAlignment="Bottom"
+                        Width="150"
+                        Height="27"
+                        Margin="0,7,0,0"
+                        Padding="1,5,5,1"
                         Background="White"
                         BorderThickness="1"
                         Click="btnTransactionHistory_Click"
                         Content="Transfer History"
-                        FontFamily="Arial"
-                        FontSize="10"
-                        FontWeight="Bold"
-                        Style="{DynamicResource ControlledButtonStyle}" />
-                </Grid>
+                        FontSize="12"
+                        Style="{StaticResource ControlledButtonStyle}" />
 
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid
-                        x:Name="ModuleGrid"
-                        Margin="15,0,15,0"
-                        Grid.Row="0"/>
-                    <Button
-                        x:Name="btnAddButton"
-                        Grid.Row="1"
-                        Width="100"
-                        Height="26"
-                        Margin="0,5,32,18"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        Background="White"
-                        BorderThickness="1"
-                        Click="btnAddButton_Click"
-                        Content="ADD RECORD"
-                        FontFamily="Arial"
-                        FontSize="10"
-                        FontWeight="Bold"
-                        Style="{DynamicResource ControlledButtonStyle}" />
-                </Grid>
+                </StackPanel>
+                <Grid
+                    x:Name="ModuleGrid"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    MinWidth="400"
+                    Margin="12,12,20,12" />
+                <Button
+                    x:Name="btnAddButton"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Width="250"
+                    Height="30"
+                    VerticalAlignment="Bottom"
+                    Click="btnAddButton_Click"
+                    Style="{DynamicResource CommonButtonStyle}">
+                    <Grid Width="250">
+                        <Path
+                            Margin="0,0,120,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="M0,7 H14 M7,0 V14"
+                            Stroke="{StaticResource BrushBlack}"
+                            StrokeThickness="1" />
+                        <Label
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="Add Record" />
+                    </Grid>
+                </Button>
             </Grid>
-        </Grid>
-        <Grid Grid.Column="0" Grid.Row="1" Background="Black">
-            <Button
-            x:Name="btnBack"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Margin="20,6, 0, 6"
-            Width="120"
-            Height="26"
-            FontSize="10"
-            Background="Yellow"
-            Style="{StaticResource ControlledButtonStyle}"
-            Click="btnBack_Click"
-            Content="Back" />
-        </Grid>
+        </Border>
     </Grid>
 </Window>
 

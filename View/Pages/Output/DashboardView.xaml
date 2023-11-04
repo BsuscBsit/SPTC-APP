@@ -79,9 +79,9 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid x:Name="mainpanel" Margin="15">
+    <Grid x:Name="mainpanel">
         <Grid.RowDefinitions>
-            <RowDefinition Height="64"/>
+            <RowDefinition Height="64" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -90,9 +90,12 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Border
+            x:Name="epekOvview"
             Grid.Row="1"
             Grid.Column="0"
-            Margin="0,0,12,12">
+            Margin="0,0,12,12"
+            Background="White"
+            CornerRadius="12">
             <Border.Effect>
                 <DropShadowEffect
                     BlurRadius="20"
@@ -100,131 +103,137 @@
                     ShadowDepth="5"
                     Color="{StaticResource ColorSoftGrey1}" />
             </Border.Effect>
-            <Border
-                x:Name="ovview"
-                Height="170"
-                Background="White"
-                BorderThickness="1"
-                CornerRadius="10"
-                UseLayoutRounding="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Label
-                        Grid.Row="0"
-                        Margin="15,10,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Content="Overview"
-                        FontSize="18"
-                        Foreground="{StaticResource BrushBlack}"
-                        Style="{StaticResource SubTitlePreset}" />
-                    <Border
-                        Grid.Row="1"
-                        Margin="15,5,15,15"
-                        Background="{StaticResource BrushSoftGrey2}"
-                        CornerRadius="10">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Border
-                                Grid.RowSpan="2"
-                                Grid.Column="0"
-                                Width="Auto"
-                                Margin="10,10,0,10"
-                                Background="White"
-                                CornerRadius="10">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label
-                                        Grid.Row="0"
-                                        Grid.Column="0"
-                                        Margin="10,0,0,0"
-                                        Padding="5,5,5,5"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Bottom"
-                                        Content="Operators: "
-                                        FontSize="14"
-                                        Style="{StaticResource TextFieldLabelingPreset}" />
-                                    <Label
-                                        Grid.Row="1"
-                                        Grid.Column="0"
-                                        Margin="10,0,0,0"
-                                        Padding="5,5,5,5"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Content="Drivers: "
-                                        FontSize="14"
-                                        Style="{StaticResource TextFieldLabelingPreset}" />
-                                    <Label
-                                        x:Name="tbTotalOperator"
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        Margin="10,0,10,0"
-                                        Padding="5,5,5,5"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Bottom"
-                                        Content="97979797997799797"
-                                        FontSize="14"
-                                        Style="{StaticResource TextFieldLabelingPreset}" />
-                                    <Label
-                                        x:Name="tbTotalDriver"
-                                        Grid.Row="1"
-                                        Grid.Column="1"
-                                        Margin="10,0,10,0"
-                                        Padding="5,5,5,5"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Top"
-                                        Content="97979797997799797"
-                                        FontSize="14"
-                                        Style="{StaticResource TextFieldLabelingPreset}" />
-                                </Grid>
-                            </Border>
-                            <Label
-                                Grid.Column="1"
-                                Margin="15,29,0,0"
-                                Padding="5,0,5,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Content="Total share capital"
-                                FontSize="14"
-                                Style="{StaticResource TextFieldLabelingPreset}" />
-                            <Viewbox
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Margin="15,0,15,15"
-                                HorizontalAlignment="Left">
-                                <Label
-                                    x:Name="tbTotalShares"
-                                    Padding="15,5,5,5"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Content="P 42342342342.0000"
-                                    Foreground="{StaticResource BrushBlack}"
-                                    Style="{StaticResource CommonTitlePreset}" />
-
-                            </Viewbox>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Border>
         </Border>
         <Border
+            x:Name="ovview"
+            Grid.Row="1"
+            Grid.Column="0"
+            Height="170"
+            Margin="0,0,12,12"
+            Background="White"
+            BorderThickness="1"
+            CornerRadius="10"
+            UseLayoutRounding="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Margin="15,10,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Overview"
+                    FontSize="18"
+                    Foreground="{StaticResource BrushBlack}"
+                    Style="{StaticResource SubTitlePreset}" />
+                <Border
+                    Grid.Row="1"
+                    Margin="15,5,15,15"
+                    Background="{StaticResource BrushSoftGrey2}"
+                    CornerRadius="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Width="Auto"
+                            Margin="10,10,0,10"
+                            Background="White"
+                            CornerRadius="10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Margin="10,0,0,0"
+                                    Padding="5,5,5,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Content="Operators: "
+                                    FontSize="14"
+                                    Style="{StaticResource TextFieldLabelingPreset}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Margin="10,0,0,0"
+                                    Padding="5,5,5,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Content="Drivers: "
+                                    FontSize="14"
+                                    Style="{StaticResource TextFieldLabelingPreset}" />
+                                <Label
+                                    x:Name="tbTotalOperator"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Margin="10,0,10,0"
+                                    Padding="5,5,5,5"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Content="97979797997799797"
+                                    FontSize="14"
+                                    Style="{StaticResource TextFieldLabelingPreset}" />
+                                <Label
+                                    x:Name="tbTotalDriver"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="10,0,10,0"
+                                    Padding="5,5,5,5"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Content="97979797997799797"
+                                    FontSize="14"
+                                    Style="{StaticResource TextFieldLabelingPreset}" />
+                            </Grid>
+                        </Border>
+                        <Label
+                            Grid.Column="1"
+                            Margin="15,29,0,0"
+                            Padding="5,0,5,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Total share capital"
+                            FontSize="14"
+                            Style="{StaticResource TextFieldLabelingPreset}" />
+                        <Viewbox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="15,0,15,15"
+                            HorizontalAlignment="Left">
+                            <Label
+                                x:Name="tbTotalShares"
+                                Padding="15,5,5,5"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Content="P 42342342342.0000"
+                                Foreground="{StaticResource BrushBlack}"
+                                Style="{StaticResource CommonTitlePreset}" />
+
+                        </Viewbox>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <Border
+            Background="White"
+            CornerRadius="12"
+            x:Name="epekLnchrtview"
             Grid.Row="2"
             Grid.Column="0"
             Margin="0,12,12,0">
@@ -235,35 +244,42 @@
                     ShadowDepth="5"
                     Color="{StaticResource ColorSoftGrey1}" />
             </Border.Effect>
-            <Border
-                x:Name="lnchrtview"
-                MinHeight="250"
-                Background="White"
-                BorderThickness="1"
-                ClipToBounds="True"
-                CornerRadius="10"
-                UseLayoutRounding="True">
-                <Viewbox Margin="15,15,15,15">
-                    <Grid
-                        Width="530"
-                        Height="190"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                        <Canvas
-                            x:Name="cvBarChart"
-                            Width="455"
-                            Height="110"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Background="White" />
-                    </Grid>
-                </Viewbox>
-            </Border>
         </Border>
         <Border
+            x:Name="lnchrtview"
+            Grid.Row="2"
+            Grid.Column="0"
+            MinHeight="250"
+            Margin="0,12,12,0"
+            Background="White"
+            BorderThickness="1"
+            ClipToBounds="True"
+            CornerRadius="10"
+            UseLayoutRounding="True">
+            <Viewbox Margin="15,15,15,15">
+                <Grid
+                    Width="530"
+                    Height="190"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <Canvas
+                        x:Name="cvBarChart"
+                        Width="455"
+                        Height="110"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="White" />
+                </Grid>
+            </Viewbox>
+        </Border>
+        <Border
+            Background="White"
+            CornerRadius="12"
+            x:Name="epekPiechrtview"
+            Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="1"
-            Margin="12,64,0,0" Grid.Row="1">
+            Margin="12,64,0,0">
             <Border.Effect>
                 <DropShadowEffect
                     BlurRadius="20"
@@ -271,143 +287,148 @@
                     ShadowDepth="5"
                     Color="{StaticResource ColorSoftGrey1}" />
             </Border.Effect>
-            <Border
-                x:Name="piechrtview"
-                Width="207"
-                HorizontalAlignment="Left"
-                Background="White"
-                BorderThickness="1"
-                CornerRadius="10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="19" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="24" />
-                    </Grid.RowDefinitions>
-                    <Label
-                        x:Name="lblPieChartTitle"
-                        Grid.Row="1"
-                        Padding="5,5,5,2"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Content="Total Revenue"
-                        FontSize="18"
-                        Foreground="{StaticResource BrushBlack}"
-                        Style="{StaticResource SubTitlePreset}" />
-                    <Label
-                        x:Name="lblPieChart"
-                        Grid.Row="2"
-                        Margin="0,0,0,10"
-                        Padding="5,2,5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Content="0"
-                        FontSize="16"
-                        Style="{StaticResource CommonTitlePreset}" />
-                    <Canvas
-                        x:Name="cvPieChart"
-                        Grid.Row="3"
-                        Width="175"
-                        Height="175"
-                        Margin="0,15,0,15"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Background="White">
-                        <Path Fill="LightGray">
-                            <Path.Data>
-                                <EllipseGeometry
-                                    x:Name="cvPieCircle"
-                                    Center="87.5, 87.5"
-                                    RadiusX="87"
-                                    RadiusY="87" />
-                            </Path.Data>
-                        </Path>
-                    </Canvas>
-                    <Grid
-                        Grid.Row="3"
-                        Width="90"
-                        Height="90"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                        <Ellipse Fill="White" />
-                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label
-                                x:Name="lblPercent"
-                                Grid.Row="0"
-                                Padding="0,0,0,0"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                Content="100%"
-                                FontSize="18"
-                                FontWeight="Bold"
-                                Foreground="{StaticResource ResourceKey=BrushBlack}"
-                                Style="{StaticResource SubTitlePreset}" />
-                            <Label
-                                x:Name="lblMonth"
-                                Grid.Row="1"
-                                Padding="0,0,0,0"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                Content="JAN"
-                                FontSize="12"
-                                Style="{StaticResource SubTitlePreset}" />
-                        </Grid>
-                    </Grid>
-                    <StackPanel
-                        Grid.Row="4"
-                        Margin="0,15,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal">
-                        <Button
-                            x:Name="btnPieBackward"
-                            Width="30"
-                            Height="30"
-                            Margin="0,0,12,0"
-                            Click="btnPieBackward_Click"
-                            Style="{DynamicResource CommonButtonStyle}">
-                            <Path
-                                Data="M7,14 L0,7 7,0"
-                                Stroke="{StaticResource BrushBlack}"
-                                StrokeThickness="3" />
-                        </Button>
-                        <Button
-                            x:Name="btnPieForward"
-                            Width="30"
-                            Height="30"
-                            Margin="12,0,0,0"
-                            Click="btnPieForward_Click"
-                            IsEnabled="False"
-                            Style="{DynamicResource CommonButtonStyle}">
-                            <Path
-                                Data="M0,0 L7,7 0,14"
-                                Stroke="{StaticResource BrushBlack}"
-                                StrokeThickness="3" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </Border>
 
         </Border>
+        <Border
+            x:Name="piechrtview"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Width="207"
+            Margin="12,64,0,0"
+            HorizontalAlignment="Left"
+            Background="White"
+            BorderThickness="1"
+            CornerRadius="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="19" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="24" />
+                </Grid.RowDefinitions>
+                <Label
+                    x:Name="lblPieChartTitle"
+                    Grid.Row="1"
+                    Padding="5,5,5,2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Content="Total Revenue"
+                    FontSize="18"
+                    Foreground="{StaticResource BrushBlack}"
+                    Style="{StaticResource SubTitlePreset}" />
+                <Label
+                    x:Name="lblPieChart"
+                    Grid.Row="2"
+                    Margin="0,0,0,10"
+                    Padding="5,2,5,5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Content="0"
+                    FontSize="16"
+                    Style="{StaticResource CommonTitlePreset}" />
+                <Canvas
+                    x:Name="cvPieChart"
+                    Grid.Row="3"
+                    Width="175"
+                    Height="175"
+                    Margin="0,15,0,15"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Path Fill="LightGray">
+                        <Path.Data>
+                            <EllipseGeometry
+                                x:Name="cvPieCircle"
+                                Center="87.5, 87.5"
+                                RadiusX="87"
+                                RadiusY="87" />
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+                <Grid
+                    Grid.Row="3"
+                    Width="90"
+                    Height="90"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <Ellipse Fill="White" />
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            x:Name="lblPercent"
+                            Grid.Row="0"
+                            Padding="0,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Content="100%"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="{StaticResource ResourceKey=BrushBlack}"
+                            Style="{StaticResource SubTitlePreset}" />
+                        <Label
+                            x:Name="lblMonth"
+                            Grid.Row="1"
+                            Padding="0,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Content="JAN"
+                            FontSize="12"
+                            Style="{StaticResource SubTitlePreset}" />
+                    </Grid>
+                </Grid>
+                <StackPanel
+                    Grid.Row="4"
+                    Margin="0,15,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="btnPieBackward"
+                        Width="30"
+                        Height="30"
+                        Margin="0,0,12,0"
+                        Click="btnPieBackward_Click"
+                        Style="{DynamicResource CommonButtonStyle}">
+                        <Path
+                            Data="M7,14 L0,7 7,0"
+                            Stroke="{StaticResource BrushBlack}"
+                            StrokeThickness="3" />
+                    </Button>
+                    <Button
+                        x:Name="btnPieForward"
+                        Width="30"
+                        Height="30"
+                        Margin="12,0,0,0"
+                        Click="btnPieForward_Click"
+                        IsEnabled="False"
+                        Style="{DynamicResource CommonButtonStyle}">
+                        <Path
+                            Data="M0,0 L7,7 0,14"
+                            Stroke="{StaticResource BrushBlack}"
+                            StrokeThickness="3" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
         <Canvas
+            Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="1"
             Width="207"
             Height="40"
             Margin="12,0,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" Grid.Row="1">
+            VerticalAlignment="Top">
             <Grid>
                 <Button
                     x:Name="epektos"

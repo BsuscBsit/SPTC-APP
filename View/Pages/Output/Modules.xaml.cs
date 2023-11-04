@@ -239,7 +239,7 @@ namespace SPTC_APP.View.Pages.Output
         {
             selectedPayment = null;
             lblSelectedLedger.Content = "N/A";
-            btnDeletePayment.Visibility = Visibility.Collapsed;
+            btnDeletePayment.IsEnabled = false;
             if(module == gridLedger)
             {
                 if(dgLedger.SelectedItem is PaymentDetails<Ledger.ShareCapital> sc)
@@ -247,21 +247,21 @@ namespace SPTC_APP.View.Pages.Output
                     lblSelectedLedger.Content = "ref no.: " + sc.referenceNo;
                     selectedPayment = sc;
                     if (AppState.USER.position?.accesses[13] ?? false)
-                        btnDeletePayment.Visibility = Visibility.Visible;
+                        btnDeletePayment.IsEnabled = true;
                 }
                 else if (dgLedger.SelectedItem is PaymentDetails<Ledger.Loan> l)
                 {
                     lblSelectedLedger.Content = "ref no.: " + l.referenceNo;
                     selectedPayment = l;
                     if (AppState.USER.position?.accesses[14] ?? false)
-                        btnDeletePayment.Visibility = Visibility.Visible;
+                        btnDeletePayment.IsEnabled = true;
                 }
                 else if (dgLedger.SelectedItem is PaymentDetails<Ledger.LongTermLoan> ltl)
                 {
                     lblSelectedLedger.Content = "ref no.: " + ltl.referenceNo;
                     selectedPayment = ltl;
                     if (AppState.USER.position?.accesses[15] ?? false)
-                        btnDeletePayment.Visibility = Visibility.Visible;
+                        btnDeletePayment.IsEnabled = true;
                 }
             }
         }

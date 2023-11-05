@@ -9,6 +9,7 @@ using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
 using SPTC_APP.View.Pages.Input;
+using SPTC_APP.View.Styling;
 
 namespace SPTC_APP.View.Pages.Output
 {
@@ -27,14 +28,14 @@ namespace SPTC_APP.View.Pages.Output
             this.table = table;
             if (table == Table.FRANCHISE && (AppState.USER?.position?.accesses[2] ?? false))
             {
+                lblAddBtn.Content = "Add Franchise";
                 btnAdd.Visibility = Visibility.Visible;
-                btnAdd.Content = "ADD FRANCHISE";
                 
             }
             else if (table == Table.DRIVER && (AppState.USER?.position?.accesses[0] ?? false))
             {
+                lblAddBtn.Content = "Add Driver";
                 btnAdd.Visibility = Visibility.Visible;
-                btnAdd.Content = "ADD DRIVER";
             }
             else
             {
@@ -48,7 +49,7 @@ namespace SPTC_APP.View.Pages.Output
         private void UpdateDefaultSidePanel()
         {
 
-            franchiseInformation.Visibility = Visibility.Collapsed;
+            franchiseInformation.AnimateWidth(0, 0.3);
             if (table == Table.FRANCHISE)
             {
                 btnManage.Visibility = Visibility.Visible;
@@ -379,7 +380,7 @@ namespace SPTC_APP.View.Pages.Output
                 btnAddLTLoan.Visibility = Visibility.Collapsed;
             }
 
-            franchiseInformation.Visibility = Visibility.Visible;
+            franchiseInformation.AnimateWidth(264, 0.3);
         }
 
         private void ValuePairFI(Label lblF, string name, Label lblI, string value)

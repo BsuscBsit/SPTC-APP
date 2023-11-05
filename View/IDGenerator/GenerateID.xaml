@@ -7,13 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Generate ID"
     Width="770"
+    Height="550"
     ContentRendered="Window_ContentRendered"
     Icon="..\..\View\Images\icons\logo.ico"
     KeyboardNavigation.TabNavigation="Continue"
+    Loaded="Window_Loaded"
     ResizeMode="NoResize"
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" Loaded="Window_Loaded" Height="550">
+    mc:Ignorable="d">
     <Grid x:Name="printable">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -56,7 +58,10 @@
                     VerticalAlignment="Top"
                     Content="Please fill up the required information."
                     Style="{StaticResource SubTitlePreset}" />
-                <Grid x:Name="fields" Grid.Row="1" Margin="7,0,0,0">
+                <Grid
+                    x:Name="fields"
+                    Grid.Row="1"
+                    Margin="7,0,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="140" />
@@ -81,9 +86,10 @@
                         </Grid.ColumnDefinitions>
                         <Label
                             Grid.Column="0"
+                            Margin="5,0,0,0"
                             Content="Required"
                             FontSize="12"
-                            Style="{StaticResource SubTitlePreset}" Margin="5,0,0,0" />
+                            Style="{StaticResource SubTitlePreset}" />
                         <Rectangle
                             Grid.Column="1"
                             Height="1"
@@ -105,12 +111,13 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="140"
-                        Height="31"
+                        Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
                         GotFocus="TextBoxGotFocus_Yey"
+                        KeyDown="TextBox_KeyDown"
                         Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="0" KeyDown="TextBox_KeyDown"/>
+                        TabIndex="0" />
                     <Label
                         Grid.Row="2"
                         Margin="20,0,0,0"
@@ -123,13 +130,15 @@
                         x:Name="tboxMn"
                         Grid.Row="2"
                         Grid.Column="1"
-                        Height="31"
+                        Width="140"
+                        Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
                         GotFocus="TextBoxGotFocus_Yey"
+                        KeyDown="TextBox_KeyDown"
                         Style="{DynamicResource CommonTextBoxStyle}"
                         TabIndex="1"
-                        Text="" KeyDown="TextBox_KeyDown" Width="140" />
+                        Text="" />
                     <Label
                         Grid.Row="3"
                         Grid.Column="0"
@@ -144,33 +153,37 @@
                         x:Name="tboxLn"
                         Grid.Row="3"
                         Grid.Column="1"
-                        Height="31"
+                        Width="140"
+                        Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
                         GotFocus="TextBoxGotFocus_Yey"
+                        KeyDown="TextBox_KeyDown"
                         Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="2" KeyDown="TextBox_KeyDown" Width="140" />
+                        TabIndex="2" />
                     <Label
                         x:Name="lblH1"
                         Grid.Row="7"
                         Grid.Column="0"
                         Height="18"
                         Margin="20,0,0,0"
+                        Padding="0,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Content="Sex:"
-                        Style="{StaticResource TextFieldLabelingPreset}" Padding="0,0,0,0" />
+                        Style="{StaticResource TextFieldLabelingPreset}" />
                     <ComboBox
                         x:Name="cbGender"
                         Grid.Row="7"
                         Grid.Column="1"
-                        Height="31"
+                        Width="140"
+                        Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
                         IsReadOnly="True"
                         IsTabStop="False"
                         SelectedIndex="0"
-                        Style="{DynamicResource CommonComboBox}" Width="140">
+                        Style="{DynamicResource CommonComboBox}">
                         <ComboBoxItem Content="MALE" />
                         <ComboBoxItem Content="FEMALE" />
                     </ComboBox>
@@ -180,26 +193,28 @@
                         Grid.Column="0"
                         Height="18"
                         Margin="20,0,0,0"
+                        Padding="0,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Content="Date of Birth:"
-                        Style="{StaticResource TextFieldLabelingPreset}" Padding="0,0,0,0" />
+                        Style="{StaticResource TextFieldLabelingPreset}" />
                     <Border
                         x:Name="grpBday"
                         Grid.Row="8"
                         Grid.Column="1"
-                        Height="33"
+                        Width="140"
+                        Height="30"
                         Margin="0,4,0,4"
                         Padding="5,0,5,0"
                         VerticalAlignment="Center"
                         Background="White"
-                        BorderBrush="Gray"
+                        BorderBrush="{StaticResource BrushGrey}"
                         BorderThickness="1"
-                        CornerRadius="5" Width="140">
+                        CornerRadius="5">
                         <DatePicker
                             x:Name="bDay"
                             Grid.Column="1"
-                            Height="31"
+                            Height="30"
                             VerticalContentAlignment="Center"
                             BorderThickness="0"
                             IsTabStop="False"
@@ -219,13 +234,15 @@
                         x:Name="tboxLnum"
                         Grid.Row="5"
                         Grid.Column="1"
-                        Height="31"
+                        Width="140"
+                        Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
                         GotFocus="TextBoxGotFocus_Yey"
+                        KeyDown="TextBox_KeyDown"
                         Style="{DynamicResource CommonTextBoxStyle}"
                         TabIndex="4"
-                        Text="" KeyDown="TextBox_KeyDown" Width="140" />
+                        Text="" />
                     <Grid
                         Grid.Row="6"
                         Grid.ColumnSpan="2"
@@ -236,9 +253,10 @@
                         </Grid.ColumnDefinitions>
                         <Label
                             Grid.Column="0"
+                            Margin="5,0,0,0"
                             Content="Additional Information (Optional)"
                             FontSize="12"
-                            Style="{StaticResource SubTitlePreset}" Margin="5,0,0,0" />
+                            Style="{StaticResource SubTitlePreset}" />
                         <Rectangle
                             Grid.Column="1"
                             Height="1"
@@ -258,53 +276,61 @@
                         x:Name="tboxBnum"
                         Grid.Row="4"
                         Grid.Column="1"
-                        Height="31"
+                        Width="140"
+                        Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
                         GotFocus="TextBoxGotFocus_Yey"
+                        KeyDown="TextBox_KeyDown"
                         Style="{DynamicResource CommonTextBoxStyle}"
                         TabIndex="3"
-                        Text="" KeyDown="TextBox_KeyDown" Width="140" />
+                        Text="" />
                     <Label
                         x:Name="lblH3"
                         Grid.Row="9"
                         Height="18"
                         Margin="20,0,0,0"
+                        Padding="0,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Content="House No, &amp; Street:"
-                        Style="{StaticResource TextFieldLabelingPreset}" Padding="0,0,0,0" />
+                        Style="{StaticResource TextFieldLabelingPreset}" />
                     <TextBox
                         x:Name="tboxAddressB"
                         Grid.Row="9"
                         Grid.Column="1"
-                        Height="31"
+                        Width="140"
+                        Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
                         GotFocus="TextBoxGotFocus_Yey"
+                        KeyDown="TextBox_KeyDown"
                         Style="{DynamicResource CommonTextBoxStyle}"
                         TabIndex="5"
-                        Text="" KeyDown="TextBox_KeyDown" Width="140" />
+                        Text="" />
                     <Label
                         x:Name="lblH4"
                         Grid.Row="10"
                         Grid.Column="0"
                         Height="18"
                         Margin="20,0,0,0"
+                        Padding="0,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Content="Brgy, City, &amp; Province:"
-                        Style="{StaticResource TextFieldLabelingPreset}" Padding="0,0,0,0" />
+                        Style="{StaticResource TextFieldLabelingPreset}" />
                     <TextBox
                         x:Name="tboxAddressS"
                         Grid.Row="10"
                         Grid.Column="1"
-                        Height="31"
+                        Width="140"
+                        Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
                         GotFocus="TextBoxGotFocus_Yey"
+                        KeyDown="TextBox_KeyDown"
                         Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="6" KeyDown="TextBox_KeyDown" Width="140" />
+                        TabIndex="6" />
 
                 </Grid>
             </Grid>
@@ -393,16 +419,16 @@
                                 <SolidColorBrush Color="{DynamicResource ColorBlack}" />
                             </Border.BorderBrush>
                             <Grid Width="200" Height="108">
-                                <Viewbox Height="100" x:Name="vbSignPH">
+                                <Viewbox x:Name="vbSignPH" Height="100">
                                     <ContentControl Margin="0,15,0,15" Content="{StaticResource SignaturePH}" />
                                 </Viewbox>
                                 <Viewbox>
                                     <Image
-                                            x:Name="imgSignPic"
-                                            Width="400"
-                                            Height="208"
-                                            Stretch="Fill"
-                                            Visibility="Visible" />
+                                        x:Name="imgSignPic"
+                                        Width="400"
+                                        Height="208"
+                                        Stretch="Fill"
+                                        Visibility="Visible" />
 
                                 </Viewbox>
                             </Grid>
@@ -439,24 +465,28 @@
                 x:Name="btnCancel"
                 Grid.Row="1"
                 Grid.Column="2"
+                Width="178"
                 Height="40"
                 Margin="0,0,0,4"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 Click="btnCancel_Click"
                 Content="CANCEL"
                 Style="{DynamicResource CommonButtonStyle}"
-                TabIndex="10" Width="178" HorizontalAlignment="Center" />
+                TabIndex="10" />
             <Button
                 x:Name="btnSave"
                 Grid.Row="1"
                 Grid.Column="4"
+                Width="178"
                 Height="40"
                 Margin="0,0,0,4"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 Click="btnPreview_Click"
                 Content="PREVIEW"
                 Style="{DynamicResource CommonButtonStyle}"
-                TabIndex="11" Width="178" HorizontalAlignment="Center" />
+                TabIndex="11" />
             <StackPanel
                 Grid.Row="1"
                 Grid.Column="4"
@@ -471,14 +501,18 @@
                     Height="33"
                     Background="Transparent"
                     Checked="MySwitch_Back"
+                    IsEnabled="False"
                     Style="{DynamicResource ToggleButtonStyle}"
                     TabIndex="9"
-                    Unchecked="MySwitch_Front" IsEnabled="False" />
+                    Unchecked="MySwitch_Front" />
                 <Label
                     x:Name="drvOrOprt"
                     Margin="10,0,0,0"
+                    Padding="5,0,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     Content="Create this ID for&#xA;Driver."
-                    Style="{StaticResource TextFieldLabelingPreset}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0,0,0" />
+                    Style="{StaticResource TextFieldLabelingPreset}" />
             </StackPanel>
         </Grid>
 

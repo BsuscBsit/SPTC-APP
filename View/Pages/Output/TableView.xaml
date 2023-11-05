@@ -1,161 +1,324 @@
-﻿<Window x:Class="SPTC_APP.View.Pages.Output.TableView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SPTC_APP.View.Pages.Output"
-        mc:Ignorable="d"
-        Title="TableView">
+﻿<Window
+    x:Class="SPTC_APP.View.Pages.Output.TableView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SPTC_APP.View.Pages.Output"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="TableView"
+    mc:Ignorable="d">
 
     <Grid x:Name="franchisePanel">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="64" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" Grid.Column="0" x:Name="TableGrid" Margin="0,0,0,12" MinWidth="400">
-            <DataGrid.Resources>
-                <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="FontFamily" Value="Arial"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="FontSize" Value="10"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                </Style>
-            </DataGrid.Resources>
-        </DataGrid>
+        <Button
+            x:Name="btnAdd"
+            Width="250"
+            Height="30"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Background="#FF4B0202"
+            Click="btnAddClick"
+            Style="{DynamicResource CommonButtonStyle}"
+            Visibility="Visible">
+            <StackPanel Orientation="Horizontal">
+                <Path
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Data="M0,7 H14 M7,0 V14"
+                    Stroke="{StaticResource BrushBlack}"
+                    StrokeThickness="1" />
+                <Label
+                    x:Name="lblAddBtn"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="Add Record" />
+            </StackPanel>
+        </Button>
 
-        <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="franchiseInformation" Background="White" Visibility="Visible" Margin="10">
-            <Ellipse Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" StrokeThickness="1" Stroke="Black" >
-                <Ellipse.Fill>
-                    <ImageBrush x:Name="imgUserProfilePic" ImageSource="/SPTC APP;component/View/Images/icons/person.png"/>
-                </Ellipse.Fill>
-            </Ellipse>
-            <Label x:Name="lblF1" Content="" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                       FontWeight="Medium"
-                        FontSize="9"
-                       Foreground="DarkGray"/>
-            <Label x:Name="lblF2" Content="" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                    FontWeight="Medium"
-                    FontSize="9"
-                    Foreground="DarkGray"/>
-            <Label x:Name="lblF3" Content="" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                    FontWeight="Medium"
-                    FontSize="9"
-                    Foreground="DarkGray"/>
-            <Label x:Name="lblF4" Content="" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                    FontWeight="Medium"
-                    FontSize="9"
-                    Foreground="DarkGray"/>
-            <Label x:Name="lblF7" Content="" HorizontalAlignment="Left" Margin="10,268,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                FontWeight="Medium"
-                FontSize="9"
-                Foreground="DarkGray"/>
-            <Label x:Name="lblF5" Content="" HorizontalAlignment="Left" Margin="10,216,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                    FontWeight="Medium"
-                    FontSize="9"
-                    Foreground="DarkGray"/>
-            <Label x:Name="lblF6" Content="" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                    FontWeight="Medium"
-                    FontSize="9"
-                    Foreground="DarkGray"/>
-            <Rectangle Height="1" Margin="0,145,0,0" Stroke="LightGray" VerticalAlignment="Top" />
-            <Label x:Name="lblI1" Content="" HorizontalAlignment="Left" Margin="85,81,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                       Foreground="Black"
-                       FontWeight="DemiBold"
-                       FontFamily="Arial"
-                       FontStretch="SemiExpanded"
-                       FontSize="9"/>
-            <Label x:Name="lblI2" Content="" HorizontalAlignment="Left" Margin="85,112,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                    Foreground="Black"
-                    FontWeight="DemiBold"
-                    FontFamily="Arial"
-                    FontStretch="SemiExpanded"
-                    FontSize="9"/>
-            <Label x:Name="lblI3"  Content="" HorizontalAlignment="Left" Margin="85,163,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                    Foreground="Black"
-                    FontWeight="DemiBold"
-                    FontFamily="Arial"
-                    FontStretch="SemiExpanded"
-                    FontSize="9"/>
-            <Label x:Name="lblI4"  Content="" HorizontalAlignment="Left" Margin="85,192,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                    Foreground="Black"
-                    FontWeight="DemiBold"
-                    FontFamily="Arial"
-                    FontStretch="SemiExpanded"
-                    FontSize="9"/>
-            <Label x:Name="lblI7"  Content="" HorizontalAlignment="Left" Margin="85,270,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                FontFamily="Arial"
-                FontStretch="SemiExpanded"
-                FontSize="9"/>
+        <Grid Grid.Row="1">
+            <Border Background="White" CornerRadius="12">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="20"
+                        Direction="-90"
+                        ShadowDepth="5"
+                        Color="{StaticResource ColorSoftGrey1}" />
+                </Border.Effect>
 
-            <Label x:Name="lblI5" Content="" HorizontalAlignment="Left" Margin="85,216,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                    Foreground="Black"
-                    FontWeight="DemiBold"
-                    FontFamily="Helvetica"
-                    FontStretch="SemiExpanded"
-                    FontSize="9"/>
-            <Label x:Name="lblI6" Content="" HorizontalAlignment="Left" Margin="85,248,0,0" VerticalAlignment="Top" Visibility="Hidden"
-                    Foreground="Black"
-                    FontWeight="DemiBold"
-                    FontFamily="Helvetica"
-                    FontStretch="SemiExpanded"
-                    FontSize="9"/>
+            </Border>
+            <Border
+                Padding="15,15,15,15"
+                Background="White"
+                CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-            <Grid Margin="8,0,0,10" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Button x:Name="btnManage" Style="{DynamicResource CommonButtonStyle}" Content="MANAGE" Grid.Row="0" Margin="5" Visibility="Collapsed"
-                        Width="150"
-                        FontWeight="Bold"
-                        Background="Yellow" Click="btnManage_Click"/>
-                <Button x:Name="btnEditProfile" Style="{DynamicResource CommonButtonStyle}" Content="EDIT PROFILE" Grid.Row="1" Margin="5" Visibility="Collapsed"
-                        Width="150"
-                        FontWeight="Bold"
-                        Background="White" Click="btnEditProfile_Click" />
-                <Button x:Name="btnGenerateid" Style="{DynamicResource CommonButtonStyle}" Content="GENERATE ID" Grid.Row="2" Margin="5" Visibility="Collapsed"
-                        Width="150"
-                        FontWeight="Bold"
-                        Background="White" Click="btnGenerateid_Click" />
-                <Button x:Name="btnAddViolation" Style="{DynamicResource CommonButtonStyle}" Content="ADD VIOLATION" Grid.Row="3" Margin="5,5,0,5" Visibility="Collapsed"
-                        Width="150"
-                        FontWeight="Bold"
-                        Background="White" HorizontalAlignment="Left" Click="btnAddViolation_Click" />
-                <Button x:Name="btnAddShareCapital" Style="{DynamicResource CommonButtonStyle}" Content="PAY SHARE CAPITAL" Grid.Row="4" Margin="5" Visibility="Collapsed"
-                    Width="150"
-                    FontWeight="Bold"
-                    FontSize="12"
-                    Background="Yellow" Click="btnAddShareCapital_Click"/>
-                <Button x:Name="btnAddLoan" Style="{DynamicResource CommonButtonStyle}" Content="PAY LOAN" Grid.Row="5" Margin="5" Visibility="Collapsed"
-                    Width="150"
-                    FontWeight="Bold"
-                    FontSize="12"
-                    Background="Yellow" Click="btnAddLoan_Click"/>
-                <Button x:Name="btnAddLTLoan" Style="{DynamicResource CommonButtonStyle}" Content="PAY LT LOAN" Grid.Row="6" Margin="5" Visibility="Collapsed"
-                    Width="150"
-                    FontWeight="Bold"
-                    FontSize="12"
-                    Background="Yellow" Click="btnAddLTLoan_Click"/>
-            </Grid>
+                    <DataGrid
+                        x:Name="TableGrid"
+                        MinWidth="400">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="FontFamily" Value="Arial" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="FontSize" Value="10" />
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Style>
+                        </DataGrid.Resources>
+                    </DataGrid>
+
+                </Grid>
+            </Border>
+
         </Grid>
 
-        <Grid Grid.Row="1" Background="Black" Grid.ColumnSpan="1">
-        <Button x:Name="btnAdd" Content="ADD" Style="{DynamicResource ControlledButtonStyle}" HorizontalAlignment="Left" Width="120" Height="26"
-                    FontFamily="hevitica "
-                    FontWeight="ExtraBold"
-                    Visibility="Visible"
-                    FontSize="10"
-                    Background="Yellow" Click="btnAddClick" Grid.Row="1" Grid.ColumnSpan="2" Margin="20,6,0,6"
-                    />
+        <Grid
+            x:Name="franchiseInformation"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="0">
+            <Border
+                MaxWidth="240"
+                Margin="24,0,0,0"
+                Background="White"
+                CornerRadius="12">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="20"
+                        Direction="-90"
+                        ShadowDepth="5"
+                        Color="{StaticResource ColorSoftGrey1}" />
+                </Border.Effect>
+
+            </Border>
+            <Border
+                MaxWidth="240"
+                Margin="24,0,0,0"
+                Padding="12,15,12,7"
+                Background="White"
+                CornerRadius="10">
+                <Grid Width="240">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Ellipse
+                        Grid.Row="0"
+                        Grid.ColumnSpan="2"
+                        Width="70"
+                        Height="70"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <Ellipse.Fill>
+                            <ImageBrush x:Name="imgUserProfilePic" ImageSource="/SPTC APP;component/View/Images/icons/person.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Rectangle
+                        Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        Height="1"
+                        VerticalAlignment="Top"
+                        Stroke="{StaticResource BrushGrey}" />
+                    <Label
+                        x:Name="lblF1"
+                        Grid.Row="1"
+                        Grid.RowSpan="1"
+                        Content="Label1"
+                        Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblF2"
+                        Grid.Row="2"
+                        Grid.RowSpan="1"
+                        Grid.ColumnSpan="1"
+                        Content="Label2"
+                        Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblF3"
+                        Grid.Row="3"
+                        Content="Label3"
+                        Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblF4"
+                        Grid.Row="5"
+                        Content="Label4"
+                        Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblF5"
+                        Grid.Row="6"
+                        Grid.RowSpan="1"
+                        Grid.ColumnSpan="1"
+                        Content="Label5"
+                        Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblF6"
+                        Grid.Row="7"
+                        Grid.RowSpan="1"
+                        Grid.ColumnSpan="1"
+                        Content="Label6"
+                        Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblF7"
+                        Grid.Row="8"
+                        Grid.ColumnSpan="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="Label7"
+                        Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblI1"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Content="c1"
+                        FontWeight="Normal"
+                        Foreground="Black"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblI2"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Content="c2"
+                        FontWeight="Normal"
+                        Foreground="Black"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblI3"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Content="c3"
+                        FontWeight="Normal"
+                        Foreground="Black"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblI4"
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Content="c4"
+                        FontWeight="Normal"
+                        Foreground="Black"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblI5"
+                        Grid.Row="6"
+                        Grid.Column="1"
+                        Content="c5"
+                        FontWeight="Normal"
+                        Foreground="Black"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblI6"
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        Content="c6"
+                        FontWeight="Normal"
+                        Foreground="Black"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblI7"
+                        Grid.Row="8"
+                        Grid.Column="1"
+                        Content="c7"
+                        FontWeight="Normal"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <StackPanel
+                        Grid.Row="9"
+                        Grid.ColumnSpan="2"
+                        VerticalAlignment="Bottom">
+                        <Button
+                            x:Name="btnManage"
+                            Width="180"
+                            Height="30"
+                            Margin="0,0,0,7"
+                            Click="btnManage_Click"
+                            Content="Manage"
+                            Style="{DynamicResource CommonButtonStyle}"
+                            Visibility="Collapsed" />
+                        <Button
+                            x:Name="btnEditProfile"
+                            Width="180"
+                            Height="30"
+                            Margin="0,0,0,7"
+                            Click="btnEditProfile_Click"
+                            Content="Edit Profile"
+                            Style="{DynamicResource CommonButtonStyle}"
+                            Visibility="Collapsed" />
+                        <Button
+                            x:Name="btnGenerateid"
+                            Width="180"
+                            Height="30"
+                            Margin="0,0,0,7"
+                            Click="btnGenerateid_Click"
+                            Content="Generate ID"
+                            Style="{DynamicResource CommonButtonStyle}"
+                            Visibility="Collapsed" />
+                        <Button
+                            x:Name="btnAddViolation"
+                            Width="180"
+                            Height="30"
+                            Margin="0,0,0,7"
+                            Click="btnAddViolation_Click"
+                            Content="Add Violation"
+                            Style="{DynamicResource CommonButtonStyle}"
+                            Visibility="Collapsed" />
+                        <Button
+                            x:Name="btnAddShareCapital"
+                            Width="180"
+                            Height="30"
+                            Margin="0,0,0,7"
+                            Click="btnAddShareCapital_Click"
+                            Content="Pay Share Capital"
+                            Style="{DynamicResource CommonButtonStyle}"
+                            Visibility="Collapsed" />
+                        <Button
+                            x:Name="btnAddLoan"
+                            Width="180"
+                            Height="30"
+                            Margin="0,0,0,7"
+                            Click="btnAddLoan_Click"
+                            Content="Pay Loan"
+                            Style="{DynamicResource CommonButtonStyle}"
+                            Visibility="Collapsed" />
+                        <Button
+                            x:Name="btnAddLTLoan"
+                            Width="180"
+                            Height="30"
+                            Margin="0,0,0,7"
+                            Click="btnAddLTLoan_Click"
+                            Content="Pay LT Loan"
+                            Style="{DynamicResource CommonButtonStyle}"
+                            Visibility="Collapsed" />
+                    </StackPanel>
+                </Grid>
+
+            </Border>
         </Grid>
     </Grid>
 </Window>

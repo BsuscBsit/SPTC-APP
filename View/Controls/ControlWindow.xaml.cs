@@ -47,7 +47,7 @@ namespace SPTC_APP.View
                 control.SetIcon(icons);
                 control.lblHeader.Content = header;
                 control.tblockContent.Text = content;
-                control.Show();
+                control.ShowDialog();
             });
             //return control;
         }
@@ -145,6 +145,7 @@ namespace SPTC_APP.View
             }
             this.Close();
         }
+
     }
 
     public enum Icons

@@ -239,6 +239,10 @@
     <Compile Include="View\Controls\DraggingHelper.cs" />
     <Compile Include="View\Controls\OutlinedText.cs" />
     <Compile Include="View\Controls\Scaler.cs" />
+    <Compile Include="View\Controls\TextBoxHelper.cs" />
+    <Compile Include="View\Controls\Toast.xaml.cs">
+      <DependentUpon>Toast.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\ToolTipHelper.cs" />
     <Compile Include="View\Controls\WindowStateHelper.cs" />
     <Compile Include="View\IDGenerator\Extra\SignPad.xaml.cs">
@@ -323,6 +327,9 @@
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Styling\AnimationHelper.cs" />
+    <Compile Include="View\Styling\StyleTester.xaml.cs">
+      <DependentUpon>StyleTester.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
@@ -354,6 +361,10 @@
     <Page Include="View\Controls\ControlWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\Toast.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\IDGenerator\Extra\SignPad.xaml">
       <SubType>Designer</SubType>
@@ -476,6 +487,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Styling\IconResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Styling\StyleTester.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

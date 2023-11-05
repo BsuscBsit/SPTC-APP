@@ -45,6 +45,7 @@ namespace SPTC_APP.View.Pages.Input
                 tboxAmount.Text = franchise.GetLoans().FirstOrDefault().paymentDues.ToString("0.00");
             }
             DraggingHelper.DragWindow(topBar);
+            tboxAmount.Focus();
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -98,6 +99,28 @@ namespace SPTC_APP.View.Pages.Input
                 {
 
                 }
+            }
+        }
+
+        private void TextBox_GotFucus(object sender, RoutedEventArgs e)
+        {
+            if(sender is TextBox tbox)
+            {
+                if(tbox.Text.Length > 0)
+                {
+                    tbox.SelectAll();
+                }
+            }
+        }
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            // Define a regular expression that allows only letters and numbers
+            string pattern = @"[^0-9]+";
+
+            // Check if the input text matches the pattern
+            if (System.Text.RegularExpressions.Regex.IsMatch(e.Text, pattern))
+            {
+                e.Handled = true; // Cancel the input event
             }
         }
     }

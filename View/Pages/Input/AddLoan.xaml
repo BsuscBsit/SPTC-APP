@@ -8,6 +8,7 @@
     Width="575"
     Height="355"
     AllowsTransparency="True"
+    KeyboardNavigation.TabNavigation="Continue"
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -64,12 +65,16 @@
             <DatePicker
                 x:Name="dpBdate"
                 Height="30"
-                VerticalAlignment="Center" BorderBrush="{x:Null}" BorderThickness="1,4,1,1"/>
+                VerticalAlignment="Center"
+                BorderBrush="{x:Null}"
+                BorderThickness="1,4,1,1"
+                TabIndex="0" />
         </Border>
         <Label
             x:Name="lblInterest"
             Grid.Row="5"
             Grid.Column="2"
+            Margin="0,15,0,0"
             HorizontalAlignment="Left"
             Content="Monthly Interest: "
             Style="{StaticResource TextFieldLabelingPreset}" />
@@ -82,12 +87,16 @@
             Margin="15,0,15,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            GotFocus="TextBox_GotFucus"
+            PreviewTextInput="TextBox_PreviewTextInput"
             Style="{StaticResource CommonTextBoxStyle}"
+            TabIndex="4"
             Text="" />
         <Label
             x:Name="lblTerms"
             Grid.Row="5"
             Grid.Column="1"
+            Margin="0,15,0,0"
             HorizontalAlignment="Left"
             Content="Penalty: "
             Style="{StaticResource TextFieldLabelingPreset}" />
@@ -99,7 +108,10 @@
             Height="30"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            GotFocus="TextBox_GotFucus"
+            PreviewTextInput="TextBox_PreviewTextInput"
             Style="{StaticResource CommonTextBoxStyle}"
+            TabIndex="3"
             Text="" />
         <Label
             Grid.Row="3"
@@ -116,7 +128,10 @@
             Margin="15,0,15,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            GotFocus="TextBox_GotFucus"
+            PreviewTextInput="TextBox_PreviewTextInput"
             Style="{StaticResource CommonTextBoxStyle}"
+            TabIndex="1"
             Text="" />
         <Label
             Grid.Row="3"
@@ -132,7 +147,10 @@
             Height="30"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            GotFocus="TextBox_GotFucus"
+            PreviewTextInput="TextBox_PreviewTextInput"
             Style="{StaticResource CommonTextBoxStyle}"
+            TabIndex="2"
             Text="" />
         <StackPanel
             Grid.Row="8"
@@ -146,7 +164,8 @@
                 Width="178"
                 Click="btnCancel_Click"
                 Content="CANCEL"
-                Style="{StaticResource CommonButtonStyle}" />
+                Style="{StaticResource CommonButtonStyle}"
+                TabIndex="5" />
 
             <Button
                 x:Name="btnSave"
@@ -154,7 +173,8 @@
                 Margin="15,0,0,0"
                 Click="btnSave_Click"
                 Content="SAVE"
-                Style="{StaticResource CommonButtonStyle}" />
+                Style="{StaticResource CommonButtonStyle}"
+                TabIndex="6" />
 
         </StackPanel>
 

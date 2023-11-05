@@ -1,0 +1,111 @@
+﻿<Window
+    x:Class="SPTC_APP.View.Styling.StyleTester"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SPTC_APP.View.Styling"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="StyleTester"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid x:Name="parentGrid" Margin="15,15,15,15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid
+            x:Name="Buttons"
+            Grid.Column="1"
+            Margin="12,0,0,0">
+            <Border Background="White" CornerRadius="15">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="25"
+                        Direction="-90"
+                        Opacity="0.2"
+                        ShadowDepth="10" />
+                </Border.Effect>
+            </Border>
+            <Border
+                Padding="15,15,15,15"
+                Background="White"
+                CornerRadius="15">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Button
+                        Width="200"
+                        Content="CommonButton"
+                        Style="{StaticResource CommonButtonStyle}" Click="Button_Click" />
+                </StackPanel>
+            </Border>
+
+        </Grid>
+        <Grid
+            x:Name="TextBoxes"
+            Margin="0,0,12,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <Border Background="White" CornerRadius="15">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="25"
+                        Direction="-90"
+                        Opacity="0.2"
+                        ShadowDepth="10" />
+                </Border.Effect>
+            </Border>
+            <Border
+                Padding="15,15,15,15"
+                Background="White"
+                CornerRadius="10">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Content="Text Boxes" Style="{StaticResource ResourceKey=SubTitlePreset}" />
+                    <TextBox
+                        x:Name="alpabets"
+                        Width="200"
+                        Height="30"
+                        Style="{StaticResource CommonTextBoxStyle}"
+                        Text="Alphabets" />
+                    <TextBox
+                        x:Name="signeddigit"
+                        Width="200"
+                        Height="30"
+                        Margin="0,5,0,0"
+                        Style="{StaticResource CommonTextBoxStyle}"
+                        Text="Signed Digits" />
+                    <TextBox
+                        x:Name="unsigneddigit"
+                        Width="200"
+                        Height="30"
+                        Margin="0,5,0,0"
+                        Style="{StaticResource CommonTextBoxStyle}"
+                        Text="Unsigned Digits" />
+                    <TextBox
+                        x:Name="alphanumeric"
+                        Width="200"
+                        Height="30"
+                        Margin="0,5,0,0"
+                        Style="{StaticResource CommonTextBoxStyle}"
+                        Text="Alphanumeric" />
+                    <TextBox
+                        x:Name="phonenumber"
+                        Width="200"
+                        Height="30"
+                        Margin="0,5,0,0"
+                        Style="{StaticResource CommonTextBoxStyle}"
+                        Text="Phone Number" />
+                    <TextBox
+                        x:Name="address"
+                        Width="200"
+                        Height="30"
+                        Margin="0,5,0,0"
+                        Style="{StaticResource CommonTextBoxStyle}"
+                        Text="Address" />
+
+                </StackPanel>
+
+            </Border>
+        </Grid>
+        <Grid x:Name="gridForToast" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>

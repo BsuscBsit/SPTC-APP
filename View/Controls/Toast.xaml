@@ -1,0 +1,40 @@
+﻿<Window
+    x:Class="SPTC_APP.View.Controls.Toast"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SPTC_APP.View.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Toast"
+    AllowsTransparency="True"
+    Background="Transparent"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Grid x:Name="parent">
+        <Grid
+            x:Name="gridToast"
+            Margin="0,0,0,24"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom" Opacity="0" Visibility="Hidden">
+            <Border Background="White" CornerRadius="11">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="20"
+                        Direction="-90"
+                        Opacity="0.7"
+                        ShadowDepth="5" />
+                </Border.Effect>
+            </Border>
+            <Border
+                Padding="10,5,10,5"
+                Background="White"
+                CornerRadius="7">
+                <Label
+                    x:Name="lblContent"
+                    Content="This is a toast message."
+                    Style="{StaticResource LabelFontMedium}" />
+            </Border>
+        </Grid>
+    </Grid>
+
+</Window>

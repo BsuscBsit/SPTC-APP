@@ -120,7 +120,5 @@ namespace SPTC_APP.View
             this.Close();
         }
 
-
-
     }
 }

@@ -129,7 +129,6 @@ namespace SPTC_APP.View.Pages.Output
                     dgLedger.Items.Add(tmp);
                 }
                 lblTotal.Content = "BALANCE :";
-                lblTotalLedger.Content = franchise.LongTermLoanBalance;
                 lblTotalLedger.Content = franchise.LongTermLoanBalance.ToString("0.00");
             }
             else if(strmod == HISTORY)

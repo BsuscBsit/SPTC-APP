@@ -129,7 +129,10 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
-        <Image Source="/View/Images/bg_login.png" Stretch="UniformToFill" Margin="-1,1,0,0">
+        <Image
+            Margin="-1,1,0,0"
+            Source="/View/Images/bg_login.png"
+            Stretch="UniformToFill">
             <Image.OpacityMask>
                 <VisualBrush>
                     <VisualBrush.Visual>
@@ -226,7 +229,8 @@
                             VerticalAlignment="Center"
                             Content="Password"
                             FontFamily="Cascadia Mono Light"
-                            Foreground="Gray" FontWeight="SemiBold" />
+                            FontWeight="SemiBold"
+                            Foreground="Gray" />
                         <Border
                             BorderBrush="Gray"
                             BorderThickness="1"

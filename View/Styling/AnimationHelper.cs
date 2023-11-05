@@ -17,8 +17,11 @@ namespace SPTC_APP.View.Styling
 
         public static void FadeOut(this UIElement element, double durationSeconds = 1, Action completedCallback = null)
         {
-            AnimateOpacity(element, element.Opacity, 0.0, durationSeconds, UIElement.OpacityProperty, completedCallback);
-            element.Visibility = Visibility.Hidden;
+            AnimateOpacity(element, element.Opacity, 0.0, durationSeconds, UIElement.OpacityProperty, () =>
+            {
+                element.Visibility = Visibility.Collapsed; // Set visibility after animation
+                completedCallback?.Invoke();
+            });
         }
 
         public static void FadeIn(this UIElement element, double durationSeconds = 1, Action beginningCallback = null, Action completedCallback = null)

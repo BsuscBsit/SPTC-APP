@@ -6,6 +6,7 @@ using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View;
 using SPTC_APP.View.Pages;
+using SPTC_APP.View.Styling;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,6 +48,7 @@ namespace SPTC_APP
         //Toggle on defore deploying
         public static bool isDeployment = false;
         public static bool isDeployment_IDGeneration = false;
+        public static bool isDesigner = false;
 
         public static Window mainwindow = null;
 
@@ -85,9 +87,16 @@ namespace SPTC_APP
                 }
                 if (!AppState.isDeployment_IDGeneration && !AppState.isDeployment)
                 {
-                    MainBody body = (new MainBody());
-                    AppState.mainwindow = body;
-                    body.Show();
+                    if (AppState.isDesigner)
+                    {
+                        (new StyleTester()).Show();
+                    }
+                    else
+                    {
+                        MainBody body = (new MainBody());
+                        AppState.mainwindow = body;
+                        body.Show();
+                    }
                     //(new Test()).Show();
                 }
 

@@ -128,6 +128,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgLedger.Items.Add(tmp);
                 }
+                lblTotal.Content = "BALANCE :";
                 lblTotalLedger.Content = franchise.LongTermLoanBalance;
             }
             else if(strmod == HISTORY)

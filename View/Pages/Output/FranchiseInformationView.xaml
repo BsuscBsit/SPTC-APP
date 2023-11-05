@@ -12,29 +12,31 @@
             <RowDefinition Height="64" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button
+        <Border VerticalAlignment="Center" Height="40" Width="271" HorizontalAlignment="Left" Background="{StaticResource BrushSoftGrey1}">
+            <Button
             x:Name="btnBack"
-            Grid.Row="0"
             Width="100"
             Height="30"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Click="btnBack_Click"
             Style="{StaticResource CommonButtonStyle}">
-            <Grid Width="100">
-                <Path
+                <Grid Width="100">
+                    <Path
                     Margin="15,0,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Data="M7,14 L0,7 7,0"
                     Stroke="{StaticResource BrushBlack}"
                     StrokeThickness="1" />
-                <Label
+                    <Label
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Content="Back" />
-            </Grid>
-        </Button>
+                </Grid>
+            </Button>
+
+        </Border>
         <Border
             x:Name="epek"
             Grid.Row="1"

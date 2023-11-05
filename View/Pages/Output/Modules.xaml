@@ -273,7 +273,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="91" />
+                <RowDefinition Height="42" />
             </Grid.RowDefinitions>
             <DataGrid
                 x:Name="dgLedger"

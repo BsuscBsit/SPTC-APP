@@ -21,6 +21,7 @@ namespace SPTC_APP.View.Pages.Output
         private string table;
         private Operator oholder;
         private Driver dholder;
+        public static DataGrid displayedTable = null;
 
         public TableView(string table)
         {
@@ -393,6 +394,7 @@ namespace SPTC_APP.View.Pages.Output
 
         public async Task<Grid> Fetch()
         {
+            TableView.displayedTable = TableGrid;
             Task task = UpdateTableAsync();
             await Task.Delay(1);
             if (franchisePanel.Parent != null)

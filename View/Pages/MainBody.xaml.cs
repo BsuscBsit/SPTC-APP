@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using SPTC_APP.Database;
@@ -156,71 +158,52 @@ namespace SPTC_APP.View.Pages
                 {
                     if (selectedButton != DashBoard)
                     {
-                        if(selectedButton == FranchiseButton && TablePanelSwap.Children.Count > 1)
+                        if (selectedButton == FranchiseButton && TablePanelSwap.Children.Count > 1)
                         {
                             GetFranchiseInList();
                         }
-                        if (TablePanelSwap.Children[0] is Grid grid)
+                        else if ((TableView.displayedTable) != null)
                         {
-                            if (grid.Children[0] is DataGrid datagrid)
+                            DataGrid datagrid = TableView.displayedTable;
+                            ICollectionView collectionView = CollectionViewSource.GetDefaultView(datagrid.Items);
+
+                            if (selectedButton == FranchiseButton)
                             {
-                                if (selectedButton == FranchiseButton)
+                                collectionView.Filter = item =>
                                 {
-                                    List<Franchise> franchises = new List<Franchise>();
-                                    foreach (Franchise f in datagrid.Items)
+                                    if (item is Franchise franchise)
                                     {
-                                        franchises.Add(f);
+                                        return franchise.BodyNumber.ToString().Contains(searchText) ||
+                                            (franchise.Operator?.ToString()?.ToLower()?.Contains(searchText) ?? false) ||
+                                            (franchise.Driver?.ToString()?.ToLower()?.Contains(searchText) ?? false);
                                     }
-
-                                    franchises = franchises.OrderByDescending(f =>
-                                        f.BodyNumber.ToString().Contains(searchText) ||
-                                        (f.Operator?.ToString()?.ToLower()?.Contains(searchText) ?? false) ||
-                                        (f.Driver?.ToString()?.ToLower()?.Contains(searchText) ?? false)
-                                        ).ThenBy(f => f.BodyNumber).ToList();
-                                    datagrid.Items.Clear();
-                                    foreach (Franchise f in franchises)
-                                    {
-                                        datagrid.Items.Add(f);
-                                    }
-                                }
-                                else if (selectedButton == OperatorButton)
-                                {
-                                    List<Operator> operators = new List<Operator>();
-                                    foreach (Operator o in datagrid.Items)
-                                    {
-                                        operators.Add(o);
-                                    }
-
-                                    operators = operators.OrderByDescending(o =>
-                                        (o.ToString()?.ToLower()?.Contains(searchText) ?? false)
-                                        ).ThenBy(o => o.ToString()).ToList();
-                                    datagrid.Items.Clear();
-                                    foreach (Operator o in operators)
-                                    {
-                                        datagrid.Items.Add(o);
-                                    }
-                                }
-                                else if (selectedButton == DriverButton)
-                                {
-                                    List<Driver> drivers = new List<Driver>();
-                                    foreach (Driver d in datagrid.Items)
-                                    {
-                                        drivers.Add(d);
-                                    }
-
-                                    drivers = drivers.OrderByDescending(d =>
-                                        (d.ToString()?.ToLower()?.Contains(searchText) ?? false)
-                                        ).ThenBy(o => o.ToString()).ToList();
-                                    datagrid.Items.Clear();
-                                    foreach (Driver d in drivers)
-                                    {
-                                        datagrid.Items.Add(d);
-                                    }
-                                }
+                                    return false;
+                                };
                             }
-                            
+                            else if (selectedButton == OperatorButton)
+                            {
+                                collectionView.Filter = item =>
+                                {
+                                    if (item is Operator op)
+                                    {
+                                        return op.ToString()?.ToLower()?.Contains(searchText) ?? false;
+                                    }
+                                    return false;
+                                };
+                            }
+                            else if (selectedButton == DriverButton)
+                            {
+                                collectionView.Filter = item =>
+                                {
+                                    if (item is Driver driver)
+                                    {
+                                        return driver.ToString()?.ToLower()?.Contains(searchText) ?? false;
+                                    }
+                                    return false;
+                                };
+                            }
                         }
-                        
+
                     }
                     else
                     {
@@ -231,7 +214,22 @@ namespace SPTC_APP.View.Pages
                     GetFranchiseInList();
                 }
             }
-            else
+            else if (cbSearch.Text.Length == 0) 
+            {
+                if (selectedButton != DashBoard)
+                {
+                    if (selectedButton == FranchiseButton && TablePanelSwap.Children.Count > 1)
+                    {
+                        
+                    }
+                    else if((TableView.displayedTable) != null)
+                    {
+                        DataGrid datagrid = TableView.displayedTable;
+                        ICollectionView collectionView = CollectionViewSource.GetDefaultView(datagrid.Items);
+                        collectionView.Filter = null;
+                    }
+                }
+            } else
             {
                 SearchBarResize(true);
             }

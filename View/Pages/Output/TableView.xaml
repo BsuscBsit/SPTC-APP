@@ -312,7 +312,7 @@
                             Height="30"
                             Margin="0,0,0,7"
                             Click="btnAddLTLoan_Click"
-                            Content="Pay LT Loan"
+                            Content="Pay LTLoan"
                             Style="{DynamicResource CommonButtonStyle}"
                             Visibility="Collapsed" />
                     </StackPanel>

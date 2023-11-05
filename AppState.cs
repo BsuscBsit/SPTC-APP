@@ -57,7 +57,7 @@ namespace SPTC_APP
         {
             dynamic result = Retrieve.Login(username, password);
 
-            if (result is View.ControlWindow controlWindow)
+            if (result is View.ControlWindow)
             {
                 result.Show();
                 EventLogger.Post($"User :: Login Failed: USER({username})");
@@ -85,7 +85,9 @@ namespace SPTC_APP
                 }
                 if (!AppState.isDeployment_IDGeneration && !AppState.isDeployment)
                 {
-                    (new MainBody()).Show();
+                    MainBody body = (new MainBody());
+                    AppState.mainwindow = body;
+                    body.Show();
                     //(new Test()).Show();
                 }
 

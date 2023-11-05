@@ -1,4 +1,5 @@
 ﻿using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,6 +44,7 @@ namespace SPTC_APP.View.Pages.Input
                 lblInterest.Visibility = Visibility.Collapsed;
                 tboxAmount.Text = franchise.GetLoans().FirstOrDefault().paymentDues.ToString("0.00");
             }
+            DraggingHelper.DragWindow(topBar);
         }
         protected override void OnClosing(CancelEventArgs e)
         {

@@ -25,7 +25,7 @@
                 </DataGrid.Resources>
             </DataGrid>
         </Grid>
-        <Grid x:Name="CodingGrid">
+        <Grid x:Name="CodingGrid" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -264,7 +264,7 @@
                 Grid.Row="1"
                 Grid.ColumnSpan="2" />
         </Grid>
-        <Grid x:Name="gridLedger" d:IsHidden="True">
+        <Grid x:Name="gridLedger">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -273,6 +273,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="91" />
             </Grid.RowDefinitions>
             <DataGrid
                 x:Name="dgLedger"

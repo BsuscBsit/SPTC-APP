@@ -82,51 +82,32 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Content="Body No."
-                        FontSize="10"
-                        FontWeight="Medium"
-                        Foreground="DarkGray" />
+                        Foreground="{StaticResource BrushGrey}" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblbodyNumber"
                         Grid.Row="0"
                         Grid.Column="1"
-                        Content="N/A"
-                        FontFamily="Arial"
-                        FontSize="16"
-                        FontStretch="SemiExpanded"
-                        FontWeight="DemiBold"
-                        Foreground="Black" />
+                        Content="N/A" VerticalAlignment="Center" Style="{StaticResource LabelFontLarge}" FontWeight="Bold" FontSize="18" />
                     <Label
                         Grid.Row="1"
                         Content="Plate No:"
-                        FontSize="10"
-                        FontWeight="Medium"
-                        Foreground="DarkGray" />
+                        Foreground="{StaticResource BrushGrey}" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblPlateNo"
                         Grid.Row="1"
                         Grid.Column="1"
                         Content="N/A"
-                        FontFamily="Arial"
-                        FontSize="10"
-                        FontStretch="SemiExpanded"
-                        FontWeight="SemiBold"
-                        Foreground="Black" />
+                        FontStretch="SemiExpanded" VerticalAlignment="Center" Style="{StaticResource LabelFontMedium}" />
                     <Label
                         Grid.Row="2"
                         Content="MTOP No:"
-                        FontSize="10"
-                        FontWeight="Medium"
-                        Foreground="DarkGray" />
+                        Foreground="{StaticResource BrushGrey}" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblMTOPNo"
                         Grid.Row="2"
                         Grid.Column="1"
                         Content="N/A"
-                        FontFamily="Arial"
-                        FontSize="10"
-                        FontStretch="SemiExpanded"
-                        FontWeight="SemiBold"
-                        Foreground="Black" />
+                        FontStretch="SemiExpanded" VerticalAlignment="Center" Style="{StaticResource LabelFontMedium}" />
 
                 </Grid>
                 <Grid
@@ -159,69 +140,45 @@
                     <Label
                         Grid.Column="1"
                         Content="Operators Name :"
-                        FontSize="9"
-                        FontWeight="Medium"
-                        Foreground="DarkGray" />
+                        Foreground="DarkGray" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblOperatorName"
                         Grid.Column="2"
                         Content="N/A"
-                        FontFamily="Arial"
-                        FontSize="14"
-                        FontStretch="SemiExpanded"
-                        FontWeight="DemiBold"
-                        Foreground="Black" />
+                        Foreground="Black" Style="{StaticResource LabelFontLarge}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" />
                     <Label
                         Grid.Row="1"
                         Grid.Column="1"
                         Content="Birthdate :"
-                        FontSize="9"
-                        FontWeight="Medium"
-                        Foreground="DarkGray" />
+                        Foreground="DarkGray" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblDateOfBIrth"
                         Grid.Row="1"
                         Grid.Column="2"
                         Content="N/A"
-                        FontFamily="Arial"
-                        FontSize="9"
-                        FontStretch="SemiExpanded"
-                        FontWeight="DemiBold"
-                        Foreground="Black" />
+                        Foreground="Black" Style="{StaticResource LabelFontMedium}" VerticalAlignment="Center" />
                     <Label
                         Grid.Row="2"
                         Grid.Column="1"
                         Content="Reference :"
-                        FontSize="9"
-                        FontWeight="Medium"
-                        Foreground="DarkGray" />
+                        Foreground="DarkGray" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
                     <Label
                         Grid.Row="2"
                         Grid.Column="2"
                         Content="N/A"
-                        FontFamily="Helvetica"
-                        FontSize="9"
-                        FontStretch="SemiExpanded"
-                        FontWeight="DemiBold"
-                        Foreground="Black" />
+                        Foreground="Black" Style="{StaticResource LabelFontMedium}" VerticalAlignment="Center" />
 
                     <Label
                         Grid.Row="3"
                         Grid.Column="1"
                         Content="Driver Name: "
-                        FontSize="9"
-                        FontWeight="Medium"
-                        Foreground="DarkGray" />
+                        Foreground="DarkGray" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblDriverName"
                         Grid.Row="3"
                         Grid.Column="2"
                         Content="N/A"
-                        FontFamily="Helvetica"
-                        FontSize="9"
-                        FontStretch="SemiExpanded"
-                        FontWeight="DemiBold"
-                        Foreground="Black" />
+                        Foreground="Black" Style="{StaticResource LabelFontMedium}" VerticalAlignment="Center" />
                 </Grid>
                 <StackPanel
                     x:Name="actions"
@@ -364,7 +321,7 @@
                     Margin="12,12,20,12" />
                 <Button
                     x:Name="btnAddButton"
-                    Grid.Row="3"
+                    Grid.Row="1"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
                     Width="250"

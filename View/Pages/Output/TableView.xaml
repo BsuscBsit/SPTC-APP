@@ -17,6 +17,33 @@
             <RowDefinition Height="64" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Button
+            x:Name="btnAdd"
+            Width="250"
+            Height="30"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Background="#FF4B0202"
+            Click="btnAddClick"
+            Style="{DynamicResource CommonButtonStyle}"
+            Visibility="Visible">
+            <StackPanel Orientation="Horizontal">
+                <Path
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Data="M0,7 H14 M7,0 V14"
+                    Stroke="{StaticResource BrushBlack}"
+                    StrokeThickness="1" />
+                <Label
+                    x:Name="lblAddBtn"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="Add Record" />
+            </StackPanel>
+        </Button>
+
         <Grid Grid.Row="1">
             <Border Background="White" CornerRadius="12">
                 <Border.Effect>
@@ -29,45 +56,17 @@
 
             </Border>
             <Border
-                Padding="15,0,15,15"
+                Padding="15,15,15,15"
                 Background="White"
                 CornerRadius="10">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Button
-                        x:Name="btnAdd"
-                        Width="250"
-                        Height="30"
-                        Margin="0,15,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Background="#FF4B0202"
-                        Click="btnAddClick"
-                        Style="{DynamicResource CommonButtonStyle}"
-                        Visibility="Visible">
-                        <StackPanel Orientation="Horizontal">
-                            <Path
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Data="M0,7 H14 M7,0 V14"
-                                Stroke="{StaticResource BrushBlack}"
-                                StrokeThickness="1" Margin="0,0,10,0" />
-                            <Label
-                                Name="lblAddBtn"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Content="Add Record" Margin="0,0,10,0" />
-                        </StackPanel>
-                    </Button>
 
                     <DataGrid
                         x:Name="TableGrid"
-                        Grid.Row="1"
-                        MinWidth="400"
-                        Margin="0,15,0,0">
+                        MinWidth="400">
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontFamily" Value="Arial" />
@@ -86,7 +85,8 @@
         <Grid
             x:Name="franchiseInformation"
             Grid.Row="1"
-            Grid.Column="1" Width="0">
+            Grid.Column="1"
+            Width="0">
             <Border
                 MaxWidth="240"
                 Margin="24,0,0,0"

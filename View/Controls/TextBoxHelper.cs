@@ -75,6 +75,10 @@ namespace SPTC_APP.View.Controls
                 {
                     e.Handled = true;
                     tb.Text = Regex.Replace(tb.Text, " ", "");
+                    if(grid != null)
+                    {
+                        new Toast(grid, "Spaces not allowed here.");
+                    }
                     tb.CaretIndex = tb.Text.Length;
                     tb.Focus();
                 }
@@ -133,10 +137,10 @@ namespace SPTC_APP.View.Controls
                     return @"[^A-Za-z.]+";
 
                 case SIGNEDDIGIT:
-                    return @"[^0-9.]+";
+                    return @"[^0-9.-]+";
 
                 case UNSIGNEDDIGIT:
-                    return @"[^0-9.-]+";
+                    return @"[^0-9.]+";
 
                 case ALPHANUMERIC:
                     return @"[^0-9.A-Za-z+\-*/()\s]+";
@@ -171,11 +175,11 @@ namespace SPTC_APP.View.Controls
                         break;
 
                     case SIGNEDDIGIT:
-                        msg += "numbers and periods." + x;
+                        msg += "numbers, dashes, and periods." + x;
                         break;
 
                     case UNSIGNEDDIGIT:
-                        msg += "numbers, dashes, and periods." + x;
+                        msg += "numbers and periods." + x;
                         break;
 
                     case ALPHANUMERIC:
@@ -201,7 +205,7 @@ namespace SPTC_APP.View.Controls
                 }
                 if(!((msg == "This field only accepts " || string.IsNullOrEmpty(msg)) && string.IsNullOrEmpty(x)))
                 {
-                    new Toast(grid, msg);
+                    new Toast(grid, msg, 2.5);
                 }
             }
         }

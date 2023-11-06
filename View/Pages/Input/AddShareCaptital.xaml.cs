@@ -1,4 +1,5 @@
 ﻿using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
 {
@@ -25,12 +27,15 @@ namespace SPTC_APP.View.Pages.Input
         public AddShareCaptital(Franchise franchise)
         {
             InitializeComponent();
+            initTextBoxes();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             
             this.franchise = franchise;
             dpBdate.DisplayDate = DateTime.Now;
             tboxAmount.Text = AppState.TOTAL_SHARE_PER_MONTH.ToString();
+            DraggingHelper.DragWindow(topBar);
+            tboxAmount.Focus();
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -63,6 +68,13 @@ namespace SPTC_APP.View.Pages.Input
                 (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 this.Close();
             }
+        }
+
+        private void initTextBoxes()
+        {
+            // Check tooltips kung tama ba description. (Optional)
+            tboxAmount.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Enter amount to loan.", 0);
+            tboxRefNo.DefaultTextBoxBehavior(SIGNEDDIGIT, true, gridToast, "Reference number.", 1);
         }
     }
 }

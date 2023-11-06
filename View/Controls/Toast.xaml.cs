@@ -20,14 +20,17 @@ namespace SPTC_APP.View.Controls
     /// </summary>
     public partial class Toast : Window
     {
-        public Toast(Grid targetGrid, string msg, double persistDuration = 1.5, double animationDuration = 0.2)
+        public Toast(Grid targetGrid, string msg, double persistDuration = 1.5, bool doBeep = true, double animationDuration = 0.2)
         {
             InitializeComponent();
             message.Text = msg;
 
             parent.Children.Remove(toast);
             targetGrid.Children.Add(toast);
-            System.Media.SystemSounds.Beep.Play();
+            if (doBeep)
+            {
+                System.Media.SystemSounds.Beep.Play();
+            }
 
             toast.FadeIn(animationDuration, async () =>
             {

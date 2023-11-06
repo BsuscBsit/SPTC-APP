@@ -1,4 +1,5 @@
 ﻿using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +27,7 @@ namespace SPTC_APP.View.Pages.Input
             InitializeComponent();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            DraggingHelper.DragWindow(topBar);
         }
         protected override void OnClosing(CancelEventArgs e)
         {

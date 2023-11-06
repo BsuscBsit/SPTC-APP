@@ -1,4 +1,5 @@
 ﻿using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
 {
@@ -27,6 +29,7 @@ namespace SPTC_APP.View.Pages.Input
         public AddLTLoan(Franchise franchise)
         {
             InitializeComponent();
+            initTextBoxes();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             this.isApply = (franchise.GetLTLoans()?.FirstOrDefault() == null);
@@ -35,7 +38,8 @@ namespace SPTC_APP.View.Pages.Input
             dpBdate.SelectedDate = DateTime.Now;
             if (isApply)
             {
-                lblTerms.Content = "Term length in months: ";
+                lblTerms.Content = "Term Length in Months: ";
+                tbPenalty.ToolTip = "Term length.";
                 lblTitle.Content = "APPLY FOR LONG TERM LOAN";
             }
             else
@@ -55,6 +59,8 @@ namespace SPTC_APP.View.Pages.Input
                     tboxAmount.Text = balance.ToString("0.00");
                 }
             }
+            DraggingHelper.DragWindow(topBar);
+            tboxAmount.Focus();
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -109,6 +115,15 @@ namespace SPTC_APP.View.Pages.Input
 
                 }
             }
+        }
+        private void initTextBoxes()
+        {
+            // Check tooltips kung tama ba description. (Optional)
+            tboxAmount.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Enter amount to loan.", 0);
+            tboxRefNo.DefaultTextBoxBehavior(SIGNEDDIGIT, true, gridToast, "Reference number.", 1);
+            tbPenalty.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Penalty amount.", 2);
+            tboxInterest.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Enter loan interest monthly.", 3);
+            tbProcessingFee.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Enter processing fee.", 4);
         }
 
     }

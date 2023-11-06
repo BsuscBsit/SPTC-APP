@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
 {
@@ -27,6 +28,7 @@ namespace SPTC_APP.View.Pages.Input
         public AddLoan(Franchise franchise)
         {
             InitializeComponent();
+            initTextBoxes();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             this.franchise = franchise;
@@ -110,31 +112,13 @@ namespace SPTC_APP.View.Pages.Input
             }
         }
 
-        private void TextBox_GotFucus(object sender, RoutedEventArgs e)
+        private void initTextBoxes()
         {
-            if(sender is TextBox tbox)
-            {
-                if(tbox.Text.Length > 0)
-                {
-                    tbox.SelectAll();
-                }
-            }
-        }
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            // Define a regular expression that allows only letters and numbers
-            string pattern = @"[^0-9]+";
-
-            // Check if the input text matches the pattern
-            if (System.Text.RegularExpressions.Regex.IsMatch(e.Text, pattern))
-            {
-                e.Handled = true; // Cancel the input event
-            }
-        }
-
-        private void tboxAmount_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            // Check tooltips kung tama ba description. (Optional)
+            tboxAmount.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Enter amount to loan.", 0);
+            tboxRefNo.DefaultTextBoxBehavior(SIGNEDDIGIT, true, gridToast, "Reference number.", 1);
+            tbPenalty.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Penalty amount.", 2);
+            tboxInterest.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Enter loan interest monthly.", 3);
         }
     }
 }

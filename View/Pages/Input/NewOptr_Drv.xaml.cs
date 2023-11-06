@@ -1,4 +1,5 @@
 ﻿using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
 {
@@ -26,6 +28,7 @@ namespace SPTC_APP.View.Pages.Input
         public NewOptr_Drv(Franchise franchise, General type)
         {
             InitializeComponent();
+            initTextBoxes();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             this.franchise = franchise;
@@ -33,6 +36,8 @@ namespace SPTC_APP.View.Pages.Input
             lblTitle.Content = "NEW " + AppState.GetEnumDescription(type);
             dpBirthday.Text = DateTime.Now.ToString();
             dpBirthday.DisplayDate = DateTime.Now;
+            DraggingHelper.DragWindow(topBar);
+            tboxsFname.Focus();
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -136,6 +141,20 @@ namespace SPTC_APP.View.Pages.Input
 
                 this.Close();
             }
+        }
+
+        private void initTextBoxes()
+        {
+            tboxsFname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "First name.", 0);
+            tboxsMname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "Middle name.", 2);
+            tboxsLname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "Last name.", 3);
+            tboxsContactNum.DefaultTextBoxBehavior(PHONENUMBER, true, gridToast, "Contact number.", 4);
+            tboxsCountry.DefaultTextBoxBehavior(ALPHANUMERIC, false, gridToast, "First Name", 0);
+            tboxsProvince.DefaultTextBoxBehavior(ALPHANUMERIC, false, gridToast, "First Name", 0);
+            tboxsCity.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First Name", 0);
+            tboxsBarangay.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First Name", 0);
+            tboxStreetName.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First Name", 0);
+
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

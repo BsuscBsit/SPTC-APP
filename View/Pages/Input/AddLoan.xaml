@@ -5,20 +5,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SPTC_APP.View.Pages.Input"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="575"
     Height="355"
     AllowsTransparency="True"
     KeyboardNavigation.TabNavigation="Continue"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid x:Name="AddShareCapital">
+    <Grid
+        x:Name="AddShareCapital"
+        Width="607"
+        Height="360">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto                               " />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="35" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -34,6 +38,7 @@
         <Border
             x:Name="topBar"
             Grid.ColumnSpan="5"
+            Margin="0,0,2,0"
             Style="{StaticResource TopBarStyle}" />
         <Label
             x:Name="lblTitle"
@@ -51,11 +56,40 @@
             HorizontalAlignment="Left"
             Content="Date: "
             Style="{StaticResource TextFieldLabelingPreset}" />
+        <Label
+            Grid.Row="3"
+            Grid.Column="2"
+            HorizontalAlignment="Left"
+            Content="Amount: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
+        <Label
+            Grid.Row="3"
+            Grid.Column="3"
+            HorizontalAlignment="Left"
+            Content="Reference No.: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
+        <Label
+            x:Name="lblTerms"
+            Grid.Row="5"
+            Grid.Column="1"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Left"
+            Content="Penalty: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
+        <Label
+            x:Name="lblInterest"
+            Grid.Row="5"
+            Grid.Column="2"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Left"
+            Content="Monthly Interest: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Border
             Grid.Row="4"
             Grid.Column="1"
             Width="164"
             Height="30"
+            Margin="15,0,0,0"
             Padding="5,0,5,0"
             VerticalAlignment="Center"
             Background="White"
@@ -67,90 +101,52 @@
                 Height="30"
                 VerticalAlignment="Center"
                 BorderBrush="{x:Null}"
-                BorderThickness="1,4,1,1"
-                TabIndex="0" />
+                BorderThickness="1,4,1,1" />
         </Border>
-        <Label
-            x:Name="lblInterest"
-            Grid.Row="5"
-            Grid.Column="2"
-            Margin="0,15,0,0"
-            HorizontalAlignment="Left"
-            Content="Monthly Interest: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
-        <TextBox
-            x:Name="tboxInterest"
-            Grid.Row="6"
-            Grid.Column="2"
-            Width="164"
-            Height="30"
-            Margin="15,0,15,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            GotFocus="TextBox_GotFucus"
-            PreviewTextInput="TextBox_PreviewTextInput"
-            Style="{StaticResource CommonTextBoxStyle}"
-            TabIndex="4"
-            Text="" />
-        <Label
-            x:Name="lblTerms"
-            Grid.Row="5"
-            Grid.Column="1"
-            Margin="0,15,0,0"
-            HorizontalAlignment="Left"
-            Content="Penalty: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
-        <TextBox
-            x:Name="tbPenalty"
-            Grid.Row="6"
-            Grid.Column="1"
-            Width="164"
-            Height="30"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            GotFocus="TextBox_GotFucus"
-            PreviewTextInput="TextBox_PreviewTextInput"
-            Style="{StaticResource CommonTextBoxStyle}"
-            TabIndex="3"
-            Text="" />
-        <Label
-            Grid.Row="3"
-            Grid.Column="2"
-            HorizontalAlignment="Left"
-            Content="Amount: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
         <TextBox
             x:Name="tboxAmount"
             Grid.Row="4"
             Grid.Column="2"
             Width="164"
             Height="30"
-            Margin="15,0,15,0"
+            Margin="15,0,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            GotFocus="TextBox_GotFucus"
-            PreviewTextInput="TextBox_PreviewTextInput"
             Style="{StaticResource CommonTextBoxStyle}"
-            TabIndex="1"
             Text="" />
-        <Label
-            Grid.Row="3"
-            Grid.Column="3"
-            HorizontalAlignment="Left"
-            Content="Reference No.: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
         <TextBox
             x:Name="tboxRefNo"
             Grid.Row="4"
             Grid.Column="3"
             Width="164"
             Height="30"
+            Margin="15,0,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            GotFocus="TextBox_GotFucus"
-            PreviewTextInput="TextBox_PreviewTextInput"
             Style="{StaticResource CommonTextBoxStyle}"
             TabIndex="2"
+            Text="" />
+        <TextBox
+            x:Name="tbPenalty"
+            Grid.Row="6"
+            Grid.Column="1"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="" />
+        <TextBox
+            x:Name="tboxInterest"
+            Grid.Row="6"
+            Grid.Column="2"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Style="{StaticResource CommonTextBoxStyle}"
             Text="" />
         <StackPanel
             Grid.Row="8"
@@ -165,8 +161,7 @@
                 Click="btnCancel_Click"
                 Content="CANCEL"
                 Style="{StaticResource CommonButtonStyle}"
-                TabIndex="5" />
-
+                TabIndex="4" />
             <Button
                 x:Name="btnSave"
                 Width="178"
@@ -174,10 +169,13 @@
                 Click="btnSave_Click"
                 Content="SAVE"
                 Style="{StaticResource CommonButtonStyle}"
-                TabIndex="6" />
-
+                TabIndex="5" />
         </StackPanel>
-
-
+        <Grid
+            x:Name="gridToast"
+            Grid.RowSpan="9"
+            Grid.ColumnSpan="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom" />
     </Grid>
 </Window>

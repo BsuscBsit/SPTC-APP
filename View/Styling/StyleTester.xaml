@@ -95,6 +95,18 @@
                         Style="{StaticResource CommonTextBoxStyle}"
                         Text="Phone Number" />
                     <TextBox
+                        x:Name="email"
+                        Width="200"
+                        Height="30"
+                        Style="{StaticResource CommonTextBoxStyle}"
+                        Text="Email" Margin="0,5,0,0" />
+                    <TextBox
+                        x:Name="common"
+                        Width="200"
+                        Height="30"
+                        Style="{StaticResource CommonTextBoxStyle}"
+                        Text="Common" Margin="0,5,0,0" />
+                    <TextBox
                         x:Name="address"
                         Width="200"
                         Height="30"
@@ -106,6 +118,6 @@
 
             </Border>
         </Grid>
-        <Grid x:Name="gridForToast" Grid.ColumnSpan="2"/>
+        <Grid x:Name="gridForToast" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

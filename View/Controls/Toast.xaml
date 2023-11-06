@@ -12,16 +12,15 @@
     mc:Ignorable="d">
     <Grid x:Name="parent">
         <Grid
-            x:Name="gridToast"
+            x:Name="toast"
             Margin="0,0,0,24"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom" Opacity="0" Visibility="Hidden">
-            <Border Background="White" CornerRadius="11">
+            VerticalAlignment="Top">
+            <Border Background="#4CFFFFFF" CornerRadius="11">
                 <Border.Effect>
                     <DropShadowEffect
                         BlurRadius="20"
                         Direction="-90"
-                        Opacity="0.7"
                         ShadowDepth="5" />
                 </Border.Effect>
             </Border>
@@ -29,10 +28,12 @@
                 Padding="10,5,10,5"
                 Background="White"
                 CornerRadius="7">
-                <Label
-                    x:Name="lblContent"
-                    Content="This is a toast message."
-                    Style="{StaticResource LabelFontMedium}" />
+                <TextBlock
+                    x:Name="message"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource TextBlockFontMedium}"
+                    Text="This is a toast message&#x0A;Read me."
+                    TextAlignment="Center" Padding="5,5,5,5" />
             </Border>
         </Grid>
     </Grid>

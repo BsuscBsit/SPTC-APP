@@ -29,17 +29,20 @@ namespace SPTC_APP.View.Styling
 
         private void initTextBoxes()
         {
-            alpabets.DefaultTextBoxBehavior(ALPHABETS);
-            signeddigit.DefaultTextBoxBehavior(SIGNEDDIGIT);
-            unsigneddigit.DefaultTextBoxBehavior(UNSIGNEDDIGIT);
-            alphanumeric.DefaultTextBoxBehavior(ALPHANUMERIC);
-            phonenumber.DefaultTextBoxBehavior(PHONENUMBER, true);
-            address.DefaultTextBoxBehavior(ADDRESS);
+            alpabets.DefaultTextBoxBehavior(ALPHABETS, false, gridForToast, "A TextBox that only accepts letters.", 1);
+            signeddigit.DefaultTextBoxBehavior(SIGNEDDIGIT, false, gridForToast);
+            unsigneddigit.DefaultTextBoxBehavior(UNSIGNEDDIGIT, false, gridForToast);
+            alphanumeric.DefaultTextBoxBehavior(ALPHANUMERIC, false, gridForToast);
+            phonenumber.DefaultTextBoxBehavior(PHONENUMBER, true, gridForToast);
+            email.DefaultTextBoxBehavior(EMAIL, true, gridForToast);
+            common.DefaultTextBoxBehavior(COMMON, false, gridForToast);
+            address.DefaultTextBoxBehavior(ADDRESS, false, gridForToast);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Toast toast = new Toast(gridForToast, "The Quick Brown Fox Jumps Over The Lazy Dog!");
         }
+
     }
 }

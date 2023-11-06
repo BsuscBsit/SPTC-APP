@@ -14,8 +14,21 @@ namespace SPTC_APP.View.Controls
 {
     public static class TextBoxHelper
     {
-        public static void DefaultTextBoxBehavior(this TextBox tb, AllowFormat? format = null, bool blockSpaces = false)
+        private static Grid grid;
+        public static void DefaultTextBoxBehavior(this TextBox tb, AllowFormat? format = null, bool blockSpaces = false, Grid errorGrid = null, string toolTip = null, int? tabIndex = null)
         {
+            if(errorGrid != null)
+            {
+                grid = errorGrid;
+            }
+            if(tabIndex != null)
+            {
+                tb.TabIndex = (int)tabIndex;
+            }
+            if(toolTip != null)
+            {
+                tb.ToolTip = toolTip;
+            }
             tb.PreviewKeyDown += PreviewKeyDown;
             tb.GotFocus += GotFocusBehavior;
             tb.MouseDoubleClick += DoubleClickBehavior;
@@ -48,7 +61,7 @@ namespace SPTC_APP.View.Controls
                 if (Regex.IsMatch(e.Text, pattern))
                 {
                     e.Handled = true;
-                    ShowError(format);
+                    ShowError(format, e.Text);
                     tb.Focus();
                 }
             }
@@ -58,8 +71,6 @@ namespace SPTC_APP.View.Controls
         {
             if (sender is TextBox tb)
             {
-
-                Console.WriteLine("[", e.ToString(), "]");
                 if (tb.Text.Contains(" "))
                 {
                     e.Handled = true;
@@ -128,10 +139,16 @@ namespace SPTC_APP.View.Controls
                     return @"[^0-9.-]+";
 
                 case ALPHANUMERIC:
-                    return @"[^0-9.A-Za-z]+";
+                    return @"[^0-9.A-Za-z+\-*/()\s]+";
 
                 case PHONENUMBER:
-                    return @"[^+\-0-9]";
+                    return @"[^+\-0-9]+";
+
+                case EMAIL:
+                    return @"[^a-zA-Z0-9@._-]+";
+
+                case COMMON:
+                    return @"[^A-Za-z0-9.,;:!@#$%^&*()_+=\[\]{}|'""<>/\\?~-]+";
 
                 case ADDRESS:
                     return @"[^0-9A-Za-z.\-/@#()""'\\]+";
@@ -141,11 +158,51 @@ namespace SPTC_APP.View.Controls
             }
         }
         
-        private static void ShowError(AllowFormat? format)
+        private static void ShowError(AllowFormat? format, string input = null)
         {
-            if(format == ALPHABETS)
+            if(grid != null)
             {
-                ControlWindow.ShowStatic("Input Error", "This field only accept alphabets.\nPlease ensure your text includes only letters and periods.");
+                string x = !string.IsNullOrEmpty(input) ? "\n'" + input + "' is not a valid input." : "";
+                string msg = "This field only accepts ";
+                switch (format)
+                {
+                    case ALPHABETS:
+                        msg += "letters and periods." + x;
+                        break;
+
+                    case SIGNEDDIGIT:
+                        msg += "numbers and periods." + x;
+                        break;
+
+                    case UNSIGNEDDIGIT:
+                        msg += "numbers, dashes, and periods." + x;
+                        break;
+
+                    case ALPHANUMERIC:
+                        msg += "letters, numbers, and characters '* / + - ( ) .'" + x;
+                        break;
+
+                    case PHONENUMBER:
+                        msg += "numbers, dashes, and plus sign '+'." + x;
+                        break;
+
+                    case EMAIL:
+                        msg = input != null ? "'" + input + "' is not a valid email character." : "";
+                        break;
+
+                    case COMMON:
+                        msg += "letters, numbers and characters:\n" +
+                            "' . , ; : ! @ # $ % ^ & * ( ) _ + = [ ] { } |' \" < > \\ / ? ~ -'";
+                        break;
+
+                    case ADDRESS:
+                        msg = !string.IsNullOrEmpty(x) ? x.Substring(1, x.Length - 2) + " for this field." : "";
+                        break;
+                }
+                if(!((msg == "This field only accepts " || string.IsNullOrEmpty(msg)) && string.IsNullOrEmpty(x)))
+                {
+                    new Toast(grid, msg);
+                }
             }
         }
 
@@ -156,6 +213,8 @@ namespace SPTC_APP.View.Controls
             UNSIGNEDDIGIT,
             ALPHANUMERIC,
             PHONENUMBER,
+            EMAIL,
+            COMMON,
             ADDRESS
         }
     }

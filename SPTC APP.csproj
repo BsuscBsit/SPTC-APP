@@ -243,7 +243,6 @@
     <Compile Include="View\Controls\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\ToolTipHelper.cs" />
     <Compile Include="View\Controls\WindowStateHelper.cs" />
     <Compile Include="View\IDGenerator\Extra\SignPad.xaml.cs">
       <DependentUpon>SignPad.xaml</DependentUpon>

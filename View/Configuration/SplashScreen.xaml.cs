@@ -23,6 +23,9 @@ namespace SPTC_APP.View
 
         }
 
-        
+        private void pbLoading_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }

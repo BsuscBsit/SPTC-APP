@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="window"
     Title="Splash Screen"
-    Width="300"
+    Width="620"
     Height="350"
     Icon="../../View/Images/icons/logo.ico"
     ResizeMode="NoResize"
@@ -20,13 +20,12 @@
         Cursor="AppStarting"
         Opacity="1">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="227*" />
-            <ColumnDefinition Width="53*" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="0*" />
         </Grid.ColumnDefinitions>
 
         <TextBox
             x:Name="tbDebugLog"
-            Grid.ColumnSpan="2"
             Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}"
             Height="18"
             Margin="0,0,0,10"
@@ -37,25 +36,30 @@
             TextWrapping="Wrap" />
         <ProgressBar
             x:Name="pbLoading"
-            Grid.ColumnSpan="2"
             Height="10"
-            Margin="0,0,0,33"
             VerticalAlignment="Bottom"
             UseLayoutRounding="True" />
         <Label
-            Grid.ColumnSpan="2"
-            Margin="42,215,0,0"
+            Margin="242,282,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Please Wait..."
             FontFamily="Inter"
-            FontSize="30"
-            FontWeight="Bold" />
+            FontSize="16"
+            FontWeight="Bold" Height="46" Width="118" />
         <Image
-            Width="150"
-            Height="150"
-            Margin="65,48,12,132"
+            Margin="0,40,360,123"
             Source="/View/Images/icons/logo.ico" />
+        <Label Content="Sapang Palay Tricycle &#xD;&#xA;Service Cooperative (SPTC)"
+       HorizontalAlignment="Left"
+       Margin="242,84,-26,0"
+       VerticalAlignment="Top"
+       FontFamily="Segoe UI"
+       FontWeight="Medium"
+       FontSize="24"
+       Height="81"
+       Width="382"
+       Grid.ColumnSpan="2" />
 
     </Grid>
 </Window>

@@ -42,7 +42,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ControlWindow.ShowDialogStatic("Creating new " + AppState.GetEnumDescription(type).ToLower(), "Confirm?", Icons.NOTIFY))
+            if (ControlWindow.ShowTwoway("Creating new " + AppState.GetEnumDescription(type).ToLower(), "Confirm?", Icons.NOTIFY))
             {
                 if (type == General.DRIVER)
                 {

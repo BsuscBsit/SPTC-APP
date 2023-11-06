@@ -269,7 +269,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnDeletePayment_Click(object sender, RoutedEventArgs e)
         {
-            if(selectedPayment != null && ControlWindow.ShowDialogStatic("Deletion", $"Removing data {lblSelectedLedger.Content}"))
+            if(selectedPayment != null && ControlWindow.ShowTwoway("Deletion", $"Removing data {lblSelectedLedger.Content}"))
             {
                 if (selectedPayment is PaymentDetails<Ledger.ShareCapital> sc)
                 {

@@ -96,7 +96,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ControlWindow.ShowDialogStatic("Changing Driver.", "Do you want to continue with the changes?", Icons.DEFAULT))
+            if (ControlWindow.ShowTwoway("Changing Driver.", "Do you want to continue with the changes?", Icons.DEFAULT))
             {
                 franchise.Driver = selectedDriver;
                 if(swapFranchise != null)

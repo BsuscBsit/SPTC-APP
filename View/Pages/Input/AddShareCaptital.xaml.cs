@@ -45,7 +45,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ControlWindow.ShowDialogStatic("Adding new record", "Confirm?", Icons.NOTIFY))
+            if (ControlWindow.ShowTwoway("Adding new record", "Confirm?", Icons.NOTIFY))
             {
                 PaymentDetails<Ledger.ShareCapital> capital = new PaymentDetails<Ledger.ShareCapital>();
                 Ledger.ShareCapital share = new Ledger.ShareCapital();

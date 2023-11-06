@@ -61,7 +61,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ControlWindow.ShowDialogStatic("Adding new record", "Confirm?", Icons.NOTIFY))
+            if (ControlWindow.ShowTwoway("Adding new record", "Confirm?", Icons.NOTIFY))
             {
                 double amount = Double.TryParse(tboxAmount.Text, out amount) ? amount : 0;
                 double interest = Double.TryParse(tboxInterest.Text, out interest) ? interest : 0;

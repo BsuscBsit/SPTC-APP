@@ -404,7 +404,7 @@ namespace SPTC_APP.View
                 warn = (cameraWarning ? "Camera" : "") + (cameraWarning && signPadWarning ? " and " : "") + (signPadWarning ? "Sign Pad" : "");
                 //warn += " has been initiated but no " + (warn.Length == 6 ? "image was" : "") + " captured. Are you certain you want to proceed?";
                 warn = !string.IsNullOrEmpty(warn) ? (warn + " has been initiated but, no" + (warn.Length < 7 ? " image was" : (warn.Length < 10 ? " input was" : " inputs were")) + " captured. \nAre you certain you want to proceed?") : warn;
-                if(ControlWindow.ShowDialogStatic("Continue?", warn, Icons.NOTIFY))
+                if(ControlWindow.ShowTwoway("Continue?", warn, Icons.NOTIFY))
                 {
                     return true;
                 }

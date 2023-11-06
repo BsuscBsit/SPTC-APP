@@ -220,7 +220,7 @@ namespace SPTC_APP.View.Pages
                 {
                     if (selectedButton == FranchiseButton && TablePanelSwap.Children.Count > 1)
                     {
-                        
+                        SearchBarResize(true);
                     }
                     else if((TableView.displayedTable) != null)
                     {

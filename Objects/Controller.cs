@@ -75,7 +75,7 @@ namespace SPTC_APP.Objects
                     } else
                     {
                         progressBar.Value = 10;
-                        if(ControlWindow.ShowDialogStatic("Somethings Wrong!", "Database takes too long to respond. Retry?", Icons.ERROR))
+                        if(ControlWindow.ShowTwoway("Somethings Wrong!", "Database takes too long to respond. Retry?", Icons.ERROR))
                         {
                             
                             ShowSplashScreenAndCloseCurrent(window);

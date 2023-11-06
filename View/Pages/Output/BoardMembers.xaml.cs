@@ -213,7 +213,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     if (AppState.IS_ADMIN)
                     {
-                        int result = ControlWindow.ShowDialogStatic("Manage Employee", $"Employee name: {employee.name?.legalName ?? noname}", "EDIT", "CHANGE", Icons.NOTIFY);
+                        int result = ControlWindow.ShowThreway("Manage Employee", $"Employee name: {employee.name?.legalName ?? noname}", "EDIT", "CHANGE", Icons.NOTIFY);
                         if (result == 0)
                         {
                             (new EditEmployee(employee, true, true)).Show();
@@ -240,7 +240,7 @@ namespace SPTC_APP.View.Pages.Output
                 }
                 else
                 {
-                    if(ControlWindow.ShowDialogStatic("Edit Profile", $"Board Member: {employee.name?.legalName ?? noname}", Icons.NOTIFY))
+                    if(ControlWindow.ShowTwoway("Edit Profile", $"Board Member: {employee.name?.legalName ?? noname}", Icons.NOTIFY))
                     {
                         (new EditEmployee(employee, true, false)).Show();
                     }

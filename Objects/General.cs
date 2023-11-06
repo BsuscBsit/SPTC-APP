@@ -264,11 +264,11 @@ namespace SPTC_APP.Objects
         {
             if (!string.IsNullOrEmpty(addressline1) && !string.IsNullOrEmpty(addressline2))
             {
-                return $"{addressline1}\n{addressline2}";
+                return $"{addressline1} {addressline2}";
             }
             else if (!string.IsNullOrEmpty(houseNo) || !string.IsNullOrEmpty(streetname) || !string.IsNullOrEmpty(barangay) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(province) || !string.IsNullOrEmpty(country))
             {
-                return $"{houseNo} {streetname},\n {barangay} {city}, {province}".Trim();
+                return $"{houseNo} {streetname}, {barangay} {city}, {province}".Trim();
             }
             else
             {
@@ -625,4 +625,64 @@ namespace SPTC_APP.Objects
             return false;
         }
     }
+
+    public class Recap
+    {
+        public int id { get; private set; }
+        public string text;
+        public double content;
+        public DateTime date;
+        private Upsert recap;
+
+        public Recap(string text, double content)
+        {
+            recap = new Upsert(Table.PAYMENT_DETAILS, -1);
+            this.id = -1;
+            this.text = text;
+            this.content = content;
+            this.date = DateTime.Now;
+        }
+
+        public Recap(MySqlDataReader reader)
+        {
+            this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
+            this.text = Retrieve.GetValueOrDefault<string>(reader, Field.RECAP_TEXT);
+            this.content = Retrieve.GetValueOrDefault<double>(reader, Field.RECAP_VALUE);
+            this.date = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE);
+
+        }
+        public override string ToString()
+        {
+            return text ?? string.Empty;
+        }
+
+        public bool Delete()
+        {
+            if (recap == null)
+            {
+                recap = new Upsert(Table.PAYMENT_DETAILS, id);
+                recap.Insert(Field.ISDELETED, true);
+                recap.Save();
+                return true;
+            }
+            return false;
+        }
+        public int Save()
+        {
+            if(recap == null)
+            {
+                recap = new Upsert(Table.PAYMENT_DETAILS, id);
+            }
+            recap.Insert(Field.RECAP_TEXT, text);
+            recap.Insert(Field.RECAP_VALUE, content);
+            recap.Insert(Field.LEDGER_TYPE, "RECAP");
+            recap.Insert(Field.DATE, date);
+            recap.Save();
+            id = recap.id;
+
+            return id;
+        }
+
+    }
 }
+

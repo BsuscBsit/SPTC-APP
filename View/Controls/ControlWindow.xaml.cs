@@ -51,7 +51,7 @@ namespace SPTC_APP.View
             });
             //return control;
         }
-        public static int ShowDialogStatic(string header, string content, string middlebtn, string rightbtn, Icons icons = Icons.DEFAULT)
+        public static int ShowThreway(string header, string content, string middlebtn, string rightbtn, Icons icons = Icons.DEFAULT)
         {
             return Application.Current.Dispatcher.Invoke(() =>
             {
@@ -65,7 +65,7 @@ namespace SPTC_APP.View
 
         
 
-        public static bool ShowDialogStatic(string header, string content, Icons icons = Icons.DEFAULT)
+        public static bool ShowTwoway(string header, string content, Icons icons = Icons.DEFAULT)
         {
             bool? res = Application.Current.Dispatcher.Invoke(() =>
             {

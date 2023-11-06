@@ -105,8 +105,15 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgLedger.Items.Add(tmp);
                 }
-                lblTotal.Content = "BALANCE :";
-                lblTotalLedger.Content = franchise.LoanBalance;
+                if (franchise.LoanBalance > 0)
+                {
+                    lblTotal.Content = "BALANCE :";
+                    lblTotalLedger.Content = franchise.LoanBalance.ToString("0.00");
+                } else
+                {
+                    lblTotal.Content = "CURRENT LOAN :";
+                    lblTotalLedger.Content = "N/A";
+                }
             } 
             else if (strmod == LTLOAN)
             {
@@ -128,8 +135,16 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgLedger.Items.Add(tmp);
                 }
-                lblTotal.Content = "BALANCE :";
-                lblTotalLedger.Content = franchise.LongTermLoanBalance;
+                if (franchise.LongTermLoanBalance > 0)
+                {
+                    lblTotal.Content = "BALANCE :";
+                    lblTotalLedger.Content = franchise.LongTermLoanBalance.ToString("0.00");
+                }
+                else
+                {
+                    lblTotal.Content = "CURRENT LTLOAN :";
+                    lblTotalLedger.Content = "N/A";
+                }
             }
             else if(strmod == HISTORY)
             {
@@ -269,7 +284,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnDeletePayment_Click(object sender, RoutedEventArgs e)
         {
-            if(selectedPayment != null && ControlWindow.ShowDialogStatic("Deletion", $"Removing data {lblSelectedLedger.Content}"))
+            if(selectedPayment != null && ControlWindow.ShowTwoway("Deletion", $"Removing data {lblSelectedLedger.Content}"))
             {
                 if (selectedPayment is PaymentDetails<Ledger.ShareCapital> sc)
                 {

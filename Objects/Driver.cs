@@ -18,6 +18,7 @@ namespace SPTC_APP.Objects
         public string emergencyPerson { get; set; }
         public string emergencyContact { get; set; }
         public DateTime dateOfMembership = DateTime.Now;
+        public Violation violation { get; set; }
         public Franchise franchise { get; set; }
         
         public int violationCount { 
@@ -29,7 +30,15 @@ namespace SPTC_APP.Objects
         public bool isSuspended {
             get
             {
-                return Retrieve.GetDataUsingQuery<bool>(RequestQuery.CHECK_IF_SUSPENDED(AppState.GetEnumDescription(General.DRIVER), Field.DRIVER_ID, id)).FirstOrDefault();
+                UpdateFranchise();
+                int fid = franchise?.id ?? -1;
+                int nid = name?.id ?? -1;
+                if(Retrieve.GetDataUsingQuery<bool>(RequestQuery.CHECK_IF_SUSPENDED(AppState.GetEnumDescription(General.DRIVER), Field.DRIVER_ID, id)).FirstOrDefault() && fid != -1 && nid != -1)
+                {
+                    violation = Retrieve.GetDataUsingQuery<Violation>(RequestQuery.GET_VIOLATION_LIST_OF(fid, nid)).LastOrDefault();
+                    return true;
+                }
+                return false;
             } 
             private set{ } 
         }

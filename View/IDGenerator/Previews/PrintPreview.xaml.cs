@@ -117,7 +117,7 @@ namespace SPTC_APP.View
 
             if (idnotprintedcunt > 0)
             {
-                if (ControlWindow.ShowDialogStatic("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotprintedcunt > 1 ? "s were" : " was")} not printed!", Icons.NOTIFY))
+                if (ControlWindow.ShowTwoway("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotprintedcunt > 1 ? "s were" : " was")} not printed!", Icons.NOTIFY))
                 {
                     ResetPrintData();
                     (new PrintPreview()).Show();
@@ -132,7 +132,7 @@ namespace SPTC_APP.View
 
             if (idnotsavedcount > 0)
             {
-                if (ControlWindow.ShowDialogStatic("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotsavedcount > 1 ? "s were" : " was")} not saved!", Icons.NOTIFY))
+                if (ControlWindow.ShowTwoway("Confirm Exit?", $"{numtext(idnotsavedcount)} ID{(idnotsavedcount > 1 ? "s were" : " was")} not saved!", Icons.NOTIFY))
                 {
                     ResetPrintData();
                     (new PrintPreview()).Show();

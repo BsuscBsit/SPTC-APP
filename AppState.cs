@@ -382,6 +382,11 @@ namespace SPTC_APP
             }
             return videoSource.VideoCapabilities.OrderByDescending(c => c.FrameSize.Width * c.FrameSize.Height).ToList();
         }
+
+        public static List<Recap> LoadRecapitulations(int currentmonth, int currentYear)
+        {
+            return Retrieve.GetDataUsingQuery<Recap>(RequestQuery.GET_ALL_RECAP_IN_MONTH(currentmonth, currentYear));
+        }
     }
 
 }

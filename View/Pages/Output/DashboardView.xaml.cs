@@ -1,6 +1,7 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
+using SPTC_APP.View.Pages.Input;
 using SPTC_APP.View.Styling;
 using System;
 using System.Collections;
@@ -468,7 +469,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnViewFullDetails_Click(object sender, RoutedEventArgs e)
         {
-            btnReload_Click(sender, e);
+            (new Recapitulations()).Show();
         }
 
         private void btnActions_MouseDown(object sender, MouseButtonEventArgs e)

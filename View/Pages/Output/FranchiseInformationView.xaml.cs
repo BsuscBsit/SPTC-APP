@@ -199,7 +199,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnChangeDriver_Click(object sender, RoutedEventArgs e)
         {
-            int result = ControlWindow.ShowDialogStatic("Change Driver", "New or Existing?", "EXISTING", "NEW", Icons.DEFAULT);
+            int result = ControlWindow.ShowThreway("Change Driver", "New or Existing?", "EXISTING", "NEW", Icons.DEFAULT);
 
             if (result == -1) 
             {

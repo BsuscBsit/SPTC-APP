@@ -44,7 +44,16 @@ namespace SPTC_APP.View.Pages.Input
                 lblInterest.Visibility = Visibility.Collapsed;
                 lblProcessingFee.Visibility = Visibility.Collapsed;
                 tbProcessingFee.Visibility = Visibility.Collapsed;
-                tboxAmount.Text = franchise.GetLTLoans().FirstOrDefault().paymentDues.ToString("0.00");
+                double payment = franchise.GetLTLoans().FirstOrDefault().paymentDues;
+                double balance = franchise.LongTermLoanBalance;
+                if (payment < balance)
+                {
+                    tboxAmount.Text = payment.ToString("0.00");
+                }
+                else
+                {
+                    tboxAmount.Text = balance.ToString("0.00");
+                }
             }
         }
         protected override void OnClosing(CancelEventArgs e)
@@ -61,7 +70,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ControlWindow.ShowDialogStatic("Adding new record", "Confirm?", Icons.NOTIFY))
+            if (ControlWindow.ShowTwoway("Adding new record", "Confirm?", Icons.NOTIFY))
             {
                 double amount = Double.TryParse(tboxAmount.Text, out amount) ? amount : 0;
                 double interest = Double.TryParse(tboxInterest.Text, out interest) ? interest : 0;

@@ -329,7 +329,7 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     if (MainBody.selectedFranchise?.Driver?.isSuspended ?? false)
                     {
-                        ValuePairFI(lblF7, "Is Suspended:", lblI7, "YES");
+                        ValuePairFI(lblF7, "Is Suspended:", lblI7, $"YES ({MainBody.selectedFranchise.Driver.violation.dDateEnd})");
                         lblI7.Foreground = Brushes.Red;
                         lblI7.FontWeight = FontWeights.Black;
                     }
@@ -362,7 +362,10 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     if (MainBody.selectedFranchise?.GetLoans()?.Count <= 0)
                     {
-                        btnAddLoan.Content = "APPLY FOR LOAN";
+                        btnAddLoan.Content = "Apply for Loan";
+                    } else
+                    {
+                        btnAddLoan.Content = "Pay Loan";
                     }
                     btnAddLoan.Visibility = Visibility.Visible;
                 }
@@ -370,7 +373,10 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     if (MainBody.selectedFranchise?.GetLTLoans()?.Count <= 0)
                     {
-                        btnAddLoan.Content = "APPLY FOR LTLOAN";
+                        btnAddLTLoan.Content = "Apply for LTLoan";
+                    } else
+                    {
+                        btnAddLTLoan.Content = "Pay LTLoan";
                     }
                     btnAddLTLoan.Visibility = Visibility.Visible;
                 }

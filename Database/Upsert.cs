@@ -180,14 +180,6 @@ namespace SPTC_APP.Database
                                 };
                                 id = GetExistingRecordId(uniqueAttributes);
                             }
-                            else if(tableName == Table.PAYMENT_DETAILS)
-                            {
-                                Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
-                                {
-                                    { Field.REFERENCE_NO, fieldValues.TryGetValue(Field.REFERENCE_NO, out var temp) ? temp : -1 },
-                                };
-                                id = GetExistingRecordId(uniqueAttributes);
-                            }
                             else if (tableName == Table.VIOLATION_TYPE)
                             {
                                 Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>

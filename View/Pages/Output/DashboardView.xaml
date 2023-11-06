@@ -474,7 +474,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Click="btnViewFullDetails_Click"
-                            Content="VIEW FULL DETAILS"
+                            Content="RECAPITULATIONS"
                             Style="{StaticResource CommonButtonStyle}" />
                         <Button
                             x:Name="btnPrint"

@@ -148,7 +148,7 @@
                            FontWeight="SemiBold"
                            FontSize="14"
                            FontFamily="Inter" Margin="422,50,31,426"/>
-        <DatePicker x:Name="bDay"
+        <DatePicker x:Name="DateIssued"
                                 BorderThickness="0"
                                 VerticalContentAlignment="Center" Height="31" Margin="548,48,46,425"/>
         <Button x:Name="btnCanceFranchiseInfo" Style="{DynamicResource CommonButtonStyle}" Content="CANCEL" Width="135" Height="40"

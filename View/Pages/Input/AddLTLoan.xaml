@@ -25,7 +25,7 @@
              FontSize="14"
              FontFamily="Inter" Margin="100,143,0, 0"/>
 
-        <DatePicker x:Name="dpBdate"
+        <DatePicker x:Name="dpLoanDate"
              Width="164"
              Height="30"
              HorizontalAlignment="left"
@@ -72,7 +72,7 @@
          FontSize="14"
          FontFamily="Inter" Margin="298,146,0,0" />
 
-        <TextBox x:Name="tboxAmount"               
+        <TextBox x:Name="tboxLoadAmount"               
          Text="" 
          Width="164"
          Height="30" 

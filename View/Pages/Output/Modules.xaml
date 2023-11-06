@@ -293,9 +293,7 @@
 
             <Border
                 Grid.Row="1"
-                Width="350"
-                Margin="0,15,0,0"
-                HorizontalAlignment="Left"
+                Margin="0,15,24,0"
                 VerticalAlignment="Bottom"
                 BorderBrush="Black"
                 BorderThickness="1"

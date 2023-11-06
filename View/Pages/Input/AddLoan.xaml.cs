@@ -42,7 +42,15 @@ namespace SPTC_APP.View.Pages.Input
             {
                 tboxInterest.Visibility = Visibility.Collapsed;
                 lblInterest.Visibility = Visibility.Collapsed;
-                tboxAmount.Text = franchise.GetLoans().FirstOrDefault().paymentDues.ToString("0.00");
+                double payment = franchise.GetLoans().FirstOrDefault().paymentDues;
+                double balance = franchise.LoanBalance;
+                if (payment < balance)
+                {
+                    tboxAmount.Text = payment.ToString("0.00");
+                } else
+                {
+                    tboxAmount.Text = balance.ToString("0.00");
+                }
             }
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
@@ -122,6 +130,11 @@ namespace SPTC_APP.View.Pages.Input
             {
                 e.Handled = true; // Cancel the input event
             }
+        }
+
+        private void tboxAmount_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -105,8 +105,15 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgLedger.Items.Add(tmp);
                 }
-                lblTotal.Content = "BALANCE :";
-                lblTotalLedger.Content = franchise.LoanBalance.ToString("0.00");
+                if (franchise.LoanBalance > 0)
+                {
+                    lblTotal.Content = "BALANCE :";
+                    lblTotalLedger.Content = franchise.LoanBalance.ToString("0.00");
+                } else
+                {
+                    lblTotal.Content = "CURRENT LOAN :";
+                    lblTotalLedger.Content = "N/A";
+                }
             } 
             else if (strmod == LTLOAN)
             {
@@ -128,8 +135,16 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgLedger.Items.Add(tmp);
                 }
-                lblTotal.Content = "BALANCE :";
-                lblTotalLedger.Content = franchise.LongTermLoanBalance.ToString("0.00");
+                if (franchise.LongTermLoanBalance > 0)
+                {
+                    lblTotal.Content = "BALANCE :";
+                    lblTotalLedger.Content = franchise.LongTermLoanBalance.ToString("0.00");
+                }
+                else
+                {
+                    lblTotal.Content = "CURRENT LTLOAN :";
+                    lblTotalLedger.Content = "N/A";
+                }
             }
             else if(strmod == HISTORY)
             {

@@ -44,7 +44,16 @@ namespace SPTC_APP.View.Pages.Input
                 lblInterest.Visibility = Visibility.Collapsed;
                 lblProcessingFee.Visibility = Visibility.Collapsed;
                 tbProcessingFee.Visibility = Visibility.Collapsed;
-                tboxAmount.Text = franchise.GetLTLoans().FirstOrDefault().paymentDues.ToString("0.00");
+                double payment = franchise.GetLTLoans().FirstOrDefault().paymentDues;
+                double balance = franchise.LongTermLoanBalance;
+                if (payment < balance)
+                {
+                    tboxAmount.Text = payment.ToString("0.00");
+                }
+                else
+                {
+                    tboxAmount.Text = balance.ToString("0.00");
+                }
             }
         }
         protected override void OnClosing(CancelEventArgs e)

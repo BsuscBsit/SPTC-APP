@@ -39,6 +39,8 @@ namespace SPTC_APP.Database
 
         public static string GET_ALL_PAYMENT_IN_MONTH(int month, int year) =>
             $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} <> -1 AND {Field.DEPOSIT} > 0 AND {Where.ALL_NOTDELETED}";
+        public static string GET_ALL_RECAP_IN_MONTH(int month, int year) =>
+            $"SELECT {Field.ID}, {Field.RECAP_TEXT}, {Field.RECAP_VALUE}, {Field.DATE} FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} = -1 AND {Field.DEPOSIT} > 0 AND {Field.LEDGER_TYPE} = \"RECAP\" AND {Where.ALL_NOTDELETED}";
         public static string GET_ALL_PAYMENT_IN_MONTH(string table, int month, int year) =>
             $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_TYPE} = \"{table}\" AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
         public static string CHECK_IF_SUSPENDED(string entity, string field, int id) =>
@@ -240,6 +242,10 @@ namespace SPTC_APP.Database
         public const string IS_PRINTED = "is_printed";
 
         public const string DATE_OF_MEM = "date_of_mem";
+
+        //RECAP
+        public const string RECAP_VALUE = "deposit";
+        public const string RECAP_TEXT = "remarks";
     }
 
     public enum CRUDControl

@@ -228,6 +228,9 @@ namespace SPTC_APP.View.Pages
                         ICollectionView collectionView = CollectionViewSource.GetDefaultView(datagrid.Items);
                         collectionView.Filter = null;
                     }
+                } else
+                {
+                    SearchBarResize(true);
                 }
             } else
             {

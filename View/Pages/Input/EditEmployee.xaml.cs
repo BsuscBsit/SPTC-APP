@@ -116,7 +116,7 @@ namespace SPTC_APP.View.Pages.Input
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            AppState.mainwindow?.Show();
+            
             base.OnClosing(e);
         }
 
@@ -235,7 +235,7 @@ namespace SPTC_APP.View.Pages.Input
         }
         private void btnPreview_Click(object sender, RoutedEventArgs e)
         {
-            if (tbFname.Text.Length > 0 && tbMname.Text.Length > 0 && tbLname.Text.Length > 0 && tbAddressLine1.Text.Length > 0 && tbAddressLine2.Text.Length > 0) {
+            if (tbFname.Text.Length > 0 && tbLname.Text.Length > 0 && tbAddressLine1.Text.Length > 0 && tbAddressLine2.Text.Length > 0) {
                 if (isEdit)
                 {
                     employee.name = (employee.name != null) ? employee.name : new Name();
@@ -293,10 +293,10 @@ namespace SPTC_APP.View.Pages.Input
                 }
                 ControlWindow.ShowStatic("Input Fields incomplete!", "Missing some required inputs.");
             }
-            this.Close();
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            AppState.mainwindow?.Show();
             this.Close();
         }
 

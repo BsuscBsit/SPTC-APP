@@ -25,7 +25,7 @@
                 </DataGrid.Resources>
             </DataGrid>
         </Grid>
-        <Grid x:Name="CodingGrid" d:IsHidden="True">
+        <Grid x:Name="CodingGrid" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -85,8 +85,10 @@
                 Grid.Row="2"
                 Grid.ColumnSpan="3"
                 Height="77"
+                Margin="0,12,0,0"
+                VerticalAlignment="Top"
                 BorderBrush="Black"
-                BorderThickness="1" VerticalAlignment="Top" Margin="0,12,0,0">
+                BorderThickness="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -188,7 +190,7 @@
                     <Image
                         x:Name="imgWed"
                         Grid.Row="1"
-                        Grid.Column="2"
+                        Grid.Column="3"
                         Width="24"
                         Height="24"
                         HorizontalAlignment="Center"
@@ -197,7 +199,7 @@
                     <Image
                         x:Name="imgThu"
                         Grid.Row="1"
-                        Grid.Column="3"
+                        Grid.Column="4"
                         Width="24"
                         Height="24"
                         HorizontalAlignment="Center"
@@ -206,7 +208,7 @@
                     <Image
                         x:Name="imgFri"
                         Grid.Row="1"
-                        Grid.Column="4"
+                        Grid.Column="5"
                         Width="24"
                         Height="24"
                         HorizontalAlignment="Center"
@@ -215,7 +217,7 @@
                     <Image
                         x:Name="imgSat"
                         Grid.Row="1"
-                        Grid.Column="5"
+                        Grid.Column="6"
                         Width="24"
                         Height="24"
                         HorizontalAlignment="Center"
@@ -224,7 +226,7 @@
                     <Image
                         x:Name="imgSun"
                         Grid.Row="1"
-                        Grid.Column="5"
+                        Grid.Column="7"
                         Width="24"
                         Height="24"
                         HorizontalAlignment="Center"
@@ -264,7 +266,7 @@
                 Grid.Row="1"
                 Grid.ColumnSpan="2" />
         </Grid>
-        <Grid x:Name="gridLedger">
+        <Grid x:Name="gridLedger" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />

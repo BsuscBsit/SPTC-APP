@@ -334,7 +334,7 @@ namespace SPTC_APP.View.Pages.Output
                 path.StrokeThickness = 0;
                 if(clickedPie != null)
                 {
-                    clickedPie.StrokeThickness = 3.5;
+                    clickedPie.StrokeThickness = 2;
                 }
                 
             }
@@ -349,13 +349,13 @@ namespace SPTC_APP.View.Pages.Output
                 double val = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).TryGetValue(tag, out var value)? value: 0;
                 lblPieChart.Content = val.ToString("0.00");
                 lblPercent.Content = Math.Round(((val / AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()) * 100)) + "%";
-                path.StrokeThickness = 3.5;
+                path.StrokeThickness = 2;
             }
         }
 
         private Brush RandomColor(int i)
         {
-            List<Brush> brushes = new List<Brush> { Brushes.Cyan, Brushes.Blue, Brushes.DarkBlue };
+            List<Brush> brushes = new List<Brush> { Brushes.Cyan, Brushes.Green, Brushes.Yellow, Brushes.Red };
             return brushes[i%brushes.Count];
         }
         public class CustomRectangle

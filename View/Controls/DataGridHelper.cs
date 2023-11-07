@@ -101,7 +101,7 @@ public class DataGridHelper<T>
             Height = height;
             MaxWidth = maxWidth;
             FontSize = fontSize;
-            BackgroundColor = backgroundColor ?? System.Windows.Media.Brushes.DarkCyan;
+            BackgroundColor = backgroundColor ?? System.Windows.Media.Brushes.White;
 
             FontWeight = fontWeight.HasValue ? fontWeight.Value : System.Windows.FontWeights.Normal;
 

@@ -338,7 +338,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Background="White">
-                    <Path Fill="LightGray">
+                    <Path Fill="{StaticResource BrushSoftGrey3}">
                         <Path.Data>
                             <EllipseGeometry
                                 x:Name="cvPieCircle"
@@ -346,6 +346,9 @@
                                 RadiusX="87"
                                 RadiusY="87" />
                         </Path.Data>
+                        <Path.Effect>
+                            <DropShadowEffect BlurRadius="20" Opacity="0.07" ShadowDepth="0"/>
+                        </Path.Effect>
                     </Path>
                 </Canvas>
                 <Grid
@@ -354,7 +357,11 @@
                     Height="90"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-                    <Ellipse Fill="White" />
+                    <Ellipse Fill="White">
+                        <Ellipse.Effect>
+                            <DropShadowEffect BlurRadius="20" Opacity="0.2" ShadowDepth="0"/>
+                        </Ellipse.Effect>
+                    </Ellipse>
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />

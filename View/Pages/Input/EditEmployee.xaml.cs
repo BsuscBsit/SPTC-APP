@@ -39,6 +39,7 @@ namespace SPTC_APP.View.Pages.Input
             InitializeComponent();
             initTextBoxes();
             DraggingHelper.DragWindow(topBar);
+            tbFname.Focus();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             bDay.SelectedDate = DateTime.Now;

@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
+using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
 {
@@ -25,6 +27,7 @@ namespace SPTC_APP.View.Pages.Input
         public InputFranchiseView(Franchise franchise = null)
         {
             InitializeComponent();
+            initTextBoxes();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             DateIssued.DisplayDate = DateTime.Now;
@@ -36,6 +39,8 @@ namespace SPTC_APP.View.Pages.Input
                 tboxLTOplateNum.Text = franchise.LicenseNO;
 
             }
+            DraggingHelper.DragWindow(topBar);
+            tboxBodyNum.Focus();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -52,6 +57,8 @@ namespace SPTC_APP.View.Pages.Input
 
         //Make Requirements into dropdown, out database will only save tin_number and voters_id_number
         //NOTE: gather all posible requirements for Franchise only
+
+        // (08-11-23) Design Temporary: TIN & Voter's as labels til' other requirements incomplete.
 
         private void btnNextFranchiseInput_Click(object sender, RoutedEventArgs e)
         {
@@ -74,6 +81,15 @@ namespace SPTC_APP.View.Pages.Input
             }
             this.Close();
 
+        }
+
+        private void initTextBoxes()
+        {
+            tboxBodyNum.DefaultTextBoxBehavior(NUMBERS, true, gridToast, "Body number.", 0, true);
+            tboxMTOPplateNum.DefaultTextBoxBehavior(STRICTALPHANUMERICDASHES, true, gridToast, "Motorcycle/Tricycle Plate number.", 1, true);
+            tboxLTOplateNum.DefaultTextBoxBehavior(STRICTALPHANUMERICDASHES, true, gridToast, "Land Transportation Office Plate number.", 2, true);
+            tboxIDNum1.DefaultTextBoxBehavior(TIN, true, gridToast, "Taxpayer's Identification Number", 3, true);
+            tboxIDNum2.DefaultTextBoxBehavior(VIN, true, gridToast, "Voter's Identification number.", 4, true);
         }
     }
 }

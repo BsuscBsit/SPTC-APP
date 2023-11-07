@@ -159,7 +159,7 @@ namespace SPTC_APP.View.Pages.Output
                         Y2 = yPos,
                         Stroke = Brushes.Gray,
                         Opacity = 0.6,
-                        StrokeThickness = 2,
+                        StrokeThickness = 1,
                         StrokeDashArray = new DoubleCollection(new double[] { 3, 1 })
                     };
 
@@ -191,7 +191,7 @@ namespace SPTC_APP.View.Pages.Output
                         Y2 = cvBarChart.Height,
                         Stroke = Brushes.Gray,
                         Opacity = 0.6,
-                        StrokeThickness = 2,
+                        StrokeThickness = 1,
                     };
                     int year = DateTime.Now.Year;
                     TextBox TblYear = new TextBox
@@ -334,7 +334,7 @@ namespace SPTC_APP.View.Pages.Output
                 path.StrokeThickness = 0;
                 if(clickedPie != null)
                 {
-                    clickedPie.StrokeThickness = 2;
+                    clickedPie.StrokeThickness = 1;
                 }
                 
             }
@@ -349,7 +349,7 @@ namespace SPTC_APP.View.Pages.Output
                 double val = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).TryGetValue(tag, out var value)? value: 0;
                 lblPieChart.Content = val.ToString("0.00");
                 lblPercent.Content = Math.Round(((val / AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()) * 100)) + "%";
-                path.StrokeThickness = 2;
+                path.StrokeThickness = 1;
             }
         }
 

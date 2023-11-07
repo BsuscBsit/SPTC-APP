@@ -249,13 +249,15 @@
                 Style="{StaticResource CommonTextBoxStyle}"
                 TextWrapping="Wrap" />
             <Border
-                Background="White"
                 Grid.Row="1"
                 Grid.RowSpan="3"
                 Grid.Column="2"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                BorderThickness="1" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                Background="White"
+                BorderThickness="1"
+                MouseEnter="Border_MouseEnter"
+                MouseLeave="Border_MouseLeave">
                 <Border.BorderBrush>
                     <SolidColorBrush Color="{DynamicResource ColorBlack}" />
                 </Border.BorderBrush>
@@ -276,29 +278,32 @@
                             Visibility="Visible" />
 
                     </Viewbox>
-                    <Grid x:Name="groupPadButtons" Background="#4C000000" Visibility="Hidden">
+                    <Grid
+                        x:Name="groupPadButtons"
+                        Background="#4C000000"
+                        Visibility="Hidden">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Button
-                            x:Name="btnStartPad"
-                            Width="125"
-                            Height="30"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Top"
-                            Click="btnStartPad_Click"
-                            Content="Start Pad"
-                            Style="{DynamicResource CommonButtonStyle}"
-                            TabIndex="8" />
+                                x:Name="btnStartPad"
+                                Width="125"
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Click="btnStartPad_Click"
+                                Content="Start Pad"
+                                Style="{DynamicResource CommonButtonStyle}"
+                                TabIndex="8" />
                             <Button
-                            x:Name="btnBrowseSignPic"
-                            Width="125"
-                            Height="30"
-                            Margin="0,8,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Top"
-                            Click="btnBrowseSignPic_Click"
-                            Content="Browse"
-                            IsTabStop="False"
-                            Style="{DynamicResource CommonButtonStyle}" />
+                                x:Name="btnBrowseSignPic"
+                                Width="125"
+                                Height="30"
+                                Margin="0,8,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Click="btnBrowseSignPic_Click"
+                                Content="Browse"
+                                IsTabStop="False"
+                                Style="{DynamicResource CommonButtonStyle}" />
                         </StackPanel>
 
                     </Grid>
@@ -311,50 +316,63 @@
             Grid.Column="1"
             Width="172"
             Height="175">
-            <Canvas x:Name="parentCanvasCam" Width="201" Height="260" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="-15" Canvas.Top="-15" MouseLeave="parentCanvasCam_MouseLeave">
+            <Canvas
+                x:Name="parentCanvasCam"
+                Canvas.Left="-15"
+                Canvas.Top="-15"
+                Width="201"
+                Height="260"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                MouseLeave="parentCanvasCam_MouseLeave">
                 <Grid
-                x:Name="gridCameraCapture"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center" Visibility="Hidden">
+                    x:Name="gridCameraCapture"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="Hidden">
                     <Border Background="White" CornerRadius="10">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="12" ShadowDepth="0" />
                         </Border.Effect>
                     </Border>
                     <Grid
-                    Width="171.2"
-                    Height="229.6"
-                    Margin="15,15,15,15">
+                        Width="171.2"
+                        Height="229.6"
+                        Margin="15,15,15,15">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="176" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <ProgressBar
-                        x:Name="pbCameraOpen"
-                        Grid.Row="1"
-                        Height="8"
-                        IsIndeterminate="false" />
-                        <Button x:Name="btnCaptureeee"
-                        Grid.Row="2"
-                        Width="125"
-                        Height="30"
-                        Margin="0,15,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Content="Capture"
-                        Style="{DynamicResource CommonButtonStyle}" Click="BtnStartCam_Click" />
+                            x:Name="pbCameraOpen"
+                            Grid.Row="1"
+                            Height="8"
+                            IsIndeterminate="false" />
+                        <Button
+                            x:Name="btnCaptureeee"
+                            Grid.Row="2"
+                            Width="125"
+                            Height="30"
+                            Margin="0,15,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Click="BtnStartCam_Click"
+                            Content="Capture"
+                            Style="{DynamicResource CommonButtonStyle}" />
                     </Grid>
                 </Grid>
                 <Grid
-                x:Name="gridCamera"
-                Width="171"
-                Height="174"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="White"
-                MouseEnter="gridCamera_MouseEnter"
-                MouseLeave="gridCamera_MouseLeave" Canvas.Left="15" Canvas.Top="15">
+                    x:Name="gridCamera"
+                    Canvas.Left="15"
+                    Canvas.Top="15"
+                    Width="171"
+                    Height="174"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="White"
+                    MouseEnter="gridCamera_MouseEnter"
+                    MouseLeave="gridCamera_MouseLeave">
                     <Border BorderThickness="1">
                         <Border.BorderBrush>
                             <SolidColorBrush Color="{DynamicResource ColorBlack}" />
@@ -364,35 +382,36 @@
                                 <ContentControl Margin="0,50,0,50" Content="{StaticResource AlbumPH}" />
                             </Viewbox>
                             <Image
-                            x:Name="imgIDPic"
-                            Width="170"
-                            Height="173"
-                            Stretch="UniformToFill" />
+                                x:Name="imgIDPic"
+                                Width="170"
+                                Height="173"
+                                Stretch="UniformToFill" />
                             <Grid
-                            x:Name="groupCameraButtons"
-                            Background="#4C000000" Visibility="Hidden">
+                                x:Name="groupCameraButtons"
+                                Background="#4C000000"
+                                Visibility="Hidden">
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Button
-                                    x:Name="btnStartCam"
-                                    Width="125"
-                                    Height="30"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Click="BtnStartCam_Click"
-                                    Content="Start Camera"
-                                    Style="{DynamicResource CommonButtonStyle}"
-                                    TabIndex="7" />
+                                        x:Name="btnStartCam"
+                                        Width="125"
+                                        Height="30"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Click="BtnStartCam_Click"
+                                        Content="Start Camera"
+                                        Style="{DynamicResource CommonButtonStyle}"
+                                        TabIndex="7" />
                                     <Button
-                                    x:Name="btnBrowseIDPic"
-                                    Width="125"
-                                    Height="30"
-                                    Margin="0,8,0,0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Click="btnBrowseIDPic_Click"
-                                    Content="Browse"
-                                    IsTabStop="False"
-                                    Style="{DynamicResource CommonButtonStyle}" />
+                                        x:Name="btnBrowseIDPic"
+                                        Width="125"
+                                        Height="30"
+                                        Margin="0,8,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Click="btnBrowseIDPic_Click"
+                                        Content="Browse"
+                                        IsTabStop="False"
+                                        Style="{DynamicResource CommonButtonStyle}" />
                                 </StackPanel>
                             </Grid>
                         </Grid>

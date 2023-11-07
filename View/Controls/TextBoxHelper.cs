@@ -15,7 +15,7 @@ namespace SPTC_APP.View.Controls
     public static class TextBoxHelper
     {
         private static Grid grid;
-        public static void DefaultTextBoxBehavior(this TextBox tb, AllowFormat? format = null, bool blockSpaces = false, Grid errorGrid = null, string toolTip = null, int? tabIndex = null)
+        public static void DefaultTextBoxBehavior(this TextBox tb, AllowFormat? format = null, bool blockSpaces = false, Grid errorGrid = null, string toolTip = null, int? tabIndex = null, bool allCaps = false)
         {
             if(errorGrid != null)
             {
@@ -34,7 +34,7 @@ namespace SPTC_APP.View.Controls
             tb.MouseDoubleClick += DoubleClickBehavior;
             if(format != null)
             {
-                tb.PreviewTextInput += (sender, e) => PreviewTextInputBehavior(sender, e, format);
+                tb.PreviewTextInput += (sender, e) => PreviewTextInputBehavior(sender, e, format, allCaps);
             }
             if (blockSpaces)
             {
@@ -52,10 +52,15 @@ namespace SPTC_APP.View.Controls
             }
         }
 
-        private static void PreviewTextInputBehavior(object sender, TextCompositionEventArgs e, AllowFormat? format)
+        private static void PreviewTextInputBehavior(object sender, TextCompositionEventArgs e, AllowFormat? format, bool allCaps = false)
         {
             if (sender is TextBox tb)
             {
+                if (allCaps)
+                {
+                    tb.Text = tb.Text.ToUpper();
+                    tb.CaretIndex = tb.Text.Length;
+                }
                 string pattern = GetPatternForFormat(format);
 
                 if (Regex.IsMatch(e.Text, pattern))
@@ -136,6 +141,15 @@ namespace SPTC_APP.View.Controls
                 case ALPHABETS:
                     return @"[^A-Za-z.]+";
 
+                case NUMBERS:
+                    return @"[^0-9]+";
+
+                case NUMBERSDASHES:
+                    return @"[^0-9\-]+";
+
+                case STRICTALPHANUMERICDASHES:
+                    return @"[^A-Za-z0-9\-]+";
+
                 case SIGNEDDIGIT:
                     return @"[^0-9.-]+";
 
@@ -150,6 +164,12 @@ namespace SPTC_APP.View.Controls
 
                 case EMAIL:
                     return @"[^a-zA-Z0-9@._-]+";
+
+                case VIN:
+                    return @"[^A-Za-z0-9\-]+";
+
+                case TIN:
+                    return @"[^0-9\-]";
 
                 case COMMON:
                     return @"[^A-Za-z0-9.,;:!@#$%^&*()_+=\[\]{}|'""<>/\\?~-]+";
@@ -174,6 +194,18 @@ namespace SPTC_APP.View.Controls
                         msg += "letters and periods." + x;
                         break;
 
+                    case NUMBERS:
+                        msg += "numbers." + x;
+                        break;
+
+                    case NUMBERSDASHES:
+                        msg += "numbers and dashes." + x;
+                        break;
+
+                    case STRICTALPHANUMERICDASHES:
+                        msg += "letters, numbers, and dashes." + x;
+                        break;
+
                     case SIGNEDDIGIT:
                         msg += "numbers, dashes, and periods." + x;
                         break;
@@ -192,6 +224,14 @@ namespace SPTC_APP.View.Controls
 
                     case EMAIL:
                         msg = input != null ? "'" + input + "' is not a valid email character." : "";
+                        break;
+
+                    case VIN:
+                        msg = input != null ? "'" + input + "' is not valid for Voter's ID number." : "";
+                        break;
+
+                    case TIN:
+                        msg = input != null ? "'" + input + "' is not valid for TIN." : "";
                         break;
 
                     case COMMON:
@@ -213,11 +253,16 @@ namespace SPTC_APP.View.Controls
         public enum AllowFormat
         {
             ALPHABETS,
+            NUMBERS,
+            NUMBERSDASHES,
+            STRICTALPHANUMERICDASHES,
             SIGNEDDIGIT,
             UNSIGNEDDIGIT,
             ALPHANUMERIC,
             PHONENUMBER,
             EMAIL,
+            VIN,
+            TIN,
             COMMON,
             ADDRESS
         }

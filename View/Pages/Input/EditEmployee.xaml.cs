@@ -98,7 +98,7 @@ namespace SPTC_APP.View.Pages.Input
             {
                 if (isManage)
                 {
-                    lblTitle.Content = $"EDIT {employee.position?.title ?? string.Empty} PROFILE: ";
+                    lblTitle.Content = $"MODIFY {employee.position?.title.ToUpper() ?? string.Empty} PROFILE: ";
                 }
                 tbPosTitle.Text = employee.position?.title?.ToString() ?? "";
                 tbFname.Text = employee.name?.firstname ?? "";

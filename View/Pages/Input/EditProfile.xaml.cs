@@ -38,7 +38,7 @@ namespace SPTC_APP.View.Pages.Input
                 tboxsProvince.Text = drv.address?.province;
                 tboxsCity.Text = drv.address?.city;
                 tboxsBarangay.Text = drv.address?.barangay;
-                tboxStreetName.Text = drv.address?.streetname;
+                tboxStreetName.Text = drv.address?.addressline1;
                 this.dholder = drv;
             } else if (type == General.OPERATOR)
             {
@@ -55,7 +55,7 @@ namespace SPTC_APP.View.Pages.Input
                 tboxsProvince.Text = optr.address?.province;
                 tboxsCity.Text = optr.address?.city;
                 tboxsBarangay.Text = optr.address?.barangay;
-                tboxStreetName.Text = optr.address?.streetname;
+                tboxStreetName.Text = optr.address?.addressline1;
                 this.oholder = optr;
             }
         }

@@ -266,6 +266,12 @@ namespace SPTC_APP.Objects
             {
                 return $"{addressline1} {addressline2}";
             }
+
+            else if (!string.IsNullOrEmpty(addressline1) && (!string.IsNullOrEmpty(barangay) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(country)))
+            {
+                return $"{addressline1}, {barangay} {city}, {province}".Trim();
+
+            }
             else if (!string.IsNullOrEmpty(houseNo) || !string.IsNullOrEmpty(streetname) || !string.IsNullOrEmpty(barangay) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(province) || !string.IsNullOrEmpty(country))
             {
                 return $"{houseNo} {streetname}, {barangay} {city}, {province}".Trim();

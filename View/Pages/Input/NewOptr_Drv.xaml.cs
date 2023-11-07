@@ -64,7 +64,7 @@ namespace SPTC_APP.View.Pages.Input
                     drv.address.province = tboxsProvince.Text;
                     drv.address.city = tboxsCity.Text;
                     drv.address.barangay = tboxsBarangay.Text;
-                    drv.address.streetname = tboxStreetName.Text;
+                    drv.address.addressline1 = tboxStreetName.Text;
                     drv.address.UpdateAddressLines();
                     if (franchise != null)
                     {
@@ -90,7 +90,7 @@ namespace SPTC_APP.View.Pages.Input
                     optr.address.province = tboxsProvince.Text;
                     optr.address.city = tboxsCity.Text;
                     optr.address.barangay = tboxsBarangay.Text;
-                    optr.address.streetname = tboxStreetName.Text;
+                    optr.address.addressline1 = tboxStreetName.Text;
                     optr.address.UpdateAddressLines();
 
                     if (franchise != null)
@@ -124,7 +124,7 @@ namespace SPTC_APP.View.Pages.Input
                     newFranchise.Operator.address.province = tboxsProvince.Text;
                     newFranchise.Operator.address.city = tboxsCity.Text;
                     newFranchise.Operator.address.barangay = tboxsBarangay.Text;
-                    newFranchise.Operator.address.streetname = tboxStreetName.Text;
+                    newFranchise.Operator.address.addressline1 = tboxStreetName.Text;
                     newFranchise.Operator.address.UpdateAddressLines();
                         
                     newFranchise.lastFranchiseId = franchise.id;

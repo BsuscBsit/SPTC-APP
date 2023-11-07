@@ -107,8 +107,12 @@ namespace SPTC_APP.View.Pages.Input
         private void click_remove(object sender, MouseEventArgs e)
         {
             if(sender is Button btn){
-                if (btn.Tag?.ToString().Equals("DELETED") ?? false) ;
-                    UpdateRecap();
+                if (btn.Tag?.ToString().Equals("DELETED") ?? false)
+                {
+                    ;
+                }
+
+                UpdateRecap();
             }
         }
 

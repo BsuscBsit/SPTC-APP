@@ -15,12 +15,14 @@
     mc:Ignorable="d">
     <Grid
         x:Name="AddShareCapital"
-        Width="607"
+        Width="640"
         Height="360">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="15" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="15" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="35" />
         </Grid.ColumnDefinitions>
@@ -37,7 +39,7 @@
         </Grid.RowDefinitions>
         <Border
             x:Name="topBar"
-            Grid.ColumnSpan="5"
+            Grid.ColumnSpan="7"
             Margin="0,0,2,0"
             Style="{StaticResource TopBarStyle}" />
         <Label
@@ -59,7 +61,7 @@
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             Grid.Row="3"
-            Grid.Column="2"
+            Grid.Column="5"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Content="Type of Payment: "
@@ -102,7 +104,7 @@
         <ComboBox
             x:Name="cbGender"
             Grid.Row="4"
-            Grid.Column="2"
+            Grid.Column="3"
             Width="164"
             Height="30"
             Margin="15,0,0,0"
@@ -116,7 +118,7 @@
         <TextBox
             x:Name="tboxAmount"
             Grid.Row="4"
-            Grid.Column="3"
+            Grid.Column="5"
             Width="164"
             Height="30"
             Margin="15,0,0,0"
@@ -134,7 +136,7 @@
         <StackPanel
             Grid.Row="8"
             Grid.Column="1"
-            Grid.ColumnSpan="4"
+            Grid.ColumnSpan="7"
             Margin="0,0,0,24"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -157,8 +159,7 @@
         </StackPanel>
         <Grid
             x:Name="gridToast"
-            Grid.RowSpan="9"
-            Grid.ColumnSpan="5"
+            Grid.ColumnSpan="7"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>

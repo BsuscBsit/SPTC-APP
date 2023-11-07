@@ -44,5 +44,9 @@ namespace SPTC_APP.View.Styling
             Toast toast = new Toast(gridForToast, "The Quick Brown Fox Jumps Over The Lazy Dog!");
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(alpabets, "InputInvalidated", false);
+        }
     }
 }

@@ -1,8 +1,10 @@
 ﻿
 using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using System;
 using System.ComponentModel;
 using System.Windows;
+using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
 {
@@ -18,6 +20,7 @@ namespace SPTC_APP.View.Pages.Input
         public EditProfile(Franchise franchise, dynamic lholder, General type)
         {
             InitializeComponent();
+            initTextBoxes();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             
@@ -58,6 +61,8 @@ namespace SPTC_APP.View.Pages.Input
                 tboxStreetName.Text = optr.address?.addressline1;
                 this.oholder = optr;
             }
+            DraggingHelper.DragWindow(topBar);
+            tboxsFname.Focus();
         }
 
         
@@ -144,6 +149,19 @@ namespace SPTC_APP.View.Pages.Input
 
             }
 
+
+        }
+        private void initTextBoxes()
+        {
+            tboxsFname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "First name.", 0);
+            tboxsMname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "Middle name.", 2);
+            tboxsLname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "Last name.", 3);
+            tboxsContactNum.DefaultTextBoxBehavior(PHONENUMBER, true, gridToast, "Contact number.", 4);
+            tboxsCountry.DefaultTextBoxBehavior(ALPHANUMERIC, false, gridToast, "First Name", 0);
+            tboxsProvince.DefaultTextBoxBehavior(ALPHANUMERIC, false, gridToast, "First Name", 0);
+            tboxsCity.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First Name", 0);
+            tboxsBarangay.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First Name", 0);
+            tboxStreetName.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First Name", 0);
 
         }
     }

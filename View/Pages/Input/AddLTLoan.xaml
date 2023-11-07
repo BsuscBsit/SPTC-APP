@@ -14,12 +14,14 @@
     mc:Ignorable="d">
     <Grid
         x:Name="AddShareCapital"
-        Width="607"
+        Width="640"
         Height="360">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="15" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="15" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="35" />
         </Grid.ColumnDefinitions>
@@ -36,7 +38,7 @@
         </Grid.RowDefinitions>
         <Border
             x:Name="topBar"
-            Grid.ColumnSpan="5"
+            Grid.ColumnSpan="7"
             Margin="0,0,2,0"
             Style="{StaticResource TopBarStyle}" />
         <Label
@@ -59,7 +61,7 @@
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             Grid.Row="3"
-            Grid.Column="2"
+            Grid.Column="3"
             Height="Auto"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
@@ -67,7 +69,7 @@
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             Grid.Row="3"
-            Grid.Column="3"
+            Grid.Column="5"
             Height="Auto"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
@@ -86,7 +88,7 @@
         <Label
             x:Name="lblInterest"
             Grid.Row="5"
-            Grid.Column="2"
+            Grid.Column="3"
             Height="Auto"
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
@@ -96,7 +98,7 @@
         <Label
             x:Name="lblProcessingFee"
             Grid.Row="5"
-            Grid.Column="3"
+            Grid.Column="5"
             Height="Auto"
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
@@ -125,7 +127,7 @@
         <TextBox
             x:Name="tboxAmount"
             Grid.Row="4"
-            Grid.Column="2"
+            Grid.Column="3"
             Width="164"
             Height="30"
             Margin="15,0,0,0"
@@ -134,7 +136,7 @@
         <TextBox
             x:Name="tboxRefNo"
             Grid.Row="4"
-            Grid.Column="3"
+            Grid.Column="5"
             Width="164"
             Height="30"
             Margin="15,0,0,0"
@@ -152,7 +154,7 @@
         <TextBox
             x:Name="tboxInterest"
             Grid.Row="6"
-            Grid.Column="2"
+            Grid.Column="3"
             Width="164"
             Height="30"
             Margin="15,0,0,0"
@@ -161,7 +163,7 @@
         <TextBox
             x:Name="tbProcessingFee"
             Grid.Row="6"
-            Grid.Column="3"
+            Grid.Column="5"
             Width="164"
             Height="30"
             Margin="15,0,0,0"
@@ -171,7 +173,7 @@
             Text="" />
         <StackPanel
             Grid.Row="8"
-            Grid.ColumnSpan="5"
+            Grid.ColumnSpan="7"
             Margin="0,0,0,24"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -195,7 +197,7 @@
         <Grid
             x:Name="gridToast"
             Grid.RowSpan="9"
-            Grid.ColumnSpan="6"
+            Grid.ColumnSpan="7"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom" />
     </Grid>

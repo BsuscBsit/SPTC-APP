@@ -12,7 +12,10 @@
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid x:Name="NewOptr" Height="477" Width="677">
+    <Grid
+        x:Name="NewOptr"
+        Width="677"
+        Height="477">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
@@ -54,7 +57,6 @@
         <Label
             Grid.Row="3"
             Grid.Column="1"
-            Height="NaN"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Content="First Name:"
@@ -62,7 +64,6 @@
         <Label
             Grid.Row="3"
             Grid.Column="3"
-            Height="NaN"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Content="Middle Name: "
@@ -70,7 +71,6 @@
         <Label
             Grid.Row="3"
             Grid.Column="5"
-            Height="NaN"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Content="Last Name: "
@@ -102,7 +102,6 @@
         <Label
             Grid.Row="7"
             Grid.Column="1"
-            Height="NaN"
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
@@ -111,7 +110,6 @@
         <Label
             Grid.Row="7"
             Grid.Column="3"
-            Height="NaN"
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
@@ -120,7 +118,6 @@
         <Label
             Grid.Row="7"
             Grid.Column="5"
-            Height="NaN"
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
@@ -141,7 +138,7 @@
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="House/Unit/Apartment/Building No. &amp; Street Name: "
+            Content="House/Unit/Apartment/Building No. &amp; Street Name:"
             Style="{StaticResource TextFieldLabelingPreset}" />
         <TextBox
             x:Name="tboxsFname"
@@ -287,9 +284,10 @@
         </StackPanel>
         <Grid
             x:Name="gridToast"
+            Grid.RowSpan="13"
             Grid.ColumnSpan="7"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom" Grid.RowSpan="13" />
+            VerticalAlignment="Bottom" />
 
 
 

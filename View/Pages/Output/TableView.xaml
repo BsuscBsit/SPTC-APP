@@ -127,8 +127,8 @@
                     <Ellipse
                         Grid.Row="0"
                         Grid.ColumnSpan="2"
-                        Width="70"
-                        Height="70"
+                        Width="120"
+                        Height="120"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
                         <Ellipse.Fill>

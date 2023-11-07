@@ -2,15 +2,21 @@
 using AForge.Video.DirectShow;
 using Microsoft.Win32;
 using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using SPTC_APP.View.IDGenerator.Extra;
+using SPTC_APP.View.Styling;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
+using Image = SPTC_APP.Objects.Image;
+
 namespace SPTC_APP.View.Pages.Input
 {
     /// <summary>
@@ -31,6 +37,8 @@ namespace SPTC_APP.View.Pages.Input
         public EditEmployee(Employee employee, bool isEdit, bool isManage)
         {
             InitializeComponent();
+            initTextBoxes();
+            DraggingHelper.DragWindow(topBar);
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             bDay.SelectedDate = DateTime.Now;
@@ -83,6 +91,7 @@ namespace SPTC_APP.View.Pages.Input
             }
         }
 
+
         private void fillUp()
         {
             if(employee != null)
@@ -128,9 +137,13 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     try
                     {
+                        groupCameraButtons.FadeOut(0.2);
+                        gridCameraCapture.FadeIn(0.3);
                         hasPhoto = false;
                         btnStartCam.IsEnabled = false;
-                        ((System.Windows.Controls.Button)sender).Content = "Capture";
+                        //((System.Windows.Controls.Button)sender).Content = "Capture";
+                        btnCaptureeee.Content = "Capture";
+                        btnStartCam.Content = "Capture";
                         pbCameraOpen.Visibility = Visibility.Visible;
                         pbCameraOpen.Value = pbCameraOpen.Minimum;
                         pbCameraOpen.IsIndeterminate = true;
@@ -153,7 +166,9 @@ namespace SPTC_APP.View.Pages.Input
                         imgIDPic.Source = lastCapturedImage;
                     }
                     hasPhoto = true;
-                    ((System.Windows.Controls.Button)sender).Content = "Retake Photo";
+                    //((System.Windows.Controls.Button)sender).Content = "Retake Photo";
+                    btnCaptureeee.Content = "Retake Photo";
+                    btnStartCam.Content = "Retake Photo";
                     this.StopCamera();
                     pbCameraOpen.Value = 100;
                     pbCameraOpen.IsIndeterminate = false;
@@ -373,6 +388,48 @@ namespace SPTC_APP.View.Pages.Input
         private void tbLname_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
+        }
+
+        private void initTextBoxes()
+        {
+            tbFname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "First name.", 0);
+            tbMname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "First name.", 0);
+            tbLname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "First name.", 0);
+            tbPosTitle.DefaultTextBoxBehavior(ALPHANUMERIC, false, gridToast, "First name.", 0);
+            tbAddressLine1.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First name.", 0);
+            tbAddressLine2.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First name.", 0);
+        }
+
+        private void gridCamera_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (isCameraRunning)
+            {
+                gridCameraCapture.FadeIn(0.2);
+            }
+            else
+            {
+                groupCameraButtons.FadeIn(0.2);
+            }
+        }
+
+        private void gridCamera_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            groupCameraButtons.FadeOut(0.2);
+        }
+
+        private void parentCanvasCam_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            gridCameraCapture.FadeOut(0.2);
+        }
+
+        private void Border_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            groupPadButtons.FadeIn(0.2);
+        }
+
+        private void Border_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            groupPadButtons.FadeOut(0.2);
         }
     }
 }

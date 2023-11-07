@@ -751,6 +751,30 @@
                                             Duration="0:0:0.2" />
                                     </Storyboard>
                                 </VisualState>
+                                <VisualState x:Name="InputInvalidated">
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="BF"
+                                            Storyboard.TargetProperty="Effect.Color"
+                                            To="{DynamicResource ColorRed}"
+                                            Duration="0:0:0.3" />
+                                        <ColorAnimation
+                                            Storyboard.TargetName="BG"
+                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                            To="{DynamicResource ColorDeepRed}"
+                                            Duration="0:0:0.3" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="BF"
+                                            Storyboard.TargetProperty="Effect.Opacity"
+                                            To="1"
+                                            Duration="0:0:0.3" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="BF"
+                                            Storyboard.TargetProperty="Effect.BlurRadius"
+                                            To="10"
+                                            Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Grid>

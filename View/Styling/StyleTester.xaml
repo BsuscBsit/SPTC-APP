@@ -8,7 +8,7 @@
     Title="StyleTester"
     SizeToContent="WidthAndHeight"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Loaded="Window_Loaded">
     <Grid x:Name="parentGrid" Margin="15,15,15,15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />

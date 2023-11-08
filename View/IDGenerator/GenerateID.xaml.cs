@@ -16,8 +16,10 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using Microsoft.Win32;
 using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using SPTC_APP.View.IDGenerator.Extra;
 using SPTC_APP.View.Styling;
+using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View
 {
@@ -78,9 +80,6 @@ namespace SPTC_APP.View
                 }
             }
             videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
-
-            if(!AppState.isDeployment && !AppState.isDeployment_IDGeneration) GenerateDummy();
-            GenerateDummy();
         }
         public GenerateID(Franchise franchise, bool isDriver)
         {
@@ -221,14 +220,14 @@ namespace SPTC_APP.View
         }
 
         //WINDOW EVENTS
-        private async void Window_ContentRendered(object sender, EventArgs e)
+        private void Window_ContentRendered(object sender, EventArgs e)
         {
             AppState.WindowsCounter(true, sender);
 
             AppState.mainwindow?.Hide();
-            await Task.Delay(TimeSpan.FromSeconds(0.2));
 
             tboxFn.Focus();
+            initTextBoxes();
 
         }
         
@@ -635,16 +634,6 @@ namespace SPTC_APP.View
         {
             pbCameraOpen.Value = pbCameraOpen.Minimum;
         }
-        private void GenerateDummy()
-        {
-            tboxFn.Text = "First Name";
-            tboxMn.Text = "Middle Name";
-            tboxLn.Text = "Last Name";
-            tboxLnum.Text = "C07-05-001168";
-            tboxBnum.Text = "99999";
-            tboxAddressB.Text = "Block 9999, Lot 9999, Phase 9999 Area ABC123";
-
-        }
 
         // Define the DeleteObject method to release HBitmap
         [DllImport("gdi32.dll")]
@@ -653,45 +642,15 @@ namespace SPTC_APP.View
 
 
         //INPUT EVENTS
-        private void TextBoxGotFocus_Yey(object sender, RoutedEventArgs e)
+        private void initTextBoxes()
         {
-            if (sender is TextBox textBox && !string.IsNullOrEmpty(textBox.Text))
-            {
-                textBox.SelectAll();
-            }
-        }
-
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                e.Handled = true;
-                TextBox tb = sender as TextBox;
-                tb?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-            }
-        }
-
-        private void SetToolTips()
-        {
-
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void InitToolTip()
-        {
-            /*Text
-
-            setToolTip(tboxFn, "first name");
-            setToolTip(tboxMn, "middle name");
-            setToolTip(tboxLn, "last name");
-            setToolTip(tboxBnum, "body / SPTC number");
-            setToolTip(tboxLnum, "license number");
-            setToolTip(tboxLn, "last name");
-            setToolTip(cbGender, "");*/
+            tboxFn.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "First name.", 0);
+            tboxMn.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Middle name.", 1);
+            tboxLn.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Last name.", 2);
+            tboxBnum.DefaultTextBoxBehavior(NUMBER, true, gridToast, "Body number.", 3);
+            tboxLnum.DefaultTextBoxBehavior(ALPHANUMERICDASH, true, gridToast, "License number.", 4, true);
+            tboxAddressB.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Street address.", 5);
+            tboxAddressS.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Additional address information.", 6);
         }
 
     }

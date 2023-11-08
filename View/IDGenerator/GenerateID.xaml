@@ -11,7 +11,6 @@
     ContentRendered="Window_ContentRendered"
     Icon="..\..\View\Images\icons\logo.ico"
     KeyboardNavigation.TabNavigation="Continue"
-    Loaded="Window_Loaded"
     ResizeMode="NoResize"
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
@@ -114,10 +113,7 @@
                         Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
-                        GotFocus="TextBoxGotFocus_Yey"
-                        KeyDown="TextBox_KeyDown"
-                        Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="0" />
+                        Style="{DynamicResource CommonTextBoxStyle}" />
                     <Label
                         Grid.Row="2"
                         Margin="20,0,0,0"
@@ -134,10 +130,7 @@
                         Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
-                        GotFocus="TextBoxGotFocus_Yey"
-                        KeyDown="TextBox_KeyDown"
                         Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="1"
                         Text="" />
                     <Label
                         Grid.Row="3"
@@ -157,10 +150,7 @@
                         Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
-                        GotFocus="TextBoxGotFocus_Yey"
-                        KeyDown="TextBox_KeyDown"
-                        Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="2" />
+                        Style="{DynamicResource CommonTextBoxStyle}" />
                     <Label
                         x:Name="lblH1"
                         Grid.Row="7"
@@ -238,10 +228,7 @@
                         Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
-                        GotFocus="TextBoxGotFocus_Yey"
-                        KeyDown="TextBox_KeyDown"
                         Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="4"
                         Text="" />
                     <Grid
                         Grid.Row="6"
@@ -280,10 +267,7 @@
                         Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
-                        GotFocus="TextBoxGotFocus_Yey"
-                        KeyDown="TextBox_KeyDown"
                         Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="3"
                         Text="" />
                     <Label
                         x:Name="lblH3"
@@ -303,10 +287,7 @@
                         Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
-                        GotFocus="TextBoxGotFocus_Yey"
-                        KeyDown="TextBox_KeyDown"
                         Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="5"
                         Text="" />
                     <Label
                         x:Name="lblH4"
@@ -327,11 +308,7 @@
                         Height="30"
                         Margin="0,4,0,4"
                         VerticalAlignment="Center"
-                        GotFocus="TextBoxGotFocus_Yey"
-                        KeyDown="TextBox_KeyDown"
-                        Style="{DynamicResource CommonTextBoxStyle}"
-                        TabIndex="6" />
-
+                        Style="{DynamicResource CommonTextBoxStyle}" />
                 </Grid>
             </Grid>
             <StackPanel
@@ -515,6 +492,11 @@
                     Style="{StaticResource TextFieldLabelingPreset}" />
             </StackPanel>
         </Grid>
+        <Grid
+            x:Name="gridToast"
+            Grid.RowSpan="4"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom" />
 
     </Grid>
 </Window>

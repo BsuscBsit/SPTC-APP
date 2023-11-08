@@ -75,8 +75,7 @@ namespace SPTC_APP.View.Pages.Output
         public class Member
         {
             private Employee employee;
-            private int width = 130, height = 145;
-            private int col, row;
+            private int row;
             private Button btnEdit;
             private bool isManage = false;
 

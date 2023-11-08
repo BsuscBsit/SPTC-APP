@@ -491,14 +491,6 @@ namespace SPTC_APP.View.Pages.Output
             }
         }
 
-        private void actionMenu_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if(menuExpanded.IsChecked == false)
-            {
-                menuExpander(false);
-            }
-        }
-
         private void menuExpander(bool isExpanded)
         {
             if (isExpanded)
@@ -508,7 +500,7 @@ namespace SPTC_APP.View.Pages.Output
             }
             else
             {
-                actionMenu.AnimateHeight(211.6, 0.2);
+                actionMenu.AnimateHeight(260.8, 0.2);
                 epektos.IsEnabled = true;
             }
             menuExpanded.IsChecked = !isExpanded;

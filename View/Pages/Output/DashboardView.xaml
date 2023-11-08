@@ -294,7 +294,7 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="1"
-            Width="207"
+            Width="232"
             Margin="12,64,0,0"
             HorizontalAlignment="Left"
             Background="White"
@@ -443,23 +443,19 @@
                     Style="{DynamicResource HidingShowingDropShadow}" />
                 <Border
                     x:Name="actionMenu"
-                    Width="207"
-                    Height="40"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Background="White"
                     BorderBrush="{DynamicResource BrushBlack}"
                     BorderThickness="1"
                     CornerRadius="10"
-                    MouseEnter="actionMenu_MouseEnter"
                     MouseLeave="actionMenu_MouseLeave"
-                    UseLayoutRounding="True">
+                    UseLayoutRounding="True" Width="232" Height="40">
                     <Grid
-                        Width="188"
-                        Height="209.6"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -475,7 +471,7 @@
                         <Button
                             x:Name="btnViewFullDetails"
                             Grid.Row="2"
-                            Width="170"
+                            Width="200"
                             Height="40"
                             Margin="0,0,0,5"
                             HorizontalAlignment="Center"
@@ -484,9 +480,19 @@
                             Content="RECAPITULATIONS"
                             Style="{StaticResource CommonButtonStyle}" />
                         <Button
-                            x:Name="btnPrint"
+                            x:Name="btnAddViolationType"
                             Grid.Row="3"
-                            Width="170"
+                            Width="200"
+                            Height="40"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Click="btnViewFullDetails_Click"
+                            Content="ADD VIOLATION TYPE"
+                            Style="{StaticResource CommonButtonStyle}" Margin="0,5,0,5" />
+                        <Button
+                            x:Name="btnPrint"
+                            Grid.Row="4"
+                            Width="200"
                             Height="40"
                             Margin="0,5,0,5"
                             HorizontalAlignment="Center"
@@ -496,10 +502,10 @@
                             Style="{StaticResource CommonButtonStyle}" />
                         <Button
                             x:Name="btnReload"
-                            Grid.Row="4"
-                            Width="170"
+                            Grid.Row="5"
+                            Width="200"
                             Height="40"
-                            Margin="0,5,0,10"
+                            Margin="0,5,0,15"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Click="btnReload_Click"

@@ -114,7 +114,7 @@
             Height="90"
             Margin="15,0,0,0"
             Style="{StaticResource CommonTextBoxStyle}"
-            Text="" />
+            Text="" TextWrapping="Wrap" />
         <TextBox
             x:Name="tbDescription"
             Grid.Row="4"

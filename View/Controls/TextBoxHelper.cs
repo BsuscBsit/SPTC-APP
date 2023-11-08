@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Xml;
 using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
@@ -15,7 +16,8 @@ namespace SPTC_APP.View.Controls
     public static class TextBoxHelper
     {
         private static Grid grid;
-        public static void DefaultTextBoxBehavior(this TextBox tb, AllowFormat? format = null, bool blockSpaces = false, Grid errorGrid = null, string toolTip = null, int? tabIndex = null, bool allCaps = false, string MSG = null)
+
+        public static void DefaultTextBoxBehavior(this TextBox tb, AllowFormat? format = null, bool blockSpaces = false, Grid errorGrid = null, string toolTip = null, int? tabIndex = null, bool allCaps = false, int? げんかい = null, string MSG = null)
         {
             if(errorGrid != null)
             {
@@ -35,7 +37,7 @@ namespace SPTC_APP.View.Controls
             }
 
             // Ordered event handlers.
-            tb.PreviewKeyDown += PreviewKeyDown;
+            tb.PreviewKeyDown += (sender, e) => PreviewKeyDown(sender, e, げんかい);
             if(format != null)
             {
                 tb.PreviewTextInput += (sender, e) => PreviewTextInputBehavior(sender, e, format, MSG);
@@ -48,14 +50,29 @@ namespace SPTC_APP.View.Controls
             tb.GotFocus += GotFocusBehavior;
         }
 
-        private static void PreviewKeyDown(object sender, KeyEventArgs e)
+        private static void PreviewKeyDown(object sender, KeyEventArgs e, int? げんかい)
         {
+            if (げんかい != null && sender is TextBox tb && IsCharacterKey(e.Key))
+            {
+                if (tb.Text.Length > げんかい + 1)
+                {
+                    e.Handled = true;
+                    ShowError(null, null, "Maximum length for this field has reached.");
+                    tb.Focus();
+                }
+            }
             var source = e.OriginalSource as FrameworkElement;
             if (e.Key == Key.Enter)
             {
                 e.Handled = true;
                 source.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
+        }
+
+        private static bool IsCharacterKey(Key key)
+        {
+            return (key >= Key.A && key <= Key.Z) || (key >= Key.D0 && key <= Key.D9) || key == Key.Space || key == Key.Oem1 || key == Key.Oem2;
+
         }
 
         private static void PreviewTextInputBehavior(object sender, TextCompositionEventArgs e, AllowFormat? format, string MSG)
@@ -183,7 +200,7 @@ namespace SPTC_APP.View.Controls
                 return;
             }
 
-            if (!string.IsNullOrEmpty(MSG))
+            if (!string.IsNullOrEmpty(MSG) && format == null)
             {
                 new Toast(grid, MSG, 2.5);
                 return;

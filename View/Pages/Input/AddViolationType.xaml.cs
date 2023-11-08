@@ -1,4 +1,5 @@
 ﻿using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
 {
@@ -26,6 +28,9 @@ namespace SPTC_APP.View.Pages.Input
             InitializeComponent();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            DraggingHelper.DragWindow(topBar);
+            initTextBoxes();
+            tbTitle.Focus();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -60,6 +65,13 @@ namespace SPTC_APP.View.Pages.Input
             {
                 ControlWindow.ShowStatic("Input Incomplete", "Some required fields in empty", Icons.DEFAULT);
             }
+        }
+        
+        private void initTextBoxes()
+        {
+            tbTitle.DefaultTextBoxBehavior(ALPHANUMERICDASHPERIOD, false, gridToast, "Enter a descriptve title of violation type.", 0, false, 20);
+            tbTitle.DefaultTextBoxBehavior(NUMBER, true, gridToast, "Span of suspended days.", 1, false, 3);
+            tbDescription.DefaultTextBoxBehavior(COMMON, true, gridToast, "Enter description for this type of violation.", 2, false, 100);
         }
     }
 }

@@ -13,7 +13,7 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid
-        x:Name="AddViolation" Height="500" Width="700">
+        x:Name="AddViolation" Height="500" Width="628">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
@@ -67,15 +67,15 @@
             Grid.Row="4"
             Grid.Column="1"
             Margin="0,15,0,0"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
             Content=" Choose Type of Violation:"
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             Grid.Row="6"
-            Grid.Column="4"
+            Grid.Column="1"
             Margin="0,15,0,0"
-            HorizontalAlignment="Right"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Remarks:"
             Style="{StaticResource TextFieldLabelingPreset}" />
@@ -103,7 +103,7 @@
             Grid.Row="5"
             Grid.Column="4"
             Grid.ColumnSpan="2"
-            Margin="0,15,0,0"
+            Margin="15,15,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             SelectedDatesChanged="calendarSelect_SelectedDatesChanged"
@@ -143,13 +143,12 @@
         <TextBox
             x:Name="tboxRemarks"
             Grid.Row="6"
-            Grid.Column="5"
-            Width="164"
+            Grid.Column="1"
             Height="30"
-            Margin="15,15,0,0"
+            Margin="80,15,0,0"
             VerticalAlignment="Top"
             Style="{StaticResource CommonTextBoxStyle}"
-            Text="" />
+            Text="" Grid.ColumnSpan="5" Width="482.4" />
         <StackPanel
             Grid.Row="9"
             Grid.Column="0"

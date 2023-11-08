@@ -475,7 +475,7 @@ namespace SPTC_APP.View.Pages.Output
             }
             else
             {
-                ControlWindow.ShowStatic("No Franchise detected!", "Cannot proceed. Dreate new Franchise first", Icons.ERROR);
+                ControlWindow.ShowStatic("No Franchise detected!", "Cannot proceed. Create new Franchise first", Icons.ERROR);
             }
         }
         private async void btnAddClick(object sender, RoutedEventArgs e)

@@ -2,6 +2,7 @@
 using System.Linq;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
+using SPTC_APP.View;
 
 namespace SPTC_APP.Objects
 {
@@ -23,7 +24,7 @@ namespace SPTC_APP.Objects
         public Employee()
         {
             employee = new Upsert(Table.EMPLOYEE, -1);
-            employee.Insert(Field.PASSWORD, RequestQuery.Protect(AppState.DEFAULT_PASSWORD));
+            //employee.Insert(Field.PASSWORD, RequestQuery.Protect(AppState.DEFAULT_PASSWORD));
             name = null;
             address = null;
             image = null;
@@ -99,6 +100,20 @@ namespace SPTC_APP.Objects
             employee.Insert(Field.ISDELETED, true);
             employee.Save();
             return true;
+        }
+
+        internal void updatePass(string password, string newpassword)
+        {
+            if (employee != null)
+            {
+                if (Retrieve.GetDataUsingQuery<string>(RequestQuery.GET_PASS(id))?.FirstOrDefault()?.Equals(RequestQuery.Protect(password)) ?? false){
+                    employee.Insert(Field.PASSWORD, RequestQuery.Protect(newpassword));
+                    employee.Save();
+                } else
+                {
+                    ControlWindow.ShowStatic("Password Incorrect", "Password doesnt match", Icons.ERROR);
+                }
+            }
         }
     }
 }

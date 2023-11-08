@@ -59,9 +59,8 @@
             <Label
                 Grid.Column="0"
                 Height="28"
-                Margin="406,160,97,306"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Center"
+                Margin="406,323,97,0"
+                VerticalAlignment="Top"
                 Content="Remarks:"
                 FontFamily="Inter"
                 FontSize="14"
@@ -71,9 +70,8 @@
                 x:Name="tboxRemarks"
                 Width="164"
                 Height="30"
-                Margin="546,158,40,306"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Center"
+                Margin="546,320,40,0"
+                VerticalAlignment="Top"
                 Text="" />
             <Label
                 Margin="65,108,0,0"
@@ -87,7 +85,8 @@
                 Content="Select start date: : " />
             <TextBlock
                 x:Name="txtBlockDesc"
-                Margin="406,221,61,83"
+                Text="No description"
+                Margin="424,139,43,196"
                 Background="White" />
         </Grid>
 

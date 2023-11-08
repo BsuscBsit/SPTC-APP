@@ -486,7 +486,7 @@
                             Height="40"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
-                            Click="btnViewFullDetails_Click"
+                            Click="btnAddViolationType_Click"
                             Content="ADD VIOLATION TYPE"
                             Style="{StaticResource CommonButtonStyle}" Margin="0,5,0,5" />
                         <Button

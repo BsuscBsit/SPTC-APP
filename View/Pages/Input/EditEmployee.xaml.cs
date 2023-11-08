@@ -287,15 +287,25 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     if (AppState.IS_ADMIN)
                     {
-                        (new EditPositionAccess(employee)).Show();
+                        if (employee.position.title == AppState.Employees[0])
+                        {
+                            employee.Save();
+                            this.Close();
+                        }
+                        else
+                        {
+                            (new EditPositionAccess(employee)).Show();
+                        }
                     }
                     else
                     {
                         employee.Save();
+                        this.Close();
                     }
                 } else
                 {
                     employee.Save();
+                    this.Close();
                 }
             } else
             {

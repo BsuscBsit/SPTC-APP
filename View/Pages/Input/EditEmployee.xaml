@@ -431,14 +431,14 @@
             VerticalAlignment="Top"
             Orientation="Horizontal">
             <Button
-                x:Name="btnCancel1"
+                x:Name="btnCancel"
                 Width="178"
                 Click="btnCancel_Click"
                 Content="CANCEL"
                 Style="{StaticResource CommonButtonStyle}"
                 TabIndex="4" />
             <Button
-                x:Name="btnSave1"
+                x:Name="btnSave"
                 Width="178"
                 Margin="15,0,0,0"
                 Click="btnPreview_Click"

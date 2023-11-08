@@ -5,137 +5,181 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SPTC_APP.View.Pages.Input"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="760"
+    AllowsTransparency="True"
+    KeyboardNavigation.TabNavigation="Continue"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    Style="{StaticResource DetachedRoundedWindow}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid
-        x:Name="AddViolation"
-        Width="760"
-        HorizontalAlignment="Right"
-        Background="WhiteSmoke">
-        <Rectangle
-            Width="NaN"
-            Height="40"
-            VerticalAlignment="Top"
-            Fill="#FEF301"
-            Stroke="#FEF301" />
+        x:Name="AddViolation" Height="500" Width="700">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border
+            x:Name="topBar"
+            Grid.ColumnSpan="7"
+            Style="{StaticResource TopBarStyle}" />
         <Label
-            Height="Auto"
-            Margin="42,45,0,425"
+            x:Name="lblTitle"
+            Grid.Row="1"
+            Grid.ColumnSpan="7"
+            Margin="20,0,0,0"
+            Padding="0,5,5,5"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Content="VIOLATION"
-            FontFamily="Inter"
-            FontSize="20"
-            Foreground="Gray" />
-
-        <Grid Margin="0,0,10,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Label
-                Grid.Column="0"
-                Height="Auto"
-                Margin="406,101,87,366"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Center"
-                Content="Violation:"
-                FontFamily="Inter"
-                FontSize="14"
-                FontWeight="SemiBold" />
-            <ComboBox
-                x:Name="cbViolations"
-                Width="164"
-                Height="30"
-                Margin="546,101,40,363"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Center"
-                IsReadOnly="True"
-                IsTabStop="False"
-                SelectedIndex="0"
-                SelectionChanged="cbViolations_SelectionChanged"
-                Style="{DynamicResource CommonComboBox}" />
-
-            <Label
-                Grid.Column="0"
-                Height="28"
-                Margin="406,323,97,0"
-                VerticalAlignment="Top"
-                Content="Remarks:"
-                FontFamily="Inter"
-                FontSize="14"
-                FontWeight="SemiBold" />
-
-            <TextBox
-                x:Name="tboxRemarks"
-                Width="164"
-                Height="30"
-                Margin="546,320,40,0"
-                VerticalAlignment="Top"
-                Text="" />
-            <Label
-                Margin="65,108,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Violation Date: " />
-            <Label
-                Margin="65,144,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Select start date: : " />
-            <TextBlock
-                x:Name="txtBlockDesc"
-                Text="No description"
-                Margin="424,139,43,196"
-                Background="White" />
-        </Grid>
-
-
-
-
-
-        <Button
-            x:Name="btnCancel"
-            Width="135"
-            Height="40"
-            Margin="134,426,491,38"
-            Background="White"
-            Click="btnCancel_Click"
-            Content="CANCEL"
-            FontFamily="Hetivica"
-            FontWeight="Bold" />
-
-        <Button
-            x:Name="btnSave"
-            Width="135"
-            Height="40"
-            Margin="480,426,145,38"
-            Background="Yellow"
-            Click="btnSave_Click"
-            Content="SAVE"
-            FontFamily="Hetivica"
-            FontWeight="Bold" />
-        <Calendar
-            x:Name="calendarSelect"
-            Width="270"
-            Height="180"
-            Margin="52,172,0,0"
+            Content="VIOLATION LOG"
+            Style="{DynamicResource CommonTitlePreset}" />
+        <Label
+            Grid.Row="3"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Select Date of Incident:"
+            Style="{StaticResource TextFieldLabelingPreset}" />
+        <Label
+            Grid.Row="4"
+            Grid.Column="4"
+            Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            Content="Select Effective Date:"
+            Style="{StaticResource TextFieldLabelingPreset}" Grid.ColumnSpan="2" />
+        <Label
+            Grid.Row="4"
+            Grid.Column="1"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content=" Choose Type of Violation:"
+            Style="{StaticResource TextFieldLabelingPreset}" />
+        <Label
+            Grid.Row="6"
+            Grid.Column="4"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="Remarks:"
+            Style="{StaticResource TextFieldLabelingPreset}" />
+        <Border
+            Grid.Row="3"
+            Grid.Column="2"
+            Width="164"
+            Height="30"
+            Padding="5,0,5,0"
+            Background="White"
+            BorderBrush="Gray"
+            BorderThickness="1"
+            CornerRadius="5" Margin="15,0,0,0">
+            <DatePicker
+                x:Name="dpViolationDate"
+                Height="31"
+                Margin="0,-1,0,0"
+                VerticalContentAlignment="Center"
+                BorderThickness="0"
+                IsTabStop="False"
+                KeyboardNavigation.TabNavigation="None" />
+        </Border>
+        <Calendar
+            x:Name="calendarSelect"
+            Grid.Row="5"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             SelectedDatesChanged="calendarSelect_SelectedDatesChanged"
             SelectionMode="MultipleRange" />
-
-        <DatePicker
-            Name="dpViolationDate"
-            Margin="166,110,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top" />
-
-
-
-
-
-
+        <ComboBox
+            x:Name="cbViolations"
+            Grid.Row="4"
+            Grid.Column="2"
+            Width="164"
+            Height="30"
+            Margin="15,15,0,0"
+            VerticalAlignment="Top"
+            IsReadOnly="True"
+            IsTabStop="False"
+            SelectedIndex="0"
+            SelectionChanged="cbViolations_SelectionChanged"
+            Style="{DynamicResource CommonComboBox}" />
+        <Border
+            Grid.Row="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="15,15,0,0"
+            Padding="15,15,15,15"
+            Background="White"
+            BorderBrush="{StaticResource BrushGrey}"
+            BorderThickness="1"
+            CornerRadius="10" Width="340">
+            <TextBlock
+                x:Name="txtBlockDesc"
+                Background="White"
+                FontFamily="Inter"
+                FontSize="14"
+                IsEnabled="False"
+                Text="Select violation type to see description..."
+                TextWrapping="Wrap" />
+        </Border>
+        <TextBox
+            x:Name="tboxRemarks"
+            Grid.Row="6"
+            Grid.Column="5"
+            Width="164"
+            Height="30"
+            Margin="15,15,0,0"
+            VerticalAlignment="Top"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="" />
+        <StackPanel
+            Grid.Row="9"
+            Grid.Column="0"
+            Grid.ColumnSpan="7"
+            Margin="0,0,0,24"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btnCancel"
+                Width="178"
+                Click="btnCancel_Click"
+                Content="CANCEL"
+                Style="{StaticResource CommonButtonStyle}"
+                TabIndex="4" />
+            <Button
+                x:Name="btnSave"
+                Width="178"
+                Margin="15,0,0,0"
+                Click="btnSave_Click"
+                Content="SAVE"
+                Style="{StaticResource CommonButtonStyle}"
+                TabIndex="5" />
+        </StackPanel>
+        <Grid
+            x:Name="gridToast"
+            Grid.RowSpan="9"
+            Grid.ColumnSpan="7"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom" />
 
     </Grid>
 </Window>

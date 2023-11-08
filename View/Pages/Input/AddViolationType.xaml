@@ -13,7 +13,7 @@
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid Width="500" Height="400">
+    <Grid Width="500" Height="420">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
@@ -109,10 +109,10 @@
             Grid.Row="6"
             Grid.Column="1"
             Grid.ColumnSpan="3"
-            Height="90"
+            Height="115"
             Margin="15,0,0,0"
             Style="{StaticResource CommonTextBoxStyle}"
-            Text="" TextWrapping="Wrap" />
+            Text="Sample text" Width="367" TextWrapping="Wrap" AcceptsReturn="True"/>
         <TextBox
             x:Name="tbNumDays"
             Grid.Row="4"

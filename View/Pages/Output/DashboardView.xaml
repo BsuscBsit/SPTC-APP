@@ -231,12 +231,12 @@
             </Grid>
         </Border>
         <Border
-            Background="White"
-            CornerRadius="12"
             x:Name="epekLnchrtview"
             Grid.Row="2"
             Grid.Column="0"
-            Margin="0,12,12,0">
+            Margin="0,12,12,0"
+            Background="White"
+            CornerRadius="12">
             <Border.Effect>
                 <DropShadowEffect
                     BlurRadius="20"
@@ -273,13 +273,13 @@
             </Viewbox>
         </Border>
         <Border
-            Background="White"
-            CornerRadius="12"
             x:Name="epekPiechrtview"
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="1"
-            Margin="12,64,0,0">
+            Margin="12,64,0,0"
+            Background="White"
+            CornerRadius="12">
             <Border.Effect>
                 <DropShadowEffect
                     BlurRadius="20"
@@ -347,7 +347,10 @@
                                 RadiusY="87" />
                         </Path.Data>
                         <Path.Effect>
-                            <DropShadowEffect BlurRadius="20" Opacity="0.07" ShadowDepth="0"/>
+                            <DropShadowEffect
+                                BlurRadius="20"
+                                Opacity="0.07"
+                                ShadowDepth="0" />
                         </Path.Effect>
                     </Path>
                 </Canvas>
@@ -359,7 +362,10 @@
                     VerticalAlignment="Center">
                     <Ellipse Fill="White">
                         <Ellipse.Effect>
-                            <DropShadowEffect BlurRadius="20" Opacity="0.2" ShadowDepth="0"/>
+                            <DropShadowEffect
+                                BlurRadius="20"
+                                Opacity="0.2"
+                                ShadowDepth="0" />
                         </Ellipse.Effect>
                     </Ellipse>
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -443,6 +449,8 @@
                     Style="{DynamicResource HidingShowingDropShadow}" />
                 <Border
                     x:Name="actionMenu"
+                    Width="232"
+                    Height="40"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Background="White"
@@ -450,10 +458,8 @@
                     BorderThickness="1"
                     CornerRadius="10"
                     MouseLeave="actionMenu_MouseLeave"
-                    UseLayoutRounding="True" Width="232" Height="40">
-                    <Grid
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top">
+                    UseLayoutRounding="True">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -484,11 +490,12 @@
                             Grid.Row="3"
                             Width="200"
                             Height="40"
+                            Margin="0,5,0,5"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
                             Click="btnViewFullDetails_Click"
                             Content="ADD VIOLATION TYPE"
-                            Style="{StaticResource CommonButtonStyle}" Margin="0,5,0,5" />
+                            Style="{StaticResource CommonButtonStyle}" />
                         <Button
                             x:Name="btnPrint"
                             Grid.Row="4"

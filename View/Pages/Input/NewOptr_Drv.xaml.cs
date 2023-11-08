@@ -149,11 +149,11 @@ namespace SPTC_APP.View.Pages.Input
             tboxsMname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Middle name.", 2);
             tboxsLname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Last name.", 3);
             tboxsContactNum.DefaultTextBoxBehavior(PHONE, true, gridToast, "Contact number.", 4);
-            tboxsCountry.DefaultTextBoxBehavior(ALPHANUMERICDASH, false, gridToast, "First Name", 5);
-            tboxsProvince.DefaultTextBoxBehavior(ALPHANUMERICDASH, false, gridToast, "First Name", 6);
-            tboxsCity.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First Name", 7);
-            tboxsBarangay.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First Name", 8);
-            tboxStreetName.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First Name", 9);
+            tboxsCountry.DefaultTextBoxBehavior(ALPHANUMERICDASH, false, gridToast, "Country.", 5);
+            tboxsProvince.DefaultTextBoxBehavior(ALPHANUMERICDASH, false, gridToast, "Province.", 6);
+            tboxsCity.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Enter city or municipality.", 7);
+            tboxsBarangay.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Enter barangay or village.", 8);
+            tboxStreetName.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Additional .", 9);
 
         }
 

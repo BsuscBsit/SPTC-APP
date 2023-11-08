@@ -1,6 +1,8 @@
-﻿using SPTC_APP.Database;
+﻿using MySqlX.XDevAPI.Relational;
+using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Pages.Input;
+using SPTC_APP.View.Styling;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,10 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SPTC_APP.View.Pages.Output.BoardMembers;
 
 namespace SPTC_APP.View.Pages.Output
 {
@@ -25,49 +29,33 @@ namespace SPTC_APP.View.Pages.Output
         public BoardMembers()
         {
             InitializeComponent();
-            int col = 0;
-            int row = 4;
-            foreach(Employee e in Retrieve.GetDataUsingQuery<Employee>(RequestQuery.GET_ALL_EMPLOYEES))
+            int row = 7;
+
+            Dictionary<string, int> positionMap = new Dictionary<string, int>
             {
-                //GET CHAIRMAN
-                if(e.position?.title == AppState.ALL_EMPLOYEES[4])
+                { AppState.ALL_EMPLOYEES[0], 2 },
+                { AppState.ALL_EMPLOYEES[1], 3 },
+                { AppState.ALL_EMPLOYEES[2], 4 },
+                { AppState.ALL_EMPLOYEES[3], 5 },
+                { AppState.ALL_EMPLOYEES[4], 0 }
+            };
+            foreach (Employee e in Retrieve.GetDataUsingQuery<Employee>(RequestQuery.GET_ALL_EMPLOYEES))
+            {
+                Member member;
+                int position;
+                if (e.position?.title != null && positionMap.ContainsKey(e.position.title))
                 {
-                    Member member = new Member(e, 2, 0);
-                    member.DrawCard(memGrid);
-                } 
-                else if (e.position?.title == AppState.ALL_EMPLOYEES[0])
-                {
-                    Member member = new Member(e, 0, 2, true);
-                    member.DrawCard(memGrid);
+                    position = positionMap[e.position.title];
+                    member = new Member(e, position, position == 0);
                 }
-                else if (e.position?.title == AppState.ALL_EMPLOYEES[1])
-                {
-                    Member member = new Member(e, 1, 2, true);
-                    member.DrawCard(memGrid);
-                }
-                else if (e.position?.title == AppState.ALL_EMPLOYEES[2])
-                {
-                    Member member = new Member(e, 2, 2, true);
-                    member.DrawCard(memGrid);
-                }
-                else if (e.position?.title == AppState.ALL_EMPLOYEES[3])
-                {
-                    Member member = new Member(e, 3, 2, true);
-                    member.DrawCard(memGrid);
-                }
-
-
                 else
                 {
-                    Member member = new Member(e, col, row);
-                    member.DrawCard(memGrid);
-                    col += 1;
-                    if(col >= 5)
-                    {
-                        row += 1;
-                        col = 0;
-                    }
+                    position = row;
+                    member = new Member(e, position);
+                    row += 1;
                 }
+
+                member.DrawCard(memGrid);
             }
         }
         public async Task<Grid> Fetch()
@@ -92,124 +80,169 @@ namespace SPTC_APP.View.Pages.Output
             private Button btnEdit;
             private bool isManage = false;
 
-            public Member(Employee employee, int col, int row, bool isManage = false)
+            private int imageRatio = 70;
+            private int nameFontSize = 20;
+            private int positionFontSize = 16;
+            private Thickness cellSpace = new Thickness(25, 10, 25, 10);
+            private Brush bg = Brushes.White;
+
+            public Member(Employee employee, int row, bool isManage = false)
             {
                 this.employee = employee;
-                this.col = col;
+                //this.col = col;
                 this.row = row;
                 this.isManage = isManage;
             }
 
+
             public void DrawCard(Grid grid)
             {
-                Border memberCard = new Border
+                // ~boku no...
+                Grid userContainerView = new Grid
                 {
-                    CornerRadius = new CornerRadius(10),
-                    Width = this.width,
-                    Height = this.height,
-                    Background = Brushes.Yellow,
-                    BorderBrush = Brushes.Black,
-                    BorderThickness = new Thickness(1)
+                    Margin = cellSpace
+                };
+                Grid.SetRow(userContainerView, this.row);
+
+                Border effectBorder = new Border
+                {
+                    Background = bg,
+                    CornerRadius = new CornerRadius(12),
+                    Effect = new DropShadowEffect
+                    {
+                        BlurRadius = 10,
+                        Opacity = 0.2,
+                        ShadowDepth = 0
+                    }
+                };
+                Border contentBorder = new Border
+                {
+                    Background = bg,
+                    CornerRadius = new CornerRadius(10)
                 };
 
-                Grid.SetColumn(memberCard, this.col);
-                Grid.SetRow(memberCard, this.row);
-
-                Grid mainGrid = new Grid();
-                mainGrid.Background = Brushes.Transparent;
-
-                Grid nestedGrid = new Grid
+                Grid contentGrid = new Grid
                 {
-                    Margin = new Thickness(0, 5, 0, 0),
-                    Height = 50,
-                    Width = 50,
+                    MinWidth = 500,
+                    Margin = new Thickness(15)
+                };
+
+                contentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                contentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                contentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+                contentGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+                contentGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+
+                Ellipse effectEllipse = new Ellipse
+                {
+                    Width = imageRatio,
+                    Height = imageRatio,
                     HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Top
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Fill = Brushes.White,
+                    Effect = new DropShadowEffect
+                    {
+                        BlurRadius = 15,
+                        Direction = -90,
+                        Opacity = 0.2,
+
+                        ShadowDepth = 5
+                    }
                 };
 
-                Ellipse profilePicture = new Ellipse
+                contentGrid.Children.Add(effectEllipse);
+                Grid.SetColumn(effectEllipse, 0);
+                Grid.SetRow(effectEllipse, 0);
+                Grid.SetRowSpan(effectEllipse, 2);
+
+                Ellipse profileEllipse = new Ellipse
                 {
-                    Width = 48,
-                    Height = 48,
-                    StrokeThickness = 1,
-                    StrokeStartLineCap = PenLineCap.Round,
-                    Stroke = Brushes.Black
+                    Width = imageRatio,
+                    Height = imageRatio,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Stroke = (Brush)Application.Current.Resources["BrushGrey"]
                 };
 
-                ImageBrush imageBrush = new ImageBrush();
                 if (employee.image?.GetSource() != null)
                 {
-                    imageBrush.ImageSource = employee.image.GetSource();
+                    profileEllipse.Fill = new ImageBrush(employee.image.GetSource());
                 }
                 else
                 {
-                    imageBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/SPTC APP;component/View/Images/icons/person.png"));
+                    profileEllipse.Fill = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/SPTC APP;component/View/Images/icons/person.png")));
                 }
 
-                profilePicture.Fill = imageBrush;
-                nestedGrid.Children.Add(profilePicture);
+                contentGrid.Children.Add(profileEllipse);
+                Grid.SetColumn(profileEllipse, 0);
+                Grid.SetRow(profileEllipse, 0);
+                Grid.SetRowSpan(profileEllipse, 2);
 
-                TextBlock nameTextBlock = new TextBlock
+                Label lblName = new Label
                 {
-                    Text = employee.name?.lastname?.ToString() ?? "???",
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    Margin = new Thickness(0, 58, 0, 0),
-                    TextWrapping = TextWrapping.Wrap,
-                    VerticalAlignment = VerticalAlignment.Top,
-                    Width = 78,
-                    TextAlignment = TextAlignment.Center,
-                    FontSize = 12,
-                    FontWeight = FontWeights.DemiBold
+                    Content = employee.name?.lastname?.ToString() ?? "Unknown(No Name Found)",
+                    FontFamily = new FontFamily("Inter"),
+                    FontSize = nameFontSize,
+                    FontWeight = FontWeights.Bold,
+                    Margin = new Thickness(15, 0, 0, 0),
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Bottom
                 };
 
-                TextBlock positionTextBlock = new TextBlock
+                contentGrid.Children.Add(lblName);
+                Grid.SetColumn(lblName, 1);
+                Grid.SetRow(lblName, 0);
+
+                Label lblPosition = new Label
                 {
-                    Text = employee.position?.title?.ToString() ?? "???",
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    Margin = new Thickness(0, 70, 0, 0),
-                    TextWrapping = TextWrapping.Wrap,
-                    VerticalAlignment = VerticalAlignment.Top,
-                    Width = 78,
-                    TextAlignment = TextAlignment.Center,
-                    FontSize = 10,
-                    FontWeight = FontWeights.Light
+                    Content = employee.position?.title?.ToString() ?? "(Position Not Assigned)",
+                    FontFamily = new FontFamily("Inter"),
+                    FontSize = positionFontSize,
+                    FontWeight = FontWeights.SemiBold,
+                    Margin = new Thickness(15, 0, 0, 0),
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Top
                 };
 
-                mainGrid.Children.Add(nestedGrid);
-                mainGrid.Children.Add(nameTextBlock);
-                mainGrid.Children.Add(positionTextBlock);
+                contentGrid.Children.Add(lblPosition);
+                Grid.SetColumn(lblPosition, 1);
+                Grid.SetRow(lblPosition, 1);
 
-
-                mainGrid.Margin = new Thickness(0, 15, 0, 0);
-
-                memberCard.Child = mainGrid;
-
-                if ((AppState.USER?.position?.accesses[17] ?? false)){
+                if ((AppState.USER?.position?.accesses[17] ?? false))
+                {
                     Button editButton = new Button
                     {
-                        Content = isManage ? ((employee.position.title == AppState.USER.position.title)?"PROFILE": "MANAGE") : "EDIT",
-                        Height = 25,
-                        Width = 70,
+                        Width = 120,
+                        Height = 30,
+                        Content = isManage ? ((employee.position.title == AppState.USER.position.title) ? "PROFILE" : "MANAGE") : "EDIT",
                         Style = (Style)Application.Current.FindResource("ControlledButtonStyle"),
-                        VerticalAlignment = VerticalAlignment.Bottom,
-                        Margin = new Thickness(0, 0, 0, 5),
-                        Visibility = Visibility.Hidden,
-                        FontSize = 10
+                        Margin = new Thickness(15, 0, 0, 0),
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Visibility = Visibility.Hidden
                     };
                     editButton.Click += EditClick;
-                    mainGrid.Children.Add(editButton);
+                    contentGrid.Children.Add(editButton);
+                    Grid.SetColumn(editButton, 2);
+                    Grid.SetRowSpan(editButton, 2);
+
                     this.btnEdit = editButton;
-                    mainGrid.MouseEnter += MemberMouseEnter;
-                    mainGrid.MouseLeave += MemberMouseLeave;
+                    userContainerView.MouseEnter += MemberMouseEnter;
+                    userContainerView.MouseLeave += MemberMouseLeave;
                 }
 
-                grid.Children.Add(memberCard);
+                contentBorder.Child = contentGrid;
+
+                userContainerView.Children.Add(effectBorder);
+                userContainerView.Children.Add(contentBorder);
+                grid.Children.Add(userContainerView);
             }
 
             private void EditClick(object sender, RoutedEventArgs e)
             {
                 string noname = "???";
-                if (isManage )
+                if (isManage)
                 {
                     if (AppState.IS_ADMIN)
                     {
@@ -226,7 +259,8 @@ namespace SPTC_APP.View.Pages.Output
                         {
 
                         }
-                    } else
+                    }
+                    else
                     {
                         if (employee.position.title == AppState.USER.position.title)
                         {
@@ -240,7 +274,7 @@ namespace SPTC_APP.View.Pages.Output
                 }
                 else
                 {
-                    if(ControlWindow.ShowTwoway("Edit Profile", $"Board Member: {employee.name?.legalName ?? noname}", Icons.NOTIFY))
+                    if (ControlWindow.ShowTwoway("Edit Profile", $"Board Member: {employee.name?.legalName ?? noname}", Icons.NOTIFY))
                     {
                         (new EditEmployee(employee, true, false)).Show();
                     }
@@ -249,9 +283,9 @@ namespace SPTC_APP.View.Pages.Output
 
             private void MemberMouseEnter(object sender, MouseEventArgs e)
             {
-                if(sender is Grid grid)
+                if (sender is Grid grid)
                 {
-                    btnEdit.Visibility = Visibility.Visible;
+                    btnEdit.FadeIn(0.3);
                 }
             }
 
@@ -259,7 +293,7 @@ namespace SPTC_APP.View.Pages.Output
             {
                 if (sender is Grid grid)
                 {
-                    btnEdit.Visibility = Visibility.Hidden;
+                    btnEdit.FadeOut(0.3);
                 }
             }
 

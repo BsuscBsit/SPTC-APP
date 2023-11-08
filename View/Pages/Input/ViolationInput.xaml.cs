@@ -34,7 +34,10 @@ namespace SPTC_APP.View.Pages.Input
             {
                 cbViolations.Items.Add(type);
             }
-            selectedViolationType = listViolation[0];
+            if (listViolation.Count > 0)
+            {
+                selectedViolationType = listViolation[0];
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)

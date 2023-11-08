@@ -12,7 +12,10 @@
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid x:Name="editProfile" Width="677" Height="477">
+    <Grid
+        x:Name="editProfile"
+        Width="677"
+        Height="477">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
@@ -38,213 +41,213 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Border
-                x:Name="topBar"
-                Grid.ColumnSpan="7"
-                Style="{StaticResource TopBarStyle}" />
+            x:Name="topBar"
+            Grid.ColumnSpan="7"
+            Style="{StaticResource TopBarStyle}" />
         <Label
-                x:Name="lblTitle"
-                Grid.Row="1"
-                Grid.ColumnSpan="5"
-                Margin="20,0,0,0"
-                Padding="0,5,5,5"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Content="EDIT PROFILE"
-                Style="{DynamicResource CommonTitlePreset}" />
+            x:Name="lblTitle"
+            Grid.Row="1"
+            Grid.ColumnSpan="5"
+            Margin="20,0,0,0"
+            Padding="0,5,5,5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="EDIT PROFILE"
+            Style="{DynamicResource CommonTitlePreset}" />
         <Label
-                Grid.Row="3"
-                Grid.Column="1"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Content="First Name:"
-                Style="{StaticResource TextFieldLabelingPreset}" />
+            Grid.Row="3"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="First Name:"
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-                Grid.Row="3"
-                Grid.Column="3"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Content="Middle Name: "
-                Style="{StaticResource TextFieldLabelingPreset}" />
+            Grid.Row="3"
+            Grid.Column="3"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Middle Name: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-                Grid.Row="3"
-                Grid.Column="5"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Content="Last Name: "
-                Style="{StaticResource TextFieldLabelingPreset}" />
+            Grid.Row="3"
+            Grid.Column="5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Last Name: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-                Grid.Row="5"
-                Grid.Column="1"
-                Margin="0,15,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Content="Birthdate: "
-                Style="{StaticResource TextFieldLabelingPreset}" />
+            Grid.Row="5"
+            Grid.Column="1"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Birthdate: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-                Grid.Row="5"
-                Grid.Column="3"
-                Margin="0,15,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Content="Gender: "
-                Style="{StaticResource TextFieldLabelingPreset}" />
+            Grid.Row="5"
+            Grid.Column="3"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Gender: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-                Grid.Row="5"
-                Grid.Column="5"
-                Margin="0,15,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Content="Contact Number: "
-                Style="{StaticResource TextFieldLabelingPreset}" />
+            Grid.Row="5"
+            Grid.Column="5"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Contact Number: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-                Grid.Row="7"
-                Grid.Column="1"
-                Margin="0,15,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Content="Country: "
-                Style="{StaticResource TextFieldLabelingPreset}" />
+            Grid.Row="7"
+            Grid.Column="1"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Country: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-                Grid.Row="7"
-                Grid.Column="3"
-                Margin="0,15,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Content="Province: "
-                Style="{StaticResource TextFieldLabelingPreset}" />
+            Grid.Row="7"
+            Grid.Column="3"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Province: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-                Grid.Row="7"
-                Grid.Column="5"
-                Margin="0,15,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Content="City/Municipality: "
-                Style="{StaticResource TextFieldLabelingPreset}" />
+            Grid.Row="7"
+            Grid.Column="5"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="City/Municipality: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-                Grid.Row="9"
-                Grid.Column="1"
-                Margin="0,15,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Content="Barangay: "
-                Style="{StaticResource TextFieldLabelingPreset}" />
+            Grid.Row="9"
+            Grid.Column="1"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Barangay: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <TextBox
-                x:Name="tboxsFname"
-                Grid.Row="4"
-                Grid.Column="1"
-                Width="164"
-                Height="30"
-                Margin="15,0,0,0"
-                Style="{StaticResource CommonTextBoxStyle}"
-                Text="" />
+            x:Name="tboxsFname"
+            Grid.Row="4"
+            Grid.Column="1"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="" />
         <TextBox
-                x:Name="tboxsMname"
-                Grid.Row="4"
-                Grid.Column="3"
-                Width="164"
-                Height="30"
-                Margin="15,0,0,0"
-                Style="{StaticResource CommonTextBoxStyle}"
-                Text="" />
+            x:Name="tboxsMname"
+            Grid.Row="4"
+            Grid.Column="3"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="" />
         <TextBox
-                x:Name="tboxsLname"
-                Grid.Row="4"
-                Grid.Column="5"
-                Width="164"
-                Height="30"
-                Margin="15,0,0,0"
-                Style="{StaticResource CommonTextBoxStyle}"
-                Text="" />
+            x:Name="tboxsLname"
+            Grid.Row="4"
+            Grid.Column="5"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="" />
         <Label
-                Grid.Row="9"
-                Grid.Column="3"
-                Grid.ColumnSpan="3"
-                Margin="0,15,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Content="House/Unit/Apartment/Building No. &amp; Street Name:"
-                Style="{StaticResource TextFieldLabelingPreset}" />
+            Grid.Row="9"
+            Grid.Column="3"
+            Grid.ColumnSpan="3"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="House/Unit/Apartment/Building No. &amp; Street Name:"
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Border
-                Grid.Row="6"
-                Grid.Column="1"
-                Width="164"
-                Height="30"
-                Margin="15,0,0,0"
-                Padding="5,0,5,0"
-                VerticalAlignment="Top"
-                Background="White"
-                BorderBrush="{StaticResource BrushGrey}"
-                BorderThickness="1"
-                CornerRadius="5">
+            Grid.Row="6"
+            Grid.Column="1"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            Padding="5,0,5,0"
+            VerticalAlignment="Top"
+            Background="White"
+            BorderBrush="{StaticResource BrushGrey}"
+            BorderThickness="1"
+            CornerRadius="5">
             <DatePicker
-                    x:Name="dpBirthday"
-                    Height="30"
-                    VerticalAlignment="Center"
-                    BorderBrush="{x:Null}"
-                    BorderThickness="1,4,1,1" />
+                x:Name="dpBirthday"
+                Height="30"
+                VerticalAlignment="Center"
+                BorderBrush="{x:Null}"
+                BorderThickness="1,4,1,1" />
         </Border>
         <ComboBox
-                x:Name="cbGender"
-                Grid.Row="6"
-                Grid.Column="3"
-                Width="164"
-                Height="30"
-                Margin="15,0,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                IsReadOnly="True"
-                IsTabStop="False"
-                SelectedIndex="0"
-                Style="{DynamicResource CommonComboBox}">
+            x:Name="cbGender"
+            Grid.Row="6"
+            Grid.Column="3"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsReadOnly="True"
+            IsTabStop="False"
+            SelectedIndex="0"
+            Style="{DynamicResource CommonComboBox}">
             <ComboBoxItem Content="MALE" />
             <ComboBoxItem Content="FEMALE" />
         </ComboBox>
         <TextBox
-                x:Name="tboxsContactNum"
-                Grid.Row="6"
-                Grid.Column="5"
-                Width="164"
-                Height="30"
-                Margin="15,0,0,0"
-                Style="{StaticResource CommonTextBoxStyle}"
-                Text="" />
+            x:Name="tboxsContactNum"
+            Grid.Row="6"
+            Grid.Column="5"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="" />
         <TextBox
-                x:Name="tboxsCountry"
-                Grid.Row="8"
-                Grid.Column="1"
-                Width="164"
-                Height="30"
-                Margin="15,0,0,0"
-                Style="{StaticResource CommonTextBoxStyle}"
-                Text="Philippines" />
+            x:Name="tboxsCountry"
+            Grid.Row="8"
+            Grid.Column="1"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="Philippines" />
         <TextBox
-                x:Name="tboxsProvince"
-                Grid.Row="8"
-                Grid.Column="3"
-                Width="164"
-                Height="30"
-                Margin="15,0,0,0"
-                Style="{StaticResource CommonTextBoxStyle}"
-                Text="Bulacan" />
+            x:Name="tboxsProvince"
+            Grid.Row="8"
+            Grid.Column="3"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="Bulacan" />
         <TextBox
-                x:Name="tboxsCity"
-                Grid.Row="8"
-                Grid.Column="5"
-                Width="164"
-                Height="30"
-                Margin="15,0,0,0"
-                Style="{StaticResource CommonTextBoxStyle}"
-                Text="San Jose Del Monte" />
+            x:Name="tboxsCity"
+            Grid.Row="8"
+            Grid.Column="5"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="San Jose Del Monte" />
         <TextBox
-                x:Name="tboxsBarangay"
-                Grid.Row="10"
-                Grid.Column="1"
-                Width="164"
-                Height="30"
-                Margin="15,0,0,0"
-                VerticalAlignment="Top"
-                Style="{StaticResource CommonTextBoxStyle}"
-                Text="Sapang Palay" />
+            x:Name="tboxsBarangay"
+            Grid.Row="10"
+            Grid.Column="1"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            VerticalAlignment="Top"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="Sapang Palay" />
 
         <StackPanel
             Grid.Row="12"
@@ -272,24 +275,28 @@
         </StackPanel>
         <Grid
             x:Name="gridToast"
+            Grid.RowSpan="13"
             Grid.ColumnSpan="7"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom" Grid.RowSpan="13" />
+            VerticalAlignment="Bottom" />
         <TextBox
-                x:Name="tboxStreetName"
-                Grid.Row="10"
-                Grid.Column="3"
-                Grid.ColumnSpan="3"
-                Height="30"
-                Margin="15,0,0,0"
-                VerticalAlignment="Top"
-                Style="{StaticResource CommonTextBoxStyle}"
-                Text="" Width="358.4" />
+            x:Name="tboxStreetName"
+            Grid.Row="10"
+            Grid.Column="3"
+            Grid.ColumnSpan="3"
+            Width="358.4"
+            Height="30"
+            Margin="15,0,0,0"
+            VerticalAlignment="Top"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="" />
 
         <Grid
-        Width="760"
-        HorizontalAlignment="Right"
-        Background="WhiteSmoke" Grid.ColumnSpan="7" Margin="0,0,-83,40"/>
+            Grid.ColumnSpan="7"
+            Width="760"
+            Margin="0,0,-83,40"
+            HorizontalAlignment="Right"
+            Background="WhiteSmoke" />
 
     </Grid>
 

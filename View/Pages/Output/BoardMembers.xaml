@@ -59,5 +59,29 @@
                 </ScrollViewer>
             </Border>
         </Grid>
+        <Button
+            x:Name="btnAdd"
+            Width="180"
+            Height="30"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Style="{DynamicResource CommonButtonStyle}"
+            Visibility="Visible">
+            <StackPanel Orientation="Horizontal">
+                <Path
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Data="M0,7 H14 M7,0 V14"
+                    Stroke="{StaticResource BrushBlack}"
+                    StrokeThickness="1" />
+                <Label
+                    x:Name="lblAddBtn"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="Add Record" />
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

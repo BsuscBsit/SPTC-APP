@@ -178,9 +178,11 @@ namespace SPTC_APP.View.Pages.Output
                 Grid.SetRow(profileEllipse, 0);
                 Grid.SetRowSpan(profileEllipse, 2);
 
+                string x = $"{employee.name?.firstname?.ToString() ?? ""} {employee.name?.lastname?.ToString() ?? ""}";
                 Label lblName = new Label
                 {
-                    Content = employee.name?.lastname?.ToString() ?? "Unknown(No Name Found)",
+                    
+                    Content = string.IsNullOrWhiteSpace(x) ? "Unknown(No Name Found)" : x,
                     FontFamily = new FontFamily("Inter"),
                     FontSize = nameFontSize,
                     FontWeight = FontWeights.Bold,

@@ -300,5 +300,9 @@ namespace SPTC_APP.View.Pages.Output
 
         }
 
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            (new EditEmployee(new Employee(), false, false)).Show();
+        }
     }
 }

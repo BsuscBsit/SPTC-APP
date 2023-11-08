@@ -90,6 +90,10 @@ namespace SPTC_APP.View.Pages.Input
                     tbPosTitle.IsEnabled = true;
                 }
             }
+            if (!isEdit && !isManage) 
+            {
+                tbPosTitle.IsEnabled = true;
+            }
         }
 
 
@@ -290,6 +294,7 @@ namespace SPTC_APP.View.Pages.Input
                         if (employee.position.title == AppState.Employees[0])
                         {
                             employee.Save();
+                            AppState.mainwindow?.Show();
                             this.Close();
                         }
                         else
@@ -300,11 +305,13 @@ namespace SPTC_APP.View.Pages.Input
                     else
                     {
                         employee.Save();
+                        AppState.mainwindow?.Show();
                         this.Close();
                     }
                 } else
                 {
                     employee.Save();
+                    AppState.mainwindow?.Show();
                     this.Close();
                 }
             } else

@@ -1,21 +1,127 @@
-﻿<Window x:Class="SPTC_APP.View.Pages.Output.Selection"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SPTC_APP.View.Pages.Output"
-        mc:Ignorable="d"
-        Title="Selection" Height="450" Width="800">
-    <Grid>
-        <Label x:Name="lblName" Content="Current Driver: None" HorizontalAlignment="Center" Margin="0,16,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblSwap" Content="Selected Driver: None" HorizontalAlignment="Center" Margin="0,0,0,100" VerticalAlignment="Bottom"/>
+﻿<Window
+    x:Class="SPTC_APP.View.Pages.Output.Selection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SPTC_APP.View.Pages.Output"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Selection"
+    AllowsTransparency="True"
+    KeyboardNavigation.TabNavigation="Continue"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    Style="{StaticResource DetachedRoundedWindow}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid Width="597" Height="473">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border
+            x:Name="topBar"
+            Grid.ColumnSpan="5"
+            Style="{StaticResource TopBarStyle}" />
+        <Label
+            x:Name="lblTitle"
+            Grid.Row="1"
+            Grid.ColumnSpan="5"
+            Margin="20,0,0,0"
+            Padding="0,5,5,5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="SELECT DRIVER"
+            Style="{DynamicResource CommonTitlePreset}" />
+        <Label
+            x:Name="lblName"
+            Grid.Row="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Margin="0,12,0,0"
+            Content="Current Driver: None"
+            Style="{StaticResource TextFieldLabelingPreset}" />
+        <Label
+            x:Name="lblSwap"
+            Grid.Row="6"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Selected Driver: None"
+            Style="{StaticResource TextFieldLabelingPreset}" />
 
-        <Label Content="List of Drivers without Franchise" HorizontalAlignment="Left" Margin="150,35,0,0" VerticalAlignment="Top"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Content="Drivers without Franchise"
+            Style="{StaticResource TextFieldLabelingPreset}" />
 
-        <Label Content="List of Drivers with Franchise" HorizontalAlignment="Left" Margin="469,34,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="dgDrivers" Margin="99,66,400,138" SelectionChanged="dgDrivers_SelectionChanged"/>
-        <DataGrid x:Name="dgDrivers_franchise" Margin="416,66,83,138" SelectionChanged="dgDrivers_franchise_SelectionChanged"/>
-        <Button x:Name="btnCancel" Height="39" Width="120" Content="CANCEL" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="119,0,0,34" Click="btnCancel_Click"/>
-        <Button x:Name="btnSave" Height="39" Background="Yellow" Content="SAVE" Width="120" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="566,0,0,34" Click="btnSave_Click"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Content="Drivers with Franchise"
+            Style="{StaticResource TextFieldLabelingPreset}" />
+        <DataGrid
+            x:Name="dgDrivers"
+            Grid.Row="4"
+            Grid.Column="1"
+            Width="250"
+            Height="200"
+            SelectionChanged="dgDrivers_SelectionChanged" />
+        <DataGrid
+            x:Name="dgDrivers_franchise"
+            Grid.Row="4"
+            Grid.Column="3"
+            Width="250"
+            Height="200"
+            SelectionChanged="dgDrivers_franchise_SelectionChanged" />
+        <StackPanel
+            Grid.Row="9"
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            Margin="0,0,0,24"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btnCancel"
+                Width="178"
+                Click="btnCancel_Click"
+                Content="CANCEL"
+                Style="{StaticResource CommonButtonStyle}"
+                TabIndex="4" />
+            <Button
+                x:Name="btnSave"
+                Width="178"
+                Margin="15,0,0,0"
+                Click="btnSave_Click"
+                Content="SAVE"
+                Style="{StaticResource CommonButtonStyle}"
+                TabIndex="5" />
+        </StackPanel>
+        <Grid
+            x:Name="gridToast"
+            Grid.RowSpan="9"
+            Grid.ColumnSpan="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom" />
     </Grid>
 </Window>

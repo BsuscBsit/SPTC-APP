@@ -40,6 +40,7 @@ namespace SPTC_APP.View.Pages.Output
                 lblName.Content = $"Current Driver: {franchise.Driver}";
             }
             DisplayDrivers();
+            DraggingHelper.DragWindow(topBar);
         }
 
         protected override void OnClosing(CancelEventArgs e)

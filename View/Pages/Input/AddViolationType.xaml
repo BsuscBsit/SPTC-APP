@@ -55,7 +55,6 @@
             <Button
                 x:Name="btnCancel"
                 Width="178"
-                Click="btnCancel_Click"
                 Content="CANCEL"
                 Style="{StaticResource CommonButtonStyle}"
                 TabIndex="4" />
@@ -63,7 +62,6 @@
                 x:Name="btnSave"
                 Width="178"
                 Margin="15,0,0,0"
-                Click="btnSave_Click"
                 Content="SAVE"
                 Style="{StaticResource CommonButtonStyle}"
                 TabIndex="5" />

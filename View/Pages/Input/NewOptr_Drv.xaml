@@ -257,7 +257,7 @@
             Margin="15,0,0,0"
             VerticalAlignment="Top"
             Style="{StaticResource CommonTextBoxStyle}"
-            Text="" />
+            Text="" Width="358.4" />
         <StackPanel
             Grid.Row="12"
             Grid.RowSpan="1"
@@ -272,7 +272,7 @@
                 Click="btnCancel_Click"
                 Content="CANCEL"
                 Style="{StaticResource CommonButtonStyle}"
-                TabIndex="4" />
+                TabIndex="10" />
             <Button
                 x:Name="btnSave"
                 Width="178"
@@ -280,7 +280,7 @@
                 Click="btnSave_Click"
                 Content="SAVE"
                 Style="{StaticResource CommonButtonStyle}"
-                TabIndex="5" />
+                TabIndex="11" />
         </StackPanel>
         <Grid
             x:Name="gridToast"

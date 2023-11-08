@@ -212,9 +212,9 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Content="Province, City/Municipality &amp; Barangay:"
-                Style="{StaticResource TextFieldLabelingPreset}" />
+                Style="{StaticResource TextFieldLabelingPreset}" Grid.Row="2" />
             <Label
-                Grid.Row="2"
+                Grid.Row="0"
                 Grid.Column="0"
                 Margin="0,15,0,0"
                 HorizontalAlignment="Left"
@@ -234,20 +234,20 @@
                 Style="{StaticResource TextFieldLabelingPreset}" />
             <TextBox
                 x:Name="tbAddressLine1"
-                Grid.Row="1"
-                Grid.Column="0"
-                Height="30"
-                Margin="15,0,0,0"
-                Style="{StaticResource CommonTextBoxStyle}"
-                TextWrapping="Wrap" />
-            <TextBox
-                x:Name="tbAddressLine2"
                 Grid.Row="3"
                 Grid.Column="0"
                 Height="30"
                 Margin="15,0,0,0"
                 Style="{StaticResource CommonTextBoxStyle}"
-                TextWrapping="Wrap" />
+                TextWrapping="Wrap" Width="352.8" />
+            <TextBox
+                x:Name="tbAddressLine2"
+                Grid.Row="1"
+                Grid.Column="0"
+                Height="30"
+                Margin="15,0,0,0"
+                Style="{StaticResource CommonTextBoxStyle}"
+                TextWrapping="Wrap" Width="352.8" />
             <Border
                 Grid.Row="1"
                 Grid.RowSpan="3"

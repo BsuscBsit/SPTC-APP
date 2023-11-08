@@ -180,7 +180,7 @@
                 Grid.Column="0"
                 Height="30"
                 Margin="15,0,0,0"
-                Style="{StaticResource CommonTextBoxStyle}" />
+                Style="{StaticResource CommonTextBoxStyle}" Width="261.6" />
             <TextBox
                 x:Name="tboxIDNum2"
                 Grid.Row="1"
@@ -189,7 +189,7 @@
                 Margin="15,0,0,0"
                 VerticalAlignment="Top"
                 Style="{StaticResource CommonTextBoxStyle}"
-                Text="" />
+                Text="" Width="260.8" />
         </Grid>
         <StackPanel
             Grid.Row="9"

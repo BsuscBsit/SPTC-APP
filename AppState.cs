@@ -48,7 +48,6 @@ namespace SPTC_APP
         //Toggle on defore deploying
         public static bool isDeployment = false;
         public static bool isDeployment_IDGeneration = false;
-        public static bool isDesigner = false;
 
         public static Window mainwindow = null;
 
@@ -87,16 +86,9 @@ namespace SPTC_APP
                 }
                 if (!AppState.isDeployment_IDGeneration && !AppState.isDeployment)
                 {
-                    if (AppState.isDesigner)
-                    {
-                        (new StyleTester()).Show();
-                    }
-                    else
-                    {
-                        MainBody body = (new MainBody());
-                        AppState.mainwindow = body;
-                        body.Show();
-                    }
+                    MainBody body = (new MainBody());
+                    AppState.mainwindow = body;
+                    body.Show();
                     //(new Test()).Show();
                 }
 

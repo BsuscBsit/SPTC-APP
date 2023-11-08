@@ -85,11 +85,11 @@ namespace SPTC_APP.View.Pages.Input
 
         private void initTextBoxes()
         {
-            tboxBodyNum.DefaultTextBoxBehavior(NUMBERS, true, gridToast, "Body number.", 0, true);
-            tboxMTOPplateNum.DefaultTextBoxBehavior(STRICTALPHANUMERICDASHES, true, gridToast, "Motorcycle/Tricycle Plate number.", 1, true);
-            tboxLTOplateNum.DefaultTextBoxBehavior(STRICTALPHANUMERICDASHES, true, gridToast, "Land Transportation Office Plate number.", 2, true);
-            tboxIDNum1.DefaultTextBoxBehavior(TIN, true, gridToast, "Taxpayer's Identification Number", 3, true);
-            tboxIDNum2.DefaultTextBoxBehavior(VIN, true, gridToast, "Voter's Identification number.", 4, true);
+            tboxBodyNum.DefaultTextBoxBehavior(NUMBER, true, gridToast, "Body number.", 0, true);
+            tboxMTOPplateNum.DefaultTextBoxBehavior(ALPHANUMERICDASH, true, gridToast, "Motorcycle/Tricycle Plate number.", 1, true);
+            tboxLTOplateNum.DefaultTextBoxBehavior(ALPHANUMERICDASH, true, gridToast, "Land Transportation Office Plate number.", 2, true);
+            tboxIDNum1.DefaultTextBoxBehavior(NUMBERDASH, true, gridToast, "Taxpayer's Identification Number", 3, true);
+            tboxIDNum2.DefaultTextBoxBehavior(ALPHANUMERICDASH, true, gridToast, "Voter's Identification number.", 4, true);
         }
     }
 }

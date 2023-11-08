@@ -332,9 +332,6 @@
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Styling\AnimationHelper.cs" />
-    <Compile Include="View\Styling\StyleTester.xaml.cs">
-      <DependentUpon>StyleTester.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
@@ -500,10 +497,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Styling\IconResource.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Styling\StyleTester.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

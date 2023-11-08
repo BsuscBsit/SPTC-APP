@@ -73,8 +73,8 @@ namespace SPTC_APP.View.Pages.Input
         private void initTextBoxes()
         {
             // Check tooltips kung tama ba description. (Optional)
-            tboxAmount.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Enter amount to loan.", 0);
-            tboxRefNo.DefaultTextBoxBehavior(SIGNEDDIGIT, true, gridToast, "Reference number.", 1);
+            tboxAmount.DefaultTextBoxBehavior(NUMBERPERIOD, true, gridToast, "Enter amount to loan.", 0);
+            tboxRefNo.DefaultTextBoxBehavior(NUMBER, true, gridToast, "Reference number.", 1);
         }
     }
 }

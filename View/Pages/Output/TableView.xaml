@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <Button
             x:Name="btnAdd"
-            Width="250"
+            Width="180"
             Height="30"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"

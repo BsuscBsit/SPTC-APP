@@ -393,12 +393,12 @@ namespace SPTC_APP.View.Pages.Input
 
         private void initTextBoxes()
         {
-            tbFname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "First name.", 0);
-            tbMname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "First name.", 0);
-            tbLname.DefaultTextBoxBehavior(ALPHABETS, false, gridToast, "First name.", 0);
-            tbPosTitle.DefaultTextBoxBehavior(ALPHANUMERIC, false, gridToast, "First name.", 0);
-            tbAddressLine1.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First name.", 0);
-            tbAddressLine2.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First name.", 0);
+            tbFname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "First name.", 0);
+            tbMname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Middle name.", 0);
+            tbLname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Last name.", 0);
+            tbPosTitle.DefaultTextBoxBehavior(ALPHANUMERICDASHPERIOD, false, gridToast, "Position of this person.", 0);
+            tbAddressLine1.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Street Address.", 0);
+            tbAddressLine2.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Additional Address Information.", 0);
         }
 
         private void gridCamera_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)

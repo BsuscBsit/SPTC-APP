@@ -15,7 +15,7 @@ namespace SPTC_APP.View.Controls
     public static class TextBoxHelper
     {
         private static Grid grid;
-        public static void DefaultTextBoxBehavior(this TextBox tb, AllowFormat? format = null, bool blockSpaces = false, Grid errorGrid = null, string toolTip = null, int? tabIndex = null, bool allCaps = false)
+        public static void DefaultTextBoxBehavior(this TextBox tb, AllowFormat? format = null, bool blockSpaces = false, Grid errorGrid = null, string toolTip = null, int? tabIndex = null, bool allCaps = false, string MSG = null)
         {
             if(errorGrid != null)
             {
@@ -29,17 +29,23 @@ namespace SPTC_APP.View.Controls
             {
                 tb.ToolTip = toolTip;
             }
+            if (allCaps)
+            {
+                tb.CharacterCasing = CharacterCasing.Upper;
+            }
+
+            // Ordered event handlers.
             tb.PreviewKeyDown += PreviewKeyDown;
-            tb.GotFocus += GotFocusBehavior;
-            tb.MouseDoubleClick += DoubleClickBehavior;
             if(format != null)
             {
-                tb.PreviewTextInput += (sender, e) => PreviewTextInputBehavior(sender, e, format, allCaps);
+                tb.PreviewTextInput += (sender, e) => PreviewTextInputBehavior(sender, e, format, MSG);
             }
             if (blockSpaces)
             {
                 tb.TextChanged += BlockSpace;
             }
+            tb.PreviewMouseDoubleClick += DoubleClickBehavior;
+            tb.GotFocus += GotFocusBehavior;
         }
 
         private static void PreviewKeyDown(object sender, KeyEventArgs e)
@@ -52,21 +58,16 @@ namespace SPTC_APP.View.Controls
             }
         }
 
-        private static void PreviewTextInputBehavior(object sender, TextCompositionEventArgs e, AllowFormat? format, bool allCaps = false)
+        private static void PreviewTextInputBehavior(object sender, TextCompositionEventArgs e, AllowFormat? format, string MSG)
         {
             if (sender is TextBox tb)
             {
-                if (allCaps)
-                {
-                    tb.Text = tb.Text.ToUpper();
-                    tb.CaretIndex = tb.Text.Length;
-                }
-                string pattern = GetPatternForFormat(format);
+                string pattern = patterns[(int) format];
 
                 if (Regex.IsMatch(e.Text, pattern))
                 {
                     e.Handled = true;
-                    ShowError(format, e.Text);
+                    ShowError(format, e.Text, MSG);
                     tb.Focus();
                 }
             }
@@ -94,9 +95,12 @@ namespace SPTC_APP.View.Controls
         {
             if(sender is TextBox tb)
             {
-                if(tb.IsSelectionActive)
+                if(tb.SelectionLength == tb.Text.Length)
                 {
                     tb.SelectionLength = 0;
+                } else
+                {
+                    tb.SelectAll();
                     tb.CaretIndex = tb.Text.Length;
                 }
             }
@@ -109,6 +113,7 @@ namespace SPTC_APP.View.Controls
                 if (textBox.Text.Length > 0)
                 {
                     textBox.SelectAll();
+                    textBox.CaretIndex = textBox.Text.Length;
                 }
             }
         }
@@ -134,137 +139,153 @@ namespace SPTC_APP.View.Controls
             }
         }
 
-        private static string GetPatternForFormat(AllowFormat? format)
-        {
-            switch (format)
-            {
-                case ALPHABETS:
-                    return @"[^A-Za-z.]+";
-
-                case NUMBERS:
-                    return @"[^0-9]+";
-
-                case NUMBERSDASHES:
-                    return @"[^0-9\-]+";
-
-                case STRICTALPHANUMERICDASHES:
-                    return @"[^A-Za-z0-9\-]+";
-
-                case SIGNEDDIGIT:
-                    return @"[^0-9.-]+";
-
-                case UNSIGNEDDIGIT:
-                    return @"[^0-9.]+";
-
-                case ALPHANUMERIC:
-                    return @"[^0-9.A-Za-z+\-*/()\s]+";
-
-                case PHONENUMBER:
-                    return @"[^+\-0-9]+";
-
-                case EMAIL:
-                    return @"[^a-zA-Z0-9@._-]+";
-
-                case VIN:
-                    return @"[^A-Za-z0-9\-]+";
-
-                case TIN:
-                    return @"[^0-9\-]";
-
-                case COMMON:
-                    return @"[^A-Za-z0-9.,;:!@#$%^&*()_+=\[\]{}|'""<>/\\?~-]+";
-
-                case ADDRESS:
-                    return @"[^0-9A-Za-z.\-/@#()""'\\]+";
-
-                default:
-                    return string.Empty;
-            }
-        }
-        
-        private static void ShowError(AllowFormat? format, string input = null)
+        /*private static void ShowError(AllowFormat? format, string input, string MSG)
         {
             if(grid != null)
             {
-                string x = !string.IsNullOrEmpty(input) ? "\n'" + input + "' is not a valid input." : "";
-                string msg = "This field only accepts ";
-                switch (format)
+                if(!string.IsNullOrEmpty(MSG))
                 {
-                    case ALPHABETS:
-                        msg += "letters and periods." + x;
-                        break;
-
-                    case NUMBERS:
-                        msg += "numbers." + x;
-                        break;
-
-                    case NUMBERSDASHES:
-                        msg += "numbers and dashes." + x;
-                        break;
-
-                    case STRICTALPHANUMERICDASHES:
-                        msg += "letters, numbers, and dashes." + x;
-                        break;
-
-                    case SIGNEDDIGIT:
-                        msg += "numbers, dashes, and periods." + x;
-                        break;
-
-                    case UNSIGNEDDIGIT:
-                        msg += "numbers and periods." + x;
-                        break;
-
-                    case ALPHANUMERIC:
-                        msg += "letters, numbers, and characters '* / + - ( ) .'" + x;
-                        break;
-
-                    case PHONENUMBER:
-                        msg += "numbers, dashes, and plus sign '+'." + x;
-                        break;
-
-                    case EMAIL:
-                        msg = input != null ? "'" + input + "' is not a valid email character." : "";
-                        break;
-
-                    case VIN:
-                        msg = input != null ? "'" + input + "' is not valid for Voter's ID number." : "";
-                        break;
-
-                    case TIN:
-                        msg = input != null ? "'" + input + "' is not valid for TIN." : "";
-                        break;
-
-                    case COMMON:
-                        msg += "letters, numbers and characters:\n" +
-                            "' . , ; : ! @ # $ % ^ & * ( ) _ + = [ ] { } |' \" < > \\ / ? ~ -'";
-                        break;
-
-                    case ADDRESS:
-                        msg = !string.IsNullOrEmpty(x) ? x.Substring(1, x.Length - 2) + " for this field." : "";
-                        break;
+                    new Toast(grid, MSG, 2.5);
+                    return;
                 }
-                if(!((msg == "This field only accepts " || string.IsNullOrEmpty(msg)) && string.IsNullOrEmpty(x)))
+
+                string post = !string.IsNullOrEmpty(input) ? "\n'" + input + "' is not a valid input." : "";
+                string pre = "This field only accepts ";
+                string msg;
+
+                if (format == NUMBEREXPRESSIONS)
                 {
-                    new Toast(grid, msg, 2.5);
+                    msg = $"{pre}{patternDescription[(int)format]}";
                 }
+                else if (format == EMAIL)
+                {
+                    msg = $"' {post} ' is not a valid input for email address.";
+                }
+                else if (format == COMMON)
+                {
+                    msg = $"{pre}{patternDescription[(int)format]}";
+                }
+                else if (format == ADDRESS)
+                {
+                    msg = $"' {post} ' is not a valid input for address.";
+                }
+                else
+                {
+                    msg = pre + patternDescription[(int)format] + post;
+                }
+                new Toast(grid, MSG, 2.5);
             }
+        }*/
+        private static void ShowError(AllowFormat? format, string input, string MSG)
+        {
+            if (grid == null)
+            {
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(MSG))
+            {
+                new Toast(grid, MSG, 2.5);
+                return;
+            }
+
+            string post = !string.IsNullOrEmpty(input) ? "\n'" + input + "' is not a valid input." : "";
+            string pre = "This field only accepts ";
+            string msg;
+
+            switch (format)
+            {
+                case NUMBEREXPRESSIONS:
+                case COMMON:
+                    msg = $"{pre}{patternDescription[(int)format]}";
+                    break;
+
+                case EMAIL:
+                    msg = $"' {post} ' is not a valid input for email address.";
+                    break;
+
+                case ADDRESS:
+                    msg = $"' {post} ' is not a valid input for address.";
+                    break;
+
+                default:
+                    msg = pre + patternDescription[(int)format] + post;
+                    break;
+            }
+
+            new Toast(grid, msg, 2.5);
         }
+
 
         public enum AllowFormat
         {
-            ALPHABETS,
-            NUMBERS,
-            NUMBERSDASHES,
-            STRICTALPHANUMERICDASHES,
-            SIGNEDDIGIT,
-            UNSIGNEDDIGIT,
+            LETTER,
+            LETTERDASH,
+            LETTERPERIOD,
+            LETTERDASHPERIOD,
+
+            NUMBER,
+            NUMBERDASH,
+            NUMBERPERIOD,
+            NUMBERDASHPERIOD,
+            NUMBEREXPRESSIONS,
+
             ALPHANUMERIC,
-            PHONENUMBER,
+            ALPHANUMERICDASH,
+            ALPHANUMERICPERIOD,
+            ALPHANUMERICDASHPERIOD,
+
+            PHONE,
             EMAIL,
-            VIN,
-            TIN,
             COMMON,
             ADDRESS
         }
+
+        private static string[] patterns = new string[]
+        {
+            @"[^A-Za-z]+",
+            @"[^A-Za-z\-]+",
+            @"[^A-Za-z.]+",
+            @"[^A-Za-z\-.]+",
+
+            @"[^0-9]+",
+            @"[^0-9\-]+",
+            @"[^0-9.]+",
+            @"[^0-9\-.]+",
+            @"[^0-9+\-*/%()^a-zA-Z]+",
+
+            @"[^0-9A-Za-z]+",
+            @"[^0-9A-Za-z\-]+",
+            @"[^0-9A-Za-z.]+",
+            @"[^0-9A-Za-z\-.]+",
+
+            @"[^+\-0-9]+",
+            @"[^a-zA-Z0-9@._-]+",
+            @"[^A-Za-z0-9.,;:!@#$%^&*()_+=\[\]{}|'""<>/\\?~-]+",
+            @"[^0-9A-Za-z.,\-/@#&()""'\\]+"
+        };
+        private static string[] patternDescription = new string[]
+        {
+            "letters.",
+            "letters and dashes.",
+            "letters and periods.",
+            "letters, dashes, and periods.",
+
+            "numbers.",
+            "numbers and dashes.",
+            "numbers and periods.",
+            "numbers, dashes and periods.",
+            "letters, numbers, and characters:\n〔 . % ^ * ( ) + = / - 〕",
+
+            "letters and numbers.",
+            "letters, numbers, and dashes.",
+            "letters, numbers, and periods.",
+            "letters, numbers, dashes and periods.",
+
+            "numbers, dashes, and plus sign '+'.",
+            "letters, numbers, and characters:\n〔 . @ _ - 〕",
+            "letters, numbers, and characters:\n〔 . , ; : ! @ # $ % ^ & * ( ) _ + = [ ] { } | \" < > \\ / ? ~ - ' 〕",
+            "letters, numbers, and characters:\n〔 . , # & ( ) \" \\ - ' 〕"
+        };
     }
 }

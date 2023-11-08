@@ -235,7 +235,7 @@ namespace SPTC_APP.View.Pages.Output
             lblMonth.Content = monthAbbreviations[pieMonth-1] + ", " + pieYear;
 
             this.total = dictionary.Values.Sum();
-            lblPieChart.Content = (total - dictionary.Values.Last()).ToString("0.00");
+            lblPieChart.Content = Scaler.NumberShorthand((total - dictionary.Values.Last()));
             lblPieChart.Tag = (total - dictionary.Values.Last()).ToString("0.00");
             double currentAngle = -90;
 
@@ -328,7 +328,13 @@ namespace SPTC_APP.View.Pages.Output
                 if (!pieClicked)
                 {
                     lblPieChartTitle.Content = "Total Revenue";
-                    lblPieChart.Content = lblPieChart.Tag.ToString();
+                    double tag = 0;
+                    try
+                    {
+                        tag = Double.Parse(lblPieChart.Tag.ToString());
+                    }
+                    catch { }
+                    lblPieChart.Content = Scaler.NumberShorthand(tag);
                     lblPercent.Content = (total == 0) ? "0%" : "100%";
                 }
                 path.StrokeThickness = 0;
@@ -347,7 +353,7 @@ namespace SPTC_APP.View.Pages.Output
                 string tag = path.Tag?.ToString() ?? "No Data";
                 lblPieChartTitle.Content = tag;
                 double val = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).TryGetValue(tag, out var value)? value: 0;
-                lblPieChart.Content = val.ToString("0.00");
+                lblPieChart.Content = Scaler.NumberShorthand(val);
                 lblPercent.Content = Math.Round(((val / AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum()) * 100)) + "%";
                 path.StrokeThickness = 1;
             }
@@ -430,7 +436,7 @@ namespace SPTC_APP.View.Pages.Output
             DrawBarChart();
             DrawPieChart();
             lblPieChartTitle.Content = "Total Revenue";
-            lblPieChart.Content = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
+            lblPieChart.Content = Scaler.NumberShorthand(AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum());
             lblPercent.Content = "100%";
         }
         private async void btnPieBackward_Click(object sender, RoutedEventArgs e)

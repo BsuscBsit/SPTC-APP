@@ -25,7 +25,7 @@
                 </DataGrid.Resources>
             </DataGrid>
         </Grid>
-        <Grid x:Name="CodingGrid" >
+        <Grid x:Name="CodingGrid" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -84,11 +84,12 @@
             <Border
                 Grid.Row="2"
                 Grid.ColumnSpan="3"
-                Height="77"
+                Height="102"
                 Margin="0,12,0,0"
                 VerticalAlignment="Top"
-                BorderBrush="Black"
-                BorderThickness="1">
+                BorderBrush="{StaticResource BrushBlack}"
+                CornerRadius="10"
+                BorderThickness="1" Padding="15,15,15,15">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -235,7 +236,7 @@
                 </Grid>
             </Border>
         </Grid>
-        <Grid x:Name="ViolationGrid" d:IsHidden="True">
+        <Grid x:Name="ViolationGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -243,6 +244,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="42" />
             </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
@@ -352,14 +354,13 @@
                 x:Name="lblTotalLedger"
                 Grid.Row="1"
                 Grid.Column="2"
-                Width="90"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 HorizontalContentAlignment="Center"
                 Content="0.00"
                 FontWeight="Regular"
                 Foreground="{StaticResource BrushRed}"
-                Style="{StaticResource LabelFontMedium}" />
+                Style="{StaticResource LabelFontMedium}" Margin="0,0,12,0" />
 
 
 

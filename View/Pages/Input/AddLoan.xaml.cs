@@ -115,10 +115,10 @@ namespace SPTC_APP.View.Pages.Input
         private void initTextBoxes()
         {
             // Check tooltips kung tama ba description. (Optional)
-            tboxAmount.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Enter amount to loan.", 0);
-            tboxRefNo.DefaultTextBoxBehavior(SIGNEDDIGIT, true, gridToast, "Reference number.", 1);
-            tbPenalty.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Penalty amount.", 2);
-            tboxInterest.DefaultTextBoxBehavior(UNSIGNEDDIGIT, true, gridToast, "Enter loan interest monthly.", 3);
+            tboxAmount.DefaultTextBoxBehavior(NUMBERPERIOD, true, gridToast, "Enter amount to loan.", 0);
+            tboxRefNo.DefaultTextBoxBehavior(NUMBER, true, gridToast, "Reference number.", 1);
+            tbPenalty.DefaultTextBoxBehavior(NUMBERPERIOD, true, gridToast, "Penalty amount.", 2);
+            tboxInterest.DefaultTextBoxBehavior(NUMBERPERIOD, true, gridToast, "Enter loan interest monthly.", 3);
         }
     }
 }

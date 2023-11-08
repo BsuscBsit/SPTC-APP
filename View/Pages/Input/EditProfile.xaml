@@ -284,7 +284,7 @@
                 Margin="15,0,0,0"
                 VerticalAlignment="Top"
                 Style="{StaticResource CommonTextBoxStyle}"
-                Text="" />
+                Text="" Width="358.4" />
 
         <Grid
         Width="760"

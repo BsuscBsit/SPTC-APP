@@ -96,7 +96,19 @@ namespace SPTC_APP.View.Pages.Output
         {
             ClickColorControl(sender);
             ModuleGrid.Children.Clear();
-            ModuleGrid.Children.Add((new Modules(moduleName, MainBody.selectedFranchise)).Fetch());
+            if(moduleName == Modules.VIOLATION)
+            {
+                Grid f = (new Modules(moduleName, MainBody.selectedFranchise)).Fetch();
+                if (btnAddButton.Visibility != Visibility.Visible)
+                {
+                    f.RowDefinitions[2] = new RowDefinition() { Height = new GridLength(0) };
+                }
+                ModuleGrid.Children.Add(f);
+            }
+            else
+            {
+                ModuleGrid.Children.Add((new Modules(moduleName, MainBody.selectedFranchise)).Fetch());
+            }
         }
 
         private void btnHistory_Click(object sender, RoutedEventArgs e)
@@ -124,6 +136,7 @@ namespace SPTC_APP.View.Pages.Output
                 } else
                 {
                     btnAddButton.Visibility = Visibility.Collapsed;
+
                 }
             } else
             {

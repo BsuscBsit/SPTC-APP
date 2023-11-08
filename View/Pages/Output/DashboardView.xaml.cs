@@ -505,5 +505,10 @@ namespace SPTC_APP.View.Pages.Output
             }
             menuExpanded.IsChecked = !isExpanded;
         }
+
+        private void btnAddViolationType_Click(object sender, RoutedEventArgs e)
+        {
+            (new AddViolationType()).Show();
+        }
     }
 }

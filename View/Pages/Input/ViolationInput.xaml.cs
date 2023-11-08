@@ -19,10 +19,11 @@ namespace SPTC_APP.View.Pages.Input
         public ViolationInput(Franchise franchise)
         {
             InitializeComponent();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide();
+                Populate();
+            };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             this.franchise = franchise;
-            Populate();
         }
 
         private void Populate()
@@ -37,6 +38,10 @@ namespace SPTC_APP.View.Pages.Input
             if (listViolation.Count > 0)
             {
                 selectedViolationType = listViolation[0];
+            } else
+            {
+                ControlWindow.ShowStatic("No Violation Types for Driver", "No violation type detected.", Icons.ERROR);
+                this.Close();
             }
         }
 
@@ -74,7 +79,7 @@ namespace SPTC_APP.View.Pages.Input
             if (cbViolations.SelectedItem is ViolationType selectedViolation)
             {
                 int numOfDays = selectedViolation.numOfDays;
-
+                txtBlockDesc.Text = selectedViolation.details.Length > 0 ? selectedViolation.details : "-No description-";
                 calendarSelect.SelectedDates.Clear();
 
                 DateTime startDate = DateTime.Today;

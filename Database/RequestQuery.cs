@@ -13,7 +13,7 @@ namespace SPTC_APP.Database
 
         public static string LOGIN_EMPLOYEE = $"SELECT * FROM {Table.EMPLOYEE} AS e LEFT JOIN {Table.POSITION} p ON p.{Field.ID} = e.{Field.POSITION_ID} WHERE p.{Field.TITLE} = ? AND e.{Field.PASSWORD} = ? AND e.{Where.ALL_NOTDELETED}";
 
-        public static string GET_CURRENT_CHAIRMAN = $"SELECT * FROM {Table.EMPLOYEE} AS e LEFT JOIN {Table.POSITION} p ON p.{Field.ID} = e.{Field.POSITION_ID} WHERE p.{Field.TITLE} = \"{AppState.ALL_EMPLOYEES?[4]?? string.Empty}\" AND e.{Field.ISDELETED} = 0";
+        public static string GET_CURRENT_CHAIRMAN = $"SELECT * FROM {Table.EMPLOYEE} AS e LEFT JOIN {Table.POSITION} p ON p.{Field.ID} = e.{Field.POSITION_ID} WHERE p.{Field.TITLE} = \"Chairman\" AND e.{Field.ISDELETED} = 0";
         public static string GET_LIST_OF_POSITION = $"SELECT {Field.TITLE} FROM {Table.POSITION} WHERE {Where.ALL_NOTDELETED}";
 
 

@@ -102,7 +102,7 @@ namespace SPTC_APP.Objects
             return true;
         }
 
-        internal void updatePass(string password, string newpassword)
+        public void updatePass(string password, string newpassword)
         {
             if (employee != null)
             {

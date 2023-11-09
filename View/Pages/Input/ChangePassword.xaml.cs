@@ -152,7 +152,7 @@ namespace SPTC_APP.View.Pages.Input
             {
                 if (pbPassword2.Password.Equals(pbPassword3.Password))
                 {
-                    //AppState.USER.updatePass(pbPassword.Password, pbPassword2.Password);
+                    AppState.USER?.updatePass(pbPassword.Password, pbPassword2.Password);
                     AppState.USER.Save();
                     this.Close();
                 }

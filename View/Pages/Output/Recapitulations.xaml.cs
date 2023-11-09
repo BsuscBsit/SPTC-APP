@@ -97,6 +97,7 @@ namespace SPTC_APP.View.Pages.Input
                 if(r.text == "Share Capital")
                 {
                     r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    r.Save();
                 }
                 RowDefinition rowDefinition = new RowDefinition();
                 rowDefinition.Height = new GridLength(40);
@@ -105,9 +106,7 @@ namespace SPTC_APP.View.Pages.Input
                 RecapDisplay recapDisplay = new RecapDisplay(r, recaps.IndexOf(r));
                 recapgrid.Children.Add(recapDisplay.AddSelf());
 
-                Button btn = recapDisplay.getDelete();
-                btn.MouseLeave += click_remove;
-                total += r.content;
+                
             }
             tbTotal.Text = total.ToString("0.00");
         }
@@ -213,6 +212,7 @@ namespace SPTC_APP.View.Pages.Input
             {
                 recap.content = Double.Parse(textBox.Text);
                 recap.Save();
+                
             }
 
             public Grid AddSelf()

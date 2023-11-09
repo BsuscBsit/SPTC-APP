@@ -121,6 +121,7 @@ namespace SPTC_APP.View.Pages.Input
                         optr.name = new Name();
                     if (optr.address == null)
                         optr.name.firstname = tboxsFname.Text;
+                    optr.name.firstname = tboxsFname.Text;
                     optr.name.middlename = tboxsMname.Text;
                     optr.name.lastname = tboxsLname.Text;
                     optr.birthday = (DateTime)dpBirthday.SelectedDate;
@@ -135,11 +136,11 @@ namespace SPTC_APP.View.Pages.Input
                     if (franchise != null)
                     {
                         franchise.Save();
+                        optr.Save();
                     }
                     else
                     {
                         optr.Save();
-
                     }
                     (AppState.mainwindow as MainBody).ResetWindow(General.OPERATOR);
                 }

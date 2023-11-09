@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2023 at 12:30 PM
+-- Generation Time: Nov 09, 2023 at 08:44 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -93,7 +93,6 @@ INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `sign_id`, `image_id`
 (3, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, NULL, NULL, NULL, NULL, 0),
 (4, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, NULL, NULL, NULL, NULL, 0),
 (5, -1, -1, -1, -1, NULL, 5, NULL, NULL, NULL, NULL, 0);
-
 
 -- --------------------------------------------------------
 
@@ -414,8 +413,7 @@ ALTER TABLE `tbl_operator`
 -- Indexes for table `tbl_payment_details`
 --
 ALTER TABLE `tbl_payment_details`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `ref` (`reference_no`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_position`

@@ -38,6 +38,7 @@ namespace SPTC_APP.Database
             $"LEFT JOIN {Table.NAME} OName ON O.{Field.NAME_ID}=OName.{Field.ID} LEFT JOIN {Table.NAME} DName ON D.{Field.NAME_ID}=DName.{Field.ID} " +
             $"WHERE f.{Field.BODY_NUMBER} LIKE \"%{text}%\" OR OName.{Field.LASTNAME} LIKE \"%{text}%\" OR DName.{Field.LASTNAME} LIKE \"%{text}%\" AND f.id = ( SELECT MAX(id) FROM tbl_franchise WHERE body_number = f.body_number ) AND f.{Where.ALL_NOTDELETED} LIMIT 0, 5";
 
+        internal static string GET_ID_IF_SAME_DETAIS(string text) => $"SELECT id FROM {Table.PAYMENT_DETAILS} WHERE {Field.RECAP_TEXT} = \"{text}\" AND {Where.ALL_NOTDELETED}";
         public static string GET_ALL_PAYMENT_IN_MONTH(int month, int year) =>
             $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} <> -1 AND {Field.DEPOSIT} > 0 AND {Where.ALL_NOTDELETED}";
         public static string GET_ALL_RECAP_IN_MONTH(int month, int year) =>

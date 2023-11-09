@@ -22,16 +22,18 @@ namespace SPTC_APP.View.Pages.Input
     /// </summary>
     public partial class AddRecap : Window
     {
-        public AddRecap()
+        private Recapitulations recaps;
+        public AddRecap(Recapitulations recap)
         {
             InitializeComponent();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
+            this.recaps = recap;
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); recaps?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             DraggingHelper.DragWindow(topBar);
         }
         protected override void OnClosing(CancelEventArgs e)
         {
-            AppState.mainwindow?.Show();
+            recaps?.Show();
             base.OnClosing(e);
         }
 
@@ -43,6 +45,11 @@ namespace SPTC_APP.View.Pages.Input
             {
                 Recap recap = new Recap(txt, amount);
                 recap.Save();
+                recaps.UpdateRecap();
+                this.Close();
+            } else
+            {
+                ControlWindow.ShowStatic("Fields Empty", "Some required fields are empty", Icons.NOTIFY);
             }
         }
 

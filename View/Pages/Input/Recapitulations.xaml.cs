@@ -69,7 +69,7 @@ namespace SPTC_APP.View.Pages.Input
             UpdateRecap();
         }
 
-        private void UpdateRecap()
+        public void UpdateRecap()
         {
             if (currentmonth == DateTime.Now.Month && currentyear == DateTime.Now.Year)
             {
@@ -87,6 +87,7 @@ namespace SPTC_APP.View.Pages.Input
 
             recapgrid.RowDefinitions.Clear();
             recapgrid.Children.Clear();
+            double total = 0;
             List<Button> btnDeletes = new List<Button>();
             foreach (Recap r in recaps)
             {
@@ -99,9 +100,9 @@ namespace SPTC_APP.View.Pages.Input
 
                 Button btn = recapDisplay.getDelete();
                 btn.MouseLeave += click_remove;
-                
+                total += r.content;
             }
-
+            tbTotal.Text = total.ToString("0.00");
         }
 
         private void click_remove(object sender, MouseEventArgs e)
@@ -109,7 +110,7 @@ namespace SPTC_APP.View.Pages.Input
             if(sender is Button btn){
                 if (btn.Tag?.ToString().Equals("DELETED") ?? false)
                 {
-                    ;
+                    
                 }
 
                 UpdateRecap();
@@ -119,8 +120,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            
-
+            (new AddRecap(this)).Show();
         }
 
         class RecapDisplay
@@ -193,6 +193,7 @@ namespace SPTC_APP.View.Pages.Input
             private void btnRemove_click(object sender, RoutedEventArgs e)
             {
                 recap.Delete();
+                btnRemove.Style = Application.Current.FindResource("RedButtonStyle") as Style;
                 btnRemove.Tag = "DELETED";
             }
 

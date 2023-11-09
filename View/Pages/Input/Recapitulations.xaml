@@ -70,7 +70,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="TOTAL: " VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <TextBox x:Name="tbTotal" Grid.Column="1" Text="HAHAHA" Style="{StaticResource CommonTextBoxStyle}" Margin="20, 5"/>
+            <TextBox x:Name="tbTotal" Grid.Column="1" Text="0.00" IsEnabled="False" Style="{StaticResource CommonTextBoxStyle}" Margin="20, 5"/>
 
         </Grid>
         <Grid Grid.Row="3" Height="70">

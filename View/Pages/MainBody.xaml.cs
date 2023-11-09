@@ -276,6 +276,11 @@ namespace SPTC_APP.View.Pages
 
         private void paneExpander_Click(object sender, RoutedEventArgs e)
         {
+            if (profileActionCanvas.Visibility == Visibility.Visible || effectCanvas.Visibility == Visibility.Visible)
+            {
+                profileActionCanvas.FadeOut(0.3);
+                effectCanvas.FadeOut(0.3);
+            }
             paneExpander.IsEnabled = false;
             if (paneExpander.IsChecked == false)
             {
@@ -303,7 +308,7 @@ namespace SPTC_APP.View.Pages
                     username.FadeIn(0.1);
                     userImageHolder.FadeIn(0.2);
 
-                    sidePanel.AnimateWidth(225, 0.2, () =>
+                    sidePanel.AnimateWidth(260, 0.2, () =>
                     {
                         paneExpander.IsEnabled = true;
                     });
@@ -357,6 +362,36 @@ namespace SPTC_APP.View.Pages
             }
 
             
+        }
+
+        private void userImageHolder_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if(paneExpander.IsChecked == true)
+            {
+                effectCanvas.FadeIn(0.1, null, () =>
+                {
+                    profileActionCanvas.FadeIn(0.2);
+                });
+            }
+        }
+
+        private void gridProfActBounding_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (profileActionCanvas.Visibility == Visibility.Visible || effectCanvas.Visibility == Visibility.Visible)
+            {
+                profileActionCanvas.FadeOut(0.3);
+                effectCanvas.FadeOut(0.3);
+            }
+        }
+
+        private void btnEditPass_Click(object sender, RoutedEventArgs e)
+        {
+            (new ChangePassword()).Show();
+        }
+
+        private void btnEditProf_Click(object sender, RoutedEventArgs e)
+        {
+            (new EditEmployee(AppState.USER, true, false)).Show();
         }
 
         private async void lsSuggestion_SelectionChanged(object sender, SelectionChangedEventArgs e)

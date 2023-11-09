@@ -236,82 +236,6 @@
                 VerticalAlignment="Center"
                 Click="paneExpander_Click"
                 Style="{DynamicResource PaneExpander}" />
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="127.2" />
-                    <RowDefinition Height="15" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Button 
-                    Grid.Row="0"
-                    x:Name="btnProfile"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Click="btnProfile_Click">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Ellipse
-                        x:Name="userImageHolder"
-                        Grid.Row="0"
-                        Width="50"
-                        Height="50"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                            <Ellipse.Fill>
-                                <ImageBrush x:Name="userImage" ImageSource="../Images/icons/person.png" />
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <Label
-                        x:Name="username"
-                        Grid.Row="1"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Content="General Manager"
-                        Foreground="{StaticResource BrushBlack}"
-                        Style="{StaticResource SubTitlePreset}"
-                        Visibility="Collapsed" />
-                    </Grid>
-                </Button>
-                <Button
-                    x:Name="DashBoard"
-                    Grid.Row="2"
-                    Height="40"
-                    Margin="10,0,10,0"
-                    VerticalAlignment="Top"
-                    Background="{StaticResource BrushSoftGrey1}"
-                    BorderThickness="0"
-                    Click="DashBoard_Click"
-                    Style="{StaticResource ControlledButtonStyle}">
-                    <Grid Width="189.6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="7" />
-                            <ColumnDefinition Width="25" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <ContentControl
-                            Grid.Column="1"
-                            Margin="-1,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Content="{StaticResource HomeIcon}" />
-                        <Label
-                            x:Name="lblDashB"
-                            Grid.Column="3"
-                            Padding="0,5,5,5"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Content="Dashboard"
-                            Foreground="{StaticResource BrushBlack}"
-                            Style="{StaticResource SubTitlePreset}" />
-                    </Grid>
-                </Button>
-            </Grid>
             <Grid x:Name="menu" Grid.Row="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -448,6 +372,127 @@
                 </Button>
 
             </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="127.2" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button
+                    x:Name="DashBoard"
+                    Grid.Row="2"
+                    Height="40"
+                    Margin="10,0,10,0"
+                    VerticalAlignment="Top"
+                    Background="{StaticResource BrushSoftGrey1}"
+                    BorderThickness="0"
+                    Click="DashBoard_Click"
+                    Style="{StaticResource ControlledButtonStyle}">
+                    <Grid Width="189.6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7" />
+                            <ColumnDefinition Width="25" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ContentControl
+                            Grid.Column="1"
+                            Margin="-1,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="{StaticResource HomeIcon}" />
+                        <Label
+                            x:Name="lblDashB"
+                            Grid.Column="3"
+                            Padding="0,5,5,5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Dashboard"
+                            Foreground="{StaticResource BrushBlack}"
+                            Style="{StaticResource SubTitlePreset}" />
+                    </Grid>
+                </Button>
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Canvas
+                        x:Name="effectCanvas"
+                        Grid.RowSpan="2" Visibility="Hidden">
+                        <Border
+                            Canvas.Left="-30"
+                            Canvas.Top="-17"
+                            Width="190.4"
+                            Height="236"
+                            Background="White"
+                            CornerRadius="12">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="12" ShadowDepth="0" />
+                            </Border.Effect>
+                        </Border>
+                    </Canvas>
+                    <Ellipse
+                        x:Name="userImageHolder"
+                        Grid.Row="0"
+                        Width="50"
+                        Height="50"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        MouseEnter="userImageHolder_MouseEnter">
+                        <Ellipse.Fill>
+                            <ImageBrush x:Name="userImage" ImageSource="../Images/icons/person.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Label
+                        x:Name="username"
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="General Manager"
+                        Foreground="{StaticResource BrushBlack}"
+                        Style="{StaticResource SubTitlePreset}" Visibility="Collapsed" />
+                    <Canvas
+                        x:Name="profileActionCanvas"
+                        Grid.RowSpan="2" Visibility="Hidden">
+                        <Grid
+                            x:Name="gridProfActBounding"
+                            Canvas.Left="-30"
+                            Canvas.Top="-17"
+                            Width="190.4"
+                            Height="236"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" MouseLeave="gridProfActBounding_MouseLeave">
+                            <Label/>
+                            <Border>
+                                <Grid Margin="15,15,15,15">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="135" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Button
+                                        x:Name="btnEditProf"
+                                        Grid.Row="1"
+                                        Height="30"
+                                        Click="btnEditProf_Click"
+                                        Content="Edit Profile"
+                                        Style="{DynamicResource CommonButtonStyle}" />
+                                    <Button
+                                        x:Name="btnEditPass"
+                                        Grid.Row="2"
+                                        Width="160"
+                                        Height="30"
+                                        Margin="0,10,0,0"
+                                        Click="btnEditPass_Click"
+                                        Content="Change Password"
+                                        Style="{DynamicResource CommonButtonStyle}" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Canvas>
+                </Grid>
+            </Grid>
             <Button
                 Grid.Row="5"
                 Height="40"
@@ -514,8 +559,9 @@
         <Grid
             x:Name="TablePanelSwap"
             Grid.Row="1"
+            Grid.RowSpan="2"
             Grid.Column="1"
-            Margin="15,0,0,0" Grid.RowSpan="2" />
+            Margin="15,0,0,0" />
         <Canvas
             Grid.Row="1"
             Grid.Column="1"

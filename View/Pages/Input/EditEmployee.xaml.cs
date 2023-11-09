@@ -95,6 +95,11 @@ namespace SPTC_APP.View.Pages.Input
             {
                 tbPosTitle.IsEnabled = true;
             }
+            if (employee.position?.title?.Equals(AppState.ALL_EMPLOYEES[4]) ?? false) 
+            {
+                tbPosTitle.IsEnabled = false;
+            }
+
         }
 
 

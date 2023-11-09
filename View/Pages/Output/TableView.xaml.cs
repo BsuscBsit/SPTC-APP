@@ -136,20 +136,20 @@ namespace SPTC_APP.View.Pages.Output
                 int pageIndex = 0;
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("name.legalName", "NAME", minWidth: 140),
-                    new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80),
-                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", minWidth: 100),
-                    new ColumnConfiguration("franchise.ShareCapital", "SHARE CAPITAL", minWidth: 100),
-                    new ColumnConfiguration("franchise.MonthlyDues", "MONTHLY DUE", minWidth: 100),
+                    new ColumnConfiguration("Operator.name.legalName", "NAME", minWidth: 140),
+                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80),
+                    new ColumnConfiguration("LicenseNO", "PLATE NO.", minWidth: 100),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100),
+                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100),
                 };
                 DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(TableGrid, columnConfigurations);
 
 
                 while (true)
                 {
-                    List<Operator> batch = await Task.Run(() =>
+                    List<Franchise> batch = await Task.Run(() =>
                     {
-                        return (new TableObject<Operator>(Table.OPERATOR, Select.ALL, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                        return (new TableObject<Franchise>(Table.FRANCHISE, Select.ALL, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
                     });
 
                     if (batch.Count == 0)
@@ -157,7 +157,6 @@ namespace SPTC_APP.View.Pages.Output
 
                     foreach (var obj in batch)
                     {
-                        obj.UpdateFranchise();
                         TableGrid.Items.Add(obj);
                         //await Task.Delay(200);
                     }
@@ -266,8 +265,8 @@ namespace SPTC_APP.View.Pages.Output
                 }
                 else if (table == Table.OPERATOR)
                 {
-                    MainBody.selectedFranchise = ((Operator)grid.SelectedItem).franchise;
-                    oholder = (Operator)grid.SelectedItem;
+                    MainBody.selectedFranchise = ((Franchise)grid.SelectedItem);
+                    oholder = MainBody.selectedFranchise.Operator;
                     ValuePairFI(lblF1, "Operator Name: ", lblI1, oholder?.name?.legalName?.ToString());
                     ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber?.ToString() ?? "");

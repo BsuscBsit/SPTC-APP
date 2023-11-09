@@ -185,9 +185,9 @@ namespace SPTC_APP.View.Pages
                             {
                                 collectionView.Filter = item =>
                                 {
-                                    if (item is Operator op)
+                                    if (item is Franchise fran)
                                     {
-                                        return op.ToString()?.ToLower()?.Contains(searchText) ?? false;
+                                        return fran?.Operator?.ToString()?.ToLower()?.Contains(searchText) ?? false;
                                     }
                                     return false;
                                 };

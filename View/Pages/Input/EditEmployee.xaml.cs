@@ -343,24 +343,16 @@ namespace SPTC_APP.View.Pages.Input
 
         public void StopCamera()
         {
-            isCameraRunning = false; // Set the flag to indicate camera stopping
+            isCameraRunning = false; 
             pbCameraOpen.Visibility = Visibility.Hidden;
             try
             {
-
-
-                // Ensure that the camera source is completely stopped and disposed
                 videoSource?.SignalToStop();
                 videoSource?.WaitForStop();
                 if (videoSource != null)
                 {
                     videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
                 }
-
-
-                // Dispose of the last captured image if necessary
-                //lastCapturedImage?.Freeze();
-                //lastCapturedImage?.ClearValue();
             }
             catch (Exception e)
             {

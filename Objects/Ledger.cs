@@ -174,7 +174,7 @@ namespace SPTC_APP.Objects
             public double amountLoaned { get; set; }
             public string details { get; set; }
             public double processingFee { get; set; }
-            public double capitalBuildup { get; set; }
+            public double monthlyInterest { get; set; }
             public double paymentDues { get; set; }
             public bool isFullyPaid { get; set; } = false;
 
@@ -198,7 +198,7 @@ namespace SPTC_APP.Objects
                 this.amountLoaned = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT_LOANED);
                 this.details = Retrieve.GetValueOrDefault<string>(reader, Field.DETAILS);
                 this.processingFee = Retrieve.GetValueOrDefault<double>(reader, Field.PROCESSING_FEE);
-                this.capitalBuildup = Retrieve.GetValueOrDefault<double>(reader, Field.CAPITAL_BUILDUP);
+                this.monthlyInterest = Retrieve.GetValueOrDefault<double>(reader, Field.CAPITAL_BUILDUP);
                 this.paymentDues = Retrieve.GetValueOrDefault<double>(reader, Field.PAYMENT_DUES);
             }
             public bool WriteInto(
@@ -238,7 +238,7 @@ namespace SPTC_APP.Objects
                 longTermLoan.Insert(Field.AMOUNT_LOANED, amountLoaned);
                 longTermLoan.Insert(Field.DETAILS, details);
                 longTermLoan.Insert(Field.PROCESSING_FEE, processingFee);
-                longTermLoan.Insert(Field.CAPITAL_BUILDUP, capitalBuildup);
+                longTermLoan.Insert(Field.CAPITAL_BUILDUP, monthlyInterest);
                 longTermLoan.Insert(Field.PAYMENT_DUES, paymentDues);
                 longTermLoan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
                 longTermLoan.Save();

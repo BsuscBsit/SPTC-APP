@@ -103,7 +103,7 @@ namespace SPTC_APP.View.Pages.Input
                     {
                         optr.Save();
                     }
-                    (AppState.mainwindow as MainBody).ResetWindow(General.OPERATOR);
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE);
                 }
                 else if (type == General.TRANSFER_FRANCHISE_OWNERSHIP)
                 {

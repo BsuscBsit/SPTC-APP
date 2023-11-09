@@ -71,10 +71,12 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
-                    new ColumnConfiguration("referenceNo", "REF NO.", minWidth: 80),
-                    new ColumnConfiguration("deposit", "DEPOSIT", minWidth: 100),
-                    new ColumnConfiguration("withdraw", "WITHDRAW", minWidth: 100),
+                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 80),
+                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 100),
+                    new ColumnConfiguration("deposit", "SHARE CAPITAL", minWidth: 100),
                     new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100),
+                    new ColumnConfiguration("penalties", "CBU", minWidth: 100),
+                    new ColumnConfiguration("balance", "TOTAL", minWidth: 100),
                 };
                 DataGridHelper<PaymentDetails<Ledger.ShareCapital>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.ShareCapital>>(dgLedger, columnConfigurations);
 
@@ -92,10 +94,10 @@ namespace SPTC_APP.View.Pages.Output
                 {
 
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
-                    new ColumnConfiguration("referenceNo", "REF NO.", minWidth: 80),
-                    new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 100),
+                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 80),
+                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 100),
+                    new ColumnConfiguration("penalties", "CBU", minWidth: 100),
                     new ColumnConfiguration("interest", "INTEREST", minWidth: 100),
-                    new ColumnConfiguration("penalties", "PENALTIES", minWidth: 100),
                     new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100),
                 };
                 DataGridHelper<PaymentDetails<Ledger.Loan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.Loan>>(dgLedger, columnConfigurations);
@@ -123,9 +125,9 @@ namespace SPTC_APP.View.Pages.Output
 
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
                     new ColumnConfiguration("referenceNo", "REF NO.", minWidth: 80),
-                    new ColumnConfiguration("principal", "CAPITAL BUILDUP", minWidth: 100),
-                    new ColumnConfiguration("interest", "FEES", minWidth: 100),
-                    new ColumnConfiguration("penalties", "PENALTIES", minWidth: 100),
+                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 100),
+                    new ColumnConfiguration("penalties", "CBU", minWidth: 100),
+                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100),
                     new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100),
                 };
                 DataGridHelper<PaymentDetails<Ledger.LongTermLoan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.LongTermLoan>>(dgLedger, columnConfigurations);

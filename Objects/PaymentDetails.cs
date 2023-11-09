@@ -29,6 +29,13 @@ namespace SPTC_APP.Objects
                 return date?.ToString("MMMM dd, yyyy");
             }
         }
+        public string monthyear
+        {
+            get
+            {
+                return date?.ToString("MMM, yyyy");
+            }
+        }
 
 
         public double paymentDues
@@ -60,7 +67,7 @@ namespace SPTC_APP.Objects
                 if (ledger is Ledger.LongTermLoan)
                 {
                     UpdateLTLedger();
-                    return (ledger as Ledger.LongTermLoan).processingFee;
+                    return (ledger as Ledger.LongTermLoan).monthlyInterest;
                 }
                 return 0;
             }

@@ -29,7 +29,7 @@ namespace SPTC_APP.Database
         public static string GET_TOTAL_SHARES = $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE {Field.LEDGER_TYPE} = \"SHARECAPITAL\" AND {Where.ALL_NOTDELETED}";
 
         public static string GET_ALL_EMPLOYEES = $"SELECT * FROM {Table.EMPLOYEE} WHERE {Where.ALL_NOTDELETED}";
-        public static string GET_ALL_OPERATOR_FOR_DISPLAY(int start, int size) => $"SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (PARTITION BY body_number ORDER BY buying_date DESC) AS rn FROM tbl_franchise WHERE operator_id <> -1 ) subquery WHERE rn = 1 LIMIT {start}, {size}";
+        public static string GET_ALL_OPERATOR_FOR_DISPLAY(int start, int size) => $"SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (PARTITION BY body_number ORDER BY buying_date DESC) AS rn FROM tbl_franchise WHERE operator_id <> -1 AND {Where.ALL_NOTDELETED} ) subquery WHERE rn = 1 LIMIT {start}, {size}";
 
         public static string GET_TOTAL_EXPENSES(int month, int year) => $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.DEPOSIT} < 0 AND {Where.ALL_NOTDELETED}";
 

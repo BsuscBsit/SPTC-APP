@@ -82,6 +82,7 @@ namespace SPTC_APP.View.Pages.Input
             {
                 tbPosTitle.Text = employee.position?.title?.ToString() ?? "";
                 tbPosTitle.IsEnabled = false;
+                
                
             } else
             {
@@ -104,7 +105,12 @@ namespace SPTC_APP.View.Pages.Input
                 if (isManage)
                 {
                     lblTitle.Content = $"MODIFY {employee.position?.title.ToUpper() ?? string.Empty} PROFILE: ";
-                }
+                    if (AppState.IS_ADMIN || AppState.USER.position.title == employee.position.title)
+                    {
+                        btnChangePass.Visibility = Visibility.Visible;
+                    }
+                } 
+
                 tbPosTitle.Text = employee.position?.title?.ToString() ?? "";
                 tbFname.Text = employee.name?.firstname ?? "";
                 tbMname.Text = employee.name?.middlename ?? "";
@@ -130,7 +136,7 @@ namespace SPTC_APP.View.Pages.Input
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            
+            this.StopCamera();
             base.OnClosing(e);
         }
 
@@ -310,20 +316,13 @@ namespace SPTC_APP.View.Pages.Input
                     }
                 } else
                 {
+                    employee.position.title = tbPosTitle.Text;
                     employee.Save();
                     AppState.mainwindow?.Show();
                     this.Close();
                 }
             } else
             {
-                if (!hasPhoto)
-                {
-                    imgIDPic.Source = null;
-                }
-                if (!hasSign)
-                {
-                    imgSignPic.Source = null;
-                }
                 ControlWindow.ShowStatic("Input Fields incomplete!", "Missing some required inputs.");
             }
         }
@@ -448,6 +447,18 @@ namespace SPTC_APP.View.Pages.Input
         private void Border_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             groupPadButtons.FadeOut(0.2);
+        }
+
+        private void btnChangePass_Click(object sender, RoutedEventArgs e)
+        {
+            if (ControlWindow.ShowTwoway("Reset Password", "Are you sure you want to reset the password", Icons.ERROR))
+            {
+                if (employee.resetPass())
+                {
+                    btnChangePass.Visibility = Visibility.Collapsed;
+                }
+            }
+
         }
     }
 }

@@ -346,7 +346,17 @@ namespace SPTC_APP.View.Pages
 
         private void btnProfile_Click(object sender, RoutedEventArgs e)
         {
-            (new EditEmployee(AppState.USER, true, false)).Show();
+            string defaultname = "N/A";
+            int result = ControlWindow.ShowThreway("Profile", $"Employee name: {AppState.USER?.name?.legalName ?? defaultname}", "CHANGE PASSWORD", "EDIT PROFILE", Icons.NOTIFY);
+            if(result == 1)
+            {
+                (new EditEmployee(AppState.USER, true, false)).Show();
+            } else if(result == 0)
+            {
+                (new ChangePassword()).Show();
+            }
+
+            
         }
 
         private async void lsSuggestion_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -104,8 +104,9 @@ namespace SPTC_APP.Objects
 
         public void updatePass(string password, string newpassword)
         {
-            if (employee != null)
+            if (id != -1
             {
+                employee = new Upsert(Table.EMPLOYEE, id);
                 if (Retrieve.GetDataUsingQuery<string>(RequestQuery.GET_PASS(id))?.FirstOrDefault()?.Equals(RequestQuery.Protect(password)) ?? false){
                     employee.Insert(Field.PASSWORD, RequestQuery.Protect(newpassword));
                     employee.Save();
@@ -116,6 +117,22 @@ namespace SPTC_APP.Objects
             } else
             {
                 ControlWindow.ShowStatic("Password Incorrect", "Password doesnt match", Icons.ERROR);
+            }
+        }
+
+        public bool resetPass()
+        {
+            if (id != -1)
+            {
+                employee = new Upsert(Table.EMPLOYEE, id);
+                employee.Insert(Field.PASSWORD, RequestQuery.Protect(AppState.DEFAULT_PASSWORD));
+                employee.Save();
+                return true;
+            }
+            else
+            {
+                ControlWindow.ShowStatic("Password reset failed", "Cannot reset password", Icons.ERROR);
+                return false;
             }
         }
     }

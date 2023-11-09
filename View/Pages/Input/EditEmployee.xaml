@@ -437,6 +437,15 @@
                 Content="CANCEL"
                 Style="{StaticResource CommonButtonStyle}"
                 TabIndex="4" />
+            <Button 
+                x:Name="btnChangePass"
+                Width="178"
+                Content="RESET PASSWORD"
+                Margin="15,0,0,0"
+                FontSize="13"
+                Style="{StaticResource RedButtonStyle}"
+                TabIndex="4" Click="btnChangePass_Click" Visibility="Collapsed"
+/>
             <Button
                 x:Name="btnSave"
                 Width="178"

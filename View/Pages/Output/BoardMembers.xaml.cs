@@ -46,7 +46,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (e.position?.title != null && positionMap.ContainsKey(e.position.title))
                 {
                     position = positionMap[e.position.title];
-                    member = new Member(e, position, position == 0);
+                    member = new Member(e, position, position != 0);
                 }
                 else
                 {

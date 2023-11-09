@@ -159,7 +159,6 @@ namespace SPTC_APP.View.Pages.Input
                 else
                 {
                     ControlWindow.ShowStatic("Wrong Password", "New PAsswords do not match", Icons.NOTIFY);
-
                 }
             }
         }

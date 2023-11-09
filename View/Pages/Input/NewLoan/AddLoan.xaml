@@ -1,0 +1,468 @@
+﻿<Window
+    x:Class="SPTC_APP.View.Pages.Input.NewLoan.AddLoan"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SPTC_APP.View.Pages.Input.NewLoan"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AddLoan"
+    AllowsTransparency="True"
+    KeyboardNavigation.TabNavigation="Continue"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    Style="{StaticResource DetachedRoundedWindow}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid Width="777" Height="586">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border
+            x:Name="topBar"
+            Grid.ColumnSpan="3"
+            Style="{StaticResource TopBarStyle}" />
+        <Label
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            Margin="20,0,0,0"
+            Content="ADD LOAN"
+            Style="{StaticResource CommonTitlePreset}" />
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="0,0,0,15"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Label
+                Margin="0,0,15,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Date:"
+                Style="{StaticResource TextFieldLabelingPreset}" />
+            <Border
+                Width="164"
+                Height="30"
+                Padding="5,0,5,0"
+                Background="White"
+                BorderBrush="{StaticResource BrushGrey}"
+                BorderThickness="1"
+                CornerRadius="5">
+                <DatePicker
+                    x:Name="dpDate"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    BorderBrush="{x:Null}"
+                    BorderThickness="1,4,1,1" />
+            </Border>
+
+        </StackPanel>
+        <Grid Grid.Row="4" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Margin="0,15,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Content="Body Number:"
+                Style="{StaticResource TextFieldLabelingPreset}" />
+            <Label
+                Grid.Column="2"
+                Margin="0,15,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Content="CV/OR Number:"
+                Style="{StaticResource TextFieldLabelingPreset}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Margin="0,15,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Content="Loan Amount:"
+                Style="{StaticResource TextFieldLabelingPreset}" />
+            <Label
+                Grid.Row="4"
+                Margin="0,15,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Deductions"
+                Style="{StaticResource SubTitlePreset}" />
+            <Label
+                Grid.Row="5"
+                Grid.Column=" 0"
+                Margin="0,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Content="Processing Fee %:"
+                Style="{StaticResource TextFieldLabelingPreset}" />
+            <Label
+                Grid.Row="6"
+                Grid.Column=" 0"
+                Margin="0,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="CBU %:"
+                Style="{StaticResource TextFieldLabelingPreset}" />
+            <Label
+                Grid.Row="7"
+                Grid.Column="2"
+                Margin="0,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Content="Interest %:"
+                Style="{StaticResource TextFieldLabelingPreset}" />
+            <Label
+                Grid.Row="7"
+                Grid.Column=" 0"
+                Margin="0,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Content="Term Length in Months:"
+                Style="{StaticResource TextFieldLabelingPreset}" />
+            <TextBox
+                x:Name="tbBodyNum"
+                Grid.Row="1"
+                Grid.Column="0"
+                Width="164"
+                Height="30"
+                Margin="15,0,0,0"
+                VerticalAlignment="Top"
+                Style="{DynamicResource CommonTextBoxStyle}" />
+            <TextBox
+                x:Name="tbCVORNum"
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="164"
+                Height="30"
+                Margin="15,0,0,0"
+                VerticalAlignment="Top"
+                Style="{DynamicResource CommonTextBoxStyle}" />
+            <TextBox
+                x:Name="tbAmount"
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Height="30"
+                Margin="15,0,0,0"
+                VerticalAlignment="Top"
+                Style="{DynamicResource CommonTextBoxStyle}" Width="358.4" />
+            <Rectangle
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Height="1"
+                Margin="101,15,0,0"
+                HorizontalAlignment="Stretch"
+                Fill="{StaticResource BrushSoftGrey2}" />
+            <TextBox
+                x:Name="tbPF"
+                Grid.Row="5"
+                Grid.Column=" 2"
+                Width="164"
+                Height="30"
+                Margin="15,10,0,0"
+                VerticalAlignment="Bottom"
+                Style="{DynamicResource CommonTextBoxStyle}" />
+            <TextBox
+                x:Name="tbCBU"
+                Grid.Row="6"
+                Grid.Column=" 2"
+                Width="164"
+                Height="30"
+                Margin="15,10,0,0"
+                VerticalAlignment="Top"
+                Style="{DynamicResource CommonTextBoxStyle}" />
+            <TextBox
+                x:Name="tbLoanLen"
+                Grid.Row="8"
+                Grid.Column="0"
+                Width="164"
+                Height="30"
+                Margin="15,0,0,0"
+                VerticalAlignment="Top"
+                Style="{DynamicResource CommonTextBoxStyle}" />
+            <TextBox
+                x:Name="tbInterest"
+                Grid.Row="8"
+                Grid.Column=" 2"
+                Width="164"
+                Height="30"
+                Margin="15,0,0,0"
+                VerticalAlignment="Top"
+                Style="{DynamicResource CommonTextBoxStyle}" />
+            <Rectangle
+                Grid.RowSpan="10"
+                Grid.Column="3"
+                Width="1"
+                Margin="15,57,15,29"
+                Fill="{StaticResource ResourceKey=BrushSoftGrey2}" />
+            <Button Content="Compute" Grid.Column="4" Grid.Row="7" Style="{DynamicResource CommonButtonStyle}" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120"/>
+            <ScrollViewer
+                x:Name="Computations"
+                Grid.RowSpan="7"
+                Grid.Column="4" Height="277" VerticalAlignment="Center">
+                <Grid
+                    Width="266"
+                    Height="463"
+                    Margin="15,15,15,15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="15" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Border
+                        Grid.Row="0"
+                        Background="White"
+                        BorderBrush="{StaticResource BrushSoftGrey2}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="25"
+                                Direction="-90"
+                                Opacity="0.1"
+                                ShadowDepth="1" />
+                        </Border.Effect>
+                    </Border>
+                    <Border
+                        Grid.Row="2"
+                        Background="White"
+                        BorderBrush="{StaticResource BrushSoftGrey2}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="25"
+                                Direction="-90"
+                                Opacity="0.1"
+                                ShadowDepth="1" />
+                        </Border.Effect>
+                    </Border>
+                    <Grid
+                        Grid.Row="0"
+                        Margin="15,15,15,15"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            HorizontalAlignment="Center"
+                            Content="Principal Breakdown"
+                            Style="{StaticResource SubTitlePreset}" />
+                        <StackPanel
+                            Grid.Row="1"
+                            Margin="15,0,15,0"
+                            Orientation="Horizontal">
+                            <Label Content="Loan Amount: " Style="{StaticResource LabelFontMedium}" />
+                            <Label
+                                x:Name="lblLoanAmount"
+                                Content="N/A"
+                                Foreground="{StaticResource BrushDeepGreen}"
+                                Style="{StaticResource LabelFontMedium}" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="2"
+                            Margin="15,0,15,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Label Content="- Processing Fee: " Style="{StaticResource LabelFontSmall}" />
+                            <Label
+                                x:Name="lblPFTotal"
+                                Content="N/A"
+                                Foreground="{StaticResource BrushRed}"
+                                Style="{StaticResource LabelFontSmall}" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="3"
+                            Margin="15,0,15,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Label Content="- CBU: " Style="{StaticResource LabelFontSmall}" />
+                            <Label
+                                x:Name="lblCBUTotal"
+                                Content="N/A"
+                                Foreground="{StaticResource BrushRed}"
+                                Style="{StaticResource LabelFontSmall}" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="4"
+                            Margin="15,0,15,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Label
+                                x:Name="lblInterestLBL"
+                                Content="- Interest: "
+                                Style="{StaticResource LabelFontSmall}" />
+                            <Label
+                                x:Name="lblInterestTotal"
+                                Content="N/A"
+                                Foreground="{StaticResource BrushRed}"
+                                Style="{StaticResource LabelFontSmall}" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="5" Margin="15,0,15,0">
+                            <Label
+                                HorizontalAlignment="Center"
+                                Content="Computed Principal/COH/CIB: "
+                                Style="{StaticResource LabelFontMedium}" />
+                            <Label
+                                x:Name="lblPrincipalTotal"
+                                HorizontalAlignment="Center"
+                                Content="N/A"
+                                FontWeight="Bold"
+                                Foreground="{StaticResource BrushDeepGreen}"
+                                Style="{StaticResource LabelFontLarge}" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2" Margin="15,15,15,15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            HorizontalAlignment="Center"
+                            Content="Breakdown in Monthly"
+                            Style="{StaticResource SubTitlePreset}" />
+                        <StackPanel
+                            Grid.Row="1"
+                            Margin="15,0,15,0"
+                            Orientation="Horizontal">
+                            <Label Content="Principal: " Style="{StaticResource LabelFontMedium}" />
+                            <Label
+                                Name="lblPrincipalTotal2"
+                                Content="N/A"
+                                Foreground="{StaticResource BrushDeepGreen}"
+                                Style="{StaticResource LabelFontMedium}" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="2"
+                            Margin="15,0,15,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            <Label
+                                x:Name="lblLoanRecievableLBL"
+                                HorizontalAlignment="Center"
+                                Content="Loan Receivable:"
+                                Style="{StaticResource LabelFontSmall}" />
+                            <Label
+                                x:Name="lblLoanRecievableTotal"
+                                HorizontalAlignment="Center"
+                                Content="N/A"
+                                Foreground="{StaticResource BrushDeepGreen}"
+                                Style="{StaticResource LabelFontSmall}" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="3"
+                            Margin="15,0,15,0"
+                            HorizontalAlignment="Center">
+                            <Label
+                                x:Name="lblInterestRecievableLBL"
+                                Content="Interest Receivable: "
+                                Style="{StaticResource LabelFontSmall}" />
+                            <Label
+                                x:Name="lblInterestRecievableTotal"
+                                HorizontalAlignment="Center"
+                                Content="N/A"
+                                Foreground="{StaticResource BrushDeepGreen}"
+                                Style="{StaticResource LabelFontSmall}" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="4"
+                            Margin="15,0,15,0"
+                            HorizontalAlignment="Center">
+                            <Label Content="Total:" Style="{StaticResource LabelFontMedium}" />
+                            <Label
+                                x:Name="lblBreakdownTotal"
+                                HorizontalAlignment="Center"
+                                Content="N/A"
+                                FontWeight="Bold"
+                                Foreground="{StaticResource BrushDeepGreen}"
+                                Style="{StaticResource LabelFontMedium}" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="5"
+                            Margin="15,0,15,0"
+                            HorizontalAlignment="Left"
+                            Orientation="Horizontal">
+                            <Label Content="Overdue Penalty:" Style="{StaticResource LabelFontSmall}" />
+                            <Label
+                                x:Name="lblPenalty"
+                                HorizontalAlignment="Center"
+                                Content="N/A"
+                                Foreground="{StaticResource BrushRed}"
+                                Style="{StaticResource LabelFontSmall}" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+            </ScrollViewer>
+        </Grid>
+        <StackPanel
+            Grid.Row="6"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="0,0,0,24"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btnCancel"
+                Width="178"
+                Click="btnCancel_Click"
+                Content="CANCEL"
+                Style="{StaticResource CommonButtonStyle}"
+                TabIndex="4" />
+            <Button
+                x:Name="btnSave"
+                Width="178"
+                Margin="15,0,0,0"
+                Click="btnSave_Click"
+                Content="SAVE"
+                Style="{StaticResource CommonButtonStyle}"
+                TabIndex="5" />
+        </StackPanel>
+        <Grid
+            x:Name="gridToast"
+            Grid.RowSpan="7"
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom" />
+    </Grid>
+</Window>

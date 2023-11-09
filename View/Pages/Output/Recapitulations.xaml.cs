@@ -1,8 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
+using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -89,8 +91,13 @@ namespace SPTC_APP.View.Pages.Input
             recapgrid.Children.Clear();
             double total = 0;
             List<Button> btnDeletes = new List<Button>();
+
             foreach (Recap r in recaps)
             {
+                if(r.text == "Share Capital")
+                {
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                }
                 RowDefinition rowDefinition = new RowDefinition();
                 rowDefinition.Height = new GridLength(40);
                 recapgrid.RowDefinitions.Add(rowDefinition);

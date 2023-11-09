@@ -305,7 +305,7 @@ namespace SPTC_APP.View.Pages.Input
                         }
                         else
                         {
-                            (new EditPositionAccess(employee)).Show();
+                            (new EditPositionAccess(this, employee)).Show();
                         }
                     }
                     else

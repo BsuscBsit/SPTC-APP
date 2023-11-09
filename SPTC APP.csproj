@@ -301,7 +301,7 @@
     <Compile Include="View\Pages\Input\NewOptr_Drv.xaml.cs">
       <DependentUpon>NewOptr_Drv.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Input\Recapitulations.xaml.cs">
+    <Compile Include="View\Pages\Output\Recapitulations.xaml.cs">
       <DependentUpon>Recapitulations.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Input\ViolationInput.xaml.cs">
@@ -447,7 +447,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Input\Recapitulations.xaml">
+    <Page Include="View\Pages\Output\Recapitulations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

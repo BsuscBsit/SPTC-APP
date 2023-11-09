@@ -104,7 +104,7 @@ namespace SPTC_APP.Objects
 
         public void updatePass(string password, string newpassword)
         {
-            if (id != -1
+            if (id != -1)
             {
                 employee = new Upsert(Table.EMPLOYEE, id);
                 if (Retrieve.GetDataUsingQuery<string>(RequestQuery.GET_PASS(id))?.FirstOrDefault()?.Equals(RequestQuery.Protect(password)) ?? false){

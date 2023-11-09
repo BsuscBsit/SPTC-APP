@@ -316,6 +316,10 @@ namespace SPTC_APP.View.Pages.Input
                     }
                 } else
                 {
+                    if(employee.position == null)
+                    {
+                        employee.position = new Position();
+                    }
                     employee.position.title = tbPosTitle.Text;
                     employee.Save();
                     AppState.mainwindow?.Show();

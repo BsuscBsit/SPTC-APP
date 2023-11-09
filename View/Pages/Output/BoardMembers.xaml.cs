@@ -30,7 +30,10 @@ namespace SPTC_APP.View.Pages.Output
         {
             InitializeComponent();
             int row = 7;
-
+            if (AppState.USER?.position?.accesses[17] ?? false)
+            {
+                btnAdd.Visibility = Visibility.Visible;
+            }
             Dictionary<string, int> positionMap = new Dictionary<string, int>
             {
                 { AppState.ALL_EMPLOYEES[0], 2 },
@@ -303,7 +306,9 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            (new EditEmployee(new Employee(), false, false)).Show();
+            
+            (new EditEmployee(new Employee(), false, false)).ShowDialog();
+
         }
     }
 }

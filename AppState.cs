@@ -319,7 +319,7 @@ namespace SPTC_APP
         public static Employee FetchChairman()
         {
             Employee chair = Retrieve.GetDataUsingQuery<Employee>(RequestQuery.GET_CURRENT_CHAIRMAN).FirstOrDefault();
-            //EventLogger.Post($"OUT :: {chair?.sign?.ToString()}");
+            //EventLogger.Post($"OUT :: {chair?.sign?.ToString()} {chair?.name?.ToString()}");
             return chair;
         }
         private static double RetrieveIncomeForMonth(int month, int year)

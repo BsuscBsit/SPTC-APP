@@ -148,18 +148,23 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if(pbPassword.Password.Length > 8 && pbPassword2.Password.Length > 8 && pbPassword3.Password.Length > 8)
+            if (pbPassword.Password.Length >= 8 && pbPassword2.Password.Length >= 8 && pbPassword3.Password.Length >= 8)
             {
                 if (pbPassword2.Password.Equals(pbPassword3.Password))
                 {
                     AppState.USER?.updatePass(pbPassword.Password, pbPassword2.Password);
-                    AppState.USER.Save();
+                    AppState.USER?.Save();
+                    ControlWindow.ShowStatic("Change Password", "Password changed successfully", Icons.NOTIFY);
                     this.Close();
                 }
                 else
                 {
-                    ControlWindow.ShowStatic("Wrong Password", "New PAsswords do not match", Icons.NOTIFY);
+                    ControlWindow.ShowStatic("Wrong Password", "New passwords do not match", Icons.NOTIFY);
                 }
+            }
+            else
+            {
+                ControlWindow.ShowStatic("Wrong Password", "Complete the password input", Icons.NOTIFY);
             }
         }
 

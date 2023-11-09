@@ -95,6 +95,11 @@ namespace SPTC_APP.View.Pages.Input
             {
                 tbPosTitle.IsEnabled = true;
             }
+            if (employee.position?.title?.Equals(AppState.ALL_EMPLOYEES[4]) ?? false) 
+            {
+                tbPosTitle.IsEnabled = false;
+            }
+
         }
 
 
@@ -305,7 +310,7 @@ namespace SPTC_APP.View.Pages.Input
                         }
                         else
                         {
-                            (new EditPositionAccess(employee)).Show();
+                            (new EditPositionAccess(this, employee)).Show();
                         }
                     }
                     else

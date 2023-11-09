@@ -26,7 +26,8 @@ namespace SPTC_APP.View.Pages.Input
         public EditPositionAccess(EditEmployee window, Employee employee)
         {
             InitializeComponent();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); window.Hide(); };
+            this.window = window;
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); window?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             this.employee = employee;
             if(employee.position != null)
@@ -71,7 +72,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnCancel(object sender, RoutedEventArgs e)
         {
-            window.Show();
+            window?.Show();
             this.Close();
         }
     }

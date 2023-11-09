@@ -113,6 +113,9 @@ namespace SPTC_APP.Objects
                 {
                     ControlWindow.ShowStatic("Password Incorrect", "Password doesnt match", Icons.ERROR);
                 }
+            } else
+            {
+                ControlWindow.ShowStatic("Password Incorrect", "Password doesnt match", Icons.ERROR);
             }
         }
     }

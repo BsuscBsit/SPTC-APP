@@ -111,8 +111,7 @@
             Grid.ColumnSpan="3"
             Height="115"
             Margin="15,0,0,0"
-            Style="{StaticResource CommonTextBoxStyle}"
-            Text="Sample text" Width="367" TextWrapping="Wrap" AcceptsReturn="True"/>
+            Style="{StaticResource CommonTextBoxStyle}" VerticalContentAlignment="Top" Width="367" TextWrapping="Wrap" AcceptsReturn="True"/>
         <TextBox
             x:Name="tbNumDays"
             Grid.Row="4"

@@ -242,26 +242,31 @@
                     <RowDefinition Height="15" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Grid
+                <Button 
                     Grid.Row="0"
+                    x:Name="btnProfile"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Ellipse
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="btnProfile_Click">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Ellipse
                         x:Name="userImageHolder"
                         Grid.Row="0"
                         Width="50"
                         Height="50"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-                        <Ellipse.Fill>
-                            <ImageBrush x:Name="userImage" ImageSource="../Images/icons/person.png" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Label
+                            <Ellipse.Fill>
+                                <ImageBrush x:Name="userImage" ImageSource="../Images/icons/person.png" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Label
                         x:Name="username"
                         Grid.Row="1"
                         HorizontalAlignment="Center"
@@ -270,7 +275,8 @@
                         Foreground="{StaticResource BrushBlack}"
                         Style="{StaticResource SubTitlePreset}"
                         Visibility="Collapsed" />
-                </Grid>
+                    </Grid>
+                </Button>
                 <Button
                     x:Name="DashBoard"
                     Grid.Row="2"

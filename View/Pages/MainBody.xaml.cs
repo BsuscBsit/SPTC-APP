@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
+using SPTC_APP.View.Pages.Input;
 using SPTC_APP.View.Pages.Output;
 using SPTC_APP.View.Styling;
 
@@ -341,6 +342,11 @@ namespace SPTC_APP.View.Pages
             {
                 SearchBarResize(true);
             }
+        }
+
+        private void btnProfile_Click(object sender, RoutedEventArgs e)
+        {
+            (new EditEmployee(AppState.USER, true, false)).Show();
         }
 
         private async void lsSuggestion_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -149,7 +149,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     List<Franchise> batch = await Task.Run(() =>
                     {
-                        return (new TableObject<Franchise>(Table.FRANCHISE, Select.ALL, Where.ALL_NOTDELETED, pageIndex * batchSize, batchSize)).data;
+                        return Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_ALL_OPERATOR_FOR_DISPLAY(pageIndex*batchSize, batchSize));
                     });
 
                     if (batch.Count == 0)

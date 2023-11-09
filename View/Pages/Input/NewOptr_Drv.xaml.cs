@@ -133,7 +133,7 @@ namespace SPTC_APP.View.Pages.Input
                     capital.WriteInto(newFranchise.id, DateTime.Now, franchise.SaveShareCapital(), 0);
                     capital.Save();
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE);
-                    franchise.delete();
+                    
                 }
                 if (franchise != null)
                 {

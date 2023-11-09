@@ -22,10 +22,11 @@ namespace SPTC_APP.View.Pages.Input
     public partial class EditPositionAccess : Window
     {
         private Employee employee;
-        public EditPositionAccess(Employee employee)
+        private EditEmployee window;
+        public EditPositionAccess(EditEmployee window, Employee employee)
         {
             InitializeComponent();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); window.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             this.employee = employee;
             if(employee.position != null)
@@ -50,8 +51,7 @@ namespace SPTC_APP.View.Pages.Input
         }
         protected override void OnClosing(CancelEventArgs e)
         {
-            AppState.mainwindow?.Show();
-            (AppState.mainwindow as MainBody).ResetWindow(General.BOARD_MEMBER);
+            
             base.OnClosing(e);
         }
 
@@ -64,11 +64,14 @@ namespace SPTC_APP.View.Pages.Input
                 i++;
             }
             employee.Save();
+            AppState.mainwindow?.Show();
+            (AppState.mainwindow as MainBody).ResetWindow(General.BOARD_MEMBER);
             this.Close();
         }
 
         private void btnCancel(object sender, RoutedEventArgs e)
         {
+            window.Show();
             this.Close();
         }
     }

@@ -15,52 +15,76 @@ namespace SPTC_APP.View.Controls
 {
     public static class TextBoxHelper
     {
+        #region Fields
+
         private static Grid grid;
 
-        public static void DefaultTextBoxBehavior(this TextBox tb, AllowFormat? format = null, bool blockSpaces = false, Grid errorGrid = null, string toolTip = null, int? tabIndex = null, bool allCaps = false, int? げんかい = null, string MSG = null)
-        {
-            if(errorGrid != null)
-            {
-                grid = errorGrid;
-            }
-            if(tabIndex != null)
-            {
-                tb.TabIndex = (int)tabIndex;
-            }
-            if(toolTip != null)
-            {
-                tb.ToolTip = toolTip;
-            }
-            if (allCaps)
-            {
-                tb.CharacterCasing = CharacterCasing.Upper;
-            }
+        #endregion
 
-            // Ordered event handlers.
-            tb.PreviewKeyDown += (sender, e) => PreviewKeyDown(sender, e, げんかい);
-            if(format != null)
-            {
-                tb.PreviewTextInput += (sender, e) => PreviewTextInputBehavior(sender, e, format, MSG);
-            }
-            if (blockSpaces)
-            {
-                tb.TextChanged += BlockSpace;
-            }
-            tb.PreviewMouseDoubleClick += DoubleClickBehavior;
+        #region Public Methods
+
+        public static void DefaultTextBoxBehavior(
+            this TextBox tb,
+            AllowFormat? format = null,
+            bool blockSpaces = false,
+            Grid errorGrid = null,
+            string toolTip = null,
+            int? tabIndex = null,
+            bool allCaps = false,
+            int? げんかい = null,
+            bool acceptReturn = false,
+            bool acceptTab = false,
+            string MSG = null)
+        {
+            if (errorGrid != null)
+                grid = errorGrid;
+
+            if (tabIndex != null)
+                tb.TabIndex = (int)tabIndex;
+
+            if (toolTip != null)
+                tb.ToolTip = toolTip;
+
+            if (allCaps)
+                tb.CharacterCasing = CharacterCasing.Upper;
+
+            tb.AcceptsReturn = acceptReturn;
+            tb.AcceptsTab = acceptTab;
+
+            tb.Loaded += (sender, e) => Loaded_InitializeLength(sender, e, げんかい);
             tb.GotFocus += GotFocusBehavior;
+            tb.PreviewKeyDown += (sender, e) => PreviewKeyDown_LengthDelimiter(sender, e, げんかい);
+
+            if (format != null)
+                tb.PreviewTextInput += (sender, e) => PreviewTextInput_Formatter(sender, e, format, MSG);
+
+            if (blockSpaces)
+                tb.TextChanged += TextChanged_SpaceBlocker;
+
+            tb.PreviewMouseDoubleClick += PreviewMouseDoubleClick_TextSelection;
         }
 
-        private static void PreviewKeyDown(object sender, KeyEventArgs e, int? げんかい)
+        #endregion
+
+        #region Event Handlers
+
+        private static void Loaded_InitializeLength(object sender, RoutedEventArgs e, int? げんかい)
         {
-            if (げんかい != null && sender is TextBox tb && IsCharacterKey(e.Key))
+            if (sender is TextBox tb && げんかい != null && tb.Text.Length > げんかい + 1)
             {
-                if (tb.Text.Length > げんかい + 1)
-                {
-                    e.Handled = true;
-                    ShowError(null, null, "Maximum length for this field has reached.");
-                    tb.Focus();
-                }
+                tb.Text = tb.Text.Substring(0, (int)げんかい);
             }
+        }
+
+        private static void PreviewKeyDown_LengthDelimiter(object sender, KeyEventArgs e, int? げんかい)
+        {
+            if (げんかい != null && sender is TextBox tb && IsCharacterKey(e.Key) && tb.Text.Length > げんかい - 1 && tb.SelectionLength != tb.Text.Length)
+            {
+                e.Handled = true;
+                ShowError(null, null, "Maximum length for this field has reached.");
+                tb.Focus();
+            }
+
             var source = e.OriginalSource as FrameworkElement;
             if (e.Key == Key.Enter)
             {
@@ -69,17 +93,11 @@ namespace SPTC_APP.View.Controls
             }
         }
 
-        private static bool IsCharacterKey(Key key)
-        {
-            return (key >= Key.A && key <= Key.Z) || (key >= Key.D0 && key <= Key.D9) || key == Key.Space || key == Key.Oem1 || key == Key.Oem2;
-
-        }
-
-        private static void PreviewTextInputBehavior(object sender, TextCompositionEventArgs e, AllowFormat? format, string MSG)
+        private static void PreviewTextInput_Formatter(object sender, TextCompositionEventArgs e, AllowFormat? format, string MSG)
         {
             if (sender is TextBox tb)
             {
-                string pattern = patterns[(int) format];
+                string pattern = patterns[(int)format];
 
                 if (Regex.IsMatch(e.Text, pattern))
                 {
@@ -90,117 +108,58 @@ namespace SPTC_APP.View.Controls
             }
         }
 
-        private static void BlockSpace(object sender, TextChangedEventArgs e)
+        private static void TextChanged_SpaceBlocker(object sender, TextChangedEventArgs e)
         {
-            if (sender is TextBox tb)
+            if (sender is TextBox tb && tb.Text.Contains(" "))
             {
-                if (tb.Text.Contains(" "))
-                {
-                    e.Handled = true;
-                    tb.Text = Regex.Replace(tb.Text, " ", "");
-                    if(grid != null)
-                    {
-                        new Toast(grid, "Spaces not allowed here.");
-                    }
-                    tb.CaretIndex = tb.Text.Length;
-                    tb.Focus();
-                }
+                int x = tb.CaretIndex - 1;
+                e.Handled = true;
+                tb.Text = Regex.Replace(tb.Text, " ", "");
+                if (grid != null)
+                    new Toast(grid, "Spaces not allowed here.");
+
+                tb.CaretIndex = x;
             }
         }
 
-        private static void DoubleClickBehavior(object sender, MouseButtonEventArgs e)
+        private static void PreviewMouseDoubleClick_TextSelection(object sender, MouseButtonEventArgs e)
         {
-            if(sender is TextBox tb)
+            if (sender is TextBox tb)
             {
-                if(tb.SelectionLength == tb.Text.Length)
+                if (tb.SelectionLength == tb.Text.Length)
                 {
                     tb.SelectionLength = 0;
-                } else
+                    tb.CaretIndex = tb.Text.Length;
+                }
+                else
                 {
                     tb.SelectAll();
-                    tb.CaretIndex = tb.Text.Length;
                 }
             }
         }
 
         private static void GotFocusBehavior(object sender, RoutedEventArgs e)
         {
-            if (sender is TextBox textBox)
+            if (sender is TextBox tb)
             {
-                if (textBox.Text.Length > 0)
-                {
-                    textBox.SelectAll();
-                    textBox.CaretIndex = textBox.Text.Length;
-                }
+                tb.SelectAll();
             }
         }
 
-        private static void FocusAction(object sender, KeyEventArgs e)
+        #endregion
+
+        #region Private Methods
+
+        private static bool IsCharacterKey(Key key)
         {
-            if (sender is TextBox textBox)
-            {
-                List<Key> allowedKeys = new List<Key>
-                {
-                    Key.A, Key.B, Key.C, Key.D, Key.E, Key.F, Key.G, Key.H, Key.I, Key.J,
-                    Key.K, Key.L, Key.M, Key.N, Key.O, Key.P, Key.Q, Key.R, Key.S, Key.T,
-                    Key.U, Key.V, Key.W, Key.X, Key.Y, Key.Z,
-                    Key.D0, Key.D1, Key.D2, Key.D3, Key.D4, Key.D5, Key.D6, Key.D7, Key.D8, Key.D9
-                };
-                if (textBox.Text.Length > 0 && 
-                    textBox.SelectionLength == textBox.Text.Length && 
-                    (allowedKeys.Contains(e.Key)))
-                {
-                    textBox.Text = "";
-                }
-                textBox.PreviewKeyDown -= FocusAction;
-            }
+            return (key >= Key.A && key <= Key.Z) || (key >= Key.D0 && key <= Key.D9) || key == Key.Space || key == Key.Oem1 || key == Key.Oem2;
         }
-
-        /*private static void ShowError(AllowFormat? format, string input, string MSG)
-        {
-            if(grid != null)
-            {
-                if(!string.IsNullOrEmpty(MSG))
-                {
-                    new Toast(grid, MSG, 2.5);
-                    return;
-                }
-
-                string post = !string.IsNullOrEmpty(input) ? "\n'" + input + "' is not a valid input." : "";
-                string pre = "This field only accepts ";
-                string msg;
-
-                if (format == NUMBEREXPRESSIONS)
-                {
-                    msg = $"{pre}{patternDescription[(int)format]}";
-                }
-                else if (format == EMAIL)
-                {
-                    msg = $"' {post} ' is not a valid input for email address.";
-                }
-                else if (format == COMMON)
-                {
-                    msg = $"{pre}{patternDescription[(int)format]}";
-                }
-                else if (format == ADDRESS)
-                {
-                    msg = $"' {post} ' is not a valid input for address.";
-                }
-                else
-                {
-                    msg = pre + patternDescription[(int)format] + post;
-                }
-                new Toast(grid, MSG, 2.5);
-            }
-        }*/
         private static void ShowError(AllowFormat? format, string input, string MSG)
         {
             if (grid == null)
-            {
                 return;
-            }
 
-            if (!string.IsNullOrEmpty(MSG) && format == null)
+            if (!string.IsNullOrEmpty(MSG))
             {
                 new Toast(grid, MSG, 2.5);
                 return;
@@ -214,15 +173,15 @@ namespace SPTC_APP.View.Controls
             {
                 case NUMBEREXPRESSIONS:
                 case COMMON:
-                    msg = $"{pre}{patternDescription[(int)format]}";
+                    msg = pre + patternDescription[(int)format];
                     break;
 
                 case EMAIL:
-                    msg = $"' {post} ' is not a valid input for email address.";
+                    msg = $"' {post} ' is not a valid input for an email address.";
                     break;
 
                 case ADDRESS:
-                    msg = $"' {post} ' is not a valid input for address.";
+                    msg = $"' {post} ' is not a valid input for an address.";
                     break;
 
                 default:
@@ -233,9 +192,9 @@ namespace SPTC_APP.View.Controls
             new Toast(grid, msg, 2.5);
         }
 
-
         public enum AllowFormat
         {
+
             LETTER,
             LETTERDASH,
             LETTERPERIOD,
@@ -257,6 +216,10 @@ namespace SPTC_APP.View.Controls
             COMMON,
             ADDRESS
         }
+
+        #endregion
+
+        #region Patterns
 
         private static string[] patterns = new string[]
         {
@@ -281,6 +244,7 @@ namespace SPTC_APP.View.Controls
             @"[^A-Za-z0-9.,;:!@#$%^&*()_+=\[\]{}|'""<>/\\?~-]+",
             @"[^0-9A-Za-z.,\-/@#&()""'\\]+"
         };
+
         private static string[] patternDescription = new string[]
         {
             "letters.",
@@ -303,6 +267,9 @@ namespace SPTC_APP.View.Controls
             "letters, numbers, and characters:\n〔 . @ _ - 〕",
             "letters, numbers, and characters:\n〔 . , ; : ! @ # $ % ^ & * ( ) _ + = [ ] { } | \" < > \\ / ? ~ - ' 〕",
             "letters, numbers, and characters:\n〔 . , # & ( ) \" \\ - ' 〕"
+
         };
     }
+
+    #endregion
 }

@@ -1,8 +1,6 @@
 ﻿
 using SPTC_APP.Objects;
 using SPTC_APP.View.Pages.Input;
-using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -255,6 +253,10 @@ namespace SPTC_APP.View.Pages.Output
             else if (selectedButton == btnShareCapital)
             {
                 (new AddShareCaptital(MainBody.selectedFranchise)).Show();
+            }
+            else if(selectedButton == btnLoanApply)
+            {
+                (new ApplyLoan(MainBody.selectedFranchise)).Show();
             }
             else if (selectedButton == btnLoan)
             {

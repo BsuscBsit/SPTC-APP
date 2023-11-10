@@ -286,6 +286,9 @@
     <Compile Include="View\Pages\Input\AddViolationType.xaml.cs">
       <DependentUpon>AddViolationType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\Input\ApplyLoan.xaml.cs">
+      <DependentUpon>ApplyLoan.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\Input\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
@@ -297,9 +300,6 @@
     </Compile>
     <Compile Include="View\Pages\Input\EditProfile.xaml.cs">
       <DependentUpon>EditProfile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Pages\Input\NewLoan\AddLoan.xaml.cs">
-      <DependentUpon>AddLoan.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Input\NewOptr_Drv.xaml.cs">
       <DependentUpon>NewOptr_Drv.xaml</DependentUpon>
@@ -430,6 +430,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Pages\Input\ApplyLoan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\Input\ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -443,10 +447,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\Input\EditProfile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Pages\Input\NewLoan\AddLoan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

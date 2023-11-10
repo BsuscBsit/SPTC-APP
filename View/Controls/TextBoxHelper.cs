@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySqlX.XDevAPI.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,7 +54,7 @@ namespace SPTC_APP.View.Controls
 
             tb.Loaded += (sender, e) => Loaded_InitializeLength(sender, e, げんかい);
             tb.GotFocus += GotFocusBehavior;
-            tb.PreviewKeyDown += (sender, e) => PreviewKeyDown_LengthDelimiter(sender, e, げんかい);
+            tb.PreviewKeyDown += (sender, e) => PreviewKeyDown_LengthLimiter(sender, e, げんかい);
 
             if (format != null)
                 tb.PreviewTextInput += (sender, e) => PreviewTextInput_Formatter(sender, e, format, MSG);
@@ -62,6 +63,18 @@ namespace SPTC_APP.View.Controls
                 tb.TextChanged += TextChanged_SpaceBlocker;
 
             tb.PreviewMouseDoubleClick += PreviewMouseDoubleClick_TextSelection;
+        }
+
+        public static void NumericTextBoxBehavior(
+            this TextBox tb,
+            AllowFormat format,
+            Grid errorGrid = null,
+            int? tabIndex = null,
+            double? min = null,
+            double? max = null)
+        {
+            tb.Loaded += (sender, e) => Loaded_InitializeSize(sender, e, format, min, max);
+            tb.GotFocus += GotFocusBehavior;
         }
 
         #endregion
@@ -76,7 +89,25 @@ namespace SPTC_APP.View.Controls
             }
         }
 
-        private static void PreviewKeyDown_LengthDelimiter(object sender, KeyEventArgs e, int? げんかい)
+        private static void Loaded_InitializeSize(object sender, RoutedEventArgs e, AllowFormat format, double? min, double? max)
+        {
+            if(sender is TextBox tb)
+            {
+                double inp;
+                tb.Text = tb.Text.Replace(patterns[(int)format], "");
+                tb.Text = SignLimiter(tb.Text);
+                if (double.TryParse(tb.Text, out inp) && min != null)
+                {
+                    tb.Text = inp < min ? min.ToString() : inp.ToString();
+                }
+                if (double.TryParse(tb.Text, out inp) && max != null)
+                {
+                    tb.Text = inp > max ? max.ToString() : inp.ToString();
+                }
+            }
+        }
+
+        private static void PreviewKeyDown_LengthLimiter(object sender, KeyEventArgs e, int? げんかい)
         {
             if (げんかい != null && sender is TextBox tb && IsCharacterKey(e.Key) && tb.Text.Length > げんかい - 1 && tb.SelectionLength != tb.Text.Length)
             {
@@ -97,12 +128,22 @@ namespace SPTC_APP.View.Controls
         {
             if (sender is TextBox tb)
             {
-                string pattern = patterns[(int)format];
-
-                if (Regex.IsMatch(e.Text, pattern))
+                if (Regex.IsMatch(e.Text, patterns[(int)format]))
                 {
                     e.Handled = true;
                     ShowError(format, e.Text, MSG);
+                    tb.Focus();
+                }
+            }
+        }
+        private static void PreviewTextInput_NumFormatter(object sender, TextCompositionEventArgs e, AllowFormat? format)
+        {
+            ///~
+            if (sender is TextBox tb)
+            {
+                if (Regex.IsMatch(e.Text, patterns[(int)format]))
+                {
+                    e.Handled = true;
                     tb.Focus();
                 }
             }
@@ -149,6 +190,31 @@ namespace SPTC_APP.View.Controls
         #endregion
 
         #region Private Methods
+
+        private static string SignLimiter(this string str)
+        {
+            string result = "";
+            int decimals = str.IndexOf('.');
+            int negative = str.IndexOf('-');
+
+            if (decimals != -1)
+            {
+                result = str.Substring(0, decimals + 1) + str.Substring(decimals + 1).Replace(".", "");
+            }
+
+            if (negative != -1)
+            {
+                if(negative == 0)
+                {
+                    result = str.Substring(0, negative + 1) + str.Substring(negative + 1).Replace("-", "");
+                }
+                else
+                {
+                    result = str.Replace("-", "");
+                }
+            }
+            return result;
+        }
 
         private static bool IsCharacterKey(Key key)
         {
@@ -214,7 +280,13 @@ namespace SPTC_APP.View.Controls
             PHONE,
             EMAIL,
             COMMON,
-            ADDRESS
+            ADDRESS,
+
+            WHOLESIGNED,
+            WHOLEUNSIGNED,
+
+            DECIMALSIGNED,
+            DECIMALUNSIGNED
         }
 
         #endregion
@@ -223,26 +295,33 @@ namespace SPTC_APP.View.Controls
 
         private static string[] patterns = new string[]
         {
-            @"[^A-Za-z]+",
+            "[^A-Za-z]+",
             @"[^A-Za-z\-]+",
-            @"[^A-Za-z.]+",
+            "[^A-Za-z.]+",
             @"[^A-Za-z\-.]+",
 
-            @"[^0-9]+",
+            "[^0-9]+",
             @"[^0-9\-]+",
-            @"[^0-9.]+",
+            "[^0-9.]+",
             @"[^0-9\-.]+",
             @"[^0-9+\-*/%()^a-zA-Z]+",
 
-            @"[^0-9A-Za-z]+",
+            "[^0-9A-Za-z]+",
             @"[^0-9A-Za-z\-]+",
-            @"[^0-9A-Za-z.]+",
+            "[^0-9A-Za-z.]+",
             @"[^0-9A-Za-z\-.]+",
 
             @"[^+\-0-9]+",
-            @"[^a-zA-Z0-9@._-]+",
+            "[^a-zA-Z0-9@._-]+",
             @"[^A-Za-z0-9.,;:!@#$%^&*()_+=\[\]{}|'""<>/\\?~-]+",
-            @"[^0-9A-Za-z.,\-/@#&()""'\\]+"
+            @"[^0-9A-Za-z.,\-/@#&()""'\\]+",
+
+            "[^0-9]+",
+            @"[^0-9\-]+",
+
+            "[^0-9.]+",
+            @"[^0-9\-.]+"
+
         };
 
         private static string[] patternDescription = new string[]

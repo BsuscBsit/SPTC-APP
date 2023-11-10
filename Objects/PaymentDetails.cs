@@ -62,12 +62,12 @@ namespace SPTC_APP.Objects
                 if (ledger is Ledger.Loan)
                 {
                     UpdateLedger();
-                    return (ledger as Ledger.Loan).monthlyInterest;
+                    return (ledger as Ledger.Loan).interest;
                 }
                 if (ledger is Ledger.LongTermLoan)
                 {
                     UpdateLTLedger();
-                    return (ledger as Ledger.LongTermLoan).monthlyInterest;
+                    return (ledger as Ledger.LongTermLoan).interest;
                 }
                 return 0;
             }

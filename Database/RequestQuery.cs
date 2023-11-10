@@ -60,9 +60,10 @@ namespace SPTC_APP.Database
         public static string GET_TOTAL(string table) => $"SELECT COUNT(*) FROM {table} WHERE {Where.ALL_NOTDELETED}";
         public static string GET_ALL_FRANCHISE_WITH_BODYNUM(string bodyNumber) => $"SELECT * FROM {Table.FRANCHISE} WHERE {Field.BODY_NUMBER} = {bodyNumber} AND {Where.ALL_NOTDELETED}";
         public static string GET_ACCESSES(int id) => $"SELECT * FROM {Table.POSITION} WHERE {Field.ID} = {id}";
-        internal static string GET_PASS(int id) => $"SELECT {Field.PASSWORD} FROM {Table.EMPLOYEE} WHERE {Field.ID} = {id}";
+        public static string GET_PASS(int id) => $"SELECT {Field.PASSWORD} FROM {Table.EMPLOYEE} WHERE {Field.ID} = {id}";
 
-        internal static string GET_ALL_PAYMENTS_ID(int id) => $"SELECT pd.* FROM tbl_payment_details pd LEFT JOIN tbl_share_capital_ledger sh ON sh.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.SHARE_CAPITAL}\" LEFT JOIN tbl_loan_ledger l ON l.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.LOAN}\" LEFT JOIN tbl_long_term_loan_ledger ltl ON ltl.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.LT_LOAN}\" LEFT JOIN tbl_loan_ledger al ON al.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.APPLY_LOAN}\" LEFT JOIN tbl_long_term_loan_ledger altl ON altl.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.APPLY_LT_LOAN}\" WHERE sh.franchise_id = {id} OR l.franchise_id = {id} OR ltl.franchise_id = {id} OR al.franchise_id = {id} OR altl.franchise_id = {id} AND pd.{Where.ALL_NOTDELETED} ORDER BY pd.date DESC";
+        public static string GET_ALL_PAYMENTS_ID(int id) => $"SELECT pd.* FROM tbl_payment_details pd LEFT JOIN tbl_share_capital_ledger sh ON sh.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.SHARE_CAPITAL}\" LEFT JOIN tbl_loan_ledger l ON l.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.LOAN}\" LEFT JOIN tbl_long_term_loan_ledger ltl ON ltl.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.LT_LOAN}\" LEFT JOIN tbl_loan_ledger al ON al.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.APPLY_LOAN}\" LEFT JOIN tbl_long_term_loan_ledger altl ON altl.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.APPLY_LT_LOAN}\" WHERE sh.franchise_id = {id} OR l.franchise_id = {id} OR ltl.franchise_id = {id} OR al.franchise_id = {id} OR altl.franchise_id = {id} AND pd.{Where.ALL_NOTDELETED} ORDER BY pd.date DESC";
+        public static string GET_ALL_APPLY_ID(int id) => $"SELECT pd.* FROM tbl_payment_details pd LEFT JOIN tbl_loan_ledger al ON al.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.APPLY_LOAN}\" LEFT JOIN tbl_long_term_loan_ledger altl ON altl.id = pd.ledger_id AND pd.ledger_type = \"{Ledger.APPLY_LT_LOAN}\" WHERE OR al.franchise_id = {id} OR altl.franchise_id = {id} AND pd.{Where.ALL_NOTDELETED} ORDER BY pd.date DESC";
         public static string GetEnumDescription(CRUDControl value)
         {
             FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
@@ -216,21 +217,17 @@ namespace SPTC_APP.Database
         public const string PENALTIES = "penalties";
         public const string BALANCE = "balance";
 
-        // LOAN
-        public const string AMOUNT = "amount";
-        public const string MONTHLY_INTEREST = "monthly_interest";
-        public const string MONTHLY_PRINCIPAL = "monthly_principal";
-        public const string PAYMENT_DUES = "payment_dues";
-
         // SHARECAPITAL 
         public const string BEGINNING_BALANCE = "beginning_balance";
         public const string LAST_BALANCE = "last_balance";
 
-        // LONGTERMLOAN
-        public const string TERMS_OF_PAYMENT_MONTH = "terms_of_payment_month";
+        // LOANS
         public const string AMOUNT_LOANED = "amount_loaned";
         public const string PROCESSING_FEE = "processing_fee";
-        public const string CAPITAL_BUILDUP = "capital_buildup";
+        public const string CBU = "cbu";
+        public const string TERMS_OF_PAYMENT_MONTH = "terms_of_payment_month";
+        public const string INTEREST = "interest";
+        public const string PRINCIPAL = "principal";
 
         //VIOLATION_TYPES
         public const string NUM_OF_DAYS = "num_of_days";

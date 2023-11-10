@@ -18,6 +18,7 @@ namespace SPTC_APP.View.Pages.Output
         public const string CODING = "CodingGrid";
         public const string VIOLATION = "ViolationGrid";
         public const string SHARECAPITAL = "ShareCapital";
+        public const string LOAN_APPLY = "LoanApply";
         public const string LOAN = "Loan";
         public const string LTLOAN = "LTLoan";
         public const string TRANSFER = "TransferGrid";
@@ -42,6 +43,9 @@ namespace SPTC_APP.View.Pages.Output
                     module = ViolationGrid;
                     break;
                 case SHARECAPITAL:
+                    module = gridLedger;
+                    break;
+                case LOAN_APPLY:
                     module = gridLedger;
                     break;
                 case LOAN:
@@ -87,6 +91,39 @@ namespace SPTC_APP.View.Pages.Output
                 }
                 lblTotalLedger.Content = franchise.GetTotalShareCapital().ToString("0.00");
             } 
+            else if(strmod == LOAN_APPLY)
+            {
+                dgLedger.Items.Clear();
+                List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
+                {
+
+                    new ColumnConfiguration("date", "DATE", minWidth: 100),
+                    new ColumnConfiguration("details", "DESCRIPTION", minWidth: 80),
+                    new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100),
+                    new ColumnConfiguration("processingFee", "PROCESSING FEE", minWidth: 100),
+                    new ColumnConfiguration("cbu", "CBU", minWidth: 100),
+                    new ColumnConfiguration("termsofpayment", "MONTHS", minWidth: 100),
+                    new ColumnConfiguration("interest", "INTEREST/MONTHLY", minWidth: 100),
+                    new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 100),
+                };
+                DataGridHelper<object> dataGridHelper = new DataGridHelper<object>(dgLedger, columnConfigurations);
+
+
+                foreach (object tmp in franchise.GetLoanAndLTLoan())
+                {
+                    dgLedger.Items.Add(tmp);
+                }
+                if (franchise.LoanBalance > 0)
+                {
+                    lblTotal.Content = "BALANCE :";
+                    lblTotalLedger.Content = franchise.LoanBalance.ToString("0.00");
+                }
+                else
+                {
+                    lblTotal.Content = "CURRENT LOAN :";
+                    lblTotalLedger.Content = "N/A";
+                }
+            }
             else if (strmod == LOAN)
             {
                 dgLedger.Items.Clear();
@@ -96,7 +133,6 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 80),
                     new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 100),
-                    new ColumnConfiguration("penalties", "CBU", minWidth: 100),
                     new ColumnConfiguration("interest", "INTEREST", minWidth: 100),
                     new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100),
                 };
@@ -126,7 +162,6 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
                     new ColumnConfiguration("referenceNo", "REF NO.", minWidth: 80),
                     new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 100),
-                    new ColumnConfiguration("penalties", "CBU", minWidth: 100),
                     new ColumnConfiguration("interest", "INTEREST", minWidth: 100),
                     new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100),
                 };
@@ -281,6 +316,20 @@ namespace SPTC_APP.View.Pages.Output
                     if (AppState.USER.position?.accesses[15] ?? false)
                         btnDeletePayment.IsEnabled = true;
                 }
+                else if(dgLedger.SelectedItem is Ledger.Loan led)
+                {
+                    lblSelectedLedger.Content = "Loaned Amount: " + led.amountLoaned;
+                    selectedPayment = led;
+                    if (AppState.USER.position?.accesses[14] ?? false)
+                        btnDeletePayment.IsEnabled = true;
+                }
+                else if (dgLedger.SelectedItem is Ledger.LongTermLoan lled)
+                {
+                    lblSelectedLedger.Content = "Loaned Amount: " + lled.amountLoaned;
+                    selectedPayment = lled;
+                    if (AppState.USER.position?.accesses[14] ?? false)
+                        btnDeletePayment.IsEnabled = true;
+                }
             }
         }
 
@@ -301,6 +350,16 @@ namespace SPTC_APP.View.Pages.Output
                 else if (selectedPayment is PaymentDetails<Ledger.LongTermLoan> ltl)
                 {
                     ltl.delete();
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                }
+                else if(selectedPayment is Ledger.Loan led)
+                {
+                    led.Delete();
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                }
+                else if (selectedPayment is Ledger.LongTermLoan lled)
+                {
+                    lled.Delete();
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 }
             }

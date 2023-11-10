@@ -158,17 +158,34 @@ namespace SPTC_APP.View.Pages.Output
             HandleButtonClick(Modules.SHARECAPITAL, sender as Button);
         }
 
+        private void btnLoanApply_Click(object sender, RoutedEventArgs e)
+        {
+            if ((AppState.USER?.position?.accesses[18] ?? false))
+            {
+                btnAddButton.Content = "APPLY FOR LOAN";
+
+                btnAddButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnAddButton.Visibility = Visibility.Collapsed;
+            }
+            HandleButtonClick(Modules.LOAN_APPLY, sender as Button);
+        }
+
         private void btnLoan_Click(object sender, RoutedEventArgs e)
         {
             if ((AppState.USER?.position?.accesses[18] ?? false))
             {
                 btnAddButton.Content = "ADD RECORD";
-                if (MainBody.selectedFranchise.GetLoans().Count <= 0)
-                {
-                    btnAddButton.Content = "APPLY FOR LOAN";
-                }
 
                 btnAddButton.Visibility = Visibility.Visible;
+                if (MainBody.selectedFranchise.GetLoans().Count <= 0)
+                {
+                    //btnAddButton.Content = "APPLY FOR LOAN";
+                    btnAddButton.Visibility = Visibility.Collapsed;
+                }
+
             }
             else
             {
@@ -182,12 +199,11 @@ namespace SPTC_APP.View.Pages.Output
             if ((AppState.USER?.position?.accesses[18] ?? false))
             {
                 btnAddButton.Content = "ADD RECORD";
+                btnAddButton.Visibility = Visibility.Visible;
                 if (MainBody.selectedFranchise.GetLTLoans().Count <= 0)
                 {
-                    btnAddButton.Content = "APPLY FOR LOAN";
-                }
-
-                btnAddButton.Visibility = Visibility.Visible;
+                    btnAddButton.Visibility = Visibility.Collapsed;
+                };
             }
             else
             {

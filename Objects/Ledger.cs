@@ -17,13 +17,21 @@ namespace SPTC_APP.Objects
         {
             public int id { get; private set; }
             public int franchiseId { get; set; }
-            public DateTime? date { get; set; }
-            public double amount { get; set; }
+            public DateTime date { get; set; }
+            public double amountLoaned { get; set; }
             public string details { get; set; }
-            public double monthlyInterest { get; set; }
-            public double termsofpayment { get; set; }
-            public double paymentDues { get; set; }
-
+            public double processingFee { get; set; }
+            public double cbu { get; set; }
+            public int termsofpayment { get; set; }
+            public double interest { get; set; }
+            public double principal { get; set; }
+            public double paymentDues
+            {
+                get
+                {
+                    return principal / termsofpayment;
+                }
+            }
             public bool isFullyPaid { get; set; } = false;
 
             private Upsert loan;
@@ -39,28 +47,28 @@ namespace SPTC_APP.Objects
                 this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
                 this.franchiseId = Retrieve.GetValueOrDefault<int>(reader, Field.FRANCHISE_ID);
                 this.date = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE);
-                this.amount = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT);
+                this.amountLoaned = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT_LOANED);
                 this.details = Retrieve.GetValueOrDefault<string>(reader, Field.DETAILS);
-                this.monthlyInterest = Retrieve.GetValueOrDefault<double>(reader, Field.MONTHLY_INTEREST);
-                this.termsofpayment = Retrieve.GetValueOrDefault<double>(reader, Field.TERMS_OF_PAYMENT_MONTH);
-                this.paymentDues = Retrieve.GetValueOrDefault<double>(reader, Field.PAYMENT_DUES);
+                this.processingFee = Retrieve.GetValueOrDefault<double>(reader, Field.PROCESSING_FEE);
+                this.cbu = Retrieve.GetValueOrDefault<double>(reader, Field.CBU);
+                this.termsofpayment = Retrieve.GetValueOrDefault<int>(reader, Field.TERMS_OF_PAYMENT_MONTH);
+                this.interest = Retrieve.GetValueOrDefault<double>(reader, Field.INTEREST);
+                this.principal = Retrieve.GetValueOrDefault<double>(reader, Field.PRINCIPAL);
             }
             public bool WriteInto(
                     int franchiseId,
                     DateTime dateLoaned,
-                    double amount,
-                    string details,
-                    double monthlyInterest,
-                    int termsofpayment,
-                    double paymentDues)
+                    double amountLoaned, string details, double processingfee, double cbu, int termsofpayment, double interest, double principal)
             {
                 this.franchiseId = franchiseId;
                 this.date = dateLoaned;
-                this.amount = amount;
+                this.amountLoaned = amountLoaned;
                 this.details = details;
-                this.monthlyInterest = monthlyInterest;
+                this.processingFee = processingFee;
+                this.cbu = cbu;
                 this.termsofpayment = termsofpayment;
-                this.paymentDues = paymentDues;
+                this.interest = interest;
+                this.principal = principal;
                 return true;
             }
 
@@ -73,11 +81,13 @@ namespace SPTC_APP.Objects
                 }
                 loan.Insert(Field.FRANCHISE_ID, franchiseId);
                 loan.Insert(Field.DATE, date);
-                loan.Insert(Field.AMOUNT, amount);
+                loan.Insert(Field.AMOUNT_LOANED, amountLoaned);
                 loan.Insert(Field.DETAILS, details);
-                loan.Insert(Field.MONTHLY_INTEREST, monthlyInterest);
+                loan.Insert(Field.PROCESSING_FEE, processingFee);
+                loan.Insert(Field.CBU, cbu);
                 loan.Insert(Field.TERMS_OF_PAYMENT_MONTH, termsofpayment);
-                loan.Insert(Field.PAYMENT_DUES, paymentDues);
+                loan.Insert(Field.INTEREST, interest);
+                loan.Insert(Field.PRINCIPAL, principal);
                 loan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
                 loan.Save();
                 id = loan.id;
@@ -167,93 +177,93 @@ namespace SPTC_APP.Objects
         {
             public int id { get; private set; }
             public int franchiseId { get; set; }
-            public DateTime? date { get; set; }
-            public int termsOfPaymentMonth { get; set; }
-            public DateTime? startDate { get; set; }
-            public DateTime? endDate { get; set; }
+            public DateTime date { get; set; }
             public double amountLoaned { get; set; }
             public string details { get; set; }
             public double processingFee { get; set; }
-            public double monthlyInterest { get; set; }
-            public double paymentDues { get; set; }
+            public double cbu { get; set; }
+            public int termsofpayment { get; set; }
+            public double interest { get; set; }
+            public double principal { get; set; }
+
+            public double paymentDues
+            {
+                get
+                {
+                    return principal / termsofpayment;  
+                }   
+            }
+
             public bool isFullyPaid { get; set; } = false;
 
-
-            private Upsert longTermLoan;
+            private Upsert loan;
 
             public LongTermLoan()
             {
-                longTermLoan = new Upsert(Table.LONG_TERM_LOAN, -1);
+                loan = new Upsert(Table.LONG_TERM_LOAN, -1);
             }
 
             public LongTermLoan(MySqlDataReader reader)
             {
-                longTermLoan = null;
+                loan = null;
                 this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
                 this.franchiseId = Retrieve.GetValueOrDefault<int>(reader, Field.FRANCHISE_ID);
                 this.date = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE);
-                this.termsOfPaymentMonth = Retrieve.GetValueOrDefault<int>(reader, Field.TERMS_OF_PAYMENT_MONTH);
-                this.startDate = Retrieve.GetValueOrDefault<DateTime?>(reader, Field.START_DATE);
-                this.endDate = Retrieve.GetValueOrDefault<DateTime?>(reader, Field.END_DATE);
                 this.amountLoaned = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT_LOANED);
                 this.details = Retrieve.GetValueOrDefault<string>(reader, Field.DETAILS);
                 this.processingFee = Retrieve.GetValueOrDefault<double>(reader, Field.PROCESSING_FEE);
-                this.monthlyInterest = Retrieve.GetValueOrDefault<double>(reader, Field.CAPITAL_BUILDUP);
-                this.paymentDues = Retrieve.GetValueOrDefault<double>(reader, Field.PAYMENT_DUES);
+                this.cbu = Retrieve.GetValueOrDefault<double>(reader, Field.CBU);
+                this.termsofpayment = Retrieve.GetValueOrDefault<int>(reader, Field.TERMS_OF_PAYMENT_MONTH);
+                this.interest = Retrieve.GetValueOrDefault<double>(reader, Field.INTEREST);
+                this.principal = Retrieve.GetValueOrDefault<double>(reader, Field.PRINCIPAL);
             }
             public bool WriteInto(
                     int franchiseId,
                     DateTime dateLoaned,
-                    int termsOfPaymentMonth,
-                    DateTime? startDate,
-                    DateTime? endDate,
-                    double amountLoaned,
-                    string details,
-                    double processingFee,
-                    double paymentDues)
+                    double amountLoaned, string details, double processingfee, double cbu, int termsofpayment, double interest, double principal)
             {
                 this.franchiseId = franchiseId;
                 this.date = dateLoaned;
-                this.termsOfPaymentMonth = termsOfPaymentMonth;
-                this.startDate = startDate;
-                this.endDate = endDate;
                 this.amountLoaned = amountLoaned;
                 this.details = details;
                 this.processingFee = processingFee;
-                this.paymentDues = paymentDues;
+                this.cbu = cbu;
+                this.termsofpayment = termsofpayment;
+                this.interest = interest;
+                this.principal = principal;
                 return true;
             }
 
+
             public int Save()
             {
-                if (longTermLoan == null)
+                if (loan == null)
                 {
-                    longTermLoan = new Upsert(Table.LONG_TERM_LOAN, id);
+                    loan = new Upsert(Table.LOAN, id);
                 }
-                longTermLoan.Insert(Field.FRANCHISE_ID, franchiseId);
-                longTermLoan.Insert(Field.DATE, date);
-                longTermLoan.Insert(Field.TERMS_OF_PAYMENT_MONTH, termsOfPaymentMonth);
-                longTermLoan.Insert(Field.START_DATE, startDate);
-                longTermLoan.Insert(Field.END_DATE, endDate);
-                longTermLoan.Insert(Field.AMOUNT_LOANED, amountLoaned);
-                longTermLoan.Insert(Field.DETAILS, details);
-                longTermLoan.Insert(Field.PROCESSING_FEE, processingFee);
-                longTermLoan.Insert(Field.CAPITAL_BUILDUP, monthlyInterest);
-                longTermLoan.Insert(Field.PAYMENT_DUES, paymentDues);
-                longTermLoan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
-                longTermLoan.Save();
-                id = longTermLoan.id;
+                loan.Insert(Field.FRANCHISE_ID, franchiseId);
+                loan.Insert(Field.DATE, date);
+                loan.Insert(Field.AMOUNT_LOANED, amountLoaned);
+                loan.Insert(Field.DETAILS, details);
+                loan.Insert(Field.PROCESSING_FEE, processingFee);
+                loan.Insert(Field.CBU, cbu);
+                loan.Insert(Field.TERMS_OF_PAYMENT_MONTH, termsofpayment);
+                loan.Insert(Field.INTEREST, interest);
+                loan.Insert(Field.PRINCIPAL, principal);
+                loan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
+                loan.Save();
+                id = loan.id;
 
                 return id;
             }
 
             public bool Delete()
             {
-                if (longTermLoan == null)
+                if (loan == null)
                 {
-                    longTermLoan = new Upsert(Table.LONG_TERM_LOAN, id);
-                    longTermLoan.Insert(Field.ISDELETED, true);
-                    longTermLoan.Save();
+                    loan = new Upsert(Table.LONG_TERM_LOAN, id);
+                    loan.Insert(Field.ISDELETED, true);
+                    loan.Save();
                     return true;
                 }
                 return false;

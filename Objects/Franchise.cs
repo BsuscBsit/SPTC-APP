@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Documents;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
+using static SPTC_APP.Objects.Ledger;
 using Table = SPTC_APP.Database.Table;
 
 namespace SPTC_APP.Objects
@@ -21,7 +22,7 @@ namespace SPTC_APP.Objects
         public string MTOPNo { get; set; }
         public double ShareCapital { get { return GetTotalShareCapital(); } }
         public double MonthlyDues { get { return (GetLoans()?.FirstOrDefault()?.paymentDues ?? 0) + (GetLTLoans()?.FirstOrDefault()?.paymentDues ?? 0) + AppState.TOTAL_SHARE_PER_MONTH; } }
-        public double LoanBalance { get { return GetLoans()?.FirstOrDefault()?.amount ?? 0; } }
+        public double LoanBalance { get { return GetLoans()?.FirstOrDefault()?.amountLoaned ?? 0; } }
         public double LongTermLoanBalance { get { return GetLTLoans()?.FirstOrDefault()?.amountLoaned ?? 0; } }
         public string displayBuyingDate { get { return BuyingDate.ToString("MMMM dd, yyyy"); } }
 
@@ -155,6 +156,8 @@ namespace SPTC_APP.Objects
             return Retrieve.GetDataUsingQuery<PaymentDetails<Ledger.LongTermLoan>>(RequestQuery.GET_LEDGER_PAYMENT(Table.LONG_TERM_LOAN, typeof(Ledger.LongTermLoan).Name.ToUpper(), id));
         }
 
+        
+
         public double GetTotalShareCapital()
         {
             return GetShareCapitalLedger().Sum(tmp => tmp.deposit);
@@ -174,9 +177,20 @@ namespace SPTC_APP.Objects
         {
             List<PaymentHistory> mainlist = Retrieve.GetDataUsingQuery<PaymentHistory>(RequestQuery.GET_ALL_PAYMENTS_ID(id));
             
-            
+            return mainlist;
+        }
 
-            //EventLogger.Post($"OUT :: {mainlist.Count}");
+        public List<object> GetLoanAndLTLoan()
+        {
+           List<object> mainlist = new List<object>();
+            mainlist.AddRange(GetLoans());
+            mainlist.AddRange(GetLTLoans());
+            mainlist.Sort((x, y) =>
+            {
+                DateTime dateX = (x is Loan) ? ((Loan)x).date : ((LongTermLoan)x).date;
+                DateTime dateY = (y is Loan) ? ((Loan)y).date : ((LongTermLoan)y).date;
+                return dateY.CompareTo(dateX);
+            });
             return mainlist;
         }
 

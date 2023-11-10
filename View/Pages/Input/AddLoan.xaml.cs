@@ -24,7 +24,6 @@ namespace SPTC_APP.View.Pages.Input
     public partial class AddLoan : Window
     {
         Franchise franchise;
-        bool isApply = false;
         public AddLoan(Franchise franchise)
         {
             InitializeComponent();
@@ -34,26 +33,6 @@ namespace SPTC_APP.View.Pages.Input
             this.franchise = franchise;
             dpBdate.DisplayDate = DateTime.Now;
             dpBdate.SelectedDate = DateTime.Now;
-            this.isApply = (franchise.GetLoans()?.FirstOrDefault() == null);
-            if (isApply)
-            {
-                lblTerms.Content = "Term length in months: ";
-                tbPenalty.Text = "12";
-                lblTitle.Content = "APPLY FOR LONG TERM LOAN";
-            } else
-            {
-                tboxInterest.Visibility = Visibility.Collapsed;
-                lblInterest.Visibility = Visibility.Collapsed;
-                double payment = franchise.GetLoans().FirstOrDefault().paymentDues;
-                double balance = franchise.LoanBalance;
-                if (payment < balance)
-                {
-                    tboxAmount.Text = payment.ToString("0.00");
-                } else
-                {
-                    tboxAmount.Text = balance.ToString("0.00");
-                }
-            }
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
         }
@@ -79,30 +58,15 @@ namespace SPTC_APP.View.Pages.Input
                 if (amount > 0)
                 {
                     PaymentDetails<Ledger.Loan> loanPayment = new PaymentDetails<Ledger.Loan>();
-                    Ledger.Loan loan = new Ledger.Loan();
-                    if (!isApply)
+                    
+                    loanPayment.WriteInto(null, false, false, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", amount);
+                    //loan.amount = loan.amount - amount;
+                    /*if(loan.amount <= 0)
                     {
-                        loan = franchise.GetLoans().FirstOrDefault();
-                        loanPayment.WriteInto(loan, false, false, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", loan.amount - amount);
-                        loan.amount = loan.amount - amount;
-                        if(loan.amount <= 0)
-                        {
-                            loan.isFullyPaid = true;
-                        }
-                        loan.Save();
-                        loanPayment.Save();
-                    } else
-                    {
-
-                        double monthlydue = (amount / penalty) + interest;
-                        double totalamount = monthlydue * penalty;
-                        loan.WriteInto(franchise.id, DateTime.Now, totalamount, "",interest, Int32.Parse(penalty.ToString()), monthlydue);
-                        loan.Save();
-                        loanPayment.WriteInto(loan, false, false, dpBdate.DisplayDate, tboxRefNo.Text, -amount, penalty, "", loan.amount);
-                        loanPayment.isApply = true;
-                        loanPayment.ledgername = Ledger.APPLY_LOAN;
-                        loanPayment.Save();
-                    }
+                        loan.isFullyPaid = true;
+                    }*/
+                    //loan.Save();
+                    loanPayment.Save();
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                     this.Close();
                 } else

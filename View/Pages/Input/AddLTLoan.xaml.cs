@@ -25,40 +25,16 @@ namespace SPTC_APP.View.Pages.Input
     {
 
         Franchise franchise;
-        bool isApply = false;
         public AddLTLoan(Franchise franchise)
         {
             InitializeComponent();
             initTextBoxes();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
-            this.isApply = (franchise.GetLTLoans()?.FirstOrDefault() == null);
             this.franchise = franchise;
             dpBdate.DisplayDate = DateTime.Now;
             dpBdate.SelectedDate = DateTime.Now;
-            if (isApply)
-            {
-                lblTerms.Content = "Term Length in Months: ";
-                tbPenalty.ToolTip = "Term length.";
-                lblTitle.Content = "APPLY FOR LONG TERM LOAN";
-            }
-            else
-            {
-                tboxInterest.Visibility = Visibility.Collapsed;
-                lblInterest.Visibility = Visibility.Collapsed;
-                lblProcessingFee.Visibility = Visibility.Collapsed;
-                tbProcessingFee.Visibility = Visibility.Collapsed;
-                double payment = franchise.GetLTLoans().FirstOrDefault().paymentDues;
-                double balance = franchise.LongTermLoanBalance;
-                if (payment < balance)
-                {
-                    tboxAmount.Text = payment.ToString("0.00");
-                }
-                else
-                {
-                    tboxAmount.Text = balance.ToString("0.00");
-                }
-            }
+            
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
         }
@@ -84,30 +60,16 @@ namespace SPTC_APP.View.Pages.Input
                 if (amount > 0)
                 {
                     PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
-                    Ledger.LongTermLoan loan = new Ledger.LongTermLoan();
-                    if (franchise.GetLTLoans()?.FirstOrDefault() != null)
+                    
+                    loanPayment.WriteInto(null, false, false, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "",  amount);
+                    //loan.amountLoaned = loan.amountLoaned - Double.Parse(tboxAmount.Text);
+                    /*if (loan.amountLoaned <= 0)
                     {
-                        loan = franchise.GetLTLoans().FirstOrDefault();
-                        loanPayment.WriteInto(loan, false, false, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", loan.amountLoaned - amount);
-                        loan.amountLoaned = loan.amountLoaned - Double.Parse(tboxAmount.Text);
-                        if (loan.amountLoaned <= 0)
-                        {
-                            loan.isFullyPaid = true;
-                        }
-                        loan.Save();
-                        loanPayment.Save();
+                        loan.isFullyPaid = true;
                     }
-                    else
-                    {
-                        double monthlydue = (amount / penalty) + interest;
-                        double totalamount = monthlydue * penalty;
-                        loan.WriteInto(franchise.id, DateTime.Now, Int32.Parse(penalty.ToString()), DateTime.Now, DateTime.Now.AddMonths(Int32.Parse(penalty.ToString())), totalamount, "", Double.Parse(tbProcessingFee.Text),  monthlydue);
-                        loan.Save();
-                        loanPayment.WriteInto(loan, false, false, dpBdate.DisplayDate, tboxRefNo.Text, -amount, penalty, "", loan.amountLoaned);
-                        loanPayment.isApply = true;
-                        loanPayment.ledgername = Ledger.APPLY_LT_LOAN;
-                        loanPayment.Save();
-                    }
+                    loan.Save();*/
+                    loanPayment.Save();
+                    
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                     this.Close();
                 } else

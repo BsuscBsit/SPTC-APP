@@ -225,7 +225,6 @@
                     x:Name="tabs"
                     Grid.Row="1"
                     Grid.Column="0"
-                    Height="233.6"
                     Margin="20,12,12,12"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top">
@@ -273,7 +272,19 @@
                         Background="White"
                         BorderThickness="1"
                         Click="btnShareCapital_Click"
-                        Content="Share Capital Ledger"
+                        Content="Share Capital"
+                        FontSize="12"
+                        Style="{StaticResource ControlledButtonStyle}" />
+                    <Button
+                        x:Name="btnLoanApply"
+                        Width="150"
+                        Height="27"
+                        Margin="0,7,0,0"
+                        Padding="1,5,5,1"
+                        Background="White"
+                        BorderThickness="1"
+                        Click="btnLoanApply_Click"
+                        Content="Loan Application"
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
                     <Button
@@ -285,7 +296,7 @@
                         Background="White"
                         BorderThickness="1"
                         Click="btnLoan_Click"
-                        Content="Loan Ledger"
+                        Content="Loan Payment"
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
                     <Button
@@ -297,7 +308,7 @@
                         Background="White"
                         BorderThickness="1"
                         Click="btnLTLoan_Click"
-                        Content="LT Loan Ledger"
+                        Content="LT Loan Payment"
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
                     <Button

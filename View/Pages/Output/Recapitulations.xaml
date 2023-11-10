@@ -4,16 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SPTC_APP.View.Pages.Input"
+        AllowsTransparency="True"
+        KeyboardNavigation.TabNavigation="Continue"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        Style="{StaticResource DetachedRoundedWindow}"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="Recapitulations" Width="700" Height="600">
+        Title="Recapitulations" Width="700">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="400"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        <Grid  Grid.Row="0">
+        <Border
+            x:Name="topBar"
+            Grid.Row="0"
+            Margin="0,0,2,0"
+            Style="{StaticResource TopBarStyle}" />
+        <Grid  Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="300"/>
@@ -58,13 +70,13 @@
                 <Button x:Name="btnAdd" Content="ADD RECORD" Margin="5" Style="{StaticResource CommonButtonStyle}" Click="btnAdd_Click" />
             </Grid>
         </Grid>
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="2">
             <Grid x:Name="recapgrid">
                 
             </Grid>
         </ScrollViewer>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="*"/>
@@ -73,7 +85,7 @@
             <TextBox x:Name="tbTotal" Grid.Column="1" Text="0.00" IsEnabled="False" Style="{StaticResource CommonTextBoxStyle}" Margin="20, 5"/>
 
         </Grid>
-        <Grid Grid.Row="3" Height="70">
+        <Grid Grid.Row="4" Height="70">
             <Button
                 x:Name="btnCancel"
                 Click="btnCancel_Click"

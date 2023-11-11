@@ -26,6 +26,8 @@ namespace SPTC_APP.View.Pages.Input
     {
 
         Franchise franchise;
+
+        Ledger.LongTermLoan ltloan;
         public AddLTLoan(Franchise franchise)
         {
             InitializeComponent();
@@ -35,7 +37,10 @@ namespace SPTC_APP.View.Pages.Input
             this.franchise = franchise;
             dpBdate.DisplayDate = DateTime.Now;
             dpBdate.SelectedDate = DateTime.Now;
-            
+            ltloan = this.franchise.GetLTLoans().FirstOrDefault();
+
+            tboxInterest.Text = ltloan.interest.ToString();
+            tbProcessingFee.Text = ltloan.processingFee.ToString();
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
         }
@@ -60,7 +65,6 @@ namespace SPTC_APP.View.Pages.Input
                 double penalty = Double.TryParse(tbPenalty.Text, out penalty) ? penalty : 0;
                 if (amount > 0)
                 {
-                    Ledger.LongTermLoan ltloan = franchise.GetLTLoans().FirstOrDefault();
 
                     PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
                     ltloan.amount = ltloan.amount - amount;

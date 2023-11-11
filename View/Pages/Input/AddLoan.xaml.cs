@@ -25,6 +25,8 @@ namespace SPTC_APP.View.Pages.Input
     public partial class AddLoan : Window
     {
         Franchise franchise;
+
+        Ledger.Loan loan;
         public AddLoan(Franchise franchise)
         {
             InitializeComponent();
@@ -34,6 +36,11 @@ namespace SPTC_APP.View.Pages.Input
             this.franchise = franchise;
             dpBdate.DisplayDate = DateTime.Now;
             dpBdate.SelectedDate = DateTime.Now;
+
+            loan = this.franchise.GetLoans().FirstOrDefault();
+            tbProcessingFee.Text = ltloan.processingFee.ToString();
+            tboxInterest.Text = loan.interest.ToString();
+
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
         }
@@ -58,7 +65,6 @@ namespace SPTC_APP.View.Pages.Input
                 double penalty = Double.TryParse(tbPenalty.Text, out penalty) ? penalty : 0;
                 if (amount > 0)
                 {
-                    Ledger.Loan loan = franchise.GetLoans().FirstOrDefault();
                     PaymentDetails<Ledger.Loan> loanPayment = new PaymentDetails<Ledger.Loan>();
                     loan.amount = loan.amount - amount;
                     loanPayment.WriteInto(loan, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", loan.amount);

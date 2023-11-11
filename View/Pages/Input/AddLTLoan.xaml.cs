@@ -63,13 +63,12 @@ namespace SPTC_APP.View.Pages.Input
                     Ledger.LongTermLoan ltloan = franchise.GetLTLoans().FirstOrDefault();
 
                     PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
-                    ltloan.amount -= amount;
+                    ltloan.amount = ltloan.amount - amount;
                     loanPayment.WriteInto(ltloan, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", ltloan.amount);
                     if (ltloan.amount <= 0)
                     {
                         ltloan.isFullyPaid = true;
                     }
-                    ltloan.Save();
                     loanPayment.Save();
                     
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);

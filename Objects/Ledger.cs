@@ -197,6 +197,13 @@ namespace SPTC_APP.Objects
             public double interest { get; set; }
             public double principal { get; set; }
             public double amount { get; set; }
+            public string displayDate
+            {
+                get
+                {
+                    return date.ToString("MMMM dd, yyyy");
+                }
+            }
             public double paymentDues
             {
                 get
@@ -227,6 +234,7 @@ namespace SPTC_APP.Objects
                 this.termsofpayment = Retrieve.GetValueOrDefault<int>(reader, Field.TERMS_OF_PAYMENT_MONTH);
                 this.interest = Retrieve.GetValueOrDefault<double>(reader, Field.INTEREST);
                 this.principal = Retrieve.GetValueOrDefault<double>(reader, Field.PRINCIPAL);
+                this.amount = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT);
             }
             public bool WriteInto(
                     int franchiseId,
@@ -237,7 +245,7 @@ namespace SPTC_APP.Objects
                 this.date = dateLoaned;
                 this.amountLoaned = amountLoaned;
                 this.details = details;
-                this.processingFee = processingFee;
+                this.processingFee = processingfee;
                 this.cbu = cbu;
                 this.termsofpayment = termsofpayment;
                 this.interest = interest;
@@ -251,7 +259,7 @@ namespace SPTC_APP.Objects
             {
                 if (loan == null)
                 {
-                    loan = new Upsert(Table.LOAN, id);
+                    loan = new Upsert(Table.LONG_TERM_LOAN, id);
                 }
                 loan.Insert(Field.FRANCHISE_ID, franchiseId);
                 loan.Insert(Field.DATE, date);

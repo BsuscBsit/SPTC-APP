@@ -60,13 +60,12 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     Ledger.Loan loan = franchise.GetLoans().FirstOrDefault();
                     PaymentDetails<Ledger.Loan> loanPayment = new PaymentDetails<Ledger.Loan>();
-                    loan.amount -= amount;
+                    loan.amount = loan.amount - amount;
                     loanPayment.WriteInto(loan, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", loan.amount);
                     if(loan.amount <= 0)
                     {
                         loan.isFullyPaid = true;
                     }
-                    loan.Save();
                     loanPayment.Save();
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                     this.Close();

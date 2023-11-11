@@ -182,7 +182,7 @@ namespace SPTC_APP.Objects
 
         public List<object> GetLoanAndLTLoan()
         {
-           List<object> mainlist = new List<object>();
+            List<object> mainlist = new List<object>();
             mainlist.AddRange(GetLoans());
             mainlist.AddRange(GetLTLoans());
             mainlist.Sort((x, y) =>

@@ -97,7 +97,7 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("date", "DATE", minWidth: 100),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
                     new ColumnConfiguration("details", "DESCRIPTION", minWidth: 80),
                     new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100),
                     new ColumnConfiguration("processingFee", "PROCESSING FEE", minWidth: 100),
@@ -113,14 +113,14 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgLedger.Items.Add(tmp);
                 }
-                if (franchise.LoanBalance > 0)
+                if ((franchise.LoanBalance + franchise.LongTermLoanBalance) > 0)
                 {
-                    lblTotal.Content = "BALANCE :";
-                    lblTotalLedger.Content = franchise.LoanBalance.ToString("0.00");
+                    lblTotal.Content = "TOTAL :";
+                    lblTotalLedger.Content = (franchise.LoanBalance + franchise.LongTermLoanBalance).ToString("0.00");
                 }
                 else
                 {
-                    lblTotal.Content = "CURRENT LOAN :";
+                    lblTotal.Content = "LOANS :";
                     lblTotalLedger.Content = "N/A";
                 }
             }
@@ -320,6 +320,8 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     lblSelectedLedger.Content = "Loaned Amount: " + led.amountLoaned;
                     selectedPayment = led;
+                    lblTotal.Content = "BALANCE :";
+                    lblTotalLedger.Content = led.amount;
                     if (AppState.USER.position?.accesses[14] ?? false)
                         btnDeletePayment.IsEnabled = true;
                 }
@@ -327,7 +329,9 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     lblSelectedLedger.Content = "Loaned Amount: " + lled.amountLoaned;
                     selectedPayment = lled;
-                    if (AppState.USER.position?.accesses[14] ?? false)
+                    lblTotal.Content = "BALANCE :";
+                    lblTotalLedger.Content = lled.amount;
+                    if (AppState.USER.position?.accesses[15] ?? false)
                         btnDeletePayment.IsEnabled = true;
                 }
             }

@@ -178,5 +178,25 @@
             Grid.ColumnSpan="7"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom" />
+        <Label
+            x:Name="lblProcessingFee"
+            Grid.Row="5"
+            Grid.Column="5"
+            Height="Auto"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Processing Fee: "
+            Style="{StaticResource TextFieldLabelingPreset}" />
+        <TextBox
+            x:Name="tbProcessingFee"
+            Grid.Row="6"
+            Grid.Column="5"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="" />
     </Grid>
 </Window>

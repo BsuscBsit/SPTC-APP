@@ -22,8 +22,8 @@ namespace SPTC_APP.Objects
         public string MTOPNo { get; set; }
         public double ShareCapital { get { return GetTotalShareCapital(); } }
         public double MonthlyDues { get { return (GetLoans()?.FirstOrDefault()?.paymentDues ?? 0) + (GetLTLoans()?.FirstOrDefault()?.paymentDues ?? 0) + AppState.TOTAL_SHARE_PER_MONTH; } }
-        public double LoanBalance { get { return GetLoans()?.FirstOrDefault()?.amountLoaned ?? 0; } }
-        public double LongTermLoanBalance { get { return GetLTLoans()?.FirstOrDefault()?.amountLoaned ?? 0; } }
+        public double LoanBalance { get { return GetLoans()?.FirstOrDefault()?.amount ?? 0; } }
+        public double LongTermLoanBalance { get { return GetLTLoans()?.FirstOrDefault()?.amount ?? 0; } }
         public string displayBuyingDate { get { return BuyingDate.ToString("MMMM dd, yyyy"); } }
 
         private Upsert franchise;
@@ -182,7 +182,7 @@ namespace SPTC_APP.Objects
 
         public List<object> GetLoanAndLTLoan()
         {
-           List<object> mainlist = new List<object>();
+            List<object> mainlist = new List<object>();
             mainlist.AddRange(GetLoans());
             mainlist.AddRange(GetLTLoans());
             mainlist.Sort((x, y) =>

@@ -13,9 +13,8 @@ namespace SPTC_APP.Objects
 
         private int ledgerId;
         public T ledger { get; set; }
-        public bool isDownPayment { get; set; }
-        public bool isDivPat { get; set; }
-        public DateTime? date { get; set; }
+        public double DivPat { get; set; }
+        public DateTime date { get; set; } = DateTime.Now;
         public string referenceNo { get; set; }
         public double deposit { get; set; }
         public double penalties { get; set; }
@@ -26,14 +25,14 @@ namespace SPTC_APP.Objects
         public string displayDate { 
             get
             {
-                return date?.ToString("MMMM dd, yyyy");
+                return date.ToString("MMMM dd, yyyy");
             }
         }
         public string monthyear
         {
             get
             {
-                return date?.ToString("MMM, yyyy");
+                return date.ToString("MMM, yyyy");
             }
         }
 
@@ -129,8 +128,7 @@ namespace SPTC_APP.Objects
         {
             paymentDetails = null;
             this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
-            this.isDownPayment = Retrieve.GetValueOrDefault<bool>(reader, Field.IS_DOWN_PAYMENT);
-            this.isDivPat = Retrieve.GetValueOrDefault<bool>(reader, Field.IS_DIV_PAT);
+            this.DivPat = Retrieve.GetValueOrDefault<double>(reader, Field.DIV_PAT);
             this.date = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE);
             this.referenceNo = Retrieve.GetValueOrDefault<string>(reader, Field.REFERENCE_NO);
             this.deposit = Retrieve.GetValueOrDefault<double>(reader, Field.DEPOSIT);
@@ -162,11 +160,10 @@ namespace SPTC_APP.Objects
             }
         }
 
-        public bool WriteInto(T lledger, bool isDP, bool isDVP, DateTime ldate, string lreferenceNo, double ldeposit, double lpenalties, string lremarks, double balance)
+        public bool WriteInto(T lledger, double isDVP, DateTime ldate, string lreferenceNo, double ldeposit, double lpenalties, string lremarks, double balance)
         {
             this.ledger = lledger;
-            this.isDownPayment = isDP;
-            this.isDivPat = isDVP;
+            this.DivPat = isDVP;
             this.date = ldate;
             this.referenceNo = lreferenceNo;
             this.deposit = ldeposit;
@@ -182,8 +179,7 @@ namespace SPTC_APP.Objects
             {
                 paymentDetails = new Upsert(Table.PAYMENT_DETAILS, id);
             }
-            paymentDetails.Insert(Field.IS_DOWN_PAYMENT, isDownPayment);
-            paymentDetails.Insert(Field.IS_DIV_PAT, isDivPat);
+            paymentDetails.Insert(Field.DIV_PAT, DivPat);
             paymentDetails.Insert(Field.DATE, date);
             paymentDetails.Insert(Field.REFERENCE_NO, referenceNo);
             paymentDetails.Insert(Field.DEPOSIT, deposit);

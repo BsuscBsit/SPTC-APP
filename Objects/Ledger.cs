@@ -25,6 +25,14 @@ namespace SPTC_APP.Objects
             public int termsofpayment { get; set; }
             public double interest { get; set; }
             public double principal { get; set; }
+            public double amount { get; set; }
+            public string displayDate
+            {
+                get
+                {
+                    return date.ToString("MMMM dd, yyyy");
+                }
+            }
             public double paymentDues
             {
                 get
@@ -54,6 +62,7 @@ namespace SPTC_APP.Objects
                 this.termsofpayment = Retrieve.GetValueOrDefault<int>(reader, Field.TERMS_OF_PAYMENT_MONTH);
                 this.interest = Retrieve.GetValueOrDefault<double>(reader, Field.INTEREST);
                 this.principal = Retrieve.GetValueOrDefault<double>(reader, Field.PRINCIPAL);
+                this.amount = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT);
             }
             public bool WriteInto(
                     int franchiseId,
@@ -64,11 +73,12 @@ namespace SPTC_APP.Objects
                 this.date = dateLoaned;
                 this.amountLoaned = amountLoaned;
                 this.details = details;
-                this.processingFee = processingFee;
+                this.processingFee = processingfee;
                 this.cbu = cbu;
                 this.termsofpayment = termsofpayment;
                 this.interest = interest;
                 this.principal = principal;
+                this.amount = principal;
                 return true;
             }
 
@@ -89,6 +99,7 @@ namespace SPTC_APP.Objects
                 loan.Insert(Field.INTEREST, interest);
                 loan.Insert(Field.PRINCIPAL, principal);
                 loan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
+                loan.Insert(Field.AMOUNT, amount);
                 loan.Save();
                 id = loan.id;
 
@@ -185,7 +196,14 @@ namespace SPTC_APP.Objects
             public int termsofpayment { get; set; }
             public double interest { get; set; }
             public double principal { get; set; }
-
+            public double amount { get; set; }
+            public string displayDate
+            {
+                get
+                {
+                    return date.ToString("MMMM dd, yyyy");
+                }
+            }
             public double paymentDues
             {
                 get
@@ -216,6 +234,7 @@ namespace SPTC_APP.Objects
                 this.termsofpayment = Retrieve.GetValueOrDefault<int>(reader, Field.TERMS_OF_PAYMENT_MONTH);
                 this.interest = Retrieve.GetValueOrDefault<double>(reader, Field.INTEREST);
                 this.principal = Retrieve.GetValueOrDefault<double>(reader, Field.PRINCIPAL);
+                this.amount = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT);
             }
             public bool WriteInto(
                     int franchiseId,
@@ -226,11 +245,12 @@ namespace SPTC_APP.Objects
                 this.date = dateLoaned;
                 this.amountLoaned = amountLoaned;
                 this.details = details;
-                this.processingFee = processingFee;
+                this.processingFee = processingfee;
                 this.cbu = cbu;
                 this.termsofpayment = termsofpayment;
                 this.interest = interest;
                 this.principal = principal;
+                this.amount = principal;
                 return true;
             }
 
@@ -239,7 +259,7 @@ namespace SPTC_APP.Objects
             {
                 if (loan == null)
                 {
-                    loan = new Upsert(Table.LOAN, id);
+                    loan = new Upsert(Table.LONG_TERM_LOAN, id);
                 }
                 loan.Insert(Field.FRANCHISE_ID, franchiseId);
                 loan.Insert(Field.DATE, date);
@@ -251,6 +271,7 @@ namespace SPTC_APP.Objects
                 loan.Insert(Field.INTEREST, interest);
                 loan.Insert(Field.PRINCIPAL, principal);
                 loan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
+                loan.Insert(Field.AMOUNT, amount);
                 loan.Save();
                 id = loan.id;
 

@@ -148,6 +148,7 @@ namespace SPTC_APP.Database
         public const string TITLE = "title";
         public const string ENTITY_TYPE = "entity_type";
         public const string IS_FULLY_PAID = "isFullyPaid";
+        public const string AMOUNT = "amount";
 
         // Foreign Keys
         public const string EMPLOYEE_ID = "user_id";
@@ -209,8 +210,7 @@ namespace SPTC_APP.Database
 
         // PAYMENT DETAILS
         public const string LEDGER_ID = "ledger_id";
-        public const string IS_DOWN_PAYMENT = "isDownPayment";
-        public const string IS_DIV_PAT = "isDivPat";
+        public const string DIV_PAT = "div_pat";
         public const string LEDGER_TYPE = "ledger_type";
         public const string REFERENCE_NO = "reference_no";
         public const string DEPOSIT = "deposit";

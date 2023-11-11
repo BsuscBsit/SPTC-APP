@@ -97,11 +97,12 @@
                 Style="{StaticResource TextFieldLabelingPreset}" />
             <Label
                 Grid.Row="1"
+                Grid.Column="2"
                 Margin="0,15,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Content="Type of Loan:"
-                Style="{StaticResource TextFieldLabelingPreset}" Grid.Column="2" />
+                Style="{StaticResource TextFieldLabelingPreset}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
@@ -151,28 +152,23 @@
                 Content="Term Length in Months:"
                 Style="{StaticResource TextFieldLabelingPreset}" />
             <TextBox
-                x:Name="tbCVORNum"
-                Grid.Row="2"
+                x:Name="tbBodyNum"
+                Grid.Row="1"
                 Grid.Column="0"
                 Width="164"
                 Height="30"
                 Margin="15,0,0,0"
                 VerticalAlignment="Top"
                 Style="{DynamicResource CommonTextBoxStyle}" />
-            <ComboBox
-                x:Name="cbLoanType"
-                Grid.Row="2"
+            <TextBox
+                x:Name="tbCVORNum"
+                Grid.Row="1"
                 Grid.Column="2"
                 Width="164"
                 Height="30"
-                IsReadOnly="True"
-                IsTabStop="False"
-                SelectedIndex="1"
-                Style="{DynamicResource CommonComboBox}" Margin="15,0,0,0" VerticalAlignment="Top">
-                <ComboBoxItem Content="Short Term" />
-                <ComboBoxItem Content="Long Term" />
-                <ComboBoxItem Content="Emergency" />
-            </ComboBox>
+                Margin="15,0,0,0"
+                VerticalAlignment="Top"
+                Style="{DynamicResource CommonTextBoxStyle}" />
             <TextBox
                 x:Name="tbAmount"
                 Grid.Row="4"
@@ -199,7 +195,8 @@
                 Height="30"
                 Margin="15,10,0,0"
                 VerticalAlignment="Bottom"
-                Style="{DynamicResource CommonTextBoxStyle}" IsEnabled="False" />
+                IsEnabled="False"
+                Style="{DynamicResource CommonTextBoxStyle}" />
             <TextBox
                 x:Name="tbCBU"
                 Grid.Row="7"
@@ -241,8 +238,9 @@
                 Height="30"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                Click="btnCompute_Click"
                 Content="Compute"
-                Style="{DynamicResource CommonButtonStyle}" Click="Button_Click" />
+                Style="{DynamicResource CommonButtonStyle}" />
             <ScrollViewer
                 x:Name="Computations"
                 Grid.Row="1"
@@ -496,11 +494,12 @@
                 x:Name="lblBodyNo"
                 Grid.Row="0"
                 Grid.Column="4"
+                Margin="59,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="8080"
                 Foreground="{StaticResource BrushBlack}"
-                Style="{StaticResource LabelFontMedium}" Margin="59,0,0,0" />
+                Style="{StaticResource LabelFontMedium}" />
         </Grid>
         <StackPanel
             Grid.Row="6"

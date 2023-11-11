@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2023 at 08:44 AM
+-- Generation Time: Nov 11, 2023 at 05:12 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -154,12 +154,15 @@ CREATE TABLE `tbl_loan_ledger` (
   `id` int(11) NOT NULL,
   `franchise_id` int(11) NOT NULL DEFAULT -1,
   `date` date DEFAULT NULL,
-  `amount` double NOT NULL DEFAULT 0,
+  `amount_loaned` double NOT NULL DEFAULT 0,
   `details` varchar(100) DEFAULT NULL,
-  `monthly_interest` double NOT NULL DEFAULT 0,
-  `payment_dues` double NOT NULL DEFAULT 0,
+  `processing_fee` double NOT NULL DEFAULT 0,
+  `cbu` double NOT NULL DEFAULT 0,
   `terms_of_payment_month` int(11) NOT NULL DEFAULT 1,
+  `interest` int(11) NOT NULL DEFAULT 0,
+  `principal` int(11) NOT NULL DEFAULT 0,
   `isFullyPaid` tinyint(1) NOT NULL DEFAULT 0,
+  `amount` double NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -173,15 +176,15 @@ CREATE TABLE `tbl_long_term_loan_ledger` (
   `id` int(11) NOT NULL,
   `franchise_id` int(11) NOT NULL DEFAULT -1,
   `date` date DEFAULT NULL,
-  `terms_of_payment_month` int(11) NOT NULL DEFAULT 1,
-  `start_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
   `amount_loaned` double NOT NULL DEFAULT 0,
-  `details` varchar(100) DEFAULT NULL,
+  `details` varchar(100) DEFAULT '',
   `processing_fee` double NOT NULL DEFAULT 0,
-  `capital_buildup` double NOT NULL DEFAULT 0,
-  `payment_dues` double NOT NULL DEFAULT 0,
+  `cbu` double NOT NULL DEFAULT 0,
+  `terms_of_payment_month` int(11) NOT NULL DEFAULT 1,
+  `interest` double NOT NULL DEFAULT 0,
+  `principal` double NOT NULL DEFAULT 0,
   `isFullyPaid` tinyint(1) NOT NULL DEFAULT 0,
+  `amount` double NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -235,7 +238,7 @@ CREATE TABLE `tbl_payment_details` (
   `id` int(11) NOT NULL,
   `ledger_id` int(11) NOT NULL DEFAULT -1,
   `isDownPayment` tinyint(1) NOT NULL DEFAULT 0,
-  `isDivPat` tinyint(1) NOT NULL DEFAULT 0,
+  `div_pat` double NOT NULL DEFAULT 0,
   `ledger_type` varchar(30) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `reference_no` int(11) NOT NULL DEFAULT -1,

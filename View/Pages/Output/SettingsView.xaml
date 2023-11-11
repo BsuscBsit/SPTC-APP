@@ -4,10 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SPTC_APP.View.Pages.Output"
-        mc:Ignorable="d"
-        Title="SettingsView" Width="450" Height="400">
+        Title="SettingsView" Width="450" Height="400" AllowsTransparency="True"
+        KeyboardNavigation.TabNavigation="Continue"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        Style="{StaticResource DetachedRoundedWindow}"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d">
     <Grid>
-        <ScrollViewer Margin="0, 0, 0, 70">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Border
+        x:Name="topBar"
+        Grid.Row="0"
+        Margin="0,0,2,0"
+        Style="{StaticResource TopBarStyle}" />
+        <ScrollViewer Grid.Row="1">
             <StackPanel>
                 <StackPanel x:Name="SettingsPanel">
                     
@@ -27,7 +42,9 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        <Button x:Name="btnCancel" Content="CANCEL" Style="{StaticResource CommonButtonStyle}" Width="140" Height="31" Margin="40, 0, 0, 20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="btnCancel_Click"/>
-        <Button x:Name="btnSave" Content="SAVE" Style="{StaticResource CommonButtonStyle}" Width="140" Height="31" Margin="0, 0, 40, 20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnSave_Click"/>
+        <Grid Grid.Row="2">
+            <Button x:Name="btnCancel" Content="CANCEL" Style="{StaticResource CommonButtonStyle}" Width="140" Height="31" Margin="40, 0, 0, 20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="btnCancel_Click"/>
+            <Button x:Name="btnSave" Content="SAVE" Style="{StaticResource CommonButtonStyle}" Width="140" Height="31" Margin="0, 0, 40, 20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnSave_Click"/>
+        </Grid>
     </Grid>
 </Window>

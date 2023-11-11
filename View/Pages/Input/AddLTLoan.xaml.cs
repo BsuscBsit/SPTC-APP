@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SPTC_APP.Objects.Ledger;
 using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
@@ -25,6 +26,8 @@ namespace SPTC_APP.View.Pages.Input
     {
 
         Franchise franchise;
+
+        Ledger.LongTermLoan ltloan;
         public AddLTLoan(Franchise franchise)
         {
             InitializeComponent();
@@ -34,7 +37,10 @@ namespace SPTC_APP.View.Pages.Input
             this.franchise = franchise;
             dpBdate.DisplayDate = DateTime.Now;
             dpBdate.SelectedDate = DateTime.Now;
-            
+            ltloan = this.franchise.GetLTLoans().FirstOrDefault();
+
+            tboxInterest.Text = ltloan.interest.ToString();
+            tbProcessingFee.Text = ltloan.processingFee.ToString();
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
         }
@@ -59,15 +65,14 @@ namespace SPTC_APP.View.Pages.Input
                 double penalty = Double.TryParse(tbPenalty.Text, out penalty) ? penalty : 0;
                 if (amount > 0)
                 {
+
                     PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
-                    
-                    loanPayment.WriteInto(null, false, false, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "",  amount);
-                    //loan.amountLoaned = loan.amountLoaned - Double.Parse(tboxAmount.Text);
-                    /*if (loan.amountLoaned <= 0)
+                    ltloan.amount = ltloan.amount - amount;
+                    loanPayment.WriteInto(ltloan, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", ltloan.amount);
+                    if (ltloan.amount <= 0)
                     {
-                        loan.isFullyPaid = true;
+                        ltloan.isFullyPaid = true;
                     }
-                    loan.Save();*/
                     loanPayment.Save();
                     
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);

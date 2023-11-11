@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SPTC_APP.Objects.Ledger;
 using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
@@ -24,6 +25,8 @@ namespace SPTC_APP.View.Pages.Input
     public partial class AddLoan : Window
     {
         Franchise franchise;
+
+        Ledger.Loan loan;
         public AddLoan(Franchise franchise)
         {
             InitializeComponent();
@@ -33,6 +36,11 @@ namespace SPTC_APP.View.Pages.Input
             this.franchise = franchise;
             dpBdate.DisplayDate = DateTime.Now;
             dpBdate.SelectedDate = DateTime.Now;
+
+            loan = this.franchise.GetLoans().FirstOrDefault();
+            tbProcessingFee.Text = ltloan.processingFee.ToString();
+            tboxInterest.Text = loan.interest.ToString();
+
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
         }
@@ -58,14 +66,12 @@ namespace SPTC_APP.View.Pages.Input
                 if (amount > 0)
                 {
                     PaymentDetails<Ledger.Loan> loanPayment = new PaymentDetails<Ledger.Loan>();
-                    
-                    loanPayment.WriteInto(null, false, false, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", amount);
-                    //loan.amount = loan.amount - amount;
-                    /*if(loan.amount <= 0)
+                    loan.amount = loan.amount - amount;
+                    loanPayment.WriteInto(loan, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", loan.amount);
+                    if(loan.amount <= 0)
                     {
                         loan.isFullyPaid = true;
-                    }*/
-                    //loan.Save();
+                    }
                     loanPayment.Save();
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                     this.Close();

@@ -13,7 +13,6 @@ namespace SPTC_APP.Objects
 
         private int ledgerId;
         public T ledger { get; set; }
-        public bool isDownPayment { get; set; }
         public double DivPat { get; set; }
         public DateTime date { get; set; } = DateTime.Now;
         public string referenceNo { get; set; }
@@ -129,7 +128,6 @@ namespace SPTC_APP.Objects
         {
             paymentDetails = null;
             this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
-            this.isDownPayment = Retrieve.GetValueOrDefault<bool>(reader, Field.IS_DOWN_PAYMENT);
             this.DivPat = Retrieve.GetValueOrDefault<double>(reader, Field.DIV_PAT);
             this.date = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE);
             this.referenceNo = Retrieve.GetValueOrDefault<string>(reader, Field.REFERENCE_NO);
@@ -162,10 +160,9 @@ namespace SPTC_APP.Objects
             }
         }
 
-        public bool WriteInto(T lledger, bool isDP, double isDVP, DateTime ldate, string lreferenceNo, double ldeposit, double lpenalties, string lremarks, double balance)
+        public bool WriteInto(T lledger, double isDVP, DateTime ldate, string lreferenceNo, double ldeposit, double lpenalties, string lremarks, double balance)
         {
             this.ledger = lledger;
-            this.isDownPayment = isDP;
             this.DivPat = isDVP;
             this.date = ldate;
             this.referenceNo = lreferenceNo;

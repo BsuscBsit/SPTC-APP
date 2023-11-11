@@ -75,7 +75,7 @@ namespace SPTC_APP.View.Pages.Input
                     loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
                     loan.Save();
                     PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
-                    payment.WriteInto(loan, false, 0, DateTime.Now, ornum, -loanAmount, 0, loantext, loanPrincipal);
+                    payment.WriteInto(loan, 0, DateTime.Now, ornum, -loanAmount, 0, loantext, loanPrincipal);
                     payment.isApply = true;
                     payment.ledgername = Ledger.APPLY_LOAN;
                     payment.Save();
@@ -88,7 +88,7 @@ namespace SPTC_APP.View.Pages.Input
                     ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
                     ltloan.Save();
                     PaymentDetails<Ledger.LongTermLoan> payment = new PaymentDetails<Ledger.LongTermLoan>();
-                    payment.WriteInto(ltloan, false, 0, DateTime.Now, this.ornum, -loanAmount, 0, this.loantext, this.loanPrincipal);
+                    payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, 0, this.loantext, this.loanPrincipal);
                     payment.isApply = true;
                     payment.ledgername = Ledger.APPLY_LT_LOAN;
                     payment.Save();

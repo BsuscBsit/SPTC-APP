@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SPTC_APP.Objects.Ledger;
 using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
@@ -57,15 +58,15 @@ namespace SPTC_APP.View.Pages.Input
                 double penalty = Double.TryParse(tbPenalty.Text, out penalty) ? penalty : 0;
                 if (amount > 0)
                 {
+                    Ledger.Loan loan = franchise.GetLoans().FirstOrDefault();
                     PaymentDetails<Ledger.Loan> loanPayment = new PaymentDetails<Ledger.Loan>();
-                    
-                    loanPayment.WriteInto(null, false, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", amount);
-                    //loan.amount = loan.amount - amount;
-                    /*if(loan.amount <= 0)
+                    loan.amount -= amount;
+                    loanPayment.WriteInto(loan, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", loan.amount);
+                    if(loan.amount <= 0)
                     {
                         loan.isFullyPaid = true;
-                    }*/
-                    //loan.Save();
+                    }
+                    loan.Save();
                     loanPayment.Save();
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                     this.Close();

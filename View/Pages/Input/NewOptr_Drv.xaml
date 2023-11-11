@@ -253,11 +253,12 @@
             Grid.Row="10"
             Grid.Column="3"
             Grid.ColumnSpan="3"
+            Width="358.4"
             Height="30"
             Margin="15,0,0,0"
             VerticalAlignment="Top"
             Style="{StaticResource CommonTextBoxStyle}"
-            Text="" Width="358.4" />
+            Text="" />
         <StackPanel
             Grid.Row="12"
             Grid.RowSpan="1"

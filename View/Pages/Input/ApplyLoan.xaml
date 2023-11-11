@@ -152,23 +152,28 @@
                 Content="Term Length in Months:"
                 Style="{StaticResource TextFieldLabelingPreset}" />
             <TextBox
-                x:Name="tbBodyNum"
-                Grid.Row="1"
+                x:Name="tbCVORNum"
+                Grid.Row="2"
                 Grid.Column="0"
                 Width="164"
                 Height="30"
                 Margin="15,0,0,0"
                 VerticalAlignment="Top"
                 Style="{DynamicResource CommonTextBoxStyle}" />
-            <TextBox
-                x:Name="tbCVORNum"
-                Grid.Row="1"
+            <ComboBox
+                x:Name="cbLoanType"
+                Grid.Row="2"
                 Grid.Column="2"
                 Width="164"
                 Height="30"
-                Margin="15,0,0,0"
-                VerticalAlignment="Top"
-                Style="{DynamicResource CommonTextBoxStyle}" />
+                IsReadOnly="True"
+                IsTabStop="False"
+                SelectedIndex="0"
+                Style="{DynamicResource CommonComboBox}" Margin="15,0,0,0" VerticalAlignment="Top">
+                <ComboBoxItem Content="Short Term" />
+                <ComboBoxItem Content="Long Term" />
+                <ComboBoxItem Content="Emergency" />
+            </ComboBox>
             <TextBox
                 x:Name="tbAmount"
                 Grid.Row="4"
@@ -491,7 +496,7 @@
                 Foreground="{StaticResource BrushBlack}"
                 Style="{StaticResource LabelFontMedium}" />
             <Label
-                x:Name="lblBodyNo"
+                x:Name="tbBodyNum"
                 Grid.Row="0"
                 Grid.Column="4"
                 Margin="59,0,0,0"

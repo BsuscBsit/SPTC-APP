@@ -207,12 +207,13 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Label
+                Grid.Row="2"
                 Grid.Column="0"
                 Margin="0,15,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Content="Province, City/Municipality &amp; Barangay:"
-                Style="{StaticResource TextFieldLabelingPreset}" Grid.Row="2" />
+                Style="{StaticResource TextFieldLabelingPreset}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
@@ -236,18 +237,20 @@
                 x:Name="tbAddressLine1"
                 Grid.Row="3"
                 Grid.Column="0"
+                Width="352.8"
                 Height="30"
                 Margin="15,0,0,0"
                 Style="{StaticResource CommonTextBoxStyle}"
-                TextWrapping="Wrap" Width="352.8" />
+                TextWrapping="Wrap" />
             <TextBox
                 x:Name="tbAddressLine2"
                 Grid.Row="1"
                 Grid.Column="0"
+                Width="352.8"
                 Height="30"
                 Margin="15,0,0,0"
                 Style="{StaticResource CommonTextBoxStyle}"
-                TextWrapping="Wrap" Width="352.8" />
+                TextWrapping="Wrap" />
             <Border
                 Grid.Row="1"
                 Grid.RowSpan="3"
@@ -437,15 +440,16 @@
                 Content="CANCEL"
                 Style="{StaticResource CommonButtonStyle}"
                 TabIndex="4" />
-            <Button 
+            <Button
                 x:Name="btnChangePass"
                 Width="178"
-                Content="RESET PASSWORD"
                 Margin="15,0,0,0"
+                Click="btnChangePass_Click"
+                Content="RESET PASSWORD"
                 FontSize="13"
                 Style="{StaticResource RedButtonStyle}"
-                TabIndex="4" Click="btnChangePass_Click" Visibility="Collapsed"
-/>
+                TabIndex="4"
+                Visibility="Collapsed" />
             <Button
                 x:Name="btnSave"
                 Width="178"

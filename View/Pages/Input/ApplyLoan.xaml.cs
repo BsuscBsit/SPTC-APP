@@ -55,7 +55,7 @@ namespace SPTC_APP.View.Pages.Input
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
 
             //make sure the bodynumber cannot be edited
-            tbBodyNum.Text = this.franchise?.BodyNumber?.ToString() ?? "N/A";
+            tbBodyNum.Content = this.franchise?.BodyNumber?.ToString() ?? "N/A";
         }
         protected override void OnClosing(CancelEventArgs e)
         {

@@ -67,7 +67,7 @@
             Grid.Row="3"
             Grid.Column="5"
             HorizontalAlignment="Left"
-            Content="Reference No.: "
+            Content="OR/CV Number: "
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             x:Name="lblTerms"

@@ -179,7 +179,6 @@ namespace SPTC_APP.Objects
             {
                 paymentDetails = new Upsert(Table.PAYMENT_DETAILS, id);
             }
-            paymentDetails.Insert(Field.IS_DOWN_PAYMENT, isDownPayment);
             paymentDetails.Insert(Field.DIV_PAT, DivPat);
             paymentDetails.Insert(Field.DATE, date);
             paymentDetails.Insert(Field.REFERENCE_NO, referenceNo);

@@ -231,6 +231,9 @@
     <Compile Include="View\Configuration\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Configuration\StyleTester.xaml.cs">
+      <DependentUpon>StyleTester.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\ControlWindow.xaml.cs">
       <DependentUpon>ControlWindow.xaml</DependentUpon>
     </Compile>
@@ -365,6 +368,10 @@
     <Page Include="View\Configuration\SplashScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Configuration\StyleTester.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Controls\ControlWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

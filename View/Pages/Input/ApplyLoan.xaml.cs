@@ -71,13 +71,18 @@ namespace SPTC_APP.View.Pages.Input
             {
                 ControlWindow.ShowStatic("Input Incomplete", "Some required inputs are empty", Icons.ERROR);
 
-                this.Close()
+                this.Close();
             }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

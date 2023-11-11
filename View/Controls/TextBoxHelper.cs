@@ -1,26 +1,15 @@
-﻿using MySqlX.XDevAPI.Common;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interop;
-using System.Xml;
 using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Controls
 {
     public static class TextBoxHelper
     {
-        #region Fields
-
-        private static Grid grid;
-
-        #endregion
 
         #region Public Methods
 
@@ -37,9 +26,6 @@ namespace SPTC_APP.View.Controls
             bool acceptTab = false,
             string MSG = null)
         {
-            if (errorGrid != null)
-                grid = errorGrid;
-
             if (tabIndex != null)
                 tb.TabIndex = (int)tabIndex;
 
@@ -54,13 +40,13 @@ namespace SPTC_APP.View.Controls
 
             tb.Loaded += (sender, e) => Loaded_InitializeLength(sender, e, げんかい);
             tb.GotFocus += GotFocusBehavior;
-            tb.PreviewKeyDown += (sender, e) => PreviewKeyDown_LengthLimiter(sender, e, げんかい);
+            tb.PreviewKeyDown += (sender, e) => PreviewKeyDown_LengthLimiter(sender, e, げんかい, errorGrid);
 
             if (format != null)
-                tb.PreviewTextInput += (sender, e) => PreviewTextInput_Formatter(sender, e, format, MSG);
+                tb.PreviewTextInput += (sender, e) => PreviewTextInput_Formatter(sender, e, format, MSG, errorGrid);
 
             if (blockSpaces)
-                tb.TextChanged += TextChanged_SpaceBlocker;
+                tb.TextChanged += (sender, e) => TextChanged_SpaceBlocker(sender, e, errorGrid);
 
             tb.PreviewMouseDoubleClick += PreviewMouseDoubleClick_TextSelection;
         }
@@ -70,11 +56,20 @@ namespace SPTC_APP.View.Controls
             AllowFormat format,
             Grid errorGrid = null,
             int? tabIndex = null,
+            string toolTip = null,
             double? min = null,
             double? max = null)
         {
+            if (tabIndex != null)
+                tb.TabIndex = (int)tabIndex;
+
+            if (toolTip != null)
+                tb.ToolTip = toolTip;
             tb.Loaded += (sender, e) => Loaded_InitializeSize(sender, e, format, min, max);
             tb.GotFocus += GotFocusBehavior;
+            tb.TextChanged += (sender, e) => TextChanged_SpaceBlocker(sender, e, errorGrid);
+            tb.PreviewTextInput += (sender, e) => TextInput_NumFormatter(sender, e, format, min, max, errorGrid);
+
         }
 
         #endregion
@@ -95,11 +90,24 @@ namespace SPTC_APP.View.Controls
             {
                 double inp;
                 tb.Text = tb.Text.Replace(patterns[(int)format], "");
-                tb.Text = SignLimiter(tb.Text);
+
+                int decimals = tb.Text.IndexOf('.');
+                int negative = tb.Text.IndexOf('-');
+
+                if (decimals != -1)
+                    tb.Text = tb.Text.Substring(0, decimals + 1) + tb.Text.Substring(decimals + 1).Replace(".", "");
+
+                if (negative != -1)
+                    tb.Text = (negative == 0) ? tb.Text.Substring(0, negative + 1)
+                        + tb.Text.Substring(negative + 1).Replace("-", "") : tb.Text.Replace("-", "");
+
+
                 if (double.TryParse(tb.Text, out inp) && min != null)
                 {
-                    tb.Text = inp < min ? min.ToString() : inp.ToString();
+                    double? result = (format == WHOLEUNSIGNED || format == DECIMALUNSIGNED) && min < 0 ? 0 : min;
+                    tb.Text = inp < result ? result.ToString() : inp.ToString();
                 }
+
                 if (double.TryParse(tb.Text, out inp) && max != null)
                 {
                     tb.Text = inp > max ? max.ToString() : inp.ToString();
@@ -107,49 +115,89 @@ namespace SPTC_APP.View.Controls
             }
         }
 
-        private static void PreviewKeyDown_LengthLimiter(object sender, KeyEventArgs e, int? げんかい)
+        private static void PreviewKeyDown_LengthLimiter(object sender, KeyEventArgs e, int? げんかい, Grid grid)
         {
             if (げんかい != null && sender is TextBox tb && IsCharacterKey(e.Key) && tb.Text.Length > げんかい - 1 && tb.SelectionLength != tb.Text.Length)
             {
                 e.Handled = true;
-                ShowError(null, null, "Maximum length for this field has reached.");
+                ShowError(null, grid, null, "Maximum length for this field has reached.");
                 tb.Focus();
             }
 
             var source = e.OriginalSource as FrameworkElement;
-            if (e.Key == Key.Enter)
+            if (sender is TextBox t && e.Key == Key.Enter)
             {
                 e.Handled = true;
                 source.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
         }
 
-        private static void PreviewTextInput_Formatter(object sender, TextCompositionEventArgs e, AllowFormat? format, string MSG)
+        private static void PreviewTextInput_Formatter(object sender, TextCompositionEventArgs e, AllowFormat? format, string MSG, Grid grid)
         {
-            if (sender is TextBox tb)
+            if (sender is TextBox tb && Regex.IsMatch(e.Text, patterns[(int)format]) && !Regex.IsMatch(e.Text, @"\r\n"))
             {
-                if (Regex.IsMatch(e.Text, patterns[(int)format]))
-                {
-                    e.Handled = true;
-                    ShowError(format, e.Text, MSG);
-                    tb.Focus();
-                }
+                e.Handled = true;
+                ShowError(format, grid, e.Text, MSG);
+                tb.Focus();
             }
         }
-        private static void PreviewTextInput_NumFormatter(object sender, TextCompositionEventArgs e, AllowFormat? format)
+        private static void TextInput_NumFormatter(object sender, TextCompositionEventArgs e, AllowFormat format, double? min, double? max, Grid grid)
         {
-            ///~
             if (sender is TextBox tb)
             {
                 if (Regex.IsMatch(e.Text, patterns[(int)format]))
                 {
                     e.Handled = true;
                     tb.Focus();
+                }
+                if (e.Text == "." && tb.Text.Count(c => c == '.') > 0)
+                {
+                    e.Handled = true;
+                    tb.Focus();
+                }
+                if (e.Text == "-")
+                {
+                    if(tb.Text.Count(c => c == '-') > 0)
+                    {
+                        e.Handled = true;
+                        tb.Focus();
+                    }
+                    else
+                    {
+                        int caret = tb.CaretIndex;
+                        string txt = tb.Text.Insert(caret, e.Text);
+
+                        if (txt.IndexOf("-") == 0)
+                        {
+                            e.Handled = true;
+                            tb.Text = txt;
+                            tb.CaretIndex = caret + 1;
+                        }
+                        else
+                        {
+                            e.Handled = true;
+                        }
+                    }
+                }
+
+                double input = 0;
+                string teksto = tb.Text.Insert(tb.CaretIndex, e.Text);
+                double.TryParse(teksto, out input);
+
+                if(min != null && input < min)
+                {
+                    e.Handled = true;
+                    ShowError(null, grid, null, $"Value {Math.Round(input, 5)} is below the minimum limit of {Math.Round((double)min, 3)}.");
+                }
+                if (max != null && input > max)
+                {
+                    e.Handled = true;
+                    ShowError(null, grid, null, $"Value {Math.Round(input, 5)} exceeds the maximum limit of {Math.Round((double)max, 3)}.");
                 }
             }
         }
 
-        private static void TextChanged_SpaceBlocker(object sender, TextChangedEventArgs e)
+        private static void TextChanged_SpaceBlocker(object sender, TextChangedEventArgs e, Grid grid)
         {
             if (sender is TextBox tb && tb.Text.Contains(" "))
             {
@@ -191,36 +239,11 @@ namespace SPTC_APP.View.Controls
 
         #region Private Methods
 
-        private static string SignLimiter(this string str)
-        {
-            string result = "";
-            int decimals = str.IndexOf('.');
-            int negative = str.IndexOf('-');
-
-            if (decimals != -1)
-            {
-                result = str.Substring(0, decimals + 1) + str.Substring(decimals + 1).Replace(".", "");
-            }
-
-            if (negative != -1)
-            {
-                if(negative == 0)
-                {
-                    result = str.Substring(0, negative + 1) + str.Substring(negative + 1).Replace("-", "");
-                }
-                else
-                {
-                    result = str.Replace("-", "");
-                }
-            }
-            return result;
-        }
-
         private static bool IsCharacterKey(Key key)
         {
             return (key >= Key.A && key <= Key.Z) || (key >= Key.D0 && key <= Key.D9) || key == Key.Space || key == Key.Oem1 || key == Key.Oem2;
         }
-        private static void ShowError(AllowFormat? format, string input, string MSG)
+        private static void ShowError(AllowFormat? format, Grid grid, string input, string MSG)
         {
             if (grid == null)
                 return;
@@ -293,7 +316,7 @@ namespace SPTC_APP.View.Controls
 
         #region Patterns
 
-        private static string[] patterns = new string[]
+        private static readonly string[] patterns = new string[]
         {
             "[^A-Za-z]+",
             @"[^A-Za-z\-]+",
@@ -316,15 +339,15 @@ namespace SPTC_APP.View.Controls
             @"[^A-Za-z0-9.,;:!@#$%^&*()_+=\[\]{}|'""<>/\\?~-]+",
             @"[^0-9A-Za-z.,\-/@#&()""'\\]+",
 
-            "[^0-9]+",
             @"[^0-9\-]+",
+            "[^0-9]+",
 
-            "[^0-9.]+",
-            @"[^0-9\-.]+"
+            @"[^0-9\-.]+",
+            "[^0-9.]+"
 
         };
 
-        private static string[] patternDescription = new string[]
+        private static readonly string[] patternDescription = new string[]
         {
             "letters.",
             "letters and dashes.",

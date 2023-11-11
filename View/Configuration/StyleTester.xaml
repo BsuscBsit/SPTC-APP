@@ -1,0 +1,38 @@
+﻿<Window x:Class="SPTC_APP.View.Configuration.StyleTester"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SPTC_APP.View.Configuration"
+        mc:Ignorable="d"
+        Title="Style Tester" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,15,15,15">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,15,0">
+                <TextBox x:Name="letter" Width="164" Height="30" Style="{StaticResource CommonTextBoxStyle}" Text="Letter"/>
+                <TextBox x:Name="letterperiod" Width="164" Height="30" Margin="0,5,0,0" Style="{StaticResource CommonTextBoxStyle}" Text="Letterperiod"/>
+                <TextBox x:Name="letterdash" Width="164" Height="30" Margin="0,5,0,0" Style="{StaticResource CommonTextBoxStyle}" Text="Letterdash"/>
+                <TextBox x:Name="letterdashperiod" Width="164" Height="30" Margin="0,5,0,0" Style="{StaticResource CommonTextBoxStyle}" Text="Letterdashperiod"/>
+                <TextBox x:Name="number" Width="164" Height="30" Margin="0,5,0,0" Style="{StaticResource CommonTextBoxStyle}" Text="Number"/>
+                <TextBox x:Name="numberdash" Width="164" Height="30" Margin="0,5,0,0" Style="{StaticResource CommonTextBoxStyle}" Text="Numberdash"/>
+                <TextBox x:Name="numberperiod" Width="164" Height="30" Margin="0,5,0,0" Style="{StaticResource CommonTextBoxStyle}" Text="Numberperiod"/>
+                <TextBox x:Name="numberdashperiod" Width="164" Height="30" Margin="0,5,0,0" Style="{StaticResource CommonTextBoxStyle}" Text="Numberdashperiod"/>
+                <TextBox x:Name="numberexpressions" Width="164" Height="30" Margin="0,5,0,0" Style="{StaticResource CommonTextBoxStyle}" Text="Numberexpressions"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBox x:Name="alphanumeric" Width="164" Height="30" Style="{StaticResource CommonTextBoxStyle}" Text="Alphanumeric"/>
+                <TextBox x:Name="alphanumericdash" Width="164" Height="30" Style="{StaticResource CommonTextBoxStyle}" Text="Alphanumericdash" Margin="0,5,0,0"/>
+                <TextBox x:Name="alphanumericperiod" Width="164" Height="30" Style="{StaticResource CommonTextBoxStyle}" Text="Alphanumericperiod" Margin="0,5,0,0"/>
+                <TextBox x:Name="alphanumericdashperiod" Width="164" Height="30" Style="{StaticResource CommonTextBoxStyle}" Text="Alphanumericdashperiod" Margin="0,5,0,0"/>
+                <TextBox x:Name="phone" Width="164" Height="30" Style="{StaticResource CommonTextBoxStyle}" Text="Phone" Margin="0,5,0,0"/>
+                <TextBox x:Name="email" Width="164" Height="30" Style="{StaticResource CommonTextBoxStyle}" Text="Email" Margin="0,5,0,0"/>
+                <TextBox x:Name="common" Width="164" Height="30" Style="{StaticResource CommonTextBoxStyle}" Text="Common" Margin="0,5,0,0"/>
+                <TextBox x:Name="address" Width="164" Height="30" Style="{StaticResource CommonTextBoxStyle}" Text="Address" Margin="0,5,0,0"/>
+                <TextBox x:Name="wholesigned" Width="164" Height="30" Style="{StaticResource CommonTextBoxStyle}" Text="----5.1-0-5-" Margin="0,5,0,0" TextChanged="wholesigned_TextChanged"/>
+
+            </StackPanel>
+
+        </StackPanel>
+        <Grid x:Name="gridtoast" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>

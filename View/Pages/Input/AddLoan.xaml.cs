@@ -59,7 +59,7 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     PaymentDetails<Ledger.Loan> loanPayment = new PaymentDetails<Ledger.Loan>();
                     
-                    loanPayment.WriteInto(null, false, false, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", amount);
+                    loanPayment.WriteInto(null, false, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", amount);
                     //loan.amount = loan.amount - amount;
                     /*if(loan.amount <= 0)
                     {

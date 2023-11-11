@@ -25,6 +25,13 @@ namespace SPTC_APP.Objects
             public int termsofpayment { get; set; }
             public double interest { get; set; }
             public double principal { get; set; }
+            public string displayDate
+            {
+                get
+                {
+                    return date.ToString("MMMM dd, yyyy");
+                }
+            }
             public double paymentDues
             {
                 get
@@ -64,7 +71,7 @@ namespace SPTC_APP.Objects
                 this.date = dateLoaned;
                 this.amountLoaned = amountLoaned;
                 this.details = details;
-                this.processingFee = processingFee;
+                this.processingFee = processingfee;
                 this.cbu = cbu;
                 this.termsofpayment = termsofpayment;
                 this.interest = interest;

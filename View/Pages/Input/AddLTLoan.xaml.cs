@@ -61,7 +61,7 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
                     
-                    loanPayment.WriteInto(null, false, false, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "",  amount);
+                    loanPayment.WriteInto(null, false, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "",  amount);
                     //loan.amountLoaned = loan.amountLoaned - Double.Parse(tboxAmount.Text);
                     /*if (loan.amountLoaned <= 0)
                     {

@@ -210,7 +210,7 @@ namespace SPTC_APP.Database
         // PAYMENT DETAILS
         public const string LEDGER_ID = "ledger_id";
         public const string IS_DOWN_PAYMENT = "isDownPayment";
-        public const string IS_DIV_PAT = "isDivPat";
+        public const string DIV_PAT = "DivPat";
         public const string LEDGER_TYPE = "ledger_type";
         public const string REFERENCE_NO = "reference_no";
         public const string DEPOSIT = "deposit";

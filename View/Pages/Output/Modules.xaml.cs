@@ -97,7 +97,7 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("date", "DATE", minWidth: 100),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
                     new ColumnConfiguration("details", "DESCRIPTION", minWidth: 80),
                     new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100),
                     new ColumnConfiguration("processingFee", "PROCESSING FEE", minWidth: 100),

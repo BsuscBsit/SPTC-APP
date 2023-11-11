@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SPTC_APP.View.Pages.Input"
-        mc:Ignorable="d"
         Title="ApplyLoan"
         AllowsTransparency="True"
         KeyboardNavigation.TabNavigation="Continue"
@@ -155,6 +154,7 @@
             Height="30"
             Margin="15,0,0,0"
             VerticalAlignment="Top"
+            IsEnabled="False"
             Style="{DynamicResource CommonTextBoxStyle}" />
             <TextBox
             x:Name="tbCVORNum"
@@ -224,7 +224,7 @@
             Width="1"
             Margin="15,57,15,29"
             Fill="{StaticResource ResourceKey=BrushSoftGrey2}" />
-            <Button Content="Compute" Grid.Column="4" Grid.Row="7" Style="{DynamicResource CommonButtonStyle}" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120"/>
+            <Button x:Name="btnCompute" Content="Compute" Grid.Column="4" Grid.Row="7" Style="{DynamicResource CommonButtonStyle}" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" Click="btnCompute_Click"/>
             <ScrollViewer
             x:Name="Computations"
             Grid.RowSpan="7"

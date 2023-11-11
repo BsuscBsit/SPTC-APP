@@ -493,12 +493,28 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnAddLoan_Click(object sender, RoutedEventArgs e)
         {
-            (new AddLoan(MainBody.selectedFranchise)).Show();
+            if (MainBody.selectedFranchise?.GetLoans()?.Count <= 0)
+            {
+
+                (new ApplyLoan(MainBody.selectedFranchise)).Show();
+            }
+            else
+            {
+
+                (new AddLoan(MainBody.selectedFranchise)).Show();
+            }
         }
 
         private void btnAddLTLoan_Click(object sender, RoutedEventArgs e)
         {
-            (new AddLTLoan(MainBody.selectedFranchise)).Show();
+            if(MainBody.selectedFranchise?.GetLTLoans()?.Count <= 0)
+            {
+                (new ApplyLoan(MainBody.selectedFranchise)).Show();
+            } else
+            {
+
+                (new AddLTLoan(MainBody.selectedFranchise)).Show();
+            }
         }
     }
 }

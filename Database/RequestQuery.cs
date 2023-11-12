@@ -24,7 +24,7 @@ namespace SPTC_APP.Database
         public static string CLEAN_IMAGE = $"DELETE i FROM {Table.IMAGE} AS i LEFT JOIN {Table.OPERATOR} AS o ON i.{Field.ID} = o.{Field.IMAGE_ID} OR i.{Field.ID} = o.{Field.SIGN_ID} LEFT JOIN {Table.DRIVER} AS d ON i.{Field.ID} = d.{Field.IMAGE_ID} OR i.{Field.ID} = d.{Field.SIGN_ID} LEFT JOIN {Table.EMPLOYEE} AS e ON i.{Field.ID} = e.{Field.IMAGE_ID} OR i.{Field.ID} = e.{Field.SIGN_ID} WHERE (o.{Field.IMAGE_ID} IS NULL AND o.{Field.SIGN_ID} IS NULL) AND (d.{Field.IMAGE_ID} IS NULL AND d.{Field.SIGN_ID} IS NULL) AND (e.{Field.IMAGE_ID} IS NULL AND e.{Field.SIGN_ID} IS NULL);";
 
         public static string GET_DRIVERS_WITHOUT_FRANCHISE = $"SELECT d.* FROM {Table.DRIVER} AS d LEFT JOIN {Table.FRANCHISE} AS f ON f.{Field.DRIVER_ID} = d.{Field.ID} WHERE f.{Field.DRIVER_ID} IS NULL AND d.{Where.ALL_NOTDELETED}";
-        public static string GET_FRANCHISE_WITH_DRIVER = $"SELECT * FROM {Table.FRANCHISE} WHERE {Field.DRIVER_ID} <> -1 AND {Where.ALL}";
+        public static string GET_FRANCHISE_WITH_DRIVER = $"SELECT * FROM {Table.FRANCHISE} WHERE {Field.DRIVER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
 
         public static string GET_TOTAL_SHARES = $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE {Field.LEDGER_TYPE} = \"SHARECAPITAL\" AND {Where.ALL_NOTDELETED}";
 
@@ -54,7 +54,7 @@ namespace SPTC_APP.Database
 
         public static string GET_LEDGER_PAYMENT(string table, string type, int id) =>
             $"SELECT * FROM {Table.PAYMENT_DETAILS} AS pd LEFT JOIN {table} AS scl ON pd.{Field.LEDGER_ID} = scl.{Field.ID} AND pd.{Field.LEDGER_TYPE} = \"{type}\" WHERE scl.{Field.FRANCHISE_ID} = {id} AND pd.{Where.ALL_NOTDELETED} ORDER BY pd.{Field.DATE} DESC";
-        public static string GET_FRANCHISE_OF(string table, string field, int id) => $"SELECT * FROM {Table.FRANCHISE} JOIN {table} AS o ON o.{Field.ID} = {field} WHERE o.{Field.ID} = {id} AND {Where.ALL_NOTDELETED}";
+        public static string GET_FRANCHISE_OF(string table, string field, int id) => $"SELECT * FROM {Table.FRANCHISE} as f JOIN {table} AS o ON o.{Field.ID} = f.{field} WHERE o.{Field.ID} = {id} AND f.{Where.ALL_NOTDELETED}";
         public static string GET_VIOLATION_COUNT_OF(int id) => $"SELECT COUNT(*) FROM {Table.VIOLATION} WHERE {Field.NAME_ID} = {id} AND {Where.ALL_NOTDELETED}";
         public static string GET_VIOLATION_LIST_OF(int id, int name_id) => $"SELECT * FROM {Table.VIOLATION} WHERE {Field.FRANCHISE_ID} = {id} AND {Field.NAME_ID} = {name_id} AND {Where.ALL_NOTDELETED} ORDER BY {Field.SUSPENSION_START} DESC";
         public static string GET_TOTAL(string table) => $"SELECT COUNT(*) FROM {table} WHERE {Where.ALL_NOTDELETED}";

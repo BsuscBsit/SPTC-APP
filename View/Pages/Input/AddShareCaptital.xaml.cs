@@ -61,10 +61,10 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     share.WriteInto(franchise.id, DateTime.Now, 0, 0);
                 }
-                capital.WriteInto(share, 0, dpBdate.DisplayDate, tboxRefNo.Text, Double.Parse(tboxAmount.Text), 0, "", share.lastBalance + Double.Parse(tboxAmount.Text));
-                capital.Save();
+
                 share.lastBalance = share.lastBalance + Double.Parse(tboxAmount.Text);
-                share.Save();
+                capital.WriteInto(share, 0, dpBdate.DisplayDate, tboxRefNo.Text, Double.Parse(tboxAmount.Text), 0, "", share.lastBalance);
+                capital.Save();
                 (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 this.Close();
             }

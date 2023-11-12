@@ -13,7 +13,7 @@
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid Width="800" Height="577">
+    <Grid Width="800" Height="572">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
@@ -47,6 +47,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -114,13 +115,20 @@
                 Style="{StaticResource TextFieldLabelingPreset}" />
             <Label
                 Grid.Row="5"
+                Grid.Column=" 0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Content="Overdue Penalty %:"
+                Style="{StaticResource TextFieldLabelingPreset}" Margin="0,15,0,0" />
+            <Label
+                Grid.Row="6"
                 Margin="0,15,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Content="Deductions"
                 Style="{StaticResource SubTitlePreset}" />
             <Label
-                Grid.Row="6"
+                Grid.Row="7"
                 Grid.Column=" 0"
                 Margin="0,10,0,0"
                 HorizontalAlignment="Left"
@@ -128,7 +136,7 @@
                 Content="Processing Fee %:"
                 Style="{StaticResource TextFieldLabelingPreset}" />
             <Label
-                Grid.Row="7"
+                Grid.Row="8"
                 Grid.Column=" 0"
                 Margin="0,10,0,0"
                 HorizontalAlignment="Left"
@@ -136,7 +144,7 @@
                 Content="CBU %:"
                 Style="{StaticResource TextFieldLabelingPreset}" />
             <Label
-                Grid.Row="8"
+                Grid.Row="9"
                 Grid.Column="2"
                 Margin="0,10,0,0"
                 HorizontalAlignment="Left"
@@ -144,7 +152,7 @@
                 Content="Interest %:"
                 Style="{StaticResource TextFieldLabelingPreset}" />
             <Label
-                Grid.Row="8"
+                Grid.Row="9"
                 Grid.Column=" 0"
                 Margin="0,10,0,0"
                 HorizontalAlignment="Left"
@@ -169,8 +177,8 @@
                 IsReadOnly="True"
                 IsTabStop="False"
                 SelectedIndex="0"
-                Style="{DynamicResource CommonComboBox}" Margin="15,0,0,0" VerticalAlignment="Top">
-                <ComboBoxItem Content="Short Term" />
+                Style="{DynamicResource CommonComboBox}" Margin="15,0,0,0" VerticalAlignment="Top" SelectionChanged="cbLoanType_SelectionChanged">
+                <ComboBoxItem Content="Short Term"/>
                 <ComboBoxItem Content="Long Term" />
                 <ComboBoxItem Content="Emergency" />
             </ComboBox>
@@ -185,7 +193,7 @@
                 VerticalAlignment="Top"
                 Style="{DynamicResource CommonTextBoxStyle}" />
             <Rectangle
-                Grid.Row="5"
+                Grid.Row="6"
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
                 Height="1"
@@ -193,18 +201,26 @@
                 HorizontalAlignment="Stretch"
                 Fill="{StaticResource BrushSoftGrey2}" />
             <TextBox
+                x:Name="tbPenalty"
+                Grid.Row="5"
+                Grid.Column=" 2"
+                Width="164"
+                Height="30"
+                Margin="15,15,0,0"
+                VerticalAlignment="Bottom"
+                Style="{DynamicResource CommonTextBoxStyle}" />
+            <TextBox
                 x:Name="tbPF"
-                Grid.Row="6"
+                Grid.Row="7"
                 Grid.Column=" 2"
                 Width="164"
                 Height="30"
                 Margin="15,10,0,0"
                 VerticalAlignment="Bottom"
-                IsEnabled="False"
                 Style="{DynamicResource CommonTextBoxStyle}" />
             <TextBox
                 x:Name="tbCBU"
-                Grid.Row="7"
+                Grid.Row="8"
                 Grid.Column=" 2"
                 Width="164"
                 Height="30"
@@ -213,7 +229,7 @@
                 Style="{DynamicResource CommonTextBoxStyle}" />
             <TextBox
                 x:Name="tbLoanLen"
-                Grid.Row="9"
+                Grid.Row="10"
                 Grid.Column="0"
                 Width="164"
                 Height="30"
@@ -222,7 +238,7 @@
                 Style="{DynamicResource CommonTextBoxStyle}" />
             <TextBox
                 x:Name="tbInterest"
-                Grid.Row="9"
+                Grid.Row="10"
                 Grid.Column=" 2"
                 Width="164"
                 Height="30"
@@ -236,7 +252,7 @@
                 Margin="15,57,15,29"
                 Fill="{StaticResource ResourceKey=BrushSoftGrey2}" />
             <Button
-                Grid.Row="8"
+                Grid.Row="9"
                 Grid.RowSpan="2"
                 Grid.Column="4"
                 Width="120"
@@ -249,10 +265,10 @@
             <ScrollViewer
                 x:Name="Computations"
                 Grid.Row="1"
-                Grid.RowSpan="7"
+                Grid.RowSpan="8"
                 Grid.Column="4"
                 Width="348"
-                Height="300"
+                Height="312"
                 VerticalAlignment="Center">
                 <Grid Margin="15,15,15,15">
                     <Border
@@ -510,7 +526,7 @@
             Grid.Row="6"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            Margin="0,0,0,24"
+            Margin="0,0,0,15"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Orientation="Horizontal">

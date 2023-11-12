@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -126,7 +128,143 @@ namespace SPTC_APP.View.Pages.Input
                   * Overdue Penalty = Loan Amount * tbInterest // not needed to be save to the database
                   * 
                  **/
-            //SAMPLE
+            Dictionary<TextBox, bool> fillStatus = new Dictionary<TextBox, bool>
+            {
+                /*0*/{ tbAmount, tbAmount.Text.Length > 0 },
+                /*1*/{ tbPF, tbPF.Text.Length > 0 },
+                /*2*/{ tbCBU, tbCBU.Text.Length > 0 },
+                /*3*/{ tbLoanLen, tbLoanLen.Text.Length > 0 },
+                /*4*/{ tbInterest, tbInterest.Text.Length > 0 }
+            };
+            if (!fillStatus.Any(kvp => kvp.Value == false))
+            {
+                int i = 0;
+                double[] userVars = { 0.0, 0.0, 0.0, 0.0, 0.0 };
+                foreach (var kvp in fillStatus)
+                {
+                    // Assuming fields are already filtered/formatted properly.
+                    if (double.TryParse(kvp.Key.Text, out double parsedValue))
+                    {
+                        userVars[i] = parsedValue;
+                    }
+                    i++;
+                }
+                // Ratio/Percentage save to database??? idk...
+                double pfRatio = userVars[1] / 100;
+                double cbuRatio = userVars[2] / 100;
+                double interestRatio = userVars[4] / 100;
+
+                #region Key Formula
+
+                double pfFinal = 0.0;
+                double cbuFinal = 0.0;
+                double interestFinal = 0.0;
+                double deductions = 0.0;
+
+                double principal = 0.0;
+                double loanReceivable = 0.0;
+                double interestReceivable = 0.0;
+
+                double totalFinal = 0.0;
+                double penalty = 0.0;
+                if (double.TryParse(tbPenalty.Text, out double ratio))
+                {
+                    penalty = userVars[0] * ratio;
+                }
+
+                switch (cbLoanType.SelectedIndex)
+                {
+                    case 0: // Short Term
+                        pfFinal = userVars[0] * pfRatio;
+                        cbuFinal = userVars[0] * cbuRatio;
+                        interestFinal = (userVars[0] * interestRatio) * userVars[3];
+                        deductions = pfFinal + cbuFinal + interestFinal;
+
+                        principal = userVars[0] - deductions;
+
+                        // Monthly Breakdown
+                        loanReceivable = principal / userVars[3]; // as total
+                        // interest paid.
+                        break;
+
+                    case 1: // Long Term
+                        pfFinal = userVars[0] * pfRatio;
+                        cbuFinal = userVars[0] * cbuRatio;
+                        interestFinal = (userVars[0] * interestRatio) * userVars[3];
+                        deductions = pfFinal + cbuFinal;
+
+                        principal = userVars[0] - deductions;
+
+                        // Monthly Breakdown
+                        loanReceivable = userVars[0] / userVars[3];
+                        interestReceivable = userVars[0] * interestRatio;
+                        totalFinal = loanReceivable + interestReceivable;
+                        break;
+
+                    case 2: // Emergency
+                        totalFinal = userVars[0];
+                        break;
+                }
+
+                #endregion
+
+                switch(cbLoanType.SelectedIndex)
+                {
+                   case 0:
+                        lblLoanAmount.Content = userVars[0].ToString();
+                        lblPFTotal.Content = pfFinal.ToString();
+                        lblInterestTotal.Content = interestFinal.ToString();
+                        lblCBUTotal.Content = cbuFinal.ToString();
+                        lblPrincipalTotal.Content = principal.ToString();
+                        lblPrincipalTotal2.Content = principal.ToString();
+                        lblLoanRecievableTotal.Content = loanReceivable.ToString();
+                        lblInterestRecievableTotal.Content = "Already deducted.";
+                        lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
+                        lblBreakdownTotal.Content = loanReceivable.ToString();
+                        break;
+
+                    case 1:
+                        lblLoanAmount.Content = userVars[0].ToString();
+                        lblPFTotal.Content = pfFinal.ToString();
+                        lblInterestTotal.Content = "Not deducted yet.";
+                        lblInterestTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
+                        lblCBUTotal.Content = cbuFinal.ToString();
+                        lblPrincipalTotal.Content = principal.ToString();
+                        lblPrincipalTotal2.Content = principal.ToString();
+                        lblLoanRecievableTotal.Content = loanReceivable.ToString();
+                        lblInterestRecievableTotal.Content = interestReceivable.ToString();
+                        lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
+                        lblBreakdownTotal.Content = totalFinal.ToString();
+                        break;
+
+                    case 2:
+                        lblLoanAmount.Content = userVars[0].ToString();
+                        lblPFTotal.Content = pfFinal.ToString();
+                        lblInterestTotal.Content = interestFinal.ToString();
+                        lblCBUTotal.Content = cbuFinal.ToString();
+                        lblPrincipalTotal.Content = principal.ToString();
+                        lblPrincipalTotal2.Content = principal.ToString();
+                        lblLoanRecievableTotal.Content = loanReceivable.ToString();
+                        lblInterestRecievableTotal.Content = interestReceivable.ToString();
+                        lblBreakdownTotal.Content = totalFinal.ToString();
+                        break;
+
+                }
+                lblPenalty.Content = penalty.ToString();
+            }
+            else
+            {
+                foreach (var kvp in fillStatus)
+                {
+                    if (!kvp.Value)
+                    {
+                        VisualStateManager.GoToState(kvp.Key, "InputInvalidated", true);
+                    }
+                }
+                new Toast(gridToast, "Fill in all required fields before proceeding.", 2);
+            }
+
+            /*SAMPLE
             this.ornum = "0001";
             this.loantext = "NORMAL";// normal or emergency , all caps please
             this.loanAmount = 10000; // magkano yung loan
@@ -136,7 +274,7 @@ namespace SPTC_APP.View.Pages.Input
             this.loanInterest = 900; // based on calculations
             this.loanPrincipal = 10900;
 
-            this.isLoan = false; // do calculate if loan or Long term loan,
+            this.isLoan = false; // do calculate if loan or Long term loan,*/
 
             return true;
         }
@@ -151,6 +289,11 @@ namespace SPTC_APP.View.Pages.Input
             computeResult();
             //Display Result to the user
             //ex: lblTotalAmount = this.loanAmount;
+        }
+
+        private void cbLoanType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Console.WriteLine($"Index: {cbLoanType.SelectedIndex}");
         }
     }
 }

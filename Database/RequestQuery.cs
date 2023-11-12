@@ -54,11 +54,11 @@ namespace SPTC_APP.Database
 
         public static string GET_LEDGER_PAYMENT(string table, string type, int id) =>
             $"SELECT * FROM {Table.PAYMENT_DETAILS} AS pd LEFT JOIN {table} AS scl ON pd.{Field.LEDGER_ID} = scl.{Field.ID} AND pd.{Field.LEDGER_TYPE} = \"{type}\" WHERE scl.{Field.FRANCHISE_ID} = {id} AND pd.{Where.ALL_NOTDELETED} ORDER BY pd.{Field.DATE} DESC";
-        public static string GET_FRANCHISE_OF(string table, string field, int id) => $"SELECT * FROM {Table.FRANCHISE} JOIN {table} AS o ON o.{Field.ID} = {field} WHERE o.{Field.ID} = {id}";
+        public static string GET_FRANCHISE_OF(string table, string field, int id) => $"SELECT * FROM {Table.FRANCHISE} JOIN {table} AS o ON o.{Field.ID} = {field} WHERE o.{Field.ID} = {id} AND {Where.ALL_NOTDELETED}";
         public static string GET_VIOLATION_COUNT_OF(int id) => $"SELECT COUNT(*) FROM {Table.VIOLATION} WHERE {Field.NAME_ID} = {id} AND {Where.ALL_NOTDELETED}";
-        public static string GET_VIOLATION_LIST_OF(int id, int name_id) => $"SELECT * FROM {Table.VIOLATION} WHERE {Field.FRANCHISE_ID} = {id} AND {Field.NAME_ID} = {name_id} AND {Field.ISDELETED} = 0";
+        public static string GET_VIOLATION_LIST_OF(int id, int name_id) => $"SELECT * FROM {Table.VIOLATION} WHERE {Field.FRANCHISE_ID} = {id} AND {Field.NAME_ID} = {name_id} AND {Where.ALL_NOTDELETED} ORDER BY {Field.SUSPENSION_START} DESC";
         public static string GET_TOTAL(string table) => $"SELECT COUNT(*) FROM {table} WHERE {Where.ALL_NOTDELETED}";
-        public static string GET_ALL_FRANCHISE_WITH_BODYNUM(string bodyNumber) => $"SELECT * FROM {Table.FRANCHISE} WHERE {Field.BODY_NUMBER} = {bodyNumber} AND {Where.ALL_NOTDELETED}";
+        public static string GET_ALL_FRANCHISE_WITH_BODYNUM(string bodyNumber) => $"SELECT * FROM {Table.FRANCHISE} WHERE {Field.BODY_NUMBER} = {bodyNumber} AND {Where.ALL_NOTDELETED} ORDER BY {Field.BUYING_DATE} DESC";
         public static string GET_ACCESSES(int id) => $"SELECT * FROM {Table.POSITION} WHERE {Field.ID} = {id}";
         public static string GET_PASS(int id) => $"SELECT {Field.PASSWORD} FROM {Table.EMPLOYEE} WHERE {Field.ID} = {id}";
 

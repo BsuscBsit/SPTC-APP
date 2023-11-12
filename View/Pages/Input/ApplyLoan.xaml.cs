@@ -68,14 +68,14 @@ namespace SPTC_APP.View.Pages.Input
             
             if(computeResult())
             { //If all inputs are filled ,
-              
+                double penalty = this.loanProcessingFee + this.loanCbu + this.loanInterest;
                 if (isLoan) // if LOAN
                 {
                     Ledger.Loan loan = new Ledger.Loan();
                     loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
                     loan.Save();
                     PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
-                    payment.WriteInto(loan, 0, DateTime.Now, ornum, -loanAmount, 0, loantext, loanPrincipal);
+                    payment.WriteInto(loan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanPrincipal);
                     payment.isApply = true;
                     payment.ledgername = Ledger.APPLY_LOAN;
                     payment.Save();
@@ -88,7 +88,7 @@ namespace SPTC_APP.View.Pages.Input
                     ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
                     ltloan.Save();
                     PaymentDetails<Ledger.LongTermLoan> payment = new PaymentDetails<Ledger.LongTermLoan>();
-                    payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, 0, this.loantext, this.loanPrincipal);
+                    payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, this.loanPrincipal);
                     payment.isApply = true;
                     payment.ledgername = Ledger.APPLY_LT_LOAN;
                     payment.Save();
@@ -120,7 +120,7 @@ namespace SPTC_APP.View.Pages.Input
                   * Principal = Loan Amount - (Processing Fee + CBU + Interest) // this is ?, outbounds, not needed to be saved
                   * 
                   * Breakdown in Monthly
-                  * Loan Receivable = Principal // tbLoanLen
+                  * Loan Receivable = Principal // tbLoanLen 
                   * Interest Receivable = Loan Amount * tbInterest
                   * Total = Loan Receivable + Interest Recievable //this is the actual principal to be saved to database
                   * Overdue Penalty = Loan Amount * tbInterest // not needed to be save to the database

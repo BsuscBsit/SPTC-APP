@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
 {
@@ -51,13 +52,15 @@ namespace SPTC_APP.View.Pages.Input
              **/
 
             InitializeComponent();
-
+            cbLoanType.SelectedIndex = 0;
+            initTextBoxes();
             this.franchise = fran;
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
 
             //make sure the bodynumber cannot be edited
             tbBodyNum.Content = this.franchise?.BodyNumber?.ToString() ?? "N/A";
+            DraggingHelper.DragWindow(topBar);
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -74,7 +77,7 @@ namespace SPTC_APP.View.Pages.Input
                 if (isLoan) // if LOAN
                 {
                     Ledger.Loan loan = new Ledger.Loan();
-                    loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount,this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
+                    //loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount,this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
                     loan.Save();
                     PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
                     payment.WriteInto(loan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanPrincipal);
@@ -87,7 +90,7 @@ namespace SPTC_APP.View.Pages.Input
                     this.loantext = "LONGTERMLOAN";
 
                     Ledger.LongTermLoan ltloan = new Ledger.LongTermLoan();
-                    ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount,this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
+                    //ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount,this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
                     ltloan.Save();
                     PaymentDetails<Ledger.LongTermLoan> payment = new PaymentDetails<Ledger.LongTermLoan>();
                     payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, this.loanPrincipal);
@@ -138,119 +141,133 @@ namespace SPTC_APP.View.Pages.Input
             };
             if (!fillStatus.Any(kvp => kvp.Value == false))
             {
-                int i = 0;
-                double[] userVars = { 0.0, 0.0, 0.0, 0.0, 0.0 };
-                foreach (var kvp in fillStatus)
+                if (ValidSize())
                 {
-                    // Assuming fields are already filtered/formatted properly.
-                    if (double.TryParse(kvp.Key.Text, out double parsedValue))
+                    int i = 0;
+                    double[] userVars = { 0.0, 0.0, 0.0, 0.0, 0.0 };
+                    foreach (var kvp in fillStatus)
                     {
-                        userVars[i] = parsedValue;
+                        // Assuming fields are already filtered/formatted properly.
+                        if (double.TryParse(kvp.Key.Text, out double parsedValue))
+                        {
+                            userVars[i] = parsedValue;
+                        }
+                        i++;
                     }
-                    i++;
+                    // Ratio/Percentage save to database??? idk...
+                    double pfRatio = userVars[1] / 100;
+                    double cbuRatio = userVars[2] / 100;
+                    double interestRatio = userVars[4] / 100;
+
+                    #region Key Formula
+
+                    double pfFinal = 0.0;
+                    double cbuFinal = 0.0;
+                    double interestFinal = 0.0;
+                    double deductions = 0.0;
+
+                    double principal = 0.0;
+                    double loanReceivable = 0.0;
+                    double interestReceivable = 0.0;
+
+                    double totalFinal = 0.0;
+                    double penalty = 0.0;
+                    if (double.TryParse(tbPenalty.Text, out double ratio))
+                    {
+                        penalty = userVars[0] * (ratio / 100);
+                    }
+
+                    switch (cbLoanType.SelectedIndex)
+                    {
+                        case 0: // Short Term
+                            pfFinal = userVars[0] * pfRatio;
+                            cbuFinal = userVars[0] * cbuRatio;
+                            interestFinal = (userVars[0] * interestRatio) * userVars[3];
+                            deductions = pfFinal + cbuFinal + interestFinal;
+
+                            principal = userVars[0] - deductions;
+
+                            // Monthly Breakdown
+                            loanReceivable = principal / userVars[3]; // as total
+                                                                      // interest paid.
+                            break;
+
+                        case 1: // Long Term
+                            pfFinal = userVars[0] * pfRatio;
+                            cbuFinal = userVars[0] * cbuRatio;
+                            interestFinal = (userVars[0] * interestRatio) * userVars[3];
+                            deductions = pfFinal + cbuFinal;
+
+                            principal = userVars[0] - deductions;
+
+                            // Monthly Breakdown
+                            loanReceivable = userVars[0] / userVars[3];
+                            interestReceivable = userVars[0] * interestRatio;
+                            totalFinal = loanReceivable + interestReceivable;
+                            break;
+
+                        case 2: // Emergency
+                            pfFinal = userVars[0] * pfRatio;
+                            cbuFinal = userVars[0] * cbuRatio;
+                            deductions = pfFinal + cbuFinal;
+
+                            principal = userVars[0];
+                            loanReceivable = userVars[0] / userVars[3];
+                            interestReceivable = userVars[0] * interestRatio;
+                            totalFinal = loanReceivable + interestReceivable;
+                            break;
+                    }
+
+                    #endregion
+
+                    double lr = Math.Round(loanReceivable, 2);
+                    double tf = Math.Round(totalFinal, 2);
+                    switch (cbLoanType.SelectedIndex)
+                    {
+                        case 0:
+                            lblLoanAmount.Content = userVars[0].ToString();
+                            lblPFTotal.Content = pfFinal.ToString();
+                            lblInterestTotal.Content = interestFinal.ToString();
+                            lblCBUTotal.Content = cbuFinal.ToString();
+                            lblPrincipalTotal.Content = principal.ToString();
+                            lblPrincipalTotal2.Content = principal.ToString();
+                            lblLoanRecievableTotal.Content = lr.ToString();
+                            lblInterestRecievableTotal.Content = "Already deducted.";
+                            lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
+                            lblBreakdownTotal.Content = lr.ToString();
+                            break;
+
+                        case 1:
+                            lblLoanAmount.Content = userVars[0].ToString();
+                            lblPFTotal.Content = pfFinal.ToString();
+                            lblInterestTotal.Content = "Not deducted yet.";
+                            lblInterestTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
+                            lblCBUTotal.Content = cbuFinal.ToString();
+                            lblPrincipalTotal.Content = principal.ToString();
+                            lblPrincipalTotal2.Content = principal.ToString();
+                            lblLoanRecievableTotal.Content = lr.ToString();
+                            lblInterestRecievableTotal.Content = interestReceivable.ToString();
+                            lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
+                            lblBreakdownTotal.Content = tf.ToString();
+                            break;
+
+                        case 2:
+                            lblLoanAmount.Content = userVars[0].ToString();
+                            lblPFTotal.Content = pfFinal.ToString() + " (To pay)";
+                            lblInterestTotal.Content = "Not deducted yet.";
+                            lblInterestTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
+                            lblCBUTotal.Content = cbuFinal.ToString() + " (To pay)";
+                            lblPrincipalTotal.Content = principal.ToString();
+                            lblPrincipalTotal2.Content = principal.ToString();
+                            lblLoanRecievableTotal.Content = lr.ToString();
+                            lblInterestRecievableTotal.Content = interestReceivable.ToString();
+                            lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
+                            lblBreakdownTotal.Content = tf.ToString();
+                            break;
+
+                    }
+                    lblPenalty.Content = penalty.ToString();
                 }
-                // Ratio/Percentage save to database??? idk...
-                double pfRatio = userVars[1] / 100;
-                double cbuRatio = userVars[2] / 100;
-                double interestRatio = userVars[4] / 100;
-
-                #region Key Formula
-
-                double pfFinal = 0.0;
-                double cbuFinal = 0.0;
-                double interestFinal = 0.0;
-                double deductions = 0.0;
-
-                double principal = 0.0;
-                double loanReceivable = 0.0;
-                double interestReceivable = 0.0;
-
-                double totalFinal = 0.0;
-                double penalty = 0.0;
-                if (double.TryParse(tbPenalty.Text, out double ratio))
-                {
-                    penalty = userVars[0] * (ratio / 100);
-                }
-
-                switch (cbLoanType.SelectedIndex)
-                {
-                    case 0: // Short Term
-                        pfFinal = userVars[0] * pfRatio;
-                        cbuFinal = userVars[0] * cbuRatio;
-                        interestFinal = (userVars[0] * interestRatio) * userVars[3];
-                        deductions = pfFinal + cbuFinal + interestFinal;
-
-                        principal = userVars[0] - deductions;
-
-                        // Monthly Breakdown
-                        loanReceivable = principal / userVars[3]; // as total
-                        // interest paid.
-                        break;
-
-                    case 1: // Long Term
-                        pfFinal = userVars[0] * pfRatio;
-                        cbuFinal = userVars[0] * cbuRatio;
-                        interestFinal = (userVars[0] * interestRatio) * userVars[3];
-                        deductions = pfFinal + cbuFinal;
-
-                        principal = userVars[0] - deductions;
-
-                        // Monthly Breakdown
-                        loanReceivable = userVars[0] / userVars[3];
-                        interestReceivable = userVars[0] * interestRatio;
-                        totalFinal = loanReceivable + interestReceivable;
-                        break;
-
-                    case 2: // Emergency
-                        totalFinal = userVars[0];
-                        break;
-                }
-
-                #endregion
-
-                switch(cbLoanType.SelectedIndex)
-                {
-                   case 0:
-                        lblLoanAmount.Content = userVars[0].ToString();
-                        lblPFTotal.Content = pfFinal.ToString();
-                        lblInterestTotal.Content = interestFinal.ToString();
-                        lblCBUTotal.Content = cbuFinal.ToString();
-                        lblPrincipalTotal.Content = principal.ToString();
-                        lblPrincipalTotal2.Content = principal.ToString();
-                        lblLoanRecievableTotal.Content = loanReceivable.ToString();
-                        lblInterestRecievableTotal.Content = "Already deducted.";
-                        lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
-                        lblBreakdownTotal.Content = loanReceivable.ToString();
-                        break;
-
-                    case 1:
-                        lblLoanAmount.Content = userVars[0].ToString();
-                        lblPFTotal.Content = pfFinal.ToString();
-                        lblInterestTotal.Content = "Not deducted yet.";
-                        lblInterestTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
-                        lblCBUTotal.Content = cbuFinal.ToString();
-                        lblPrincipalTotal.Content = principal.ToString();
-                        lblPrincipalTotal2.Content = principal.ToString();
-                        lblLoanRecievableTotal.Content = loanReceivable.ToString();
-                        lblInterestRecievableTotal.Content = interestReceivable.ToString();
-                        lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
-                        lblBreakdownTotal.Content = totalFinal.ToString();
-                        break;
-
-                    case 2:
-                        lblLoanAmount.Content = userVars[0].ToString();
-                        lblPFTotal.Content = pfFinal.ToString();
-                        lblInterestTotal.Content = interestFinal.ToString();
-                        lblCBUTotal.Content = cbuFinal.ToString();
-                        lblPrincipalTotal.Content = principal.ToString();
-                        lblPrincipalTotal2.Content = principal.ToString();
-                        lblLoanRecievableTotal.Content = loanReceivable.ToString();
-                        lblInterestRecievableTotal.Content = interestReceivable.ToString();
-                        lblBreakdownTotal.Content = totalFinal.ToString();
-                        break;
-
-                }
-                lblPenalty.Content = penalty.ToString();
             }
             else
             {
@@ -293,7 +310,100 @@ namespace SPTC_APP.View.Pages.Input
 
         private void cbLoanType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine($"Index: {cbLoanType.SelectedIndex}");
+            presetFields(cbLoanType.SelectedIndex, false);
+        }
+
+
+        double? minLoan, maxLoan, minMont, maxMont;
+        private void initTextBoxes()
+        {
+            tbCVORNum.DefaultTextBoxBehavior(CVOR, true, gridToast, "Cash Voucher and/or Official Reciept Number/s.", 0, true, 50);
+            tbPenalty.NumericTextBoxBehavior(DECIMALUNSIGNED, gridToast, 2, "Penalty amount for overdue.", 0, 100);
+            tbPF.NumericTextBoxBehavior(DECIMALUNSIGNED, gridToast, 3, "Processing fees.", 0, 100);
+            tbCBU.NumericTextBoxBehavior(DECIMALUNSIGNED, gridToast, 4, "CBU", 0, 100);
+            tbInterest.NumericTextBoxBehavior(DECIMALUNSIGNED, gridToast, 6, "Interest rate.", 0, 100);
+
+            tbAmount.NumericTextBoxBehavior(DECIMALUNSIGNED, gridToast, 1, "Loan Amount.");
+            tbLoanLen.NumericTextBoxBehavior(WHOLEUNSIGNED, gridToast, 5, "Term Length.");
+            presetFields(0);
+        }
+
+        private void presetFields(int preset, bool isReset = true)
+        {
+            if(isReset)
+            {
+                tbAmount.Text = "0";
+                tbPenalty.Text = "2";
+                tbPF.Text = "2";
+                tbCBU.Text = "2";
+                tbInterest.Text = "1.5";
+
+                switch (preset)
+                {
+                    case 0:
+                        tbLoanLen.Text = "6";
+                        break;
+                    case 1:
+                        tbLoanLen.Text = "12";
+                        break;
+                    case 2:
+                        tbLoanLen.Text = "3";
+                        break;
+                }
+            }
+            else
+            {
+                switch (preset)
+                {
+                    case 0:
+                        minLoan = 0;
+                        maxLoan = 30000;
+                        minMont = 6;
+                        maxMont = null;
+                        break;
+                    case 1:
+                        minLoan = 31000;
+                        maxLoan = null;
+                        minMont = 12;
+                        maxMont = null;
+                        break;
+                    case 2:
+                        minLoan = 0;
+                        maxLoan = 3000;
+                        minMont = null;
+                        maxMont = 3;
+                        break;
+                }
+            }
+        }
+        private bool ValidSize()
+        {
+            if(double.TryParse(tbAmount.Text, out double minlon) && minlon < minLoan)
+            {
+                VisualStateManager.GoToState(tbAmount, "InputInvalidated", true);
+                new Toast(gridToast, $"Value {Math.Round(minlon, 5)} is below the minimum limit of {Math.Round((double)minLoan, 3)}.");
+                return false;
+            }
+            if (double.TryParse(tbAmount.Text, out double maxlon) && maxlon > maxLoan)
+            {
+                VisualStateManager.GoToState(tbAmount, "InputInvalidated", true);
+                new Toast(gridToast, $"Value {Math.Round(maxlon, 5)} exceeds the maximum limit of {Math.Round((double)maxLoan, 3)}.");
+                return false;
+            }
+            if (double.TryParse(tbLoanLen.Text, out double minmon) && minmon < minMont)
+            {
+                VisualStateManager.GoToState(tbLoanLen, "InputInvalidated", true);
+                new Toast(gridToast, $"Value {Math.Round(minmon, 5)} is below the minimum limit of {Math.Round((double)minMont, 3)}.");
+                return false;
+            }
+            if (double.TryParse(tbLoanLen.Text, out double maxmon) && maxmon > maxMont)
+            {
+                VisualStateManager.GoToState(tbLoanLen, "InputInvalidated", true);
+                new Toast(gridToast, $"Value {Math.Round(maxmon, 5)} exceeds the maximum limit of {Math.Round((double)maxMont, 3)}.");
+                return false;
+            }
+
+            return true;
         }
     }
 }

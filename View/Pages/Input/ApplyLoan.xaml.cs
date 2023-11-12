@@ -169,7 +169,7 @@ namespace SPTC_APP.View.Pages.Input
                 double penalty = 0.0;
                 if (double.TryParse(tbPenalty.Text, out double ratio))
                 {
-                    penalty = userVars[0] * ratio;
+                    penalty = userVars[0] * (ratio / 100);
                 }
 
                 switch (cbLoanType.SelectedIndex)

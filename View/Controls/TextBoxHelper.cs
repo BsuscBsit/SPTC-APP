@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static SPTC_APP.View.Controls.TextBoxHelper.EventSubscription;
 using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Controls
@@ -60,16 +61,16 @@ namespace SPTC_APP.View.Controls
             double? min = null,
             double? max = null)
         {
-            if (tabIndex != null)
+            if (tabIndex != null && tb != null)
                 tb.TabIndex = (int)tabIndex;
 
-            if (toolTip != null)
+            if (toolTip != null && tb != null)
                 tb.ToolTip = toolTip;
             tb.Loaded += (sender, e) => Loaded_InitializeSize(sender, e, format, min, max);
+            tb.PreviewMouseDoubleClick += PreviewMouseDoubleClick_TextSelection;
             tb.GotFocus += GotFocusBehavior;
-            tb.TextChanged += (sender, e) => TextChanged_SpaceBlocker(sender, e, errorGrid);
+            tb.TextChanged += (sender, e) => TextChanged_SpaceBlocker(sender, e, null);
             tb.PreviewTextInput += (sender, e) => TextInput_NumFormatter(sender, e, format, min, max, errorGrid);
-
         }
 
         #endregion
@@ -84,7 +85,7 @@ namespace SPTC_APP.View.Controls
             }
         }
 
-        private static void Loaded_InitializeSize(object sender, RoutedEventArgs e, AllowFormat format, double? min, double? max)
+        private static void Loaded_InitializeSize(object sender, RoutedEventArgs e, AllowFormat? format, double? min, double? max)
         {
             if(sender is TextBox tb)
             {
@@ -141,7 +142,7 @@ namespace SPTC_APP.View.Controls
                 tb.Focus();
             }
         }
-        private static void TextInput_NumFormatter(object sender, TextCompositionEventArgs e, AllowFormat format, double? min, double? max, Grid grid)
+        private static void TextInput_NumFormatter(object sender, TextCompositionEventArgs e, AllowFormat? format, double? min, double? max, Grid grid)
         {
             if (sender is TextBox tb)
             {
@@ -184,12 +185,12 @@ namespace SPTC_APP.View.Controls
                 string teksto = tb.Text.Insert(tb.CaretIndex, e.Text);
                 double.TryParse(teksto, out input);
 
-                if(min != null && input < min)
+                if(min != null && input < min && tb.SelectedText.Length != tb.Text.Length)
                 {
                     e.Handled = true;
                     ShowError(null, grid, null, $"Value {Math.Round(input, 5)} is below the minimum limit of {Math.Round((double)min, 3)}.");
                 }
-                if (max != null && input > max)
+                if (max != null && input > max && tb.SelectedText.Length != tb.Text.Length)
                 {
                     e.Handled = true;
                     ShowError(null, grid, null, $"Value {Math.Round(input, 5)} exceeds the maximum limit of {Math.Round((double)max, 3)}.");
@@ -273,6 +274,10 @@ namespace SPTC_APP.View.Controls
                     msg = $"' {post} ' is not a valid input for an address.";
                     break;
 
+                case CVOR:
+                    msg = $"' {post} ' is not a valid input for this field.";
+                    break;
+
                 default:
                     msg = pre + patternDescription[(int)format] + post;
                     break;
@@ -309,7 +314,15 @@ namespace SPTC_APP.View.Controls
             WHOLEUNSIGNED,
 
             DECIMALSIGNED,
-            DECIMALUNSIGNED
+            DECIMALUNSIGNED,
+
+            CVOR
+        }
+
+        public enum EventSubscription
+        {
+            DefaultBehavior,
+            NumberFormat
         }
 
         #endregion
@@ -343,7 +356,9 @@ namespace SPTC_APP.View.Controls
             "[^0-9]+",
 
             @"[^0-9\-.]+",
-            "[^0-9.]+"
+            "[^0-9.]+",
+
+            @"[^0-9\-/]+"
 
         };
 

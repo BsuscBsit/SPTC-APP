@@ -8,7 +8,6 @@
     x:Name="window1"
     Title="Sapang Palay Tricycle Cooperative"
     Width="1000"
-    Height="600"
     MinWidth="1000"
     MinHeight="600"
     AllowsTransparency="True"
@@ -16,7 +15,7 @@
     MouseDown="Window_MouseDown"
     Style="{StaticResource Minified}"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Height="650">
     <Window.Resources>
         <ResourceDictionary>
             <Style x:Key="PaneExpander" TargetType="ToggleButton">
@@ -186,7 +185,7 @@
 
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid Height="650">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="64" />

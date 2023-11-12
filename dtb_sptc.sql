@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2023 at 05:12 AM
+-- Generation Time: Nov 12, 2023 at 07:49 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -155,6 +155,7 @@ CREATE TABLE `tbl_loan_ledger` (
   `franchise_id` int(11) NOT NULL DEFAULT -1,
   `date` date DEFAULT NULL,
   `amount_loaned` double NOT NULL DEFAULT 0,
+  `reference_no` varchar(20) NOT NULL,
   `details` varchar(100) DEFAULT NULL,
   `processing_fee` double NOT NULL DEFAULT 0,
   `cbu` double NOT NULL DEFAULT 0,
@@ -177,6 +178,7 @@ CREATE TABLE `tbl_long_term_loan_ledger` (
   `franchise_id` int(11) NOT NULL DEFAULT -1,
   `date` date DEFAULT NULL,
   `amount_loaned` double NOT NULL DEFAULT 0,
+  `reference_no` varchar(20) NOT NULL,
   `details` varchar(100) DEFAULT '',
   `processing_fee` double NOT NULL DEFAULT 0,
   `cbu` double NOT NULL DEFAULT 0,
@@ -241,7 +243,7 @@ CREATE TABLE `tbl_payment_details` (
   `div_pat` double NOT NULL DEFAULT 0,
   `ledger_type` varchar(30) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `reference_no` int(11) NOT NULL DEFAULT -1,
+  `reference_no` varchar(20) NOT NULL,
   `deposit` double NOT NULL DEFAULT 0,
   `penalties` double NOT NULL DEFAULT 0,
   `remarks` varchar(100) DEFAULT NULL,

@@ -100,10 +100,11 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
                     new ColumnConfiguration("details", "DESCRIPTION", minWidth: 80),
                     new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100),
+                    new ColumnConfiguration("cv_or", "CV/OR", minWidth: 100),
                     new ColumnConfiguration("processingFee", "PROCESSING FEE", minWidth: 100),
                     new ColumnConfiguration("cbu", "CBU", minWidth: 100),
                     new ColumnConfiguration("termsofpayment", "MONTHS", minWidth: 100),
-                    new ColumnConfiguration("interest", "INTEREST/MONTHLY", minWidth: 100),
+                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100),
                     new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 100),
                 };
                 DataGridHelper<object> dataGridHelper = new DataGridHelper<object>(dgLedger, columnConfigurations);

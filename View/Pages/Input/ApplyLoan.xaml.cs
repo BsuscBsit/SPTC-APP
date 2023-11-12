@@ -74,7 +74,7 @@ namespace SPTC_APP.View.Pages.Input
                 if (isLoan) // if LOAN
                 {
                     Ledger.Loan loan = new Ledger.Loan();
-                    loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
+                    loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount,this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
                     loan.Save();
                     PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
                     payment.WriteInto(loan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanPrincipal);
@@ -87,7 +87,7 @@ namespace SPTC_APP.View.Pages.Input
                     this.loantext = "LONGTERMLOAN";
 
                     Ledger.LongTermLoan ltloan = new Ledger.LongTermLoan();
-                    ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
+                    ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount,this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
                     ltloan.Save();
                     PaymentDetails<Ledger.LongTermLoan> payment = new PaymentDetails<Ledger.LongTermLoan>();
                     payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, this.loanPrincipal);

@@ -18,6 +18,7 @@ namespace SPTC_APP.Objects
             public int id { get; private set; }
             public int franchiseId { get; set; }
             public DateTime date { get; set; }
+            public string cv_or { get; set; }
             public double amountLoaned { get; set; }
             public string details { get; set; }
             public double processingFee { get; set; }
@@ -56,6 +57,7 @@ namespace SPTC_APP.Objects
                 this.franchiseId = Retrieve.GetValueOrDefault<int>(reader, Field.FRANCHISE_ID);
                 this.date = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE);
                 this.amountLoaned = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT_LOANED);
+                this.cv_or = Retrieve.GetValueOrDefault<string>(reader, Field.REFERENCE_NO);
                 this.details = Retrieve.GetValueOrDefault<string>(reader, Field.DETAILS);
                 this.processingFee = Retrieve.GetValueOrDefault<double>(reader, Field.PROCESSING_FEE);
                 this.cbu = Retrieve.GetValueOrDefault<double>(reader, Field.CBU);
@@ -67,11 +69,14 @@ namespace SPTC_APP.Objects
             public bool WriteInto(
                     int franchiseId,
                     DateTime dateLoaned,
-                    double amountLoaned, string details, double processingfee, double cbu, int termsofpayment, double interest, double principal)
+                    double amountLoaned, 
+                    string cv_or,
+                    string details, double processingfee, double cbu, int termsofpayment, double interest, double principal)
             {
                 this.franchiseId = franchiseId;
                 this.date = dateLoaned;
                 this.amountLoaned = amountLoaned;
+                this.cv_or = cv_or;
                 this.details = details;
                 this.processingFee = processingfee;
                 this.cbu = cbu;
@@ -92,6 +97,7 @@ namespace SPTC_APP.Objects
                 loan.Insert(Field.FRANCHISE_ID, franchiseId);
                 loan.Insert(Field.DATE, date);
                 loan.Insert(Field.AMOUNT_LOANED, amountLoaned);
+                loan.Insert(Field.REFERENCE_NO, cv_or);
                 loan.Insert(Field.DETAILS, details);
                 loan.Insert(Field.PROCESSING_FEE, processingFee);
                 loan.Insert(Field.CBU, cbu);
@@ -190,6 +196,7 @@ namespace SPTC_APP.Objects
             public int franchiseId { get; set; }
             public DateTime date { get; set; }
             public double amountLoaned { get; set; }
+            public string cv_or { get; set; }
             public string details { get; set; }
             public double processingFee { get; set; }
             public double cbu { get; set; }
@@ -228,6 +235,7 @@ namespace SPTC_APP.Objects
                 this.franchiseId = Retrieve.GetValueOrDefault<int>(reader, Field.FRANCHISE_ID);
                 this.date = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE);
                 this.amountLoaned = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT_LOANED);
+                this.cv_or = Retrieve.GetValueOrDefault<string>(reader, Field.REFERENCE_NO);
                 this.details = Retrieve.GetValueOrDefault<string>(reader, Field.DETAILS);
                 this.processingFee = Retrieve.GetValueOrDefault<double>(reader, Field.PROCESSING_FEE);
                 this.cbu = Retrieve.GetValueOrDefault<double>(reader, Field.CBU);
@@ -239,11 +247,13 @@ namespace SPTC_APP.Objects
             public bool WriteInto(
                     int franchiseId,
                     DateTime dateLoaned,
-                    double amountLoaned, string details, double processingfee, double cbu, int termsofpayment, double interest, double principal)
+                    double amountLoaned,
+                    string cv_or, string details, double processingfee, double cbu, int termsofpayment, double interest, double principal)
             {
                 this.franchiseId = franchiseId;
                 this.date = dateLoaned;
                 this.amountLoaned = amountLoaned;
+                this.cv_or = cv_or;
                 this.details = details;
                 this.processingFee = processingfee;
                 this.cbu = cbu;

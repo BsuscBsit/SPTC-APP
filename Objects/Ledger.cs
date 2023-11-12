@@ -274,6 +274,7 @@ namespace SPTC_APP.Objects
                 loan.Insert(Field.FRANCHISE_ID, franchiseId);
                 loan.Insert(Field.DATE, date);
                 loan.Insert(Field.AMOUNT_LOANED, amountLoaned);
+                loan.Insert(Field.REFERENCE_NO, cv_or);
                 loan.Insert(Field.DETAILS, details);
                 loan.Insert(Field.PROCESSING_FEE, processingFee);
                 loan.Insert(Field.CBU, cbu);

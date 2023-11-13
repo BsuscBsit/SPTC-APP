@@ -38,6 +38,7 @@ namespace SPTC_APP.View.Pages.Input
         private int loanMonthsCount; // for both longterma anbd short term
         private double loanInterest; // based on calculations
         private double loanPrincipal;
+        private double interestRate;
         //paymentDues or Monthly Receivable is automatically clculated in backend, loanPrincipal / loanMonthCount
 
         private bool isLoan;
@@ -73,7 +74,7 @@ namespace SPTC_APP.View.Pages.Input
             
             if(computeResult())
             { //If all inputs are filled ,
-                double penalty = this.loanProcessingFee + this.loanCbu + this.loanInterest;
+                double penalty = this.loanAmount * this.interestRate;
                 if (isLoan) // if LOAN
                 {
                     Ledger.Loan loan = new Ledger.Loan();
@@ -134,6 +135,7 @@ namespace SPTC_APP.View.Pages.Input
                     double pfRatio = userVars[1] / 100;
                     double cbuRatio = userVars[2] / 100;
                     double interestRatio = userVars[4] / 100;
+                    this.interestRate = interestRatio;
 
                     #region Key Formula
 

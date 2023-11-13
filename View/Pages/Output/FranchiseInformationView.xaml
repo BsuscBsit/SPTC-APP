@@ -12,27 +12,32 @@
             <RowDefinition Height="64" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border VerticalAlignment="Center" Height="40" Width="271" HorizontalAlignment="Left" Background="{StaticResource BrushSoftGrey1}">
-            <Button
-            x:Name="btnBack"
-            Width="100"
-            Height="30"
+        <Border
+            Width="271"
+            Height="40"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Click="btnBack_Click"
-            Style="{StaticResource CommonButtonStyle}">
+            Background="{StaticResource BrushSoftGrey1}">
+            <Button
+                x:Name="btnBack"
+                Width="100"
+                Height="30"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Click="btnBack_Click"
+                Style="{StaticResource CommonButtonStyle}">
                 <Grid Width="100">
                     <Path
-                    Margin="15,0,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Data="M7,14 L0,7 7,0"
-                    Stroke="{StaticResource BrushBlack}"
-                    StrokeThickness="1" />
+                        Margin="15,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Data="M7,14 L0,7 7,0"
+                        Stroke="{StaticResource BrushBlack}"
+                        StrokeThickness="1" />
                     <Label
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Content="Back" />
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="Back" />
                 </Grid>
             </Button>
 
@@ -83,105 +88,142 @@
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
+                        VerticalAlignment="Center"
                         Content="Body No."
-                        Foreground="{StaticResource BrushGrey}" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
+                        Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblbodyNumber"
                         Grid.Row="0"
                         Grid.Column="1"
-                        Content="N/A" VerticalAlignment="Center" Style="{StaticResource LabelFontLarge}" FontWeight="Bold" FontSize="18" />
+                        VerticalAlignment="Center"
+                        Content="N/A"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Style="{StaticResource LabelFontLarge}" />
                     <Label
                         Grid.Row="1"
+                        VerticalAlignment="Center"
                         Content="Plate No:"
-                        Foreground="{StaticResource BrushGrey}" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
+                        Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblPlateNo"
                         Grid.Row="1"
                         Grid.Column="1"
+                        VerticalAlignment="Center"
                         Content="N/A"
-                        FontStretch="SemiExpanded" VerticalAlignment="Center" Style="{StaticResource LabelFontMedium}" />
+                        FontStretch="SemiExpanded"
+                        Style="{StaticResource LabelFontMedium}" />
                     <Label
                         Grid.Row="2"
+                        VerticalAlignment="Center"
                         Content="MTOP No:"
-                        Foreground="{StaticResource BrushGrey}" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
+                        Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblMTOPNo"
                         Grid.Row="2"
                         Grid.Column="1"
+                        VerticalAlignment="Center"
                         Content="N/A"
-                        FontStretch="SemiExpanded" VerticalAlignment="Center" Style="{StaticResource LabelFontMedium}" />
+                        FontStretch="SemiExpanded"
+                        Style="{StaticResource LabelFontMedium}" />
 
                 </Grid>
-                <Grid
+                <Viewbox
                     Grid.Row="0"
                     Grid.Column="1"
-                    Margin="12,50,12,12"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Ellipse
-                        Grid.RowSpan="4"
-                        Grid.Column="0"
-                        Width="100"
-                        Height="100"
-                        Margin="0,0,15,0">
-                        <Ellipse.Fill>
-                            <ImageBrush x:Name="imgProfilePic" ImageSource="/SPTC APP;component/View/Images/icons/person.png" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Label
-                        Grid.Column="1"
-                        Content="Operator:"
-                        Foreground="DarkGray" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
-                    <Label
-                        x:Name="lblOperatorName"
-                        Grid.Column="2"
-                        Content="N/A"
-                        Foreground="Black" Style="{StaticResource LabelFontLarge}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" />
-                    <Label
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Content="Birthdate:"
-                        Foreground="DarkGray" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
-                    <Label
-                        x:Name="lblDateOfBIrth"
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Content="N/A"
-                        Foreground="Black" Style="{StaticResource LabelFontMedium}" VerticalAlignment="Center" />
-                    <Label
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Content="Reference:"
-                        Foreground="DarkGray" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
-                    <Label
-                        Grid.Row="2"
-                        Grid.Column="2"
-                        Content="N/A"
-                        Foreground="Black" Style="{StaticResource LabelFontMedium}" VerticalAlignment="Center" />
+                    MaxHeight="118"
+                    Margin="12,50,12,12">
+                    <Grid
+                        Height="119"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Ellipse
+                            Grid.RowSpan="4"
+                            Grid.Column="0"
+                            Width="100"
+                            Height="100"
+                            Margin="0,0,15,0">
+                            <Ellipse.Fill>
+                                <ImageBrush x:Name="imgProfilePic" ImageSource="/SPTC APP;component/View/Images/icons/person.png" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Label
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Content="Operator:"
+                            Foreground="DarkGray"
+                            Style="{StaticResource LabelFontSmall}" />
+                        <Label
+                            x:Name="lblOperatorName"
+                            Grid.Column="2"
+                            VerticalAlignment="Center"
+                            Content="N/A"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            Style="{StaticResource LabelFontLarge}" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Content="Birthdate:"
+                            Foreground="DarkGray"
+                            Style="{StaticResource LabelFontSmall}" />
+                        <Label
+                            x:Name="lblDateOfBIrth"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            VerticalAlignment="Center"
+                            Content="N/A"
+                            Foreground="Black"
+                            Style="{StaticResource LabelFontMedium}" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Content="Reference:"
+                            Foreground="DarkGray"
+                            Style="{StaticResource LabelFontSmall}" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            VerticalAlignment="Center"
+                            Content="N/A"
+                            Foreground="Black"
+                            Style="{StaticResource LabelFontMedium}" />
 
-                    <Label
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Content="Driver Name: "
-                        Foreground="DarkGray" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
-                    <Label
-                        x:Name="lblDriverName"
-                        Grid.Row="3"
-                        Grid.Column="2"
-                        Content="N/A"
-                        Foreground="Black" Style="{StaticResource LabelFontMedium}" VerticalAlignment="Center" />
-                </Grid>
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Content="Driver Name: "
+                            Foreground="DarkGray"
+                            Style="{StaticResource LabelFontSmall}" />
+                        <Label
+                            x:Name="lblDriverName"
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            VerticalAlignment="Center"
+                            Content="N/A"
+                            Foreground="Black"
+                            Style="{StaticResource LabelFontMedium}" />
+                    </Grid>
+
+                </Viewbox>
                 <StackPanel
                     x:Name="actions"
                     Grid.Row="0"

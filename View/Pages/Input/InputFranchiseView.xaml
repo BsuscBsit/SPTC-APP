@@ -102,7 +102,7 @@
             Margin="0,20,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="LTOP Number:"
+            Content="LTO Plate Number:"
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             Grid.Row="6"

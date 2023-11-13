@@ -44,6 +44,7 @@ namespace SPTC_APP.View.Pages.Output
             lblPlateNo.Content = MainBody.selectedFranchise?.LicenseNO;
             lblMTOPNo.Content = MainBody.selectedFranchise?.MTOPNo;
             lblDriverName.Content = MainBody.selectedFranchise?.Driver?.name?.legalName ?? "N/A";
+            connumber.Content = MainBody.selectedFranchise?.Operator?.emergencyContact ?? "N/A";
 
             if (MainBody.selectedFranchise?.Operator?.image?.GetSource() != null)
             {

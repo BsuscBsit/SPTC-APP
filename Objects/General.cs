@@ -646,9 +646,9 @@ namespace SPTC_APP.Objects
         public Recap(string text, double content)
         {
             int tid = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_ID_IF_SAME_DETAIS(text))?.FirstOrDefault() ?? -1;
-            recap = new Upsert(Table.PAYMENT_DETAILS, tid);
+            recap = new Upsert(Table.PAYMENT_DETAILS, tid == 0? -1 : tid);
             
-            this.id = -1;
+            this.id = tid == 0? -1:tid;
             this.text = text;
             this.content = content;
             this.date = DateTime.Now;

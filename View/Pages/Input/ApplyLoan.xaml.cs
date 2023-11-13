@@ -62,6 +62,7 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
+            AppState.mainwindow?.displayToast("SAMPLE", 2);
             base.OnClosing(e);
         }
 
@@ -75,7 +76,7 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     Ledger.Loan loan = new Ledger.Loan();
                     loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount,this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
-                    loan.Save();
+                    
                     PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
                     payment.WriteInto(loan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanPrincipal);
                     payment.isApply = true;
@@ -88,7 +89,7 @@ namespace SPTC_APP.View.Pages.Input
 
                     Ledger.LongTermLoan ltloan = new Ledger.LongTermLoan();
                     ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount,this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
-                    ltloan.Save();
+                    
                     PaymentDetails<Ledger.LongTermLoan> payment = new PaymentDetails<Ledger.LongTermLoan>();
                     payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, this.loanPrincipal);
                     payment.isApply = true;

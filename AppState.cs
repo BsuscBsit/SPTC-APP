@@ -49,7 +49,7 @@ namespace SPTC_APP
         public static bool isDeployment = true;
         public static bool isDeployment_IDGeneration = false;
 
-        public static Window mainwindow = null;
+        public static MainBody mainwindow = null;
 
         private static HashSet<Window> OpenedWindows = new HashSet<Window>();
 

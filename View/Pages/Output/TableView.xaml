@@ -86,12 +86,11 @@
             x:Name="franchiseInformation"
             Grid.Row="1"
             Grid.Column="1"
-            Width="280">
+            Width="0">
             <Border
-                MaxWidth="250"
                 Margin="24,0,0,0"
                 Background="White"
-                CornerRadius="12">
+                CornerRadius="12" Width="301" HorizontalAlignment="Left">
                 <Border.Effect>
                     <DropShadowEffect
                         BlurRadius="20"
@@ -102,12 +101,11 @@
 
             </Border>
             <Border
-                MaxWidth="250"
                 Margin="24,0,0,0"
                 Padding="15,15,15,7"
                 Background="White"
-                CornerRadius="10">
-                <Grid>
+                CornerRadius="10" HorizontalAlignment="Left">
+                <Grid Width="270">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -192,14 +190,6 @@
                         VerticalAlignment="Center"
                         Content="Label7"
                         Foreground="{StaticResource BrushGrey}"
-                        Style="{StaticResource LabelFontSmall}" />
-                    <Label
-                        x:Name="lblI1_Copy"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Content="DIERO reneel Monteclaro eStReLlA"
-                        FontWeight="Normal"
-                        Foreground="Black"
                         Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblI1"

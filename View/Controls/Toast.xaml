@@ -24,7 +24,7 @@
                         ShadowDepth="5" />
                 </Border.Effect>
             </Border>
-            <Border
+            <Border x:Name="border"
                 Padding="10,5,10,5"
                 Background="White"
                 CornerRadius="7">

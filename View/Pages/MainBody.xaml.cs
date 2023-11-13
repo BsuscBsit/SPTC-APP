@@ -48,7 +48,7 @@ namespace SPTC_APP.View.Pages
 
         public void displayToast(string message, double duration)
         {
-            (new Toast(gridToast, message, duration)).Show();
+            new Toast(gridToast, message, duration);
         }
 
         public async void ResetWindow(General where, bool hasSelection = false)

@@ -37,6 +37,8 @@ namespace SPTC_APP.View.Pages.Input
         private double loanPrincipal;
         private double interestRate;
 
+        private string closingMSG;
+
         private bool isLoan;
         public ApplyLoan(Franchise fran)
         {
@@ -62,7 +64,7 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
-            AppState.mainwindow?.displayToast("SAMPLE", 2);
+            AppState.mainwindow?.displayToast(closingMSG, 2.5);
             base.OnClosing(e);
         }
 
@@ -96,6 +98,7 @@ namespace SPTC_APP.View.Pages.Input
                     payment.ledgername = Ledger.APPLY_LT_LOAN;
                     payment.Save();
                 }
+                closingMSG = "Loan application successful.";
                 this.Close();
             }
             else
@@ -312,6 +315,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            this.closingMSG = "Application for loan cancelled.";
             this.Close();
         }
 
@@ -353,15 +357,15 @@ namespace SPTC_APP.View.Pages.Input
                 switch (preset)
                 {
                     case 0:
-                        this.loantext = "SHORTTERMLOAN";
+                        this.loantext = "SHORT TERM";
                         tbLoanLen.Text = "6";
                         break;
                     case 1:
-                        this.loantext = "LONGTERMLOAN";
+                        this.loantext = "LONG TERM";
                         tbLoanLen.Text = "12";
                         break;
                     case 2:
-                        this.loantext = "EMERGENCYLOAN";
+                        this.loantext = "EMERGENCY";
                         tbLoanLen.Text = "3";
                         break;
                 }
@@ -371,21 +375,21 @@ namespace SPTC_APP.View.Pages.Input
                 switch (preset)
                 {
                     case 0:
-                        this.loantext = "SHORTTERMLOAN";
+                        this.loantext = "SHORT TERM";
                         minLoan = 1;
                         maxLoan = 30000;
                         minMont = 6;
                         maxMont = null;
                         break;
                     case 1:
-                        this.loantext = "LONGTERMLOAN";
+                        this.loantext = "LONG TERM";
                         minLoan = 31000;
                         maxLoan = null;
                         minMont = 12;
                         maxMont = null;
                         break;
                     case 2:
-                        this.loantext = "EMERGENCYLOAN";
+                        this.loantext = "EMERGENCY";
                         minLoan = 1;
                         maxLoan = 3000;
                         minMont = 1;

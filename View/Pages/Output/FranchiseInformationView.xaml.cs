@@ -283,8 +283,12 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnDeleteFranchise_Click(object sender, RoutedEventArgs e)
         {
-            MainBody.selectedFranchise.delete();
-            (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE);
+            if (ControlWindow.ShowTwoway("Deleting Franchise", "Are you sure you want to continue?", Icons.ERROR))
+            {
+                MainBody.selectedFranchise.delete();
+                (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE);
+                AppState.mainwindow?.displayToast("Franchise deleted", 5);
+            }
         }
 
         private void btnEditFranchise_Click(object sender, RoutedEventArgs e)

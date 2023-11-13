@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
 using SPTC_APP.View.Controls;
@@ -200,6 +202,7 @@ namespace SPTC_APP.Objects
             }
             paymentDetails.Save();
             id = paymentDetails.id;
+            
 
             return id;
         }

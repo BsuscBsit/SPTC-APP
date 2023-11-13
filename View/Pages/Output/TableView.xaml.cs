@@ -386,7 +386,7 @@ namespace SPTC_APP.View.Pages.Output
                 btnAddLTLoan.Visibility = Visibility.Collapsed;
             }
 
-            franchiseInformation.AnimateWidth(264, 0.3);
+            franchiseInformation.AnimateWidth(274, 0.3);
         }
 
         private void ValuePairFI(Label lblF, string name, Label lblI, string value)

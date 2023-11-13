@@ -88,7 +88,7 @@
             Grid.Column="1"
             Width="0">
             <Border
-                MaxWidth="240"
+                MaxWidth="250"
                 Margin="24,0,0,0"
                 Background="White"
                 CornerRadius="12">
@@ -102,12 +102,12 @@
 
             </Border>
             <Border
-                MaxWidth="240"
+                MaxWidth="250"
                 Margin="24,0,0,0"
-                Padding="12,15,12,7"
+                Padding="15,15,15,7"
                 Background="White"
                 CornerRadius="10">
-                <Grid Width="240">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />

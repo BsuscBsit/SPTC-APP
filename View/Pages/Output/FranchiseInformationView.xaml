@@ -141,7 +141,7 @@
                     </Ellipse>
                     <Label
                         Grid.Column="1"
-                        Content="Operators Name :"
+                        Content="Operator:"
                         Foreground="DarkGray" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblOperatorName"
@@ -151,7 +151,7 @@
                     <Label
                         Grid.Row="1"
                         Grid.Column="1"
-                        Content="Birthdate :"
+                        Content="Birthdate:"
                         Foreground="DarkGray" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblDateOfBIrth"
@@ -162,7 +162,7 @@
                     <Label
                         Grid.Row="2"
                         Grid.Column="1"
-                        Content="Reference :"
+                        Content="Reference:"
                         Foreground="DarkGray" VerticalAlignment="Center" Style="{StaticResource LabelFontSmall}" />
                     <Label
                         Grid.Row="2"

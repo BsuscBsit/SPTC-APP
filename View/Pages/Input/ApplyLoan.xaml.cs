@@ -98,39 +98,17 @@ namespace SPTC_APP.View.Pages.Input
                     payment.ledgername = Ledger.APPLY_LT_LOAN;
                     payment.Save();
                 }
-
-
                 this.Close();
             }
             else
             {
                 ControlWindow.ShowStatic("Input Incomplete", "Some required inputs are empty", Icons.ERROR);
-
                 this.Close();
             }
         }
 
         private bool computeResult()
         {
-            //Retrun true if all input fields are filled
-            //Actual Computation
-            //From textobx to private variables
-            // ex: this.loanAmount = place verification if the input is double only etc....
-            // TODO: computations
-
-            /**
-                  * Processing Fee = Loan Amount * tbPF // make sure to if tbPf is 2%, transform first to decimal, 0.02 before multiplifyng to Loan Amount
-                  * CBU = Loan Amount * tbCBU //same here
-                  * Interest = (Loan Amount * tbInterest) * tbLoanLen //and here
-                  * Principal = Loan Amount - (Processing Fee + CBU + Interest) // this is ?, outbounds, not needed to be saved
-                  * 
-                  * Breakdown in Monthly
-                  * Loan Receivable = Principal // tbLoanLen 
-                  * Interest Receivable = Loan Amount * tbInterest
-                  * Total = Loan Receivable + Interest Recievable //this is the actual principal to be saved to database
-                  * Overdue Penalty = Loan Amount * tbInterest // not needed to be save to the database
-                  * 
-                 **/
             Dictionary<TextBox, bool> fillStatus = new Dictionary<TextBox, bool>
             {
                 /*0*/{ tbAmount, tbAmount.Text.Length > 0 },
@@ -147,14 +125,12 @@ namespace SPTC_APP.View.Pages.Input
                     double[] userVars = { 0.0, 0.0, 0.0, 0.0, 0.0 };
                     foreach (var kvp in fillStatus)
                     {
-                        // Assuming fields are already filtered/formatted properly.
                         if (double.TryParse(kvp.Key.Text, out double parsedValue))
                         {
                             userVars[i] = parsedValue;
                         }
                         i++;
                     }
-                    // Ratio/Percentage save to database??? idk...
                     double pfRatio = userVars[1] / 100;
                     double cbuRatio = userVars[2] / 100;
                     double interestRatio = userVars[4] / 100;
@@ -188,8 +164,7 @@ namespace SPTC_APP.View.Pages.Input
                             principal = userVars[0] - deductions;
 
                             // Monthly Breakdown
-                            loanReceivable = principal / userVars[3]; // as total
-                                                                      // interest paid.
+                            loanReceivable = principal / userVars[3];
                             break;
 
                         case 1: // Long Term
@@ -212,11 +187,25 @@ namespace SPTC_APP.View.Pages.Input
                             deductions = pfFinal + cbuFinal;
 
                             principal = userVars[0];
+
+                            // Monthly Breakdown
+                            principal = userVars[0];
                             loanReceivable = userVars[0] / userVars[3];
                             interestReceivable = userVars[0] * interestRatio;
+                            interestFinal = userVars[0] * interestRatio;
                             totalFinal = loanReceivable + interestReceivable;
                             break;
                     }
+
+                    // Parsing to global variables.
+                    this.ornum = tbCVORNum.Text ?? string.Empty;
+                    this.loanAmount = userVars[0];
+                    this.loanProcessingFee = pfFinal;
+                    this.loanCbu = cbuFinal;
+                    this.loanMonthsCount = (int)userVars[3];
+                    this.loanInterest = interestFinal;
+                    this.loanPrincipal = principal;
+
 
                     #endregion
 
@@ -235,6 +224,7 @@ namespace SPTC_APP.View.Pages.Input
                             lblInterestRecievableTotal.Content = "Already deducted.";
                             lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
                             lblBreakdownTotal.Content = lr.ToString();
+
                             break;
 
                         case 1:

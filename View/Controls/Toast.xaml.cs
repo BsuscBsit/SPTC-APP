@@ -22,15 +22,15 @@ namespace SPTC_APP.View.Controls
     {
         public Toast(Grid targetGrid, string msg, double persistDuration = 1.5, bool doBeep = true, double animationDuration = 0.2)
         {
+            if (doBeep)
+            {
+                System.Media.SystemSounds.Beep.Play();
+            }
             InitializeComponent();
             message.Text = msg;
 
             parent.Children.Remove(toast);
             targetGrid.Children.Add(toast);
-            if (doBeep)
-            {
-                System.Media.SystemSounds.Beep.Play();
-            }
 
             toast.FadeIn(animationDuration, async () =>
             {

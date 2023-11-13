@@ -267,15 +267,15 @@ namespace SPTC_APP.View.Controls
                     break;
 
                 case EMAIL:
-                    msg = $"' {post} ' is not a valid input for an email address.";
+                    msg = $"' {input} ' is not a valid input for an email address.";
                     break;
 
                 case ADDRESS:
-                    msg = $"' {post} ' is not a valid input for an address.";
+                    msg = $"' {input} ' is not a valid input for an address.";
                     break;
 
                 case CVOR:
-                    msg = $"' {post} ' is not a valid input for this field.";
+                    msg = $"' {input} ' is not a valid input for this field.";
                     break;
 
                 default:

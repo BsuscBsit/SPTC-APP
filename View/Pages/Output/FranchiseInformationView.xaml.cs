@@ -1,9 +1,11 @@
 ﻿
 using SPTC_APP.Objects;
 using SPTC_APP.View.Pages.Input;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace SPTC_APP.View.Pages.Output
 {
@@ -43,7 +45,14 @@ namespace SPTC_APP.View.Pages.Output
             lblMTOPNo.Content = MainBody.selectedFranchise?.MTOPNo;
             lblDriverName.Content = MainBody.selectedFranchise?.Driver?.name?.legalName ?? "N/A";
 
-            imgProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
+            if (MainBody.selectedFranchise?.Operator?.image?.GetSource() != null)
+            {
+                imgProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
+            }
+            else
+            {
+                imgProfilePic.ImageSource = new BitmapImage(new Uri("pack://application:,,,/SPTC APP;component/View/Images/icons/person.png"));
+            }
             if (MainBody.selectedFranchise?.Driver == null)
             {
                 btnChangeDriver.Content = "NEW DRIVER";

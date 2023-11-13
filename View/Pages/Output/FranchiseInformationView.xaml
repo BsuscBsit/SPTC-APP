@@ -194,9 +194,9 @@
                             Grid.Row="2"
                             Grid.Column="1"
                             VerticalAlignment="Center"
-                            Content="Contact #:"
+                            Content="Operator contact #:"
                             Foreground="DarkGray"
-                            Style="{StaticResource LabelFontSmall}" Visibility="Collapsed" />
+                            Style="{StaticResource LabelFontSmall}" />
                         <Label
                             x:Name="connumber"
                             Grid.Row="2"
@@ -204,7 +204,7 @@
                             VerticalAlignment="Center"
                             Content="N/A"
                             Foreground="Black"
-                            Style="{StaticResource LabelFontMedium}" Visibility="Collapsed" />
+                            Style="{StaticResource LabelFontMedium}" />
 
                         <Label
                             Grid.Row="3"

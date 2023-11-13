@@ -222,7 +222,7 @@ namespace SPTC_APP.Database
 
                     string setValues = string.Join(", ", fieldValues.Keys.Select(key => $"{key} = @{key}"));
 
-                    string query = $"UPDATE {tableName} SET {setValues} WHERE id=@idkey";
+                    string query = $"UPDATE {tableName} SET isDeleted = 0,{setValues} WHERE id=@idkey";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("@idkey", id);
 

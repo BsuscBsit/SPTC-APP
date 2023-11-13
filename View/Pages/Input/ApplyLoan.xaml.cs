@@ -226,6 +226,7 @@ namespace SPTC_APP.View.Pages.Input
                             lblInterestRecievableTotal.Content = "Already deducted.";
                             lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
                             lblBreakdownTotal.Content = lr.ToString();
+                            this.isLoan = true;
                             break;
 
                         case 1:
@@ -240,6 +241,7 @@ namespace SPTC_APP.View.Pages.Input
                             lblInterestRecievableTotal.Content = interestReceivable.ToString();
                             lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
                             lblBreakdownTotal.Content = tf.ToString();
+                            this.isLoan = true;
                             break;
 
                         case 2:
@@ -254,6 +256,7 @@ namespace SPTC_APP.View.Pages.Input
                             lblInterestRecievableTotal.Content = interestReceivable.ToString();
                             lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
                             lblBreakdownTotal.Content = tf.ToString();
+                            this.isLoan = false;
                             break;
 
                     }

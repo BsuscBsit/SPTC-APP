@@ -149,20 +149,21 @@
                 Style="{StaticResource CommonButtonStyle}"
                 TabIndex="2" />
             <Button
-                IsDefault="True"
                 x:Name="btnSave"
                 Width="178"
                 Margin="15,0,0,0"
                 Click="btnSave_Click"
                 Content="SAVE"
+                IsDefault="True"
                 Style="{StaticResource CommonButtonStyle}"
                 TabIndex="3" />
         </StackPanel>
         <Grid
             x:Name="gridToast"
+            Grid.RowSpan="9"
             Grid.ColumnSpan="7"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom" Grid.RowSpan="9">
+            VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />

@@ -8,6 +8,7 @@
     x:Name="window1"
     Title="Sapang Palay Tricycle Cooperative"
     Width="1000"
+    Height="650"
     MinWidth="1000"
     MinHeight="600"
     AllowsTransparency="True"
@@ -15,7 +16,7 @@
     MouseDown="Window_MouseDown"
     Style="{StaticResource Minified}"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" Height="650">
+    mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
             <Style x:Key="PaneExpander" TargetType="ToggleButton">
@@ -258,14 +259,19 @@
                             <ColumnDefinition Width="12" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Image Grid.ColumnSpan="3" Source="/View/Images/icons/paper.png" Width="30" Margin="0,0,5,0"/>
+                        <Image
+                            Grid.ColumnSpan="3"
+                            Width="30"
+                            Margin="0,0,5,0"
+                            Source="/View/Images/icons/paper.png" />
                         <ContentControl
                             Grid.ColumnSpan="3"
                             Width="30"
                             Height="30"
                             Margin="6,0,0,0"
                             HorizontalAlignment="Left"
-                            Content="{StaticResource FranchiseIcon}" Visibility="Hidden" />
+                            Content="{StaticResource FranchiseIcon}"
+                            Visibility="Hidden" />
                         <Label
                             x:Name="lblFran"
                             Grid.Column="3"
@@ -293,11 +299,16 @@
                             <ColumnDefinition Width="12" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="/View/Images/icons/operator.png" Grid.ColumnSpan="3" Width="30" Margin="0,0,6,0" />
+                        <Image
+                            Grid.ColumnSpan="3"
+                            Width="30"
+                            Margin="0,0,6,0"
+                            Source="/View/Images/icons/operator.png" />
                         <ContentControl
                             Grid.Column="1"
                             Width="30"
-                            Height="30" Visibility="Hidden" />
+                            Height="30"
+                            Visibility="Hidden" />
                         <Label
                             x:Name="lblOp"
                             Grid.Column="3"
@@ -325,11 +336,16 @@
                             <ColumnDefinition Width="12" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="/View/Images/icons/tricycle.png" Grid.ColumnSpan="3" Width="30" Margin="0,0,5,0"/>
+                        <Image
+                            Grid.ColumnSpan="3"
+                            Width="30"
+                            Margin="0,0,5,0"
+                            Source="/View/Images/icons/tricycle.png" />
                         <ContentControl
                             Grid.Column="1"
                             Width="30"
-                            Height="30" Visibility="Hidden" />
+                            Height="30"
+                            Visibility="Hidden" />
                         <Label
                             x:Name="lblDrv"
                             Grid.Column="3"
@@ -357,11 +373,16 @@
                             <ColumnDefinition Width="12" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Image Grid.ColumnSpan="3" Width="30" Source="/View/Images/icons/group.png" Margin="0,0,3,0"/>
+                        <Image
+                            Grid.ColumnSpan="3"
+                            Width="30"
+                            Margin="0,0,3,0"
+                            Source="/View/Images/icons/group.png" />
                         <ContentControl
                             Grid.Column="1"
                             Width="30"
-                            Height="30" Visibility="Hidden" />
+                            Height="30"
+                            Visibility="Hidden" />
                         <Label
                             x:Name="lblBM"
                             Grid.Column="3"
@@ -398,13 +419,18 @@
                             <ColumnDefinition Width="12" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="/View/Images/icons/home.png" Width="30" Grid.ColumnSpan="3" Margin="0,0,6,0"/>
+                        <Image
+                            Grid.ColumnSpan="3"
+                            Width="30"
+                            Margin="0,0,6,0"
+                            Source="/View/Images/icons/home.png" />
                         <ContentControl
                             Grid.Column="1"
                             Margin="-1,0,0,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Content="{StaticResource HomeIcon}" Visibility="Hidden" />
+                            Content="{StaticResource HomeIcon}"
+                            Visibility="Hidden" />
                         <Label
                             x:Name="lblDashB"
                             Grid.Column="3"
@@ -423,7 +449,8 @@
                     </Grid.RowDefinitions>
                     <Canvas
                         x:Name="effectCanvas"
-                        Grid.RowSpan="2" Visibility="Hidden">
+                        Grid.RowSpan="2"
+                        Visibility="Hidden">
                         <Border
                             Canvas.Left="-30"
                             Canvas.Top="-7"
@@ -455,10 +482,12 @@
                         VerticalAlignment="Center"
                         Content="General Manager"
                         Foreground="{StaticResource BrushBlack}"
-                        Style="{StaticResource SubTitlePreset}" Visibility="Collapsed" />
+                        Style="{StaticResource SubTitlePreset}"
+                        Visibility="Collapsed" />
                     <Canvas
                         x:Name="profileActionCanvas"
-                        Grid.RowSpan="2" Visibility="Hidden">
+                        Grid.RowSpan="2"
+                        Visibility="Hidden">
                         <Grid
                             x:Name="gridProfActBounding"
                             Canvas.Left="-30"
@@ -466,9 +495,14 @@
                             Width="190.4"
                             Height="156"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Center" MouseLeave="gridProfActBounding_MouseLeave">
-                            <Label/>
-                            <Border CornerRadius="12" VerticalAlignment="Center" Height="138" Background="#4C1C1C1E">
+                            VerticalAlignment="Center"
+                            MouseLeave="gridProfActBounding_MouseLeave">
+                            <Label />
+                            <Border
+                                Height="138"
+                                VerticalAlignment="Center"
+                                Background="#4C1C1C1E"
+                                CornerRadius="12">
                                 <Grid Margin="15,15,15,15" VerticalAlignment="Center">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -512,7 +546,11 @@
                         <ColumnDefinition Width="12" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Image Source="/View/Images/icons/settings.png" Width="26" Grid.ColumnSpan="3" Margin="0,0,6,0" />
+                    <Image
+                        Grid.ColumnSpan="3"
+                        Width="26"
+                        Margin="0,0,6,0"
+                        Source="/View/Images/icons/settings.png" />
                     <ContentControl
                         Grid.Column="1"
                         Width="30"
@@ -544,10 +582,12 @@
                         <ColumnDefinition Width="12" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Image Source="/View/Images/icons/logout.png" Width="30" Grid.ColumnSpan="3" Margin="0,0,4,-1" />
-                    <ContentControl
-                        Grid.Column="1"
-                        Width="20" />
+                    <Image
+                        Grid.ColumnSpan="3"
+                        Width="30"
+                        Margin="0,0,4,-1"
+                        Source="/View/Images/icons/logout.png" />
+                    <ContentControl Grid.Column="1" Width="20" />
                     <Label
                         x:Name="lblLogout"
                         Grid.Column="3"
@@ -660,6 +700,11 @@
             </Border>
 
         </Canvas>
-
+        <Grid
+            x:Name="gridToast"
+            Grid.RowSpan="4"
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom" />
     </Grid>
 </Window>

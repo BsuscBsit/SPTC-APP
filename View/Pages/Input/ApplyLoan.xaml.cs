@@ -27,9 +27,6 @@ namespace SPTC_APP.View.Pages.Input
     {
         private Franchise franchise;
 
-        //TODO: SETUP Variables
-        // palitan nalang ng actual result sa calculation mo @Diero
-        //eto yumg masasave sa backend
         private string ornum;
         private string loantext;// normal or emergency , all caps please
         private double loanAmount; // magkano yung loan
@@ -39,7 +36,6 @@ namespace SPTC_APP.View.Pages.Input
         private double loanInterest; // based on calculations
         private double loanPrincipal;
         private double interestRate;
-        //paymentDues or Monthly Receivable is automatically clculated in backend, loanPrincipal / loanMonthCount
 
         private bool isLoan;
         public ApplyLoan(Franchise fran)
@@ -167,6 +163,7 @@ namespace SPTC_APP.View.Pages.Input
 
                             // Monthly Breakdown
                             loanReceivable = principal / userVars[3];
+                            totalFinal = loanReceivable;
                             break;
 
                         case 1: // Long Term
@@ -213,53 +210,87 @@ namespace SPTC_APP.View.Pages.Input
 
                     double lr = Math.Round(loanReceivable, 2);
                     double tf = Math.Round(totalFinal, 2);
+                    string principalStr = principal.ToString();
+                    string pfFinalStr = pfFinal.ToString();
+                    string cbuFinalStr = cbuFinal.ToString();
+                    string interestRecStr = interestReceivable.ToString();
+
                     switch (cbLoanType.SelectedIndex)
                     {
                         case 0:
-                            lblLoanAmount.Content = userVars[0].ToString();
-                            lblPFTotal.Content = pfFinal.ToString();
-                            lblInterestTotal.Content = interestFinal.ToString();
-                            lblCBUTotal.Content = cbuFinal.ToString();
-                            lblPrincipalTotal.Content = principal.ToString();
-                            lblPrincipalTotal2.Content = principal.ToString();
-                            lblLoanRecievableTotal.Content = lr.ToString();
-                            lblInterestRecievableTotal.Content = "Already deducted.";
-                            lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
-                            lblBreakdownTotal.Content = lr.ToString();
-                            this.isLoan = true;
+                            UpdateLabels(
+                                userVars[0].ToString(),
+                                pfFinalStr,
+                                interestFinal.ToString(),
+                                (SolidColorBrush)FindResource("BrushRed"),
+                                "Already deducted.",
+                                (SolidColorBrush)FindResource("BrushRed"),
+                                cbuFinalStr,
+                                principalStr,
+                                lr.ToString(),
+                                tf.ToString(),
+                                true);
                             break;
 
                         case 1:
-                            lblLoanAmount.Content = userVars[0].ToString();
-                            lblPFTotal.Content = pfFinal.ToString();
-                            lblInterestTotal.Content = "Not deducted yet.";
-                            lblInterestTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
-                            lblCBUTotal.Content = cbuFinal.ToString();
-                            lblPrincipalTotal.Content = principal.ToString();
-                            lblPrincipalTotal2.Content = principal.ToString();
-                            lblLoanRecievableTotal.Content = lr.ToString();
-                            lblInterestRecievableTotal.Content = interestReceivable.ToString();
-                            lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
-                            lblBreakdownTotal.Content = tf.ToString();
-                            this.isLoan = true;
+                            UpdateLabels(
+                                userVars[0].ToString(),
+                                pfFinalStr,
+                                "Not deducted yet.",
+                                (SolidColorBrush)FindResource("BrushDeepGreen"),
+                                interestRecStr,
+                                (SolidColorBrush)FindResource("BrushDeepGreen"),
+                                cbuFinalStr,
+                                principalStr,
+                                lr.ToString(),
+                                tf.ToString(),
+                                false);
                             break;
 
                         case 2:
-                            lblLoanAmount.Content = userVars[0].ToString();
-                            lblPFTotal.Content = pfFinal.ToString() + " (To pay)";
-                            lblInterestTotal.Content = "Not deducted yet.";
-                            lblInterestTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
-                            lblCBUTotal.Content = cbuFinal.ToString() + " (To pay)";
-                            lblPrincipalTotal.Content = principal.ToString();
-                            lblPrincipalTotal2.Content = principal.ToString();
-                            lblLoanRecievableTotal.Content = lr.ToString();
-                            lblInterestRecievableTotal.Content = interestReceivable.ToString();
-                            lblInterestRecievableTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
-                            lblBreakdownTotal.Content = tf.ToString();
-                            this.isLoan = false;
+                            UpdateLabels(
+                                userVars[0].ToString(),
+                                $"{pfFinalStr} (To pay)",
+                                "Not deducted yet.",
+                                (SolidColorBrush)FindResource("BrushDeepGreen"),
+                                interestRecStr,
+                                (SolidColorBrush)FindResource("BrushDeepGreen"),
+                                $"{cbuFinalStr} (To pay)",
+                                principalStr,
+                                lr.ToString(),
+                                tf.ToString(),
+                                true);
                             break;
 
                     }
+
+                    void UpdateLabels(
+                        string loanAmount,
+                        string pfTotal,
+                        string interestTotal,
+                        SolidColorBrush interestTotalForeground,
+                        string interestRecievableTotal,
+                        SolidColorBrush interestRecForeground,
+                        string cbuTotal,
+                        string principalTotal,
+                        string loanReceivableTotal,
+                        string breakdownTotal,
+                        bool isLoan)
+                    {
+                        lblLoanAmount.Content = loanAmount;
+                        lblPFTotal.Content = pfTotal;
+                        lblInterestTotal.Content = interestTotal;
+                        lblInterestTotal.Foreground = interestTotalForeground;
+                        lblCBUTotal.Content = cbuTotal;
+                        lblPrincipalTotal.Content = principalTotal;
+                        lblPrincipalTotal2.Content = principalTotal;
+                        lblLoanRecievableTotal.Content = loanReceivableTotal;
+                        lblInterestRecievableTotal.Content = interestRecievableTotal;
+                        lblInterestRecievableTotal.Foreground = interestRecForeground;
+                        lblBreakdownTotal.Content = breakdownTotal;
+                        this.isLoan = isLoan;
+                    }
+
                     lblPenalty.Content = penalty.ToString();
                 }
             }
@@ -275,18 +306,6 @@ namespace SPTC_APP.View.Pages.Input
                 new Toast(gridToast, "Fill in all required fields before proceeding.", 2);
             }
 
-            /*SAMPLE
-            this.ornum = "0001";
-            this.loantext = "NORMAL";// normal or emergency , all caps please
-            this.loanAmount = 10000; // magkano yung loan
-            this.loanProcessingFee = 200; // actual value to be stord, if 2%
-            this.loanCbu = 200; // also 2%
-            this.loanMonthsCount = 6; // for both longterma anbd short term
-            this.loanInterest = 900; // based on calculations
-            this.loanPrincipal = 10900;
-
-            this.isLoan = false; // do calculate if loan or Long term loan,*/
-
             return true;
         }
 
@@ -298,8 +317,6 @@ namespace SPTC_APP.View.Pages.Input
         private void btnCompute_Click(object sender, RoutedEventArgs e)
         {
             computeResult();
-            //Display Result to the user
-            //ex: lblTotalAmount = this.loanAmount;
         }
 
         private void cbLoanType_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -317,8 +334,8 @@ namespace SPTC_APP.View.Pages.Input
             tbCBU.NumericTextBoxBehavior(DECIMALUNSIGNED, gridToast, 4, "CBU", 0, 100);
             tbInterest.NumericTextBoxBehavior(DECIMALUNSIGNED, gridToast, 6, "Interest rate.", 0, 100);
 
-            tbAmount.NumericTextBoxBehavior(DECIMALUNSIGNED, gridToast, 1, "Loan Amount.");
-            tbLoanLen.NumericTextBoxBehavior(WHOLEUNSIGNED, gridToast, 5, "Term Length.");
+            tbAmount.NumericTextBoxBehavior(DECIMALUNSIGNED, gridToast, 1, "Loan Amount.", 1);
+            tbLoanLen.NumericTextBoxBehavior(WHOLEUNSIGNED, gridToast, 5, "Term Length.", 1);
             presetFields(0);
         }
 
@@ -354,7 +371,7 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     case 0:
                         this.loantext = "SHORTTERMLOAN";
-                        minLoan = 0;
+                        minLoan = 1;
                         maxLoan = 30000;
                         minMont = 6;
                         maxMont = null;
@@ -368,9 +385,9 @@ namespace SPTC_APP.View.Pages.Input
                         break;
                     case 2:
                         this.loantext = "EMERGENCYLOAN";
-                        minLoan = 0;
+                        minLoan = 1;
                         maxLoan = 3000;
-                        minMont = null;
+                        minMont = 1;
                         maxMont = 3;
                         break;
                 }

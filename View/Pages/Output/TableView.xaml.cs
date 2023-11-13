@@ -98,7 +98,7 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
                     new ColumnConfiguration("Operator.name.legalName", "OPERATOR NAME", minWidth: 140),
-                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true),
+                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("MTOPNo", "MTOP NO.", minWidth: 100, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true),
@@ -138,7 +138,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     new ColumnConfiguration("Operator.name.legalName", "NAME", minWidth: 140),
                     new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true),
-                    new ColumnConfiguration("LicenseNO", "PLATE NO.", minWidth: 100, isNumeric: true),
+                    new ColumnConfiguration("LicenseNO", "PLATE NO.", minWidth: 100, isCenter: true,isNumeric: true),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter : true, isNumeric : true),
                     new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true),
                 };

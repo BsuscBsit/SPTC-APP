@@ -26,7 +26,7 @@ namespace SPTC_APP.View.Pages.Input
     {
 
         Franchise franchise;
-
+        private string closingMSG;
         Ledger.LongTermLoan ltloan;
         public AddLTLoan(Franchise franchise)
         {
@@ -47,12 +47,13 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
-            
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            this.closingMSG = "Adding loan payment history was canceled.";
             this.Close();
         }
 
@@ -76,6 +77,7 @@ namespace SPTC_APP.View.Pages.Input
                     loanPayment.Save();
                     
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                    this.closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";
                     this.Close();
                 } else
                 {

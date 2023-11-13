@@ -49,7 +49,7 @@ namespace SPTC_APP.View.Pages.Input
                 this.Close();
             } else
             {
-                ControlWindow.ShowStatic("Fields Empty", "Some required fields are empty", Icons.NOTIFY);
+                ControlWindow.ShowStatic("Found Empty Fields", "Some required fields are empty.\n Please fill them up before continuing.", Icons.NOTIFY);
             }
         }
 

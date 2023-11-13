@@ -16,6 +16,7 @@ namespace SPTC_APP.View.Pages.Input
     {
         ViolationType selectedViolationType;
         Franchise franchise;
+        private string closingMSG;
         public ViolationInput(Franchise franchise)
         {
             InitializeComponent();
@@ -40,7 +41,7 @@ namespace SPTC_APP.View.Pages.Input
                 selectedViolationType = listViolation[0];
             } else
             {
-                ControlWindow.ShowStatic("No Violation Types for Driver", "No violation type detected.", Icons.ERROR);
+                ControlWindow.ShowStatic("No Violation Types Found", "No violation types was found.\nPlease add from Dashboard > Actions > Add Violation Type.", Icons.ERROR);
                 this.Close();
             }
         }
@@ -48,6 +49,7 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
@@ -55,7 +57,7 @@ namespace SPTC_APP.View.Pages.Input
         {
             if (selectedViolationType != null)
             {
-                if (ControlWindow.ShowTwoway("Adding Violation.", "Confirm?.", Icons.NOTIFY))
+                if (ControlWindow.ShowTwoway("Adding Violation.", "Do you confirm this action?", Icons.NOTIFY))
                 {
                     DateTime violationDate = (dpViolationDate.SelectedDate != null)? (DateTime)dpViolationDate.SelectedDate: DateTime.Today;
                     DateTime startDate = calendarSelect.SelectedDates.FirstOrDefault();
@@ -65,6 +67,7 @@ namespace SPTC_APP.View.Pages.Input
                     violation.WriteInto(franchise.id, selectedViolationType.id, violationDate , startDate, endDate, tboxRemarks.Text, (selectedViolationType.entityType == General.DRIVER)? franchise.Driver.name.id:franchise.Operator.name.id);
                     violation.Save();
                 }
+                closingMSG = "The violation was recorded successfully.\nPlease refresh the view to see changes.";
                 this.Close();
             
             }
@@ -72,6 +75,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            closingMSG = "No violation was recorded.\nAction canceled.";
             this.Close();
         }
         private void cbViolations_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

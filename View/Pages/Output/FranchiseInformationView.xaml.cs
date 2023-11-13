@@ -1,6 +1,7 @@
 ﻿
 using SPTC_APP.Objects;
 using SPTC_APP.View.Pages.Input;
+using SPTC_APP.View.Styling;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -121,14 +122,14 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnHistory_Click(object sender, RoutedEventArgs e)
         {
-            btnAddButton.Visibility = Visibility.Collapsed;
+            btnAddButton.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
             HandleButtonClick(Modules.HISTORY, sender as Button);
             
         }
 
         private void btnCoding_Click(object sender, RoutedEventArgs e)
         {
-            btnAddButton.Visibility = Visibility.Collapsed;
+            btnAddButton.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
             HandleButtonClick(Modules.CODING, sender as Button);
         }
 
@@ -139,16 +140,15 @@ namespace SPTC_APP.View.Pages.Output
 
                 if (MainBody.selectedFranchise?.Driver != null)
                 {
-                    btnAddButton.Content = "ADD RECORD";
-                    btnAddButton.Visibility = Visibility.Visible;
+                    addBtnInit("Add Record");
                 } else
                 {
-                    btnAddButton.Visibility = Visibility.Collapsed;
+                    addBtnInit();
 
                 }
             } else
             {
-                btnAddButton.Visibility = Visibility.Collapsed;
+                btnAddButton.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
             }
             HandleButtonClick(Modules.VIOLATION, sender as Button);
         }
@@ -157,11 +157,10 @@ namespace SPTC_APP.View.Pages.Output
         {
             if ((AppState.USER?.position?.accesses[18] ?? false))
             {
-                btnAddButton.Content = "ADD RECORD";
-                btnAddButton.Visibility = Visibility.Visible;
+                addBtnInit("Add Record");
             } else
             {
-                btnAddButton.Visibility = Visibility.Collapsed;
+                addBtnInit();
             }
             HandleButtonClick(Modules.SHARECAPITAL, sender as Button);
         }
@@ -170,13 +169,11 @@ namespace SPTC_APP.View.Pages.Output
         {
             if ((AppState.USER?.position?.accesses[18] ?? false))
             {
-                btnAddButton.Content = "APPLY FOR LOAN";
-
-                btnAddButton.Visibility = Visibility.Visible;
+                addBtnInit("Add Loan");
             }
             else
             {
-                btnAddButton.Visibility = Visibility.Collapsed;
+                addBtnInit();
             }
             HandleButtonClick(Modules.LOAN_APPLY, sender as Button);
         }
@@ -185,19 +182,17 @@ namespace SPTC_APP.View.Pages.Output
         {
             if ((AppState.USER?.position?.accesses[18] ?? false))
             {
-                btnAddButton.Content = "ADD RECORD";
-
-                btnAddButton.Visibility = Visibility.Visible;
+                addBtnInit("Add Record");
                 if (MainBody.selectedFranchise.GetLoans().Count <= 0)
                 {
                     //btnAddButton.Content = "APPLY FOR LOAN";
-                    btnAddButton.Visibility = Visibility.Collapsed;
+                    btnAddButton.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
                 }
 
             }
             else
             {
-                btnAddButton.Visibility = Visibility.Collapsed;
+                addBtnInit();
             }
             HandleButtonClick(Modules.LOAN, sender as Button);
         }
@@ -206,16 +201,15 @@ namespace SPTC_APP.View.Pages.Output
         {
             if ((AppState.USER?.position?.accesses[18] ?? false))
             {
-                btnAddButton.Content = "ADD RECORD";
-                btnAddButton.Visibility = Visibility.Visible;
+                addBtnInit("Add Record");
                 if (MainBody.selectedFranchise.GetLTLoans().Count <= 0)
                 {
-                    btnAddButton.Visibility = Visibility.Collapsed;
+                    btnAddButton.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
                 };
             }
             else
             {
-                btnAddButton.Visibility = Visibility.Collapsed;
+                addBtnInit();
             }
             HandleButtonClick(Modules.LTLOAN, sender as Button);
         }
@@ -224,12 +218,11 @@ namespace SPTC_APP.View.Pages.Output
         {
             if ((AppState.USER?.position?.accesses[1] ?? false))
             {
-                btnAddButton.Content = "TRANSFER";
-                btnAddButton.Visibility = Visibility.Visible;
+                addBtnInit("Transfer", false);
             }
             else
             {
-                btnAddButton.Visibility = Visibility.Collapsed;
+                addBtnInit();
             }
             HandleButtonClick(Modules.TRANSFER, sender as Button);
         }
@@ -295,6 +288,32 @@ namespace SPTC_APP.View.Pages.Output
         private void btnEditFranchise_Click(object sender, RoutedEventArgs e)
         {
             (new InputFranchiseView(MainBody.selectedFranchise)).Show();
+        }
+
+        private void addBtnInit(string content = null, bool isAdd = true)
+        {
+            if (content != null)
+            {
+                btnAddButton.FadeIn(0.2, () =>
+                {
+                    lblBtnAddContent.Content = content;
+                    if (isAdd)
+                    {
+                        iconAdd.Visibility = Visibility.Visible;
+                        iconTransfer.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        iconTransfer.Visibility = Visibility.Visible;
+                        iconAdd.Visibility = Visibility.Hidden;
+                    }
+                });
+            }
+            else
+            {
+                btnAddButton.FadeOut(0.2);
+                btnAddButton.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

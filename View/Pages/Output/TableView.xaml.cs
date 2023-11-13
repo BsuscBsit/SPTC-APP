@@ -221,7 +221,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (table == Table.FRANCHISE)
                 {
                     MainBody.selectedFranchise = (Franchise)grid.SelectedItem;
-                    ValuePairFI(lblF1, "Operator Name: ", lblI1, MainBody.selectedFranchise?.Operator?.ToString() ?? "");
+                    ValuePairFI(lblF1, "Operator: ", lblI1, MainBody.selectedFranchise?.Operator?.ToString() ?? "");
                     ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber.ToString() ?? "");
 
@@ -267,7 +267,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     MainBody.selectedFranchise = ((Franchise)grid.SelectedItem);
                     oholder = MainBody.selectedFranchise.Operator;
-                    ValuePairFI(lblF1, "Operator Name: ", lblI1, oholder?.name?.legalName?.ToString());
+                    ValuePairFI(lblF1, "Operator: ", lblI1, oholder?.name?.legalName?.ToString());
                     ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Operator?.dateOfMembership.ToString("MMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Body No: ", lblI3, MainBody.selectedFranchise?.BodyNumber?.ToString() ?? "");
 
@@ -312,11 +312,11 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     MainBody.selectedFranchise = ((Driver)grid.SelectedItem).franchise;
                     dholder = (Driver)grid.SelectedItem;
-                    ValuePairFI(lblF1, "Driver's Name: ", lblI1, dholder?.name?.legalName?.ToString());
+                    ValuePairFI(lblF1, "Driver: ", lblI1, dholder?.name?.legalName?.ToString());
                     ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Driver?.dateOfMembership.ToString("MMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Address: ", lblI3, MainBody.selectedFranchise?.Driver?.address?.ToString() ?? "");
                     ValuePairFI(lblF4, "Body No.: ", lblI4, MainBody.selectedFranchise?.BodyNumber?.ToString() ?? "");
-                    ValuePairFI(lblF5, "License No: ", lblI5, MainBody.selectedFranchise?.LicenseNO?.ToString() ?? "");
+                    ValuePairFI(lblF5, "License No.: ", lblI5, MainBody.selectedFranchise?.LicenseNO?.ToString() ?? "");
                     ValuePairFI(lblF6, "Violation:  ", lblI6, MainBody.selectedFranchise?.Driver?.violationCount.ToString() ?? "");
                     if (MainBody.selectedFranchise?.Driver?.image?.GetSource() != null)
                     {
@@ -328,15 +328,15 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     if (MainBody.selectedFranchise?.Driver?.isSuspended ?? false)
                     {
-                        ValuePairFI(lblF7, "Is Suspended:", lblI7, $"YES ({MainBody.selectedFranchise.Driver.violation.dDateEnd})");
-                        lblI7.Foreground = Brushes.Red;
-                        lblI7.FontWeight = FontWeights.Black;
+                        ValuePairFI(lblF7, "Suspended:", lblI7, $"YES ({MainBody.selectedFranchise.Driver.violation.dDateEnd})");
+                        lblI7.Foreground = FindResource("BrushRed") as Brush;
+                        lblI7.FontWeight = FontWeights.SemiBold;
                     }
                     else
                     {
-                        ValuePairFI(lblF7, "Is Suspended:", lblI7, "NO");
-                        lblI7.Foreground = Brushes.Green;
-                        lblI7.FontWeight = FontWeights.Black;
+                        ValuePairFI(lblF7, "Suspended:", lblI7, "NO");
+                        lblI7.Foreground = FindResource("BrushDeepGreen") as Brush;
+                        lblI7.FontWeight = FontWeights.SemiBold;
                     }
                 }
                 
@@ -427,7 +427,7 @@ namespace SPTC_APP.View.Pages.Output
             }
             else
             {
-                ControlWindow.ShowStatic("No Franchise detected!", "Cannot proceed. Dreate new Franchise first", Icons.ERROR);
+                ControlWindow.ShowStatic("No Franchise Found", "Please create a new franchise first.", Icons.ERROR);
             }
         }
 
@@ -461,7 +461,7 @@ namespace SPTC_APP.View.Pages.Output
             }
             else
             {
-                ControlWindow.ShowStatic("No Franchise detected!", "Cannot proceed. Create new Franchise first", Icons.ERROR);
+                ControlWindow.ShowStatic("No Franchise Found", "Please create a new franchise first.", Icons.ERROR);
             }
         }
         private async void btnAddViolation_Click(object sender, RoutedEventArgs e)
@@ -474,7 +474,7 @@ namespace SPTC_APP.View.Pages.Output
             }
             else
             {
-                ControlWindow.ShowStatic("No Franchise detected!", "Cannot proceed. Create new Franchise first", Icons.ERROR);
+                ControlWindow.ShowStatic("No Franchise Found", "Please create a new franchise first.", Icons.ERROR);
             }
         }
         private async void btnAddClick(object sender, RoutedEventArgs e)

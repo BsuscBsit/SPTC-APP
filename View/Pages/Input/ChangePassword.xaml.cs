@@ -154,17 +154,17 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     AppState.USER?.updatePass(pbPassword.Password, pbPassword2.Password);
                     AppState.USER?.Save();
-                    ControlWindow.ShowStatic("Change Password", "Password changed successfully", Icons.NOTIFY);
+                    ControlWindow.ShowStatic("Success", "Password has been changed successfully.", Icons.NOTIFY);
                     this.Close();
                 }
                 else
                 {
-                    ControlWindow.ShowStatic("Wrong Password", "New passwords do not match", Icons.NOTIFY);
+                    ControlWindow.ShowStatic("Check Passwords", "New passwords do not match.", Icons.NOTIFY);
                 }
             }
             else
             {
-                ControlWindow.ShowStatic("Wrong Password", "Complete the password input", Icons.NOTIFY);
+                ControlWindow.ShowStatic("Failed", "Please complete the password inputs.", Icons.NOTIFY);
             }
         }
 

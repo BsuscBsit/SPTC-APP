@@ -86,7 +86,7 @@
             x:Name="franchiseInformation"
             Grid.Row="1"
             Grid.Column="1"
-            Width="0">
+            Width="280">
             <Border
                 MaxWidth="250"
                 Margin="24,0,0,0"
@@ -192,6 +192,14 @@
                         VerticalAlignment="Center"
                         Content="Label7"
                         Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontSmall}" />
+                    <Label
+                        x:Name="lblI1_Copy"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Content="DIERO reneel Monteclaro eStReLlA"
+                        FontWeight="Normal"
+                        Foreground="Black"
                         Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblI1"

@@ -36,7 +36,7 @@
             Grid.ColumnSpan="3"
             Margin="20,0,0,0"
             HorizontalAlignment="Left"
-            Content="APPLY FOR LOAN"
+            Content="ADD LOAN"
             Style="{StaticResource CommonTitlePreset}" />
         <Grid Grid.Row="3" Grid.Column="1">
             <Grid.ColumnDefinitions>
@@ -308,9 +308,6 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label
                             Grid.ColumnSpan="2"
@@ -330,28 +327,28 @@
                             Grid.Row="2"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="- Processing Fee: "
+                            Content="Processing Fee: "
                             Style="{StaticResource LabelFontSmall}" />
                         <Label
                             x:Name="LBLCBU"
                             Grid.Row="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="- CBU: "
+                            Content="CBU: "
                             Style="{StaticResource LabelFontSmall}" />
                         <Label
                             x:Name="LBLINTER"
                             Grid.Row="4"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="- Interest: "
+                            Content="Interest: "
                             Style="{StaticResource LabelFontSmall}" />
                         <Label
                             Grid.Row="5"
                             Grid.ColumnSpan="2"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="Computed Principal(COH/CIB):"
+                            Content="Principal (COH/CIB):"
                             Style="{StaticResource LabelFontMedium}" />
                         <Label
                             Grid.Row="7"
@@ -362,35 +359,28 @@
                             Content="Breakdown in Monthly"
                             Style="{StaticResource SubTitlePreset}" />
                         <Label
-                            Grid.Row="8"
-                            Margin="0,12,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Content="Principal: "
-                            Style="{StaticResource LabelFontSmall}" />
-                        <Label
                             x:Name="LBLLOANREC"
-                            Grid.Row="9"
+                            Grid.Row="8"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="Loan Receivable:"
                             Style="{StaticResource LabelFontSmall}" />
                         <Label
                             x:Name="LBLINTEREC"
-                            Grid.Row="10"
+                            Grid.Row="9"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="Interest Receivable: "
                             Style="{StaticResource LabelFontSmall}" />
                         <Label
-                            Grid.Row="11"
+                            Grid.Row="10"
                             Grid.ColumnSpan="2"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="Total:"
+                            Content="Payment Per Month:"
                             Style="{StaticResource LabelFontMedium}" />
                         <Label
-                            Grid.Row="13"
+                            Grid.Row="12"
                             Margin="0,15,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
@@ -403,7 +393,7 @@
                             VerticalAlignment="Top"
                             Fill="{StaticResource BrushSoftGrey2}" />
                         <Rectangle
-                            Grid.Row="12"
+                            Grid.Row="11"
                             Grid.ColumnSpan="2"
                             Height="2"
                             VerticalAlignment="Top"
@@ -457,47 +447,37 @@
                             Foreground="{StaticResource BrushDeepGreen}"
                             Style="{StaticResource LabelFontLarge}" />
                         <Label
-                            x:Name="lblPrincipalTotal2"
+                            x:Name="lblLoanRecievableTotal"
                             Grid.Row="8"
                             Grid.Column="1"
-                            Margin="0,12,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="N/A"
-                            Foreground="{StaticResource BrushDeepGreen}"
+                            Foreground="{StaticResource BrushDeepBlue}"
                             Style="{StaticResource LabelFontSmall}" />
                         <Label
-                            x:Name="lblLoanRecievableTotal"
+                            x:Name="lblInterestRecievableTotal"
                             Grid.Row="9"
                             Grid.Column="1"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="N/A"
-                            Foreground="{StaticResource BrushDeepGreen}"
-                            Style="{StaticResource LabelFontSmall}" />
-                        <Label
-                            x:Name="lblInterestRecievableTotal"
-                            Grid.Row="10"
-                            Grid.Column="1"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Content="N/A"
-                            Foreground="{StaticResource BrushDeepGreen}"
+                            Foreground="{StaticResource BrushDeepBlue}"
                             Style="{StaticResource LabelFontSmall}" />
                         <Label
                             x:Name="lblBreakdownTotal"
-                            Grid.Row="12"
+                            Grid.Row="11"
                             Grid.ColumnSpan="2"
                             Margin="0,5,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="N/A"
                             FontWeight="Bold"
-                            Foreground="{StaticResource BrushDeepGreen}"
-                            Style="{StaticResource LabelFontMedium}" />
+                            Foreground="{StaticResource BrushDeepBlue}"
+                            Style="{StaticResource LabelFontLarge}" />
                         <Label
                             x:Name="lblPenalty"
-                            Grid.Row="13"
+                            Grid.Row="12"
                             Grid.Column="1"
                             Margin="0,15,0,0"
                             HorizontalAlignment="Left"

@@ -112,11 +112,11 @@ namespace SPTC_APP.Objects
                     employee.Save();
                 } else
                 {
-                    ControlWindow.ShowStatic("Password Incorrect", "Password doesnt match", Icons.ERROR);
+                    ControlWindow.ShowStatic("Incorrect Password", "Passwords do not match.", Icons.ERROR);
                 }
             } else
             {
-                ControlWindow.ShowStatic("Password Incorrect", "Password doesnt match", Icons.ERROR);
+                ControlWindow.ShowStatic("Incorrect Password", "Passwords do not match.", Icons.ERROR);
             }
         }
 
@@ -131,7 +131,7 @@ namespace SPTC_APP.Objects
             }
             else
             {
-                ControlWindow.ShowStatic("Password reset failed", "Cannot reset password", Icons.ERROR);
+                ControlWindow.ShowStatic("Password Reset Failed", "Cannot reset the password.", Icons.ERROR);
                 return false;
             }
         }

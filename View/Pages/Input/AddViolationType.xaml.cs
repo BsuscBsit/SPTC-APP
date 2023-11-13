@@ -23,6 +23,7 @@ namespace SPTC_APP.View.Pages.Input
     /// </summary>
     public partial class AddViolationType : Window
     {
+        private string closingMSG;
         public AddViolationType()
         {
             InitializeComponent();
@@ -36,12 +37,13 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
-
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            this.closingMSG = "Adding violation type was cancelled.";
             this.Close();
         }
 
@@ -56,14 +58,15 @@ namespace SPTC_APP.View.Pages.Input
                     ViolationType violationType = new ViolationType();
                     violationType.WriteInto(tbTitle.Text, tbDescription.Text, numofdays, General.DRIVER);
                     violationType.Save();
+                    this.closingMSG = "Adding violation type was successful.";
                     this.Close();
                 } else
                 {
-                    ControlWindow.ShowStatic("Input Error", "Some required fields in empty", Icons.DEFAULT);
+                    ControlWindow.ShowStatic("Found Empty Fields", "Some required fields are empty.\n Please fill them up before continuing.", Icons.DEFAULT);
                 }
             } else
             {
-                ControlWindow.ShowStatic("Input Incomplete", "Some required fields in empty", Icons.DEFAULT);
+                ControlWindow.ShowStatic("Found Empty Fields", "Some required fields are empty.\n Please fill them up before continuing.", Icons.DEFAULT);
             }
         }
         

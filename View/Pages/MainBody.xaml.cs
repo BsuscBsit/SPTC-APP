@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -46,9 +47,13 @@ namespace SPTC_APP.View.Pages
             this.Close();
         }
 
-        public void displayToast(string message, double duration)
+        public void displayToast(string message, double duration = 5)
         {
-            new Toast(gridToast, message, duration);
+            System.Windows.Media.Brush bg = message.Contains("success") ? 
+                FindResource("BrushDeepGreen") as System.Windows.Media.Brush : 
+                FindResource("BrushRed") as System.Windows.Media.Brush;
+
+            new Toast(gridToast, message, duration, true, 0.2, System.Windows.Media.Brushes.White, bg);
         }
 
         public async void ResetWindow(General where, bool hasSelection = false)
@@ -136,10 +141,10 @@ namespace SPTC_APP.View.Pages
             selectedFranchise = null;
             if (selectedButton != null)
             {
-                selectedButton.Background = Brushes.White;
+                selectedButton.Background = System.Windows.Media.Brushes.White;
             }
             
-            button.Background = Brushes.Yellow;
+            button.Background = FindResource("BrushYellow") as System.Windows.Media.Brush;
             selectedButton = button;
             if (selectedButton == BtnBoardMember)
             {
@@ -322,8 +327,8 @@ namespace SPTC_APP.View.Pages
         }
         private void SearchBarResize(bool isMinimize = false)
         {
-            
-            if(sbBorder.Height != double.NaN)
+
+            /*if(sbBorder.Height != double.NaN)
             {
                 if(sbBorder.Height == 40 && !isMinimize)
                 {
@@ -335,7 +340,21 @@ namespace SPTC_APP.View.Pages
                     sbBorder.AnimateHeight(40, 0.3);
                     epektos.IsEnabled = false;
                 }
+            }*/
+            if (!double.IsNaN(sbBorder.Height))
+            {
+                if (sbBorder.Height == 40 && !isMinimize)
+                {
+                    sbBorder.AnimateHeight(272, 0.3);
+                    epektos.IsEnabled = true;
+                }
+                else
+                {
+                    sbBorder.AnimateHeight(40, 0.3);
+                    epektos.IsEnabled = false;
+                }
             }
+
         }
 
         private void cbSearch_LostFocus_1(object sender, RoutedEventArgs e)

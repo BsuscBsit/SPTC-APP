@@ -13,6 +13,10 @@
     <Color x:Key="ColorGreen">#60C961</Color>
     <Color x:Key="ColorDeepGreen">#317F40</Color>
     <Color x:Key="ColorDeepYellow">#C7C201</Color>
+    <Color x:Key="ColorOrange">#FFC04D</Color>
+    <Color x:Key="ColorDeepOrange">#CC7000</Color>
+    <Color x:Key="ColorBlue">#3385ff</Color>
+    <Color x:Key="ColorDeepBlue">#0052cc</Color>
 
 
     <!--  Brush Version  -->
@@ -24,6 +28,10 @@
     <SolidColorBrush x:Key="BrushMildBlack" Color="{StaticResource ColorMildBlack}" />
     <SolidColorBrush x:Key="BrushYellow" Color="{StaticResource ColorYellow}" />
     <SolidColorBrush x:Key="BrushDeepYellow" Color="{StaticResource ColorDeepYellow}" />
+    <SolidColorBrush x:Key="BrushOrange" Color="{StaticResource ColorOrange}" />
+    <SolidColorBrush x:Key="BrushDeepOrange" Color="{StaticResource ColorDeepOrange}" />
+    <SolidColorBrush x:Key="BrushBlue" Color="{StaticResource ColorBlue}" />
+    <SolidColorBrush x:Key="BrushDeepBlue" Color="{StaticResource ColorDeepBlue}" />
     <SolidColorBrush x:Key="BrushGrey" Color="{StaticResource ColorGrey}" />
     <SolidColorBrush x:Key="BrushSoftGrey1" Color="{StaticResource ColorSoftGrey1}" />
     <SolidColorBrush x:Key="BrushSoftGrey2" Color="{StaticResource ColorSoftGrey2}" />

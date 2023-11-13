@@ -25,7 +25,7 @@ namespace SPTC_APP.View.Pages.Input
     public partial class AddLoan : Window
     {
         Franchise franchise;
-
+        private string closingMSG;
         Ledger.Loan loan;
         public AddLoan(Franchise franchise)
         {
@@ -47,18 +47,19 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
-            
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            this.closingMSG = "Adding loan payment history was canceled.";
             this.Close();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ControlWindow.ShowTwoway("Adding new record", "Confirm?", Icons.NOTIFY))
+            if (ControlWindow.ShowTwoway("Adding Loan Payment", "Do you confirm this transaction?", Icons.NOTIFY))
             {
                 double amount = Double.TryParse(tboxAmount.Text, out amount) ? amount : 0;
                 double interest = Double.TryParse(tboxInterest.Text, out interest) ? interest : 0;
@@ -74,10 +75,8 @@ namespace SPTC_APP.View.Pages.Input
                     }
                     loanPayment.Save();
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                    closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";
                     this.Close();
-                } else
-                {
-
                 }
             }
         }

@@ -19,6 +19,7 @@ namespace SPTC_APP.View.Pages.Input
         int currentmonth;
         int currentyear;
         private string[] monthAbbreviations = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
+
         public Recapitulations()
         {
             InitializeComponent();
@@ -34,11 +35,6 @@ namespace SPTC_APP.View.Pages.Input
             base.OnClosing(e);
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -106,23 +102,22 @@ namespace SPTC_APP.View.Pages.Input
                 RecapDisplay recapDisplay = new RecapDisplay(r, recaps.IndexOf(r));
                 recapgrid.Children.Add(recapDisplay.AddSelf());
 
-                
+                total += r.content;
+                recapDisplay.getDelete().MouseLeave += click_remove;
             }
             tbTotal.Text = total.ToString("0.00");
         }
 
         private void click_remove(object sender, MouseEventArgs e)
         {
-            if(sender is Button btn){
+            if (sender is Button btn)
+            {
                 if (btn.Tag?.ToString().Equals("DELETED") ?? false)
                 {
-                    
+                    UpdateRecap();
                 }
-
-                UpdateRecap();
             }
         }
-
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {

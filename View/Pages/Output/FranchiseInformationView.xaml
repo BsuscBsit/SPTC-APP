@@ -137,7 +137,6 @@
                     MaxHeight="118"
                     Margin="12,50,12,12">
                     <Grid
-                        Height="119"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
@@ -197,7 +196,7 @@
                             VerticalAlignment="Center"
                             Content="Contact #:"
                             Foreground="DarkGray"
-                            Style="{StaticResource LabelFontSmall}" />
+                            Style="{StaticResource LabelFontSmall}" Visibility="Collapsed" />
                         <Label
                             x:Name="connumber"
                             Grid.Row="2"
@@ -205,7 +204,7 @@
                             VerticalAlignment="Center"
                             Content="N/A"
                             Foreground="Black"
-                            Style="{StaticResource LabelFontMedium}" />
+                            Style="{StaticResource LabelFontMedium}" Visibility="Collapsed" />
 
                         <Label
                             Grid.Row="3"

@@ -212,57 +212,55 @@ namespace SPTC_APP.View.Pages.Input
 
                     #endregion
 
-                    double lr = Math.Round(loanReceivable, 2);
-                    double tf = Math.Round(totalFinal, 2);
-                    string principalStr = principal.ToString();
-                    string pfFinalStr = pfFinal.ToString();
-                    string cbuFinalStr = cbuFinal.ToString();
-                    string interestRecStr = interestReceivable.ToString();
+                    string principalStr = principal.ToString("N2");
+                    string pfFinalStr = pfFinal.ToString("N2");
+                    string cbuFinalStr = cbuFinal.ToString("N2");
+                    string interestRecStr = interestReceivable.ToString("N2");
 
                     switch (cbLoanType.SelectedIndex)
                     {
                         case 0:
                             UpdateLabels(
-                                userVars[0].ToString(),
-                                pfFinalStr,
-                                interestFinal.ToString(),
+                                "₱" + userVars[0].ToString("N2"),
+                                "₱" + pfFinalStr,
+                                "₱" + interestFinal.ToString("N2"),
                                 (SolidColorBrush)FindResource("BrushRed"),
                                 "Already deducted.",
                                 (SolidColorBrush)FindResource("BrushRed"),
-                                cbuFinalStr,
-                                principalStr,
-                                lr.ToString(),
-                                tf.ToString(),
+                                "₱" + cbuFinalStr,
+                                "₱" + principalStr,
+                                "₱" + loanReceivable.ToString("N2"),
+                                "₱" + totalFinal.ToString("N2"),
                                 true);
                             break;
 
                         case 1:
                             UpdateLabels(
-                                userVars[0].ToString(),
-                                pfFinalStr,
+                                "₱" + userVars[0].ToString("N2"),
+                                "₱" + pfFinalStr,
                                 "Not deducted yet.",
                                 (SolidColorBrush)FindResource("BrushDeepGreen"),
-                                interestRecStr,
+                                "₱" + interestRecStr,
                                 (SolidColorBrush)FindResource("BrushDeepGreen"),
                                 cbuFinalStr,
-                                principalStr,
-                                lr.ToString(),
-                                tf.ToString(),
+                                "₱" + principalStr,
+                                "₱" + loanReceivable.ToString("N2"),
+                                "₱" + totalFinal.ToString("N2"),
                                 false);
                             break;
 
                         case 2:
                             UpdateLabels(
-                                userVars[0].ToString(),
-                                $"{pfFinalStr} (To pay)",
+                                "₱" + userVars[0].ToString("N2"),
+                                $"₱{pfFinalStr} (To pay)",
                                 "Not deducted yet.",
                                 (SolidColorBrush)FindResource("BrushDeepGreen"),
                                 interestRecStr,
                                 (SolidColorBrush)FindResource("BrushDeepGreen"),
-                                $"{cbuFinalStr} (To pay)",
-                                principalStr,
-                                lr.ToString(),
-                                tf.ToString(),
+                                $"₱{cbuFinalStr} (To pay)",
+                                "₱" + principalStr,
+                                "₱" + loanReceivable.ToString("N2"),
+                                "₱" + totalFinal.ToString("N2"),
                                 true);
                             break;
 
@@ -295,7 +293,7 @@ namespace SPTC_APP.View.Pages.Input
                         this.isLoan = isLoan;
                     }
 
-                    lblPenalty.Content = penalty.ToString();
+                    lblPenalty.Content = "₱" + penalty.ToString("N2");
                 }
             }
             else
@@ -396,6 +394,37 @@ namespace SPTC_APP.View.Pages.Input
                         maxMont = 3;
                         break;
                 }
+
+                if (tbAmount != null)
+                {
+                    if (double.TryParse(tbAmount.Text, out double newAmount))
+                    {
+                        if (newAmount > maxLoan)
+                        {
+                            tbAmount.Text = maxLoan.ToString();
+                        }
+                        else if (newAmount < minLoan)
+                        {
+                            tbAmount.Text = minLoan.ToString();
+                        }
+                    }
+                }
+
+                if (tbLoanLen != null)
+                {
+                    if (double.TryParse(tbLoanLen.Text, out double newLoanLen))
+                    {
+                        if (newLoanLen > maxMont)
+                        {
+                            tbLoanLen.Text = maxMont.ToString();
+                        }
+                        else if (newLoanLen < minMont)
+                        {
+                            tbLoanLen.Text = minMont.ToString();
+                        }
+                    }
+                }
+
             }
         }
         private bool ValidSize()

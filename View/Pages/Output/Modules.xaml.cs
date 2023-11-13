@@ -240,7 +240,7 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("violationLevelCount", "NO.", minWidth: 60, isNumeric : true),
+                    //new ColumnConfiguration("violationLevelCount", "NO.", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("violationType", "VIOLATION", minWidth: 80),
                     new ColumnConfiguration("dDate", "DATE", minWidth : 60, isNumeric : true),
                     new ColumnConfiguration("dDateStart", "FROM: ", minWidth: 60, isNumeric:true),

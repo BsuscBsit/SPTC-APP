@@ -695,16 +695,12 @@
                         </TextBox>
                     </Grid>
                 </Grid>
-
-
             </Border>
-
         </Canvas>
         <Grid
             x:Name="gridToast"
-            Grid.RowSpan="4"
-            Grid.ColumnSpan="3"
+            Grid.RowSpan="2"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom" />
+            VerticalAlignment="Top" Grid.Row="2" Margin="0,24,0,0" Grid.Column="1" />
     </Grid>
 </Window>

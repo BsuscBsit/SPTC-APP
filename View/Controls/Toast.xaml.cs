@@ -1,17 +1,12 @@
 ﻿using SPTC_APP.View.Styling;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SPTC_APP.View.Controls
 {
@@ -20,14 +15,23 @@ namespace SPTC_APP.View.Controls
     /// </summary>
     public partial class Toast : Window
     {
-        public Toast(Grid targetGrid, string msg, double persistDuration = 1.5, bool doBeep = true, double animationDuration = 0.2)
+        public Toast(
+            Grid targetGrid,
+            string msg,
+            double persistDuration = 1.5,
+            bool doBeep = true,
+            double animationDuration = 0.2,
+            System.Windows.Media.Brush fg = null,
+            System.Windows.Media.Brush bg = null)
         {
+            InitializeComponent();
             if (doBeep)
             {
-                System.Media.SystemSounds.Beep.Play();
+                System.Media.SystemSounds.Exclamation.Play();
             }
-            InitializeComponent();
             message.Text = msg;
+            message.Foreground = fg ?? FindResource("BrushBlack") as System.Windows.Media.Brush;
+            border.Background = bg ?? System.Windows.Media.Brushes.White;
 
             parent.Children.Remove(toast);
             targetGrid.Children.Add(toast);

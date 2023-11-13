@@ -13,7 +13,9 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid
-        x:Name="AddViolation" Height="500" Width="628">
+        x:Name="AddViolation"
+        Width="628"
+        Height="500">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
@@ -58,11 +60,12 @@
         <Label
             Grid.Row="4"
             Grid.Column="4"
+            Grid.ColumnSpan="2"
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Select Effective Date:"
-            Style="{StaticResource TextFieldLabelingPreset}" Grid.ColumnSpan="2" />
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             Grid.Row="4"
             Grid.Column="1"
@@ -84,11 +87,12 @@
             Grid.Column="2"
             Width="164"
             Height="30"
+            Margin="15,0,0,0"
             Padding="5,0,5,0"
             Background="White"
             BorderBrush="Gray"
             BorderThickness="1"
-            CornerRadius="5" Margin="15,0,0,0">
+            CornerRadius="5">
             <DatePicker
                 x:Name="dpViolationDate"
                 Height="31"
@@ -125,12 +129,13 @@
             Grid.Row="5"
             Grid.Column="1"
             Grid.ColumnSpan="2"
+            Width="340"
             Margin="15,15,0,0"
             Padding="15,15,15,15"
             Background="White"
             BorderBrush="{StaticResource BrushGrey}"
             BorderThickness="1"
-            CornerRadius="10" Width="340">
+            CornerRadius="10">
             <TextBlock
                 x:Name="txtBlockDesc"
                 Background="White"
@@ -144,11 +149,13 @@
             x:Name="tboxRemarks"
             Grid.Row="6"
             Grid.Column="1"
+            Grid.ColumnSpan="5"
+            Width="482.4"
             Height="30"
             Margin="80,15,0,0"
             VerticalAlignment="Top"
             Style="{StaticResource CommonTextBoxStyle}"
-            Text="" Grid.ColumnSpan="5" Width="482.4" />
+            Text="" />
         <StackPanel
             Grid.Row="9"
             Grid.Column="0"

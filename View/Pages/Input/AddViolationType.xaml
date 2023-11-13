@@ -55,16 +55,19 @@
             <Button
                 x:Name="btnCancel"
                 Width="178"
+                Click="btnCancel_Click"
                 Content="CANCEL"
                 Style="{StaticResource CommonButtonStyle}"
-                TabIndex="4" Click="btnCancel_Click" />
+                TabIndex="4" />
             <Button
                 x:Name="btnSave"
                 Width="178"
                 Margin="15,0,0,0"
+                Click="btnSave_Click"
                 Content="SAVE"
+                IsDefault="True"
                 Style="{StaticResource CommonButtonStyle}"
-                TabIndex="5" Click="btnSave_Click" />
+                TabIndex="5" />
         </StackPanel>
         <Grid
             x:Name="gridToast"
@@ -109,9 +112,13 @@
             Grid.Row="6"
             Grid.Column="1"
             Grid.ColumnSpan="3"
+            Width="367"
             Height="115"
             Margin="15,0,0,0"
-            Style="{StaticResource CommonTextBoxStyle}" VerticalContentAlignment="Top" Width="367" TextWrapping="Wrap" AcceptsReturn="True"/>
+            VerticalContentAlignment="Top"
+            AcceptsReturn="True"
+            Style="{StaticResource CommonTextBoxStyle}"
+            TextWrapping="Wrap" />
         <TextBox
             x:Name="tbNumDays"
             Grid.Row="4"

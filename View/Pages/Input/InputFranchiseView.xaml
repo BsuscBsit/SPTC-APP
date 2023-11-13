@@ -178,18 +178,20 @@
                 x:Name="tboxIDNum1"
                 Grid.Row="1"
                 Grid.Column="0"
+                Width="261.6"
                 Height="30"
                 Margin="15,0,0,0"
-                Style="{StaticResource CommonTextBoxStyle}" Width="261.6" />
+                Style="{StaticResource CommonTextBoxStyle}" />
             <TextBox
                 x:Name="tboxIDNum2"
                 Grid.Row="1"
                 Grid.Column="2"
+                Width="260.8"
                 Height="30"
                 Margin="15,0,0,0"
                 VerticalAlignment="Top"
                 Style="{StaticResource CommonTextBoxStyle}"
-                Text="" Width="260.8" />
+                Text="" />
         </Grid>
         <StackPanel
             Grid.Row="9"
@@ -210,6 +212,7 @@
                 Margin="15,0,0,0"
                 Click="btnNextFranchiseInput_Click"
                 Content="NEXT"
+                IsDefault="True"
                 Style="{DynamicResource CommonButtonStyle}" />
         </StackPanel>
         <Grid

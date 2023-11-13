@@ -116,10 +116,11 @@
             <Label
                 Grid.Row="5"
                 Grid.Column=" 0"
+                Margin="0,15,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Content="Overdue Penalty %:"
-                Style="{StaticResource TextFieldLabelingPreset}" Margin="0,15,0,0" />
+                Style="{StaticResource TextFieldLabelingPreset}" />
             <Label
                 Grid.Row="6"
                 Margin="0,15,0,0"
@@ -174,11 +175,14 @@
                 Grid.Column="2"
                 Width="164"
                 Height="30"
+                Margin="15,0,0,0"
+                VerticalAlignment="Top"
                 IsReadOnly="True"
                 IsTabStop="False"
                 SelectedIndex="0"
-                Style="{DynamicResource CommonComboBox}" Margin="15,0,0,0" VerticalAlignment="Top" SelectionChanged="cbLoanType_SelectionChanged">
-                <ComboBoxItem Content="Short Term"/>
+                SelectionChanged="cbLoanType_SelectionChanged"
+                Style="{DynamicResource CommonComboBox}">
+                <ComboBoxItem Content="Short Term" />
                 <ComboBoxItem Content="Long Term" />
                 <ComboBoxItem Content="Emergency" />
             </ComboBox>
@@ -268,7 +272,8 @@
                 Grid.RowSpan="8"
                 Grid.Column="4"
                 Width="348"
-                VerticalAlignment="Center" Height="312">
+                Height="312"
+                VerticalAlignment="Center">
                 <Grid Margin="15,15,15,15">
                     <Border
                         Grid.Row="0"
@@ -320,13 +325,15 @@
                             VerticalAlignment="Center"
                             Content="Loan Amount: "
                             Style="{StaticResource LabelFontMedium}" />
-                        <Label x:Name="LBLPF"
+                        <Label
+                            x:Name="LBLPF"
                             Grid.Row="2"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="- Processing Fee: "
                             Style="{StaticResource LabelFontSmall}" />
-                        <Label x:Name="LBLCBU"
+                        <Label
+                            x:Name="LBLCBU"
                             Grid.Row="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"

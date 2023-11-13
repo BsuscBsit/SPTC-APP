@@ -46,37 +46,48 @@
             Content="ADD RECORD"
             Style="{DynamicResource CommonTitlePreset}" />
         <Label
+            Grid.Row="3"
             Grid.Column="1"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Content="TITLE: "
             FontSize="16"
-            Style="{StaticResource TextFieldLabelingPreset}" Grid.Row="3" />
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <TextBox
             x:Name="tbTitle"
+            Grid.Row="4"
+            Grid.Column="1"
             Width="164"
             Height="30"
+            Margin="15,0,0,0"
             Style="{StaticResource CommonTextBoxStyle}"
             TabIndex="1"
-            Text="" Grid.Row="4" Grid.Column="1" Margin="15,0,0,0" />
+            Text="" />
         <TextBox
             x:Name="tbContent"
+            Grid.Row="4"
+            Grid.Column="3"
             Width="164"
             Height="30"
+            Margin="15,0,0,0"
             Style="{StaticResource CommonTextBoxStyle}"
             TabIndex="2"
-            Text="" Grid.Row="4" Grid.Column="3" Margin="15,0,0,0" />
+            Text="" />
         <Label
+            Grid.Row="3"
             Grid.Column="3"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Content="CONTENT: "
             FontSize="16"
-            Style="{StaticResource TextFieldLabelingPreset}" Grid.Row="3" />
+            Style="{StaticResource TextFieldLabelingPreset}" />
         <StackPanel
+            Grid.Row="7"
+            Grid.ColumnSpan="5"
+            Margin="0,0,0,24"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="5" Margin="0,0,0,24">
+            Orientation="Horizontal">
             <Button
                 x:Name="btnCancel"
                 Width="178"
@@ -90,6 +101,7 @@
                 Margin="15,0,0,0"
                 Click="btnSave_Click"
                 Content="SAVE"
+                IsDefault="True"
                 Style="{StaticResource CommonButtonStyle}"
                 TabIndex="5" />
         </StackPanel>

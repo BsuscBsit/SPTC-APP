@@ -280,6 +280,7 @@
                 Margin="15,0,0,0"
                 Click="btnSave_Click"
                 Content="SAVE"
+                IsDefault="True"
                 Style="{StaticResource CommonButtonStyle}"
                 TabIndex="11" />
         </StackPanel>

@@ -31,7 +31,7 @@ namespace SPTC_APP.Objects
             {
                 get
                 {
-                    return date.ToString("MMMM dd, yyyy");
+                    return date.ToString("MM/dd/yyyy");
                 }
             }
             public double paymentDues
@@ -208,7 +208,7 @@ namespace SPTC_APP.Objects
             {
                 get
                 {
-                    return date.ToString("MMMM dd, yyyy");
+                    return date.ToString("MM/dd/yyyy");
                 }
             }
             public double paymentDues

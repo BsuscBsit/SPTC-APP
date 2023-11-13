@@ -97,11 +97,11 @@ namespace SPTC_APP.View.Pages.Output
                 int pageIndex = 0;
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("Operator.name.legalName", "OPERATOR NAME", minWidth: 140, backgroundColor: Brushes.LightBlue),
-                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80),
-                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100),
-                    new ColumnConfiguration("MTOPNo", "MTOP NO.", minWidth: 100),
-                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100),
+                    new ColumnConfiguration("Operator.name.legalName", "OPERATOR NAME", minWidth: 140),
+                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter:true, isNumeric: true),
+                    new ColumnConfiguration("MTOPNo", "MTOP NO.", minWidth: 100, isCenter:true, isNumeric: true),
+                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true),
                 };
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
 
@@ -137,10 +137,10 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
                     new ColumnConfiguration("Operator.name.legalName", "NAME", minWidth: 140),
-                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80),
-                    new ColumnConfiguration("LicenseNO", "PLATE NO.", minWidth: 100),
-                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100),
-                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100),
+                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true),
+                    new ColumnConfiguration("LicenseNO", "PLATE NO.", minWidth: 100, isNumeric: true),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter : true, isNumeric : true),
+                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true),
                 };
                 DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(TableGrid, columnConfigurations);
 
@@ -177,8 +177,8 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     new ColumnConfiguration("name.legalName", "NAME", minWidth: 140),
                     new ColumnConfiguration("address", "ADDRESS", minWidth: 100),
-                    new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80),
-                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", minWidth: 80),
+                    new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80, isCenter : true, isNumeric : true),
+                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", minWidth: 80, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("franchise.Operator", "OPERATOR", minWidth: 120),
                 };
                 DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(TableGrid, columnConfigurations);

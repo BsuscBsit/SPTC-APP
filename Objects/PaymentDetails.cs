@@ -25,7 +25,7 @@ namespace SPTC_APP.Objects
         public string displayDate { 
             get
             {
-                return date.ToString("MMMM dd, yyyy");
+                return date.ToString("MM/dd/yyyy");
             }
         }
         public string monthyear

@@ -24,7 +24,7 @@ namespace SPTC_APP.Objects
         public double MonthlyDues { get { return (GetLoans()?.FirstOrDefault()?.paymentDues ?? 0) + (GetLTLoans()?.FirstOrDefault()?.paymentDues ?? 0) + AppState.TOTAL_SHARE_PER_MONTH; } }
         public double LoanBalance { get { return GetLoans()?.FirstOrDefault()?.amount ?? 0; } }
         public double LongTermLoanBalance { get { return GetLTLoans()?.FirstOrDefault()?.amount ?? 0; } }
-        public string displayBuyingDate { get { return BuyingDate.ToString("MMMM dd, yyyy"); } }
+        public string displayBuyingDate { get { return BuyingDate.ToString("MM/dd/yyyy"); } }
 
         private Upsert franchise;
 

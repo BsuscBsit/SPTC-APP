@@ -25,19 +25,8 @@ public class DataGridHelper<T>
             dataGrid.SelectionUnit = DataGridSelectionUnit.FullRow;
             dataGrid.AutoGenerateColumns = false;
 
-            Style rowStyle = new Style(typeof(DataGridRow));
-
-            DataTrigger selectedTrigger = new DataTrigger
-            {
-                Binding = new Binding("IsSelected"),
-                Value = true
-            };
-
-            selectedTrigger.Setters.Add(new Setter(DataGridRow.ForegroundProperty, Brushes.Red)); 
-
-            rowStyle.Triggers.Add(selectedTrigger);
-
-            dataGrid.RowStyle = rowStyle;
+            dataGrid.GridLinesVisibility = DataGridGridLinesVisibility.None;
+           
 
 
             foreach (var config in columnConfigurations)
@@ -49,24 +38,39 @@ public class DataGridHelper<T>
                     Width = new DataGridLength(config.Width, DataGridLengthUnitType.Star),
                     MinWidth = config.Width,
                     MaxWidth = config.MaxWidth,
+                    HeaderStyle = new Style
+                    {
+                        Setters =
+                        {
+                            new Setter(Control.FontWeightProperty, FontWeights.Bold),
+                            new Setter(Control.HorizontalContentAlignmentProperty, HorizontalAlignment.Center),
+                            new Setter(Control.FontFamilyProperty, new FontFamily("Inter")),
+                        }
+                    },
+                    
                     CellStyle = new System.Windows.Style
                     {
                         Setters =
                         {
-                            new Setter(System.Windows.Controls.Control.BackgroundProperty, config.BackgroundColor),
-                            new Setter(System.Windows.Controls.Control.FontWeightProperty, config.FontWeight),
-                            new Setter(System.Windows.Controls.Control.FontSizeProperty, config.FontSize),
-                            new Setter(System.Windows.Controls.Control.HeightProperty, config.Height)
+                            new Setter(Control.BackgroundProperty, config.BackgroundColor),
+                            new Setter(Control.ForegroundProperty, Brushes.Black),
+                            new Setter(Control.FontWeightProperty, config.FontWeight),
+                            new Setter(Control.HeightProperty, config.Height),
+                            new Setter(Control.FontSizeProperty, config.FontSize),
+                            new Setter(TextBlock.TextAlignmentProperty, config.Centralize? TextAlignment.Center: TextAlignment.Left),
+                            new Setter(Control.FontFamilyProperty, new FontFamily("Inter")),
+                            new Setter(Control.FontStretchProperty, config.Numeric? FontStretches.Expanded : FontStretches.Normal),
+                            new Setter(Control.VerticalContentAlignmentProperty, VerticalAlignment.Center)
                         }
                     },
                     Visibility = config.Visibility 
+
                 };
 
                 dataGrid.Columns.Add(column);
             }
             
         }
-
     }
 
     /// <summary>
@@ -80,9 +84,11 @@ public class DataGridHelper<T>
         public double Height { get; }
         public double MaxWidth { get; }
         public double FontSize { get; }
-        public System.Windows.Media.Brush BackgroundColor { get; }
-        public System.Windows.FontWeight FontWeight { get; }
-        public Visibility Visibility { get; } 
+        public bool Centralize { get; }
+        public bool Numeric { get; }
+        public Brush BackgroundColor { get; }
+        public FontWeight FontWeight { get; }
+        public Visibility Visibility { get; }
 
         public ColumnConfiguration(
             string bindingPath,
@@ -90,9 +96,11 @@ public class DataGridHelper<T>
             double minWidth = 100,
             double height = 30,
             double maxWidth = 200,
-            double fontSize = 10,
-            System.Windows.Media.Brush backgroundColor = null,
-            System.Windows.FontWeight? fontWeight = null,
+            double fontSize = 13,
+            bool isCenter = false,
+            bool isNumeric = false,
+            Brush backgroundColor = null,
+            FontWeight? fontWeight = null,
             Visibility visibility = Visibility.Visible) 
         {
             BindingPath = bindingPath;
@@ -101,9 +109,11 @@ public class DataGridHelper<T>
             Height = height;
             MaxWidth = maxWidth;
             FontSize = fontSize;
-            BackgroundColor = backgroundColor ?? System.Windows.Media.Brushes.White;
+            Centralize = isCenter;
+            Numeric = isNumeric;
+            BackgroundColor = backgroundColor ?? Brushes.White;
 
-            FontWeight = fontWeight.HasValue ? fontWeight.Value : System.Windows.FontWeights.Normal;
+            FontWeight = fontWeight.HasValue ? fontWeight.Value : FontWeights.SemiBold;
 
             Visibility = visibility;
         }

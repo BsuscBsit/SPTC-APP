@@ -46,7 +46,7 @@ namespace SPTC_APP
         public static List<KeyValuePair<string, double>> ThisMonthsChart;
 
         //Toggle on defore deploying
-        public static bool isDeployment = false;
+        public static bool isDeployment = true;
         public static bool isDeployment_IDGeneration = false;
 
         public static Window mainwindow = null;

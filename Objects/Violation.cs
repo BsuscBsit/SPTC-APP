@@ -19,15 +19,15 @@ namespace SPTC_APP.Objects
 
         public string dDate
         {
-            get { return violationDate.ToString("MMM dd, yyyy"); }
+            get { return violationDate.ToString("MM/dd/yyyy"); }
         }
         public string dDateStart
         {
-            get { return suspensionStart?.ToString("MMM dd, yyyy"); }
+            get { return suspensionStart?.ToString("MM/dd/yyyy"); }
         }
         public string dDateEnd
         {
-            get { return suspensionEnd?.ToString("MMM dd, yyyy"); }
+            get { return suspensionEnd?.ToString("MM/dd/yyyy"); }
         }
 
         public string violationType

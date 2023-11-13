@@ -68,19 +68,21 @@ namespace SPTC_APP.View.Pages.Output
 
         private void RenderFranchiseInformation()
         {
+            //TODO: Designs here
+
             if (strmod == SHARECAPITAL)
             { 
                 dgLedger.Items.Clear();
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
                     
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
-                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 80),
-                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 100),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
+                    new ColumnConfiguration("referenceNo", "OR#", minWidth: 60, isNumeric:true),
+                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("deposit", "SHARE CAPITAL", minWidth: 100),
-                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100),
-                    new ColumnConfiguration("penalties", "CBU", minWidth: 100),
-                    new ColumnConfiguration("balance", "TOTAL", minWidth: 100),
+                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("penalties", "CBU", minWidth: 100, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("balance", "TOTAL", minWidth: 100, isCenter: true, isNumeric: true),
                 };
                 DataGridHelper<PaymentDetails<Ledger.ShareCapital>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.ShareCapital>>(dgLedger, columnConfigurations);
 
@@ -97,15 +99,15 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
-                    new ColumnConfiguration("details", "DESCRIPTION", minWidth: 80),
-                    new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100),
-                    new ColumnConfiguration("cv_or", "CV/OR", minWidth: 100),
-                    new ColumnConfiguration("processingFee", "PROCESSING FEE", minWidth: 100),
-                    new ColumnConfiguration("cbu", "CBU", minWidth: 100),
-                    new ColumnConfiguration("termsofpayment", "MONTHS", minWidth: 100),
-                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100),
-                    new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 100),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
+                    new ColumnConfiguration("details", "DESCRIPTION", minWidth: 110),
+                    new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("cv_or", "OR#", minWidth: 60, isNumeric: true),
+                    new ColumnConfiguration("processingFee", "FEE", minWidth: 60, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("cbu", "CBU", minWidth: 60, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("termsofpayment", "MONTHS", minWidth: 50, isNumeric: true),
+                    new ColumnConfiguration("interest", "INT", minWidth: 60, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 120, isCenter: true, isNumeric: true),
                 };
                 DataGridHelper<object> dataGridHelper = new DataGridHelper<object>(dgLedger, columnConfigurations);
 
@@ -131,11 +133,11 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
-                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 80),
-                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 100),
-                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100),
-                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
+                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
+                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric : true),
+                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true),
                 };
                 DataGridHelper<PaymentDetails<Ledger.Loan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.Loan>>(dgLedger, columnConfigurations);
 
@@ -160,11 +162,11 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 100),
-                    new ColumnConfiguration("referenceNo", "REF NO.", minWidth: 80),
-                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 100),
-                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100),
-                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric: true),
+                    new ColumnConfiguration("referenceNo", "REF NO.", minWidth: 60, isNumeric : true),
+                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric:true),
+                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true),
                 };
                 DataGridHelper<PaymentDetails<Ledger.LongTermLoan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.LongTermLoan>>(dgLedger, columnConfigurations);
 
@@ -190,11 +192,11 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
                     
-                    new ColumnConfiguration("date", "DATE", minWidth: 100),
+                    new ColumnConfiguration("date", "DATE", minWidth : 60, isNumeric : true),
                     new ColumnConfiguration("ledgerType", "LEDGER TYPE", minWidth: 80),
-                    new ColumnConfiguration("referenceNo", "REFERENCE NO.", minWidth: 100),
-                    new ColumnConfiguration("balance", "BALANCE", minWidth: 100),
-                    new ColumnConfiguration("payment", "PAYMENT", minWidth: 100),
+                    new ColumnConfiguration("referenceNo", "REFERENCE NO.", minWidth : 60, isNumeric : true),
+                    new ColumnConfiguration("balance", "BALANCE", minWidth: 100, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("payment", "PAYMENT", minWidth: 100, isCenter: true, isNumeric: true),
                 };
                 DataGridHelper<PaymentHistory> dataGridHelper = new DataGridHelper<PaymentHistory>(dgHistory, columnConfigurations);
 
@@ -238,11 +240,11 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("violationLevelCount", "NO.", minWidth: 100),
+                    new ColumnConfiguration("violationLevelCount", "NO.", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("violationType", "VIOLATION", minWidth: 80),
-                    new ColumnConfiguration("dDate", "DATE", minWidth: 100),
-                    new ColumnConfiguration("dDateStart", "FROM: ", minWidth: 100),
-                    new ColumnConfiguration("dDateEnd", "TO: ", minWidth: 100),
+                    new ColumnConfiguration("dDate", "DATE", minWidth : 60, isNumeric : true),
+                    new ColumnConfiguration("dDateStart", "FROM: ", minWidth: 60, isNumeric:true),
+                    new ColumnConfiguration("dDateEnd", "TO: ", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("remarks", "REMARKS", minWidth: 100),
                 };
                 new DataGridHelper<PaymentHistory>(dgDriverViolation, columnConfigurations);

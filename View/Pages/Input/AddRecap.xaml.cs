@@ -29,6 +29,7 @@ namespace SPTC_APP.View.Pages.Input
             this.recaps = recap;
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); recaps?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+            cbTitle.ItemsSource = AppState.LIST_RECAP;
             DraggingHelper.DragWindow(topBar);
         }
         protected override void OnClosing(CancelEventArgs e)
@@ -40,8 +41,8 @@ namespace SPTC_APP.View.Pages.Input
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             double amount = Double.Parse(tbContent.Text);
-            string txt = tbTitle.Text;
-            if (amount != 0 && txt.Length > 0)
+            string txt = cbTitle.SelectedValue.ToString();
+            if (txt.Length > 0)
             {
                 Recap recap = new Recap(txt, amount);
                 recap.Save();

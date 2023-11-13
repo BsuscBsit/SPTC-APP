@@ -20,6 +20,10 @@ namespace SPTC_APP.View
             AppState.LoadFromJson();
             if(!AppState.isDeployment && !AppState.isDeployment_IDGeneration) pbPassword.Password = "Admin1234";
             cbUser.ItemsSource = AppState.Employees;
+            if((AppState.Employees?.Count ?? 0) < 4)
+            {
+                AppState.SaveToJson();
+            }
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             FocusPb();
@@ -35,6 +39,11 @@ namespace SPTC_APP.View
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
             pbPassword.Focus();
+            if ((AppState.Employees?.Count ?? 0) < 4)
+            {
+                ControlWindow.ShowStatic("Loading Error", "An error occured", Icons.ERROR);
+                this.Close();
+            }
         }
 
         // Styling

@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -36,6 +37,7 @@ namespace SPTC_APP
         public static int TABLE_BATCH_SIZE;
         public static double TOTAL_SHARE_PER_MONTH;
         public static string CAMERA_RESOLUTION;
+        public static Newtonsoft.Json.Linq.JArray LIST_RECAP;
 
         //NOT SAVED EXTERNALLY
         public static string[] ALL_EMPLOYEES;
@@ -222,6 +224,7 @@ namespace SPTC_APP
             TABLE_BATCH_SIZE = 2;
             TOTAL_SHARE_PER_MONTH = 100;
             CAMERA_RESOLUTION = "";
+            LIST_RECAP = new Newtonsoft.Json.Linq.JArray { "Cash On Hand", "Share Capital", "Monthly Dues", "Mutual Funds Payable", "Certification Fee", "Loan Receivable - Pastdue", "Loan Receivable - Current", "Change Motor - Entrance", "Change Motor - Motor", "Clearance Fee", "Miscelleneous Income", "Sales Trapal", "AIR-Stricker", "Penalties", "Interest Receivable", "Cash in Bank", "Rental Fee: Franchise", "Transfer Fees", "Membership Fee", "Seminar Fee" };
         }
         public static void SaveToJson()
         {
@@ -240,6 +243,7 @@ namespace SPTC_APP
                 TABLE_BATCH_SIZE,
                 TOTAL_SHARE_PER_MONTH,
                 CAMERA_RESOLUTION,
+                LIST_RECAP,
             };
 
             if (File.Exists(APPSTATE_PATH))
@@ -284,6 +288,7 @@ namespace SPTC_APP
                     TABLE_BATCH_SIZE = data.TABLE_BATCH_SIZE;
                     TOTAL_SHARE_PER_MONTH = data.TOTAL_SHARE_PER_MONTH;
                     CAMERA_RESOLUTION = data.CAMERA_RESOLUTION;
+                    LIST_RECAP = data.LIST_RECAP;
                     if (DatabaseConnection.HasConnection())
                     {
                         ALL_EMPLOYEES = Retrieve.GetDataUsingQuery<string>(RequestQuery.GET_LIST_OF_POSITION).ToArray();

@@ -34,7 +34,10 @@ public class DataGridHelper<T>
                 var column = new DataGridTextColumn
                 {
                     Header = config.Header,
-                    Binding = new System.Windows.Data.Binding(config.BindingPath),
+                    Binding = new System.Windows.Data.Binding(config.BindingPath)
+                    {
+                        StringFormat = config.HasSign ? $"\u20B1 {0:N2}" : null
+                    },
                     Width = new DataGridLength(config.Width, DataGridLengthUnitType.Star),
                     MinWidth = config.Width,
                     MaxWidth = config.MaxWidth,
@@ -58,9 +61,9 @@ public class DataGridHelper<T>
                             new Setter(Control.HeightProperty, config.Height),
                             new Setter(Control.FontSizeProperty, config.FontSize),
                             new Setter(TextBlock.TextAlignmentProperty, config.Centralize? TextAlignment.Center: TextAlignment.Left),
-                            new Setter(Control.FontFamilyProperty, new FontFamily("Inter")),
-                            new Setter(Control.FontStretchProperty, config.Numeric? FontStretches.Expanded : FontStretches.Normal),
-                            new Setter(Control.VerticalContentAlignmentProperty, VerticalAlignment.Center)
+                            new Setter(TextBlock.FontFamilyProperty, new FontFamily("Inter")),
+                            new Setter(TextBlock.FontStretchProperty, config.Numeric? FontStretches.Expanded : FontStretches.Normal),
+                            new Setter(Control.VerticalContentAlignmentProperty, VerticalAlignment.Center),
                         }
                     },
                     Visibility = config.Visibility 
@@ -86,6 +89,7 @@ public class DataGridHelper<T>
         public double FontSize { get; }
         public bool Centralize { get; }
         public bool Numeric { get; }
+        public bool HasSign { get; }
         public Brush BackgroundColor { get; }
         public FontWeight FontWeight { get; }
         public Visibility Visibility { get; }
@@ -99,6 +103,7 @@ public class DataGridHelper<T>
             double fontSize = 13,
             bool isCenter = false,
             bool isNumeric = false,
+            bool haspeso = false,
             Brush backgroundColor = null,
             FontWeight? fontWeight = null,
             Visibility visibility = Visibility.Visible) 
@@ -111,6 +116,7 @@ public class DataGridHelper<T>
             FontSize = fontSize;
             Centralize = isCenter;
             Numeric = isNumeric;
+            HasSign = haspeso;
             BackgroundColor = backgroundColor ?? Brushes.White;
 
             FontWeight = fontWeight.HasValue ? fontWeight.Value : FontWeights.SemiBold;

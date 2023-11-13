@@ -23,11 +23,11 @@ namespace SPTC_APP.Objects
         }
         public string dDateStart
         {
-            get { return suspensionStart?.ToString("MM/dd/yyyy"); }
+            get { return suspensionStart?.ToString("MM/dd"); }
         }
         public string dDateEnd
         {
-            get { return suspensionEnd?.ToString("MM/dd/yyyy"); }
+            get { return suspensionEnd?.ToString("MM/dd"); }
         }
 
         public string violationType

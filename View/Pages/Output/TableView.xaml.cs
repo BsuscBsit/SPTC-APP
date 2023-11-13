@@ -101,7 +101,7 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("MTOPNo", "MTOP NO.", minWidth: 100, isCenter:true, isNumeric: true),
-                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true),
+                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
 
@@ -140,7 +140,7 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("LicenseNO", "PLATE NO.", minWidth: 100, isCenter: true,isNumeric: true),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter : true, isNumeric : true),
-                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true),
+                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(TableGrid, columnConfigurations);
 
@@ -227,8 +227,8 @@ namespace SPTC_APP.View.Pages.Output
 
                     if (AppState.USER?.position?.title == AppState.Employees[0])
                     {
-                        ValuePairFI(lblF4, "Loan Balance: ", lblI4, "P "+MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
-                        ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, "P "+MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF4, "Loan Balance: ", lblI4, "\u20B1 "+ MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, "\u20B1 "+ MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
                         ValuePairFI(lblF6, "Reference: ", lblI6, MainBody.selectedFranchise?.Owner?.ToString() ?? "");
                         ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
                         
@@ -242,10 +242,10 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     else if(AppState.USER?.position?.title == AppState.Employees[2])
                     {
-                        ValuePairFI(lblF4, "Share Capital: ", lblI4, "P " + MainBody.selectedFranchise?.ShareCapital.ToString("0.00") ?? "0");
-                        ValuePairFI(lblF5, "Loan Balance: ", lblI5, "P " + MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
-                        ValuePairFI(lblF6, "LT Loan Balance: ", lblI6, "P " + MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
-                        ValuePairFI(lblF7, "Total Due for "+DateTime.Now.ToString("MMM")+": ", lblI7, "P " + MainBody.selectedFranchise?.MonthlyDues.ToString("0.00") ?? "");
+                        ValuePairFI(lblF4, "Share Capital: ", lblI4, "\u20B1 "+ MainBody.selectedFranchise?.ShareCapital.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF5, "Loan Balance: ", lblI5, "\u20B1 "+ MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF6, "LT Loan Balance: ", lblI6, "\u20B1 "+ MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF7, "Total Due for "+DateTime.Now.ToString("MMM")+": ", lblI7, "\u20B1 "+ MainBody.selectedFranchise?.MonthlyDues.ToString("0.00") ?? "");
                     } 
                     else if(AppState.USER?.position?.title == AppState.Employees[3])
                     {
@@ -273,8 +273,8 @@ namespace SPTC_APP.View.Pages.Output
 
                     if (AppState.USER?.position?.title == AppState.Employees[0])
                     {
-                        ValuePairFI(lblF4, "Loan Balance: ", lblI4, "P " + MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
-                        ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, "P " + MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF4, "Loan Balance: ", lblI4, "\u20B1 "+ MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, "\u20B1 "+ MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
                         ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
                         ValuePairFI(lblF7, "VOTERS ID No.: ", lblI7, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
                     }
@@ -287,10 +287,10 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[2])
                     {
-                        ValuePairFI(lblF4, "Share Capital: ", lblI4, "P " + MainBody.selectedFranchise?.ShareCapital.ToString("0.00") ?? "0");
-                        ValuePairFI(lblF5, "Loan Balance: ", lblI5, "P " + MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF4, "Share Capital: ", lblI4, "\u20B1 "+ MainBody.selectedFranchise?.ShareCapital.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF5, "Loan Balance: ", lblI5, "\u20B1 "+ MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
                         ValuePairFI(lblF6, "LT Loan Balance: ", lblI6, "P " + MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
-                        ValuePairFI(lblF7, "Due for " + DateTime.Now.ToString("MMM") + ": ", lblI7, "P " + MainBody.selectedFranchise?.MonthlyDues.ToString("0.00") ?? "");
+                        ValuePairFI(lblF7, "Due for " + DateTime.Now.ToString("MMM") + ": ", lblI7, "\u20B1 "+ MainBody.selectedFranchise?.MonthlyDues.ToString("0.00") ?? "");
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[3])
                     {

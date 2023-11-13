@@ -53,16 +53,18 @@
             Content="TITLE: "
             FontSize="16"
             Style="{StaticResource TextFieldLabelingPreset}" />
-        <TextBox
-            x:Name="tbTitle"
+        <ComboBox
+            x:Name="cbTitle"
             Grid.Row="4"
             Grid.Column="1"
             Width="164"
             Height="30"
             Margin="15,0,0,0"
-            Style="{StaticResource CommonTextBoxStyle}"
+            IsReadOnly="False"
+            IsEditable="True"
+            Style="{StaticResource CommonComboBox}"
             TabIndex="1"
-            Text="" />
+            />
         <TextBox
             x:Name="tbContent"
             Grid.Row="4"
@@ -72,7 +74,7 @@
             Margin="15,0,0,0"
             Style="{StaticResource CommonTextBoxStyle}"
             TabIndex="2"
-            Text="" />
+            Text="0" />
         <Label
             Grid.Row="3"
             Grid.Column="3"

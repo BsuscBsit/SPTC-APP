@@ -93,7 +93,6 @@ namespace SPTC_APP.View.Pages.Input
                 if(r.text == "Share Capital")
                 {
                     r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
-                    r.Save();
                 }
                 RowDefinition rowDefinition = new RowDefinition();
                 rowDefinition.Height = new GridLength(40);

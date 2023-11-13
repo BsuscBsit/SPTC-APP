@@ -77,12 +77,11 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
-                    new ColumnConfiguration("referenceNo", "OR#", minWidth: 60, isNumeric:true),
+                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric : true),
-                    new ColumnConfiguration("deposit", "SHARE CAPITAL", minWidth: 100),
-                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true),
-                    new ColumnConfiguration("penalties", "CBU", minWidth: 100, isCenter: true, isNumeric: true),
-                    new ColumnConfiguration("balance", "TOTAL", minWidth: 100, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("deposit", "SHARE CAPITAL", minWidth: 100, isCenter: true, isNumeric: true, haspeso: true),
+                    new ColumnConfiguration("penalties", "CBU", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("balance", "TOTAL", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
                 };
                 DataGridHelper<PaymentDetails<Ledger.ShareCapital>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.ShareCapital>>(dgLedger, columnConfigurations);
 
@@ -101,13 +100,13 @@ namespace SPTC_APP.View.Pages.Output
 
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
                     new ColumnConfiguration("details", "DESCRIPTION", minWidth: 120),
-                    new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true),
-                    new ColumnConfiguration("cv_or", "OR#", minWidth: 60, isNumeric: true),
-                    new ColumnConfiguration("processingFee", "FEE", minWidth: 60, isCenter: true, isNumeric: true),
-                    new ColumnConfiguration("cbu", "CBU", minWidth: 60, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("cv_or", "OR NO.", minWidth: 60, isNumeric: true),
+                    new ColumnConfiguration("processingFee", "FEE", minWidth: 60, isCenter: true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("cbu", "CBU", minWidth: 60, isCenter: true, isNumeric: true, haspeso:true),
                     new ColumnConfiguration("termsofpayment", "MONTHS", minWidth: 50, isNumeric: true),
-                    new ColumnConfiguration("interest", "INT", minWidth: 60, isCenter: true, isNumeric: true),
-                    new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 120, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("interest", "INT", minWidth: 60, isCenter: true, isNumeric: true, haspeso : true),
+                    new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 120, isCenter: true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<object> dataGridHelper = new DataGridHelper<object>(dgLedger, columnConfigurations);
 
@@ -136,8 +135,8 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric : true),
-                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true),
-                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
+                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<PaymentDetails<Ledger.Loan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.Loan>>(dgLedger, columnConfigurations);
 
@@ -163,10 +162,10 @@ namespace SPTC_APP.View.Pages.Output
                 {
 
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric: true),
-                    new ColumnConfiguration("referenceNo", "REF NO.", minWidth: 60, isNumeric : true),
+                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric:true),
-                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true),
-                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
+                    new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true , haspeso : true),
                 };
                 DataGridHelper<PaymentDetails<Ledger.LongTermLoan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.LongTermLoan>>(dgLedger, columnConfigurations);
 
@@ -194,9 +193,9 @@ namespace SPTC_APP.View.Pages.Output
                     
                     new ColumnConfiguration("date", "DATE", minWidth : 60, isNumeric : true),
                     new ColumnConfiguration("ledgerType", "LEDGER TYPE", minWidth: 80),
-                    new ColumnConfiguration("referenceNo", "REFERENCE NO.", minWidth : 60, isNumeric : true),
-                    new ColumnConfiguration("balance", "BALANCE", minWidth: 100, isCenter: true, isNumeric: true),
-                    new ColumnConfiguration("payment", "PAYMENT", minWidth: 100, isCenter: true, isNumeric: true),
+                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth : 60, isNumeric : true),
+                    new ColumnConfiguration("balance", "BALANCE", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
+                    new ColumnConfiguration("payment", "PAYMENT", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<PaymentHistory> dataGridHelper = new DataGridHelper<PaymentHistory>(dgHistory, columnConfigurations);
 
@@ -242,7 +241,7 @@ namespace SPTC_APP.View.Pages.Output
 
                     //new ColumnConfiguration("violationLevelCount", "NO.", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("violationType", "VIOLATION", minWidth: 80),
-                    new ColumnConfiguration("dDate", "DATE", minWidth : 60, isNumeric : true),
+                    new ColumnConfiguration("dDate", "DATE", minWidth : 80, isNumeric : true),
                     new ColumnConfiguration("dDateStart", "FROM: ", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("dDateEnd", "TO: ", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("remarks", "REMARKS", minWidth: 100),
@@ -265,7 +264,7 @@ namespace SPTC_APP.View.Pages.Output
 
                     new ColumnConfiguration("Operator.name.legalName", "OWNER", minWidth: 100),
                     new ColumnConfiguration("displayBuyingDate", "DATE", minWidth: 80),
-                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, haspeso:true),
                 };
                 new DataGridHelper<PaymentHistory>(dgTransfer, columnConfigurations);
                 List<Franchise> franchises = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_ALL_FRANCHISE_WITH_BODYNUM(franchise.BodyNumber));

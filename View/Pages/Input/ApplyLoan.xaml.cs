@@ -88,7 +88,7 @@ namespace SPTC_APP.View.Pages.Input
                 }
                 else // if LONG TERM LOAN
                 {
-                    this.loantext = "LONGTERMLOAN";
+                    //this.loantext = "LONGTERMLOAN";
 
                     Ledger.LongTermLoan ltloan = new Ledger.LongTermLoan();
                     ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount,this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
@@ -332,12 +332,15 @@ namespace SPTC_APP.View.Pages.Input
                 switch (preset)
                 {
                     case 0:
+                        this.loantext = "SHORTTERMLOAN";
                         tbLoanLen.Text = "6";
                         break;
                     case 1:
+                        this.loantext = "LONGTERMLOAN";
                         tbLoanLen.Text = "12";
                         break;
                     case 2:
+                        this.loantext = "EMERGENCYLOAN";
                         tbLoanLen.Text = "3";
                         break;
                 }
@@ -347,18 +350,21 @@ namespace SPTC_APP.View.Pages.Input
                 switch (preset)
                 {
                     case 0:
+                        this.loantext = "SHORTTERMLOAN";
                         minLoan = 0;
                         maxLoan = 30000;
                         minMont = 6;
                         maxMont = null;
                         break;
                     case 1:
+                        this.loantext = "LONGTERMLOAN";
                         minLoan = 31000;
                         maxLoan = null;
                         minMont = 12;
                         maxMont = null;
                         break;
                     case 2:
+                        this.loantext = "EMERGENCYLOAN";
                         minLoan = 0;
                         maxLoan = 3000;
                         minMont = null;

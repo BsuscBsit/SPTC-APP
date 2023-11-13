@@ -194,10 +194,11 @@
                             Grid.Row="2"
                             Grid.Column="1"
                             VerticalAlignment="Center"
-                            Content="Reference:"
+                            Content="Contact #:"
                             Foreground="DarkGray"
                             Style="{StaticResource LabelFontSmall}" Visibility="Collapsed" />
                         <Label
+                            x:Name="connumber"
                             Grid.Row="2"
                             Grid.Column="2"
                             VerticalAlignment="Center"

@@ -100,7 +100,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
 
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
-                    new ColumnConfiguration("details", "DESCRIPTION", minWidth: 110),
+                    new ColumnConfiguration("details", "DESCRIPTION", minWidth: 120),
                     new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true),
                     new ColumnConfiguration("cv_or", "OR#", minWidth: 60, isNumeric: true),
                     new ColumnConfiguration("processingFee", "FEE", minWidth: 60, isCenter: true, isNumeric: true),

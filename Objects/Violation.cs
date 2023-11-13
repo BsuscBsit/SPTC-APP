@@ -62,6 +62,7 @@ namespace SPTC_APP.Objects
         public void WriteInto(int franchise_id, int violation_type_id, DateTime violation_date, DateTime start, DateTime end, string remarks, int name_id)
         {
             this.franchiseId = franchise_id;
+            this.violationLevelCount = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_VIOLATION_COUNT_OF(franchise_id)).FirstOrDefault();
             this.violationTypeId = violation_type_id;
             this.violationDate = violation_date;
             this.suspensionStart = start;

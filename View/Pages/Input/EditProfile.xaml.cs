@@ -15,6 +15,7 @@ namespace SPTC_APP.View.Pages.Input
     {
         private Driver dholder;
         private Operator oholder;
+        private string closingMSG;
         Franchise franchise;
         General type;
         public EditProfile(Franchise franchise, dynamic lholder, General type)
@@ -70,11 +71,13 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            closingMSG = "Changes was not saved.\nAction was canceled.";
             this.Close();
         }
 
@@ -144,10 +147,8 @@ namespace SPTC_APP.View.Pages.Input
                     }
                     (AppState.mainwindow as MainBody).ResetWindow(General.OPERATOR);
                 }
+                closingMSG = "Changes was saved successfully.\nPlease refesh the view to see changes.";
                 this.Close();
-            } else
-            {
-
             }
 
 

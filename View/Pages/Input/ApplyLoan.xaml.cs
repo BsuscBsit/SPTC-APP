@@ -64,7 +64,7 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
-            AppState.mainwindow?.displayToast(closingMSG, 2.5);
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
@@ -72,38 +72,42 @@ namespace SPTC_APP.View.Pages.Input
         {
             
             if(computeResult())
-            { //If all inputs are filled ,
-                double penalty = this.loanAmount * this.interestRate;
-                if (isLoan) // if LOAN
+            {
+                if (ControlWindow.ShowTwoway("Add Loan", string.IsNullOrEmpty(tbCVORNum.Text) ?
+                    "CV/OR Number is empty.\nDo you still want to save?" : "Confirm adding loan?", Icons.NOTIFY))
                 {
-                    Ledger.Loan loan = new Ledger.Loan();
-                    loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount,this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
-                    
-                    PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
-                    payment.WriteInto(loan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanPrincipal);
-                    payment.isApply = true;
-                    payment.ledgername = Ledger.APPLY_LOAN;
-                    payment.Save();
-                }
-                else // if LONG TERM LOAN
-                {
-                    //this.loantext = "LONGTERMLOAN";
+                    double penalty = this.loanAmount * this.interestRate;
+                    if (isLoan) // if LOAN
+                    {
+                        Ledger.Loan loan = new Ledger.Loan();
+                        loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
 
-                    Ledger.LongTermLoan ltloan = new Ledger.LongTermLoan();
-                    ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount,this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
-                    
-                    PaymentDetails<Ledger.LongTermLoan> payment = new PaymentDetails<Ledger.LongTermLoan>();
-                    payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, this.loanPrincipal);
-                    payment.isApply = true;
-                    payment.ledgername = Ledger.APPLY_LT_LOAN;
-                    payment.Save();
+                        PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
+                        payment.WriteInto(loan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanPrincipal);
+                        payment.isApply = true;
+                        payment.ledgername = Ledger.APPLY_LOAN;
+                        payment.Save();
+                    }
+                    else // if LONG TERM LOAN
+                    {
+                        //this.loantext = "LONGTERMLOAN";
+
+                        Ledger.LongTermLoan ltloan = new Ledger.LongTermLoan();
+                        ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
+
+                        PaymentDetails<Ledger.LongTermLoan> payment = new PaymentDetails<Ledger.LongTermLoan>();
+                        payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, this.loanPrincipal);
+                        payment.isApply = true;
+                        payment.ledgername = Ledger.APPLY_LT_LOAN;
+                        payment.Save();
+                    }
+                    closingMSG = "Adding loan history successful.\nPlease refresh the view to see changes.";
+                    this.Close();
                 }
-                closingMSG = "Loan application successful.";
-                this.Close();
             }
             else
             {
-                ControlWindow.ShowStatic("Input Incomplete", "Some required inputs are empty", Icons.ERROR);
+                ControlWindow.ShowStatic("Found Empty Fields", "Some required fields are empty.\n Please fill them up before continuing.", Icons.ERROR);
                 this.Close();
             }
         }
@@ -185,9 +189,9 @@ namespace SPTC_APP.View.Pages.Input
                             break;
 
                         case 2: // Emergency
-                            pfFinal = userVars[0] * pfRatio;
+                            /*pfFinal = userVars[0] * pfRatio;
                             cbuFinal = userVars[0] * cbuRatio;
-                            deductions = pfFinal + cbuFinal;
+                            deductions = pfFinal + cbuFinal;*/
 
                             principal = userVars[0];
 
@@ -212,58 +216,58 @@ namespace SPTC_APP.View.Pages.Input
 
                     #endregion
 
-                    double lr = Math.Round(loanReceivable, 2);
-                    double tf = Math.Round(totalFinal, 2);
-                    string principalStr = principal.ToString();
-                    string pfFinalStr = pfFinal.ToString();
-                    string cbuFinalStr = cbuFinal.ToString();
-                    string interestRecStr = interestReceivable.ToString();
+                    string principalStr = principal.ToString("N2");
+                    string pfFinalStr = pfFinal.ToString("N2");
+                    string cbuFinalStr = cbuFinal.ToString("N2");
+                    string interestRecStr = interestReceivable.ToString("N2");
 
                     switch (cbLoanType.SelectedIndex)
                     {
                         case 0:
                             UpdateLabels(
-                                userVars[0].ToString(),
-                                pfFinalStr,
-                                interestFinal.ToString(),
+                                "₱" + userVars[0].ToString("N2"),
+                                (pfFinal > 0 ? "- " : "") + "₱" + pfFinalStr,
+                                (interestFinal > 0 ? "- " : "") + "₱" + interestFinal.ToString("N2"),
                                 (SolidColorBrush)FindResource("BrushRed"),
                                 "Already deducted.",
-                                (SolidColorBrush)FindResource("BrushRed"),
-                                cbuFinalStr,
-                                principalStr,
-                                lr.ToString(),
-                                tf.ToString(),
+                                (SolidColorBrush)FindResource("BrushDeepGreen"),
+                                (cbuFinal > 0 ? "- " : "") + "₱" + cbuFinalStr,
+                                "₱" + principalStr,
+                                "₱" + loanReceivable.ToString("N2"),
+                                "₱" + totalFinal.ToString("N2"),
                                 true);
                             break;
 
                         case 1:
                             UpdateLabels(
-                                userVars[0].ToString(),
-                                pfFinalStr,
+                                "₱" + userVars[0].ToString("N2"),
+                                (pfFinal > 0 ? "- " : "") + "₱" + pfFinalStr,
                                 "Not deducted yet.",
                                 (SolidColorBrush)FindResource("BrushDeepGreen"),
-                                interestRecStr,
-                                (SolidColorBrush)FindResource("BrushDeepGreen"),
-                                cbuFinalStr,
-                                principalStr,
-                                lr.ToString(),
-                                tf.ToString(),
-                                false);
+                                "₱" + interestRecStr,
+                                (SolidColorBrush)FindResource("BrushDeepBlue"),
+                                (cbuFinal > 0 ? "- " : "") + "₱" + cbuFinalStr,
+                                "₱" + principalStr,
+                                "₱" + loanReceivable.ToString("N2"),
+                                "₱" + totalFinal.ToString("N2"),
+                                false);;
                             break;
 
                         case 2:
                             UpdateLabels(
-                                userVars[0].ToString(),
-                                $"{pfFinalStr} (To pay)",
+                                "₱" + userVars[0].ToString("N2"),
+                                "Fee not included.",
                                 "Not deducted yet.",
                                 (SolidColorBrush)FindResource("BrushDeepGreen"),
-                                interestRecStr,
-                                (SolidColorBrush)FindResource("BrushDeepGreen"),
-                                $"{cbuFinalStr} (To pay)",
-                                principalStr,
-                                lr.ToString(),
-                                tf.ToString(),
+                                "₱" + interestRecStr,
+                                (SolidColorBrush)FindResource("BrushDeepBlue"),
+                                "CBU not included.",
+                                "₱" + principalStr,
+                                "₱" + loanReceivable.ToString("N2"),
+                                "₱" + totalFinal.ToString("N2"),
                                 true);
+                            lblPFTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
+                            lblCBUTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
                             break;
 
                     }
@@ -287,15 +291,27 @@ namespace SPTC_APP.View.Pages.Input
                         lblInterestTotal.Foreground = interestTotalForeground;
                         lblCBUTotal.Content = cbuTotal;
                         lblPrincipalTotal.Content = principalTotal;
-                        lblPrincipalTotal2.Content = principalTotal;
                         lblLoanRecievableTotal.Content = loanReceivableTotal;
                         lblInterestRecievableTotal.Content = interestRecievableTotal;
                         lblInterestRecievableTotal.Foreground = interestRecForeground;
                         lblBreakdownTotal.Content = breakdownTotal;
                         this.isLoan = isLoan;
+
+                        lblPFTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
+                        lblCBUTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
                     }
 
-                    lblPenalty.Content = penalty.ToString();
+                    lblPenalty.Content = "₱" + penalty.ToString("N2");
+                    if(loanAmount > 0 && userVars[3] > 1)
+                    {
+                        lblInTot.Content = $"* ₱ {(totalFinal * userVars[3]).ToString("N2")} in {userVars[3].ToString("N0")} mos.";
+                        lblInTot.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        lblInTot.Visibility = Visibility.Collapsed;
+                    }
+                        
                 }
             }
             else
@@ -308,6 +324,7 @@ namespace SPTC_APP.View.Pages.Input
                     }
                 }
                 new Toast(gridToast, "Fill in all required fields before proceeding.", 2);
+                return false;
             }
 
             return true;
@@ -315,7 +332,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.closingMSG = "Application for loan cancelled.";
+            this.closingMSG = "Adding loan was cancelled.";
             this.Close();
         }
 
@@ -378,8 +395,8 @@ namespace SPTC_APP.View.Pages.Input
                         this.loantext = "SHORT TERM";
                         minLoan = 1;
                         maxLoan = 30000;
-                        minMont = 6;
-                        maxMont = null;
+                        minMont = null;
+                        maxMont = 6;
                         break;
                     case 1:
                         this.loantext = "LONG TERM";
@@ -396,6 +413,37 @@ namespace SPTC_APP.View.Pages.Input
                         maxMont = 3;
                         break;
                 }
+
+                if (tbAmount != null)
+                {
+                    if (double.TryParse(tbAmount.Text, out double newAmount))
+                    {
+                        if (newAmount > maxLoan)
+                        {
+                            tbAmount.Text = maxLoan.ToString();
+                        }
+                        else if (newAmount < minLoan)
+                        {
+                            tbAmount.Text = minLoan.ToString();
+                        }
+                    }
+                }
+
+                if (tbLoanLen != null)
+                {
+                    if (double.TryParse(tbLoanLen.Text, out double newLoanLen))
+                    {
+                        if (newLoanLen > maxMont)
+                        {
+                            tbLoanLen.Text = maxMont.ToString();
+                        }
+                        else if (newLoanLen < minMont)
+                        {
+                            tbLoanLen.Text = minMont.ToString();
+                        }
+                    }
+                }
+
             }
         }
         private bool ValidSize()

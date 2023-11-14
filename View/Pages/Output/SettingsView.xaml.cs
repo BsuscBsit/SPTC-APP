@@ -126,10 +126,13 @@ namespace SPTC_APP.View.Pages.Output
 
                     textBox.TextChanged += (sender, e) =>
                     {
-                        if (field.FieldType == typeof(double))
-                            field.SetValue(null, double.Parse(textBox.Text));
-                        else if (field.FieldType == typeof(int))
-                            field.SetValue(null, int.Parse(textBox.Text));
+                        if (textBox.Text.ToString().Length > 0)
+                        {
+                            if (field.FieldType == typeof(double))
+                                field.SetValue(null, double.Parse(textBox.Text));
+                            else if (field.FieldType == typeof(int))
+                                field.SetValue(null, int.Parse(textBox.Text));
+                        }
                     };
 
                     stackPanel.Children.Add(textBox);

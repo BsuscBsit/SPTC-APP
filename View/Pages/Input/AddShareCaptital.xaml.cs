@@ -23,6 +23,7 @@ namespace SPTC_APP.View.Pages.Input
     /// </summary>
     public partial class AddShareCaptital : Window
     {
+        private string closingMSG;
         private Franchise franchise;
         public AddShareCaptital(Franchise franchise)
         {
@@ -40,11 +41,13 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            this.closingMSG = "Adding share capital was cancelled.";
             this.Close();
         }
 
@@ -66,6 +69,7 @@ namespace SPTC_APP.View.Pages.Input
                 capital.WriteInto(share, 0, dpBdate.DisplayDate, tboxRefNo.Text, Double.Parse(tboxAmount.Text), 0, "", share.lastBalance);
                 capital.Save();
                 (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                this.closingMSG = "Adding share capital history was successful.\nPlease refresh the view to see changes.";
                 this.Close();
             }
         }

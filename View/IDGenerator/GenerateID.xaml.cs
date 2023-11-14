@@ -546,7 +546,7 @@ namespace SPTC_APP.View
                     {
                         imgSignPic.Source = null;
                     }
-                    ControlWindow.ShowStatic("Input Fields incomplete!", "Missing some required inputs.");
+                    ControlWindow.ShowStatic("Found Empty Fields", "Some required fields are empty.\n Please fill them up before continuing.");
                 }
             }
         }

@@ -60,11 +60,13 @@
             Width="164"
             Height="30"
             Margin="15,0,0,0"
-            IsReadOnly="False"
             IsEditable="True"
-            Style="{StaticResource CommonComboBox}"
-            TabIndex="1"
-            />
+            IsReadOnly="True"
+            IsTabStop="False"
+            SelectedIndex="0"
+            Style="{DynamicResource CommonComboBox}" BorderThickness="1,1,1,1">
+            <ComboBoxItem Content="Share Capital" VerticalContentAlignment="Top" />
+        </ComboBox>
         <TextBox
             x:Name="tbContent"
             Grid.Row="4"

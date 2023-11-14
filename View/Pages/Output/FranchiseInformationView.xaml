@@ -136,9 +136,7 @@
                     Grid.Column="1"
                     MaxHeight="118"
                     Margin="12,50,12,12">
-                    <Grid
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom">
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
@@ -326,7 +324,7 @@
                         Background="White"
                         BorderThickness="1"
                         Click="btnLoanApply_Click"
-                        Content="Loan Application"
+                        Content="Add Loan"
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
                     <Button
@@ -379,20 +377,48 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
-                    Width="250"
+                    Width="225"
                     Height="30"
                     VerticalAlignment="Bottom"
                     Click="btnAddButton_Click"
                     Style="{DynamicResource CommonButtonStyle}">
-                    <Grid Width="250">
+                    <Grid>
+                        <ContentControl
+                            x:Name="iconTransfer"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center" Width="16" Height="12" Margin="0,1,0,0" d:IsHidden="True" Visibility="Hidden">
+                            <ContentControl.Content>
+                                <Viewbox Width="21" Height="17">
+                                    <Canvas Width="17" Height="13">
+                                        <Canvas>
+                                            <Canvas>
+                                                <Path
+                                                    Data="M 12.148,2.815 L 1.207,2.815 L 3.669,0.354"
+                                                    Stroke="#ff000000"
+                                                    StrokeMiterLimit="1.0"
+                                                    StrokeThickness="1.0" />
+                                                <Path
+                                                    Data="M 1.207,6.097 L 12.148,6.097 L 9.686,8.559"
+                                                    Stroke="#ff000000"
+                                                    StrokeMiterLimit="1.0"
+                                                    StrokeThickness="1.0" />
+                                            </Canvas>
+                                        </Canvas>
+                                    </Canvas>
+                                </Viewbox>
+
+                            </ContentControl.Content>
+                        </ContentControl>
                         <Path
-                            Margin="0,0,120,0"
-                            HorizontalAlignment="Center"
+                            x:Name="iconAdd"
+                            HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Data="M0,7 H14 M7,0 V14"
                             Stroke="{StaticResource BrushBlack}"
                             StrokeThickness="1" />
                         <Label
+                            x:Name="lblBtnAddContent"
+                            Margin="20,0,0,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="Add Record" />

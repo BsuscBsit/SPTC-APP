@@ -25,6 +25,7 @@ namespace SPTC_APP.View.Pages.Input
     {
         Franchise franchise;
         General type;
+        private string closingMSG;
         public NewOptr_Drv(Franchise franchise, General type)
         {
             InitializeComponent();
@@ -42,6 +43,7 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
@@ -139,7 +141,7 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     franchise.Save();
                 }
-
+                closingMSG = "Newly added record was successfully saved.\nPlease refresh the view to see changes.";
                 this.Close();
             }
         }
@@ -160,6 +162,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            closingMSG = "Adding new record was canceled.\n No data was saved.";
             this.Close();
         }
     }

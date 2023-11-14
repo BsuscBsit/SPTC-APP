@@ -49,7 +49,7 @@
             Padding="0,5,5,5"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Content="ADD LONG TERM LOAN"
+            Content="ADD LONG TERM LOAN PAYMENT"
             Style="{DynamicResource CommonTitlePreset}" />
         <Label
             Grid.Row="3"
@@ -65,7 +65,7 @@
             Height="Auto"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="Amount: "
+            Content="Payment Amount: "
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             Grid.Row="3"
@@ -73,7 +73,7 @@
             Height="Auto"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="Reference No.: "
+            Content="CV/OR Number:"
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             x:Name="lblTerms"
@@ -83,7 +83,7 @@
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="Penalty: "
+            Content="Overdue Penalty: "
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             x:Name="lblInterest"

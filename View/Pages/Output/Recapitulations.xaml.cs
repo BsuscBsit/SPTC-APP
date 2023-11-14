@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +34,15 @@ namespace SPTC_APP.View.Pages.Input
         {
             AppState.mainwindow?.Show();
             base.OnClosing(e);
+        }
+
+        public void displayToast(string message, double duration = 5)
+        {
+            System.Windows.Media.Brush bg = message.Contains("success") ?
+                FindResource("BrushDeepGreen") as System.Windows.Media.Brush :
+                FindResource("BrushRed") as System.Windows.Media.Brush;
+
+            new Toast(gridToast, message, duration, true, 0.2, System.Windows.Media.Brushes.White, bg);
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {

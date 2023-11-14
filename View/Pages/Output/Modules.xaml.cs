@@ -1,6 +1,7 @@
 ﻿using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
+using SPTC_APP.View.Styling;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -239,7 +240,7 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("violationLevelCount", "NO.", minWidth: 60,isCenter:true, isNumeric : true),
+                    //new ColumnConfiguration("violationLevelCount", "NO.", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("violationType", "VIOLATION", minWidth: 80),
                     new ColumnConfiguration("dDate", "DATE", minWidth : 80, isNumeric : true),
                     new ColumnConfiguration("dDateStart", "FROM: ", minWidth: 60, isNumeric:true),
@@ -326,6 +327,15 @@ namespace SPTC_APP.View.Pages.Output
                     lblTotalLedger.Content = led.amount;
                     if (AppState.USER.position?.accesses[14] ?? false)
                         btnDeletePayment.IsEnabled = true;
+
+                    AppState.mainwindow.ShowReceipt(
+                        led.details,
+                        led.amountLoaned,
+                        led.processingFee,
+                        led.cbu,
+                        led.interest,
+                        led.termsofpayment);
+
                 }
                 else if (dgLedger.SelectedItem is Ledger.LongTermLoan lled)
                 {
@@ -335,6 +345,14 @@ namespace SPTC_APP.View.Pages.Output
                     lblTotalLedger.Content = lled.amount;
                     if (AppState.USER.position?.accesses[15] ?? false)
                         btnDeletePayment.IsEnabled = true;
+
+                    AppState.mainwindow.ShowReceipt(
+                        lled.details,
+                        lled.amountLoaned,
+                        lled.processingFee,
+                        lled.cbu,
+                        lled.interest,
+                        lled.termsofpayment);
                 }
             }
         }
@@ -370,5 +388,7 @@ namespace SPTC_APP.View.Pages.Output
                 }
             }
         }
+
+        
     }
 }

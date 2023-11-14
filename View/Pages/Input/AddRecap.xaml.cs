@@ -23,6 +23,7 @@ namespace SPTC_APP.View.Pages.Input
     public partial class AddRecap : Window
     {
         private Recapitulations recaps;
+        private string closingMSG;
         public AddRecap(Recapitulations recap)
         {
             InitializeComponent();
@@ -35,27 +36,32 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             recaps?.Show();
+            if(!string.IsNullOrEmpty(closingMSG))
+                recaps.displayToast(closingMSG);
+
             base.OnClosing(e);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             double amount = Double.Parse(tbContent.Text);
-            string txt = cbTitle.SelectedValue.ToString();
-            if (txt.Length > 0)
+            string txt = cbTitle.SelectedValue?.ToString();
+            if (txt?.Length > 0)
             {
                 Recap recap = new Recap(txt, amount);
                 recap.Save();
                 recaps.UpdateRecap();
+                closingMSG = "Record successfully added.";
                 this.Close();
             } else
             {
-                ControlWindow.ShowStatic("Fields Empty", "Some required fields are empty", Icons.NOTIFY);
+                ControlWindow.ShowStatic("Found Empty Fields", "Some required fields are empty.\n Please fill them up before continuing.", Icons.NOTIFY);
             }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            closingMSG = "No record was added.\n Action canceled.";
             this.Close();
         }
     }

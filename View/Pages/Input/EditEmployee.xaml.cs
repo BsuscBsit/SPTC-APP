@@ -34,6 +34,10 @@ namespace SPTC_APP.View.Pages.Input
         bool isEdit = false;
         bool isManage = false;
         private bool isCameraRunning;
+
+        private string canceledMSG;
+        private string savedMSG;
+        private string closingMSG;
         public EditEmployee(Employee employee, bool isEdit, bool isManage)
         {
             InitializeComponent();
@@ -142,6 +146,7 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             this.StopCamera();
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
@@ -171,7 +176,7 @@ namespace SPTC_APP.View.Pages.Input
                     }
                     catch (Exception ex)
                     {
-                        ControlWindow.ShowStatic("Camera Error", $"An error occurred: {ex.Message}", Icons.ERROR);
+                        ControlWindow.ShowStatic("Camera Error", $"An has error occurred: {ex.Message}", Icons.ERROR);
                         pbCameraOpen.Visibility = Visibility.Hidden;
                     }
                 }
@@ -267,6 +272,7 @@ namespace SPTC_APP.View.Pages.Input
         private void btnPreview_Click(object sender, RoutedEventArgs e)
         {
             if (tbFname.Text.Length > 0 && tbLname.Text.Length > 0 && tbAddressLine1.Text.Length > 0 && tbAddressLine2.Text.Length > 0) {
+                closingMSG = savedMSG;
                 if (isEdit)
                 {
                     employee.name = (employee.name != null) ? employee.name : new Name();
@@ -306,6 +312,7 @@ namespace SPTC_APP.View.Pages.Input
                         {
                             employee.Save();
                             AppState.mainwindow?.Show();
+
                             this.Close();
                         }
                         else
@@ -332,12 +339,13 @@ namespace SPTC_APP.View.Pages.Input
                 }
             } else
             {
-                ControlWindow.ShowStatic("Input Fields incomplete!", "Missing some required inputs.");
+                ControlWindow.ShowStatic("Found Empty Fields", "Some required fields are empty.\n Please fill them up before continuing.");
             }
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             AppState.mainwindow?.Show();
+            closingMSG = canceledMSG;
             this.Close();
         }
 
@@ -416,6 +424,7 @@ namespace SPTC_APP.View.Pages.Input
             tbPosTitle.DefaultTextBoxBehavior(ALPHANUMERICDASHPERIOD, false, gridToast, "Position of this person.", 0);
             tbAddressLine1.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Street Address.", 0);
             tbAddressLine2.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Additional Address Information.", 0);
+
         }
 
         private void gridCamera_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -460,6 +469,20 @@ namespace SPTC_APP.View.Pages.Input
                 }
             }
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            string pos = employee.position?.title ?? string.Empty;
+            if (!string.IsNullOrEmpty(pos))
+            {
+                pos = pos.Trim();
+                string capitalized = string.Join(" ", pos.Split(' ').Select(word => char.ToUpper(word[0]) + word.Substring(1)));
+                this.canceledMSG = string.IsNullOrWhiteSpace(capitalized) ?
+                    $"Changes to {capitalized} was not saved.\nAction was canceled." : "Changes to profile was not saved.\nAction was canceled.";
+                this.savedMSG = string.IsNullOrWhiteSpace(capitalized) ?
+                    $"Changes to {capitalized} was saved successfully." : "The changes was saved successfully.";
+            }
         }
     }
 }

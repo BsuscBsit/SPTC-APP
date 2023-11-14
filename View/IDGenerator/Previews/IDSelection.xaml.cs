@@ -66,7 +66,7 @@ namespace SPTC_APP.View.IDGenerator.Previews
                 this.Close();
             } else
             {
-                ControlWindow.ShowStatic("No iset selected", "Select from the list then proceed");
+                ControlWindow.ShowStatic("No ID Selected", "Please select from the list then proceed.");
                 btnNext.IsEnabled = false;
             }
         }

@@ -309,6 +309,7 @@ namespace SPTC_APP.View.Pages.Input
                     }
                 }
                 new Toast(gridToast, "Fill in all required fields before proceeding.", 2);
+                return false;
             }
 
             return true;

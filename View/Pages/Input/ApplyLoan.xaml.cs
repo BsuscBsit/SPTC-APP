@@ -189,9 +189,9 @@ namespace SPTC_APP.View.Pages.Input
                             break;
 
                         case 2: // Emergency
-                            pfFinal = userVars[0] * pfRatio;
+                            /*pfFinal = userVars[0] * pfRatio;
                             cbuFinal = userVars[0] * cbuRatio;
-                            deductions = pfFinal + cbuFinal;
+                            deductions = pfFinal + cbuFinal;*/
 
                             principal = userVars[0];
 
@@ -256,16 +256,18 @@ namespace SPTC_APP.View.Pages.Input
                         case 2:
                             UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
-                                $"₱{pfFinalStr} (To pay later)",
+                                "Fee not included.",
                                 "Not deducted yet.",
                                 (SolidColorBrush)FindResource("BrushDeepGreen"),
                                 "₱" + interestRecStr,
                                 (SolidColorBrush)FindResource("BrushDeepBlue"),
-                                $"₱{cbuFinalStr} (To pay later)",
+                                "CBU not included.",
                                 "₱" + principalStr,
                                 "₱" + loanReceivable.ToString("N2"),
                                 "₱" + totalFinal.ToString("N2"),
                                 true);
+                            lblPFTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
+                            lblCBUTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
                             break;
 
                     }
@@ -294,9 +296,22 @@ namespace SPTC_APP.View.Pages.Input
                         lblInterestRecievableTotal.Foreground = interestRecForeground;
                         lblBreakdownTotal.Content = breakdownTotal;
                         this.isLoan = isLoan;
+
+                        lblPFTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
+                        lblCBUTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
                     }
 
                     lblPenalty.Content = "₱" + penalty.ToString("N2");
+                    if(loanAmount > 0 && userVars[3] > 1)
+                    {
+                        lblInTot.Content = $"* ₱ {(totalFinal * userVars[3]).ToString("N2")} in {userVars[3].ToString("N0")} mos.";
+                        lblInTot.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        lblInTot.Visibility = Visibility.Collapsed;
+                    }
+                        
                 }
             }
             else
@@ -380,8 +395,8 @@ namespace SPTC_APP.View.Pages.Input
                         this.loantext = "SHORT TERM";
                         minLoan = 1;
                         maxLoan = 30000;
-                        minMont = 6;
-                        maxMont = null;
+                        minMont = null;
+                        maxMont = 6;
                         break;
                     case 1:
                         this.loantext = "LONG TERM";

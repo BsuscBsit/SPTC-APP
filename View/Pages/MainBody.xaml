@@ -691,9 +691,268 @@
             </Border>
         </Canvas>
         <Grid
+            x:Name="gridReceipt"
+            Focusable="True"
+            Grid.Row="2"
+            Grid.RowSpan="1"
+            Grid.ColumnSpan="2"
+            Margin="0,0,24,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center" Visibility="Hidden" LostFocus="gridReceipt_LostFocus">
+            <Border
+                Grid.Row="0"
+                Background="White"
+                BorderBrush="{StaticResource BrushSoftGrey2}"
+                BorderThickness="1"
+                CornerRadius="10">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="25"
+                        Direction="-90"
+                        Opacity="0.1"
+                        ShadowDepth="1" />
+                </Border.Effect>
+            </Border>
+            <Grid Width="270" Margin="15,15,15,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Principal Breakdown"
+                    Style="{StaticResource SubTitlePreset}" />
+                <Label
+                    Grid.Row="1"
+                    Margin="0,12,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Loan Amount: "
+                    Style="{StaticResource LabelFontMedium}" />
+                <Label
+                    x:Name="LBLPF"
+                    Grid.Row="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Processing Fee: "
+                    Style="{StaticResource LabelFontSmall}" />
+                <Label
+                    x:Name="LBLCBU"
+                    Grid.Row="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="CBU: "
+                    Style="{StaticResource LabelFontSmall}" />
+                <Label
+                    x:Name="LBLINTER"
+                    Grid.Row="4"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Interest: "
+                    Style="{StaticResource LabelFontSmall}" />
+                <Label
+                    Grid.Row="5"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Principal (COH/CIB):"
+                    Style="{StaticResource LabelFontMedium}" />
+                <Label
+                    Grid.Row="7"
+                    Grid.ColumnSpan="2"
+                    Margin="0,15,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Breakdown in Monthly"
+                    Style="{StaticResource SubTitlePreset}" />
+                <Label
+                    x:Name="LBLLOANREC"
+                    Grid.Row="8"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Loan Receivable:"
+                    Style="{StaticResource LabelFontSmall}" />
+                <Label
+                    x:Name="LBLINTEREC"
+                    Grid.Row="9"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Interest Receivable: "
+                    Style="{StaticResource LabelFontSmall}" />
+                <Label
+                    Grid.Row="10"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Payment Per Month:"
+                    Style="{StaticResource LabelFontMedium}" />
+                <Label
+                    Grid.Row="13"
+                    Margin="0,15,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Overdue Penalty:"
+                    Style="{StaticResource LabelFontSmall}"
+                    Visibility="Collapsed" />
+                <Rectangle
+                    Grid.Row="6"
+                    Grid.ColumnSpan="2"
+                    Height="2"
+                    VerticalAlignment="Top"
+                    Fill="{StaticResource BrushSoftGrey2}" />
+                <Rectangle
+                    Grid.Row="11"
+                    Grid.ColumnSpan="2"
+                    Height="2"
+                    VerticalAlignment="Top"
+                    Fill="{StaticResource BrushSoftGrey2}" />
+                <Label
+                    x:Name="lblLoanAmount"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="0,12,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="N/A"
+                    Foreground="{StaticResource BrushDeepGreen}"
+                    Style="{StaticResource LabelFontMedium}" />
+                <Label
+                    x:Name="lblPFTotal"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="N/A"
+                    Foreground="{StaticResource BrushRed}"
+                    Style="{StaticResource LabelFontSmall}" />
+                <Label
+                    x:Name="lblCBUTotal"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="N/A"
+                    Foreground="{StaticResource BrushRed}"
+                    Style="{StaticResource LabelFontSmall}" />
+                <Label
+                    x:Name="lblInterestTotal"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="N/A"
+                    Foreground="{StaticResource BrushRed}"
+                    Style="{StaticResource LabelFontSmall}" />
+                <Label
+                    x:Name="lblPrincipalTotal"
+                    Grid.Row="6"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="N/A"
+                    FontWeight="Bold"
+                    Foreground="{StaticResource BrushDeepGreen}"
+                    Style="{StaticResource LabelFontLarge}" />
+                <Label
+                    x:Name="lblLoanRecievableTotal"
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="N/A"
+                    Foreground="{StaticResource BrushDeepBlue}"
+                    Style="{StaticResource LabelFontSmall}" />
+                <Label
+                    x:Name="lblInterestRecievableTotal"
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="N/A"
+                    Foreground="{StaticResource BrushDeepBlue}"
+                    Style="{StaticResource LabelFontSmall}" />
+                <Label
+                    x:Name="lblBreakdownTotal"
+                    Grid.Row="11"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,0,0"
+                    Padding="5,5,5,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="N/A"
+                    FontWeight="Bold"
+                    Foreground="{StaticResource BrushDeepBlue}"
+                    Style="{StaticResource LabelFontLarge}" />
+                <Label
+                    x:Name="lblInTot"
+                    Grid.Row="12"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Padding="5,0,5,5"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="N/A"
+                    FontSize="10"
+                    FontStyle="Italic"
+                    FontWeight="Normal"
+                    Style="{StaticResource LabelFontSmall}"
+                    Visibility="Collapsed" />
+                <Label
+                    x:Name="lblPenalty"
+                    Grid.Row="13"
+                    Grid.Column="1"
+                    Margin="0,15,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="N/A"
+                    Foreground="{StaticResource BrushRed}"
+                    Style="{StaticResource LabelFontSmall}"
+                    Visibility="Collapsed" />
+                <Button
+                    x:Name="btnCloseReceipt"
+                    Grid.Column="1"
+                    Width="28"
+                    Height="28"
+                    Padding="0,0,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Click="btnReceiptClose_Click"
+                    Content="x"
+                    FontFamily="Berlin Sans FB"
+                    FontSize="20"
+                    FontStretch="Normal"
+                    FontWeight="Regular"
+                    Style="{DynamicResource ExitButtonStyle}" />
+            </Grid>
+        </Grid>
+        <Grid
             x:Name="gridToast"
+            Grid.Row="2"
             Grid.RowSpan="2"
+            Grid.Column="1"
+            Margin="0,24,0,0"
             HorizontalAlignment="Center"
-            VerticalAlignment="Top" Grid.Row="2" Margin="0,24,0,0" Grid.Column="1" />
+            VerticalAlignment="Top" />
     </Grid>
 </Window>

@@ -308,6 +308,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label
                             Grid.ColumnSpan="2"
@@ -380,7 +381,7 @@
                             Content="Payment Per Month:"
                             Style="{StaticResource LabelFontMedium}" />
                         <Label
-                            Grid.Row="12"
+                            Grid.Row="13"
                             Margin="0,15,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
@@ -469,6 +470,7 @@
                             Grid.Row="11"
                             Grid.ColumnSpan="2"
                             Margin="0,5,0,0"
+                            Padding="5,5,5,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="N/A"
@@ -476,8 +478,22 @@
                             Foreground="{StaticResource BrushDeepBlue}"
                             Style="{StaticResource LabelFontLarge}" />
                         <Label
-                            x:Name="lblPenalty"
+                            x:Name="lblInTot"
                             Grid.Row="12"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Padding="5,0,5,5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="N/A"
+                            FontSize="10"
+                            FontStyle="Italic"
+                            FontWeight="Normal"
+                            Style="{StaticResource LabelFontSmall}"
+                            Visibility="Collapsed" />
+                        <Label
+                            x:Name="lblPenalty"
+                            Grid.Row="13"
                             Grid.Column="1"
                             Margin="0,15,0,0"
                             HorizontalAlignment="Left"

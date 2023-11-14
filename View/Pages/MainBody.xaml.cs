@@ -28,9 +28,6 @@ namespace SPTC_APP.View.Pages
         public static Franchise selectedFranchise = null;
         private TableView Ftable, Otable, Dtable;
 
-
-
-
         public MainBody()
         {
             InitializeComponent();
@@ -444,6 +441,132 @@ namespace SPTC_APP.View.Pages
         {
             lblSBHint.FadeOut(0.3);
             cbSearch_TextChanged(sender, null);
+        }
+
+        private void gridReceipt_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (gridReceipt.Visibility == Visibility.Visible)
+                gridReceipt.FadeOut(0.2);
+        }
+
+        // Assumes all args are already tallied, not percentage.
+        public void ShowReceipt(
+            string termType,
+            double amount,
+            double processingFee,
+            double cbu,
+            double interest,
+            double termLength)
+        {
+            double principal, loanRec, breakTot;
+            string type = "";
+            type = termType?.Trim().ToLower();
+
+            if (type.Contains("short"))
+            {
+                principal = amount - (processingFee + cbu + interest);
+                loanRec = principal / termLength;
+                breakTot = loanRec;
+
+                UpdateLabels(
+                    "₱" + amount.ToString("N2"),
+                    (processingFee > 0 ? "- " : "") + "₱" + processingFee.ToString("N2"),
+                    (interest > 0 ? "- " : "") + "₱" + interest.ToString("N2"),
+                    (SolidColorBrush)FindResource("BrushRed"),
+                    "Already deducted.",
+                    (SolidColorBrush)FindResource("BrushDeepGreen"),
+                    (cbu > 0 ? "- " : "") + "₱" + cbu.ToString("N2"),
+                    "₱" + principal.ToString("N2"),
+                    "₱" + loanRec.ToString("N2"),
+                    "₱" + loanRec.ToString("N2"));
+            }
+            else if (type.Contains("long"))
+            {
+                interest /= termLength;
+                principal = amount - (processingFee + cbu);
+                loanRec = principal / termLength;
+                breakTot = loanRec + interest;
+
+                UpdateLabels(
+                    "₱" + amount.ToString("N2"),
+                    (processingFee > 0 ? "- " : "") + "₱" + processingFee.ToString("N2"),
+                    "Not deducted yet.",
+                    (SolidColorBrush)FindResource("BrushDeepGreen"),
+                    "₱" + interest.ToString("N2"),
+                    (SolidColorBrush)FindResource("BrushDeepBlue"),
+                    (cbu > 0 ? "- " : "") + "₱" + cbu.ToString("N2"),
+                    "₱" + principal.ToString("N2"),
+                    "₱" + loanRec.ToString("N2"),
+                    "₱" + breakTot.ToString("N2"));
+            }
+            else if (type.Contains("emergency"))
+            {
+                interest /= termLength;
+                principal = amount;
+                loanRec = principal / termLength;
+                breakTot = loanRec + interest;
+
+                UpdateLabels(
+                    "₱" + amount.ToString("N2"),
+                    (processingFee > 0 ? "- " : "") + "₱" + processingFee.ToString("N2") + " (To Pay)",
+                    "Not deducted yet.",
+                    (SolidColorBrush)FindResource("BrushDeepGreen"),
+                    "₱" + interest.ToString("N2"),
+                    (SolidColorBrush)FindResource("BrushDeepBlue"),
+                    (cbu > 0 ? "- " : "") + "₱" + cbu.ToString("N2") + " (To Pay)",
+                    "₱" + principal.ToString("N2"),
+                    "₱" + loanRec.ToString("N2"),
+                    "₱" + breakTot.ToString("N2"));
+            }
+            else
+            {
+                if (gridReceipt.Visibility == Visibility.Visible)
+                    gridReceipt.FadeOut(0.2);
+
+                return;
+            }
+
+            gridReceipt.FadeIn(0.2);
+            gridReceipt.Focus();
+
+            void UpdateLabels(
+                string loanAmount,
+                string pfTotal,
+                string interestTotal,
+                SolidColorBrush interestTotalForeground,
+                string interestRecievableTotal,
+                SolidColorBrush interestRecForeground,
+                string cbuTotal,
+                string principalTotal,
+                string loanReceivableTotal,
+                string breakdownTotal)
+            {
+                lblLoanAmount.Content = loanAmount;
+                lblPFTotal.Content = pfTotal;
+                lblInterestTotal.Content = interestTotal;
+                lblInterestTotal.Foreground = interestTotalForeground;
+                lblCBUTotal.Content = cbuTotal;
+                lblPrincipalTotal.Content = principalTotal;
+                lblLoanRecievableTotal.Content = loanReceivableTotal;
+                lblInterestRecievableTotal.Content = interestRecievableTotal;
+                lblInterestRecievableTotal.Foreground = interestRecForeground;
+                lblBreakdownTotal.Content = breakdownTotal;
+                //lblPenalty.Content = "₱" + penalty.ToString("N2");
+
+                if (amount > 1 && termLength >= 2)
+                {
+                    lblInTot.Content = $"* ₱ {(breakTot * termLength).ToString("N2")} in {termLength.ToString("N0")} mos.";
+                    lblInTot.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    lblInTot.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+        private void btnReceiptClose_Click(object sender, RoutedEventArgs e)
+        {
+            gridReceipt.FadeOut(0.2);
         }
     }
 }

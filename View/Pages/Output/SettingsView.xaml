@@ -27,7 +27,7 @@
                 <StackPanel x:Name="SettingsPanel">
                     
                 </StackPanel>
-                <StackPanel x:Name="stResolution" Orientation="Horizontal" Margin="10, 0, 0, 10" Visibility="Hidden">
+                <StackPanel x:Name="stResolution" Orientation="Horizontal" Margin="10, 0, 0, 10">
                     <TextBlock Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Text="CAMERA RESOLUTION"/>
                     <ComboBox
                             x:Name="cbResolution"

@@ -65,7 +65,7 @@
             Height="Auto"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="Amount Loaned: "
+            Content="Payment Amount: "
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             Grid.Row="3"

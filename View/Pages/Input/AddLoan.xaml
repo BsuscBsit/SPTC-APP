@@ -62,7 +62,7 @@
             Grid.Row="3"
             Grid.Column="3"
             HorizontalAlignment="Left"
-            Content="Amount Loaned: "
+            Content="Payment Amount: "
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             Grid.Row="3"

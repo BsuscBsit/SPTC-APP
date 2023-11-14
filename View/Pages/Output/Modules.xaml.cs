@@ -79,7 +79,7 @@ namespace SPTC_APP.View.Pages.Output
                     
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
-                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric : true),
+                    new ColumnConfiguration("monthyear", "M/Y", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("deposit", "SHARE CAPITAL", minWidth: 100, isCenter: true, isNumeric: true, haspeso: true),
                     new ColumnConfiguration("penalties", "CBU", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
                     new ColumnConfiguration("balance", "TOTAL", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
@@ -108,6 +108,7 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("termsofpayment", "MONTHS", minWidth: 50, isNumeric: true),
                     new ColumnConfiguration("interest", "INT", minWidth: 60, isCenter: true, isNumeric: true, haspeso : true),
                     new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 120, isCenter: true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("total", "TOTAL", minWidth: 120, isCenter: true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<object> dataGridHelper = new DataGridHelper<object>(dgLedger, columnConfigurations);
 
@@ -135,7 +136,7 @@ namespace SPTC_APP.View.Pages.Output
 
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
-                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric : true),
+                    new ColumnConfiguration("monthyear", "M/Y", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
                     new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
                 };
@@ -164,7 +165,7 @@ namespace SPTC_APP.View.Pages.Output
 
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric: true),
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric : true),
-                    new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric:true),
+                    new ColumnConfiguration("monthyear", "M/Y", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
                     new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true , haspeso : true),
                 };

@@ -38,11 +38,14 @@ namespace SPTC_APP.View.Pages.Input
 
         public void displayToast(string message, double duration = 5)
         {
-            System.Windows.Media.Brush bg = message.Contains("success") ?
+            if (!(string.IsNullOrEmpty(message) && string.IsNullOrWhiteSpace(message)))
+            {
+                System.Windows.Media.Brush bg = message.Contains("success") ?
                 FindResource("BrushDeepGreen") as System.Windows.Media.Brush :
                 FindResource("BrushRed") as System.Windows.Media.Brush;
 
-            new Toast(gridToast, message, duration, true, 0.2, System.Windows.Media.Brushes.White, bg);
+                new Toast(gridToast, message, duration, true, 0.2, System.Windows.Media.Brushes.White, bg);
+            }
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {

@@ -46,7 +46,7 @@ namespace SPTC_APP.View.Pages
 
         public void displayToast(string message, double duration = 5)
         {
-            if(!(string.IsNullOrEmpty(message) && !string.IsNullOrWhiteSpace(message)))
+            if(!(string.IsNullOrEmpty(message) && string.IsNullOrWhiteSpace(message)))
             {
                 System.Windows.Media.Brush bg = message.Contains("success") ?
                 FindResource("BrushDeepGreen") as System.Windows.Media.Brush :

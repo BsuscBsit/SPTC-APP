@@ -60,6 +60,23 @@ namespace SPTC_APP.View.Pages.Input
             //make sure the bodynumber cannot be edited
             tbBodyNum.Content = this.franchise?.BodyNumber?.ToString() ?? "N/A";
             DraggingHelper.DragWindow(topBar);
+
+
+            //HOW TO add restrictions to combobox selector if I have Loan I cannot apply for Emergency and Shorteermloan
+            //if I have llong term loan i cannot have longtermloan
+
+            // hot to know if i have loan or longtermloan
+            //USAGE: 
+            /** @DIERO
+             * 
+             * if(this.franchise.LoanBalance <= 0){
+             *      //PREVENT THE USER FROM CLICKING SHORT TERM LOAN or EMEGRGENCY LOAN
+             * }
+             * if(this.franchise.LongTermLoanBalance <= 0){
+             *      //PREVENT THE USER FROM CLICKING LONG TERM LOAN
+             * }
+             * 
+             **/
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -83,7 +100,7 @@ namespace SPTC_APP.View.Pages.Input
                         loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
 
                         PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
-                        payment.WriteInto(loan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanPrincipal);
+                        payment.WriteInto(loan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanAmount + loanInterest);
                         payment.isApply = true;
                         payment.ledgername = Ledger.APPLY_LOAN;
                         payment.Save();
@@ -96,7 +113,7 @@ namespace SPTC_APP.View.Pages.Input
                         ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal);
 
                         PaymentDetails<Ledger.LongTermLoan> payment = new PaymentDetails<Ledger.LongTermLoan>();
-                        payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, this.loanPrincipal);
+                        payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, loanAmount + loanInterest);
                         payment.isApply = true;
                         payment.ledgername = Ledger.APPLY_LT_LOAN;
                         payment.Save();

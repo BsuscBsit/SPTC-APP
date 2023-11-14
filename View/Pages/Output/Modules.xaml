@@ -268,7 +268,7 @@
                 Grid.Row="1"
                 Grid.ColumnSpan="2" />
         </Grid>
-        <Grid x:Name="gridLedger">
+        <Grid x:Name="gridLedger" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -367,7 +367,7 @@
 
 
         </Grid>
-        <Grid x:Name="TransferGrid" d:IsHidden="True">
+        <Grid x:Name="TransferGrid" >
             <DataGrid
                 x:Name="dgTransfer"
                 VerticalAlignment="Top"
@@ -382,6 +382,8 @@
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
+            <Label Content="TOTAL: "/>
+            <Label x:Name="lblTotalShareCapital" Content="100"/>
         </Grid>
     </Grid>
 </Window>

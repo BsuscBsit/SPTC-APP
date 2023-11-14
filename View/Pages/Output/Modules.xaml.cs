@@ -91,7 +91,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgLedger.Items.Add(tmp);
                 }
-                lblTotalLedger.Content = franchise.GetTotalShareCapital().ToString("0.00");
+                lblTotalLedger.Content = "\u20B1 " + franchise.GetTotalShareCapital().ToString("0.00");
             } 
             else if(strmod == LOAN_APPLY)
             {
@@ -108,7 +108,7 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("termsofpayment", "MONTHS", minWidth: 50, isNumeric: true),
                     new ColumnConfiguration("interest", "INT", minWidth: 60, isCenter: true, isNumeric: true, haspeso : true),
                     new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 120, isCenter: true, isNumeric: true, haspeso:true),
-                    new ColumnConfiguration("total", "TOTAL", minWidth: 120, isCenter: true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("amount", "TOTAL", minWidth: 120, isCenter: true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<object> dataGridHelper = new DataGridHelper<object>(dgLedger, columnConfigurations);
 
@@ -120,7 +120,7 @@ namespace SPTC_APP.View.Pages.Output
                 if ((franchise.LoanBalance + franchise.LongTermLoanBalance) > 0)
                 {
                     lblTotal.Content = "TOTAL :";
-                    lblTotalLedger.Content = (franchise.LoanBalance + franchise.LongTermLoanBalance).ToString("0.00");
+                    lblTotalLedger.Content = "\u20B1 " + (franchise.LoanBalance + franchise.LongTermLoanBalance).ToString("0.00");
                 }
                 else
                 {
@@ -150,7 +150,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (franchise.LoanBalance > 0)
                 {
                     lblTotal.Content = "BALANCE :";
-                    lblTotalLedger.Content = franchise.LoanBalance.ToString("0.00");
+                    lblTotalLedger.Content = "\u20B1 " +franchise.LoanBalance.ToString("0.00");
                 } else
                 {
                     lblTotal.Content = "CURRENT LOAN :";
@@ -179,7 +179,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (franchise.LongTermLoanBalance > 0)
                 {
                     lblTotal.Content = "BALANCE :";
-                    lblTotalLedger.Content = franchise.LongTermLoanBalance.ToString("0.00");
+                    lblTotalLedger.Content = "\u20B1 " + franchise.LongTermLoanBalance.ToString("0.00");
                 }
                 else
                 {
@@ -270,10 +270,13 @@ namespace SPTC_APP.View.Pages.Output
                 };
                 new DataGridHelper<PaymentHistory>(dgTransfer, columnConfigurations);
                 List<Franchise> franchises = Retrieve.GetDataUsingQuery<Franchise>(RequestQuery.GET_ALL_FRANCHISE_WITH_BODYNUM(franchise.BodyNumber));
+                double totalShareCapital = 0;
                 foreach (var fran in franchises)
                 {
                     dgTransfer.Items.Add(fran);
+                    totalShareCapital += fran.ShareCapital;
                 }
+                lblTotalShareCapital.Content = "\u20B1 " + totalShareCapital.ToString("0.00");
             }
         }
 

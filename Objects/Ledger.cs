@@ -83,7 +83,7 @@ namespace SPTC_APP.Objects
                 this.termsofpayment = termsofpayment;
                 this.interest = interest;
                 this.principal = principal;
-                this.amount = principal;
+                this.amount = amountLoaned + interest;
                 return true;
             }
 
@@ -260,7 +260,7 @@ namespace SPTC_APP.Objects
                 this.termsofpayment = termsofpayment;
                 this.interest = interest;
                 this.principal = principal;
-                this.amount = principal;
+                this.amount = amountLoaned + interest;
                 return true;
             }
 

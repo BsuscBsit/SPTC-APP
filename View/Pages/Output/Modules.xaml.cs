@@ -76,7 +76,7 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
                     
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("deposit", "SHARE CAPITAL", minWidth: 100, isCenter: true, isNumeric: true, haspeso: true),
@@ -98,10 +98,10 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric : true),
+                    new ColumnConfiguration("cv_or", "OR NO.", minWidth: 60, isNumeric: true),
                     new ColumnConfiguration("details", "DESCRIPTION", minWidth: 120),
                     new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
-                    new ColumnConfiguration("cv_or", "OR NO.", minWidth: 60, isNumeric: true),
                     new ColumnConfiguration("processingFee", "FEE", minWidth: 60, isCenter: true, isNumeric: true, haspeso:true),
                     new ColumnConfiguration("cbu", "CBU", minWidth: 60, isCenter: true, isNumeric: true, haspeso:true),
                     new ColumnConfiguration("termsofpayment", "MONTHS", minWidth: 50, isNumeric: true),
@@ -132,7 +132,7 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
@@ -161,7 +161,7 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric: true),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric: true),
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("monthyear", "MONTH/YEAR", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),

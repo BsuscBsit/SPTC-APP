@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2023 at 07:49 AM
+-- Generation Time: Nov 14, 2023 at 09:36 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -58,7 +58,7 @@ CREATE TABLE `tbl_driver` (
   `contact_no` varchar(11) DEFAULT NULL,
   `emergency_person` varchar(50) DEFAULT NULL,
   `emergency_number` varchar(11) DEFAULT NULL,
-  `date_of_mem` date DEFAULT NULL,
+  `date_of_mem` datetime DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -76,8 +76,8 @@ CREATE TABLE `tbl_employee` (
   `image_id` int(11) NOT NULL DEFAULT -1,
   `password` varchar(50) DEFAULT NULL,
   `position_id` int(11) NOT NULL DEFAULT -1,
-  `start_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
   `contact_no` varchar(11) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
@@ -106,7 +106,7 @@ CREATE TABLE `tbl_franchise` (
   `operator_id` int(11) NOT NULL DEFAULT -1,
   `driver_id` int(11) NOT NULL DEFAULT -1,
   `owner_id` int(11) NOT NULL DEFAULT -1,
-  `buying_date` date DEFAULT NULL,
+  `buying_date` datetime DEFAULT NULL,
   `last_franchise_id` int(11) NOT NULL DEFAULT -1,
   `mtop_no` varchar(20) DEFAULT NULL,
   `license_no` varchar(20) DEFAULT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE `tbl_franchise` (
 
 CREATE TABLE `tbl_id_history` (
   `id` int(11) NOT NULL,
-  `date` date DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
   `owner_id` int(11) NOT NULL DEFAULT -1,
   `entity_type` varchar(10) NOT NULL DEFAULT 'OPERATOR',
   `franchise_id` int(11) NOT NULL DEFAULT -1,
@@ -153,7 +153,7 @@ CREATE TABLE `tbl_image` (
 CREATE TABLE `tbl_loan_ledger` (
   `id` int(11) NOT NULL,
   `franchise_id` int(11) NOT NULL DEFAULT -1,
-  `date` date DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
   `amount_loaned` double NOT NULL DEFAULT 0,
   `reference_no` varchar(20) NOT NULL,
   `details` varchar(100) DEFAULT NULL,
@@ -176,7 +176,7 @@ CREATE TABLE `tbl_loan_ledger` (
 CREATE TABLE `tbl_long_term_loan_ledger` (
   `id` int(11) NOT NULL,
   `franchise_id` int(11) NOT NULL DEFAULT -1,
-  `date` date DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
   `amount_loaned` double NOT NULL DEFAULT 0,
   `reference_no` varchar(20) NOT NULL,
   `details` varchar(100) DEFAULT '',
@@ -224,7 +224,7 @@ CREATE TABLE `tbl_operator` (
   `emergency_person` varchar(50) DEFAULT NULL,
   `emergency_number` varchar(11) DEFAULT NULL,
   `isOwner` tinyint(1) NOT NULL DEFAULT 0,
-  `date_of_mem` date DEFAULT NULL,
+  `date_of_mem` datetime DEFAULT NULL,
   `tin_number` varchar(50) DEFAULT NULL,
   `voters_id_number` varchar(50) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
@@ -242,7 +242,7 @@ CREATE TABLE `tbl_payment_details` (
   `isDownPayment` tinyint(1) NOT NULL DEFAULT 0,
   `div_pat` double NOT NULL DEFAULT 0,
   `ledger_type` varchar(30) DEFAULT NULL,
-  `date` date DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
   `reference_no` varchar(20) NOT NULL,
   `deposit` double NOT NULL DEFAULT 0,
   `penalties` double NOT NULL DEFAULT 0,
@@ -303,7 +303,7 @@ INSERT INTO `tbl_position` (`id`, `title`, `can_cnd`, `can_cno`, `can_cnf`, `can
 CREATE TABLE `tbl_share_capital_ledger` (
   `id` int(11) NOT NULL,
   `franchise_id` int(11) NOT NULL DEFAULT -1,
-  `date` date DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
   `beginning_balance` double NOT NULL DEFAULT 0,
   `last_balance` double NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0

@@ -36,7 +36,9 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             recaps?.Show();
-            recaps.displayToast(closingMSG);
+            if(!string.IsNullOrEmpty(closingMSG))
+                recaps.displayToast(closingMSG);
+
             base.OnClosing(e);
         }
 

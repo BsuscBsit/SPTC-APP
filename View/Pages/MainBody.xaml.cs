@@ -49,11 +49,14 @@ namespace SPTC_APP.View.Pages
 
         public void displayToast(string message, double duration = 5)
         {
-            System.Windows.Media.Brush bg = message.Contains("success") ? 
-                FindResource("BrushDeepGreen") as System.Windows.Media.Brush : 
+            if(!(string.IsNullOrEmpty(message) && !string.IsNullOrWhiteSpace(message)))
+            {
+                System.Windows.Media.Brush bg = message.Contains("success") ?
+                FindResource("BrushDeepGreen") as System.Windows.Media.Brush :
                 FindResource("BrushRed") as System.Windows.Media.Brush;
 
-            new Toast(gridToast, message, duration, true, 0.2, System.Windows.Media.Brushes.White, bg);
+                new Toast(gridToast, message, duration, true, 0.2, System.Windows.Media.Brushes.White, bg);
+            }
         }
 
         public async void ResetWindow(General where, bool hasSelection = false)

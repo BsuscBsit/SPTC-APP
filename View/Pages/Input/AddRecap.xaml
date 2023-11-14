@@ -63,7 +63,7 @@
             IsReadOnly="False"
             IsEditable="True"
             Style="{StaticResource CommonComboBox}"
-            TabIndex="1"
+            TabIndex="1" HorizontalAlignment="Center"
             />
         <TextBox
             x:Name="tbContent"

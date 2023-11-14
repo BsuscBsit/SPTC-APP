@@ -36,15 +36,15 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             recaps?.Show();
-            //AppState.mainwindow?.displayToast(closingMSG); Pano to ikabit @Lewis
+            recaps.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             double amount = Double.Parse(tbContent.Text);
-            string txt = cbTitle.SelectedValue.ToString();
-            if (txt.Length > 0)
+            string txt = cbTitle.SelectedValue?.ToString();
+            if (txt?.Length > 0)
             {
                 Recap recap = new Recap(txt, amount);
                 recap.Save();

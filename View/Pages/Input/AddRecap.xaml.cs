@@ -23,6 +23,7 @@ namespace SPTC_APP.View.Pages.Input
     public partial class AddRecap : Window
     {
         private Recapitulations recaps;
+        private string closingMSG;
         public AddRecap(Recapitulations recap)
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             recaps?.Show();
+            //AppState.mainwindow?.displayToast(closingMSG); Pano to ikabit @Lewis
             base.OnClosing(e);
         }
 
@@ -47,6 +49,7 @@ namespace SPTC_APP.View.Pages.Input
                 Recap recap = new Recap(txt, amount);
                 recap.Save();
                 recaps.UpdateRecap();
+                closingMSG = "Record successfully added.";
                 this.Close();
             } else
             {
@@ -56,6 +59,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            closingMSG = "No record was added.\n Action canceled.";
             this.Close();
         }
     }

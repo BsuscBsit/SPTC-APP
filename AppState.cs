@@ -379,19 +379,28 @@ namespace SPTC_APP
             }
             return videoSource.VideoCapabilities.OrderByDescending(c => c.FrameSize.Width * c.FrameSize.Height).ToList();
         }
-
-        public static List<Recap> LoadRecapitulations(int currentmonth, int currentYear)
+        private static bool isRecapLoaded = false;
+        public static void LoadRecapList(int currentmonth, int currentYear)
         {
-            foreach(string title in AppState.LIST_RECAP)
+            if (!isRecapLoaded)
             {
-                if((Retrieve.GetDataUsingQuery<int>(RequestQuery.CHECK_RECAP(title, currentmonth, currentYear)).Count == 0))
+                foreach (string title in AppState.LIST_RECAP.ToObject<string[]>())
                 {
-                    Recap recap = new Recap(title, 0);
-                    recap.date = new DateTime(currentYear, currentmonth, 1);
-                    recap.Save();
+                    if ((Retrieve.GetDataUsingQuery<int>(RequestQuery.CHECK_RECAP(title, currentmonth, currentYear)).FirstOrDefault() == 0))
+                    {
+                        Recap recap = new Recap(title, 0);
+                        recap.date = new DateTime(currentYear, currentmonth, 1);
+                        recap.Save();
+                    }
                 }
+                isRecapLoaded = true;
             }
 
+        }
+        public static List<Recap> LoadRecapitulations(int currentmonth, int currentYear)
+        {
+           
+            LoadRecapList(currentmonth, currentYear);
 
             return Retrieve.GetDataUsingQuery<Recap>(RequestQuery.GET_ALL_RECAP_IN_MONTH(currentmonth, currentYear));
         }

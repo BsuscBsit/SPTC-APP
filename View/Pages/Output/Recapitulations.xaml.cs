@@ -64,6 +64,7 @@ namespace SPTC_APP.View.Pages.Input
                 currentmonth++;
             }
             UpdateRecap();
+
         }
 
         private void btnPieBackward_Click(object sender, RoutedEventArgs e)
@@ -82,6 +83,14 @@ namespace SPTC_APP.View.Pages.Input
 
         public void UpdateRecap()
         {
+            if (currentmonth == DateTime.Now.Month && currentyear == DateTime.Now.Year)
+            {
+                    btnPieForward.IsEnabled = false;
+            }
+            else
+            {
+                    btnPieForward.IsEnabled = true;
+            }
             lblMonthYear.Content = $"{monthAbbreviations[currentmonth - 1] + ", " + currentyear}";
 
             List<Recap> recaps = AppState.LoadRecapitulations(currentmonth, currentyear);
@@ -93,32 +102,34 @@ namespace SPTC_APP.View.Pages.Input
 
             foreach (Recap r in recaps)
             {
-                if(r.text == "Share Capital")
-                {
-                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
-                }
+                
                 RowDefinition rowDefinition = new RowDefinition();
                 rowDefinition.Height = new GridLength(40);
                 recapgrid.RowDefinitions.Add(rowDefinition);
 
-                RecapDisplay recapDisplay = new RecapDisplay(r, recaps.IndexOf(r));
+                RecapDisplay recapDisplay = new RecapDisplay(r, recaps.IndexOf(r), check(r));
                 recapgrid.Children.Add(recapDisplay.AddSelf());
-
+                Button button = recapDisplay.GetButton();
+                button.MouseDown += btn_click;
                 total += r.content;
-                recapDisplay.getDelete().MouseLeave += click_remove;
             }
             tbTotal.Text = total.ToString("0.00");
         }
 
-        private void click_remove(object sender, MouseEventArgs e)
+        private bool check(Recap r)
         {
-            if (sender is Button btn)
-            {
-                if (btn.Tag?.ToString().Equals("DELETED") ?? false)
-                {
-                    UpdateRecap();
-                }
+            switch(r.text){
+                case "Share Capital":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                default:
+                    return  false;
             }
+        }
+
+        private void btn_click(object sender, MouseButtonEventArgs e)
+        {
+            UpdateRecap();
         }
 
         class RecapDisplay
@@ -126,10 +137,10 @@ namespace SPTC_APP.View.Pages.Input
             private Recap recap;
             private Label label;
             private TextBox textBox;
-            private Button btnRemove;
             private Grid grid;
+            private Button button;
 
-            public RecapDisplay(Recap r, int row)
+            public RecapDisplay(Recap r, int row, bool isReadonly = false)
             {
                 this.recap = r;
                 this.grid = new Grid();
@@ -141,12 +152,9 @@ namespace SPTC_APP.View.Pages.Input
                 col2.Width = new GridLength(1, GridUnitType.Star);
                 ColumnDefinition col3 = new ColumnDefinition();
                 col3.Width = new GridLength(100);
-                ColumnDefinition col4 = new ColumnDefinition();
-                col4.Width = new GridLength(100);
                 grid.ColumnDefinitions.Add(col1);
                 grid.ColumnDefinitions.Add(col2);
                 grid.ColumnDefinitions.Add(col3);
-                grid.ColumnDefinitions.Add(col4);
 
                 this.label = new Label();
                 label.Content = $"{recap.text}: ";
@@ -158,46 +166,26 @@ namespace SPTC_APP.View.Pages.Input
                 this.textBox = new TextBox();
                 textBox.Text = recap.content.ToString("0.00");
                 textBox.SetValue(Grid.ColumnProperty, 1);
+                textBox.IsReadOnly = isReadonly;
                 textBox.Style = Application.Current.FindResource("CommonTextBoxStyle") as Style; 
 
                 textBox.Margin = new Thickness(20, 5, 10, 5);
 
-                Button button = new Button();
-                button.Content = "SYNC";
+                button = new Button();
+                button.Content = "SAVE";
                 button.SetValue(Grid.ColumnProperty, 2);
                 button.Width = 90;
+                button.IsEnabled = !isReadonly;
                 button.HorizontalAlignment = HorizontalAlignment.Center;
                 button.VerticalAlignment = VerticalAlignment.Center;
                 button.Style = Application.Current.FindResource("CommonButtonStyle") as Style;
                 button.Margin = new Thickness(5);
                 button.Click += btn_click;
 
-                btnRemove = new Button();
-                btnRemove.Content = "REMOVE";
-                btnRemove.Width = 90;
-                btnRemove.SetValue(Grid.ColumnProperty, 3);
-                btnRemove.HorizontalAlignment = HorizontalAlignment.Center;
-                btnRemove.VerticalAlignment = VerticalAlignment.Center;
-                btnRemove.Style = Application.Current.FindResource("CommonButtonStyle") as Style;
-                btnRemove.Margin = new Thickness(5);
-                btnRemove.Click += btnRemove_click;
 
                 grid.Children.Add(label);
                 grid.Children.Add(textBox);
                 grid.Children.Add(button);
-                grid.Children.Add(btnRemove);
-            }
-
-            private void btnRemove_click(object sender, RoutedEventArgs e)
-            {
-                recap.Delete();
-                btnRemove.Style = Application.Current.FindResource("RedButtonStyle") as Style;
-                btnRemove.Tag = "DELETED";
-            }
-
-            public Button getDelete()
-            {
-                return btnRemove;
             }
 
             private void btn_click(object sender, RoutedEventArgs e)
@@ -205,6 +193,10 @@ namespace SPTC_APP.View.Pages.Input
                 recap.content = Double.Parse(textBox.Text);
                 recap.Save();
                 
+            }
+            public Button GetButton()
+            {
+                return button;
             }
 
             public Grid AddSelf()

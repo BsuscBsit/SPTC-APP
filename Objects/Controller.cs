@@ -137,7 +137,7 @@ namespace SPTC_APP.Objects
         private static async Task<bool> PerformDatabaseTasks(ProgressBar progressBar, TextBox log)
         {
             Task<bool> loadDatabaseTask = Task.Run(() => AppState.LoadDatabase());
-
+            AppState.LoadRecapList(DateTime.Now.Month, DateTime.Now.Year);
             for (int i = 0; i < 100; i++)
             {
                 progressBar.Dispatcher.Invoke(() =>

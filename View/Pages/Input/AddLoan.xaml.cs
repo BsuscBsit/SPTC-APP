@@ -38,7 +38,7 @@ namespace SPTC_APP.View.Pages.Input
             dpBdate.SelectedDate = DateTime.Now;
 
             loan = this.franchise.GetLoans().FirstOrDefault();
-            tbProcessingFee.Text = loan.processingFee.ToString();
+            
             tboxInterest.Text = loan.interest.ToString();
 
             DraggingHelper.DragWindow(topBar);

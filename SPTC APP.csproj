@@ -280,9 +280,6 @@
     <Compile Include="View\Pages\Input\AddLTLoan.xaml.cs">
       <DependentUpon>AddLTLoan.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Input\AddRecap.xaml.cs">
-      <DependentUpon>AddRecap.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Pages\Input\AddShareCaptital.xaml.cs">
       <DependentUpon>AddShareCaptital.xaml</DependentUpon>
     </Compile>
@@ -422,10 +419,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\Input\AddLTLoan.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Pages\Input\AddRecap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

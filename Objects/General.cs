@@ -267,12 +267,12 @@ namespace SPTC_APP.Objects
                 return $"{addressline1} {addressline2}";
             }
 
-            else if (!string.IsNullOrEmpty(addressline1) && (!string.IsNullOrEmpty(barangay) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(country)))
+            else if (!string.IsNullOrEmpty(addressline1) && ((!string.IsNullOrEmpty(barangay) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(province))))
             {
                 return $"{addressline1}, {barangay} {city}, {province}".Trim();
 
             }
-            else if (!string.IsNullOrEmpty(houseNo) || !string.IsNullOrEmpty(streetname) || !string.IsNullOrEmpty(barangay) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(province) || !string.IsNullOrEmpty(country))
+            else if (!string.IsNullOrEmpty(houseNo) || !string.IsNullOrEmpty(streetname) || !string.IsNullOrEmpty(barangay) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(province))
             {
                 return $"{houseNo} {streetname}, {barangay} {city}, {province}".Trim();
             }

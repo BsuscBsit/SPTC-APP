@@ -53,13 +53,6 @@
             VerticalAlignment="Center"
             Content="TOTAL: "
             Style="{StaticResource TextFieldLabelingPreset}" />
-        <Button
-            x:Name="btnAdd"
-            Grid.Row="3"
-            Grid.Column="3"
-            Click="btnAdd_Click"
-            Content="ADD RECORD"
-            Style="{StaticResource CommonButtonStyle}" />
         <TextBox
             x:Name="tbTotal"
             Grid.Row="5"

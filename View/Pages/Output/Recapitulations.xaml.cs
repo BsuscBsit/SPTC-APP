@@ -82,16 +82,6 @@ namespace SPTC_APP.View.Pages.Input
 
         public void UpdateRecap()
         {
-            if (currentmonth == DateTime.Now.Month && currentyear == DateTime.Now.Year)
-            {
-                btnPieForward.IsEnabled = false;
-                btnAdd.IsEnabled = true;
-            }
-            else
-            {
-                btnPieForward.IsEnabled = true;
-                btnAdd.IsEnabled = false;
-            }
             lblMonthYear.Content = $"{monthAbbreviations[currentmonth - 1] + ", " + currentyear}";
 
             List<Recap> recaps = AppState.LoadRecapitulations(currentmonth, currentyear);
@@ -129,11 +119,6 @@ namespace SPTC_APP.View.Pages.Input
                     UpdateRecap();
                 }
             }
-        }
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            (new AddRecap(this)).Show();
         }
 
         class RecapDisplay

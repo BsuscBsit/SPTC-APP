@@ -382,6 +382,17 @@ namespace SPTC_APP
 
         public static List<Recap> LoadRecapitulations(int currentmonth, int currentYear)
         {
+            foreach(string title in AppState.LIST_RECAP)
+            {
+                if((Retrieve.GetDataUsingQuery<int>(RequestQuery.CHECK_RECAP(title, currentmonth, currentYear)).Count == 0))
+                {
+                    Recap recap = new Recap(title, 0);
+                    recap.date = new DateTime(currentYear, currentmonth, 1);
+                    recap.Save();
+                }
+            }
+
+
             return Retrieve.GetDataUsingQuery<Recap>(RequestQuery.GET_ALL_RECAP_IN_MONTH(currentmonth, currentYear));
         }
     }

@@ -57,11 +57,11 @@ namespace SPTC_APP.View.Pages.Input
             if (currentmonth == 1)
             {
                 currentmonth = 12;
-                currentyear--;
+                currentyear++;
             }
             else
             {
-                currentmonth--;
+                currentmonth++;
             }
             UpdateRecap();
         }
@@ -71,11 +71,11 @@ namespace SPTC_APP.View.Pages.Input
             if (currentmonth >= 12)
             {
                 currentmonth = 1;
-                currentyear++;
+                currentyear--;
             }
             else
             {
-                currentmonth++;
+                currentmonth--;
             }
             UpdateRecap();
         }

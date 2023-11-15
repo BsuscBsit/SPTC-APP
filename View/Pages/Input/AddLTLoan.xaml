@@ -65,7 +65,7 @@
             Height="Auto"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="Payment Amount: "
+            Content="Loan Payment Amount: "
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             Grid.Row="3"
@@ -83,7 +83,7 @@
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="Overdue Penalty: "
+            Content="Overdue Months: "
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             x:Name="lblInterest"
@@ -93,7 +93,7 @@
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="Monthly Interest: "
+            Content="Overdue Penalty: "
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             x:Name="lblProcessingFee"
@@ -103,7 +103,7 @@
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="Processing Fee: "
+            Content="Total Amount: "
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Border
             Grid.Row="4"

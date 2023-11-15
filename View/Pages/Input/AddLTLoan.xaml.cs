@@ -59,15 +59,16 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ControlWindow.ShowTwoway("Adding new record", "Confirm?", Icons.NOTIFY))
+            
+            if (confirmPayment())
             {
                 double amount = Double.TryParse(tboxAmount.Text, out amount) ? amount : 0;
-                double interest = Double.TryParse(tboxInterest.Text, out interest) ? interest : 0;
+                
                 double penalty = Double.TryParse(tbPenalty.Text, out penalty) ? penalty : 0;
                 if (amount > 0)
                 {
 
-                    PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
+                    /*PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
                     ltloan.amount = ltloan.amount - amount;
                     loanPayment.WriteInto(ltloan, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", ltloan.amount);
                     if (ltloan.amount <= 0)
@@ -76,7 +77,7 @@ namespace SPTC_APP.View.Pages.Input
                     }
                     loanPayment.Save();
                     
-                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);*/
                     this.closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";
                     this.Close();
                 } else
@@ -85,6 +86,19 @@ namespace SPTC_APP.View.Pages.Input
                 }
             }
         }
+
+        private bool confirmPayment()
+        {
+            if(ControlWindow.ShowTwoway("Adding new record", "Confirm?", Icons.NOTIFY))
+            {
+
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+
         private void initTextBoxes()
         {
             // Check tooltips kung tama ba description. (Optional)

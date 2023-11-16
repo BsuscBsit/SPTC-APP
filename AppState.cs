@@ -385,7 +385,7 @@ namespace SPTC_APP
         private static bool isRecapLoaded = false;
         public static void LoadRecapList(int currentmonth, int currentYear)
         {
-            if (!isRecapLoaded)
+            if (!isRecapLoaded && AppState.LIST_RECAP != null)
             {
                 foreach (string title in AppState.LIST_RECAP.ToObject<string[]>())
                 {

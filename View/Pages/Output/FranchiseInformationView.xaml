@@ -253,8 +253,6 @@
                         x:Name="btnChangeDriver"
                         Width="130"
                         Height="27"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
                         Click="btnChangeDriver_Click"
                         Content="CHANGE DRIVER"
                         FontSize="12"
@@ -372,22 +370,29 @@
                     Grid.ColumnSpan="2"
                     MinWidth="400"
                     Margin="12,12,20,12" />
-                <Button
-                    x:Name="btnAddButton"
+                <StackPanel x:Name="spRecordButtons"
                     Grid.Row="1"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
-                    Width="225"
-                    Height="30"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
-                    Click="btnAddButton_Click"
-                    Style="{DynamicResource CommonButtonStyle}">
-                    <Grid>
-                        <ContentControl
-                            x:Name="iconTransfer"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center" Width="16" Height="12" Margin="0,1,0,0" d:IsHidden="True" Visibility="Hidden">
-                            <ContentControl.Content>
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="btnAddButton"
+                        Width="225"
+                        Height="30"
+                        Click="btnAddButton_Click"
+                        Style="{DynamicResource CommonButtonStyle}" Margin="0,0,15,0">
+                        <Grid>
+                            <ContentControl
+                                x:Name="iconTransfer"
+                                Width="16"
+                                Height="12"
+                                Margin="0,1,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                d:IsHidden="True"
+                                Visibility="Hidden">
                                 <Viewbox Width="21" Height="17">
                                     <Canvas Width="17" Height="13">
                                         <Canvas>
@@ -406,24 +411,31 @@
                                         </Canvas>
                                     </Canvas>
                                 </Viewbox>
+                            </ContentControl>
+                            <Path
+                                x:Name="iconAdd"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Data="M0,7 H14 M7,0 V14"
+                                Stroke="{StaticResource BrushBlack}"
+                                StrokeThickness="1" />
+                            <Label
+                                x:Name="lblBtnAddContent"
+                                Margin="20,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Content="Add Record"
+                                Style="{StaticResource ButtonTextPresetLabel}" />
+                        </Grid>
+                    </Button>
+                    <Button
+                        x:Name="btnReload"
+                        Width="150"
+                        Height="30"
+                        Content="Reload View"
+                        Style="{StaticResource CommonButtonStyle}" />
 
-                            </ContentControl.Content>
-                        </ContentControl>
-                        <Path
-                            x:Name="iconAdd"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Data="M0,7 H14 M7,0 V14"
-                            Stroke="{StaticResource BrushBlack}"
-                            StrokeThickness="1" />
-                        <Label
-                            x:Name="lblBtnAddContent"
-                            Margin="20,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Content="Add Record" />
-                    </Grid>
-                </Button>
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>

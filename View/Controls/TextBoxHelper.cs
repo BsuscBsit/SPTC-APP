@@ -278,6 +278,13 @@ namespace SPTC_APP.View.Controls
                     msg = $"' {input} ' is not a valid input for this field.";
                     break;
 
+                case WHOLESIGNED:
+                case WHOLEUNSIGNED:
+                case DECIMALSIGNED:
+                case DECIMALUNSIGNED:
+                    msg = null;
+                    break;
+
                 default:
                     msg = pre + patternDescription[(int)format] + post;
                     break;

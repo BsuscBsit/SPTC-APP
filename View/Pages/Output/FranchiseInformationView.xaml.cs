@@ -22,7 +22,7 @@ namespace SPTC_APP.View.Pages.Output
             InitializeComponent();
             this.tableview = tableview;
             UpdateContent();
-            btnAddButton.Visibility = Visibility.Hidden;
+            spRecordButtons.Visibility = Visibility.Hidden;
             if((AppState.USER?.position?.accesses[0] ?? false))
             {
                 btnChangeDriver.Visibility = Visibility.Visible;
@@ -105,10 +105,10 @@ namespace SPTC_APP.View.Pages.Output
         {
             ClickColorControl(sender);
             ModuleGrid.Children.Clear();
-            if(moduleName == Modules.VIOLATION)
+            Grid f = (new Modules(moduleName, MainBody.selectedFranchise)).Fetch();
+            if (moduleName == Modules.VIOLATION)
             {
-                Grid f = (new Modules(moduleName, MainBody.selectedFranchise)).Fetch();
-                if (btnAddButton.Visibility != Visibility.Visible)
+                if (spRecordButtons.Visibility != Visibility.Visible)
                 {
                     f.RowDefinitions[2] = new RowDefinition() { Height = new GridLength(0) };
                 }
@@ -116,20 +116,20 @@ namespace SPTC_APP.View.Pages.Output
             }
             else
             {
-                ModuleGrid.Children.Add((new Modules(moduleName, MainBody.selectedFranchise)).Fetch());
+                ModuleGrid.Children.Add(f);
             }
         }
 
         private void btnHistory_Click(object sender, RoutedEventArgs e)
         {
-            btnAddButton.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
+            spRecordButtons.FadeOut(0.2, () => { spRecordButtons.Visibility = Visibility.Collapsed; });
             HandleButtonClick(Modules.HISTORY, sender as Button);
             
         }
 
         private void btnCoding_Click(object sender, RoutedEventArgs e)
         {
-            btnAddButton.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
+            spRecordButtons.FadeOut(0.2, () => { spRecordButtons.Visibility = Visibility.Collapsed; });
             HandleButtonClick(Modules.CODING, sender as Button);
         }
 
@@ -148,7 +148,7 @@ namespace SPTC_APP.View.Pages.Output
                 }
             } else
             {
-                btnAddButton.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
+                spRecordButtons.FadeOut(0.2, () => { spRecordButtons.Visibility = Visibility.Collapsed; });
             }
             HandleButtonClick(Modules.VIOLATION, sender as Button);
         }
@@ -186,7 +186,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (MainBody.selectedFranchise.GetLoans().Count <= 0)
                 {
                     //btnAddButton.Content = "APPLY FOR LOAN";
-                    btnAddButton.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
+                    spRecordButtons.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
                 }
 
             }
@@ -204,7 +204,7 @@ namespace SPTC_APP.View.Pages.Output
                 addBtnInit("Add Record");
                 if (MainBody.selectedFranchise.GetLTLoans().Count <= 0)
                 {
-                    btnAddButton.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
+                    spRecordButtons.FadeOut(0.2, () => { spRecordButtons.Visibility = Visibility.Collapsed; });
                 };
             }
             else
@@ -294,7 +294,7 @@ namespace SPTC_APP.View.Pages.Output
         {
             if (content != null)
             {
-                btnAddButton.FadeIn(0.2, () =>
+                spRecordButtons.FadeIn(0.2, () =>
                 {
                     lblBtnAddContent.Content = content;
                     if (isAdd)
@@ -311,8 +311,8 @@ namespace SPTC_APP.View.Pages.Output
             }
             else
             {
-                btnAddButton.FadeOut(0.2);
-                btnAddButton.Visibility = Visibility.Collapsed;
+                spRecordButtons.FadeOut(0.2);
+                spRecordButtons.Visibility = Visibility.Collapsed;
             }
         }
     }

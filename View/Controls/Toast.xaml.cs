@@ -24,26 +24,29 @@ namespace SPTC_APP.View.Controls
             System.Windows.Media.Brush fg = null,
             System.Windows.Media.Brush bg = null)
         {
-            InitializeComponent();
-            if (doBeep)
+            if(!(string.IsNullOrEmpty(msg) || string.IsNullOrWhiteSpace(msg)))
             {
-                System.Media.SystemSounds.Exclamation.Play();
-            }
-            message.Text = msg;
-            message.Foreground = fg ?? FindResource("BrushBlack") as System.Windows.Media.Brush;
-            border.Background = bg ?? System.Windows.Media.Brushes.White;
-
-            parent.Children.Remove(toast);
-            targetGrid.Children.Add(toast);
-
-            toast.FadeIn(animationDuration, async () =>
-            {
-                await Task.Delay(TimeSpan.FromSeconds(persistDuration));
-                toast.FadeOut(animationDuration, () =>
+                InitializeComponent();
+                if (doBeep)
                 {
-                    targetGrid.Children.Remove(toast);
+                    System.Media.SystemSounds.Exclamation.Play();
+                }
+                message.Text = msg;
+                message.Foreground = fg ?? FindResource("BrushBlack") as System.Windows.Media.Brush;
+                border.Background = bg ?? System.Windows.Media.Brushes.White;
+
+                parent.Children.Remove(toast);
+                targetGrid.Children.Add(toast);
+
+                toast.FadeIn(animationDuration, async () =>
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(persistDuration));
+                    toast.FadeOut(animationDuration, () =>
+                    {
+                        targetGrid.Children.Remove(toast);
+                    });
                 });
-            });
+            }
         }
     }
 }

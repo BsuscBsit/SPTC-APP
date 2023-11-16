@@ -27,6 +27,10 @@ namespace SPTC_APP.View.Pages.Input
 
         Franchise franchise;
         private string closingMSG;
+
+        private double penalty;
+        private double breakdown;
+
         Ledger.LongTermLoan ltloan;
         public AddLTLoan(Franchise franchise)
         {
@@ -39,8 +43,26 @@ namespace SPTC_APP.View.Pages.Input
             dpBdate.SelectedDate = DateTime.Now;
             ltloan = this.franchise.GetLTLoans().FirstOrDefault();
 
-            tboxInterest.Text = ltloan.interest.ToString();
-            tbProcessingFee.Text = ltloan.processingFee.ToString();
+            lblLoanDate.Content = ltloan.displayDate;
+            lblLoanCVOR.Content = ltloan.cv_or;
+            lblLoanAmount.Content = "₱" + ltloan.amountLoaned.ToString("N2");
+            lblLoanInterest.Content = "₱" + ltloan.interest.ToString("N2");
+            lblTotal.Content = "₱" + (ltloan.amountLoaned + ltloan.interest).ToString("N2");
+
+            lblLoanRec.Content = "₱" + (ltloan.amountLoaned / ltloan.termsofpayment).ToString("N2");
+            lblInteRec.Content = "₱" + (ltloan.interest / ltloan.termsofpayment).ToString("N2");
+
+            breakdown = ((ltloan.amountLoaned / ltloan.termsofpayment) + (ltloan.interest / ltloan.termsofpayment));
+            lblTotalBreak.Content = "₱" + breakdown.ToString("N2");
+
+            // dat depende sa total dun sa applyloan eh.
+            penalty = ltloan.amountLoaned * (0.02);
+
+            /* pano kunin to?
+            lblBodyNum.Content =
+            lblRemainingBalance.Content =
+            */
+
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
         }
@@ -101,13 +123,43 @@ namespace SPTC_APP.View.Pages.Input
 
         private void initTextBoxes()
         {
-            // Check tooltips kung tama ba description. (Optional)
-            tboxAmount.DefaultTextBoxBehavior(NUMBERDASHPERIOD, true, gridToast, "Enter amount to loan.", 0);
-            tboxRefNo.DefaultTextBoxBehavior(NUMBER, true, gridToast, "Reference number.", 1);
-            tbPenalty.DefaultTextBoxBehavior(NUMBERPERIOD, true, gridToast, "Penalty amount.", 2);
-            tboxInterest.DefaultTextBoxBehavior(NUMBERPERIOD, true, gridToast, "Enter loan interest monthly.", 3);
-            tbProcessingFee.DefaultTextBoxBehavior(NUMBERPERIOD, true, gridToast, "Enter processing fee.", 4);
+            tboxAmount.DefaultTextBoxBehavior(DECIMALUNSIGNED, true, gridToast, "Enter amount of payment.", 0);
+            tboxRefNo.DefaultTextBoxBehavior(WHOLEUNSIGNED, true, gridToast, "CV/OR number.", 1);
+            tbPenalty.DefaultTextBoxBehavior(WHOLEUNSIGNED, true, gridToast, "Enter number of overdue in months.", 2);
         }
 
+        private void tboxAmount_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            double val;
+            if(double.TryParse(tboxAmount.Text + e.Text, out val))
+            {
+                lblCurrentPay.Content = "₱" + val.ToString("N2");
+
+                /**
+                 * pano kunin yung balance?
+                
+                lblRemainingBalance.Content = remaining - val
+
+                 * inuupdate ng part na to kung magkano mababawas
+                 * sa existing loan.
+                 * Pag di pwede/kailangan pwede naman tanggalin
+                 * dinagdag ko lang to para may live update sa effect
+                 * ng payment.
+                 * 
+                 * pag pwede ng kunin yung current balance, pwede yun
+                 * mailagay sa loan details.
+                 **/
+            }
+        }
+
+        private void tbPenalty_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            double val;
+            if (double.TryParse(tbPenalty.Text + e.Text, out val))
+            {
+                lblPenalty.Content = "₱" + (penalty * val).ToString("N2");
+                lblTotalBreak.Content = "₱" + (breakdown + (penalty * val)).ToString("N2");
+            }
+        }
     }
 }

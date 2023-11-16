@@ -24,6 +24,7 @@ namespace SPTC_APP.View.Pages.Input
     public partial class InputFranchiseView : Window
     {
         Franchise fran;
+        private string closingMSG;
         public InputFranchiseView(Franchise franchise = null)
         {
             InitializeComponent();
@@ -46,11 +47,13 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
         private void btnCanceFranchiseInfo_Click(object sender, RoutedEventArgs e)
         {
+            closingMSG = "No franchise was added.\nAction was canceled.";
             this.Close();
         }
 

@@ -84,13 +84,14 @@ namespace SPTC_APP.View.Pages.Input
             
             if (confirmPayment())
             {
+                /*
                 double amount = Double.TryParse(tboxAmount.Text, out amount) ? amount : 0;
                 
                 double penalty = Double.TryParse(tbPenalty.Text, out penalty) ? penalty : 0;
                 if (amount > 0)
                 {
 
-                    /*PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
+                    PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
                     ltloan.amount = ltloan.amount - amount;
                     loanPayment.WriteInto(ltloan, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", ltloan.amount);
                     if (ltloan.amount <= 0)
@@ -99,13 +100,13 @@ namespace SPTC_APP.View.Pages.Input
                     }
                     loanPayment.Save();
                     
-                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);*/
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                     this.closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";
                     this.Close();
                 } else
                 {
 
-                }
+                }*/
             }
         }
 
@@ -127,7 +128,11 @@ namespace SPTC_APP.View.Pages.Input
             tboxRefNo.DefaultTextBoxBehavior(WHOLEUNSIGNED, true, gridToast, "CV/OR number.", 1);
             tbPenalty.DefaultTextBoxBehavior(WHOLEUNSIGNED, true, gridToast, "Enter number of overdue in months.", 2);
         }
-
+        /**
+         * Diero dapat etong tboxAmount ay galing sa monthly , yung nakalagay sa amortizations, di nato editable
+         * tapos yung sa principal daw, ay naka round up sa 100, ex. principa 3333 dapat 3400
+         * Ok na yung computation tas yung design, yung sa penalty, ilagay mo nalang sa ilalim ng tbPenalty
+         * **/
         private void tboxAmount_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             double val;
@@ -149,6 +154,7 @@ namespace SPTC_APP.View.Pages.Input
                  * pag pwede ng kunin yung current balance, pwede yun
                  * mailagay sa loan details.
                  **/
+                lblRemainingBalance.Content = franchise.LongTermLoanBalance - val;
             }
         }
 

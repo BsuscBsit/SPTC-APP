@@ -30,6 +30,11 @@ namespace SPTC_APP.View.Pages.Input
 
         private double penalty;
         private double breakdown;
+        /**
+         * Lagay dito yung mga isasave sa database, yung amount na nareceive
+         * tas yung totalpenalty, penalty * months not paying ganun
+         * 
+         */
 
         Ledger.LongTermLoan ltloan;
         public AddLTLoan(Franchise franchise)
@@ -55,7 +60,8 @@ namespace SPTC_APP.View.Pages.Input
             breakdown = ((ltloan.amountLoaned / ltloan.termsofpayment) + (ltloan.interest / ltloan.termsofpayment));
             lblTotalBreak.Content = "₱" + breakdown.ToString("N2");
 
-            penalty = ltloan.amountLoaned * (0.02);
+            // Eto galing sa applyloan
+            penalty = ltloan.amountLoaned * (ltloan.penaltyPercent / 100);
 
             lblRemainingBalance.Content = franchise.LongTermLoanBalance;
             tboxAmount.Text = Scaler.RoundUp(breakdown).ToString();
@@ -125,11 +131,6 @@ namespace SPTC_APP.View.Pages.Input
             tboxRefNo.DefaultTextBoxBehavior(WHOLEUNSIGNED, true, gridToast, "CV/OR number.", 1);
             tbPenalty.DefaultTextBoxBehavior(WHOLEUNSIGNED, true, gridToast, "Enter number of overdue in months.", 2);
         }
-        /**
-         * Diero dapat etong tboxAmount ay galing sa monthly , yung nakalagay sa amortizations, di nato editable
-         * tapos yung sa principal daw, ay naka round up sa 100, ex. principa 3333 dapat 3400
-         * Ok na yung computation tas yung design, yung sa penalty, ilagay mo nalang sa ilalim ng tbPenalty
-         * **/
 
         private void tbPenalty_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

@@ -160,8 +160,9 @@ CREATE TABLE `tbl_loan_ledger` (
   `processing_fee` double NOT NULL DEFAULT 0,
   `cbu` double NOT NULL DEFAULT 0,
   `terms_of_payment_month` int(11) NOT NULL DEFAULT 1,
-  `interest` int(11) NOT NULL DEFAULT 0,
-  `principal` int(11) NOT NULL DEFAULT 0,
+  `interest` double NOT NULL DEFAULT 0,
+  `principal` double NOT NULL DEFAULT 0,
+  `penalties` double NOT NULL DEFAULT 0,
   `isFullyPaid` tinyint(1) NOT NULL DEFAULT 0,
   `amount` double NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
@@ -185,6 +186,7 @@ CREATE TABLE `tbl_long_term_loan_ledger` (
   `terms_of_payment_month` int(11) NOT NULL DEFAULT 1,
   `interest` double NOT NULL DEFAULT 0,
   `principal` double NOT NULL DEFAULT 0,
+  `penalties` double NOT NULL DEFAULT 0,
   `isFullyPaid` tinyint(1) NOT NULL DEFAULT 0,
   `amount` double NOT NULL DEFAULT 0,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0

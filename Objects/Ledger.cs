@@ -27,6 +27,7 @@ namespace SPTC_APP.Objects
             public double interest { get; set; }
             public double principal { get; set; }
             public double amount { get; set; }
+            public double penaltyPercent { get; set; }
             public string displayDate
             {
                 get
@@ -65,13 +66,14 @@ namespace SPTC_APP.Objects
                 this.interest = Retrieve.GetValueOrDefault<double>(reader, Field.INTEREST);
                 this.principal = Retrieve.GetValueOrDefault<double>(reader, Field.PRINCIPAL);
                 this.amount = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT);
+                this.penaltyPercent = Retrieve.GetValueOrDefault<double>(reader, Field.PENALTIES);
             }
             public bool WriteInto(
                     int franchiseId,
                     DateTime dateLoaned,
                     double amountLoaned, 
                     string cv_or,
-                    string details, double processingfee, double cbu, int termsofpayment, double interest, double principal)
+                    string details, double processingfee, double cbu, int termsofpayment, double interest, double principal, double penalty)
             {
                 this.franchiseId = franchiseId;
                 this.date = dateLoaned;
@@ -84,6 +86,7 @@ namespace SPTC_APP.Objects
                 this.interest = interest;
                 this.principal = principal;
                 this.amount = amountLoaned + interest;
+                this.penaltyPercent = penalty;
                 return true;
             }
 
@@ -104,6 +107,7 @@ namespace SPTC_APP.Objects
                 loan.Insert(Field.TERMS_OF_PAYMENT_MONTH, termsofpayment);
                 loan.Insert(Field.INTEREST, interest);
                 loan.Insert(Field.PRINCIPAL, principal);
+                loan.Insert(Field.PENALTIES, penaltyPercent);
                 loan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
                 loan.Insert(Field.AMOUNT, amount);
                 loan.Save();
@@ -203,6 +207,7 @@ namespace SPTC_APP.Objects
             public int termsofpayment { get; set; }
             public double interest { get; set; }
             public double principal { get; set; }
+            public double penaltyPercent { get; set; }
             public double amount { get; set; }
             public string displayDate
             {
@@ -242,13 +247,14 @@ namespace SPTC_APP.Objects
                 this.termsofpayment = Retrieve.GetValueOrDefault<int>(reader, Field.TERMS_OF_PAYMENT_MONTH);
                 this.interest = Retrieve.GetValueOrDefault<double>(reader, Field.INTEREST);
                 this.principal = Retrieve.GetValueOrDefault<double>(reader, Field.PRINCIPAL);
+                this.penaltyPercent = Retrieve.GetValueOrDefault<double>(reader, Field.PENALTIES);
                 this.amount = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT);
             }
             public bool WriteInto(
                     int franchiseId,
                     DateTime dateLoaned,
                     double amountLoaned,
-                    string cv_or, string details, double processingfee, double cbu, int termsofpayment, double interest, double principal)
+                    string cv_or, string details, double processingfee, double cbu, int termsofpayment, double interest, double principal, double penalty)
             {
                 this.franchiseId = franchiseId;
                 this.date = dateLoaned;
@@ -260,6 +266,7 @@ namespace SPTC_APP.Objects
                 this.termsofpayment = termsofpayment;
                 this.interest = interest;
                 this.principal = principal;
+                this.penaltyPercent = penalty;
                 this.amount = amountLoaned + interest;
                 return true;
             }
@@ -281,6 +288,7 @@ namespace SPTC_APP.Objects
                 loan.Insert(Field.TERMS_OF_PAYMENT_MONTH, termsofpayment);
                 loan.Insert(Field.INTEREST, interest);
                 loan.Insert(Field.PRINCIPAL, principal);
+                loan.Insert(Field.PENALTIES, penaltyPercent);
                 loan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
                 loan.Insert(Field.AMOUNT, amount);
                 loan.Save();

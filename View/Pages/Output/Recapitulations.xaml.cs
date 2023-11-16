@@ -106,7 +106,7 @@ namespace SPTC_APP.View.Pages.Input
 
             foreach (Recap r in recaps)
             {
-                if (r.text == "Cash On Hand")
+                if (r.text == Field.CASH_ON_HAND)
                 {
                     RecapDisplay recapDisplay = new RecapDisplay(this, r, recaps.Count - 1, check(r.text));
                     gridChashonhand.Children.Add(recapDisplay.AddSelf());

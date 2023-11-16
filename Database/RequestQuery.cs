@@ -30,8 +30,7 @@ namespace SPTC_APP.Database
 
         public static string GET_ALL_EMPLOYEES = $"SELECT * FROM {Table.EMPLOYEE} WHERE {Where.ALL_NOTDELETED}";
         public static string GET_ALL_OPERATOR_FOR_DISPLAY(int start, int size) => $"SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (PARTITION BY body_number ORDER BY buying_date DESC) AS rn FROM tbl_franchise WHERE operator_id <> -1 AND {Where.ALL_NOTDELETED} ) subquery WHERE rn = 1 LIMIT {start}, {size}";
-
-
+        public static string GET_CASHONHAND(int month, int year) => $"SELECT {Field.DEPOSIT} FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} = -1 AND {Field.DEPOSIT} >= 0 AND {Field.RECAP_TEXT} = \"{Field.CASH_ON_HAND}\" AND {Where.ALL_NOTDELETED}";
         public static string GET_TOTAL_EXPENSES(int month, int year) => $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.DEPOSIT} < 0 AND {Field.ID} = -1 AND {Where.ALL_NOTDELETED}";
 
         public static string SEARCH(string text) =>
@@ -45,7 +44,7 @@ namespace SPTC_APP.Database
         public static string GET_ALL_RECAP_IN_MONTH(int month, int year) =>
             $"SELECT {Field.ID}, {Field.RECAP_TEXT}, {Field.RECAP_VALUE}, {Field.DATE} FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} = -1 AND {Field.LEDGER_TYPE} = \"RECAP\" AND {Where.ALL_NOTDELETED}";
         public static string GET_ALL_PAYMENT_IN_MONTH(string table, int month, int year) =>
-            $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_TYPE} = \"{table}\" AND {Field.LEDGER_ID} <> -1 AND {Where.ALL_NOTDELETED}";
+            $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_TYPE} = \"{table}\" AND {Where.ALL_NOTDELETED}";
         public static string CHECK_IF_SUSPENDED(string entity, string field, int id) =>
             $"SELECT CASE WHEN EXISTS ( SELECT 1 FROM {Table.VIOLATION} AS v LEFT JOIN {Table.FRANCHISE} AS f ON f.{Field.ID} = v.{Field.FRANCHISE_ID} LEFT JOIN {Table.VIOLATION_TYPE} AS vt ON v.{Field.VIOLATION_TYPE_ID} = vt.{Field.ID} WHERE vt.{Field.ENTITY_TYPE} = \"{entity}\" AND f.{field} = {id} AND CURDATE() BETWEEN v.{Field.SUSPENSION_START} AND v.{Field.SUSPENSION_END} ) THEN TRUE ELSE FALSE END AS IsSuspended;";
         public static string GET_SHARE_LEDGER_LIST(int id) =>
@@ -90,6 +89,7 @@ namespace SPTC_APP.Database
                 return stringBuilder.ToString();
             }
         }
+
     }
 
     public static class Table
@@ -246,6 +246,7 @@ namespace SPTC_APP.Database
         //RECAP
         public const string RECAP_VALUE = "deposit";
         public const string RECAP_TEXT = "remarks";
+        public const string CASH_ON_HAND = "Cash On Hand";
     }
 
     public enum CRUDControl

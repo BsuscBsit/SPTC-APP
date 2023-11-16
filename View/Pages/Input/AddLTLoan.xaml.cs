@@ -55,13 +55,10 @@ namespace SPTC_APP.View.Pages.Input
             breakdown = ((ltloan.amountLoaned / ltloan.termsofpayment) + (ltloan.interest / ltloan.termsofpayment));
             lblTotalBreak.Content = "₱" + breakdown.ToString("N2");
 
-            // dat depende sa total dun sa applyloan eh.
             penalty = ltloan.amountLoaned * (0.02);
 
-            /* pano kunin to?
-            lblBodyNum.Content =
-            lblRemainingBalance.Content =
-            */
+            lblRemainingBalance.Content = franchise.LongTermLoanBalance;
+            tboxAmount.Text = Scaler.RoundUp(breakdown).ToString();
 
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
@@ -133,39 +130,23 @@ namespace SPTC_APP.View.Pages.Input
          * tapos yung sa principal daw, ay naka round up sa 100, ex. principa 3333 dapat 3400
          * Ok na yung computation tas yung design, yung sa penalty, ilagay mo nalang sa ilalim ng tbPenalty
          * **/
-        private void tboxAmount_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            double val;
-            if(double.TryParse(tboxAmount.Text + e.Text, out val))
-            {
-                lblCurrentPay.Content = "₱" + val.ToString("N2");
-
-                /**
-                 * pano kunin yung balance?
-                
-                lblRemainingBalance.Content = remaining - val
-
-                 * inuupdate ng part na to kung magkano mababawas
-                 * sa existing loan.
-                 * Pag di pwede/kailangan pwede naman tanggalin
-                 * dinagdag ko lang to para may live update sa effect
-                 * ng payment.
-                 * 
-                 * pag pwede ng kunin yung current balance, pwede yun
-                 * mailagay sa loan details.
-                 **/
-                lblRemainingBalance.Content = franchise.LongTermLoanBalance - val;
-            }
-        }
 
         private void tbPenalty_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             double val;
             if (double.TryParse(tbPenalty.Text + e.Text, out val))
             {
+                double pen = penalty * val;
                 lblPenalty.Content = "₱" + (penalty * val).ToString("N2");
-                lblTotalBreak.Content = "₱" + (breakdown + (penalty * val)).ToString("N2");
+                lblTotalBreak.Content = "₱" + (breakdown + pen).ToString("N2");
+
+                double cur = Scaler.RoundUp(breakdown + pen);
+                tboxAmount.Text = cur.ToString();
+                lblCurrentPay.Content = cur.ToString();
+                lblRemainingBalance.Content = franchise.LongTermLoanBalance - cur;
             }
         }
+
+        
     }
 }

@@ -206,9 +206,6 @@ namespace SPTC_APP.View.Pages.Input
                             break;
 
                         case 2: // Emergency
-                            /*pfFinal = userVars[0] * pfRatio;
-                            cbuFinal = userVars[0] * cbuRatio;
-                            deductions = pfFinal + cbuFinal;*/
 
                             principal = userVars[0];
 

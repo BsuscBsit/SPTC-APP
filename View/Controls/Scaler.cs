@@ -17,6 +17,11 @@ namespace SPTC_APP.View
             return (pt / 72) * 96;
         }
 
+        public static int RoundUp(double number)
+        {
+            return (int)Math.Ceiling(number / 100) * 100;
+        }
+
         public static string NumberShorthand(double value, string excludeabvr = null)
         {
             string res = ShortHand(value, excludeabvr);

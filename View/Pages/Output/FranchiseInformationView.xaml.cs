@@ -307,6 +307,7 @@ namespace SPTC_APP.View.Pages.Output
                         iconTransfer.Visibility = Visibility.Visible;
                         iconAdd.Visibility = Visibility.Hidden;
                     }
+                    btnAddButton.Visibility = Visibility.Visible;
                 });
             }
             else

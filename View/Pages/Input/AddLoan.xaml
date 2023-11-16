@@ -132,11 +132,9 @@
             x:Name="tbPenalty"
             Grid.Row="6"
             Grid.Column="1"
-            Width="164"
             Height="30"
-            Margin="15,0,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            Margin="15,0,1,0"
+            VerticalAlignment="Center"
             Style="{StaticResource CommonTextBoxStyle}"
             Text="" />
         <TextBox
@@ -149,7 +147,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Style="{StaticResource CommonTextBoxStyle}"
-            Text="" />
+            Text="Exum ao Manis VERIS" />
         <StackPanel
             Grid.Row="8"
             Grid.ColumnSpan="7"

@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Relational;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
@@ -10,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 namespace SPTC_APP.View.Pages.Input
 {
     /// <summary>
@@ -29,6 +31,8 @@ namespace SPTC_APP.View.Pages.Input
             currentmonth = DateTime.Now.Month;
             currentyear = DateTime.Now.Year;
             UpdateRecap();
+
+            tbTotal.DefaultTextBoxBehavior(NUMBERPERIOD, true, gridToast, null, 21);
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -96,34 +100,38 @@ namespace SPTC_APP.View.Pages.Input
             List<Recap> recaps = AppState.LoadRecapitulations(currentmonth, currentyear);
 
             recapgrid.RowDefinitions.Clear();
+            gridChashonhand.Children.Clear();
             recapgrid.Children.Clear();
             double total = 0;
-            List<Button> btnDeletes = new List<Button>();
 
             foreach (Recap r in recaps)
             {
-                
-                RowDefinition rowDefinition = new RowDefinition();
-                rowDefinition.Height = new GridLength(40);
-                recapgrid.RowDefinitions.Add(rowDefinition);
+                if (r.text == "Cash On Hand")
+                {
+                    RecapDisplay recapDisplay = new RecapDisplay(this, r, recaps.Count - 1, check(r.text));
+                    gridChashonhand.Children.Add(recapDisplay.AddSelf());
+                }
+                else
+                {
+                    RowDefinition rowDefinition = new RowDefinition();
+                    rowDefinition.Height = new GridLength(40);
+                    recapgrid.RowDefinitions.Add(rowDefinition);
 
-                RecapDisplay recapDisplay = new RecapDisplay(r, recaps.IndexOf(r), check(r));
-                recapgrid.Children.Add(recapDisplay.AddSelf());
-                Button button = recapDisplay.GetButton();
-                button.MouseDown += btn_click;
-                total += r.content;
+                    RecapDisplay recapDisplay = new RecapDisplay(this, r, recaps.IndexOf(r) -1, check(r.text));
+                    recapgrid.Children.Add(recapDisplay.AddSelf());
+                    total += r.content;
+                }
             }
             tbTotal.Text = total.ToString("0.00");
         }
 
-        private bool check(Recap r)
+        private KeyValuePair<bool, double> check(string r)
         {
-            switch(r.text){
+            switch(r){
                 case "Share Capital":
-                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
-                    return true;
+                    return new KeyValuePair<bool, double>(true, Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault());
                 default:
-                    return  false;
+                    return  new KeyValuePair<bool, double>(false, 0);
             }
         }
 
@@ -134,30 +142,32 @@ namespace SPTC_APP.View.Pages.Input
 
         class RecapDisplay
         {
+            private Recapitulations recapmain;
             private Recap recap;
             private Label label;
-            private TextBox textBox;
+            public TextBox textBox;
             private Grid grid;
-            private Button button;
+            private bool isReadOnly;
+            private double autoval;
 
-            public RecapDisplay(Recap r, int row, bool isReadonly = false)
+            public RecapDisplay(Recapitulations rptc, Recap r, int row, KeyValuePair<bool, double> kvp)
             {
+                this.recapmain = rptc;
                 this.recap = r;
                 this.grid = new Grid();
+                this.isReadOnly = kvp.Key;
+                this.autoval = kvp.Value;
                 grid.SetValue(Grid.RowProperty, row); 
 
                 ColumnDefinition col1 = new ColumnDefinition();
                 col1.Width = new GridLength(250);
                 ColumnDefinition col2 = new ColumnDefinition();
                 col2.Width = new GridLength(1, GridUnitType.Star);
-                ColumnDefinition col3 = new ColumnDefinition();
-                col3.Width = new GridLength(100);
                 grid.ColumnDefinitions.Add(col1);
                 grid.ColumnDefinitions.Add(col2);
-                grid.ColumnDefinitions.Add(col3);
 
                 this.label = new Label();
-                label.Content = $"{recap.text}: ";
+                label.Content = $"{recap.text}: " + (isReadOnly? $"({autoval})": "");
                 label.SetValue(Grid.ColumnProperty, 0);
                 label.HorizontalAlignment = HorizontalAlignment.Right;
                 label.Width = 200;
@@ -166,43 +176,43 @@ namespace SPTC_APP.View.Pages.Input
                 this.textBox = new TextBox();
                 textBox.Text = recap.content.ToString("0.00");
                 textBox.SetValue(Grid.ColumnProperty, 1);
-                textBox.IsReadOnly = isReadonly;
-                textBox.Style = Application.Current.FindResource("CommonTextBoxStyle") as Style; 
-
-                textBox.Margin = new Thickness(20, 5, 10, 5);
-
-                button = new Button();
-                button.Content = "SAVE";
-                button.SetValue(Grid.ColumnProperty, 2);
-                button.Width = 90;
-                button.IsEnabled = !isReadonly;
-                button.HorizontalAlignment = HorizontalAlignment.Center;
-                button.VerticalAlignment = VerticalAlignment.Center;
-                button.Style = Application.Current.FindResource("CommonButtonStyle") as Style;
-                button.Margin = new Thickness(5);
-                button.Click += btn_click;
-
-
+                textBox.Height = 30;
+                textBox.Style = Application.Current.FindResource("CommonTextBoxStyle") as Style;
+                textBox.VerticalAlignment = VerticalAlignment.Center;
+                textBox.Margin = new Thickness(20, 0, 10, 0);
+                textBox.GotFocus += SelectAll;
+                textBox.LostFocus += Save;
+                textBox.DefaultTextBoxBehavior(NUMBERPERIOD, true, recapmain.gridToast, null, row);
                 grid.Children.Add(label);
                 grid.Children.Add(textBox);
-                grid.Children.Add(button);
             }
 
-            private void btn_click(object sender, RoutedEventArgs e)
+            private void Save(object sender, RoutedEventArgs e)
             {
-                recap.content = Double.Parse(textBox.Text);
-                recap.Save();
-                
+                double newval = Double.Parse(textBox.Text);
+                if (recap.content != newval) {
+                    recap.content = newval;
+                    recap.Save();
+                    recapmain.displayToast($"{recap.text} Updated!", 1);
+                }
             }
-            public Button GetButton()
+
+            private void SelectAll(object sender, RoutedEventArgs e)
             {
-                return button;
+                textBox.SelectAll();
             }
+
+
 
             public Grid AddSelf()
             {
                 return grid;
             }
+        }
+
+        private void tbTotal_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UpdateRecap();
         }
 
     }

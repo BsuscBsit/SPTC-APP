@@ -227,11 +227,7 @@ namespace SPTC_APP.View.Pages.Output
             
             lblPercent.Content = "100%";
             
-            var sortedList = AppState.ThisMonthsChart
-                .OrderBy(x => x.Key == "Expenses" ? 1 : 0)
-                .ThenByDescending(x => x.Value)
-                .ToList();
-            var dictionary = sortedList.ToDictionary(x => x.Key, x => x.Value);
+            var dictionary = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value);
             lblMonth.Content = monthAbbreviations[pieMonth-1] + ", " + pieYear;
 
             this.total = dictionary.Values.Sum();
@@ -252,7 +248,7 @@ namespace SPTC_APP.View.Pages.Output
                 
                 Path path = new Path
                 {
-                    Fill = (i == dictionary.Count - 1)? Brushes.LightGray : RandomColor(i),
+                    Fill = RandomColor(i),
                     Opacity = 1,
                     Tag = dictionary.Keys.ElementAt(i),
                     Stroke = Brushes.Black,
@@ -436,8 +432,9 @@ namespace SPTC_APP.View.Pages.Output
             DrawBarChart();
             DrawPieChart();
             lblPieChartTitle.Content = "Total Revenue";
-            lblPieChart.Content = Scaler.NumberShorthand(AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum());
-            lblPercent.Content = "100%";
+            double totalSum = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
+            lblPieChart.Content = Scaler.NumberShorthand(totalSum);
+            lblPercent.Content = totalSum == 0? "0%":"100%";
         }
         private async void btnPieBackward_Click(object sender, RoutedEventArgs e)
         {

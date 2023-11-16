@@ -17,11 +17,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="35" />
+            <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="35" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -46,8 +47,9 @@
             Content="RECAPITULATULATIONS"
             FontSize="20"
             Style="{StaticResource CommonTitlePreset}" />
+        <StackPanel x:Name="gridChashonhand" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Height="40"/>
         <Label
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.Column="1"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
@@ -55,13 +57,13 @@
             Style="{StaticResource TextFieldLabelingPreset}" />
         <TextBox
             x:Name="tbTotal"
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.Column="2"
             Grid.ColumnSpan="2"
             Height="30"
-            IsEnabled="False"
+            IsReadOnly="True"
             Style="{StaticResource CommonTextBoxStyle}"
-            Text="0.00" />
+            Text="0.00" GotFocus="tbTotal_GotFocus" />
         <StackPanel
             Grid.Row="3"
             Grid.Column="1"
@@ -126,7 +128,7 @@
         </ScrollViewer>
         <Button
             x:Name="btnCancel"
-            Grid.Row="7"
+            Grid.Row="8"
             Grid.Column="1"
             Grid.ColumnSpan="3"
             Width="200"

@@ -196,8 +196,7 @@ namespace SPTC_APP
                 ThisMonthsChart = new List<KeyValuePair<string, double>> {
                         new KeyValuePair<string, double>("Share Capital", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", month, year)).FirstOrDefault()),
                         new KeyValuePair<string, double>("Loan", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("LOAN", month, year)).FirstOrDefault()),
-                        new KeyValuePair<string, double>("Long Term Loan", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("LONGTERMLOAN", month, year)).FirstOrDefault()),
-                        new KeyValuePair<string, double>("Expenses", Math.Abs(Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_TOTAL_EXPENSES(month, year)).FirstOrDefault()))
+                        new KeyValuePair<string, double>("Long Term Loan", Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("LONGTERMLOAN", month, year)).FirstOrDefault())
                 };
             }
             catch(MySqlException e)
@@ -224,7 +223,7 @@ namespace SPTC_APP
             TABLE_BATCH_SIZE = 2;
             TOTAL_SHARE_PER_MONTH = 100;
             CAMERA_RESOLUTION = "";
-            LIST_RECAP = new Newtonsoft.Json.Linq.JArray { "Cash On Hand", "Share Capital", "Monthly Dues", "Mutual Funds Payable", "Certification Fee", "Loan Receivable - Pastdue", "Loan Receivable - Current", "Change Motor - Entrance", "Change Motor - Motor", "Clearance Fee", "Miscelleneous Income", "Sales Trapal", "AIR-Stricker", "Penalties", "Interest Receivable", "Cash in Bank", "Rental Fee: Franchise", "Transfer Fees", "Membership Fee", "Seminar Fee" };
+            LIST_RECAP = new Newtonsoft.Json.Linq.JArray { "Cash On Hand", "Share Capital", "Monthly Dues", "Mutual Funds Payable", "Certification Fee", "Loan Receivable - Pastdue", "--------------- - Current", "Change Motor - Entrance", "------------ - Motor", "Clearance Fee", "Miscelleneous Income", "Sales Trapal", "AIR-Stricker", "Penalties", "Interest Receivable", "Cash in Bank", "Rental Fee: Franchise", "Transfer Fees", "Membership Fee", "Seminar Fee" };
         }
         public static void SaveToJson()
         {

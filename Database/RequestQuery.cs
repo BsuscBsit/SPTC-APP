@@ -32,7 +32,7 @@ namespace SPTC_APP.Database
         public static string GET_ALL_OPERATOR_FOR_DISPLAY(int start, int size) => $"SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (PARTITION BY body_number ORDER BY buying_date DESC) AS rn FROM tbl_franchise WHERE operator_id <> -1 AND {Where.ALL_NOTDELETED} ) subquery WHERE rn = 1 LIMIT {start}, {size}";
 
 
-        public static string GET_TOTAL_EXPENSES(int month, int year) => $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.DEPOSIT} < 0 AND {Where.ALL_NOTDELETED}";
+        public static string GET_TOTAL_EXPENSES(int month, int year) => $"SELECT SUM({Field.DEPOSIT}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.DEPOSIT} < 0 AND {Field.ID} = -1 AND {Where.ALL_NOTDELETED}";
 
         public static string SEARCH(string text) =>
             $"SELECT f.* FROM {Table.FRANCHISE} f LEFT JOIN {Table.OPERATOR} O ON f.{Field.OPERATOR_ID}=O.{Field.ID} LEFT JOIN {Table.DRIVER} D ON f.{Field.DRIVER_ID}=D.{Field.ID} " +

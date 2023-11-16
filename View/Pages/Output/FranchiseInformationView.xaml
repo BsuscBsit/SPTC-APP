@@ -433,7 +433,7 @@
                         Width="150"
                         Height="30"
                         Content="Reload View"
-                        Style="{StaticResource CommonButtonStyle}" />
+                        Style="{StaticResource CommonButtonStyle}" Click="btnReload_Click" />
 
                 </StackPanel>
             </Grid>

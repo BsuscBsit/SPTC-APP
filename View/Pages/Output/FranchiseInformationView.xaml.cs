@@ -186,7 +186,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (MainBody.selectedFranchise.GetLoans().Count <= 0)
                 {
                     //btnAddButton.Content = "APPLY FOR LOAN";
-                    spRecordButtons.FadeOut(0.2, () => { btnAddButton.Visibility = Visibility.Collapsed; });
+                    spRecordButtons.FadeOut(0.2, () => { spRecordButtons.Visibility = Visibility.Collapsed; });
                 }
 
             }
@@ -205,7 +205,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (MainBody.selectedFranchise.GetLTLoans().Count <= 0)
                 {
                     spRecordButtons.FadeOut(0.2, () => { spRecordButtons.Visibility = Visibility.Collapsed; });
-                };
+                } 
             }
             else
             {
@@ -314,6 +314,13 @@ namespace SPTC_APP.View.Pages.Output
             {
                 spRecordButtons.FadeOut(0.2);
                 spRecordButtons.Visibility = Visibility.Collapsed;
+            }
+        }
+        private void btnReload_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedButton != null)
+            {
+                selectedButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             }
         }
     }

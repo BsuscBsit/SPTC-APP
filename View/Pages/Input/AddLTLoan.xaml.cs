@@ -141,10 +141,11 @@ namespace SPTC_APP.View.Pages.Input
                 lblPenalty.Content = "₱" + (penalty * val).ToString("N2");
                 lblTotalBreak.Content = "₱" + (breakdown + pen).ToString("N2");
 
-                double cur = Scaler.RoundUp(breakdown + pen);
-                tboxAmount.Text = cur.ToString();
-                lblCurrentPay.Content = cur.ToString();
-                lblRemainingBalance.Content = franchise.LongTermLoanBalance - cur;
+                double cur = Scaler.RoundUp(breakdown + pen); // hindi rito yung rounding, sa mismong amount dapat
+                tboxAmount.Text = breakdown.ToString(); // dito yung breakdown lang dapat
+                // tapos sa display, sa ilalim ng texbox ng penalty, dapat meron dun display kung magkano yung penalty na babayaran nya
+                lblCurrentPay.Content = cur.ToString(); // eto oks, total eto na babayaran
+                lblRemainingBalance.Content = franchise.LongTermLoanBalance - breakdown; // eto dapat walang minus na penalty, dat pala nakaround na eto agad
             }
         }
 

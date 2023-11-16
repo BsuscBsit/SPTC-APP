@@ -259,14 +259,18 @@
                         Style="{StaticResource CommonButtonStyle}" />
 
                 </StackPanel>
-                <StackPanel
+                <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel
                     x:Name="tabs"
-                    Grid.Row="1"
                     Grid.Column="0"
-                    Margin="20,12,12,12"
+                    Margin="20,12,12,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top">
-                    <Button
+                        <Button
                         x:Name="btnHistory"
                         Width="150"
                         Height="27"
@@ -277,7 +281,7 @@
                         Content="History"
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
-                    <Button
+                        <Button
                         x:Name="btnCoding"
                         Width="150"
                         Height="27"
@@ -289,7 +293,7 @@
                         Content="Coding"
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
-                    <Button
+                        <Button
                         x:Name="btnViolation"
                         Width="150"
                         Height="27"
@@ -301,7 +305,7 @@
                         Content="Violation"
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
-                    <Button
+                        <Button
                         x:Name="btnShareCapital"
                         Width="150"
                         Height="27"
@@ -313,7 +317,7 @@
                         Content="Share Capital"
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
-                    <Button
+                        <Button
                         x:Name="btnLoanApply"
                         Width="150"
                         Height="27"
@@ -325,7 +329,7 @@
                         Content="Add Loan"
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
-                    <Button
+                        <Button
                         x:Name="btnLoan"
                         Width="150"
                         Height="27"
@@ -337,7 +341,7 @@
                         Content="Loan Payment"
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
-                    <Button
+                        <Button
                         x:Name="btnLTLoan"
                         Width="150"
                         Height="27"
@@ -349,7 +353,7 @@
                         Content="LT Loan Payment"
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
-                    <Button
+                        <Button
                         x:Name="btnTransactionHistory"
                         Width="150"
                         Height="27"
@@ -362,29 +366,22 @@
                         FontSize="12"
                         Style="{StaticResource ControlledButtonStyle}" />
 
-                </StackPanel>
-                <Grid
+                    </StackPanel>
+                    <Grid
                     x:Name="ModuleGrid"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Grid.ColumnSpan="2"
-                    MinWidth="400"
-                    Margin="12,12,20,12" />
-                <StackPanel x:Name="spRecordButtons"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Grid.ColumnSpan="2"
+                    MinWidth="400" Grid.Column="1" Margin="15,15,20,15" />
+                    <StackPanel x:Name="spRecordButtons"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
-                    Orientation="Horizontal">
-                    <Button
+                    Orientation="Horizontal" Grid.Column="1">
+                        <Button
                         x:Name="btnAddButton"
                         Width="225"
                         Height="30"
                         Click="btnAddButton_Click"
                         Style="{DynamicResource CommonButtonStyle}" Margin="0,0,15,0">
-                        <Grid>
-                            <ContentControl
+                            <Grid>
+                                <ContentControl
                                 x:Name="iconTransfer"
                                 Width="16"
                                 Height="12"
@@ -393,49 +390,50 @@
                                 VerticalAlignment="Center"
                                 d:IsHidden="True"
                                 Visibility="Hidden">
-                                <Viewbox Width="21" Height="17">
-                                    <Canvas Width="17" Height="13">
-                                        <Canvas>
+                                    <Viewbox Width="21" Height="17">
+                                        <Canvas Width="17" Height="13">
                                             <Canvas>
-                                                <Path
+                                                <Canvas>
+                                                    <Path
                                                     Data="M 12.148,2.815 L 1.207,2.815 L 3.669,0.354"
                                                     Stroke="#ff000000"
                                                     StrokeMiterLimit="1.0"
                                                     StrokeThickness="1.0" />
-                                                <Path
+                                                    <Path
                                                     Data="M 1.207,6.097 L 12.148,6.097 L 9.686,8.559"
                                                     Stroke="#ff000000"
                                                     StrokeMiterLimit="1.0"
                                                     StrokeThickness="1.0" />
+                                                </Canvas>
                                             </Canvas>
                                         </Canvas>
-                                    </Canvas>
-                                </Viewbox>
-                            </ContentControl>
-                            <Path
+                                    </Viewbox>
+                                </ContentControl>
+                                <Path
                                 x:Name="iconAdd"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 Data="M0,7 H14 M7,0 V14"
                                 Stroke="{StaticResource BrushBlack}"
                                 StrokeThickness="1" />
-                            <Label
+                                <Label
                                 x:Name="lblBtnAddContent"
                                 Margin="20,0,0,0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Content="Add Record"
                                 Style="{StaticResource ButtonTextPresetLabel}" />
-                        </Grid>
-                    </Button>
-                    <Button
+                            </Grid>
+                        </Button>
+                        <Button
                         x:Name="btnReload"
                         Width="150"
                         Height="30"
                         Content="Reload View"
                         Style="{StaticResource CommonButtonStyle}" Click="btnReload_Click" />
 
-                </StackPanel>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </Border>
     </Grid>

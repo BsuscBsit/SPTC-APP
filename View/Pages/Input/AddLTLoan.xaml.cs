@@ -30,11 +30,23 @@ namespace SPTC_APP.View.Pages.Input
 
         private double penalty;
         private double breakdown;
+
         /**
          * Lagay dito yung mga isasave sa database, yung amount na nareceive
          * tas yung totalpenalty, penalty * months not paying ganun
-         * 
          */
+
+        // Based on table in pictures(might be redundant).
+        private int seriesNo;
+        private double amortization;
+        private double principal;
+        private double total; // remaining balance
+
+        // Others
+        private double paidAmount;
+        private double penaltyTot;
+        private string cvorNum;
+
 
         Ledger.LongTermLoan ltloan;
         public AddLTLoan(Franchise franchise)
@@ -63,8 +75,16 @@ namespace SPTC_APP.View.Pages.Input
             // Eto galing sa applyloan
             penalty = ltloan.amountLoaned * (ltloan.penaltyPercent / 100);
 
-            lblRemainingBalance.Content = franchise.LongTermLoanBalance;
+            lblRemainingBalance.Content = "₱" + (franchise.LongTermLoanBalance - Scaler.RoundUp(breakdown)).ToString("N2");
             tboxAmount.Text = Scaler.RoundUp(breakdown).ToString();
+            lblCurrentPay.Content = "₱" + Scaler.RoundUp(breakdown).ToString("N2");
+            lblAmort.Content = "₱" + Scaler.RoundUp(breakdown).ToString("N2");
+
+            // Kung kaya, i-autocompute sana.
+            tbPenalty.Text = "0";
+
+
+            compute(0);
 
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
@@ -115,20 +135,30 @@ namespace SPTC_APP.View.Pages.Input
 
         private bool confirmPayment()
         {
-            if(ControlWindow.ShowTwoway("Adding new record", "Confirm?", Icons.NOTIFY))
+            if (!string.IsNullOrEmpty(tboxCVOR.Text))
             {
-
-                return true;
-            } else
+                if (ControlWindow.ShowTwoway("Adding new record", "Confirm?", Icons.NOTIFY))
+                {
+                    compute(double.TryParse(tbPenalty.Text, out double pen) ? pen : 0);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
             {
+                VisualStateManager.GoToState(tboxCVOR, "InputInvalidated", true);
+                new Toast(gridToast, "Cash Voucher/Official Receipt Number cannot be empty.", 5, true, 0.2, Brushes.White, FindResource("BrushDeepRed") as Brush);
                 return false;
             }
         }
 
         private void initTextBoxes()
         {
-            tboxAmount.DefaultTextBoxBehavior(DECIMALUNSIGNED, true, gridToast, "Enter amount of payment.", 0);
-            tboxRefNo.DefaultTextBoxBehavior(WHOLEUNSIGNED, true, gridToast, "CV/OR number.", 1);
+            tboxAmount.DefaultTextBoxBehavior(DECIMALUNSIGNED, true, gridToast, "Enter amount of payment.", 1);
+            tboxCVOR.DefaultTextBoxBehavior(NUMBER, true, gridToast, "CV/OR number.", 0);
             tbPenalty.DefaultTextBoxBehavior(WHOLEUNSIGNED, true, gridToast, "Enter number of overdue in months.", 2);
         }
 
@@ -137,18 +167,27 @@ namespace SPTC_APP.View.Pages.Input
             double val;
             if (double.TryParse(tbPenalty.Text + e.Text, out val))
             {
-                double pen = penalty * val;
-                lblPenalty.Content = "₱" + (penalty * val).ToString("N2");
-                lblTotalBreak.Content = "₱" + (breakdown + pen).ToString("N2");
-
-                double cur = Scaler.RoundUp(breakdown + pen); // hindi rito yung rounding, sa mismong amount dapat
-                tboxAmount.Text = breakdown.ToString(); // dito yung breakdown lang dapat
-                // tapos sa display, sa ilalim ng texbox ng penalty, dapat meron dun display kung magkano yung penalty na babayaran nya
-                lblCurrentPay.Content = cur.ToString(); // eto oks, total eto na babayaran
-                lblRemainingBalance.Content = franchise.LongTermLoanBalance - breakdown; // eto dapat walang minus na penalty, dat pala nakaround na eto agad
+                compute(val);
             }
         }
-
         
+        private void compute(double overdue)
+        {
+            amortization = Scaler.RoundUp(breakdown);
+            principal = breakdown;
+            total = franchise.LongTermLoanBalance - amortization;
+
+            penaltyTot = penalty * overdue;
+            paidAmount = amortization + penaltyTot;
+
+            // Changing labels/fields
+            lblPenalty.Content = "+₱" + penaltyTot.ToString("N2");
+            lblPenalty2.Content = "₱" + penaltyTot.ToString("N2");
+            lblTotalBreak.Content = "₱" + paidAmount.ToString("N2");
+            tboxAmount.Text = amortization.ToString();
+            lblAmort.Content = "₱" + amortization.ToString("N2");
+            lblCurrentPay.Content = "₱" + paidAmount.ToString("N2");
+            lblRemainingBalance.Content = "₱" + total.ToString("N2");
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.Windows.Navigation;
 
 namespace SPTC_APP.View
 {
-    internal class Scaler
+    static class Scaler
     {
         public static double InToDip(double inches)
         {

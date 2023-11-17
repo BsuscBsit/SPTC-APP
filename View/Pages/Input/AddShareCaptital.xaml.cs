@@ -66,9 +66,9 @@ namespace SPTC_APP.View.Pages.Input
                 }
 
                 share.lastBalance = share.lastBalance + Double.Parse(tboxAmount.Text);
-                capital.WriteInto(share, 0, dpBdate.DisplayDate, tboxRefNo.Text, Double.Parse(tboxAmount.Text), 0, "", share.lastBalance);
+                capital.WriteInto(share, 0, dpBdate.DisplayDate, tboxRefNo.Text, Double.Parse(tboxAmount.Text), 0, "MONTHLY", share.lastBalance);
                 capital.Save();
-                (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                //(AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 this.closingMSG = "Adding share capital history was successful.\nPlease refresh the view to see changes.";
                 this.Close();
             }
@@ -77,7 +77,7 @@ namespace SPTC_APP.View.Pages.Input
         private void initTextBoxes()
         {
             // Check tooltips kung tama ba description. (Optional)
-            tboxAmount.DefaultTextBoxBehavior(NUMBERPERIOD, true, gridToast, "Enter amount to loan.", 0);
+            tboxAmount.DefaultTextBoxBehavior(NUMBERPERIOD, true, gridToast, "Enter share capital.", 0);
             tboxRefNo.DefaultTextBoxBehavior(NUMBER, true, gridToast, "Reference number.", 1);
         }
     }

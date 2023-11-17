@@ -36,7 +36,7 @@ namespace SPTC_APP.View.Pages.Input
         private double total;
 
         private double paidAmount;
-        private double penaltyTot;
+        private double penaltyTot; // eto inistore ko sa database, 
         private string cvorNum;
 
 
@@ -94,26 +94,17 @@ namespace SPTC_APP.View.Pages.Input
         {
             if (confirmPayment())
             {
-                /*if (ControlWindow.ShowTwoway("Adding Loan Payment", "Do you confirm this transaction?", Icons.NOTIFY))
+                PaymentDetails<Ledger.Loan> loanPayment = new PaymentDetails<Ledger.Loan>();
+                loan.amount = loan.amount - amortization;
+                loanPayment.WriteInto(loan, 0, dpBdate.DisplayDate, tboxCVOR.Text, amortization, penaltyTot, "", loan.amount);
+                if(loan.amount <= 0)
                 {
-                    double amount = Double.TryParse(tboxAmount.Text, out amount) ? amount : 0;
-                    double interest = Double.TryParse(tboxInterest.Text, out interest) ? interest : 0;
-                    double penalty = Double.TryParse(tbPenalty.Text, out penalty) ? penalty : 0;
-                    if (amount > 0)
-                    {
-                        PaymentDetails<Ledger.Loan> loanPayment = new PaymentDetails<Ledger.Loan>();
-                        loan.amount = loan.amount - amount;
-                        loanPayment.WriteInto(loan, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", loan.amount);
-                        if(loan.amount <= 0)
-                        {
-                            loan.isFullyPaid = true;
-                        }
-                        loanPayment.Save();
-                        (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
-                        closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";
-                        this.Close();
-                    }
-                }*/
+                    loan.isFullyPaid = true;
+                }
+                loanPayment.Save();
+                //(AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";
+                this.Close();
             }
         }
 

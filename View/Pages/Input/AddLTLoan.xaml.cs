@@ -123,7 +123,7 @@ namespace SPTC_APP.View.Pages.Input
                 }
                 loanPayment.Save();
                     
-                (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                //(AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 this.closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";
                 this.Close();
             }

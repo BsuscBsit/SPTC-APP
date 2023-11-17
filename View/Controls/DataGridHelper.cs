@@ -98,7 +98,7 @@ public class DataGridHelper<T>
             string bindingPath,
             string header,
             double minWidth = 100,
-            double height = 30,
+            double height = 28,
             double maxWidth = 200,
             double fontSize = 13,
             bool isCenter = false,

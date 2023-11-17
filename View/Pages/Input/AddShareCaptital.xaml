@@ -79,7 +79,7 @@
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="Reference No.: "
+            Content="CV/OR Number:"
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Border
             Grid.Row="4"

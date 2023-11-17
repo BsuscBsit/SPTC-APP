@@ -86,7 +86,7 @@ namespace SPTC_APP.View.Pages.Input
             
             if(computeResult())
             {
-                if (string.IsNullOrEmpty(tbCVORNum.Text))
+                if (!string.IsNullOrEmpty(tbCVORNum.Text))
                 {
                     if (ControlWindow.ShowTwoway("Add Loan", "Confirm adding loan?", Icons.NOTIFY))
                     {
@@ -94,10 +94,10 @@ namespace SPTC_APP.View.Pages.Input
                         if (isLoan)
                         {
                             Ledger.Loan loan = new Ledger.Loan();
-                            loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal, this.penaltyPercent);
+                            loan.WriteInto(this.franchise.id, dpDate.SelectedDate ?? DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal, this.penaltyPercent);
 
                             PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
-                            payment.WriteInto(loan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanAmount + loanInterest);
+                            payment.WriteInto(loan, 0, dpDate.SelectedDate ?? DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanAmount + loanInterest);
                             payment.isApply = true;
                             payment.ledgername = Ledger.APPLY_LOAN;
                             payment.Save();
@@ -105,13 +105,31 @@ namespace SPTC_APP.View.Pages.Input
                         else
                         {
                             Ledger.LongTermLoan ltloan = new Ledger.LongTermLoan();
-                            ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal, this.penaltyPercent);
+                            ltloan.WriteInto(this.franchise.id, dpDate.SelectedDate ?? DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal, this.penaltyPercent);
 
                             PaymentDetails<Ledger.LongTermLoan> payment = new PaymentDetails<Ledger.LongTermLoan>();
-                            payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, loanAmount + loanInterest);
-                            payment.isApply = true;
+                            payment.WriteInto(ltloan, 0, dpDate.SelectedDate??DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, loanAmount + loanInterest);
+                            payment.isApply = true; 
                             payment.ledgername = Ledger.APPLY_LT_LOAN;
                             payment.Save();
+                        }
+                        if (cbLoanType.SelectedItem.ToString() != "Emergency")
+                        {
+                            PaymentDetails<Ledger.ShareCapital> capital = new PaymentDetails<Ledger.ShareCapital>();
+                            Ledger.ShareCapital share = new Ledger.ShareCapital();
+                            if (franchise.GetShareCapitals()?.FirstOrDefault() != null)
+                            {
+                                share = franchise.GetShareCapitals().FirstOrDefault();
+                            }
+                            else
+                            {
+                                share.WriteInto(franchise.id, DateTime.Now, 0, 0);
+                            }
+
+                            share.lastBalance = share.lastBalance + loanCbu;
+                            capital.WriteInto(share, 0, dpDate.SelectedDate ?? DateTime.Now, ornum, loanCbu, 0, "FROM " + loantext, share.lastBalance);
+                            capital.Save();
+
                         }
                         closingMSG = "Adding loan history successful.\nPlease refresh the view to see changes.";
                         this.Close();
@@ -181,6 +199,7 @@ namespace SPTC_APP.View.Pages.Input
                     switch (cbLoanType.SelectedItem)
                     {
                         case "Short Term":
+                            isLoan = true;
                             pfFinal = userVars[0] * pfRatio;
                             cbuFinal = userVars[0] * cbuRatio;
                             interestFinal = (userVars[0] * interestRatio) * userVars[3];
@@ -195,6 +214,7 @@ namespace SPTC_APP.View.Pages.Input
                             break;
 
                         case "Long Term":
+                            isLoan = false;
                             pfFinal = userVars[0] * pfRatio;
                             cbuFinal = userVars[0] * cbuRatio;
                             interestFinal = (userVars[0] * interestRatio) * userVars[3];
@@ -210,7 +230,7 @@ namespace SPTC_APP.View.Pages.Input
                             break;
 
                         case "Emergency":
-
+                            isLoan = true;
                             principal = userVars[0];
                             interestFinal = (userVars[0] * interestRatio) * userVars[3];
 

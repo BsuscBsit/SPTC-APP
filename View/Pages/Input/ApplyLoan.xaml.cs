@@ -260,6 +260,8 @@ namespace SPTC_APP.View.Pages.Input
                                 null,
                                 totalFinal,
                                 monthlyAmortization);
+                            LBL4.Content = $"Interest on Loan {userVars[3]} {(userVars[3] > 1 ? "Months" : "Month")}:";
+                            LBL8.Content = $"Payment in Total of {userVars[3]} {(userVars[3] > 1 ? "Months" : "Month")}:";
                             /*UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
                                 (pfFinal > 0 ? "- " : "") + "₱" + pfFinalStr,
@@ -285,6 +287,8 @@ namespace SPTC_APP.View.Pages.Input
                                 interestReceivable,
                                 totalFinal,
                                 monthlyAmortization);
+                            LBL7.Content = $"Interest Receivables {userVars[3]} {(userVars[3] > 1 ? "mos." : "mo.")}:";
+                            LBL8.Content = $"Payment in Total of {userVars[3]} {(userVars[3] > 1 ? "Months" : "Month")}:";
                             /*UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
                                 (pfFinal > 0 ? "- " : "") + "₱" + pfFinalStr,
@@ -310,6 +314,8 @@ namespace SPTC_APP.View.Pages.Input
                                 interestReceivable,
                                 totalFinal,
                                 null);
+                            LBL7.Content = $"Interest Receivables {userVars[3]} {(userVars[3] > 1 ? "mos." : "mo.")}:";
+                            LBL8.Content = $"Pay in Full({userVars[3]} {(userVars[3] > 1 ? "Months" : "Month")}):";
                             /*UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
                                 "Fee not included.",
@@ -495,6 +501,9 @@ namespace SPTC_APP.View.Pages.Input
             }
             else
             {
+                LBL4.Content = "Interest on Loan:";
+                LBL7.Content = "Interest Receivables:";
+                LBL8.Content = "Payment in Total:";
                 switch (preset)
                 {
                     case "Short Term":
@@ -507,15 +516,16 @@ namespace SPTC_APP.View.Pages.Input
                         LBL2.Visibility = Visibility.Visible;
                         LBL3.Visibility = Visibility.Visible;
                         LBL4.Visibility = Visibility.Visible;
+                        LBL9.Visibility = Visibility.Visible;
                         lblPFTotal.Visibility = Visibility.Visible;
                         lblCBUTotal.Visibility = Visibility.Visible;
                         lblInterestTotal.Visibility = Visibility.Visible;
+                        lblMonthlyAmort.Visibility = Visibility.Visible;
 
                         LBL7.Visibility = Visibility.Collapsed;
                         lblInterestRecievableTotal.Visibility = Visibility.Collapsed;
 
                         LBL4.Content = "Interest on Loan:";
-                        lblInterestRecievableTotal.Content = "N/A";
                         LBL4.Visibility = Visibility.Visible;
                         lblInterestTotal.Visibility = Visibility.Visible;
                         break;
@@ -530,15 +540,15 @@ namespace SPTC_APP.View.Pages.Input
                         LBL2.Visibility = Visibility.Visible;
                         LBL3.Visibility = Visibility.Visible;
                         LBL4.Visibility = Visibility.Visible;
+                        LBL9.Visibility = Visibility.Visible;
                         lblPFTotal.Visibility = Visibility.Visible;
                         lblCBUTotal.Visibility = Visibility.Visible;
                         lblInterestTotal.Visibility = Visibility.Visible;
+                        lblMonthlyAmort.Visibility = Visibility.Visible;
 
                         LBL4.Visibility = Visibility.Collapsed;
                         lblInterestTotal.Visibility = Visibility.Collapsed;
 
-                        LBL7.Content = "Interest Receivable:";
-                        lblInterestRecievableTotal.Content = "N/A";
                         LBL7.Visibility = Visibility.Visible;
                         lblInterestRecievableTotal.Visibility = Visibility.Visible;
                         break;
@@ -553,9 +563,12 @@ namespace SPTC_APP.View.Pages.Input
                         LBL2.Visibility = Visibility.Collapsed;
                         LBL3.Visibility = Visibility.Collapsed;
                         LBL4.Visibility = Visibility.Collapsed;
+                        LBL9.Visibility = Visibility.Collapsed;
                         lblPFTotal.Visibility = Visibility.Collapsed;
                         lblCBUTotal.Visibility = Visibility.Collapsed;
                         lblInterestTotal.Visibility = Visibility.Collapsed;
+                        lblMonthlyAmort.Visibility = Visibility.Collapsed;
+                        LBL8.Content = "Pay in Full:";
                         break;
                 }
 

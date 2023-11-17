@@ -458,14 +458,14 @@ namespace SPTC_APP.View.Pages
             double interest,
             double termLength)
         {
-            double principal, loanRec, breakTot;
+            double principal, loanRec, breakTot, loanRecRounded;
             string type = "";
             type = termType?.Trim().ToLower();
 
             if (type.Contains("short"))
             {
                 principal = amount - (processingFee + cbu + interest);
-                loanRec = principal / termLength;
+                loanRec = amount / termLength; // make sure it is amount / termlength not principal
                 breakTot = loanRec;
 
                 UpdateLabels(
@@ -484,8 +484,10 @@ namespace SPTC_APP.View.Pages
             {
                 interest /= termLength;
                 principal = amount - (processingFee + cbu);
-                loanRec = principal / termLength;
-                breakTot = loanRec + interest;
+                loanRec = amount / termLength; // same
+                loanRecRounded = Scaler.RoundUp(loanRec);
+                bool shouldRound = (loanRec != loanRecRounded);
+                breakTot = loanRecRounded + interest;
 
                 UpdateLabels(
                     "₱" + amount.ToString("N2"),
@@ -496,14 +498,14 @@ namespace SPTC_APP.View.Pages
                     (SolidColorBrush)FindResource("BrushDeepBlue"),
                     (cbu > 0 ? "- " : "") + "₱" + cbu.ToString("N2"),
                     "₱" + principal.ToString("N2"),
-                    "₱" + loanRec.ToString("N2"),
+                    "₱" + loanRec.ToString("N2") + (shouldRound? "\n -> ( ₱" + loanRecRounded.ToString("N2") + " )" : ""),
                     "₱" + breakTot.ToString("N2"));
             }
             else if (type.Contains("emergency"))
             {
                 interest /= termLength;
                 principal = amount;
-                loanRec = principal / termLength;
+                loanRec = amount / termLength; //  this is one time payment
                 breakTot = loanRec + interest;
 
                 UpdateLabels(

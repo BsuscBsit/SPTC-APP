@@ -284,7 +284,7 @@
                 Grid.ColumnSpan="3"
                 BorderBrush="Black"
                 BorderThickness="1"
-                SelectionChanged="dgLedger_SelectionChanged">
+                SelectionChanged="dgLedger_SelectionChanged" MouseDoubleClick="dgLedger_MouseDoubleClick">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="FontFamily" Value="Arial" />

@@ -359,7 +359,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void cbLoanType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            presetFields(cbLoanType.SelectedIndex, false);
+            presetFields(cbLoanType.SelectedItem.ToString(), false);
         }
 
 
@@ -374,10 +374,10 @@ namespace SPTC_APP.View.Pages.Input
 
             tbAmount.NumericTextBoxBehavior(DECIMALUNSIGNED, gridToast, 1, "Loan Amount.", 1);
             tbLoanLen.NumericTextBoxBehavior(WHOLEUNSIGNED, gridToast, 5, "Term Length.", 1);
-            presetFields(0);
+            presetFields("Short Term");
         }
 
-        private void presetFields(int preset, bool isReset = true)
+        private void presetFields(string preset, bool isReset = true)
         {
             if(isReset)
             {
@@ -389,15 +389,15 @@ namespace SPTC_APP.View.Pages.Input
 
                 switch (preset)
                 {
-                    case 0:
+                    case "Short Term":
                         this.loantext = "SHORT TERM";
                         tbLoanLen.Text = "6";
                         break;
-                    case 1:
+                    case "Long Term":
                         this.loantext = "LONG TERM";
                         tbLoanLen.Text = "12";
                         break;
-                    case 2:
+                    case "Emergency":
                         this.loantext = "EMERGENCY";
                         tbLoanLen.Text = "3";
                         break;
@@ -407,21 +407,21 @@ namespace SPTC_APP.View.Pages.Input
             {
                 switch (preset)
                 {
-                    case 0:
+                    case "Short Term":
                         this.loantext = "SHORT TERM";
                         minLoan = 1;
                         maxLoan = 30000;
                         minMont = null;
                         maxMont = 6;
                         break;
-                    case 1:
+                    case "Long Term":
                         this.loantext = "LONG TERM";
                         minLoan = 31000;
                         maxLoan = null;
                         minMont = 12;
                         maxMont = null;
                         break;
-                    case 2:
+                    case "Emergency":
                         this.loantext = "EMERGENCY";
                         minLoan = 1;
                         maxLoan = 3000;

@@ -165,12 +165,12 @@ namespace SPTC_APP.Objects
 
         public double GetTotalLoan()
         {
-            return GetLoanLedger().Sum(tmp => tmp.deposit - tmp.penalties);
+            return GetLoanLedger().Sum(tmp => tmp.deposit);
         }
 
         public double GetTotalLTLoan()
         {
-            return GetlTLoanLedger().Sum(tmp => tmp.deposit - tmp.penalties);
+            return GetlTLoanLedger().Sum(tmp => tmp.deposit);
         }
 
         public List<PaymentHistory> GetPaymentList()

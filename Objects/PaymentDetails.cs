@@ -120,20 +120,6 @@ namespace SPTC_APP.Objects
             }
             return -1;
         }
-        private void deletePayment()
-        {
-            if(ledger != null)
-            {
-                if (ledger is Objects.Ledger.Loan loan)
-                {
-                    loan.amount += (deposit );
-                }
-                if (ledger is Objects.Ledger.LongTermLoan ltloan)
-                {
-                    ltloan.amount += (deposit );
-                }
-            }
-        }
 
         public PaymentDetails()
         {
@@ -233,7 +219,6 @@ namespace SPTC_APP.Objects
             }
             paymentDetails.Insert(Field.ISDELETED, true);
 
-            deletePayment();
             paymentDetails.Save();
             return true;
         }

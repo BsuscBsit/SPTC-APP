@@ -358,11 +358,17 @@ namespace SPTC_APP.View.Pages.Output
                 }
                 else if (selectedPayment is PaymentDetails<Ledger.Loan> l)
                 {
+                    Ledger.Loan loan = franchise.GetLoans().FirstOrDefault();
+                    loan.amount = loan.amount + l.deposit;
+                    loan.Save();
                     l.delete();
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 }
                 else if (selectedPayment is PaymentDetails<Ledger.LongTermLoan> ltl)
                 {
+                    Ledger.LongTermLoan loan = franchise.GetLTLoans().FirstOrDefault();
+                    loan.amount = loan.amount + ltl.deposit;
+                    loan.Save();
                     ltl.delete();
                     (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 }

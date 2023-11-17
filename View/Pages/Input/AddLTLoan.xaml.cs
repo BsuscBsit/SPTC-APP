@@ -116,7 +116,7 @@ namespace SPTC_APP.View.Pages.Input
             {
                 PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
                 ltloan.amount = ltloan.amount - amortization;
-                loanPayment.WriteInto(ltloan, 0, dpBdate.DisplayDate, tboxCVOR.Text, amortization, penalty, "", ltloan.amount);
+                loanPayment.WriteInto(ltloan, 0, dpBdate.DisplayDate, tboxCVOR.Text, amortization, penaltyTot, "", ltloan.amount);
                 if (ltloan.amount <= 0)
                 {
                     ltloan.isFullyPaid = true;

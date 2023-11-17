@@ -14,7 +14,7 @@
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid Width="918" Height="604">
+    <Grid Width="892" Height="604">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />

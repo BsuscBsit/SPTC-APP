@@ -43,14 +43,6 @@ namespace SPTC_APP.View.Pages.Input
         private bool isLoan;
         public ApplyLoan(Franchise fran)
         {
-            /**
-              * This window will be used for adding loan. LT, L, Emergency Loan.
-              * Emergency loan maximum of 3 months 3k maximum.
-              * Short term loan (L) 6 months 30k below.
-              * Long term 12 months 31k above.
-              * Add this restrictions to frontend
-             **/
-
             InitializeComponent();
             cbLoanType.SelectedIndex = 0;
             initTextBoxes();
@@ -58,9 +50,11 @@ namespace SPTC_APP.View.Pages.Input
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
 
-            //make sure the bodynumber cannot be edited
             tbBodyNum.Content = this.franchise?.BodyNumber?.ToString() ?? "N/A";
             DraggingHelper.DragWindow(topBar);
+
+            dpDate.SelectedDate = DateTime.Now;
+            dpDate.DisplayDate = DateTime.Now;
 
             List<string> possibleloans = new List<string>();
 
@@ -92,12 +86,12 @@ namespace SPTC_APP.View.Pages.Input
             
             if(computeResult())
             {
-                if (!string.IsNullOrEmpty(tbCVORNum.Text))
+                if (string.IsNullOrEmpty(tbCVORNum.Text))
                 {
                     if (ControlWindow.ShowTwoway("Add Loan", "Confirm adding loan?", Icons.NOTIFY))
                     {
                         double penalty = this.loanAmount * this.interestRate;
-                        if (isLoan) // if LOAN
+                        if (isLoan)
                         {
                             Ledger.Loan loan = new Ledger.Loan();
                             loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal, this.penaltyPercent);
@@ -108,10 +102,8 @@ namespace SPTC_APP.View.Pages.Input
                             payment.ledgername = Ledger.APPLY_LOAN;
                             payment.Save();
                         }
-                        else // if LONG TERM LOAN
+                        else
                         {
-                            //this.loantext = "LONGTERMLOAN";
-
                             Ledger.LongTermLoan ltloan = new Ledger.LongTermLoan();
                             ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal, this.penaltyPercent);
 
@@ -128,6 +120,7 @@ namespace SPTC_APP.View.Pages.Input
                 else
                 {
                     VisualStateManager.GoToState(tbCVORNum, "InputInvalidated", true);
+                    new Toast(gridToast, "Cash Voucher/Official Receipt cannot be empty.");
                 }
             }
             else
@@ -141,11 +134,11 @@ namespace SPTC_APP.View.Pages.Input
         {
             Dictionary<TextBox, bool> fillStatus = new Dictionary<TextBox, bool>
             {
-                /*0*/{ tbAmount, tbAmount.Text.Length > 0 },
-                /*1*/{ tbPF, tbPF.Text.Length > 0 },
-                /*2*/{ tbCBU, tbCBU.Text.Length > 0 },
-                /*3*/{ tbLoanLen, tbLoanLen.Text.Length > 0 },
-                /*4*/{ tbInterest, tbInterest.Text.Length > 0 }
+                { tbAmount, tbAmount.Text.Length > 0 },
+                { tbPF, tbPF.Text.Length > 0 },
+                { tbCBU, tbCBU.Text.Length > 0 },
+                { tbLoanLen, tbLoanLen.Text.Length > 0 },
+                { tbInterest, tbInterest.Text.Length > 0 }
             };
             if (!fillStatus.Any(kvp => kvp.Value == false))
             {
@@ -242,11 +235,6 @@ namespace SPTC_APP.View.Pages.Input
 
                     #endregion
 
-                    /*string principalStr = principal.ToString("N2");
-                    string pfFinalStr = pfFinal.ToString("N2");
-                    string cbuFinalStr = cbuFinal.ToString("N2");
-                    string interestRecStr = interestReceivable.ToString("N2");*/
-
                     switch (cbLoanType.SelectedItem)
                     {
                         case "Short Term":
@@ -262,18 +250,6 @@ namespace SPTC_APP.View.Pages.Input
                                 monthlyAmortization);
                             LBL4.Content = $"Interest on Loan {userVars[3]} {(userVars[3] > 1 ? "Months" : "Month")}:";
                             LBL8.Content = $"Payment in Total of {userVars[3]} {(userVars[3] > 1 ? "Months" : "Month")}:";
-                            /*UpdateLabels(
-                                "₱" + userVars[0].ToString("N2"),
-                                (pfFinal > 0 ? "- " : "") + "₱" + pfFinalStr,
-                                (interestFinal > 0 ? "- " : "") + "₱" + interestFinal.ToString("N2"),
-                                (SolidColorBrush)FindResource("BrushRed"),
-                                "Already deducted.",
-                                (SolidColorBrush)FindResource("BrushDeepGreen"),
-                                (cbuFinal > 0 ? "- " : "") + "₱" + cbuFinalStr,
-                                "₱" + principalStr,
-                                "₱" + loanReceivable.ToString("N2"),
-                                "₱" + totalFinal.ToString("N2"),
-                                true);*/
                             break;
 
                         case "Long Term":
@@ -289,18 +265,6 @@ namespace SPTC_APP.View.Pages.Input
                                 monthlyAmortization);
                             LBL7.Content = $"Interest Receivables {userVars[3]} {(userVars[3] > 1 ? "mos." : "mo.")}:";
                             LBL8.Content = $"Payment in Total of {userVars[3]} {(userVars[3] > 1 ? "Months" : "Month")}:";
-                            /*UpdateLabels(
-                                "₱" + userVars[0].ToString("N2"),
-                                (pfFinal > 0 ? "- " : "") + "₱" + pfFinalStr,
-                                "Not deducted yet.",
-                                (SolidColorBrush)FindResource("BrushDeepGreen"),
-                                "₱" + interestRecStr,
-                                (SolidColorBrush)FindResource("BrushDeepBlue"),
-                                (cbuFinal > 0 ? "- " : "") + "₱" + cbuFinalStr,
-                                "₱" + principalStr,
-                                "₱" + loanReceivable.ToString("N2"),
-                                "₱" + totalFinal.ToString("N2"),
-                                false);*/
                             break;
 
                         case "Emergency":
@@ -315,53 +279,10 @@ namespace SPTC_APP.View.Pages.Input
                                 totalFinal,
                                 null);
                             LBL7.Content = $"Interest Receivables {userVars[3]} {(userVars[3] > 1 ? "mos." : "mo.")}:";
-                            LBL8.Content = $"Pay in Full({userVars[3]} {(userVars[3] > 1 ? "Months" : "Month")}):";
-                            /*UpdateLabels(
-                                "₱" + userVars[0].ToString("N2"),
-                                "Fee not included.",
-                                "Not deducted yet.",
-                                (SolidColorBrush)FindResource("BrushDeepGreen"),
-                                "₱" + interestRecStr,
-                                (SolidColorBrush)FindResource("BrushDeepBlue"),
-                                "CBU not included.",
-                                "₱" + principalStr,
-                                "₱" + loanReceivable.ToString("N2"),
-                                "₱" + totalFinal.ToString("N2"),
-                                true);
-                            lblPFTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
-                            lblCBUTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");*/
+                            LBL8.Content = $"One-Time Payment of {userVars[3]} {(userVars[3] > 1 ? "Months" : "Month")} in Total:";
                             break;
 
                     }
-
-                    /*void UpdateLabels(
-                        string loanAmount,
-                        string pfTotal,
-                        string interestTotal,
-                        SolidColorBrush interestTotalForeground,
-                        string interestRecievableTotal,
-                        SolidColorBrush interestRecForeground,
-                        string cbuTotal,
-                        string principalTotal,
-                        string loanReceivableTotal,
-                        string breakdownTotal,
-                        bool isLoan)
-                    {
-                        lblLoanAmount.Content = loanAmount;
-                        lblPFTotal.Content = pfTotal;
-                        lblInterestTotal.Content = interestTotal;
-                        lblInterestTotal.Foreground = interestTotalForeground;
-                        lblCBUTotal.Content = cbuTotal;
-                        lblPrincipalTotal.Content = principalTotal;
-                        lblLoanRecievableTotal.Content = loanReceivableTotal;
-                        lblInterestRecievableTotal.Content = interestRecievableTotal;
-                        lblInterestRecievableTotal.Foreground = interestRecForeground;
-                        lblMonthlyAmort.Content = breakdownTotal;
-                        this.isLoan = isLoan;
-
-                        lblPFTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
-                        lblCBUTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
-                    }*/
                     
                     void UpdateLabelVal(
                         double? amountLoan,
@@ -405,17 +326,6 @@ namespace SPTC_APP.View.Pages.Input
                             index++;
                         }
                     }
-
-                    //lblPenalty.Content = "₱" + penalty.ToString("N2");
-                    /*if(loanAmount > 0 && userVars[3] > 1)
-                    {
-                        lblInTot.Content = $"* ₱ {(totalFinal * userVars[3]).ToString("N2")} in {userVars[3].ToString("N0")} mos.";
-                        lblInTot.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        lblInTot.Visibility = Visibility.Collapsed;
-                    }*/
                         
                 }
             }
@@ -501,9 +411,16 @@ namespace SPTC_APP.View.Pages.Input
             }
             else
             {
-                LBL4.Content = "Interest on Loan:";
-                LBL7.Content = "Interest Receivables:";
-                LBL8.Content = "Payment in Total:";
+                LBL2.Visibility = Visibility.Collapsed;
+                LBL3.Visibility = Visibility.Collapsed;
+                LBL4.Visibility = Visibility.Collapsed;
+                LBL9.Visibility = Visibility.Collapsed;
+                lblPFTotal.Visibility = Visibility.Collapsed;
+                lblCBUTotal.Visibility = Visibility.Collapsed;
+                lblInterestTotal.Visibility = Visibility.Collapsed;
+                lblMonthlyAmort.Visibility = Visibility.Collapsed;
+                lblInterestRecievableTotal.Visibility = Visibility.Collapsed;
+
                 switch (preset)
                 {
                     case "Short Term":
@@ -519,14 +436,9 @@ namespace SPTC_APP.View.Pages.Input
                         LBL9.Visibility = Visibility.Visible;
                         lblPFTotal.Visibility = Visibility.Visible;
                         lblCBUTotal.Visibility = Visibility.Visible;
-                        lblInterestTotal.Visibility = Visibility.Visible;
                         lblMonthlyAmort.Visibility = Visibility.Visible;
 
-                        LBL7.Visibility = Visibility.Collapsed;
-                        lblInterestRecievableTotal.Visibility = Visibility.Collapsed;
-
                         LBL4.Content = "Interest on Loan:";
-                        LBL4.Visibility = Visibility.Visible;
                         lblInterestTotal.Visibility = Visibility.Visible;
                         break;
 
@@ -539,17 +451,10 @@ namespace SPTC_APP.View.Pages.Input
 
                         LBL2.Visibility = Visibility.Visible;
                         LBL3.Visibility = Visibility.Visible;
-                        LBL4.Visibility = Visibility.Visible;
+                        LBL4.Visibility = Visibility.Collapsed;
                         LBL9.Visibility = Visibility.Visible;
                         lblPFTotal.Visibility = Visibility.Visible;
                         lblCBUTotal.Visibility = Visibility.Visible;
-                        lblInterestTotal.Visibility = Visibility.Visible;
-                        lblMonthlyAmort.Visibility = Visibility.Visible;
-
-                        LBL4.Visibility = Visibility.Collapsed;
-                        lblInterestTotal.Visibility = Visibility.Collapsed;
-
-                        LBL7.Visibility = Visibility.Visible;
                         lblInterestRecievableTotal.Visibility = Visibility.Visible;
                         break;
 
@@ -560,46 +465,17 @@ namespace SPTC_APP.View.Pages.Input
                         minMont = 1;
                         maxMont = 2;
 
-                        LBL2.Visibility = Visibility.Collapsed;
-                        LBL3.Visibility = Visibility.Collapsed;
-                        LBL4.Visibility = Visibility.Collapsed;
-                        LBL9.Visibility = Visibility.Collapsed;
-                        lblPFTotal.Visibility = Visibility.Collapsed;
-                        lblCBUTotal.Visibility = Visibility.Collapsed;
-                        lblInterestTotal.Visibility = Visibility.Collapsed;
-                        lblMonthlyAmort.Visibility = Visibility.Collapsed;
-                        LBL8.Content = "Pay in Full:";
+                        LBL8.Content = "One-Time Payment:";
                         break;
                 }
 
-                if (tbAmount != null)
-                {
-                    if (double.TryParse(tbAmount.Text, out double newAmount))
-                    {
-                        if (newAmount > maxLoan)
-                        {
-                            tbAmount.Text = maxLoan.ToString();
-                        }
-                        else if (newAmount < minLoan)
-                        {
-                            tbAmount.Text = minLoan.ToString();
-                        }
-                    }
-                }
 
-                if (tbLoanLen != null)
+                constrain(ref tbAmount, double.TryParse(tbAmount?.Text, out double newAmount) ? newAmount : 0, minLoan, maxLoan);
+                constrain(ref tbLoanLen, double.TryParse(tbLoanLen?.Text, out double newLoanLen) ? newLoanLen : 0, minMont, maxMont);
+
+                void constrain(ref TextBox textBox, double? newValue, double? minValue, double? maxValue)
                 {
-                    if (double.TryParse(tbLoanLen.Text, out double newLoanLen))
-                    {
-                        if (newLoanLen > maxMont)
-                        {
-                            tbLoanLen.Text = maxMont.ToString();
-                        }
-                        else if (newLoanLen < minMont)
-                        {
-                            tbLoanLen.Text = minMont.ToString();
-                        }
-                    }
+                    textBox.Text = (newValue > maxValue) ? maxValue.ToString() : (newValue < minValue) ? minValue.ToString() : textBox.Text;
                 }
 
             }
@@ -623,34 +499,24 @@ namespace SPTC_APP.View.Pages.Input
                 val.Content = "N/A";
             }
         }
+
         private bool ValidSize()
         {
-            if(double.TryParse(tbAmount.Text, out double minlon) && minlon < minLoan)
-            {
-                VisualStateManager.GoToState(tbAmount, "InputInvalidated", true);
-                new Toast(gridToast, $"Value {Math.Round(minlon, 5)} is below the minimum limit of {Math.Round((double)minLoan, 3)}.");
-                return false;
-            }
-            if (double.TryParse(tbAmount.Text, out double maxlon) && maxlon > maxLoan)
-            {
-                VisualStateManager.GoToState(tbAmount, "InputInvalidated", true);
-                new Toast(gridToast, $"Value {Math.Round(maxlon, 5)} exceeds the maximum limit of {Math.Round((double)maxLoan, 3)}.");
-                return false;
-            }
-            if (double.TryParse(tbLoanLen.Text, out double minmon) && minmon < minMont)
-            {
-                VisualStateManager.GoToState(tbLoanLen, "InputInvalidated", true);
-                new Toast(gridToast, $"Value {Math.Round(minmon, 5)} is below the minimum limit of {Math.Round((double)minMont, 3)}.");
-                return false;
-            }
-            if (double.TryParse(tbLoanLen.Text, out double maxmon) && maxmon > maxMont)
-            {
-                VisualStateManager.GoToState(tbLoanLen, "InputInvalidated", true);
-                new Toast(gridToast, $"Value {Math.Round(maxmon, 5)} exceeds the maximum limit of {Math.Round((double)maxMont, 3)}.");
-                return false;
-            }
+            bool validAmount = double.TryParse(tbAmount.Text, out double amount) && isValid(amount, minLoan, maxLoan, tbAmount, minLoan, maxLoan);
+            bool validLen = double.TryParse(tbLoanLen.Text, out double loanLen) && isValid(loanLen, minMont, maxMont, tbLoanLen, minMont, maxMont);
 
-            return true;
+            return (validAmount && validLen);
+
+            bool isValid(double? value, double? minValue, double? maxValue, TextBox textBox, double? minLimit, double? maxLimit)
+            {
+                if (value.HasValue && (value < minValue || value > maxValue))
+                {
+                    VisualStateManager.GoToState(textBox, "InputInvalidated", true);
+                    new Toast(gridToast, $"Value {Math.Round(value.Value, 5)} is {(value < minValue ? "below" : "exceeds")} the {(value < minValue ? "minimum" : "maximum")} limit of {Math.Round((double)(value < minValue ? minLimit : maxLimit), 3)}.", 3);
+                    return false;
+                }
+                return true;
+            }
         }
     }
 }

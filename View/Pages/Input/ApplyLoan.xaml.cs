@@ -169,7 +169,7 @@ namespace SPTC_APP.View.Pages.Input
                     double principal = 0.0;
                     double loanReceivable = 0.0;
                     double interestReceivable = 0.0;
-
+                    double monthlyAmortization = 0.0;
                     double totalFinal = 0.0;
                     double penalty = 0.0;
                     if (double.TryParse(tbPenalty.Text, out double ratio))
@@ -187,10 +187,11 @@ namespace SPTC_APP.View.Pages.Input
                             deductions = pfFinal + cbuFinal + interestFinal;
 
                             principal = userVars[0] - deductions;
+                            loanReceivable = principal;
+                            totalFinal = loanReceivable;
 
                             // Monthly Breakdown
-                            loanReceivable = principal / userVars[3];
-                            totalFinal = loanReceivable;
+                            monthlyAmortization = totalFinal / userVars[3];
                             break;
 
                         case "Long Term": // Long Term
@@ -240,7 +241,17 @@ namespace SPTC_APP.View.Pages.Input
                     switch (cbLoanType.SelectedItem)
                     {
                         case "Short Term":
-                            UpdateLabels(
+                            UpdateLabelVal(
+                                userVars[0],
+                                pfFinal,
+                                cbuFinal,
+                                interestFinal,
+                                principal,
+                                loanReceivable,
+                                null,
+                                totalFinal,
+                                monthlyAmortization);
+                            /*UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
                                 (pfFinal > 0 ? "- " : "") + "₱" + pfFinalStr,
                                 (interestFinal > 0 ? "- " : "") + "₱" + interestFinal.ToString("N2"),
@@ -251,11 +262,11 @@ namespace SPTC_APP.View.Pages.Input
                                 "₱" + principalStr,
                                 "₱" + loanReceivable.ToString("N2"),
                                 "₱" + totalFinal.ToString("N2"),
-                                true);
+                                true);*/
                             break;
 
                         case "Long Term":
-                            UpdateLabels(
+                            /*UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
                                 (pfFinal > 0 ? "- " : "") + "₱" + pfFinalStr,
                                 "Not deducted yet.",
@@ -266,11 +277,11 @@ namespace SPTC_APP.View.Pages.Input
                                 "₱" + principalStr,
                                 "₱" + loanReceivable.ToString("N2"),
                                 "₱" + totalFinal.ToString("N2"),
-                                false);;
+                                false);*/
                             break;
 
                         case "Emergency":
-                            UpdateLabels(
+                            /*UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
                                 "Fee not included.",
                                 "Not deducted yet.",
@@ -283,12 +294,12 @@ namespace SPTC_APP.View.Pages.Input
                                 "₱" + totalFinal.ToString("N2"),
                                 true);
                             lblPFTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
-                            lblCBUTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");
+                            lblCBUTotal.Foreground = (SolidColorBrush)FindResource("BrushDeepGreen");*/
                             break;
 
                     }
 
-                    void UpdateLabels(
+                    /*void UpdateLabels(
                         string loanAmount,
                         string pfTotal,
                         string interestTotal,
@@ -310,15 +321,61 @@ namespace SPTC_APP.View.Pages.Input
                         lblLoanRecievableTotal.Content = loanReceivableTotal;
                         lblInterestRecievableTotal.Content = interestRecievableTotal;
                         lblInterestRecievableTotal.Foreground = interestRecForeground;
-                        lblBreakdownTotal.Content = breakdownTotal;
+                        lblMonthlyAmort.Content = breakdownTotal;
                         this.isLoan = isLoan;
 
                         lblPFTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
                         lblCBUTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
+                    }*/
+                    
+                    void UpdateLabelVal(
+                        double? amountLoan,
+                        double? processingFee,
+                        double? cbu,
+                        double? interest,
+                        double? cobPrincipal,
+                        double? loanRec,
+                        double? inteRec,
+                        double? totaRec,
+                        double? montAmo)
+                    {
+                        Dictionary<Label, double?> labels = new Dictionary<Label, double?>
+                        {
+                            { lblLoanAmount, amountLoan },
+                            { lblPFTotal, processingFee },
+                            { lblCBUTotal, cbu },
+                            { lblInterestTotal, interest },
+                            { lblPrincipalTotal, cobPrincipal },
+                            { lblLoanRecievableTotal, loanRec },
+                            { lblInterestRecievableTotal, inteRec },
+                            { lblInTot, totaRec },
+                            { lblMonthlyAmort, montAmo }
+                        };
+
+                        foreach (var kvp in labels)
+                        {
+                            if(kvp.Value == null)
+                            {
+                                kvp.Key.Visibility = Visibility.Collapsed;
+                            }
+                            else
+                            {
+                                kvp.Key.Content = "₱" + kvp.Value?.ToString("N2");
+                            }
+                        }
+                    }
+                    void UpdateLabel(
+                        string interest,
+                        string interec,
+                        string rectot)
+                    {
+                        LBLINTER.Content = interest ?? "Interest on Loan:";
+                        LBLINTEREC.Content = interec ?? "Interest Receivable:";
+                        LBLRECS.Content = rectot ?? "Payment in Total:";
                     }
 
                     //lblPenalty.Content = "₱" + penalty.ToString("N2");
-                    if(loanAmount > 0 && userVars[3] > 1)
+                    /*if(loanAmount > 0 && userVars[3] > 1)
                     {
                         lblInTot.Content = $"* ₱ {(totalFinal * userVars[3]).ToString("N2")} in {userVars[3].ToString("N0")} mos.";
                         lblInTot.Visibility = Visibility.Visible;
@@ -326,7 +383,7 @@ namespace SPTC_APP.View.Pages.Input
                     else
                     {
                         lblInTot.Visibility = Visibility.Collapsed;
-                    }
+                    }*/
                         
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 using SPTC_APP.Database;
+using SPTC_APP.View;
 using static SPTC_APP.Objects.Ledger;
 
 namespace SPTC_APP.Objects
@@ -39,7 +40,7 @@ namespace SPTC_APP.Objects
             {
                 get
                 {
-                    return (amountLoaned + interest) / termsofpayment;
+                    return Scaler.RoundUp((amountLoaned + interest) / termsofpayment);
                 }
             }
             public bool isFullyPaid { get; set; } = false;
@@ -220,7 +221,7 @@ namespace SPTC_APP.Objects
             {
                 get
                 {
-                    return (amountLoaned + interest) / termsofpayment;  
+                    return Scaler.RoundUp((amountLoaned + interest) / termsofpayment);  
                 }   
             }
 

@@ -50,7 +50,7 @@ namespace SPTC_APP.Database
         public static string GET_SHARE_LEDGER_LIST(int id) =>
             $"SELECT * FROM {Table.SHARE_CAPITAL} WHERE {Field.FRANCHISE_ID} = {id} AND {Where.ALL_NOTDELETED} ORDER BY {Field.DATE} DESC";
         public static string GET_LEDGER_LIST(string table, int id) =>
-            $"SELECT * FROM {table} WHERE {Field.FRANCHISE_ID} = {id} AND {Field.IS_FULLY_PAID}=0 AND {Where.ALL_NOTDELETED} ORDER BY {Field.DATE} DESC";
+            $"SELECT * FROM {table} WHERE {Field.FRANCHISE_ID} = {id} AND {Where.ALL_NOTDELETED} ORDER BY {Field.DATE} DESC";
         public static string CHECK_RECAP(string title, int month, int year) => $"SELECT COUNT({Field.ID}) FROM {Table.PAYMENT_DETAILS} WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND {Field.LEDGER_ID} = -1 AND {Field.LEDGER_TYPE} = \"RECAP\" AND {Field.RECAP_TEXT} = \"{title}\" AND {Where.ALL_NOTDELETED}";
         public static string GET_LEDGER_PAYMENT(string table, string type, int id) =>
             $"SELECT * FROM {Table.PAYMENT_DETAILS} AS pd LEFT JOIN {table} AS scl ON pd.{Field.LEDGER_ID} = scl.{Field.ID} AND pd.{Field.LEDGER_TYPE} = \"{type}\" WHERE scl.{Field.FRANCHISE_ID} = {id} AND pd.{Where.ALL_NOTDELETED} ORDER BY pd.{Field.DATE} DESC";

@@ -4,6 +4,7 @@ using SPTC_APP.View.Controls;
 using SPTC_APP.View.Styling;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -81,7 +82,6 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("monthyear", "M/Y", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("deposit", "SHARE CAPITAL", minWidth: 100, isCenter: true, isNumeric: true, haspeso: true),
-                    new ColumnConfiguration("penalties", "CBU", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
                     new ColumnConfiguration("balance", "TOTAL", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
                 };
                 DataGridHelper<PaymentDetails<Ledger.ShareCapital>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.ShareCapital>>(dgLedger, columnConfigurations);
@@ -101,12 +101,12 @@ namespace SPTC_APP.View.Pages.Output
 
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("cv_or", "OR NO.", minWidth: 60, isNumeric: true),
-                    new ColumnConfiguration("details", "DESCRIPTION", minWidth: 120),
+                    new ColumnConfiguration("details", "DESCRIPTION", minWidth: 100, isCenter: true),
                     new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
-                    new ColumnConfiguration("processingFee", "FEE", minWidth: 60, isCenter: true, isNumeric: true, haspeso:true),
-                    new ColumnConfiguration("cbu", "CBU", minWidth: 60, isCenter: true, isNumeric: true, haspeso:true),
-                    new ColumnConfiguration("termsofpayment", "MONTHS", minWidth: 50, isNumeric: true),
-                    new ColumnConfiguration("interest", "INT", minWidth: 60, isCenter: true, isNumeric: true, haspeso : true),
+                    //new ColumnConfiguration("processingFee", "FEE", minWidth: 60, isCenter: true, isNumeric: true, haspeso:true),
+                    //new ColumnConfiguration("cbu", "CBU", minWidth: 60, isCenter: true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("termsofpayment", "MONTHS", minWidth: 80, isNumeric: true, isCenter: true),
+                    //new ColumnConfiguration("interest", "INT", minWidth: 60, isCenter: true, isNumeric: true, haspeso : true),
                     new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 120, isCenter: true, isNumeric: true, haspeso:true),
                     new ColumnConfiguration("amount", "TOTAL", minWidth: 120, isCenter: true, isNumeric: true, haspeso:true),
                 };
@@ -137,7 +137,7 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("monthyear", "M/Y", minWidth: 60, isNumeric : true),
-                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
+                    new ColumnConfiguration("penalties", "PENALTY", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
                     new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<PaymentDetails<Ledger.Loan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.Loan>>(dgLedger, columnConfigurations);
@@ -166,7 +166,7 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric: true),
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("monthyear", "M/Y", minWidth: 60, isNumeric:true),
-                    new ColumnConfiguration("interest", "INTEREST", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
+                    new ColumnConfiguration("penalties", "PENALTY", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
                     new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true , haspeso : true),
                 };
                 DataGridHelper<PaymentDetails<Ledger.LongTermLoan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.LongTermLoan>>(dgLedger, columnConfigurations);
@@ -331,14 +331,7 @@ namespace SPTC_APP.View.Pages.Output
                     lblTotalLedger.Content = led.amount;
                     if (AppState.USER.position?.accesses[14] ?? false)
                         btnDeletePayment.IsEnabled = true;
-
-                    AppState.mainwindow.ShowReceipt(
-                        led.details,
-                        led.amountLoaned,
-                        led.processingFee,
-                        led.cbu,
-                        led.interest,
-                        led.termsofpayment);
+                    //Moved to DoubleClick mouse event
 
                 }
                 else if (dgLedger.SelectedItem is Ledger.LongTermLoan lled)
@@ -350,13 +343,6 @@ namespace SPTC_APP.View.Pages.Output
                     if (AppState.USER.position?.accesses[15] ?? false)
                         btnDeletePayment.IsEnabled = true;
 
-                    AppState.mainwindow.ShowReceipt(
-                        lled.details,
-                        lled.amountLoaned,
-                        lled.processingFee,
-                        lled.cbu,
-                        lled.interest,
-                        lled.termsofpayment);
                 }
             }
         }
@@ -393,6 +379,46 @@ namespace SPTC_APP.View.Pages.Output
             }
         }
 
-        
+        private void dgLedger_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (dgLedger.SelectedItem != null)
+            {
+                if (dgLedger.SelectedItem is Ledger.Loan led)
+                {
+                    lblSelectedLedger.Content = "Loaned Amount: " + led.amountLoaned;
+                    selectedPayment = led;
+                    lblTotal.Content = "BALANCE :";
+                    lblTotalLedger.Content = led.amount;
+                    if (AppState.USER.position?.accesses[14] ?? false)
+                        btnDeletePayment.IsEnabled = true;
+
+                    AppState.mainwindow.ShowReceipt(
+                        led.details,
+                        led.amountLoaned,
+                        led.processingFee,
+                        led.cbu,
+                        led.interest,
+                        led.termsofpayment);
+
+                }
+                else if (dgLedger.SelectedItem is Ledger.LongTermLoan lled)
+                {
+                    lblSelectedLedger.Content = "Loaned Amount: " + lled.amountLoaned;
+                    selectedPayment = lled;
+                    lblTotal.Content = "BALANCE :";
+                    lblTotalLedger.Content = lled.amount;
+                    if (AppState.USER.position?.accesses[15] ?? false)
+                        btnDeletePayment.IsEnabled = true;
+
+                    AppState.mainwindow.ShowReceipt(
+                        lled.details,
+                        lled.amountLoaned,
+                        lled.processingFee,
+                        lled.cbu,
+                        lled.interest,
+                        lled.termsofpayment);
+                }
+            }
+        }
     }
 }

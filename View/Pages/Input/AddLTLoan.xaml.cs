@@ -62,17 +62,25 @@ namespace SPTC_APP.View.Pages.Input
 
             lblLoanDate.Content = ltloan.displayDate;
             lblLoanCVOR.Content = ltloan.cv_or;
+
             lblLoanAmount.Content = "₱" + ltloan.amountLoaned.ToString("N2");
             lblLoanInterest.Content = "₱" + ltloan.interest.ToString("N2");
             lblTotal.Content = "₱" + (ltloan.amountLoaned + ltloan.interest).ToString("N2");
 
-            lblLoanRec.Content = "₱" + (ltloan.amountLoaned / ltloan.termsofpayment).ToString("N2");
+            double balanceOrReceivable = (ltloan.amount < (ltloan.amountLoaned / ltloan.termsofpayment)) ? ltloan.amount: Scaler.RoundUp(ltloan.amountLoaned / ltloan.termsofpayment);
+            bool shouldRound = (ltloan.amountLoaned / ltloan.termsofpayment != Scaler.RoundUp(ltloan.amountLoaned / ltloan.termsofpayment)); // if true,it should display round
+            lblLoanRec.Content = "₱" + (ltloan.amountLoaned / ltloan.termsofpayment).ToString("N2") + (shouldRound ? "\n -> ( ₱ " + balanceOrReceivable.ToString("N2") + " )" : "");
             lblInteRec.Content = "₱" + (ltloan.interest / ltloan.termsofpayment).ToString("N2");
 
             breakdown = ((ltloan.amountLoaned / ltloan.termsofpayment) + (ltloan.interest / ltloan.termsofpayment));
+            if(ltloan.amount < breakdown)
+            {
+                breakdown = ltloan.amount;
+            }
+
+
             lblTotalBreak.Content = "₱" + breakdown.ToString("N2");
 
-            // Eto galing sa applyloan
             penalty = ltloan.amountLoaned * (ltloan.penaltyPercent / 100);
 
             lblRemainingBalance.Content = "₱" + (franchise.LongTermLoanBalance - Scaler.RoundUp(breakdown)).ToString("N2");
@@ -82,6 +90,7 @@ namespace SPTC_APP.View.Pages.Input
 
             // Kung kaya, i-autocompute sana.
             tbPenalty.Text = "0";
+
 
             compute(0);
 
@@ -105,29 +114,18 @@ namespace SPTC_APP.View.Pages.Input
         {
             if (confirmPayment())
             {
-                /*
-                double amount = Double.TryParse(tboxAmount.Text, out amount) ? amount : 0;
-                
-                double penalty = Double.TryParse(tbPenalty.Text, out penalty) ? penalty : 0;
-                if (amount > 0)
+                PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
+                ltloan.amount = ltloan.amount - amortization;
+                loanPayment.WriteInto(ltloan, 0, dpBdate.DisplayDate, tboxCVOR.Text, amortization, penalty, "", ltloan.amount);
+                if (ltloan.amount <= 0)
                 {
-
-                    PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
-                    ltloan.amount = ltloan.amount - amount;
-                    loanPayment.WriteInto(ltloan, 0, dpBdate.DisplayDate, tboxRefNo.Text, amount, penalty, "", ltloan.amount);
-                    if (ltloan.amount <= 0)
-                    {
-                        ltloan.isFullyPaid = true;
-                    }
-                    loanPayment.Save();
+                    ltloan.isFullyPaid = true;
+                }
+                loanPayment.Save();
                     
-                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
-                    this.closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";
-                    this.Close();
-                } else
-                {
-
-                }*/
+                (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                this.closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";
+                this.Close();
             }
         }
 
@@ -166,6 +164,10 @@ namespace SPTC_APP.View.Pages.Input
             if (double.TryParse(tbPenalty.Text + e.Text, out val))
             {
                 compute(val);
+            } else
+            {
+                tbPenalty.Text = "0";
+                compute(0);
             }
         }
         
@@ -181,7 +183,7 @@ namespace SPTC_APP.View.Pages.Input
             // Changing labels/fields
             lblPenalty.Content = "+₱" + penaltyTot.ToString("N2");
             lblPenalty2.Content = "₱" + penaltyTot.ToString("N2");
-            lblTotalBreak.Content = "₱" + paidAmount.ToString("N2");
+            lblTotalBreak.Content = "₱" + amortization.ToString("N2");
             tboxAmount.Text = amortization.ToString();
             lblAmort.Content = "₱" + amortization.ToString("N2");
             lblCurrentPay.Content = "₱" + paidAmount.ToString("N2");

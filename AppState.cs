@@ -375,11 +375,13 @@ namespace SPTC_APP
         public static List<VideoCapabilities> GetResolutionList()
         {
             FilterInfoCollection videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            VideoCaptureDevice videoSource = new VideoCaptureDevice(videoDevices[AppState.DEFAULT_CAMERA].MonikerString);
             if (videoDevices.Count == 0)
             {
                 EventLogger.Post("ERR :: No video devices found.");
+                return new List<VideoCapabilities>();
             }
+            VideoCaptureDevice videoSource = new VideoCaptureDevice(videoDevices[AppState.DEFAULT_CAMERA].MonikerString);
+            
             return videoSource.VideoCapabilities.OrderByDescending(c => c.FrameSize.Width * c.FrameSize.Height).ToList();
         }
         private static bool isRecapLoaded = false;
@@ -406,6 +408,73 @@ namespace SPTC_APP
             LoadRecapList(currentmonth, currentYear);
 
             return Retrieve.GetDataUsingQuery<Recap>(RequestQuery.GET_ALL_RECAP_IN_MONTH(currentmonth, currentYear));
+        }
+
+        public static void CheckCamera(int cam)
+        {
+            FilterInfoCollection videoDevices;
+            VideoCaptureDevice videoSource;
+            try
+            {
+                videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                if (videoDevices.Count == 0)
+                {
+                    EventLogger.Post("ERR :: No video devices found.");
+                    return;
+                }
+                videoSource = new VideoCaptureDevice(videoDevices[cam].MonikerString);
+                
+                List<VideoCapabilities> vcList = videoSource.VideoCapabilities.OrderByDescending(c => c.FrameSize.Width * c.FrameSize.Height).ToList();
+                bool change = false;
+                foreach(VideoCapabilities vc in vcList)
+                {
+                    change = true;
+                    if(AppState.CAMERA_RESOLUTION == $"{vc.FrameSize.Height}x{vc.FrameSize.Width}")
+                    {
+                        change = false;
+                        break;
+                    }
+                }
+                if (change)
+                {
+                    VideoCapabilities vc = vcList.LastOrDefault();
+                    AppState.CAMERA_RESOLUTION = $"{vc.FrameSize.Height}x{vc.FrameSize.Width}";
+                    AppState.SaveToJson();
+                }
+            }
+            catch (Exception e)
+            {
+                EventLogger.Post($"ERR :: {e.Message}");
+                videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                if (videoDevices.Count == 0)
+                {
+                    EventLogger.Post("ERR :: No video devices found.");
+                    return;
+                }
+                videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
+                AppState.DEFAULT_CAMERA = 0;
+                
+                VideoCapabilities vc = videoSource.VideoCapabilities.OrderByDescending(c => c.FrameSize.Width * c.FrameSize.Height).ToList().LastOrDefault();
+                AppState.CAMERA_RESOLUTION = $"{vc.FrameSize.Height}x{vc.FrameSize.Width}";
+                AppState.SaveToJson();
+            }
+            
+        }
+
+        public static List<string> GetCameras()
+        {
+            CheckCamera(AppState.DEFAULT_CAMERA);
+
+            FilterInfoCollection videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+
+            List<string> cameraList = new List<string>();
+
+            foreach (FilterInfo device in videoDevices)
+            {
+                cameraList.Add(device.Name);
+            }
+
+            return cameraList;
         }
     }
 

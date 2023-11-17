@@ -39,7 +39,7 @@ namespace SPTC_APP.Objects
             {
                 get
                 {
-                    return principal / termsofpayment;
+                    return amountLoaned / termsofpayment;
                 }
             }
             public bool isFullyPaid { get; set; } = false;

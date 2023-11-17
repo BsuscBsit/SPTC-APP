@@ -28,12 +28,12 @@ namespace SPTC_APP.View.Pages.Input
         private Franchise franchise;
 
         private string ornum;
-        private string loantext;// normal or emergency , all caps please
-        private double loanAmount; // magkano yung loan
-        private double loanProcessingFee; // actual value to be stord, if 2%
-        private double loanCbu; // also 2%
-        private int loanMonthsCount; // for both longterma anbd short term
-        private double loanInterest; // based on calculations
+        private string loantext;
+        private double loanAmount; 
+        private double loanProcessingFee; 
+        private double loanCbu; 
+        private int loanMonthsCount; 
+        private double loanInterest; 
         private double loanPrincipal;
         private double interestRate;
         private double penaltyPercent;
@@ -62,22 +62,22 @@ namespace SPTC_APP.View.Pages.Input
             tbBodyNum.Content = this.franchise?.BodyNumber?.ToString() ?? "N/A";
             DraggingHelper.DragWindow(topBar);
 
+            List<string> possibleloans = new List<string>();
 
-            //HOW TO add restrictions to combobox selector if I have Loan I cannot apply for Emergency and Shorteermloan
-            //if I have llong term loan i cannot have longtermloan
-
-            // hot to know if i have loan or longtermloan
-            //USAGE: 
-            /** @DIERO
-             * 
-             * if(this.franchise.LoanBalance <= 0){
-             *      //PREVENT THE USER FROM CLICKING SHORT TERM LOAN or EMEGRGENCY LOAN
-             * }
-             * if(this.franchise.LongTermLoanBalance <= 0){
-             *      //PREVENT THE USER FROM CLICKING LONG TERM LOAN
-             * }
-             * 
-             **/
+            if (this.franchise.LoanBalance == 0)
+            {
+                cbLoanType.Items.Add("Emergency");
+                cbLoanType.Items.Add("Short Term");
+            }
+            if (this.franchise.LongTermLoanBalance == 0)
+            {
+                cbLoanType.Items.Add("Long Term");
+            }
+            if (cbLoanType.Items.Count == 0)
+            {
+                closingMSG = "Currently has Short term and Long term loan";
+                this.Close();
+            }
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -178,9 +178,9 @@ namespace SPTC_APP.View.Pages.Input
                         this.penaltyPercent = ratio;
                     }
 
-                    switch (cbLoanType.SelectedIndex)
+                    switch (cbLoanType.SelectedItem)
                     {
-                        case 0: // Short Term
+                        case "Short Term": // Short Term
                             pfFinal = userVars[0] * pfRatio;
                             cbuFinal = userVars[0] * cbuRatio;
                             interestFinal = (userVars[0] * interestRatio) * userVars[3];
@@ -193,7 +193,7 @@ namespace SPTC_APP.View.Pages.Input
                             totalFinal = loanReceivable;
                             break;
 
-                        case 1: // Long Term
+                        case "Long Term": // Long Term
                             pfFinal = userVars[0] * pfRatio;
                             cbuFinal = userVars[0] * cbuRatio;
                             interestFinal = (userVars[0] * interestRatio) * userVars[3];
@@ -207,7 +207,7 @@ namespace SPTC_APP.View.Pages.Input
                             totalFinal = loanReceivable + interestReceivable;
                             break;
 
-                        case 2: // Emergency
+                        case "Emergency": // Emergency
 
                             principal = userVars[0];
 
@@ -237,9 +237,9 @@ namespace SPTC_APP.View.Pages.Input
                     string cbuFinalStr = cbuFinal.ToString("N2");
                     string interestRecStr = interestReceivable.ToString("N2");
 
-                    switch (cbLoanType.SelectedIndex)
+                    switch (cbLoanType.SelectedItem)
                     {
-                        case 0:
+                        case "Short Term":
                             UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
                                 (pfFinal > 0 ? "- " : "") + "₱" + pfFinalStr,
@@ -254,7 +254,7 @@ namespace SPTC_APP.View.Pages.Input
                                 true);
                             break;
 
-                        case 1:
+                        case "Long Term":
                             UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
                                 (pfFinal > 0 ? "- " : "") + "₱" + pfFinalStr,
@@ -269,7 +269,7 @@ namespace SPTC_APP.View.Pages.Input
                                 false);;
                             break;
 
-                        case 2:
+                        case "Emergency":
                             UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
                                 "Fee not included.",
@@ -359,7 +359,7 @@ namespace SPTC_APP.View.Pages.Input
 
         private void cbLoanType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            presetFields(cbLoanType.SelectedIndex, false);
+            presetFields(cbLoanType.SelectedItem.ToString(), false);
         }
 
 
@@ -374,10 +374,10 @@ namespace SPTC_APP.View.Pages.Input
 
             tbAmount.NumericTextBoxBehavior(DECIMALUNSIGNED, gridToast, 1, "Loan Amount.", 1);
             tbLoanLen.NumericTextBoxBehavior(WHOLEUNSIGNED, gridToast, 5, "Term Length.", 1);
-            presetFields(0);
+            presetFields("Short Term");
         }
 
-        private void presetFields(int preset, bool isReset = true)
+        private void presetFields(string preset, bool isReset = true)
         {
             if(isReset)
             {
@@ -389,7 +389,7 @@ namespace SPTC_APP.View.Pages.Input
 
                 switch (preset)
                 {
-                    case 0:
+                    case "Short Term":
                         this.loantext = "SHORT TERM";
                         tbLoanLen.Text = "6";
 
@@ -398,11 +398,11 @@ namespace SPTC_APP.View.Pages.Input
                         LBLINTER.Visibility = Visibility.Visible;
                         lblInterestTotal.Visibility = Visibility.Visible;
                         break;
-                    case 1:
+                    case "Long Term":
                         this.loantext = "LONG TERM";
                         tbLoanLen.Text = "12";
                         break;
-                    case 2:
+                    case "Emergency":
                         this.loantext = "EMERGENCY";
                         tbLoanLen.Text = "2";
                         break;
@@ -412,7 +412,7 @@ namespace SPTC_APP.View.Pages.Input
             {
                 switch (preset)
                 {
-                    case 0:
+                    case "Short Term":
                         this.loantext = "SHORT TERM";
                         minLoan = 1;
                         maxLoan = 30000;
@@ -420,7 +420,7 @@ namespace SPTC_APP.View.Pages.Input
                         maxMont = 6;
 
                         break;
-                    case 1:
+                    case "Long Term":
                         this.loantext = "LONG TERM";
                         minLoan = 31000;
                         maxLoan = null;
@@ -432,7 +432,7 @@ namespace SPTC_APP.View.Pages.Input
                         LBLINTER.Visibility = Visibility.Collapsed;
                         lblInterestTotal.Visibility = Visibility.Collapsed;
                         break;
-                    case 2:
+                    case "Emergency":
                         this.loantext = "EMERGENCY";
                         minLoan = 1;
                         maxLoan = 3000;

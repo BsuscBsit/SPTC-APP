@@ -182,9 +182,7 @@
                 SelectedIndex="0"
                 SelectionChanged="cbLoanType_SelectionChanged"
                 Style="{DynamicResource CommonComboBox}">
-                <ComboBoxItem Content="Short Term" />
-                <ComboBoxItem Content="Long Term" />
-                <ComboBoxItem Content="Emergency" />
+                
             </ComboBox>
             <TextBox
                 x:Name="tbAmount"

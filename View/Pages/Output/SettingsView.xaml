@@ -27,6 +27,19 @@
                 <StackPanel x:Name="SettingsPanel">
                     
                 </StackPanel>
+                <StackPanel x:Name="stCamera" Orientation="Horizontal" Margin="10, 0, 0, 10">
+                    <TextBlock Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Text="CAMERA"/>
+                    <ComboBox
+                        x:Name="cbCamera"
+                        Height="31"
+                        Margin="0,4,0,4"
+                        VerticalAlignment="Center"
+                        IsReadOnly="True"
+                        IsTabStop="False"
+                        SelectedIndex="0"
+                        Style="{DynamicResource CommonComboBox}" Width="200" SelectionChanged="cbCamera_SelectionChanged">
+                    </ComboBox>
+                </StackPanel>
                 <StackPanel x:Name="stResolution" Orientation="Horizontal" Margin="10, 0, 0, 10">
                     <TextBlock Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Text="CAMERA RESOLUTION"/>
                     <ComboBox
@@ -37,7 +50,7 @@
                             IsReadOnly="True"
                             IsTabStop="False"
                             SelectedIndex="0"
-                            Style="{DynamicResource CommonComboBox}" Width="140">
+                            Style="{DynamicResource CommonComboBox}" Width="200">
                     </ComboBox>
                 </StackPanel>
             </StackPanel>

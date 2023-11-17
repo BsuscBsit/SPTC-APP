@@ -40,7 +40,7 @@ namespace SPTC_APP.View.Pages.Input
             base.OnClosing(e);
         }
 
-        public void displayToast(string message, double duration = 5)
+        public void displayToast(string message, double duration = 3)
         {
             if (!(string.IsNullOrEmpty(message) && string.IsNullOrWhiteSpace(message)))
             {

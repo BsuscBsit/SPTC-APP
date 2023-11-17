@@ -24,6 +24,7 @@ namespace SPTC_APP.View.Pages.Output
     /// </summary>
     public partial class SettingsView : Window
     {
+        private string closingMSG;
         public SettingsView()
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace SPTC_APP.View.Pages.Output
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
         private void GenerateSettingsUI()
@@ -60,7 +62,6 @@ namespace SPTC_APP.View.Pages.Output
                     HorizontalAlignment = HorizontalAlignment.Left,
                     VerticalAlignment = VerticalAlignment.Center
                 };
-
                 stackPanel.Children.Add(label);
                 if(field.Name == "CAMERA_RESOLUTION")
                 {
@@ -71,6 +72,17 @@ namespace SPTC_APP.View.Pages.Output
                     
                     cbResolution.SelectedItem = (string)field.GetValue(null);
                     cbResolution.Visibility = Visibility.Visible;
+                    
+                }
+                else if(field.Name == "DEFAULT_CAMERA")
+                {
+                    foreach (var vc in AppState.GetCameras())
+                    {
+                        cbCamera.Items.Add(vc);
+                    }
+
+                    cbCamera.SelectedIndex = (int)field.GetValue(null);
+                    cbCamera.Visibility = Visibility.Visible;
                 }
                 else if (field.FieldType == typeof(string))
                 {
@@ -149,6 +161,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            AppState.DEFAULT_CAMERA = cbCamera.SelectedIndex;
             AppState.CAMERA_RESOLUTION = cbResolution.Text;
             AppState.SaveToJson();
             this.Close();
@@ -157,6 +170,15 @@ namespace SPTC_APP.View.Pages.Output
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void cbCamera_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cbResolution.Items.Clear();
+            foreach (VideoCapabilities vc in AppState.GetResolutionList())
+            {
+                cbResolution.Items.Add($"{vc.FrameSize.Height}x{vc.FrameSize.Width}");
+            }
         }
     }
 }

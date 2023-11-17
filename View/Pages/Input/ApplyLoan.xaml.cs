@@ -317,7 +317,7 @@ namespace SPTC_APP.View.Pages.Input
                         lblCBUTotal.Foreground = (SolidColorBrush)FindResource("BrushRed");
                     }
 
-                    lblPenalty.Content = "₱" + penalty.ToString("N2");
+                    //lblPenalty.Content = "₱" + penalty.ToString("N2");
                     if(loanAmount > 0 && userVars[3] > 1)
                     {
                         lblInTot.Content = $"* ₱ {(totalFinal * userVars[3]).ToString("N2")} in {userVars[3].ToString("N0")} mos.";
@@ -392,6 +392,11 @@ namespace SPTC_APP.View.Pages.Input
                     case 0:
                         this.loantext = "SHORT TERM";
                         tbLoanLen.Text = "6";
+
+                        LBLINTEREC.Visibility = Visibility.Collapsed;
+                        lblInterestRecievableTotal.Visibility = Visibility.Collapsed;
+                        LBLINTER.Visibility = Visibility.Visible;
+                        lblInterestTotal.Visibility = Visibility.Visible;
                         break;
                     case 1:
                         this.loantext = "LONG TERM";
@@ -399,7 +404,7 @@ namespace SPTC_APP.View.Pages.Input
                         break;
                     case 2:
                         this.loantext = "EMERGENCY";
-                        tbLoanLen.Text = "3";
+                        tbLoanLen.Text = "2";
                         break;
                 }
             }
@@ -413,6 +418,7 @@ namespace SPTC_APP.View.Pages.Input
                         maxLoan = 30000;
                         minMont = null;
                         maxMont = 6;
+
                         break;
                     case 1:
                         this.loantext = "LONG TERM";
@@ -420,13 +426,23 @@ namespace SPTC_APP.View.Pages.Input
                         maxLoan = null;
                         minMont = 12;
                         maxMont = null;
+
+                        LBLINTEREC.Visibility = Visibility.Visible;
+                        lblInterestRecievableTotal.Visibility = Visibility.Visible;
+                        LBLINTER.Visibility = Visibility.Collapsed;
+                        lblInterestTotal.Visibility = Visibility.Collapsed;
                         break;
                     case 2:
                         this.loantext = "EMERGENCY";
                         minLoan = 1;
                         maxLoan = 3000;
                         minMont = 1;
-                        maxMont = 3;
+                        maxMont = 2;
+
+                        LBLINTEREC.Visibility = Visibility.Collapsed;
+                        lblInterestRecievableTotal.Visibility = Visibility.Collapsed;
+                        LBLINTER.Visibility = Visibility.Visible;
+                        lblInterestTotal.Visibility = Visibility.Visible;
                         break;
                 }
 

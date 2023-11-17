@@ -83,7 +83,6 @@ namespace SPTC_APP.View.Pages.Input
             // Kung kaya, i-autocompute sana.
             tbPenalty.Text = "0";
 
-
             compute(0);
 
             DraggingHelper.DragWindow(topBar);
@@ -104,7 +103,6 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            
             if (confirmPayment())
             {
                 /*

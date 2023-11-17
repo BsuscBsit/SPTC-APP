@@ -75,9 +75,10 @@ namespace SPTC_APP.View.Pages.Input
             }
             if (cbLoanType.Items.Count == 0)
             {
-                closingMSG = "Currently has Short term and Long term loan";
+                closingMSG = "This account already have existing Short and Long term loans.";
                 this.Close();
             }
+            tbCVORNum.Focus();
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -91,36 +92,42 @@ namespace SPTC_APP.View.Pages.Input
             
             if(computeResult())
             {
-                if (ControlWindow.ShowTwoway("Add Loan", string.IsNullOrEmpty(tbCVORNum.Text) ?
-                    "CV/OR Number is empty.\nDo you still want to save?" : "Confirm adding loan?", Icons.NOTIFY))
+                if (!string.IsNullOrEmpty(tbCVORNum.Text))
                 {
-                    double penalty = this.loanAmount * this.interestRate;
-                    if (isLoan) // if LOAN
+                    if (ControlWindow.ShowTwoway("Add Loan", "Confirm adding loan?", Icons.NOTIFY))
                     {
-                        Ledger.Loan loan = new Ledger.Loan();
-                        loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal, this.penaltyPercent);
+                        double penalty = this.loanAmount * this.interestRate;
+                        if (isLoan) // if LOAN
+                        {
+                            Ledger.Loan loan = new Ledger.Loan();
+                            loan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal, this.penaltyPercent);
 
-                        PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
-                        payment.WriteInto(loan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanAmount + loanInterest);
-                        payment.isApply = true;
-                        payment.ledgername = Ledger.APPLY_LOAN;
-                        payment.Save();
+                            PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
+                            payment.WriteInto(loan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanAmount + loanInterest);
+                            payment.isApply = true;
+                            payment.ledgername = Ledger.APPLY_LOAN;
+                            payment.Save();
+                        }
+                        else // if LONG TERM LOAN
+                        {
+                            //this.loantext = "LONGTERMLOAN";
+
+                            Ledger.LongTermLoan ltloan = new Ledger.LongTermLoan();
+                            ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal, this.penaltyPercent);
+
+                            PaymentDetails<Ledger.LongTermLoan> payment = new PaymentDetails<Ledger.LongTermLoan>();
+                            payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, loanAmount + loanInterest);
+                            payment.isApply = true;
+                            payment.ledgername = Ledger.APPLY_LT_LOAN;
+                            payment.Save();
+                        }
+                        closingMSG = "Adding loan history successful.\nPlease refresh the view to see changes.";
+                        this.Close();
                     }
-                    else // if LONG TERM LOAN
-                    {
-                        //this.loantext = "LONGTERMLOAN";
-
-                        Ledger.LongTermLoan ltloan = new Ledger.LongTermLoan();
-                        ltloan.WriteInto(this.franchise.id, DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal, this.penaltyPercent);
-
-                        PaymentDetails<Ledger.LongTermLoan> payment = new PaymentDetails<Ledger.LongTermLoan>();
-                        payment.WriteInto(ltloan, 0, DateTime.Now, this.ornum, -loanAmount, penalty, this.loantext, loanAmount + loanInterest);
-                        payment.isApply = true;
-                        payment.ledgername = Ledger.APPLY_LT_LOAN;
-                        payment.Save();
-                    }
-                    closingMSG = "Adding loan history successful.\nPlease refresh the view to see changes.";
-                    this.Close();
+                }
+                else
+                {
+                    VisualStateManager.GoToState(tbCVORNum, "InputInvalidated", true);
                 }
             }
             else
@@ -180,7 +187,7 @@ namespace SPTC_APP.View.Pages.Input
 
                     switch (cbLoanType.SelectedItem)
                     {
-                        case "Short Term": // Short Term
+                        case "Short Term":
                             pfFinal = userVars[0] * pfRatio;
                             cbuFinal = userVars[0] * cbuRatio;
                             interestFinal = (userVars[0] * interestRatio) * userVars[3];
@@ -194,30 +201,32 @@ namespace SPTC_APP.View.Pages.Input
                             monthlyAmortization = totalFinal / userVars[3];
                             break;
 
-                        case "Long Term": // Long Term
+                        case "Long Term":
                             pfFinal = userVars[0] * pfRatio;
                             cbuFinal = userVars[0] * cbuRatio;
                             interestFinal = (userVars[0] * interestRatio) * userVars[3];
                             deductions = pfFinal + cbuFinal;
 
                             principal = userVars[0] - deductions;
+                            loanReceivable = userVars[0];
+                            interestReceivable = interestFinal;
+                            totalFinal = loanReceivable + interestReceivable;
 
                             // Monthly Breakdown
-                            loanReceivable = userVars[0] / userVars[3];
-                            interestReceivable = userVars[0] * interestRatio;
-                            totalFinal = loanReceivable + interestReceivable;
+                            monthlyAmortization = totalFinal / userVars[3];
                             break;
 
-                        case "Emergency": // Emergency
+                        case "Emergency":
 
                             principal = userVars[0];
+                            interestFinal = (userVars[0] * interestRatio) * userVars[3];
+
+                            loanReceivable = userVars[0];
+                            interestReceivable = interestFinal;
+                            totalFinal = loanReceivable + interestReceivable;
 
                             // Monthly Breakdown
-                            principal = userVars[0];
-                            loanReceivable = userVars[0] / userVars[3];
-                            interestReceivable = userVars[0] * interestRatio;
-                            interestFinal = userVars[0] * interestRatio;
-                            totalFinal = loanReceivable + interestReceivable;
+                            monthlyAmortization = totalFinal / userVars[3];
                             break;
                     }
 
@@ -233,10 +242,10 @@ namespace SPTC_APP.View.Pages.Input
 
                     #endregion
 
-                    string principalStr = principal.ToString("N2");
+                    /*string principalStr = principal.ToString("N2");
                     string pfFinalStr = pfFinal.ToString("N2");
                     string cbuFinalStr = cbuFinal.ToString("N2");
-                    string interestRecStr = interestReceivable.ToString("N2");
+                    string interestRecStr = interestReceivable.ToString("N2");*/
 
                     switch (cbLoanType.SelectedItem)
                     {
@@ -266,6 +275,16 @@ namespace SPTC_APP.View.Pages.Input
                             break;
 
                         case "Long Term":
+                            UpdateLabelVal(
+                                userVars[0],
+                                pfFinal,
+                                cbuFinal,
+                                null,
+                                principal,
+                                loanReceivable,
+                                interestReceivable,
+                                totalFinal,
+                                monthlyAmortization);
                             /*UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
                                 (pfFinal > 0 ? "- " : "") + "₱" + pfFinalStr,
@@ -281,6 +300,16 @@ namespace SPTC_APP.View.Pages.Input
                             break;
 
                         case "Emergency":
+                            UpdateLabelVal(
+                                userVars[0],
+                                null,
+                                null,
+                                null,
+                                principal,
+                                loanReceivable,
+                                interestReceivable,
+                                totalFinal,
+                                null);
                             /*UpdateLabels(
                                 "₱" + userVars[0].ToString("N2"),
                                 "Fee not included.",
@@ -339,7 +368,8 @@ namespace SPTC_APP.View.Pages.Input
                         double? totaRec,
                         double? montAmo)
                     {
-                        Dictionary<Label, double?> labels = new Dictionary<Label, double?>
+                        Label[] label = { LBL1, LBL2, LBL3, LBL4, LBL5, LBL6, LBL7, LBL8, LBL9 };
+                        Dictionary<Label, double?> labelVals = new Dictionary<Label, double?>
                         {
                             { lblLoanAmount, amountLoan },
                             { lblPFTotal, processingFee },
@@ -352,26 +382,22 @@ namespace SPTC_APP.View.Pages.Input
                             { lblMonthlyAmort, montAmo }
                         };
 
-                        foreach (var kvp in labels)
+                        int index = 0;
+                        foreach (var kvp in labelVals)
                         {
                             if(kvp.Value == null)
                             {
+                                label[index].Visibility = Visibility.Collapsed;
                                 kvp.Key.Visibility = Visibility.Collapsed;
                             }
                             else
                             {
+                                label[index].Visibility = Visibility.Visible;
+                                kvp.Key.Visibility = Visibility.Visible;
                                 kvp.Key.Content = "₱" + kvp.Value?.ToString("N2");
                             }
+                            index++;
                         }
-                    }
-                    void UpdateLabel(
-                        string interest,
-                        string interec,
-                        string rectot)
-                    {
-                        LBLINTER.Content = interest ?? "Interest on Loan:";
-                        LBLINTEREC.Content = interec ?? "Interest Receivable:";
-                        LBLRECS.Content = rectot ?? "Payment in Total:";
                     }
 
                     //lblPenalty.Content = "₱" + penalty.ToString("N2");
@@ -416,11 +442,18 @@ namespace SPTC_APP.View.Pages.Input
 
         private void cbLoanType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            labelValsReset();
             presetFields(cbLoanType.SelectedItem.ToString(), false);
         }
 
 
         double? minLoan, maxLoan, minMont, maxMont;
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            presetFields(cbLoanType.SelectedItem.ToString(), false);
+        }
+
         private void initTextBoxes()
         {
             tbCVORNum.DefaultTextBoxBehavior(CVOR, true, gridToast, "Cash Voucher and/or Official Reciept Number/s.", 0, true, 50);
@@ -449,11 +482,6 @@ namespace SPTC_APP.View.Pages.Input
                     case "Short Term":
                         this.loantext = "SHORT TERM";
                         tbLoanLen.Text = "6";
-
-                        LBLINTEREC.Visibility = Visibility.Collapsed;
-                        lblInterestRecievableTotal.Visibility = Visibility.Collapsed;
-                        LBLINTER.Visibility = Visibility.Visible;
-                        lblInterestTotal.Visibility = Visibility.Visible;
                         break;
                     case "Long Term":
                         this.loantext = "LONG TERM";
@@ -476,7 +504,22 @@ namespace SPTC_APP.View.Pages.Input
                         minMont = null;
                         maxMont = 6;
 
+                        LBL2.Visibility = Visibility.Visible;
+                        LBL3.Visibility = Visibility.Visible;
+                        LBL4.Visibility = Visibility.Visible;
+                        lblPFTotal.Visibility = Visibility.Visible;
+                        lblCBUTotal.Visibility = Visibility.Visible;
+                        lblInterestTotal.Visibility = Visibility.Visible;
+
+                        LBL7.Visibility = Visibility.Collapsed;
+                        lblInterestRecievableTotal.Visibility = Visibility.Collapsed;
+
+                        LBL4.Content = "Interest on Loan:";
+                        lblInterestRecievableTotal.Content = "N/A";
+                        LBL4.Visibility = Visibility.Visible;
+                        lblInterestTotal.Visibility = Visibility.Visible;
                         break;
+
                     case "Long Term":
                         this.loantext = "LONG TERM";
                         minLoan = 31000;
@@ -484,11 +527,22 @@ namespace SPTC_APP.View.Pages.Input
                         minMont = 12;
                         maxMont = null;
 
-                        LBLINTEREC.Visibility = Visibility.Visible;
-                        lblInterestRecievableTotal.Visibility = Visibility.Visible;
-                        LBLINTER.Visibility = Visibility.Collapsed;
+                        LBL2.Visibility = Visibility.Visible;
+                        LBL3.Visibility = Visibility.Visible;
+                        LBL4.Visibility = Visibility.Visible;
+                        lblPFTotal.Visibility = Visibility.Visible;
+                        lblCBUTotal.Visibility = Visibility.Visible;
+                        lblInterestTotal.Visibility = Visibility.Visible;
+
+                        LBL4.Visibility = Visibility.Collapsed;
                         lblInterestTotal.Visibility = Visibility.Collapsed;
+
+                        LBL7.Content = "Interest Receivable:";
+                        lblInterestRecievableTotal.Content = "N/A";
+                        LBL7.Visibility = Visibility.Visible;
+                        lblInterestRecievableTotal.Visibility = Visibility.Visible;
                         break;
+
                     case "Emergency":
                         this.loantext = "EMERGENCY";
                         minLoan = 1;
@@ -496,10 +550,12 @@ namespace SPTC_APP.View.Pages.Input
                         minMont = 1;
                         maxMont = 2;
 
-                        LBLINTEREC.Visibility = Visibility.Collapsed;
-                        lblInterestRecievableTotal.Visibility = Visibility.Collapsed;
-                        LBLINTER.Visibility = Visibility.Visible;
-                        lblInterestTotal.Visibility = Visibility.Visible;
+                        LBL2.Visibility = Visibility.Collapsed;
+                        LBL3.Visibility = Visibility.Collapsed;
+                        LBL4.Visibility = Visibility.Collapsed;
+                        lblPFTotal.Visibility = Visibility.Collapsed;
+                        lblCBUTotal.Visibility = Visibility.Collapsed;
+                        lblInterestTotal.Visibility = Visibility.Collapsed;
                         break;
                 }
 
@@ -533,6 +589,25 @@ namespace SPTC_APP.View.Pages.Input
                     }
                 }
 
+            }
+        }
+        private void labelValsReset()
+        {
+            Label[] labelVal =
+            {
+                lblLoanAmount,
+                lblPFTotal,
+                lblCBUTotal,
+                lblInterestTotal,
+                lblPrincipalTotal,
+                lblLoanRecievableTotal,
+                lblInterestRecievableTotal,
+                lblInTot,
+                lblMonthlyAmort
+            };
+            foreach (var val in labelVal)
+            {
+                val.Content = "N/A";
             }
         }
         private bool ValidSize()

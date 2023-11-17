@@ -138,6 +138,7 @@ namespace SPTC_APP.Objects
         {
             Task<bool> loadDatabaseTask = Task.Run(() => AppState.LoadDatabase());
             AppState.LoadRecapList(DateTime.Now.Month, DateTime.Now.Year);
+            AppState.CheckCamera(AppState.DEFAULT_CAMERA);
             for (int i = 0; i < 100; i++)
             {
                 progressBar.Dispatcher.Invoke(() =>

@@ -28,12 +28,12 @@ namespace SPTC_APP.View.Pages.Input
         private Franchise franchise;
 
         private string ornum;
-        private string loantext;// normal or emergency , all caps please
-        private double loanAmount; // magkano yung loan
-        private double loanProcessingFee; // actual value to be stord, if 2%
-        private double loanCbu; // also 2%
-        private int loanMonthsCount; // for both longterma anbd short term
-        private double loanInterest; // based on calculations
+        private string loantext;
+        private double loanAmount; 
+        private double loanProcessingFee; 
+        private double loanCbu; 
+        private int loanMonthsCount; 
+        private double loanInterest; 
         private double loanPrincipal;
         private double interestRate;
         private double penaltyPercent;
@@ -62,22 +62,22 @@ namespace SPTC_APP.View.Pages.Input
             tbBodyNum.Content = this.franchise?.BodyNumber?.ToString() ?? "N/A";
             DraggingHelper.DragWindow(topBar);
 
+            List<string> possibleloans = new List<string>();
 
-            //HOW TO add restrictions to combobox selector if I have Loan I cannot apply for Emergency and Shorteermloan
-            //if I have llong term loan i cannot have longtermloan
-
-            // hot to know if i have loan or longtermloan
-            //USAGE: 
-            /** @DIERO
-             * 
-             * if(this.franchise.LoanBalance <= 0){
-             *      //PREVENT THE USER FROM CLICKING SHORT TERM LOAN or EMEGRGENCY LOAN
-             * }
-             * if(this.franchise.LongTermLoanBalance <= 0){
-             *      //PREVENT THE USER FROM CLICKING LONG TERM LOAN
-             * }
-             * 
-             **/
+            if (this.franchise.LoanBalance == 0)
+            {
+                cbLoanType.Items.Add("Emergency");
+                cbLoanType.Items.Add("Short Term");
+            }
+            if (this.franchise.LongTermLoanBalance == 0)
+            {
+                cbLoanType.Items.Add("Long Term");
+            }
+            if (cbLoanType.Items.Count == 0)
+            {
+                closingMSG = "Currently has Short term and Long term loan";
+                this.Close();
+            }
         }
         protected override void OnClosing(CancelEventArgs e)
         {

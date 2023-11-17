@@ -229,7 +229,7 @@ namespace SPTC_APP.View.Pages.Output
                     {
                         ValuePairFI(lblF4, "Loan Balance: ", lblI4, "\u20B1 "+ MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
                         ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, "\u20B1 "+ MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
-                        ValuePairFI(lblF6, "Reference: ", lblI6, MainBody.selectedFranchise?.Owner?.ToString() ?? "");
+                        ValuePairFI(lblF6, "Total Shares: ", lblI6, MainBody.selectedFranchise?.ShareCapital?.ToString() ?? "");
                         ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
                         
                     } 
@@ -237,7 +237,7 @@ namespace SPTC_APP.View.Pages.Output
                     {
                         ValuePairFI(lblF4, "TIN No.: ", lblI4, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
                         ValuePairFI(lblF5, "VOTERS ID No.: ", lblI5, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
-                        ValuePairFI(lblF6, "Reference: ", lblI6, MainBody.selectedFranchise?.Owner?.ToString() ?? "");
+                        ValuePairFI(lblF6, "Total Shares: ", lblI6, MainBody.selectedFranchise?.ShareCapital?.ToString() ?? "");
                         ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
                     }
                     else if(AppState.USER?.position?.title == AppState.Employees[2])
@@ -280,10 +280,10 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[1])
                     {
-                        ValuePairFI(lblF4, "TIN No.: ", lblI4, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
-                        ValuePairFI(lblF5, "VOTERS ID No.: ", lblI5, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
-                        ValuePairFI(lblF6, "Reference: ", lblI6, MainBody.selectedFranchise?.Owner?.ToString() ?? "");
-                        ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
+                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.LicenseNO ?? "");
+                        ValuePairFI(lblF5, "MTOP No.: ", lblI5, MainBody.selectedFranchise?.MTOPNo ?? "");
+                        ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
+                        ValuePairFI(lblF7, "VOTERS ID No.: ", lblI7, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[2])
                     {
@@ -328,7 +328,7 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     if (MainBody.selectedFranchise?.Driver?.isSuspended ?? false)
                     {
-                        ValuePairFI(lblF7, "Suspended:", lblI7, $"YES ({MainBody.selectedFranchise.Driver.violation.dDateEnd})");
+                        ValuePairFI(lblF7, "Suspended:", lblI7, $"YES ( {MainBody.selectedFranchise.Driver.violation.dDateEnd} )");
                         lblI7.Foreground = FindResource("BrushRed") as Brush;
                         lblI7.FontWeight = FontWeights.SemiBold;
                     }

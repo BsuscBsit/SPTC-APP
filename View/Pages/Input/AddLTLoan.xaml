@@ -94,7 +94,7 @@
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Content="Penalty Period(In months): "
+            Content="Payment Delays(In months): "
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
             x:Name="lblBodyNum"

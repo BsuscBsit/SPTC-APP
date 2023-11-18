@@ -223,7 +223,7 @@ namespace SPTC_APP
             TABLE_BATCH_SIZE = 2;
             TOTAL_SHARE_PER_MONTH = 100;
             CAMERA_RESOLUTION = "";
-            LIST_RECAP = new Newtonsoft.Json.Linq.JArray { Field.CASH_ON_HAND, "Share Capital", "Monthly Dues", "Mutual Funds Payable", "Certification Fee", "Loan Receivable - Pastdue", "--------------- - Current", "Change Motor - Entrance", "------------ - Motor", "Clearance Fee", "Miscelleneous Income", "Sales Trapal", "AIR-Stricker", "Penalties", "Interest Receivable", "Cash in Bank", "Rental Fee: Franchise", "Transfer Fees", "Membership Fee", "Seminar Fee" };
+            LIST_RECAP = new Newtonsoft.Json.Linq.JArray { Field.CASH_ON_HAND, "Share Capital", "Monthly Dues", "Mutual Funds Payable", "Certification Fee", "Loan Receivable - Pastdue", "--------------- - Current", "Change Motor - Entrance", "--------------- - Motor", "Clearance Fee", "Miscelleneous Income", "Sales Trapal", "AIR-Stricker", "Penalties", "Interest Receivable", "Cash in Bank", "Rental Fee: Franchise", "Transfer Fees", "Membership Fee", "Seminar Fee" };
         }
         public static void SaveToJson()
         {

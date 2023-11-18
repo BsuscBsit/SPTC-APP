@@ -223,7 +223,7 @@ namespace SPTC_APP.View.Pages.Output
         private void DrawPieChart()
         {
             
-            lblPieChartTitle.Content = "Total Revenue: ";
+            lblPieChartTitle.Content = "Monthly Revenue: ";
             
             lblPercent.Content = "100%";
             
@@ -323,7 +323,7 @@ namespace SPTC_APP.View.Pages.Output
             {
                 if (!pieClicked)
                 {
-                    lblPieChartTitle.Content = "Total Revenue";
+                    lblPieChartTitle.Content = "Monthly Revenue";
                     double tag = 0;
                     try
                     {
@@ -431,7 +431,7 @@ namespace SPTC_APP.View.Pages.Output
             await AppState.LoadDatabase();
             DrawBarChart();
             DrawPieChart();
-            lblPieChartTitle.Content = "Total Revenue";
+            lblPieChartTitle.Content = "Monthly Revenue";
             double totalSum = AppState.ThisMonthsChart.ToDictionary(x => x.Key, x => x.Value).Values.Sum();
             lblPieChart.Content = Scaler.NumberShorthand(totalSum);
             lblPercent.Content = totalSum == 0? "0%":"100%";

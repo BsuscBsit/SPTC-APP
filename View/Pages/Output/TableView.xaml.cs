@@ -229,7 +229,7 @@ namespace SPTC_APP.View.Pages.Output
                     {
                         ValuePairFI(lblF4, "Loan Balance: ", lblI4, "\u20B1 "+ MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
                         ValuePairFI(lblF5, "LT Loan Balance: ", lblI5, "\u20B1 "+ MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
-                        ValuePairFI(lblF6, "Total Shares: ", lblI6, MainBody.selectedFranchise?.ShareCapital?.ToString() ?? "");
+                        ValuePairFI(lblF6, "Total Shares: ", lblI6, "\u20B1 " + MainBody.selectedFranchise?.ShareCapital.ToString("0.00") ?? "");
                         ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
                         
                     } 
@@ -237,7 +237,7 @@ namespace SPTC_APP.View.Pages.Output
                     {
                         ValuePairFI(lblF4, "TIN No.: ", lblI4, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
                         ValuePairFI(lblF5, "VOTERS ID No.: ", lblI5, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
-                        ValuePairFI(lblF6, "Total Shares: ", lblI6, MainBody.selectedFranchise?.ShareCapital?.ToString() ?? "");
+                        ValuePairFI(lblF6, "Total Shares: ", lblI6, "\u20B1 " + MainBody.selectedFranchise?.ShareCapital.ToString("0.00") ?? "");
                         ValuePairFI(lblF7, "Driver: ", lblI7, MainBody.selectedFranchise?.Driver?.ToString() ?? "");
                     }
                     else if(AppState.USER?.position?.title == AppState.Employees[2])
@@ -289,7 +289,7 @@ namespace SPTC_APP.View.Pages.Output
                     {
                         ValuePairFI(lblF4, "Share Capital: ", lblI4, "\u20B1 "+ MainBody.selectedFranchise?.ShareCapital.ToString("0.00") ?? "0");
                         ValuePairFI(lblF5, "Loan Balance: ", lblI5, "\u20B1 "+ MainBody.selectedFranchise?.LoanBalance.ToString("0.00") ?? "0");
-                        ValuePairFI(lblF6, "LT Loan Balance: ", lblI6, "P " + MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
+                        ValuePairFI(lblF6, "LT Loan Balance: ", lblI6, "\u20B1 " + MainBody.selectedFranchise?.LongTermLoanBalance.ToString("0.00") ?? "0");
                         ValuePairFI(lblF7, "Due for " + DateTime.Now.ToString("MMM") + ": ", lblI7, "\u20B1 "+ MainBody.selectedFranchise?.MonthlyDues.ToString("0.00") ?? "");
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[3])

@@ -56,11 +56,25 @@ namespace SPTC_APP.View.Pages.Input
             this.Close();
         }
 
-        private void btnPieForward_Click(object sender, RoutedEventArgs e)
+        
+        private void btnPieBackward_Click(object sender, RoutedEventArgs e)
         {
             if (currentmonth == 1)
             {
                 currentmonth = 12;
+                currentyear--;
+            }
+            else
+            {
+                currentmonth--;
+            }
+            UpdateRecap();
+        }
+        private void btnPieForward_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentmonth >= 12)
+            {
+                currentmonth = 1;
                 currentyear++;
             }
             else
@@ -71,19 +85,6 @@ namespace SPTC_APP.View.Pages.Input
 
         }
 
-        private void btnPieBackward_Click(object sender, RoutedEventArgs e)
-        {
-            if (currentmonth >= 12)
-            {
-                currentmonth = 1;
-                currentyear--;
-            }
-            else
-            {
-                currentmonth--;
-            }
-            UpdateRecap();
-        }
 
         public void UpdateRecap()
         {

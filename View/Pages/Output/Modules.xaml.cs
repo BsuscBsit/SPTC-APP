@@ -30,6 +30,7 @@ namespace SPTC_APP.View.Pages.Output
         private Franchise franchise;
 
         private object selectedPayment;
+        private Violation selectedViolation;
         public Modules(string moduleName, Franchise franchise)
         {
             InitializeComponent();
@@ -423,6 +424,35 @@ namespace SPTC_APP.View.Pages.Output
                         lled.cbu,
                         lled.interest,
                         lled.termsofpayment);
+                }
+            }
+        }
+
+        private void btnDeleteViolation_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedViolation != null && ControlWindow.ShowTwoway("Deletion", $"Removing data {lblSelectedViolation.Content}"))
+            {
+                if (selectedViolation is Violation sc)
+                {
+                    sc.Delete();
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
+                }
+            }
+        }
+
+        private void dgDriverViolation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedViolation = null;
+            lblSelectedViolation.Content = "N/A";
+            btnDeleteViolation.IsEnabled = false;
+            if (module == ViolationGrid)
+            {
+                if (dgDriverViolation.SelectedItem is Violation sc)
+                {
+                    lblSelectedViolation.Content = "Remarks : " + sc.remarks;
+                    selectedViolation = sc;
+                    if (AppState.USER.position?.accesses[12] ?? false)
+                        btnDeleteViolation.IsEnabled = true;
                 }
             }
         }

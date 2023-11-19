@@ -202,7 +202,7 @@
             x:Name="topBar"
             Grid.Row="0"
             Grid.ColumnSpan="3"
-            MouseDown="Border_MouseDown"
+           
             Style="{StaticResource TopBarStyle}" />
         <Grid
             x:Name="sidePanel"

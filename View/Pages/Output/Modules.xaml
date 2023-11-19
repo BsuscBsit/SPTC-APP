@@ -236,7 +236,7 @@
                 </Grid>
             </Border>
         </Grid>
-        <Grid x:Name="ViolationGrid" d:IsHidden="True">
+        <Grid x:Name="ViolationGrid" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -244,6 +244,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="42" />
             </Grid.RowDefinitions>
             <Label
@@ -266,7 +267,53 @@
             <DataGrid
                 x:Name="dgDriverViolation"
                 Grid.Row="1"
-                Grid.ColumnSpan="2" />
+                Grid.ColumnSpan="2" 
+                SelectionChanged="dgDriverViolation_SelectionChanged" />
+            <Border
+                 Grid.Row="2"
+                 Grid.ColumnSpan="2"
+                 Margin="20,15,20,0"
+                 VerticalAlignment="Bottom"
+                 BorderBrush="Black"
+                 BorderThickness="1"
+                 CornerRadius="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                         Margin="10,0,0,0"
+                         Padding="5,5,0,5"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Center"
+                         Content="Selected: "
+                         Foreground="{StaticResource BrushGrey}"
+                         Style="{StaticResource LabelFontMedium}" />
+                    <Label
+                         x:Name="lblSelectedViolation"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Center"
+                         Content="N/A"
+                         FontWeight="Regular"
+                         Style="{StaticResource LabelFontMedium}" />
+                    <Button
+                         x:Name="btnDeleteViolation"
+                         Grid.Column="2"
+                         Width="80"
+                         Height="25"
+                         Margin="12,12,12,12"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Center"
+                         Content="Delete"
+                         FontSize="12"
+                         IsEnabled="False"
+                         Style="{DynamicResource CommonButtonStyle}" Click="btnDeleteViolation_Click" />
+                </Grid>
+            </Border>
+
         </Grid>
         <Grid x:Name="gridLedger" d:IsHidden="True">
             <Grid.ColumnDefinitions>
@@ -367,7 +414,7 @@
 
 
         </Grid>
-        <Grid x:Name="TransferGrid" >
+        <Grid x:Name="TransferGrid" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />

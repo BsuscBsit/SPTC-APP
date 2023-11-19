@@ -70,7 +70,7 @@ namespace SPTC_APP.View.Pages.Input
                 closingMSG = "The violation was recorded successfully.\nPlease refresh the view to see changes.";
                 this.Close();
             
-            }
+            } 
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

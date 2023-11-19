@@ -22,9 +22,12 @@ namespace SPTC_APP.View
             this.SetIcon(icons);
             this.lblHeader.Content = header;
             this.tblockContent.Text = content;
-            DraggingHelper.DragWindow(topBar);
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+
+            DraggingHelper.DragWindow(topBar);
+            if (btnOK != null && btnOK.Visibility == Visibility.Visible)
+                btnOK.Focus();
         }
 
         public ControlWindow(string header, string content, string middlebtn, string rightbtn, Icons icons = Icons.DEFAULT)
@@ -37,6 +40,10 @@ namespace SPTC_APP.View
             btnMiddle.Content = middlebtn;
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+
+            DraggingHelper.DragWindow(topBar);
+            if (btnOK != null && btnOK.Visibility == Visibility.Visible)
+                btnOK.Focus();
         }
 
         public static void ShowStatic(string header, string content, Icons icons = Icons.DEFAULT)

@@ -48,6 +48,7 @@ namespace SPTC_APP.View.Pages.Input
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             this.franchise = franchise;
+            this.loan = this.franchise.GetLoans().FirstOrDefault();
             dpBdate.DisplayDate = DateTime.Now;
             dpBdate.SelectedDate = DateTime.Now;
 

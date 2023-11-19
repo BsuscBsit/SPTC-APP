@@ -77,11 +77,10 @@ namespace SPTC_APP.View.Pages.Output
                 dgLedger.Items.Clear();
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    
                     new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("monthyear", "M/Y", minWidth: 60, isNumeric : true),
-                    new ColumnConfiguration("remarks", "M/Y", minWidth: 60, isNumeric : true),
+                    new ColumnConfiguration("remarks", "DETAILS", minWidth: 150, isNumeric : true),
                     new ColumnConfiguration("deposit", "SHARE CAPITAL", minWidth: 100, isCenter: true, isNumeric: true, haspeso: true),
                     new ColumnConfiguration("balance", "TOTAL", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
                 };

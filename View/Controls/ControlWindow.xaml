@@ -94,8 +94,8 @@
                 Margin="0,0,0,0"
                 Click="btnOK_Click"
                 Content="OK"
-                IsDefault="True"
-                Style="{DynamicResource CommonButtonStyle}" Visibility="Visible" />
+                Style="{DynamicResource CommonButtonStyle}"
+                Visibility="Visible" />
             <Button
                 x:Name="btnCancel"
                 Grid.Column="0"
@@ -104,7 +104,8 @@
                 Margin="0,0,20,0"
                 Click="btnCancel_Click"
                 Content="CANCEL"
-                Style="{DynamicResource CommonButtonStyle}" Visibility="Collapsed" />
+                Style="{DynamicResource CommonButtonStyle}"
+                Visibility="Collapsed" />
             <Button
                 x:Name="btnMiddle"
                 Grid.Column="1"
@@ -113,7 +114,8 @@
                 Margin="0,0,20,0"
                 Click="btnMiddle_Click"
                 Content=""
-                Style="{DynamicResource CommonButtonStyle}" Visibility="Collapsed" />
+                Style="{DynamicResource CommonButtonStyle}"
+                Visibility="Collapsed" />
         </Grid>
     </Grid>
 </Window>

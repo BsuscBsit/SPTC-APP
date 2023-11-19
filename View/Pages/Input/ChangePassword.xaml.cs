@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SPTC_APP.View.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace SPTC_APP.View.Pages.Input
     public partial class ChangePassword : Window
     {
         List<object[]> passwordArray;
+        private string closingMSG;
 
         public ChangePassword()
         {
@@ -40,7 +42,7 @@ namespace SPTC_APP.View.Pages.Input
         protected override void OnClosing(CancelEventArgs e)
         {
             AppState.mainwindow?.Show();
-
+            AppState.mainwindow?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
@@ -148,28 +150,31 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            string msg = null;
             if (pbPassword.Password.Length >= 8 && pbPassword2.Password.Length >= 8 && pbPassword3.Password.Length >= 8)
             {
                 if (pbPassword2.Password.Equals(pbPassword3.Password))
                 {
                     AppState.USER?.updatePass(pbPassword.Password, pbPassword2.Password);
                     AppState.USER?.Save();
-                    ControlWindow.ShowStatic("Success", "Password has been changed successfully.", Icons.NOTIFY);
+                    closingMSG = "Password saved successfully!\nNewly created password will take effect on next login.";
                     this.Close();
                 }
                 else
                 {
-                    ControlWindow.ShowStatic("Check Passwords", "New passwords do not match.", Icons.NOTIFY);
+                    msg = "New passwords do not match.\nPlease use passwords you can easily remember.";
                 }
             }
             else
             {
-                ControlWindow.ShowStatic("Failed", "Please complete the password inputs.", Icons.NOTIFY);
+                msg = "For security, please use a minimum of 8\ncharacters for your password.";
             }
+            new Toast(gridToast, msg);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            closingMSG = "Password not changed.\nAction was canceled.";
             this.Close();
         }
     }

@@ -66,7 +66,7 @@ namespace SPTC_APP.Database
                 }
                 else
                 {
-                    return new ControlWindow("Incorrect Password", "We apologize, but the password entered is incorrect. Please double-check your input and try again.", Icons.ERROR);
+                    return new ControlWindow("Incorrect Password", "We apologize, but the password entered is incorrect.\nPlease double-check your input and try again.", Icons.ERROR);
                 }
             }
             catch (MySqlException ex)

@@ -82,7 +82,10 @@ namespace SPTC_APP.View.Pages
         //Side panel buttons
         private void Btn_Logout(object sender, RoutedEventArgs e)
         {
-            AppState.Logout(this);
+            if(ControlWindow.ShowTwoway("Logout", "Are you sure you want to logout?", Icons.NOTIFY))
+            {
+                AppState.Logout(this);
+            }
         }
 
         private void Btn_Settings(object sender, RoutedEventArgs e)
@@ -327,20 +330,6 @@ namespace SPTC_APP.View.Pages
         }
         private void SearchBarResize(bool isMinimize = false)
         {
-
-            /*if(sbBorder.Height != double.NaN)
-            {
-                if(sbBorder.Height == 40 && !isMinimize)
-                {
-                    sbBorder.AnimateHeight(272, 0.3);
-                    epektos.IsEnabled = true;
-                } 
-                else
-                {
-                    sbBorder.AnimateHeight(40, 0.3);
-                    epektos.IsEnabled = false;
-                }
-            }*/
             if (!double.IsNaN(sbBorder.Height))
             {
                 if (sbBorder.Height == 40 && !isMinimize)

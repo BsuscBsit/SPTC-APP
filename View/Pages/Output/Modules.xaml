@@ -368,8 +368,19 @@
 
         </Grid>
         <Grid x:Name="TransferGrid" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="42" />
+            </Grid.RowDefinitions>
             <DataGrid
                 x:Name="dgTransfer"
+                Grid.ColumnSpan="3"
                 VerticalAlignment="Top"
                 BorderBrush="Black"
                 BorderThickness="1">
@@ -382,8 +393,26 @@
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
-            <Label Content="TOTAL: "/>
-            <Label x:Name="lblTotalShareCapital" Content="100"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="TOTAL : "
+                Foreground="{StaticResource BrushGrey}"
+                Style="{StaticResource LabelFontMedium}" />
+
+            <Label
+                 x:Name="lblTransferTotal"
+                 Grid.Row="1"
+                 Grid.Column="2"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 HorizontalContentAlignment="Center"
+                 Content="0.00"
+                 FontWeight="Regular"
+                 Foreground="{StaticResource BrushRed}"
+                 Style="{StaticResource LabelFontMedium}" Margin="0,0,12,0" />
         </Grid>
     </Grid>
 </Window>

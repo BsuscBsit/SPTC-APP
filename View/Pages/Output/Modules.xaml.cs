@@ -263,8 +263,8 @@ namespace SPTC_APP.View.Pages.Output
                 dgTransfer.Items.Clear();
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-
-                    new ColumnConfiguration("Operator.name.legalName", "OWNER", minWidth: 100),
+                    new ColumnConfiguration("lastFranchise.Operator.name.legalName", "FROM", minWidth: 100),
+                    new ColumnConfiguration("Operator.name.legalName", "TO", minWidth: 100),
                     new ColumnConfiguration("displayBuyingDate", "DATE", minWidth: 80),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, haspeso:true),
                 };
@@ -276,7 +276,7 @@ namespace SPTC_APP.View.Pages.Output
                     dgTransfer.Items.Add(fran);
                     totalShareCapital += fran.ShareCapital;
                 }
-                lblTotalShareCapital.Content = "\u20B1 " + totalShareCapital.ToString("0.00");
+                lblTransferTotal.Content = "\u20B1 " + totalShareCapital.ToString("0.00");
             }
         }
 

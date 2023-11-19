@@ -25,6 +25,7 @@ namespace SPTC_APP.Objects
         public double LoanBalance { get { return GetLoans()?.FirstOrDefault()?.amount ?? 0; } }
         public double LongTermLoanBalance { get { return GetLTLoans()?.FirstOrDefault()?.amount ?? 0; } }
         public string displayBuyingDate { get { return BuyingDate.ToString("MM/dd/yyyy"); } }
+        public Franchise lastFranchise { get { return Retrieve.GetData<Franchise>(Table.FRANCHISE, Select.ALL, Where.ID_NOTDELETED, new MySqlParameter("id", lastFranchiseId)).FirstOrDefault(); } }
 
         private Upsert franchise;
 

@@ -282,7 +282,8 @@ namespace SPTC_APP.View.Pages.Input
                                 loanReceivable,
                                 interestReceivable,
                                 totalFinal,
-                                monthlyAmortization);
+                                monthlyAmortization,
+                                false);
                             LBL7.Content = $"Interest Receivables {userVars[3]} {(userVars[3] > 1 ? "mos." : "mo.")}:";
                             LBL8.Content = $"Payment in Total of {userVars[3]} {(userVars[3] > 1 ? "Months" : "Month")}:";
                             break;
@@ -313,8 +314,10 @@ namespace SPTC_APP.View.Pages.Input
                         double? loanRec,
                         double? inteRec,
                         double? totaRec,
-                        double? montAmo)
+                        double? montAmo,
+                        bool isLoan = true)
                     {
+                        this.isLoan = isLoan;
                         Label[] label = { LBL1, LBL2, LBL3, LBL4, LBL5, LBL6, LBL7, LBL8, LBL9 };
                         Dictionary<Label, double?> labelVals = new Dictionary<Label, double?>
                         {

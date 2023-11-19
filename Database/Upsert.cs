@@ -140,7 +140,7 @@ namespace SPTC_APP.Database
 
                                 id = GetExistingRecordId(uniqueAttributes);
                             } 
-                            else if (tableName == Table.ADDRESS)
+                            /*else if (tableName == Table.ADDRESS)
                             {
                                 Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>
                                 {
@@ -149,7 +149,7 @@ namespace SPTC_APP.Database
                                 };
 
                                 id = GetExistingRecordId(uniqueAttributes);
-                            }
+                            }*/
                             else if (tableName == Table.FRANCHISE)
                             {
                                 Dictionary<string, object> uniqueAttributes = new Dictionary<string, object>

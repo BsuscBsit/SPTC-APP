@@ -271,7 +271,13 @@ namespace SPTC_APP.View.Pages.Output
             }
             else if (selectedButton == btnTransactionHistory)
             {
-                (new NewOptr_Drv(MainBody.selectedFranchise, General.TRANSFER_FRANCHISE_OWNERSHIP)).Show();
+                if (MainBody.selectedFranchise.LoanBalance + MainBody.selectedFranchise.LongTermLoanBalance == 0)
+                {
+                    (new NewOptr_Drv(MainBody.selectedFranchise, General.TRANSFER_FRANCHISE_OWNERSHIP)).Show();
+                } else
+                {
+                    ControlWindow.ShowStatic("Franchise transfer failed", "Cannot transfer franchise while having loan balance", Icons.DEFAULT);
+                }
             }
         }
 

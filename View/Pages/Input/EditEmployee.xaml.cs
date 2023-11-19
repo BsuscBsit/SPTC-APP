@@ -124,7 +124,7 @@ namespace SPTC_APP.View.Pages.Input
                 tbFname.Text = employee.name?.firstname ?? "";
                 tbMname.Text = employee.name?.middlename ?? "";
                 tbLname.Text = employee.name?.lastname ?? "";
-                bDay.Text = employee.birthday.ToString();
+                bDay.DisplayDate = employee.birthday;
                 bDay.SelectedDate = employee.birthday;
                 cbGender.SelectedIndex = (employee.name?.sex ?? false)? 1: 0;
                 tbAddressLine1.Text = employee.address?.addressline1;
@@ -312,7 +312,7 @@ namespace SPTC_APP.View.Pages.Input
                         {
                             employee.Save();
                             AppState.mainwindow?.Show();
-
+                            (AppState.mainwindow as MainBody).ResetWindow(General.BOARD_MEMBER);
                             this.Close();
                         }
                         else
@@ -324,6 +324,7 @@ namespace SPTC_APP.View.Pages.Input
                     {
                         employee.Save();
                         AppState.mainwindow?.Show();
+                        (AppState.mainwindow as MainBody).ResetWindow(General.BOARD_MEMBER);
                         this.Close();
                     }
                 } else
@@ -335,6 +336,7 @@ namespace SPTC_APP.View.Pages.Input
                     employee.position.title = tbPosTitle.Text;
                     employee.Save();
                     AppState.mainwindow?.Show();
+                    (AppState.mainwindow as MainBody).ResetWindow(General.BOARD_MEMBER);
                     this.Close();
                 }
             } else

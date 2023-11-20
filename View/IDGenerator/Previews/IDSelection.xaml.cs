@@ -31,9 +31,10 @@ namespace SPTC_APP.View.IDGenerator.Previews
                 foreach (var item in PrintPreview.GetPrintIDs())
                 {
                     string res = item.Value ? "Driver" : "Operator";
-                    tbCurrentPrintQueue.Content += $"\n B#: {item.Key} : {res}";
+                    tbCurrentPrintQueue.Content += $"\n B#: {item.Key.Substring(item.Key.IndexOf(" ") + 1)} : {res}";
                 }
             }
+            MySwitch.IsChecked = true;
             DraggingHelper.DragWindow(topBar);
         }
         protected override void OnClosing(CancelEventArgs e)
@@ -79,14 +80,17 @@ namespace SPTC_APP.View.IDGenerator.Previews
                 if(franchise.Operator != null && franchise.Driver != null)
                 {
                     MySwitch.IsEnabled = true;
+                    MySwitch.IsChecked = true;
                     MySwitch_Back(MySwitch, null);
                 } else if(franchise.Operator != null)
                 {
                     MySwitch.IsEnabled = false;
+                    MySwitch.IsChecked = true;
                     MySwitch_Back(MySwitch, null);
                 } else if(franchise.Driver != null)
                 {
                     MySwitch.IsEnabled = false;
+                    MySwitch.IsChecked = false;
                     MySwitch_Front(MySwitch, null);
                 }
                 selectedFranchise = franchise;

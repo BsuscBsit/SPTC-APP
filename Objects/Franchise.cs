@@ -17,7 +17,7 @@ namespace SPTC_APP.Objects
         public string LicenseNO { get; set; }
         public Driver Driver { get; set; }
         public Name Owner { get; set; }
-        public int lastFranchiseId { get; set; } = -1;
+        public int lastFranchiseId { get; set; }
         public DateTime BuyingDate { get; set; }
         public string MTOPNo { get; set; }
         public double ShareCapital { get { return GetTotalShareCapital(); } }

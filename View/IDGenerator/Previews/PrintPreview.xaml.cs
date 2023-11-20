@@ -95,6 +95,10 @@ namespace SPTC_APP.View
             CenterOffset();
             AppState.WindowsCounter(true, sender);
             AppState.mainwindow?.Hide();
+            if(idcount <= 0)
+            {
+                btnAddNew_Click(btnAddNew, null);
+            }
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -318,12 +322,14 @@ namespace SPTC_APP.View
         public static Dictionary<string, bool> GetPrintIDs()
         {
             Dictionary<string, bool> dict = new Dictionary<string, bool>();
+            int xcount = 0;
             foreach (ID id in new ID[] { PrintPreview.mGrid1, PrintPreview.mGrid2, PrintPreview.mGrid3, PrintPreview.mGrid4 })
             {
                 if(id != null)
                 {
-                    dict.Add(id.franchise?.BodyNumber.ToString(), id.type == General.DRIVER);
+                    dict.Add(xcount.ToString() + " " + id.franchise?.BodyNumber.ToString(), id.type == General.DRIVER);
                 }
+                xcount++;
             }
             return dict;
         }
@@ -363,12 +369,12 @@ namespace SPTC_APP.View
         {
             if (idcount == 0)
             {
-                Grid0Content.Visibility = Visibility.Visible;
+                //Grid0Content.Visibility = Visibility.Visible;
                 btnPrint.Visibility = Visibility.Hidden;
             }
             else
             {
-                Grid0Content.Visibility = Visibility.Collapsed;
+                //Grid0Content.Visibility = Visibility.Collapsed;
                 btnPrint.Visibility = Visibility.Visible;
                 if (mGrid1 != null) {
                     if (mGrid1.FrontPrint >= 1 && mGrid1.BackPrint >= 1)

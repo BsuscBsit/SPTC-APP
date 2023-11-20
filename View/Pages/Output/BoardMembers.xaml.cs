@@ -42,13 +42,13 @@ namespace SPTC_APP.View.Pages.Output
                 { AppState.ALL_EMPLOYEES[3], 5 },
                 { AppState.ALL_EMPLOYEES[4], 0 }
             };
-            foreach (Employee e in Retrieve.GetDataUsingQuery<Employee>(RequestQuery.GET_ALL_EMPLOYEES))
+            foreach (Employee e in AppState.EMPLOYEE_LIST(false))
             {
                 Member member;
                 int position;
-                if (e.position?.title != null && positionMap.ContainsKey(e.position.title))
+                if (e.position?.title != null && positionMap.ContainsKey(e.position?.title))
                 {
-                    position = positionMap[e.position.title];
+                    position = positionMap[e.position?.title];
                     member = new Member(e, position, position != 0);
                 }
                 else
@@ -61,6 +61,7 @@ namespace SPTC_APP.View.Pages.Output
                 member.DrawCard(memGrid);
             }
         }
+ 
         public async Task<Grid> Fetch()
         {
             await Task.Delay(1);

@@ -183,7 +183,7 @@ namespace SPTC_APP.View.Pages.Output
             if ((AppState.USER?.position?.accesses[18] ?? false))
             {
                 addBtnInit("Add Record");
-                if (MainBody.selectedFranchise.GetLoans().Count <= 0)
+                if (MainBody.selectedFranchise.LoanBalance <= 0)
                 {
                     //btnAddButton.Content = "APPLY FOR LOAN";
                     spRecordButtons.FadeOut(0.2, () => { spRecordButtons.Visibility = Visibility.Collapsed; });
@@ -202,7 +202,7 @@ namespace SPTC_APP.View.Pages.Output
             if ((AppState.USER?.position?.accesses[18] ?? false))
             {
                 addBtnInit("Add Record");
-                if (MainBody.selectedFranchise.GetLTLoans().Count <= 0)
+                if (MainBody.selectedFranchise.LongTermLoanBalance <= 0)
                 {
                     spRecordButtons.FadeOut(0.2, () => { spRecordButtons.Visibility = Visibility.Collapsed; });
                 } 

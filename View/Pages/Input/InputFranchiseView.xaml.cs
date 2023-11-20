@@ -38,7 +38,8 @@ namespace SPTC_APP.View.Pages.Input
                 tboxBodyNum.Text = franchise.BodyNumber;
                 tboxMTOPplateNum.Text = franchise.MTOPNo;
                 tboxLTOplateNum.Text = franchise.LicenseNO;
-
+                tboxIDNum1.Text = franchise.Operator?.tinNumber;
+                tboxIDNum2.Text = franchise.Operator?.votersNumbewr;
             }
             DraggingHelper.DragWindow(topBar);
             tboxBodyNum.Focus();

@@ -17,6 +17,7 @@ using System.Reflection.Emit;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Navigation;
 using static SPTC_APP.Objects.Ledger;
 
 namespace SPTC_APP
@@ -46,6 +47,15 @@ namespace SPTC_APP
         public static Employee USER = null;
         public static Dictionary<string, double> MonthlyIncome;
         public static List<KeyValuePair<string, double>> ThisMonthsChart;
+        private static List<Employee> employees_list;
+        public static List<Employee> EMPLOYEE_LIST(bool isLatest) {
+            if (isLatest)
+            {
+                employees_list = Retrieve.GetDataUsingQuery<Employee>(RequestQuery.GET_ALL_EMPLOYEES);
+            }
+            return employees_list;
+        }
+        
 
         //Toggle on defore deploying
         public static bool isDeployment = true;

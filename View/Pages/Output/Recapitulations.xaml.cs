@@ -118,7 +118,7 @@ namespace SPTC_APP.View.Pages.Input
                     rowDefinition.Height = new GridLength(40);
                     recapgrid.RowDefinitions.Add(rowDefinition);
 
-                    RecapDisplay recapDisplay = new RecapDisplay(this, r, recaps.IndexOf(r) -1, check(r.text));
+                    RecapDisplay recapDisplay = new RecapDisplay(this, r, recaps.IndexOf(r) - 1, check(r.text));
                     recapgrid.Children.Add(recapDisplay.AddSelf());
                     total += r.content;
                 }

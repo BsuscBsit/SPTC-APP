@@ -61,12 +61,12 @@ namespace SPTC_APP.View.Pages.Input
             lblLoanRec.Content = "₱" + (loan.amountLoaned / loan.termsofpayment).ToString("N2");
             lblInteRec.Content = "₱" + (loan.interest / loan.termsofpayment).ToString("N2");
 
-            breakdown = ((loan.amountLoaned / loan.termsofpayment) + (loan.interest / loan.termsofpayment));
+            breakdown = ((loan.amountLoaned / loan.termsofpayment));
             lblTotalBreak.Content = "₱" + breakdown.ToString("N2");
 
             penalty = loan.amountLoaned * (loan.penaltyPercent / 100);
 
-            lblRemainingBalance.Content = "₱" + (franchise.LongTermLoanBalance - Scaler.RoundUp(breakdown)).ToString("N2");
+            lblRemainingBalance.Content = "₱" + (franchise.LoanBalance - Scaler.RoundUp(breakdown)).ToString("N2");
             tboxAmount.Text = Scaler.RoundUp(breakdown).ToString();
             lblCurrentPay.Content = "₱" + Scaler.RoundUp(breakdown).ToString("N2");
             lblAmort.Content = "₱" + Scaler.RoundUp(breakdown).ToString("N2");

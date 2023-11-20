@@ -86,7 +86,7 @@ namespace SPTC_APP.Objects
                 this.termsofpayment = termsofpayment;
                 this.interest = interest;
                 this.principal = principal;
-                this.amount = amountLoaned + interest;
+                this.amount = amountLoaned;
                 this.penaltyPercent = penalty;
                 return true;
             }

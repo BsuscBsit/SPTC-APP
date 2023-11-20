@@ -97,7 +97,7 @@ namespace SPTC_APP.View.Pages.Input
                             loan.WriteInto(this.franchise.id, dpDate.SelectedDate ?? DateTime.Now, this.loanAmount, this.ornum, this.loantext, this.loanProcessingFee, this.loanCbu, this.loanMonthsCount, this.loanInterest, this.loanPrincipal, this.penaltyPercent);
 
                             PaymentDetails<Ledger.Loan> payment = new PaymentDetails<Ledger.Loan>();
-                            payment.WriteInto(loan, 0, dpDate.SelectedDate ?? DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanAmount + loanInterest);
+                            payment.WriteInto(loan, 0, dpDate.SelectedDate ?? DateTime.Now, this.ornum, -loanAmount, penalty, loantext, loanAmount);
                             payment.isApply = true;
                             payment.ledgername = Ledger.APPLY_LOAN;
                             payment.Save();
@@ -206,7 +206,7 @@ namespace SPTC_APP.View.Pages.Input
                             deductions = pfFinal + cbuFinal + interestFinal;
 
                             principal = userVars[0] - deductions;
-                            loanReceivable = principal;
+                            loanReceivable = userVars[0];
                             totalFinal = loanReceivable;
 
                             // Monthly Breakdown

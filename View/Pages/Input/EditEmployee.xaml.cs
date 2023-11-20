@@ -298,11 +298,11 @@ namespace SPTC_APP.View.Pages.Input
                 employee.address.addressline2 = tbAddressLine2.Text;
                 if (hasPhoto)
                 {
-                    employee.image = new Image(imgIDPic.Source, $"Image {employee.position.title}");
+                    employee.image = new Image(imgIDPic.Source, $"Image {employee.position?.title?.ToString() ?? tbPosTitle.Text}");
                 }
                 if (hasSign)
                 {
-                    employee.sign = new Image(imgSignPic.Source, $"Signature {employee.position.title}");
+                    employee.sign = new Image(imgSignPic.Source, $"Signature {employee.position?.title?.ToString() ?? tbPosTitle.Text}");
                 }
                 if (isManage)
                 {

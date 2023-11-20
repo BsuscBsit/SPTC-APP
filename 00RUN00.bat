@@ -1,7 +1,5 @@
 @echo off
 cd /D %~dp0
-echo Diese Eingabeforderung nicht waehrend des Running beenden
-echo Please dont close Window while MySQL is running
 echo MySQL is trying to start
 echo Please wait ...
 echo MySQL is starting with mysql\bin\my.ini (console)
@@ -10,7 +8,7 @@ start "MySQL Console" /B mysql\bin\mysqld --defaults-file=mysql\bin\my.ini --sta
 
 if errorlevel 1 goto error
 
-rem Add a delay to allow MySQL to start (adjust the time as needed)
+rem Add a delay to allow MySQL to start (adjust the time as needed) type shell:startup in win run
 timeout /t 3
 
 rem Close the Command Prompt window

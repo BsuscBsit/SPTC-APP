@@ -166,7 +166,7 @@ namespace SPTC_APP.Objects
         {
             this.ledger = lledger;
             this.DivPat = isDVP;
-            this.date = ldate;
+            this.date = new DateTime(ldate.Year, ldate.Month, ldate.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             this.referenceNo = lreferenceNo;
             this.deposit = ldeposit;
             this.penalties = lpenalties;

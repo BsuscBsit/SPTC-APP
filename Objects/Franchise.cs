@@ -21,7 +21,20 @@ namespace SPTC_APP.Objects
         public DateTime BuyingDate { get; set; }
         public string MTOPNo { get; set; }
         public double ShareCapital { get { return GetTotalShareCapital(); } }
-        public double MonthlyDues { get { return (GetLoans()?.FirstOrDefault()?.paymentDues ?? 0) + (GetLTLoans()?.FirstOrDefault()?.paymentDues ?? 0) + AppState.TOTAL_SHARE_PER_MONTH; } }
+        public double MonthlyDues { 
+            get {
+                double balance = AppState.TOTAL_SHARE_PER_MONTH;
+                if(LoanBalance > 0)
+                {
+                    balance += GetLoans()?.FirstOrDefault()?.paymentDues ?? 0;
+                }
+                if(LongTermLoanBalance > 0)
+                {
+                    balance += (GetLTLoans()?.FirstOrDefault()?.paymentDues ?? 0);
+                }
+                return balance;
+            } 
+        }
         public double LoanBalance { get { return GetLoans()?.FirstOrDefault()?.amount ?? 0; } }
         public double LongTermLoanBalance { get { return GetLTLoans()?.FirstOrDefault()?.amount ?? 0; } }
         public string displayBuyingDate { get { return BuyingDate.ToString("MM/dd/yyyy"); } }

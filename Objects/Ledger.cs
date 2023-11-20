@@ -36,6 +36,13 @@ namespace SPTC_APP.Objects
                     return date.ToString("MM/dd/yyyy");
                 }
             }
+            public string status
+            {
+                get
+                {
+                    return (amount > 0) ? $"\u20B1 " + amount.ToString("N2") : "PAID";
+                }
+            }
             public double paymentDues
             {
                 get
@@ -77,7 +84,7 @@ namespace SPTC_APP.Objects
                     string details, double processingfee, double cbu, int termsofpayment, double interest, double principal, double penalty)
             {
                 this.franchiseId = franchiseId;
-                this.date = dateLoaned;
+                this.date = new DateTime(dateLoaned.Year, dateLoaned.Month, dateLoaned.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
                 this.amountLoaned = amountLoaned;
                 this.cv_or = cv_or;
                 this.details = details;
@@ -86,7 +93,7 @@ namespace SPTC_APP.Objects
                 this.termsofpayment = termsofpayment;
                 this.interest = interest;
                 this.principal = principal;
-                this.amount = amountLoaned;
+                this.amount = amountLoaned + (details.Contains("EMERGENCY")? interest:0);
                 this.penaltyPercent = penalty;
                 return true;
             }
@@ -155,12 +162,12 @@ namespace SPTC_APP.Objects
             }
             public bool WriteInto(
                     int franchiseId,
-                    DateTime date,
+                    DateTime dateLoaned,
                     double beginningBalance,
                     double lastBalance)
             {
                 this.franchiseId = franchiseId;
-                this.date = date;
+                this.date = new DateTime(dateLoaned.Year, dateLoaned.Month, dateLoaned.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
                 this.beginningBalance = beginningBalance;
                 this.lastBalance = lastBalance;
                 return true;
@@ -217,6 +224,13 @@ namespace SPTC_APP.Objects
                     return date.ToString("MM/dd/yyyy");
                 }
             }
+            public string status
+            {
+                get
+                {
+                    return (amount > 0) ? $"\u20B1 " + amount.ToString("N2") : "PAID";
+                }
+            }
             public double paymentDues
             {
                 get
@@ -258,7 +272,7 @@ namespace SPTC_APP.Objects
                     string cv_or, string details, double processingfee, double cbu, int termsofpayment, double interest, double principal, double penalty)
             {
                 this.franchiseId = franchiseId;
-                this.date = dateLoaned;
+                this.date = new DateTime(dateLoaned.Year, dateLoaned.Month, dateLoaned.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second); ;
                 this.amountLoaned = amountLoaned;
                 this.cv_or = cv_or;
                 this.details = details;

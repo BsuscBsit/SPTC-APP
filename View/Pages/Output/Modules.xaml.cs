@@ -78,8 +78,8 @@ namespace SPTC_APP.View.Pages.Output
                 dgLedger.Items.Clear();
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric : true),
-                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
+                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 80, isNumeric:true),
                     new ColumnConfiguration("monthyear", "M/Y", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("remarks", "DETAILS", minWidth: 150, isNumeric : true),
                     new ColumnConfiguration("deposit", "SHARE CAPITAL", minWidth: 100, isCenter: true, isNumeric: true, haspeso: true),
@@ -100,16 +100,16 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric : true),
-                    new ColumnConfiguration("cv_or", "OR NO.", minWidth: 60, isNumeric: true),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
+                    new ColumnConfiguration("cv_or", "CV/OR", minWidth: 60, isNumeric: true),
                     new ColumnConfiguration("details", "DESCRIPTION", minWidth: 100, isCenter: true),
                     new ColumnConfiguration("amountLoaned", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
                     //new ColumnConfiguration("processingFee", "FEE", minWidth: 60, isCenter: true, isNumeric: true, haspeso:true),
                     //new ColumnConfiguration("cbu", "CBU", minWidth: 60, isCenter: true, isNumeric: true, haspeso:true),
-                    new ColumnConfiguration("termsofpayment", "MONTHS", minWidth: 80, isNumeric: true, isCenter: true),
+                    new ColumnConfiguration("termsofpayment", "TERM", minWidth: 60, isNumeric: true, isCenter: true),
                     //new ColumnConfiguration("interest", "INT", minWidth: 60, isCenter: true, isNumeric: true, haspeso : true),
                     new ColumnConfiguration("principal", "PRINCIPAL", minWidth: 120, isCenter: true, isNumeric: true, haspeso:true),
-                    new ColumnConfiguration("amount", "TOTAL", minWidth: 120, isCenter: true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("status", "BALANCE", minWidth: 120, isCenter: true, isNumeric: true),
                 };
                 DataGridHelper<object> dataGridHelper = new DataGridHelper<object>(dgLedger, columnConfigurations);
 
@@ -135,11 +135,11 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric : true),
-                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric:true),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric : true),
+                    new ColumnConfiguration("referenceNo", "CV/OR", minWidth: 60, isNumeric:true),
                     new ColumnConfiguration("monthyear", "M/Y", minWidth: 60, isNumeric : true),
-                    new ColumnConfiguration("penalties", "PENALTY", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
                     new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("penalties", "PENALTY", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
                 };
                 DataGridHelper<PaymentDetails<Ledger.Loan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.Loan>>(dgLedger, columnConfigurations);
 
@@ -164,11 +164,11 @@ namespace SPTC_APP.View.Pages.Output
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
 
-                    new ColumnConfiguration("displayDate", "DATE", minWidth: 60, isNumeric: true),
-                    new ColumnConfiguration("referenceNo", "OR NO.", minWidth: 60, isNumeric : true),
+                    new ColumnConfiguration("displayDate", "DATE", minWidth: 80, isNumeric: true),
+                    new ColumnConfiguration("referenceNo", "CV/OR", minWidth: 60, isNumeric : true),
                     new ColumnConfiguration("monthyear", "M/Y", minWidth: 60, isNumeric:true),
-                    new ColumnConfiguration("penalties", "PENALTY", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
                     new ColumnConfiguration("deposit", "AMOUNT", minWidth: 100, isCenter: true, isNumeric: true , haspeso : true),
+                    new ColumnConfiguration("penalties", "PENALTY", minWidth: 100, isCenter: true, isNumeric: true, haspeso : true),
                 };
                 DataGridHelper<PaymentDetails<Ledger.LongTermLoan>> dataGridHelper = new DataGridHelper<PaymentDetails<Ledger.LongTermLoan>>(dgLedger, columnConfigurations);
 

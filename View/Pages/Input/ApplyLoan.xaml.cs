@@ -58,12 +58,12 @@ namespace SPTC_APP.View.Pages.Input
 
             List<string> possibleloans = new List<string>();
 
-            if (this.franchise.LoanBalance == 0)
+            if (this.franchise.LoanBalance <= 0)
             {
                 cbLoanType.Items.Add("Emergency");
                 cbLoanType.Items.Add("Short Term");
             }
-            if (this.franchise.LongTermLoanBalance == 0)
+            if (this.franchise.LongTermLoanBalance <= 0)
             {
                 cbLoanType.Items.Add("Long Term");
             }

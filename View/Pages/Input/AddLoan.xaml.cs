@@ -61,15 +61,15 @@ namespace SPTC_APP.View.Pages.Input
             lblLoanRec.Content = "₱" + (loan.amountLoaned / loan.termsofpayment).ToString("N2");
             lblInteRec.Content = "₱" + (loan.interest / loan.termsofpayment).ToString("N2");
 
-            breakdown = ((loan.amountLoaned / loan.termsofpayment));
+            breakdown = (loan.details.Contains("EMERGENCY") ? loan.amount :(loan.amountLoaned / loan.termsofpayment));
             lblTotalBreak.Content = "₱" + breakdown.ToString("N2");
 
             penalty = loan.amountLoaned * (loan.penaltyPercent / 100);
 
-            lblRemainingBalance.Content = "₱" + (franchise.LoanBalance - Scaler.RoundUp(breakdown)).ToString("N2");
-            tboxAmount.Text = Scaler.RoundUp(breakdown).ToString();
-            lblCurrentPay.Content = "₱" + Scaler.RoundUp(breakdown).ToString("N2");
-            lblAmort.Content = "₱" + Scaler.RoundUp(breakdown).ToString("N2");
+            lblRemainingBalance.Content = "₱" + (franchise.LoanBalance - breakdown).ToString("N2");
+            tboxAmount.Text = breakdown.ToString();
+            lblCurrentPay.Content = "₱" + breakdown.ToString("N2");
+            lblAmort.Content = "₱" + breakdown.ToString("N2");
 
             tbPenalty.Text = "0";
 
@@ -149,9 +149,9 @@ namespace SPTC_APP.View.Pages.Input
 
         private void compute(double overdue)
         {
-            amortization = Scaler.RoundUp(breakdown);
+            amortization = breakdown;
             principal = breakdown;
-            total = franchise.LongTermLoanBalance - amortization;
+            total = franchise.LoanBalance - amortization;
 
             penaltyTot = penalty * overdue;
             paidAmount = amortization + penaltyTot;

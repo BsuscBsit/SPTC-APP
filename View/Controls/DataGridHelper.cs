@@ -36,7 +36,7 @@ public class DataGridHelper<T>
                     Header = config.Header,
                     Binding = new System.Windows.Data.Binding(config.BindingPath)
                     {
-                        StringFormat = config.HasSign ? $"\u20B1 {0:N2}" : null
+                        StringFormat = config.HasSign ? $"\u20B1 {0:N2}" : null,
                     },
                     Width = new DataGridLength(config.Width, DataGridLengthUnitType.Star),
                     MinWidth = config.Width,
@@ -104,6 +104,7 @@ public class DataGridHelper<T>
             bool isCenter = false,
             bool isNumeric = false,
             bool haspeso = false,
+            bool isPaid = false,
             Brush backgroundColor = null,
             FontWeight? fontWeight = null,
             Visibility visibility = Visibility.Visible) 

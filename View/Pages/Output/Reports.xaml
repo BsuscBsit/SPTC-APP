@@ -4,7 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SPTC_APP.View.Pages.Output"
+        Focusable="False"
+        IsHitTestVisible="False"
+        IsTabStop="False"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        Topmost="False"
+        WindowStyle="None"
         mc:Ignorable="d"
-        Title="Reports" Height="450" Width="800">
-    <Grid/>
+        Title="Reports">
+    <Grid x:Name="reportpage" Height="690" Width="480">
+        <Label Content="SPTC REPORT" HorizontalAlignment="Left" Margin="37,20,0,0" VerticalAlignment="Top" FontSize="20" Style="{StaticResource CommonTitlePreset}"/>
+    </Grid>
 </Window>

@@ -48,9 +48,10 @@ namespace SPTC_APP.View.Pages.Input
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             this.franchise = franchise;
-            this.loan = this.franchise.GetLoans().FirstOrDefault();
-            dpBdate.DisplayDate = DateTime.Now;
+            this.loan = this.franchise.currentloan;
+           
             dpBdate.SelectedDate = DateTime.Now;
+            dpBdate.DisplayDate = DateTime.Now;
 
             lblLoanDate.Content = loan.displayDate;
             lblLoanCVOR.Content = loan.cv_or;
@@ -102,6 +103,7 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     loan.isFullyPaid = true;
                 }
+                loan.last_payment = dpBdate.DisplayDate;
                 loanPayment.Save();
                 //(AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";

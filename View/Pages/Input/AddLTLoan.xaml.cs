@@ -56,9 +56,10 @@ namespace SPTC_APP.View.Pages.Input
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             this.franchise = franchise;
-            dpBdate.DisplayDate = DateTime.Now;
             dpBdate.SelectedDate = DateTime.Now;
-            ltloan = this.franchise.GetLTLoans().FirstOrDefault();
+            dpBdate.DisplayDate = DateTime.Now;
+
+            ltloan = this.franchise.currentltloan;
 
             lblLoanDate.Content = ltloan.displayDate;
             lblLoanCVOR.Content = ltloan.cv_or;
@@ -121,6 +122,7 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     ltloan.isFullyPaid = true;
                 }
+                ltloan.last_payment = dpBdate.DisplayDate;
                 loanPayment.Save();
                     
                 //(AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);

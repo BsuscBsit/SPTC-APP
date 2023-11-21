@@ -29,6 +29,7 @@ namespace SPTC_APP.Objects
             public double principal { get; set; }
             public double amount { get; set; }
             public double penaltyPercent { get; set; }
+            public DateTime last_payment { get; set; }
             public string displayDate
             {
                 get
@@ -75,6 +76,7 @@ namespace SPTC_APP.Objects
                 this.principal = Retrieve.GetValueOrDefault<double>(reader, Field.PRINCIPAL);
                 this.amount = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT);
                 this.penaltyPercent = Retrieve.GetValueOrDefault<double>(reader, Field.PENALTIES);
+                this.last_payment = Retrieve.GetValueOrDefault<DateTime>(reader, Field.LAST_PAYMENT);
             }
             public bool WriteInto(
                     int franchiseId,
@@ -95,6 +97,7 @@ namespace SPTC_APP.Objects
                 this.principal = principal;
                 this.amount = amountLoaned + (details.Contains("EMERGENCY")? interest:0);
                 this.penaltyPercent = penalty;
+                this.last_payment = date;
                 return true;
             }
 
@@ -118,6 +121,7 @@ namespace SPTC_APP.Objects
                 loan.Insert(Field.PENALTIES, penaltyPercent);
                 loan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
                 loan.Insert(Field.AMOUNT, amount);
+                loan.Insert(Field.LAST_PAYMENT, last_payment);
                 loan.Save();
                 id = loan.id;
 
@@ -140,9 +144,10 @@ namespace SPTC_APP.Objects
         {
             public int id { get; private set; }
             public int franchiseId { get; set; }
-            public DateTime? date { get; set; }
+            public DateTime date { get; set; }
             public double beginningBalance { get; set; }
             public double lastBalance { get; set; }
+            public DateTime last_payment { get; set; }
 
             private Upsert shareCapital;
 
@@ -159,6 +164,7 @@ namespace SPTC_APP.Objects
                 this.date = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE);
                 this.beginningBalance = Retrieve.GetValueOrDefault<double>(reader, Field.BEGINNING_BALANCE);
                 this.lastBalance = Retrieve.GetValueOrDefault<double>(reader, Field.LAST_BALANCE);
+                this.last_payment = Retrieve.GetValueOrDefault<DateTime>(reader, Field.LAST_PAYMENT);
             }
             public bool WriteInto(
                     int franchiseId,
@@ -170,6 +176,7 @@ namespace SPTC_APP.Objects
                 this.date = new DateTime(dateLoaned.Year, dateLoaned.Month, dateLoaned.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
                 this.beginningBalance = beginningBalance;
                 this.lastBalance = lastBalance;
+                this.last_payment = date;
                 return true;
             }
 
@@ -184,6 +191,7 @@ namespace SPTC_APP.Objects
                 shareCapital.Insert(Field.DATE, date);
                 shareCapital.Insert(Field.BEGINNING_BALANCE, beginningBalance);
                 shareCapital.Insert(Field.LAST_BALANCE, lastBalance);
+                shareCapital.Insert(Field.LAST_PAYMENT, last_payment);
                 shareCapital.Save();
                 id = shareCapital.id;
 
@@ -217,6 +225,7 @@ namespace SPTC_APP.Objects
             public double principal { get; set; }
             public double penaltyPercent { get; set; }
             public double amount { get; set; }
+            public DateTime last_payment { get; set; }
             public string displayDate
             {
                 get
@@ -264,6 +273,7 @@ namespace SPTC_APP.Objects
                 this.principal = Retrieve.GetValueOrDefault<double>(reader, Field.PRINCIPAL);
                 this.penaltyPercent = Retrieve.GetValueOrDefault<double>(reader, Field.PENALTIES);
                 this.amount = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT);
+                this.last_payment = Retrieve.GetValueOrDefault<DateTime>(reader, Field.LAST_PAYMENT);
             }
             public bool WriteInto(
                     int franchiseId,
@@ -283,6 +293,7 @@ namespace SPTC_APP.Objects
                 this.principal = principal;
                 this.penaltyPercent = penalty;
                 this.amount = amountLoaned + interest;
+                this.last_payment = date;
                 return true;
             }
 
@@ -306,6 +317,7 @@ namespace SPTC_APP.Objects
                 loan.Insert(Field.PENALTIES, penaltyPercent);
                 loan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
                 loan.Insert(Field.AMOUNT, amount);
+                loan.Insert(Field.LAST_PAYMENT, last_payment);
                 loan.Save();
                 id = loan.id;
 

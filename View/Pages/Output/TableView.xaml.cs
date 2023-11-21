@@ -101,7 +101,7 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("MTOPNo", "MTOP NO.", minWidth: 100, isCenter:true, isNumeric: true),
-                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("MonthlyDues", "PAYMENT DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
 
@@ -138,9 +138,9 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     new ColumnConfiguration("Operator.name.legalName", "NAME", minWidth: 140),
                     new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true),
-                    new ColumnConfiguration("LicenseNO", "PLATE NO.", minWidth: 100, isCenter: true,isNumeric: true),
+                    new ColumnConfiguration("PlateNo", "PLATE NO.", minWidth: 100, isCenter: true,isNumeric: true),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter : true, isNumeric : true),
-                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("MonthlyDues", "PAYMENT DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(TableGrid, columnConfigurations);
 
@@ -178,7 +178,7 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("name.legalName", "NAME", minWidth: 140),
                     new ColumnConfiguration("address", "ADDRESS", minWidth: 100),
                     new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80, isCenter : true, isNumeric : true),
-                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", minWidth: 80, isCenter:true, isNumeric: true),
+                    new ColumnConfiguration("franchise.PlateNo", "PLATE NO.", minWidth: 80, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("franchise.Operator", "OPERATOR", minWidth: 120),
                 };
                 DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(TableGrid, columnConfigurations);
@@ -249,7 +249,7 @@ namespace SPTC_APP.View.Pages.Output
                     } 
                     else if(AppState.USER?.position?.title == AppState.Employees[3])
                     {
-                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.LicenseNO ?? "");
+                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.PlateNo ?? "");
                         ValuePairFI(lblF5, "MTOP No.: ", lblI5, MainBody.selectedFranchise?.MTOPNo ?? "");
                         ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
                         ValuePairFI(lblF7, "VOTERS ID No.: ", lblI7, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
@@ -280,7 +280,7 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[1])
                     {
-                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.LicenseNO ?? "");
+                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.PlateNo ?? "");
                         ValuePairFI(lblF5, "MTOP No.: ", lblI5, MainBody.selectedFranchise?.MTOPNo ?? "");
                         ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
                         ValuePairFI(lblF7, "VOTERS ID No.: ", lblI7, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
@@ -294,7 +294,7 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[3])
                     {
-                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.LicenseNO ?? "");
+                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.PlateNo ?? "");
                         ValuePairFI(lblF5, "MTOP No.: ", lblI5, MainBody.selectedFranchise?.MTOPNo ?? "");
                         ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
                         ValuePairFI(lblF7, "VOTERS ID No.: ", lblI7, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
@@ -316,7 +316,7 @@ namespace SPTC_APP.View.Pages.Output
                     ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Driver?.dateOfMembership.ToString("MMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Address: ", lblI3, MainBody.selectedFranchise?.Driver?.address?.ToString() ?? "");
                     ValuePairFI(lblF4, "Body No.: ", lblI4, MainBody.selectedFranchise?.BodyNumber?.ToString() ?? "");
-                    ValuePairFI(lblF5, "License No.: ", lblI5, MainBody.selectedFranchise?.LicenseNO?.ToString() ?? "");
+                    ValuePairFI(lblF5, "License No.: ", lblI5, MainBody.selectedFranchise?.Driver?.licenseNo?.ToString() ?? "");
                     ValuePairFI(lblF6, "Violation:  ", lblI6, MainBody.selectedFranchise?.Driver?.violationCount.ToString() ?? "");
                     if (MainBody.selectedFranchise?.Driver?.image?.GetSource() != null)
                     {
@@ -435,11 +435,11 @@ namespace SPTC_APP.View.Pages.Output
         {
             if (table == Table.OPERATOR)
             {
-                (new EditProfile(MainBody.selectedFranchise, oholder, General.OPERATOR)).ShowDialog();
+                (new EditProfile(MainBody.selectedFranchise, General.OPERATOR)).ShowDialog();
             }
             else if (table == Table.DRIVER)
             {
-                (new EditProfile(MainBody.selectedFranchise, dholder, General.DRIVER)).ShowDialog();
+                (new EditProfile(MainBody.selectedFranchise, General.DRIVER, dholder)).ShowDialog();
             }
 
             await UpdateTableAsync();
@@ -482,7 +482,7 @@ namespace SPTC_APP.View.Pages.Output
             if (table == Table.FRANCHISE)
                 (new InputFranchiseView()).ShowDialog();
             if (table == Table.DRIVER)
-                (new NewOptr_Drv(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
+                (new EditProfile(MainBody.selectedFranchise, General.NEW_DRIVER)).ShowDialog();
             await UpdateTableAsync();
         }
 

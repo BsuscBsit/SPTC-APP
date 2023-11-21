@@ -301,9 +301,6 @@
     <Compile Include="View\Pages\Input\EditProfile.xaml.cs">
       <DependentUpon>EditProfile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Input\NewOptr_Drv.xaml.cs">
-      <DependentUpon>NewOptr_Drv.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Pages\Output\Recapitulations.xaml.cs">
       <DependentUpon>Recapitulations.xaml</DependentUpon>
     </Compile>
@@ -321,6 +318,9 @@
     </Compile>
     <Compile Include="View\Pages\Output\Modules.xaml.cs">
       <DependentUpon>Modules.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\Output\Reports.xaml.cs">
+      <DependentUpon>Reports.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Output\Selection.xaml.cs">
       <DependentUpon>Selection.xaml</DependentUpon>
@@ -450,10 +450,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Input\NewOptr_Drv.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Pages\Output\Recapitulations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -475,6 +471,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\Output\Modules.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\Output\Reports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

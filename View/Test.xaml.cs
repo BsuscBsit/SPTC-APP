@@ -197,7 +197,7 @@ namespace SPTC_APP.View
             List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
             {
                 new ColumnConfiguration("BodyNumber", "###", minWidth: 30),
-                new ColumnConfiguration("LicenseNO", "Plate Number", minWidth: 60, backgroundColor: Brushes.Yellow),
+                new ColumnConfiguration("PlateNo", "Plate Number", minWidth: 60, backgroundColor: Brushes.Yellow),
                 new ColumnConfiguration("Operator", "Operator name"),
                 new ColumnConfiguration("Driver", "Driver name", fontWeight: FontWeights.Black, minWidth: 100, maxWidth: 150),
             };

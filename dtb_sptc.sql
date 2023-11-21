@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2023 at 09:36 AM
+-- Generation Time: Nov 21, 2023 at 10:49 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -56,9 +56,10 @@ CREATE TABLE `tbl_driver` (
   `remarks` varchar(100) DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
   `contact_no` varchar(11) DEFAULT NULL,
+  `license_no` varchar(30) NOT NULL DEFAULT '',
   `emergency_person` varchar(50) DEFAULT NULL,
   `emergency_number` varchar(11) DEFAULT NULL,
-  `date_of_mem` datetime DEFAULT NULL,
+  `date_of_mem` date DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -76,8 +77,8 @@ CREATE TABLE `tbl_employee` (
   `image_id` int(11) NOT NULL DEFAULT -1,
   `password` varchar(50) DEFAULT NULL,
   `position_id` int(11) NOT NULL DEFAULT -1,
-  `start_date` datetime DEFAULT NULL,
-  `end_date` datetime DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
   `contact_no` varchar(11) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
@@ -88,11 +89,15 @@ CREATE TABLE `tbl_employee` (
 --
 
 INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `sign_id`, `image_id`, `password`, `position_id`, `start_date`, `end_date`, `date_of_birth`, `contact_no`, `isDeleted`) VALUES
-(1, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 1, NULL, NULL, NULL, NULL, 0),
-(2, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 2, NULL, NULL, NULL, NULL, 0),
-(3, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 3, NULL, NULL, NULL, NULL, 0),
-(4, -1, -1, -1, -1, '751cb3f4aa17c36186f4856c8982bf27', 4, NULL, NULL, NULL, NULL, 0),
-(5, -1, -1, -1, -1, NULL, 5, NULL, NULL, NULL, NULL, 0);
+(1, 10, 10, 10, 17, '751cb3f4aa17c36186f4856c8982bf27', 1, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
+(2, 12, 12, 12, 11, '751cb3f4aa17c36186f4856c8982bf27', 2, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
+(3, 14, 14, 16, 15, '751cb3f4aa17c36186f4856c8982bf27', 3, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
+(4, 13, 13, 14, 13, '751cb3f4aa17c36186f4856c8982bf27', 4, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
+(5, 4, 4, 1, 4, NULL, 5, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
+(6, -1, -1, -1, -1, NULL, -1, NULL, NULL, NULL, NULL, 1),
+(7, -1, -1, -1, -1, NULL, -1, NULL, NULL, NULL, NULL, 1),
+(8, -1, -1, -1, -1, NULL, -1, NULL, NULL, NULL, NULL, 1),
+(9, 11, 11, -1, 24, NULL, 6, '0001-01-01', '0001-01-01', '2023-11-20', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -123,7 +128,7 @@ CREATE TABLE `tbl_franchise` (
 
 CREATE TABLE `tbl_id_history` (
   `id` int(11) NOT NULL,
-  `date` datetime DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `owner_id` int(11) NOT NULL DEFAULT -1,
   `entity_type` varchar(10) NOT NULL DEFAULT 'OPERATOR',
   `franchise_id` int(11) NOT NULL DEFAULT -1,
@@ -160,11 +165,12 @@ CREATE TABLE `tbl_loan_ledger` (
   `processing_fee` double NOT NULL DEFAULT 0,
   `cbu` double NOT NULL DEFAULT 0,
   `terms_of_payment_month` int(11) NOT NULL DEFAULT 1,
-  `interest` double NOT NULL DEFAULT 0,
-  `principal` double NOT NULL DEFAULT 0,
+  `interest` int(11) NOT NULL DEFAULT 0,
+  `principal` int(11) NOT NULL DEFAULT 0,
   `penalties` double NOT NULL DEFAULT 0,
   `isFullyPaid` tinyint(1) NOT NULL DEFAULT 0,
   `amount` double NOT NULL DEFAULT 0,
+  `last_payment_date` datetime DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -189,6 +195,7 @@ CREATE TABLE `tbl_long_term_loan_ledger` (
   `penalties` double NOT NULL DEFAULT 0,
   `isFullyPaid` tinyint(1) NOT NULL DEFAULT 0,
   `amount` double NOT NULL DEFAULT 0,
+  `last_payment_date` datetime DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -226,7 +233,7 @@ CREATE TABLE `tbl_operator` (
   `emergency_person` varchar(50) DEFAULT NULL,
   `emergency_number` varchar(11) DEFAULT NULL,
   `isOwner` tinyint(1) NOT NULL DEFAULT 0,
-  `date_of_mem` datetime DEFAULT NULL,
+  `date_of_mem` date DEFAULT NULL,
   `tin_number` varchar(50) DEFAULT NULL,
   `voters_id_number` varchar(50) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
@@ -293,8 +300,9 @@ INSERT INTO `tbl_position` (`id`, `title`, `can_cnd`, `can_cno`, `can_cnf`, `can
 (1, 'General Manager', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0),
 (2, 'Secretary', 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0),
 (3, 'Treasurer', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0),
-(4, 'Bookeeper', 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0),
-(5, 'Chairman', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(4, 'Bookkeeper', 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0),
+(5, 'Chairman', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(6, 'Board Member', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -308,6 +316,7 @@ CREATE TABLE `tbl_share_capital_ledger` (
   `date` datetime DEFAULT NULL,
   `beginning_balance` double NOT NULL DEFAULT 0,
   `last_balance` double NOT NULL DEFAULT 0,
+  `last_payment_date` datetime DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -353,8 +362,7 @@ CREATE TABLE `tbl_violation_type` (
 -- Indexes for table `tbl_address`
 --
 ALTER TABLE `tbl_address`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `address_line1` (`address_line1`,`address_line2`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_driver`
@@ -467,7 +475,7 @@ ALTER TABLE `tbl_driver`
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_franchise`
@@ -521,7 +529,7 @@ ALTER TABLE `tbl_payment_details`
 -- AUTO_INCREMENT for table `tbl_position`
 --
 ALTER TABLE `tbl_position`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_share_capital_ledger`

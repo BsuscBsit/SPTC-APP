@@ -149,6 +149,7 @@ namespace SPTC_APP.Database
         public const string ENTITY_TYPE = "entity_type";
         public const string IS_FULLY_PAID = "isFullyPaid";
         public const string AMOUNT = "amount";
+        public const string LAST_PAYMENT = "last_payment_date";
 
         // Foreign Keys
         public const string EMPLOYEE_ID = "user_id";

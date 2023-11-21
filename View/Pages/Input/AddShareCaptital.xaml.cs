@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SPTC_APP.Objects.Ledger;
 using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 
 namespace SPTC_APP.View.Pages.Input
@@ -33,7 +34,10 @@ namespace SPTC_APP.View.Pages.Input
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             
             this.franchise = franchise;
+
+            dpBdate.SelectedDate = DateTime.Now;
             dpBdate.DisplayDate = DateTime.Now;
+
             tboxAmount.Text = AppState.TOTAL_SHARE_PER_MONTH.ToString();
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
@@ -53,7 +57,8 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ControlWindow.ShowTwoway("Adding new record", "Confirm?", Icons.NOTIFY))
+            string displaydate = dpBdate.DisplayDate.ToString("MMM dd, YYY");
+            if (ControlWindow.ShowTwoway("Confirm?", $"Adding record: \nShare Capital: {tboxAmount.Text}\nDate: {displaydate}\nCV/OR: {tboxRefNo.Text}", Icons.NOTIFY))
             {
                 PaymentDetails<Ledger.ShareCapital> capital = new PaymentDetails<Ledger.ShareCapital>();
                 Ledger.ShareCapital share = new Ledger.ShareCapital();
@@ -67,6 +72,7 @@ namespace SPTC_APP.View.Pages.Input
 
                 share.lastBalance = share.lastBalance + Double.Parse(tboxAmount.Text);
                 capital.WriteInto(share, 0, dpBdate.DisplayDate, tboxRefNo.Text, Double.Parse(tboxAmount.Text), 0, "MONTHLY", share.lastBalance);
+                share.last_payment = dpBdate.DisplayDate;
                 capital.Save();
                 //(AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 this.closingMSG = "Adding share capital history was successful.\nPlease refresh the view to see changes.";

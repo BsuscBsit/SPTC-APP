@@ -40,13 +40,21 @@
             Style="{StaticResource TopBarStyle}" />
         <Label
             Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
             Margin="20,0,0,0"
             VerticalAlignment="Top"
             Content="RECAPITULATULATIONS"
             FontSize="20"
             Style="{StaticResource CommonTitlePreset}" />
+        <Button 
+            Grid.Column="3"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            VerticalAlignment="Top"
+            Content="PRINT"
+            Style="{StaticResource CommonButtonStyle}"
+            />
         <StackPanel x:Name="gridChashonhand" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Height="40"/>
         <Label
             Grid.Row="6"

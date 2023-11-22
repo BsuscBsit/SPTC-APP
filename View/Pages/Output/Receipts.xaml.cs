@@ -23,7 +23,6 @@ namespace SPTC_APP.View.Pages.Output
     /// </summary>
     public partial class Receipts : Window
     {
-        private List<object> data;
         private string filename;
         public Receipts(string filename)
         {
@@ -31,9 +30,8 @@ namespace SPTC_APP.View.Pages.Output
             this.filename = filename;
         }
 
-        public void Populate(List<object> reportList)
+        public void Populate()
         {
-            this.data = reportList;
             lblTitle.Content = "SPTC RECEIPT : " + filename;
 
 

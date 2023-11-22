@@ -102,12 +102,14 @@
         Content="Birthdate:"
         Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
+            x:Name="lblDriverLicense"
         Grid.Row="7"
         Grid.Column="5"
         Margin="0,15,0,0"
         HorizontalAlignment="Left"
         VerticalAlignment="Bottom"
-        Content="Position:"
+        Content="License:"
+            Visibility="Hidden"
         Style="{StaticResource TextFieldLabelingPreset}" />
         <StackPanel
         Grid.Row="4"
@@ -180,13 +182,14 @@
             KeyboardNavigation.TabNavigation="None" />
         </Border>
         <TextBox
-        x:Name="tbPosTitle"
+        x:Name="tbLicense"
         Grid.Row="8"
         Grid.Column="5"
         Width="164"
         Height="30"
         Margin="15,0,0,0"
         IsEnabled="False"
+        Visibility="Hidden"
         Style="{StaticResource CommonTextBoxStyle}"
         TextWrapping="Wrap" />
         <Grid

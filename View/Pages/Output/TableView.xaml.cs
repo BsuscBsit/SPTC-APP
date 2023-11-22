@@ -23,6 +23,7 @@ namespace SPTC_APP.View.Pages.Output
         private Driver dholder;
         public static DataGrid displayedTable = null;
 
+
         public TableView(string table)
         {
             InitializeComponent();
@@ -178,7 +179,7 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("name.legalName", "NAME", minWidth: 140),
                     new ColumnConfiguration("address", "ADDRESS", minWidth: 100),
                     new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80, isCenter : true, isNumeric : true),
-                    new ColumnConfiguration("franchise.PlateNo", "PLATE NO.", minWidth: 80, isCenter:true, isNumeric: true),
+                    new ColumnConfiguration("licenseNo", "LICENSE", minWidth: 80, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("franchise.Operator", "OPERATOR", minWidth: 120),
                 };
                 DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(TableGrid, columnConfigurations);
@@ -430,7 +431,6 @@ namespace SPTC_APP.View.Pages.Output
                 ControlWindow.ShowStatic("No Franchise Found", "Please create a new franchise first.", Icons.ERROR);
             }
         }
-
         private async void btnEditProfile_Click(object sender, RoutedEventArgs e)
         {
             if (table == Table.OPERATOR)
@@ -485,12 +485,10 @@ namespace SPTC_APP.View.Pages.Output
                 (new EditProfile(MainBody.selectedFranchise, General.NEW_DRIVER)).ShowDialog();
             await UpdateTableAsync();
         }
-
         private void btnAddShareCapital_Click(object sender, RoutedEventArgs e)
         {
             (new AddShareCaptital(MainBody.selectedFranchise)).Show();
         }
-
         private void btnAddLoan_Click(object sender, RoutedEventArgs e)
         {
             if (MainBody.selectedFranchise?.GetLoans()?.Count <= 0)
@@ -504,7 +502,6 @@ namespace SPTC_APP.View.Pages.Output
                 (new AddLoan(MainBody.selectedFranchise)).Show();
             }
         }
-
         private void btnAddLTLoan_Click(object sender, RoutedEventArgs e)
         {
             if(MainBody.selectedFranchise?.GetLTLoans()?.Count <= 0)
@@ -515,6 +512,80 @@ namespace SPTC_APP.View.Pages.Output
 
                 (new AddLTLoan(MainBody.selectedFranchise)).Show();
             }
+        }
+        public class Filter
+        {
+            string Name;
+            bool isOn;
+
+            public Filter(string x, bool y)
+            {
+                this.Name = x;
+                this.isOn = y;
+            }
+        }
+
+        static List<Filter> franchiseFilter = new List<Filter>()
+        {
+            //FRANCHISE DEFAULT FILTER
+            new Filter("OPERATOR NAME", true),
+            new Filter("BODY NO.", true),
+            new Filter("SHARE CAPITAL", true),
+            new Filter("MTOP NO.", true),
+            new Filter("PAYMENT DUE", true),
+
+
+            new Filter("DRIVER NAME", false),
+            new Filter("LOAN BALANCE", false),
+            new Filter("LTLOAN BALANCE", false),
+            new Filter("OWNERSHIP DATE", false),
+        };
+
+        static List<Filter> opratorFilter = new List<Filter>()
+        {
+            //OPERATOR DEFAULT FILTER
+            new Filter("NAME", true),
+            new Filter("BODY NO.", true),
+            new Filter("PLATE NO.", true),
+            new Filter("SHARE CAPITAL", true),
+            new Filter("PAYMENT DUE", true),
+
+            new Filter("ADDRESS", false),
+            new Filter("BIRTHDAY", false),
+            new Filter("CONTACT", false),
+            new Filter("MEMBERSHIP DATE", false),
+            new Filter("TIN NUMBER", false),
+            new Filter("VOTERS ID", false),
+            new Filter("DRIVER NAME", false),
+            new Filter("LOAN BALANCE", false),
+            new Filter("LTLOAN BALANCE", false),
+            new Filter("OWNERSHIP DATE", false),
+        };
+
+        static List<Filter> driverFilter = new List<Filter>()
+        {
+            //DRIVER DEFAULT FILTER
+            new Filter("NAME", true),
+            new Filter("ADDRESS", true),
+            new Filter("BODY NO.", true),
+            new Filter("LICENSE", true),
+            new Filter("PAYMENT DUE", true),
+
+            new Filter("ADDRESS", false),
+            new Filter("BIRTHDAY", false),
+            new Filter("CONTACT", false),
+            new Filter("PLATE NO.", false),
+        };
+
+        private void btnFilter_Click(object sender, RoutedEventArgs e)
+        {
+            //Open filters view with button
+            //different filters depending on the tableview details
+            //talbe == [Table.DRIVER, Table.OPERATOR, Table.FRANCHISE]
+            // Decide the filter settings
+            // FRANCHISE FILTER
+            // Operator Name, 
+            
         }
     }
 }

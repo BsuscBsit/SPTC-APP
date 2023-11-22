@@ -614,5 +614,8 @@
   <ItemGroup>
     <Resource Include="View\Images\icons\cross.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Images\icons\filter.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

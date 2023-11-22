@@ -92,6 +92,9 @@ namespace SPTC_APP.View.Pages.Input
                 tboxsCountry.Text = drv.address?.country;
                 tboxsProvince.Text = drv.address?.province;
                 tboxsCity.Text = drv.address?.city;*/
+                lblDriverLicense.Visibility = Visibility.Visible;
+                tbLicense.Visibility = Visibility.Visible;
+                tbLicense.Text = drv.licenseNo?.ToString();
                 tbAddressLine1.Text = drv.address?.addressline1;
                 tbAddressLine2.Text = drv.address?.addressline2;
                 if ((drv.image?.GetSource() ?? null) != null)
@@ -136,6 +139,11 @@ namespace SPTC_APP.View.Pages.Input
                 }
 
                 this.oholder = optr;
+            }
+            else if(type == General.NEW_DRIVER)
+            {
+                lblDriverLicense.Visibility = Visibility.Visible;
+                tbLicense.Visibility = Visibility.Visible;
             }
             DraggingHelper.DragWindow(topBar);
             tbFname.Focus();
@@ -306,6 +314,7 @@ namespace SPTC_APP.View.Pages.Input
                     drv.name.sex = cbGender.SelectedIndex == 1;
                     drv.address.addressline1 = tbAddressLine1.Text;
                     drv.address.addressline2 = tbAddressLine2.Text;
+                    drv.licenseNo = tbLicense.Text;
                     drv.address.UpdateAddressLines();
                     if (franchise != null)
                     {
@@ -336,6 +345,7 @@ namespace SPTC_APP.View.Pages.Input
                     drv.address.city = tboxsCity.Text;*/
                     drv.address.addressline1 = tbAddressLine1.Text;
                     drv.address.addressline2 = tbAddressLine2.Text;
+                    drv.licenseNo = tbLicense.Text;
                     drv.address.UpdateAddressLines();
                     if (hasPhoto)
                     {

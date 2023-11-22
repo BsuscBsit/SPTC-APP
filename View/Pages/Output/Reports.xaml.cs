@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SPTC_APP.View.Pages.Input;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Printing;
@@ -17,19 +18,14 @@ namespace SPTC_APP.View.Pages.Output
     /// </summary>
     public partial class Reports : Window
     {
-
-        private List<object> data;
-        private string filename;
-        public Reports(string filename)
+        private string filename = "Recapitulations";
+        public Reports()
         {
             InitializeComponent();
-            this.filename = filename;
         }
 
-        public void Populate(List<object> reportList)
+        public void Populate()
         {
-            this.data = reportList;
-            lblTitle.Content = "SPTC REPORT: " + filename;
 
 
 

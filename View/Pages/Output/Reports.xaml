@@ -16,9 +16,12 @@
     <Grid x:Name="reportpage" Width="728.8" Height="985.2">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="lblTitle" Content="SPTC REPORT" Grid.Row="0" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" FontSize="20" Style="{StaticResource CommonTitlePreset}"/>
-        <DataGrid Grid.Row="1"/>
+        <Label Content="SPTC REPORT: RECAPITULATONS" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="20" Style="{StaticResource CommonTitlePreset}"/>
+        <Label x:Name="lblDate" Grid.Row="1" Content="Jan 2023" Style="{StaticResource LabelFontLarge}" Margin="20, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        
+        <!-- Complete this based on picture for recap -->
     </Grid>
 </Window>

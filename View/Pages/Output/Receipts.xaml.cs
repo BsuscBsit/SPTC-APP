@@ -24,6 +24,9 @@ namespace SPTC_APP.View.Pages.Output
     public partial class Receipts : Window
     {
         private string filename;
+        private static string SHARE_CAPITAL = "SHARE CAPITAL";
+        private static string LOAN = "LOAN";
+
         public Receipts(string filename)
         {
             InitializeComponent();

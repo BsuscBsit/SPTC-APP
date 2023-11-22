@@ -19,6 +19,5 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label x:Name="lblTitle" Content="SPTC RECEIPT: " Grid.Row="0" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" FontSize="15" Style="{StaticResource CommonTitlePreset}"/>
-        <DataGrid Grid.Row="1"/>
     </Grid>
 </Window>

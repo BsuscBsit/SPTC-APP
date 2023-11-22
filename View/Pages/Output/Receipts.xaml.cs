@@ -1,26 +1,31 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Printing;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
-using Image = System.Windows.Controls.Image;
+using System.Windows.Xps;
 
 namespace SPTC_APP.View.Pages.Output
 {
     /// <summary>
-    /// Interaction logic for Reports.xaml
+    /// Interaction logic for Receipts.xaml
     /// </summary>
-    public partial class Reports : Window
+    public partial class Receipts : Window
     {
-
         private List<object> data;
         private string filename;
-        public Reports(string filename)
+        public Receipts(string filename)
         {
             InitializeComponent();
             this.filename = filename;
@@ -29,7 +34,7 @@ namespace SPTC_APP.View.Pages.Output
         public void Populate(List<object> reportList)
         {
             this.data = reportList;
-            lblTitle.Content = "SPTC REPORT: " + filename;
+            lblTitle.Content = "SPTC RECEIPT : " + filename;
 
 
 
@@ -49,8 +54,8 @@ namespace SPTC_APP.View.Pages.Output
             {
                 XpsDocumentWriter xpsWriter = XpsDocument.CreateXpsDocumentWriter(xpsDoc);
 
-                PrintTicket printTicket = new PrintTicket(); 
-                xpsWriter.Write(reportpage, printTicket);
+                PrintTicket printTicket = new PrintTicket();
+                xpsWriter.Write(receiptpage, printTicket);
             }
 
             PrintDialog printDialog = new PrintDialog();

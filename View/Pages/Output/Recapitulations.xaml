@@ -21,7 +21,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -55,9 +54,8 @@
             Content="PRINT"
             Style="{StaticResource CommonButtonStyle}"
             />
-        <StackPanel x:Name="gridChashonhand" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Height="40"/>
         <Label
-            Grid.Row="6"
+            Grid.Row="5"
             Grid.Column="1"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
@@ -65,7 +63,7 @@
             Style="{StaticResource TextFieldLabelingPreset}" />
         <TextBox
             x:Name="tbTotal"
-            Grid.Row="6"
+            Grid.Row="5"
             Grid.Column="2"
             Grid.ColumnSpan="2"
             Height="30"

@@ -38,6 +38,8 @@ namespace SPTC_APP.View.Pages.Input
             dpBdate.SelectedDate = DateTime.Now;
             dpBdate.DisplayDate = DateTime.Now;
 
+            tboxRefNo.Text = (AppState.CV_OR_LAST + 1).ToString();
+
             tboxAmount.Text = AppState.TOTAL_SHARE_PER_MONTH.ToString();
             DraggingHelper.DragWindow(topBar);
             tboxAmount.Focus();
@@ -74,6 +76,9 @@ namespace SPTC_APP.View.Pages.Input
                 capital.WriteInto(share, 0, dpBdate.DisplayDate, tboxRefNo.Text, Double.Parse(tboxAmount.Text), 0, "MONTHLY", share.lastBalance);
                 share.last_payment = dpBdate.DisplayDate;
                 capital.Save();
+
+                AppState.CV_OR_LAST = Int32.Parse(tboxRefNo.Text);
+                AppState.SaveToJson();
                 //(AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 this.closingMSG = "Adding share capital history was successful.\nPlease refresh the view to see changes.";
                 this.Close();

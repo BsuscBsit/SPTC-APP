@@ -510,7 +510,7 @@ namespace SPTC_APP.View.Pages.Input
             tbFname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "First name.", 0);
             tbMname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Middle name.", 0);
             tbLname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Last name.", 0);
-            tbPosTitle.DefaultTextBoxBehavior(ALPHANUMERICDASHPERIOD, false, gridToast, "Position of this person.", 0);
+            tbLicense.DefaultTextBoxBehavior(ALPHANUMERICDASHPERIOD, false, gridToast, "License number.", 0);
             tbAddressLine1.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Street Address.", 0);
             tbAddressLine2.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Additional Address Information.", 0);
 

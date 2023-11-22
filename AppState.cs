@@ -36,9 +36,11 @@ namespace SPTC_APP
         public static bool LOG_WINDOW;
         public static int DEFAULT_CAMERA;
         public static int TABLE_BATCH_SIZE;
+        public static int CV_OR_LAST;
         public static double TOTAL_SHARE_PER_MONTH;
         public static string CAMERA_RESOLUTION;
         public static Newtonsoft.Json.Linq.JArray LIST_RECAP;
+
 
         //NOT SAVED EXTERNALLY
         public static string[] ALL_EMPLOYEES;
@@ -232,6 +234,7 @@ namespace SPTC_APP
             LOG_WINDOW = false;
             TABLE_BATCH_SIZE = 2;
             TOTAL_SHARE_PER_MONTH = 100;
+            CV_OR_LAST = 0;
             CAMERA_RESOLUTION = "";
             LIST_RECAP = new Newtonsoft.Json.Linq.JArray { Field.CASH_ON_HAND, "Share Capital", "Monthly Dues", "Mutual Funds Payable", "Certification Fee", "Loan Receivable - Pastdue", "--------------- - Current", "Change Motor - Entrance", "--------------- - Motor", "Clearance Fee", "Miscelleneous Income", "Sales Trapal", "AIR-Stricker", "Penalties", "Interest Receivable", "Cash in Bank", "Rental Fee: Franchise", "Transfer Fees", "Membership Fee", "Seminar Fee" };
         }
@@ -250,6 +253,7 @@ namespace SPTC_APP
                 LOG_WINDOW,
                 DEFAULT_CAMERA,
                 TABLE_BATCH_SIZE,
+                CV_OR_LAST,
                 TOTAL_SHARE_PER_MONTH,
                 CAMERA_RESOLUTION,
                 LIST_RECAP,
@@ -295,6 +299,7 @@ namespace SPTC_APP
                     LOG_WINDOW = data.LOG_WINDOW;
                     DEFAULT_CAMERA = data.DEFAULT_CAMERA;
                     TABLE_BATCH_SIZE = data.TABLE_BATCH_SIZE;
+                    CV_OR_LAST = data.CV_OR_LAST;
                     TOTAL_SHARE_PER_MONTH = data.TOTAL_SHARE_PER_MONTH;
                     CAMERA_RESOLUTION = data.CAMERA_RESOLUTION;
                     LIST_RECAP = data.LIST_RECAP;

@@ -10,7 +10,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using System.Windows.Media;
 using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 namespace SPTC_APP.View.Pages.Input
 {
@@ -22,6 +22,8 @@ namespace SPTC_APP.View.Pages.Input
         int currentmonth;
         int currentyear;
         private string[] monthAbbreviations = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
+
+        static Recap cashonhand;
 
         public Recapitulations()
         {
@@ -101,7 +103,6 @@ namespace SPTC_APP.View.Pages.Input
             List<Recap> recaps = AppState.LoadRecapitulations(currentmonth, currentyear);
 
             recapgrid.RowDefinitions.Clear();
-            gridChashonhand.Children.Clear();
             recapgrid.Children.Clear();
             double total = 0;
 
@@ -109,8 +110,7 @@ namespace SPTC_APP.View.Pages.Input
             {
                 if (r.text == Field.CASH_ON_HAND)
                 {
-                    RecapDisplay recapDisplay = new RecapDisplay(this, r, recaps.Count - 1);
-                    gridChashonhand.Children.Add(recapDisplay.AddSelf());
+                    cashonhand = r;
                 }
                 else
                 {
@@ -124,6 +124,7 @@ namespace SPTC_APP.View.Pages.Input
                 }
             }
             tbTotal.Text = total.ToString("0.00");
+            cashonhand.content = total;
         }
 
         private bool check(Recap r)
@@ -131,6 +132,21 @@ namespace SPTC_APP.View.Pages.Input
             switch(r.text){
                 case "Share Capital":
                     r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                case "Monthly Dues":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH($"LOAN\" || {Field.LEDGER_TYPE} = \"LONGTERMLOAN", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                case "Loan Receivable - Pastdue":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_PASTDUE_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                case "--------------- - Current":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_CURRENT_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                case "Penalties":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_PENALTY_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                case "Interest Receivable":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_INTEREST_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
                     return true;
                 default:
                     return false;
@@ -150,7 +166,6 @@ namespace SPTC_APP.View.Pages.Input
             public TextBox textBox;
             private Grid grid;
             private bool isReadOnly;
-            private double autoval;
 
             public RecapDisplay(Recapitulations rptc, Recap r, int row, bool isread = false)
             {
@@ -158,7 +173,6 @@ namespace SPTC_APP.View.Pages.Input
                 this.recap = r;
                 this.grid = new Grid();
                 this.isReadOnly = isread;
-                this.autoval = autoval;
                 grid.SetValue(Grid.RowProperty, row); 
 
                 ColumnDefinition col1 = new ColumnDefinition();
@@ -172,8 +186,9 @@ namespace SPTC_APP.View.Pages.Input
                 label.Content = $"{recap.text}: ";
                 label.SetValue(Grid.ColumnProperty, 0);
                 label.HorizontalAlignment = HorizontalAlignment.Right;
-                label.Width = 200;
+                label.Width = 180;
                 label.VerticalAlignment = VerticalAlignment.Center;
+
 
                 this.textBox = new TextBox();
                 textBox.Text = recap.content.ToString("0.00");
@@ -182,6 +197,11 @@ namespace SPTC_APP.View.Pages.Input
                 textBox.Style = Application.Current.FindResource("CommonTextBoxStyle") as Style;
                 textBox.VerticalAlignment = VerticalAlignment.Center;
                 textBox.Margin = new Thickness(20, 0, 10, 0);
+                if (isReadOnly)
+                {
+                    textBox.Background = Brushes.Blue;
+                }
+                textBox.IsReadOnly = isReadOnly;
                 textBox.GotFocus += SelectAll;
                 textBox.LostFocus += Save;
                 textBox.DefaultTextBoxBehavior(NUMBERPERIOD, true, recapmain.gridToast, null, row);

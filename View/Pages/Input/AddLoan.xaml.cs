@@ -74,6 +74,8 @@ namespace SPTC_APP.View.Pages.Input
 
             tbPenalty.Text = "0";
 
+            tboxCVOR.Text = (AppState.CV_OR_LAST + 1).ToString();
+
             compute(0);
 
             DraggingHelper.DragWindow(topBar);
@@ -105,6 +107,8 @@ namespace SPTC_APP.View.Pages.Input
                 }
                 loan.last_payment = dpBdate.DisplayDate;
                 loanPayment.Save();
+                AppState.CV_OR_LAST = Int32.Parse(tboxCVOR.Text);
+                AppState.SaveToJson();
                 //(AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";
                 this.Close();

@@ -13,7 +13,7 @@
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid Width="670" Height="600">
+    <Grid Width="670" Height="760">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -46,14 +46,12 @@
             Content="RECAPITULATULATIONS"
             FontSize="20"
             Style="{StaticResource CommonTitlePreset}" />
-        <Button 
+        <Button
+            Grid.Row="3"
             Grid.Column="3"
-            Grid.Row="1"
-            Grid.RowSpan="2"
             VerticalAlignment="Top"
             Content="PRINT"
-            Style="{StaticResource CommonButtonStyle}"
-            />
+            Style="{StaticResource CommonButtonStyle}" />
         <Label
             Grid.Row="5"
             Grid.Column="1"
@@ -67,9 +65,10 @@
             Grid.Column="2"
             Grid.ColumnSpan="2"
             Height="30"
+            GotFocus="tbTotal_GotFocus"
             IsReadOnly="True"
             Style="{StaticResource CommonTextBoxStyle}"
-            Text="0.00" GotFocus="tbTotal_GotFocus" />
+            Text="0.00" />
         <StackPanel
             Grid.Row="3"
             Grid.Column="1"
@@ -110,28 +109,79 @@
                     StrokeThickness="3" />
             </Button>
         </StackPanel>
-        <Border
+        <Grid
+            Grid.Row="4"
+            Grid.Column="1"
+            Grid.ColumnSpan="3" Margin="0,24,0,24" Width="600">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="15" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border
+                Grid.Row="0"
+                Background="White"
+                CornerRadius="10">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="15"
+                        Direction="-90"
+                        Opacity="0.3"
+                        ShadowDepth="5" />
+                </Border.Effect>
+            </Border>
+            <Border
+                Grid.Row="2"
+                Background="White"
+                CornerRadius="10">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="15"
+                        Direction="-90"
+                        Opacity="0.3"
+                        ShadowDepth="5" />
+                </Border.Effect>
+            </Border>
+            <Grid Grid.Row="0" Margin="15,15,15,15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="System Generated"
+                    Style="{StaticResource TextFieldLabelingPreset}" />
+                <ScrollViewer Grid.Row="1" Margin="0,15,0,0">
+                    <Grid x:Name="recapgrid" />
+                </ScrollViewer>
+            </Grid>
+            <Grid Grid.Row="2" Margin="15,15,15,15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Other Records"
+                    Style="{StaticResource TextFieldLabelingPreset}" />
+                <Button
+                    Width="150"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    Content="Add Record"
+                    Style="{DynamicResource CommonButtonStyle}" />
+                <ScrollViewer Grid.Row="1" Margin="0,15,0,0">
+                    <Grid x:Name="recapgrid1" />
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <Grid
             Grid.Row="4"
             Grid.Column="1"
             Grid.ColumnSpan="3"
-            Margin="0,15,0,15"
-            Background="White"
-            CornerRadius="10">
-            <Border.Effect>
-                <DropShadowEffect
-                    BlurRadius="15"
-                    Direction="-90"
-                    Opacity="0.3"
-                    ShadowDepth="5" />
-            </Border.Effect>
-        </Border>
-        <ScrollViewer
-            Grid.Row="4"
-            Grid.Column="1"
-            Grid.ColumnSpan="3"
-            Margin="15,30,15,30">
-            <Grid x:Name="recapgrid" />
-        </ScrollViewer>
+            Margin="15,30,15,30" />
         <Button
             x:Name="btnCancel"
             Grid.Row="8"
@@ -143,6 +193,12 @@
             Click="btnCancel_Click"
             Content="OK"
             Style="{StaticResource CommonButtonStyle}" />
-        <Grid x:Name="gridToast" Grid.ColumnSpan="5" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,32,0,0"/>
+        <Grid
+            x:Name="gridToast"
+            Grid.Row="4"
+            Grid.ColumnSpan="5"
+            Margin="0,32,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top" />
     </Grid>
 </Window>

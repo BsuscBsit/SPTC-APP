@@ -64,14 +64,14 @@ namespace SPTC_APP.View.Pages.Input
             lblLoanDate.Content = ltloan.displayDate;
             lblLoanCVOR.Content = ltloan.cv_or;
 
-            lblLoanAmount.Content = "₱" + ltloan.amountLoaned.ToString("N2");
-            lblLoanInterest.Content = "₱" + ltloan.interest.ToString("N2");
-            lblTotal.Content = "₱" + (ltloan.amountLoaned + ltloan.interest).ToString("N2");
+            lblLoanAmount.Content = $"\u20B1 {ltloan.amountLoaned.ToString("N2")}";
+            lblLoanInterest.Content = $"\u20B1 {ltloan.interest.ToString("N2")}";
+            lblTotal.Content = $"\u20B1 {(ltloan.amountLoaned + ltloan.interest).ToString("N2")}";
 
             double balanceOrReceivable = (ltloan.amount < (ltloan.amountLoaned / ltloan.termsofpayment)) ? ltloan.amount: Scaler.RoundUp(ltloan.amountLoaned / ltloan.termsofpayment);
             bool shouldRound = (ltloan.amountLoaned / ltloan.termsofpayment != Scaler.RoundUp(ltloan.amountLoaned / ltloan.termsofpayment)); // if true,it should display round
-            lblLoanRec.Content = "₱" + (ltloan.amountLoaned / ltloan.termsofpayment).ToString("N2") + (shouldRound ? "\n -> ( ₱ " + balanceOrReceivable.ToString("N2") + " )" : "");
-            lblInteRec.Content = "₱" + (ltloan.interest / ltloan.termsofpayment).ToString("N2");
+            lblLoanRec.Content = $"\u20B1 {(ltloan.amountLoaned / ltloan.termsofpayment).ToString("N2") + (shouldRound ? $"\n -> (\u20B1 {balanceOrReceivable.ToString("N2")})" : "")}";
+            lblInteRec.Content = $"\u20B1 {(ltloan.interest / ltloan.termsofpayment).ToString("N2")}";
 
             breakdown = ((ltloan.amountLoaned / ltloan.termsofpayment) + (ltloan.interest / ltloan.termsofpayment));
             if(ltloan.amount < breakdown)
@@ -80,14 +80,14 @@ namespace SPTC_APP.View.Pages.Input
             }
 
 
-            lblTotalBreak.Content = "₱" + breakdown.ToString("N2");
+            lblTotalBreak.Content = $"\u20B1 {breakdown.ToString("N2")}";
 
             penalty = ltloan.amountLoaned * (ltloan.penaltyPercent / 100);
 
-            lblRemainingBalance.Content = "₱" + (franchise.LongTermLoanBalance - Scaler.RoundUp(breakdown)).ToString("N2");
+            lblRemainingBalance.Content = $"\u20B1 {(franchise.LongTermLoanBalance - Scaler.RoundUp(breakdown)).ToString("N2")}";
             tboxAmount.Text = Scaler.RoundUp(breakdown).ToString();
-            lblCurrentPay.Content = "₱" + Scaler.RoundUp(breakdown).ToString("N2");
-            lblAmort.Content = "₱" + Scaler.RoundUp(breakdown).ToString("N2");
+            lblCurrentPay.Content = $"\u20B1 {Scaler.RoundUp(breakdown).ToString("N2")}";
+            lblAmort.Content = $"\u20B1 {Scaler.RoundUp(breakdown).ToString("N2")}";
 
             // Kung kaya, i-autocompute sana.
             tbPenalty.Text = "0";
@@ -184,13 +184,13 @@ namespace SPTC_APP.View.Pages.Input
             paidAmount = amortization + penaltyTot;
 
             // Changing labels/fields
-            lblPenalty.Content = "+₱" + penaltyTot.ToString("N2");
-            lblPenalty2.Content = "₱" + penaltyTot.ToString("N2");
-            lblTotalBreak.Content = "₱" + amortization.ToString("N2");
+            lblPenalty.Content = $"\u20B1 {penaltyTot.ToString("N2")}";
+            lblPenalty2.Content = $"\u20B1 {penaltyTot.ToString("N2")}";
+            lblTotalBreak.Content = $"\u20B1 {amortization.ToString("N2")}";
             tboxAmount.Text = amortization.ToString();
-            lblAmort.Content = "₱" + amortization.ToString("N2");
-            lblCurrentPay.Content = "₱" + paidAmount.ToString("N2");
-            lblRemainingBalance.Content = "₱" + total.ToString("N2");
+            lblAmort.Content = $"\u20B1 {amortization.ToString("N2")}";
+            lblCurrentPay.Content = $"\u20B1 {paidAmount.ToString("N2")}";
+            lblRemainingBalance.Content = $"\u20B1 {total.ToString("N2")}";
         }
     }
 }

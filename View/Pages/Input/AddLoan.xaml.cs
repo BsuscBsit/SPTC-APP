@@ -55,22 +55,22 @@ namespace SPTC_APP.View.Pages.Input
 
             lblLoanDate.Content = loan.displayDate;
             lblLoanCVOR.Content = loan.cv_or;
-            lblLoanAmount.Content = "₱" + loan.amountLoaned.ToString("N2");
-            lblLoanInterest.Content = "₱" + loan.interest.ToString("N2");
-            lblTotal.Content = "₱" + (loan.amountLoaned + loan.interest).ToString("N2");
+            lblLoanAmount.Content = $"\u20B1 {loan.amountLoaned.ToString("N2")}";
+            lblLoanInterest.Content = $"\u20B1 {loan.interest.ToString("N2")}";
+            lblTotal.Content = $"\u20B1 {(loan.amountLoaned + loan.interest).ToString("N2")}";
 
-            lblLoanRec.Content = "₱" + (loan.amountLoaned / loan.termsofpayment).ToString("N2");
-            lblInteRec.Content = "₱" + (loan.interest / loan.termsofpayment).ToString("N2");
+            lblLoanRec.Content = $"\u20B1 {(loan.amountLoaned / loan.termsofpayment).ToString("N2")}";
+            lblInteRec.Content = $"\u20B1 {(loan.interest / loan.termsofpayment).ToString("N2")}";
 
             breakdown = (loan.details.Contains("EMERGENCY") ? loan.amount :(loan.amountLoaned / loan.termsofpayment));
-            lblTotalBreak.Content = "₱" + breakdown.ToString("N2");
+            lblTotalBreak.Content = $"\u20B1 {breakdown.ToString("N2")}";
 
             penalty = loan.amountLoaned * (loan.penaltyPercent / 100);
 
-            lblRemainingBalance.Content = "₱" + (franchise.LoanBalance - breakdown).ToString("N2");
+            lblRemainingBalance.Content = $"\u20B1 {(franchise.LoanBalance - breakdown).ToString("N2")}";
             tboxAmount.Text = breakdown.ToString();
-            lblCurrentPay.Content = "₱" + breakdown.ToString("N2");
-            lblAmort.Content = "₱" + breakdown.ToString("N2");
+            lblCurrentPay.Content = $"\u20B1 {breakdown.ToString("N2")}";
+            lblAmort.Content = $"\u20B1 {breakdown.ToString("N2")}";
 
             tbPenalty.Text = "0";
 
@@ -163,13 +163,13 @@ namespace SPTC_APP.View.Pages.Input
             paidAmount = amortization + penaltyTot;
 
             // Changing labels/fields
-            lblPenalty.Content = "+₱" + penaltyTot.ToString("N2");
-            lblPenalty2.Content = "₱" + penaltyTot.ToString("N2");
-            lblTotalBreak.Content = "₱" + paidAmount.ToString("N2");
+            lblPenalty.Content = $"+\u20B1 {penaltyTot.ToString("N2")}";
+            lblPenalty2.Content = $"\u20B1 {penaltyTot.ToString("N2")}";
+            lblTotalBreak.Content = $"\u20B1 {paidAmount.ToString("N2")}";
             tboxAmount.Text = amortization.ToString();
-            lblAmort.Content = "₱" + amortization.ToString("N2");
-            lblCurrentPay.Content = "₱" + paidAmount.ToString("N2");
-            lblRemainingBalance.Content = "₱" + total.ToString("N2");
+            lblAmort.Content = $"\u20B1 {amortization.ToString("N2")}";
+            lblCurrentPay.Content = $"\u20B1 {paidAmount.ToString("N2")}";
+            lblRemainingBalance.Content = $"\u20B1 {total.ToString("N2")}";
         }
     }
 }

@@ -344,7 +344,7 @@ namespace SPTC_APP.View.Pages.Input
                             {
                                 label[index].Visibility = Visibility.Visible;
                                 kvp.Key.Visibility = Visibility.Visible;
-                                kvp.Key.Content = "₱" + kvp.Value?.ToString("N2");
+                                kvp.Key.Content = $"\u20B1 {kvp.Value?.ToString("N2")}";
                             }
                             index++;
                         }

@@ -51,7 +51,10 @@ namespace SPTC_APP.View.Pages.Output
         private void UpdateDefaultSidePanel()
         {
 
-            franchiseInformation.AnimateWidth(0, 0.3);
+            franchiseInformation.AnimateWidth(0, 0.3, () =>
+            {
+                btnHideFI.Visibility = Visibility.Hidden;
+            });
             if (table == Table.FRANCHISE)
             {
                 btnManage.Visibility = Visibility.Visible;
@@ -387,7 +390,11 @@ namespace SPTC_APP.View.Pages.Output
                 btnAddLTLoan.Visibility = Visibility.Collapsed;
             }
 
-            franchiseInformation.AnimateWidth(325, 0.3);
+            franchiseInformation.AnimateWidth(325, 0.3, () =>
+            {
+                if(btnHideFI.Visibility == Visibility.Hidden)
+                    btnHideFI.FadeIn(0.3);
+            });
         }
 
         private void ValuePairFI(Label lblF, string name, Label lblI, string value)
@@ -528,15 +535,15 @@ namespace SPTC_APP.View.Pages.Output
         static List<Filter> franchiseFilter = new List<Filter>()
         {
             //FRANCHISE DEFAULT FILTER
-            new Filter("OPERATOR NAME", true),
-            new Filter("BODY NO.", true),
+            new Filter("OPERATOR NAME", false),
+            new Filter("BODY NO.", false),
             new Filter("SHARE CAPITAL", true),
-            new Filter("MTOP NO.", true),
+            new Filter("MTOP NO.", false),
             new Filter("PAYMENT DUE", true),
 
 
             new Filter("DRIVER NAME", false),
-            new Filter("LOAN BALANCE", false),
+            new Filter("LOAN BALANCE", true),
             new Filter("LTLOAN BALANCE", false),
             new Filter("OWNERSHIP DATE", false),
         };
@@ -586,6 +593,14 @@ namespace SPTC_APP.View.Pages.Output
             // FRANCHISE FILTER
             // Operator Name, 
             
+        }
+
+        private void btnHideFI_Click(object sender, RoutedEventArgs e)
+        {
+            franchiseInformation.AnimateWidth(0, 0.3, () =>
+            {
+                btnHideFI.Visibility = Visibility.Hidden;
+            });
         }
     }
 }

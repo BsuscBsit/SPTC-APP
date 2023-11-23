@@ -123,7 +123,7 @@ namespace SPTC_APP.View.Pages.Input
                     total += r.content;
                 }
             }
-            tbTotal.Text = total.ToString("0.00");
+            tbTotal.Text = $"\u20B1{total.ToString("N2")}";
             cashonhand.content = total;
         }
 

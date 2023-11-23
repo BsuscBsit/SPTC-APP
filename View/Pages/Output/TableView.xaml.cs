@@ -100,7 +100,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     new ColumnConfiguration("Operator.name.legalName", "OPERATOR NAME", minWidth: 140, filter:franchiseFilter),
                     new ColumnConfiguration("Driver.name.legalName", "DRIVER NAME", minWidth: 140, filter:franchiseFilter),
-                    new ColumnConfiguration("BuyingDate", "OWNERSHIP DATE", minWidth:120, filter:franchiseFilter),
+                    new ColumnConfiguration("displayBuyingDate", "OWNERSHIP DATE", minWidth:120, filter:franchiseFilter),
                     new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true, filter:franchiseFilter),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter:true, isNumeric: true, filter:franchiseFilter),
                     new ColumnConfiguration("MTOPNo", "MTOP NO.", minWidth: 100, isCenter:true, isNumeric: true, filter:franchiseFilter),
@@ -144,8 +144,8 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("Operator.name.legalName", "NAME", minWidth: 140, filter:opratorFilter),
                     new ColumnConfiguration("Driver.name.legalName", "DRIVER NAME", minWidth: 140, filter:opratorFilter),
                     new ColumnConfiguration("Operator.address", "ADDRESS", minWidth: 100, filter:opratorFilter),
-                    new ColumnConfiguration("Operator.birthday", "BIRTHDAY", minWidth:120, filter:opratorFilter),
-                    new ColumnConfiguration("BuyingDate", "MEMBERSHIP DATE", minWidth:120, filter:opratorFilter),
+                    new ColumnConfiguration("Operator.displayBirth", "BIRTHDAY", minWidth:120, filter:opratorFilter),
+                    new ColumnConfiguration("displayBuyingDate", "MEMBERSHIP DATE", minWidth:120, filter:opratorFilter),
                     new ColumnConfiguration("Operator.emergencyContact", "CONTACT", minWidth: 120, isNumeric: true, filter:opratorFilter),
                     new ColumnConfiguration("Operator.tinNumber", "TIN NUMBER", minWidth:120, filter:opratorFilter),
                     new ColumnConfiguration("Operator.votersNumbewr", "VOTERS ID", minWidth:120, filter:opratorFilter),
@@ -191,7 +191,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     new ColumnConfiguration("name.legalName", "NAME", minWidth: 140, filter:driverFilter),
                     new ColumnConfiguration("address", "ADDRESS", minWidth: 100, filter:driverFilter),
-                     new ColumnConfiguration("birthday", "BIRTHDAY", minWidth:120, filter:driverFilter),
+                     new ColumnConfiguration("displayBirth", "BIRTHDAY", minWidth:120, filter:driverFilter),
                      new ColumnConfiguration("Operator.emergencyContact", "CONTACT", minWidth: 120, isNumeric: true, filter:driverFilter),
                     new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80, isCenter : true, isNumeric : true, filter : driverFilter),
                     new ColumnConfiguration("licenseNo", "LICENSE", minWidth: 80, isCenter:true, isNumeric: true, filter:driverFilter),
@@ -531,6 +531,7 @@ namespace SPTC_APP.View.Pages.Output
             }
         }
 
+        //CONTROL THIS IN FILTER AS CHECKBOXES
         static Dictionary<string, bool> driverFilter = new Dictionary<string, bool>()
         {
             // DRIVER DEFAULT FILTER
@@ -540,11 +541,10 @@ namespace SPTC_APP.View.Pages.Output
             { "LICENSE", true },
             { "PAYMENT DUE", true },
 
-            { "BIRTHDAY", true },
-            { "CONTACT", true },
-            { "PLATE NO.", true },
+            { "BIRTHDAY", false },
+            { "CONTACT", false },
+            { "PLATE NO.", false },
         };
-
         static Dictionary<string, bool> franchiseFilter = new Dictionary<string, bool>()
         {
             // FRANCHISE DEFAULT FILTER
@@ -586,7 +586,7 @@ namespace SPTC_APP.View.Pages.Output
             //talbe == [Table.DRIVER, Table.OPERATOR, Table.FRANCHISE]
             // Decide the filter settings
             // FRANCHISE FILTER
-            // Operator Name, 
+            // franchiseFilter Dictionary, with "NAME" set the Value
             
         }
     }

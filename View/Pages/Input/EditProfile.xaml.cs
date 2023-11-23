@@ -22,6 +22,7 @@ namespace SPTC_APP.View.Pages.Input
     /// <summary>
     /// Interaction logic for ChangeOperator.xaml
     /// </summary>
+    /// NEEDS MORE ROOM FOR DRIVER AND OPERATOR CONTACT NUMBER
     public partial class EditProfile : Window
     {
         BitmapSource lastCapturedImage = null;

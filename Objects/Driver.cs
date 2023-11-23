@@ -107,6 +107,7 @@ namespace SPTC_APP.Objects
             mDriver.Insert(Field.EM_CONTACT_PERSON, this.emergencyPerson);
             mDriver.Insert(Field.EM_CONTACT_NUMBER, this.emergencyContact);
             mDriver.Insert(Field.DATE_OF_MEM, dateOfMembership);
+            mDriver.Insert(Field.LICENSE_NO, licenseNo);
             if (this.name != null)
             {
                 mDriver.Insert(Field.NAME_ID, this.name.Save());

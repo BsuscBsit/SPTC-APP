@@ -98,11 +98,15 @@ namespace SPTC_APP.View.Pages.Output
                 int pageIndex = 0;
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("Operator.name.legalName", "OPERATOR NAME", minWidth: 140),
-                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true),
-                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter:true, isNumeric: true),
-                    new ColumnConfiguration("MTOPNo", "MTOP NO.", minWidth: 100, isCenter:true, isNumeric: true),
-                    new ColumnConfiguration("MonthlyDues", "PAYMENT DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("Operator.name.legalName", "OPERATOR NAME", minWidth: 140, filter:franchiseFilter),
+                    new ColumnConfiguration("Driver.name.legalName", "DRIVER NAME", minWidth: 140, filter:franchiseFilter),
+                    new ColumnConfiguration("BuyingDate", "OWNERSHIP DATE", minWidth:120, filter:franchiseFilter),
+                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true, filter:franchiseFilter),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter:true, isNumeric: true, filter:franchiseFilter),
+                    new ColumnConfiguration("MTOPNo", "MTOP NO.", minWidth: 100, isCenter:true, isNumeric: true, filter:franchiseFilter),
+                    new ColumnConfiguration("MonthlyDues", "PAYMENT DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true, filter:franchiseFilter),
+                    new ColumnConfiguration("LoanBalance", "LOAN BALANCE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true, filter:franchiseFilter),
+                    new ColumnConfiguration("LongTermLoanBalance", "LTLOAN BALANCE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true, filter:franchiseFilter),
                 };
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
 
@@ -137,11 +141,20 @@ namespace SPTC_APP.View.Pages.Output
                 int pageIndex = 0;
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("Operator.name.legalName", "NAME", minWidth: 140),
-                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true),
-                    new ColumnConfiguration("PlateNo", "PLATE NO.", minWidth: 100, isCenter: true,isNumeric: true),
-                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter : true, isNumeric : true),
-                    new ColumnConfiguration("MonthlyDues", "PAYMENT DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("Operator.name.legalName", "NAME", minWidth: 140, filter:opratorFilter),
+                    new ColumnConfiguration("Driver.name.legalName", "DRIVER NAME", minWidth: 140, filter:opratorFilter),
+                    new ColumnConfiguration("Operator.address", "ADDRESS", minWidth: 100, filter:opratorFilter),
+                    new ColumnConfiguration("Operator.birthday", "BIRTHDAY", minWidth:120, filter:opratorFilter),
+                    new ColumnConfiguration("BuyingDate", "MEMBERSHIP DATE", minWidth:120, filter:opratorFilter),
+                    new ColumnConfiguration("Operator.emergencyContact", "CONTACT", minWidth: 120, isNumeric: true, filter:opratorFilter),
+                    new ColumnConfiguration("Operator.tinNumber", "TIN NUMBER", minWidth:120, filter:opratorFilter),
+                    new ColumnConfiguration("Operator.votersNumbewr", "VOTERS ID", minWidth:120, filter:opratorFilter),
+                    new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true, filter:opratorFilter),
+                    new ColumnConfiguration("PlateNo", "PLATE NO.", minWidth: 100, isCenter: true,isNumeric: true, filter:opratorFilter),
+                    new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter : true, isNumeric : true, filter:opratorFilter),
+                    new ColumnConfiguration("MonthlyDues", "PAYMENT DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true, filter:opratorFilter),
+                     new ColumnConfiguration("LoanBalance", "LOAN BALANCE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true, filter:opratorFilter),
+                    new ColumnConfiguration("LongTermLoanBalance", "LTLOAN BALANCE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true, filter:opratorFilter),
                 };
                 DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(TableGrid, columnConfigurations);
 
@@ -176,11 +189,15 @@ namespace SPTC_APP.View.Pages.Output
 
                 List<ColumnConfiguration> columnConfigurations = new List<ColumnConfiguration>
                 {
-                    new ColumnConfiguration("name.legalName", "NAME", minWidth: 140),
-                    new ColumnConfiguration("address", "ADDRESS", minWidth: 100),
-                    new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80, isCenter : true, isNumeric : true),
-                    new ColumnConfiguration("licenseNo", "LICENSE", minWidth: 80, isCenter:true, isNumeric: true),
-                    new ColumnConfiguration("franchise.Operator", "OPERATOR", minWidth: 120),
+                    new ColumnConfiguration("name.legalName", "NAME", minWidth: 140, filter:driverFilter),
+                    new ColumnConfiguration("address", "ADDRESS", minWidth: 100, filter:driverFilter),
+                     new ColumnConfiguration("birthday", "BIRTHDAY", minWidth:120, filter:driverFilter),
+                     new ColumnConfiguration("Operator.emergencyContact", "CONTACT", minWidth: 120, isNumeric: true, filter:driverFilter),
+                    new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80, isCenter : true, isNumeric : true, filter : driverFilter),
+                    new ColumnConfiguration("licenseNo", "LICENSE", minWidth: 80, isCenter:true, isNumeric: true, filter:driverFilter),
+                    new ColumnConfiguration("Franchise.PlateNo", "PLATE NO.", minWidth: 100, isCenter: true,isNumeric: true, filter:driverFilter),
+                    new ColumnConfiguration("franchise.Operator", "OPERATOR", minWidth: 120, filter:driverFilter),
+                    
                 };
                 DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(TableGrid, columnConfigurations);
 
@@ -513,68 +530,53 @@ namespace SPTC_APP.View.Pages.Output
                 (new AddLTLoan(MainBody.selectedFranchise)).Show();
             }
         }
-        public class Filter
+
+        static Dictionary<string, bool> driverFilter = new Dictionary<string, bool>()
         {
-            string Name;
-            bool isOn;
+            // DRIVER DEFAULT FILTER
+            { "NAME", true },
+            { "ADDRESS", true },
+            { "BODY NO.", true },
+            { "LICENSE", true },
+            { "PAYMENT DUE", true },
 
-            public Filter(string x, bool y)
-            {
-                this.Name = x;
-                this.isOn = y;
-            }
-        }
-
-        static List<Filter> franchiseFilter = new List<Filter>()
-        {
-            //FRANCHISE DEFAULT FILTER
-            new Filter("OPERATOR NAME", true),
-            new Filter("BODY NO.", true),
-            new Filter("SHARE CAPITAL", true),
-            new Filter("MTOP NO.", true),
-            new Filter("PAYMENT DUE", true),
-
-
-            new Filter("DRIVER NAME", false),
-            new Filter("LOAN BALANCE", false),
-            new Filter("LTLOAN BALANCE", false),
-            new Filter("OWNERSHIP DATE", false),
+            { "BIRTHDAY", true },
+            { "CONTACT", true },
+            { "PLATE NO.", true },
         };
 
-        static List<Filter> opratorFilter = new List<Filter>()
+        static Dictionary<string, bool> franchiseFilter = new Dictionary<string, bool>()
         {
-            //OPERATOR DEFAULT FILTER
-            new Filter("NAME", true),
-            new Filter("BODY NO.", true),
-            new Filter("PLATE NO.", true),
-            new Filter("SHARE CAPITAL", true),
-            new Filter("PAYMENT DUE", true),
+            // FRANCHISE DEFAULT FILTER
+            { "OPERATOR NAME", true },
+            { "BODY NO.", true },
+            { "SHARE CAPITAL", true },
+            { "MTOP NO.", true },
+            { "PAYMENT DUE", true },
 
-            new Filter("ADDRESS", false),
-            new Filter("BIRTHDAY", false),
-            new Filter("CONTACT", false),
-            new Filter("MEMBERSHIP DATE", false),
-            new Filter("TIN NUMBER", false),
-            new Filter("VOTERS ID", false),
-            new Filter("DRIVER NAME", false),
-            new Filter("LOAN BALANCE", false),
-            new Filter("LTLOAN BALANCE", false),
-            new Filter("OWNERSHIP DATE", false),
+            { "DRIVER NAME", false },
+            { "LOAN BALANCE", false },
+            { "LTLOAN BALANCE", false },
+            { "OWNERSHIP DATE", false },
         };
-
-        static List<Filter> driverFilter = new List<Filter>()
+        static Dictionary<string, bool> opratorFilter = new Dictionary<string, bool>()
         {
-            //DRIVER DEFAULT FILTER
-            new Filter("NAME", true),
-            new Filter("ADDRESS", true),
-            new Filter("BODY NO.", true),
-            new Filter("LICENSE", true),
-            new Filter("PAYMENT DUE", true),
+            // OPERATOR DEFAULT FILTER
+            { "NAME", true },
+            { "BODY NO.", true },
+            { "PLATE NO.", true },
+            { "SHARE CAPITAL", true },
+            { "PAYMENT DUE", true },
 
-            new Filter("ADDRESS", false),
-            new Filter("BIRTHDAY", false),
-            new Filter("CONTACT", false),
-            new Filter("PLATE NO.", false),
+            { "ADDRESS", false },
+            { "BIRTHDAY", false },
+            { "CONTACT", false },
+            { "MEMBERSHIP DATE", false },
+            { "TIN NUMBER", false },
+            { "VOTERS ID", false },
+            { "DRIVER NAME", false },
+            { "LOAN BALANCE", false },
+            { "LTLOAN BALANCE", false },
         };
 
         private void btnFilter_Click(object sender, RoutedEventArgs e)

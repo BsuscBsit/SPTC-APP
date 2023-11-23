@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using SPTC_APP.View.Pages.Output;
 
 namespace SPTC_APP.View.Controls
 {
@@ -41,6 +42,7 @@ public class DataGridHelper<T>
                     Width = new DataGridLength(config.Width, DataGridLengthUnitType.Star),
                     MinWidth = config.Width,
                     MaxWidth = config.MaxWidth,
+                    
                     HeaderStyle = new Style
                     {
                         Setters =
@@ -48,6 +50,7 @@ public class DataGridHelper<T>
                             new Setter(Control.FontWeightProperty, FontWeights.Bold),
                             new Setter(Control.HorizontalContentAlignmentProperty, HorizontalAlignment.Center),
                             new Setter(Control.FontFamilyProperty, new FontFamily("Inter")),
+                            new Setter(Control.VisibilityProperty, config.Visibility),
                         }
                     },
                     
@@ -105,9 +108,9 @@ public class DataGridHelper<T>
             bool isNumeric = false,
             bool haspeso = false,
             bool isPaid = false,
+            Dictionary<string, bool> filter = null,
             Brush backgroundColor = null,
-            FontWeight? fontWeight = null,
-            Visibility visibility = Visibility.Visible) 
+            FontWeight? fontWeight = null) 
         {
             BindingPath = bindingPath;
             Header = header;
@@ -122,7 +125,13 @@ public class DataGridHelper<T>
 
             FontWeight = fontWeight.HasValue ? fontWeight.Value : FontWeights.SemiBold;
 
-            Visibility = visibility;
+            if (filter != null && filter.ContainsKey(header))
+            {
+                Visibility = (filter[header]) ? Visibility.Visible : Visibility.Collapsed;
+            } else {
+
+                Visibility = Visibility.Collapsed;
+            }
         }
     }
 

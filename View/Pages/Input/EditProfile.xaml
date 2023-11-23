@@ -188,7 +188,6 @@
         Width="164"
         Height="30"
         Margin="15,0,0,0"
-        IsEnabled="False"
         Visibility="Hidden"
         Style="{StaticResource CommonTextBoxStyle}"
         TextWrapping="Wrap" />

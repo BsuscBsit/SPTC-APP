@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="TableView"
     mc:Ignorable="d">
-
     <Grid x:Name="franchisePanel">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -150,16 +149,18 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Button x:Name="btnHideFI"
+                    <Button
+                        x:Name="btnHideFI"
                         Grid.ColumnSpan="2"
                         Width="63"
                         Height="30"
                         Margin="0,0,0,10"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
+                        Click="btnHideFI_Click"
                         Content="Hide"
                         Style="{DynamicResource CommonButtonStyle}"
-                        Visibility="Hidden" Click="btnHideFI_Click" />
+                        Visibility="Hidden" />
                     <Ellipse
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
@@ -356,6 +357,135 @@
                 </Grid>
 
             </Border>
+        </Grid>
+        <Grid
+            x:Name="filterOptions"
+            Grid.Row="1"
+            Grid.ColumnSpan="2">
+            <Border Background="#CCFFFFFF" CornerRadius="10" />
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border
+                    Background="White"
+                    BorderBrush="{StaticResource BrushSoftGrey2}"
+                    BorderThickness="1"
+                    CornerRadius="10">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="20"
+                            Direction="-90"
+                            ShadowDepth="5"
+                            Color="{StaticResource ColorSoftGrey1}" />
+                    </Border.Effect>
+                </Border>
+                <Grid
+                    Width="303"
+                    MinWidth="351"
+                    Margin="15,15,15,15"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        HorizontalAlignment="Center"
+                        Content="Filter Settings"
+                        Style="{StaticResource CommonTitlePreset}" />
+                    <Label
+                        Grid.Row="1"
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Content="Filter By:"
+                        Style="{StaticResource TextFieldLabelingPreset}" />
+                    <Label
+                        Grid.Row="4"
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Content="Only Show:"
+                        Style="{StaticResource TextFieldLabelingPreset}" />
+                    <StackPanel
+                        x:Name="spFranchiseBY"
+                        Grid.Row="3"
+                        MinHeight="30"
+                        Margin="15,10,0,0">
+                        <RadioButton Content="Operator Name"/>
+                        <RadioButton Content="Body Number"/>
+                        <RadioButton Content="Share Capital"/>
+                        <RadioButton Content="MTOP Number"/>
+                        <RadioButton Content="Payment Due"/>
+                        <!-- ??? -->
+                    </StackPanel>
+                        <StackPanel
+                        x:Name="spOperatorBY"
+                        Grid.Row="3"
+                        MinHeight="30"
+                        Margin="15,10,0,0" />
+                    <StackPanel
+                        x:Name="spDriverBY"
+                        Grid.Row="3"
+                        MinHeight="30"
+                        Margin="15,10,0,0" />
+                    <StackPanel
+                        x:Name="spFranchiseSHOW"
+                        Grid.Row="6"
+                        MinHeight="30"
+                        Margin="15,10,0,0">
+                        <CheckBox Content="Franchise with loans."/>
+                        <CheckBox Content="Franchise with long term loans."/>
+                    </StackPanel>
+                    <StackPanel
+                        x:Name="spOperatorSHOW"
+                        Grid.Row="6"
+                        MinHeight="30"
+                        Margin="15,10,0,0" />
+                    <StackPanel
+                        x:Name="spDriverSHOW"
+                        Grid.Row="6"
+                        MinHeight="30"
+                        Margin="15,10,0,0" />
+                    <Rectangle
+                        Grid.Row="2"
+                        Height="1"
+                        VerticalAlignment="Top"
+                        Stroke="{StaticResource BrushGrey}" />
+                    <Rectangle
+                        Grid.Row="5"
+                        Height="1"
+                        VerticalAlignment="Top"
+                        Stroke="{StaticResource BrushGrey}" />
+                    <StackPanel
+                        Grid.Row="7"
+                        Margin="0,10,0,12"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Button
+                            x:Name="btnApplyFiltersCancel"
+                            Width="140"
+                            Height="30"
+                            Margin="0,0,10,0"
+                            Click="btnApplyFiltersCancel_Click"
+                            Content="Cancel"
+                            Style="{DynamicResource CommonButtonStyle}" />
+                        <Button
+                            x:Name="btnApplyFilters"
+                            Width="140"
+                            Height="30"
+                            Click="btnApplyFilters_Click"
+                            Content="Apply Filters"
+                            Style="{DynamicResource CommonButtonStyle}" />
+
+                    </StackPanel>
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

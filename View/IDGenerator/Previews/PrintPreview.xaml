@@ -125,7 +125,6 @@
                                                     Margin="0,0,0,0"
                                                     Opacity="0.2"
                                                     Source="/View/Images/no_id.png"
-                                                    Stretch="UniformToFill"
                                                     Tag="NullImage" />
                                             </Grid>
 
@@ -147,7 +146,6 @@
                                                     Margin="0,0,0,0"
                                                     Opacity="0.2"
                                                     Source="/View/Images/no_id.png"
-                                                    Stretch="UniformToFill"
                                                     Tag="NullImage" />
                                             </Grid>
 
@@ -169,7 +167,6 @@
                                                     Margin="0,0,0,0"
                                                     Opacity="0.2"
                                                     Source="/View/Images/no_id.png"
-                                                    Stretch="UniformToFill"
                                                     Tag="NullImage" />
                                             </Grid>
 
@@ -191,7 +188,6 @@
                                                     Margin="0,0,0,0"
                                                     Opacity="0.2"
                                                     Source="/View/Images/no_id.png"
-                                                    Stretch="UniformToFill"
                                                     Tag="NullImage" />
                                             </Grid>
 

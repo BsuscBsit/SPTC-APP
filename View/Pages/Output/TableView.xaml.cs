@@ -46,12 +46,16 @@ namespace SPTC_APP.View.Pages.Output
 
            
             UpdateDefaultSidePanel();
+            filterOptions.Visibility = Visibility.Hidden;
         }
 
         private void UpdateDefaultSidePanel()
         {
 
-            franchiseInformation.AnimateWidth(0, 0.3);
+            franchiseInformation.AnimateWidth(0, 0.3, () =>
+            {
+                btnHideFI.Visibility = Visibility.Hidden;
+            });
             if (table == Table.FRANCHISE)
             {
                 btnManage.Visibility = Visibility.Visible;
@@ -404,7 +408,11 @@ namespace SPTC_APP.View.Pages.Output
                 btnAddLTLoan.Visibility = Visibility.Collapsed;
             }
 
-            franchiseInformation.AnimateWidth(325, 0.3);
+            franchiseInformation.AnimateWidth(325, 0.3, () =>
+            {
+                if(btnHideFI.Visibility == Visibility.Hidden)
+                    btnHideFI.FadeIn(0.3);
+            });
         }
 
         private void ValuePairFI(Label lblF, string name, Label lblI, string value)
@@ -581,6 +589,17 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnFilter_Click(object sender, RoutedEventArgs e)
         {
+            if(filterOptions.Visibility != Visibility.Visible)
+            {
+                filterOptions.FadeIn(0.2, () =>
+                {
+                    showFilterChoices(this.table);
+                });
+            }
+            else
+            {
+                filterOptions.FadeOut(0.2);
+            }
             //Open filters view with button
             //different filters depending on the tableview details
             //talbe == [Table.DRIVER, Table.OPERATOR, Table.FRANCHISE]
@@ -588,6 +607,55 @@ namespace SPTC_APP.View.Pages.Output
             // FRANCHISE FILTER
             // franchiseFilter Dictionary, with "NAME" set the Value
             
+        }
+        
+        private void btnHideFI_Click(object sender, RoutedEventArgs e)
+        {
+            franchiseInformation.AnimateWidth(0, 0.3, () =>
+            {
+                btnHideFI.Visibility = Visibility.Hidden;
+            });
+        }
+
+        private void btnApplyFilters_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnApplyFiltersCancel_Click(object sender, RoutedEventArgs e)
+        {
+            filterOptions.FadeOut(0.2);
+        }
+
+        private void showFilterChoices(string tbl)
+        {
+            spFranchiseBY.Visibility = Visibility.Hidden;
+            spOperatorBY.Visibility = Visibility.Hidden;
+            spDriverBY.Visibility = Visibility.Hidden;
+            spFranchiseSHOW.Visibility = Visibility.Hidden;
+            spOperatorSHOW.Visibility = Visibility.Hidden;
+            spDriverSHOW.Visibility = Visibility.Hidden;
+
+            switch (tbl)
+            {
+                case Table.FRANCHISE:
+                    spFranchiseBY.Visibility = Visibility.Visible;
+                    spFranchiseSHOW.Visibility = Visibility.Visible;
+                    break;
+
+                case Table.OPERATOR:
+                    spOperatorBY.Visibility = Visibility.Visible;
+                    spOperatorSHOW.Visibility = Visibility.Visible;
+                    break;
+
+                case Table.DRIVER:
+                    spDriverBY.Visibility = Visibility.Visible;
+                    spDriverSHOW.Visibility = Visibility.Visible;
+                    break;
+
+                default:
+                    return;
+            }
         }
     }
 }

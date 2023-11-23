@@ -14,7 +14,8 @@
     mc:Ignorable="d">
     <Grid
         x:Name="AddShareCapital"
-        Width="694" Height="497">
+        Width="694"
+        Height="497">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
@@ -168,7 +169,8 @@
         <ScrollViewer
             Grid.Row="4"
             Grid.RowSpan="8"
-            Grid.Column="3" Height="260">
+            Grid.Column="3"
+            Height="260">
             <Grid x:Name="gridReceipt" Margin="15,15,15,15">
                 <Border
                     Background="White"
@@ -258,12 +260,13 @@
                     <Label
                         x:Name="lblTotalBreak"
                         Grid.Row="9"
+                        Grid.Column="1"
                         Margin="0,2,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Content="N/A"
                         FontWeight="Bold"
-                        Style="{StaticResource LabelFontSmall}" Grid.Column="1" />
+                        Style="{StaticResource LabelFontSmall}" />
                     <Label
                         x:Name="lblAmort"
                         Grid.Row="12"
@@ -276,10 +279,11 @@
                         x:Name="lblRemainingBalance"
                         Grid.Row="16"
                         Grid.Column="1"
+                        Margin="0,15,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Content="N/A"
-                        Style="{StaticResource LabelFontSmall}" Margin="0,15,0,0" />
+                        Style="{StaticResource LabelFontSmall}" />
                     <Label
                         Grid.Row="0"
                         Content="Loan Details"
@@ -353,10 +357,11 @@
                         Style="{StaticResource LabelFontSmall}" />
                     <Label
                         Grid.Row="16"
+                        Margin="0,15,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Content="Remaining Balance:"
-                        Style="{StaticResource LabelFontSmall}" Margin="0,15,0,0" />
+                        Style="{StaticResource LabelFontSmall}" />
                     <Label
                         Grid.Row="9"
                         HorizontalAlignment="Left"
@@ -366,11 +371,12 @@
                         Style="{StaticResource LabelFontSmall}" />
                     <Label
                         Grid.Row="11"
+                        Grid.ColumnSpan="2"
                         Margin="0,15,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Content="Payment in total for this transaction"
-                        Style="{StaticResource SubTitlePreset}" Grid.ColumnSpan="2" />
+                        Style="{StaticResource SubTitlePreset}" />
                     <Label
                         Grid.Row="13"
                         HorizontalAlignment="Left"

@@ -458,16 +458,16 @@ namespace SPTC_APP.View.Pages
                 breakTot = loanRec;
 
                 UpdateLabels(
-                    "₱" + amount.ToString("N2"),
-                    (processingFee > 0 ? "- " : "") + "₱" + processingFee.ToString("N2"),
-                    (interest > 0 ? "- " : "") + "₱" + interest.ToString("N2"),
+                    $"\u20B1 {amount.ToString("N2")}",
+                    $"{(processingFee > 0 ? "- " : "")}\u20B1{processingFee.ToString("N2")}",
+                    $"{(interest > 0 ? "- " : "")}\u20B1{interest.ToString("N2")}",
                     (SolidColorBrush)FindResource("BrushRed"),
                     "Already deducted.",
                     (SolidColorBrush)FindResource("BrushDeepGreen"),
-                    (cbu > 0 ? "- " : "") + "₱" + cbu.ToString("N2"),
-                    "₱" + principal.ToString("N2"),
-                    "₱" + loanRec.ToString("N2"),
-                    "₱" + loanRec.ToString("N2"));
+                    $"{(cbu > 0 ? "- " : "")}\u20B1{cbu.ToString("N2")}",
+                    $"\u20B1 {principal.ToString("N2")}",
+                    $"\u20B1 {loanRec.ToString("N2")}",
+                    $"\u20B1 {loanRec.ToString("N2")}");
             }
             else if (type.Contains("long"))
             {
@@ -479,16 +479,16 @@ namespace SPTC_APP.View.Pages
                 breakTot = loanRecRounded + interest;
 
                 UpdateLabels(
-                    "₱" + amount.ToString("N2"),
-                    (processingFee > 0 ? "- " : "") + "₱" + processingFee.ToString("N2"),
+                    $"\u20B1 {amount.ToString("N2")}",
+                    $"{(processingFee > 0 ? "- " : "")}\u20B1{processingFee.ToString("N2")}",
                     "Not deducted yet.",
                     (SolidColorBrush)FindResource("BrushDeepGreen"),
-                    "₱" + interest.ToString("N2"),
+                    $"\u20B1 {interest.ToString("N2")}",
                     (SolidColorBrush)FindResource("BrushDeepBlue"),
-                    (cbu > 0 ? "- " : "") + "₱" + cbu.ToString("N2"),
-                    "₱" + principal.ToString("N2"),
-                    "₱" + loanRec.ToString("N2") + (shouldRound? "\n -> ( ₱" + loanRecRounded.ToString("N2") + " )" : ""),
-                    "₱" + breakTot.ToString("N2"));
+                    $"{(cbu > 0 ? "- " : "")}\u20B1{cbu.ToString("N2")}",
+                    $"\u20B1 {principal.ToString("N2")}",
+                    $"\u20B1 {loanRec.ToString("N2")}{(shouldRound ? $"\n -> \u20B1{loanRecRounded.ToString("N2")})" : "")}",
+                    $"\u20B1 {breakTot.ToString("N2")}");
             }
             else if (type.Contains("emergency"))
             {
@@ -498,16 +498,16 @@ namespace SPTC_APP.View.Pages
                 breakTot = loanRec + interest;
 
                 UpdateLabels(
-                    "₱" + amount.ToString("N2"),
-                    (processingFee > 0 ? "- " : "") + "₱" + processingFee.ToString("N2") + " (To Pay)",
+                    $"\u20B1 {amount.ToString("N2")}",
+                    $"{(processingFee > 0 ? "- " : "")}\u20B1{processingFee.ToString("N2") + " (To Pay)"}",
                     "Not deducted yet.",
                     (SolidColorBrush)FindResource("BrushDeepGreen"),
-                    "₱" + interest.ToString("N2"),
+                    $"\u20B1 {interest.ToString("N2")}",
                     (SolidColorBrush)FindResource("BrushDeepBlue"),
-                    (cbu > 0 ? "- " : "") + "₱" + cbu.ToString("N2") + " (To Pay)",
-                    "₱" + principal.ToString("N2"),
-                    "₱" + loanRec.ToString("N2"),
-                    "₱" + breakTot.ToString("N2"));
+                    $"{(cbu > 0 ? "- " : "")}\u20B1{cbu.ToString("N2") + " (To Pay)"}",
+                    $"\u20B1 {principal.ToString("N2")}",
+                    $"\u20B1 {loanRec.ToString("N2")}",
+                    $"\u20B1 {breakTot.ToString("N2")}");
             }
             else
             {
@@ -546,7 +546,7 @@ namespace SPTC_APP.View.Pages
 
                 if (amount > 1 && termLength >= 2)
                 {
-                    lblInTot.Content = $"* ₱ {(breakTot * termLength).ToString("N2")} in {termLength.ToString("N0")} mos.";
+                    lblInTot.Content = $"* \u20B1 {(breakTot * termLength).ToString("N2")} in {termLength.ToString("N0")} mos.";
                     lblInTot.Visibility = Visibility.Visible;
                 }
                 else

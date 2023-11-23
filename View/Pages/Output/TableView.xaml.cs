@@ -535,15 +535,15 @@ namespace SPTC_APP.View.Pages.Output
         static List<Filter> franchiseFilter = new List<Filter>()
         {
             //FRANCHISE DEFAULT FILTER
-            new Filter("OPERATOR NAME", false),
-            new Filter("BODY NO.", false),
+            new Filter("OPERATOR NAME", true),
+            new Filter("BODY NO.", true),
             new Filter("SHARE CAPITAL", true),
-            new Filter("MTOP NO.", false),
+            new Filter("MTOP NO.", true),
             new Filter("PAYMENT DUE", true),
 
 
             new Filter("DRIVER NAME", false),
-            new Filter("LOAN BALANCE", true),
+            new Filter("LOAN BALANCE", false),
             new Filter("LTLOAN BALANCE", false),
             new Filter("OWNERSHIP DATE", false),
         };

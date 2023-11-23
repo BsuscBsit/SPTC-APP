@@ -234,7 +234,7 @@
                 Content="E-signature"
                 Style="{StaticResource TextFieldLabelingPreset}" />
             <TextBox
-                x:Name="tbAddressLine1"
+                x:Name="tbAddressLine2"
                 Grid.Row="3"
                 Grid.Column="0"
                 Width="352.8"
@@ -243,7 +243,7 @@
                 Style="{StaticResource CommonTextBoxStyle}"
                 TextWrapping="Wrap" />
             <TextBox
-                x:Name="tbAddressLine2"
+                x:Name="tbAddressLine1"
                 Grid.Row="1"
                 Grid.Column="0"
                 Width="352.8"

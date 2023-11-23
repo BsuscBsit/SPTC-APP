@@ -134,7 +134,7 @@ namespace SPTC_APP.View
                     /*tboxEmePer.Text = drv.emergencyPerson;
                     tboxPhone.Text = drv.emergencyContact;*/
                     tboxBnum.Text = franchise.BodyNumber;
-                    tboxLnum.Text = franchise.LicenseNO;
+                    tboxLnum.Text = franchise.PlateNo;
                     MySwitch_Front(MySwitch, null);
                 }
             } else
@@ -176,7 +176,7 @@ namespace SPTC_APP.View
                     /*tboxEmePer.Text = drv.emergencyPerson;
                     tboxPhone.Text = drv.emergencyContact;*/
                     tboxBnum.Text = franchise.BodyNumber;
-                    tboxLnum.Text = franchise.LicenseNO;
+                    tboxLnum.Text = franchise.PlateNo;
                     MySwitch_Back(MySwitch, null);
                 }
             }

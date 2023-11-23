@@ -1,0 +1,27 @@
+﻿<Window x:Class="SPTC_APP.View.Pages.Output.Reports"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SPTC_APP.View.Pages.Output"
+        Focusable="False"
+        IsHitTestVisible="False"
+        IsTabStop="False"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        Topmost="False"
+        WindowStyle="None"
+        mc:Ignorable="d"
+        Title="Reports">
+    <Grid x:Name="reportpage" Width="728.8" Height="985.2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="SPTC REPORT: RECAPITULATONS" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="20" Style="{StaticResource CommonTitlePreset}"/>
+        <Label x:Name="lblDate" Grid.Row="1" Content="Jan 2023" Style="{StaticResource LabelFontLarge}" Margin="20, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        
+        <!-- Complete this based on picture for recap -->
+    </Grid>
+</Window>

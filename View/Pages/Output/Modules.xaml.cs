@@ -92,7 +92,7 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     dgLedger.Items.Add(tmp);
                 }
-                lblTotalLedger.Content = "\u20B1 " + franchise.GetTotalShareCapital().ToString("0.00");
+                lblTotalLedger.Content = "\u20B1 " + franchise.ShareCapital.ToString("0.00");
             } 
             else if(strmod == LOAN_APPLY)
             {
@@ -359,7 +359,7 @@ namespace SPTC_APP.View.Pages.Output
                 }
                 else if (selectedPayment is PaymentDetails<Ledger.Loan> l)
                 {
-                    Ledger.Loan loan = franchise.GetLoans().FirstOrDefault();
+                    Ledger.Loan loan = franchise.currentloan;
                     loan.amount = loan.amount + l.deposit;
                     loan.Save();
                     l.delete();
@@ -367,7 +367,7 @@ namespace SPTC_APP.View.Pages.Output
                 }
                 else if (selectedPayment is PaymentDetails<Ledger.LongTermLoan> ltl)
                 {
-                    Ledger.LongTermLoan loan = franchise.GetLTLoans().FirstOrDefault();
+                    Ledger.LongTermLoan loan = franchise.currentltloan;
                     loan.amount = loan.amount + ltl.deposit;
                     loan.Save();
                     ltl.delete();

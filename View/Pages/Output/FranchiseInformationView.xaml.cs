@@ -42,11 +42,13 @@ namespace SPTC_APP.View.Pages.Output
             lblbodyNumber.Content = MainBody.selectedFranchise?.BodyNumber;
             lblOperatorName.Content = MainBody.selectedFranchise?.Operator;
             lblDateOfBIrth.Content = MainBody.selectedFranchise?.Operator?.birthday.ToLongDateString();
-            lblPlateNo.Content = MainBody.selectedFranchise?.LicenseNO;
+            lblPlateNo.Content = MainBody.selectedFranchise?.PlateNo;
             lblMTOPNo.Content = MainBody.selectedFranchise?.MTOPNo;
             lblDriverName.Content = MainBody.selectedFranchise?.Driver?.name?.legalName ?? "N/A";
             connumber.Content = MainBody.selectedFranchise?.Operator?.emergencyContact ?? "N/A";
-
+            MainBody.selectedFranchise?.loadshare(true);
+            MainBody.selectedFranchise?.loadLoan(true);
+            MainBody.selectedFranchise?.loadltloan(true);
             if (MainBody.selectedFranchise?.Operator?.image?.GetSource() != null)
             {
                 imgProfilePic.ImageSource = MainBody.selectedFranchise?.Operator?.image?.GetSource();
@@ -237,7 +239,7 @@ namespace SPTC_APP.View.Pages.Output
             }
             else if(result == 1)
             {
-                (new NewOptr_Drv(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
+                (new EditProfile(MainBody.selectedFranchise, General.NEW_DRIVER)).ShowDialog();
                 UpdateContent();
             }
             else if (result == 0)
@@ -273,7 +275,7 @@ namespace SPTC_APP.View.Pages.Output
             {
                 if (MainBody.selectedFranchise.LoanBalance + MainBody.selectedFranchise.LongTermLoanBalance == 0)
                 {
-                    (new NewOptr_Drv(MainBody.selectedFranchise, General.TRANSFER_FRANCHISE_OWNERSHIP)).Show();
+                    (new EditProfile(MainBody.selectedFranchise, General.TRANSFER_FRANCHISE_OWNERSHIP)).Show();
                 } else
                 {
                     ControlWindow.ShowStatic("Franchise transfer failed", "Cannot transfer franchise while having loan balance", Icons.DEFAULT);

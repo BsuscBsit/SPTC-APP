@@ -10,7 +10,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using System.Windows.Media;
 using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
 namespace SPTC_APP.View.Pages.Input
 {
@@ -22,6 +22,8 @@ namespace SPTC_APP.View.Pages.Input
         int currentmonth;
         int currentyear;
         private string[] monthAbbreviations = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
+
+        static Recap cashonhand;
 
         public Recapitulations()
         {
@@ -101,7 +103,6 @@ namespace SPTC_APP.View.Pages.Input
             List<Recap> recaps = AppState.LoadRecapitulations(currentmonth, currentyear);
 
             recapgrid.RowDefinitions.Clear();
-            gridChashonhand.Children.Clear();
             recapgrid.Children.Clear();
             double total = 0;
 
@@ -109,30 +110,46 @@ namespace SPTC_APP.View.Pages.Input
             {
                 if (r.text == Field.CASH_ON_HAND)
                 {
-                    RecapDisplay recapDisplay = new RecapDisplay(this, r, recaps.Count - 1, check(r.text));
-                    gridChashonhand.Children.Add(recapDisplay.AddSelf());
+                    cashonhand = r;
                 }
                 else
                 {
                     RowDefinition rowDefinition = new RowDefinition();
                     rowDefinition.Height = new GridLength(40);
                     recapgrid.RowDefinitions.Add(rowDefinition);
-
-                    RecapDisplay recapDisplay = new RecapDisplay(this, r, recaps.IndexOf(r) - 1, check(r.text));
+                    
+                    RecapDisplay recapDisplay = new RecapDisplay(this, r, recaps.IndexOf(r) - 1, check(r));
                     recapgrid.Children.Add(recapDisplay.AddSelf());
                     total += r.content;
                 }
             }
             tbTotal.Text = total.ToString("0.00");
+            cashonhand.content = total;
         }
 
-        private KeyValuePair<bool, double> check(string r)
+        private bool check(Recap r)
         {
-            switch(r){
+            switch(r.text){
                 case "Share Capital":
-                    return new KeyValuePair<bool, double>(true, Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault());
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                case "Monthly Dues":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH($"LOAN\" || {Field.LEDGER_TYPE} = \"LONGTERMLOAN", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                case "Loan Receivable - Pastdue":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_PASTDUE_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                case "--------------- - Current":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_CURRENT_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                case "Penalties":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_PENALTY_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                case "Interest Receivable":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_INTEREST_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
                 default:
-                    return  new KeyValuePair<bool, double>(false, 0);
+                    return false;
             }
         }
 
@@ -149,15 +166,13 @@ namespace SPTC_APP.View.Pages.Input
             public TextBox textBox;
             private Grid grid;
             private bool isReadOnly;
-            private double autoval;
 
-            public RecapDisplay(Recapitulations rptc, Recap r, int row, KeyValuePair<bool, double> kvp)
+            public RecapDisplay(Recapitulations rptc, Recap r, int row, bool isread = false)
             {
                 this.recapmain = rptc;
                 this.recap = r;
                 this.grid = new Grid();
-                this.isReadOnly = kvp.Key;
-                this.autoval = kvp.Value;
+                this.isReadOnly = isread;
                 grid.SetValue(Grid.RowProperty, row); 
 
                 ColumnDefinition col1 = new ColumnDefinition();
@@ -168,11 +183,12 @@ namespace SPTC_APP.View.Pages.Input
                 grid.ColumnDefinitions.Add(col2);
 
                 this.label = new Label();
-                label.Content = $"{recap.text}: " + (isReadOnly? $"({autoval})": "");
+                label.Content = $"{recap.text}: ";
                 label.SetValue(Grid.ColumnProperty, 0);
                 label.HorizontalAlignment = HorizontalAlignment.Right;
-                label.Width = 200;
+                label.Width = 180;
                 label.VerticalAlignment = VerticalAlignment.Center;
+
 
                 this.textBox = new TextBox();
                 textBox.Text = recap.content.ToString("0.00");
@@ -181,6 +197,11 @@ namespace SPTC_APP.View.Pages.Input
                 textBox.Style = Application.Current.FindResource("CommonTextBoxStyle") as Style;
                 textBox.VerticalAlignment = VerticalAlignment.Center;
                 textBox.Margin = new Thickness(20, 0, 10, 0);
+                if (isReadOnly)
+                {
+                    textBox.Background = Brushes.Blue;
+                }
+                textBox.IsReadOnly = isReadOnly;
                 textBox.GotFocus += SelectAll;
                 textBox.LostFocus += Save;
                 textBox.DefaultTextBoxBehavior(NUMBERPERIOD, true, recapmain.gridToast, null, row);

@@ -16,6 +16,7 @@ namespace SPTC_APP.Objects
         public string remarks { get; set; }
         public DateTime birthday { get; set; }
         public string emergencyPerson { get; set; }
+        public string licenseNo { get; set; }
         public string emergencyContact { get; set; }
         public DateTime dateOfMembership = DateTime.Now;
         public Violation violation { get; set; }
@@ -63,6 +64,7 @@ namespace SPTC_APP.Objects
             this.id = Retrieve.GetValueOrDefault<int>(reader, Field.ID);
             this.remarks = Retrieve.GetValueOrDefault<string>(reader, Field.REMARKS);
             this.birthday = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE_OF_BIRTH);
+            this.licenseNo = Retrieve.GetValueOrDefault<string>(reader, Field.LICENSE_NO);
             this.emergencyPerson = Retrieve.GetValueOrDefault<string>(reader, Field.EM_CONTACT_PERSON);
             this.emergencyContact = Retrieve.GetValueOrDefault<string>(reader, Field.EM_CONTACT_NUMBER);
             this.dateOfMembership = Retrieve.GetValueOrDefault<DateTime>(reader, Field.DATE_OF_MEM);

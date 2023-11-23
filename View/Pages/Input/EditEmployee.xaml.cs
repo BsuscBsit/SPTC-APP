@@ -33,7 +33,7 @@ namespace SPTC_APP.View.Pages.Input
         bool hasSign = false;
         bool isEdit = false;
         bool isManage = false;
-        private bool isCameraRunning;
+        private bool isCameraRunning = false;
 
         private string canceledMSG;
         private string savedMSG;

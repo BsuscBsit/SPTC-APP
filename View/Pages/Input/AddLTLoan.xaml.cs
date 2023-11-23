@@ -56,9 +56,10 @@ namespace SPTC_APP.View.Pages.Input
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             this.franchise = franchise;
-            dpBdate.DisplayDate = DateTime.Now;
             dpBdate.SelectedDate = DateTime.Now;
-            ltloan = this.franchise.GetLTLoans().FirstOrDefault();
+            dpBdate.DisplayDate = DateTime.Now;
+
+            ltloan = this.franchise.currentltloan;
 
             lblLoanDate.Content = ltloan.displayDate;
             lblLoanCVOR.Content = ltloan.cv_or;
@@ -91,7 +92,7 @@ namespace SPTC_APP.View.Pages.Input
             // Kung kaya, i-autocompute sana.
             tbPenalty.Text = "0";
 
-
+            tboxCVOR.Text = (AppState.CV_OR_LAST + 1).ToString();
             compute(0);
 
             DraggingHelper.DragWindow(topBar);
@@ -121,8 +122,10 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     ltloan.isFullyPaid = true;
                 }
+                ltloan.last_payment = dpBdate.DisplayDate;
                 loanPayment.Save();
-                    
+                AppState.CV_OR_LAST = Int32.Parse(tboxCVOR.Text);
+                AppState.SaveToJson();
                 //(AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
                 this.closingMSG = "Adding loan payment history was successful.\nPlease refresh the view to see changes.";
                 this.Close();

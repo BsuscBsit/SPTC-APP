@@ -12,10 +12,7 @@
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid
-        x:Name="editProfile"
-        Width="677"
-        Height="477">
+    <Grid Width="655" Height="580">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
@@ -36,269 +33,430 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Border
-            x:Name="topBar"
-            Grid.ColumnSpan="7"
-            Style="{StaticResource TopBarStyle}" />
+        x:Name="topBar"
+        Grid.ColumnSpan="9"
+        Style="{StaticResource TopBarStyle}" />
         <Label
-            x:Name="lblTitle"
-            Grid.Row="1"
-            Grid.ColumnSpan="5"
-            Margin="20,0,0,0"
-            Padding="0,5,5,5"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Content="EDIT PROFILE"
-            Style="{DynamicResource CommonTitlePreset}" />
+        x:Name="lblTitle"
+        Grid.Row="1"
+        Grid.ColumnSpan="9"
+        Margin="20,0,0,0"
+        Padding="0,5,5,5"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Center"
+        Content="EDIT PROFILE"
+        Style="{DynamicResource CommonTitlePreset}" />
         <Label
-            Grid.Row="3"
-            Grid.Column="1"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Content="First Name:"
-            Style="{StaticResource TextFieldLabelingPreset}" />
+        x:Name="lblPhoto"
+        Grid.Row="3"
+        Grid.Column="1"
+        Padding="0,5,0,5"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Bottom"
+        Content="Photo"
+        Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-            Grid.Row="3"
-            Grid.Column="3"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Content="Middle Name: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
+        Grid.Row="3"
+        Grid.Column="3"
+        Grid.ColumnSpan="3"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Bottom"
+        Content="First Name:"
+        Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-            Grid.Row="3"
-            Grid.Column="5"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Content="Last Name: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
+        Grid.Row="5"
+        Grid.Column="3"
+        Grid.ColumnSpan="3"
+        Margin="0,15,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Bottom"
+        Content="Middle Name:"
+        Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-            Grid.Row="5"
-            Grid.Column="1"
-            Margin="0,15,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Content="Birthdate: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
+        Grid.Row="7"
+        Grid.Column="3"
+        Grid.ColumnSpan="3"
+        Margin="0,15,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Bottom"
+        Content="Last Name:"
+        Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-            Grid.Row="5"
-            Grid.Column="3"
-            Margin="0,15,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Content="Gender: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
+        Grid.Row="5"
+        Grid.Column="5"
+        Grid.ColumnSpan="2"
+        Margin="0,15,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Bottom"
+        Content="Gender:"
+        Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-            Grid.Row="5"
-            Grid.Column="5"
-            Margin="0,15,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Content="Contact Number: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
+        Grid.Row="3"
+        Grid.Column="5"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Bottom"
+        Content="Birthdate:"
+        Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-            Grid.Row="7"
-            Grid.Column="1"
-            Margin="0,15,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Content="Country: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
-        <Label
-            Grid.Row="7"
-            Grid.Column="3"
-            Margin="0,15,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Content="Province: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
-        <Label
-            Grid.Row="7"
-            Grid.Column="5"
-            Margin="0,15,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Content="City/Municipality: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
-        <Label
-            Grid.Row="9"
-            Grid.Column="1"
-            Margin="0,15,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Content="Barangay: "
-            Style="{StaticResource TextFieldLabelingPreset}" />
+            x:Name="lblDriverLicense"
+        Grid.Row="7"
+        Grid.Column="5"
+        Margin="0,15,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Bottom"
+        Content="License:"
+            Visibility="Hidden"
+        Style="{StaticResource TextFieldLabelingPreset}" />
+        <StackPanel
+        Grid.Row="4"
+        Grid.RowSpan="5"
+        Grid.Column="1"
+        HorizontalAlignment="Center" />
         <TextBox
-            x:Name="tboxsFname"
-            Grid.Row="4"
-            Grid.Column="1"
-            Width="164"
-            Height="30"
-            Margin="15,0,0,0"
-            Style="{StaticResource CommonTextBoxStyle}"
-            Text="" />
+        x:Name="tbFname"
+        Grid.Row="4"
+        Grid.Column="3"
+        Grid.ColumnSpan="1"
+        Width="164"
+        Height="30"
+        Margin="15,0,0,0"
+        Style="{StaticResource CommonTextBoxStyle}"
+        TextWrapping="Wrap" />
         <TextBox
-            x:Name="tboxsMname"
-            Grid.Row="4"
-            Grid.Column="3"
-            Width="164"
-            Height="30"
-            Margin="15,0,0,0"
-            Style="{StaticResource CommonTextBoxStyle}"
-            Text="" />
+        x:Name="tbMname"
+        Grid.Row="6"
+        Grid.Column="3"
+        Grid.ColumnSpan="1"
+        Width="164"
+        Height="30"
+        Margin="15,0,0,0"
+        Style="{StaticResource CommonTextBoxStyle}"
+        TextWrapping="Wrap" />
         <TextBox
-            x:Name="tboxsLname"
-            Grid.Row="4"
-            Grid.Column="5"
-            Width="164"
-            Height="30"
-            Margin="15,0,0,0"
-            Style="{StaticResource CommonTextBoxStyle}"
-            Text="" />
-        <Label
-            Grid.Row="9"
-            Grid.Column="3"
-            Grid.ColumnSpan="3"
+        x:Name="tbLname"
+        Grid.Row="8"
+        Grid.Column="3"
+        Grid.ColumnSpan="1"
+        Width="164"
+        Height="30"
+        Margin="15,0,0,0"
+        Style="{StaticResource CommonTextBoxStyle}"
+        TextWrapping="Wrap" />
+        <ComboBox
+        x:Name="cbGender"
+        Grid.Row="6"
+        Grid.Column="5"
+        Width="164"
+        Height="30"
+        Margin="15,0,0,0"
+        IsReadOnly="True"
+        IsTabStop="False"
+        SelectedIndex="0"
+        Style="{DynamicResource CommonComboBox}">
+            <ComboBoxItem Content="MALE" />
+            <ComboBoxItem Content="FEMALE" />
+        </ComboBox>
+        <Border
+        x:Name="grpBday"
+        Grid.Row="4"
+        Grid.Column="5"
+        Width="164"
+        Height="30"
+        Margin="15,0,0,0"
+        Padding="5,0,5,0"
+        Background="White"
+        BorderBrush="Gray"
+        BorderThickness="1"
+        CornerRadius="5">
+            <DatePicker
+            x:Name="bDay"
+            Height="31"
+            Margin="0,-1,0,0"
+            VerticalContentAlignment="Center"
+            BorderThickness="0"
+            IsTabStop="False"
+            KeyboardNavigation.TabNavigation="None" />
+        </Border>
+        <TextBox
+        x:Name="tbLicense"
+        Grid.Row="8"
+        Grid.Column="5"
+        Width="164"
+        Height="30"
+        Margin="15,0,0,0"
+        IsEnabled="False"
+        Visibility="Hidden"
+        Style="{StaticResource CommonTextBoxStyle}"
+        TextWrapping="Wrap" />
+        <Grid
+        Grid.Row="9"
+        Grid.Column="1"
+        Grid.ColumnSpan="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="0,15,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Province, City/Municipality &amp; Barangay:"
+            Style="{StaticResource TextFieldLabelingPreset}" />
+            <Label
+            Grid.Row="0"
+            Grid.Column="0"
             Margin="0,15,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Content="House/Unit/Apartment/Building No. &amp; Street Name:"
             Style="{StaticResource TextFieldLabelingPreset}" />
-        <Border
-            Grid.Row="6"
-            Grid.Column="1"
-            Width="164"
+            <Label
+            x:Name="lblsign"
+            Grid.Row="0"
+            Grid.Column="2"
+            Margin="0,15,0,0"
+            Padding="0,5,0,5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            HorizontalContentAlignment="Center"
+            Content="E-signature"
+            Style="{StaticResource TextFieldLabelingPreset}" />
+            <TextBox
+            x:Name="tbAddressLine2"
+            Grid.Row="3"
+            Grid.Column="0"
+            Width="352.8"
             Height="30"
             Margin="15,0,0,0"
-            Padding="5,0,5,0"
+            Style="{StaticResource CommonTextBoxStyle}"
+            TextWrapping="Wrap" />
+            <TextBox
+            x:Name="tbAddressLine1"
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="352.8"
+            Height="30"
+            Margin="15,0,0,0"
+            Style="{StaticResource CommonTextBoxStyle}"
+            TextWrapping="Wrap" />
+            <Border
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            Grid.Column="2"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="White"
-            BorderBrush="{StaticResource BrushGrey}"
             BorderThickness="1"
-            CornerRadius="5">
-            <DatePicker
-                x:Name="dpBirthday"
-                Height="30"
-                VerticalAlignment="Center"
-                BorderBrush="{x:Null}"
-                BorderThickness="1,4,1,1" />
-        </Border>
-        <ComboBox
-            x:Name="cbGender"
-            Grid.Row="6"
-            Grid.Column="3"
-            Width="164"
-            Height="30"
-            Margin="15,0,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            IsReadOnly="True"
-            IsTabStop="False"
-            SelectedIndex="0"
-            Style="{DynamicResource CommonComboBox}">
-            <ComboBoxItem Content="MALE" />
-            <ComboBoxItem Content="FEMALE" />
-        </ComboBox>
-        <TextBox
-            x:Name="tboxsContactNum"
-            Grid.Row="6"
-            Grid.Column="5"
-            Width="164"
-            Height="30"
-            Margin="15,0,0,0"
-            Style="{StaticResource CommonTextBoxStyle}"
-            Text="" />
-        <TextBox
-            x:Name="tboxsCountry"
-            Grid.Row="8"
-            Grid.Column="1"
-            Width="164"
-            Height="30"
-            Margin="15,0,0,0"
-            Style="{StaticResource CommonTextBoxStyle}"
-            Text="Philippines" />
-        <TextBox
-            x:Name="tboxsProvince"
-            Grid.Row="8"
-            Grid.Column="3"
-            Width="164"
-            Height="30"
-            Margin="15,0,0,0"
-            Style="{StaticResource CommonTextBoxStyle}"
-            Text="Bulacan" />
-        <TextBox
-            x:Name="tboxsCity"
-            Grid.Row="8"
-            Grid.Column="5"
-            Width="164"
-            Height="30"
-            Margin="15,0,0,0"
-            Style="{StaticResource CommonTextBoxStyle}"
-            Text="San Jose Del Monte" />
-        <TextBox
-            x:Name="tboxsBarangay"
-            Grid.Row="10"
-            Grid.Column="1"
-            Width="164"
-            Height="30"
-            Margin="15,0,0,0"
-            VerticalAlignment="Top"
-            Style="{StaticResource CommonTextBoxStyle}"
-            Text="Sapang Palay" />
+            MouseEnter="Border_MouseEnter"
+            MouseLeave="Border_MouseLeave">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="{DynamicResource ColorBlack}" />
+                </Border.BorderBrush>
+                <Grid
+                Width="176"
+                Height="108"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                    <Viewbox x:Name="vbSignPH" Height="100">
+                        <ContentControl Margin="0,15,0,15" Content="{StaticResource SignaturePH}" />
+                    </Viewbox>
+                    <Viewbox>
+                        <Image
+                        x:Name="imgSignPic"
+                        Width="400"
+                        Height="208"
+                        Stretch="UniformToFill"
+                        Visibility="Visible" />
 
-        <StackPanel
-            Grid.Row="12"
-            Grid.RowSpan="1"
-            Grid.ColumnSpan="7"
-            Margin="0,0,0,24"
-            HorizontalAlignment="Center"
+                    </Viewbox>
+                    <Grid
+                    x:Name="groupPadButtons"
+                    Background="#4C000000"
+                    Visibility="Hidden">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button
+                            x:Name="btnStartPad"
+                            Width="125"
+                            Height="30"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Click="btnStartPad_Click"
+                            Content="Start Pad"
+                            Style="{DynamicResource CommonButtonStyle}"
+                            TabIndex="8" />
+                            <Button
+                            x:Name="btnBrowseSignPic"
+                            Width="125"
+                            Height="30"
+                            Margin="0,8,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Click="btnBrowseSignPic_Click"
+                            Content="Browse"
+                            IsTabStop="False"
+                            Style="{DynamicResource CommonButtonStyle}" />
+                        </StackPanel>
+
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+        <Canvas
+        Grid.Row="4"
+        Grid.RowSpan="5"
+        Grid.Column="1"
+        Width="172"
+        Height="175">
+            <Canvas
+            x:Name="parentCanvasCam"
+            Canvas.Left="-15"
+            Canvas.Top="-15"
+            Width="201"
+            Height="260"
+            HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Orientation="Horizontal">
+            MouseLeave="parentCanvasCam_MouseLeave">
+                <Grid
+                x:Name="gridCameraCapture"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="Hidden">
+                    <Border Background="White" CornerRadius="10">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="12" ShadowDepth="0" />
+                        </Border.Effect>
+                    </Border>
+                    <Grid
+                    Width="171.2"
+                    Height="229.6"
+                    Margin="15,15,15,15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="176" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ProgressBar
+                        x:Name="pbCameraOpen"
+                        Grid.Row="1"
+                        Height="8"
+                        IsIndeterminate="false" />
+                        <Button
+                        x:Name="btnCaptureeee"
+                        Grid.Row="2"
+                        Width="125"
+                        Height="30"
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Click="BtnStartCam_Click"
+                        Content="Capture"
+                        Style="{DynamicResource CommonButtonStyle}" />
+                    </Grid>
+                </Grid>
+                <Grid
+                x:Name="gridCamera"
+                Canvas.Left="15"
+                Canvas.Top="15"
+                Width="171"
+                Height="174"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="White"
+                MouseEnter="gridCamera_MouseEnter"
+                MouseLeave="gridCamera_MouseLeave">
+                    <Border BorderThickness="1">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="{DynamicResource ColorBlack}" />
+                        </Border.BorderBrush>
+                        <Grid>
+                            <Viewbox>
+                                <ContentControl Margin="0,50,0,50" Content="{StaticResource AlbumPH}" />
+                            </Viewbox>
+                            <Image
+                            x:Name="imgIDPic"
+                            Width="170"
+                            Height="173"
+                            Stretch="UniformToFill" />
+                            <Grid
+                            x:Name="groupCameraButtons"
+                            Background="#4C000000"
+                            Visibility="Hidden">
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Button
+                                    x:Name="btnStartCam"
+                                    Width="125"
+                                    Height="30"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Click="BtnStartCam_Click"
+                                    Content="Start Camera"
+                                    Style="{DynamicResource CommonButtonStyle}"
+                                    TabIndex="7" />
+                                    <Button
+                                    x:Name="btnBrowseIDPic"
+                                    Width="125"
+                                    Height="30"
+                                    Margin="0,8,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Click="btnBrowseIDPic_Click"
+                                    Content="Browse"
+                                    IsTabStop="False"
+                                    Style="{DynamicResource CommonButtonStyle}" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+
+            </Canvas>
+
+        </Canvas>
+        <StackPanel
+        Grid.Row="13"
+        Grid.Column="0"
+        Grid.ColumnSpan="9"
+        Margin="0,0,0,24"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Top"
+        Orientation="Horizontal">
             <Button
-                x:Name="btnCancel"
-                Width="178"
-                Click="btnCancel_Click"
-                Content="CANCEL"
-                Style="{StaticResource CommonButtonStyle}"
-                TabIndex="4" />
+            x:Name="btnCancel"
+            Width="178"
+            Click="btnCancel_Click"
+            Content="CANCEL"
+            Style="{StaticResource CommonButtonStyle}"
+            TabIndex="4" />
+           
             <Button
-                x:Name="btnSave"
-                Width="178"
-                Margin="15,0,0,0"
-                Click="btnSave_Click"
-                Content="SAVE"
-                IsDefault="True"
-                Style="{StaticResource CommonButtonStyle}"
-                TabIndex="5" />
+            x:Name="btnSave"
+            Width="178"
+            Margin="15,0,0,0"
+            Click="btnSave_Click"
+            Content="SAVE"
+            IsDefault="True"
+            Style="{StaticResource CommonButtonStyle}"
+            TabIndex="5" />
         </StackPanel>
         <Grid
-            x:Name="gridToast"
-            Grid.RowSpan="13"
-            Grid.ColumnSpan="7"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom" />
-        <TextBox
-            x:Name="tboxStreetName"
-            Grid.Row="10"
-            Grid.Column="3"
-            Grid.ColumnSpan="3"
-            Width="358.4"
-            Height="30"
-            Margin="15,0,0,0"
-            VerticalAlignment="Top"
-            Style="{StaticResource CommonTextBoxStyle}"
-            Text="" />
-
-        <Grid
-            Grid.ColumnSpan="7"
-            Width="760"
-            Margin="0,0,-83,40"
-            HorizontalAlignment="Right"
-            Background="WhiteSmoke" />
-
+        x:Name="gridToast"
+        Grid.RowSpan="14"
+        Grid.ColumnSpan="9"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Bottom" />
     </Grid>
-
 </Window>

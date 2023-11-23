@@ -23,6 +23,7 @@ namespace SPTC_APP.View.Pages.Output
         private Driver dholder;
         public static DataGrid displayedTable = null;
 
+
         public TableView(string table)
         {
             InitializeComponent();
@@ -101,7 +102,7 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("MTOPNo", "MTOP NO.", minWidth: 100, isCenter:true, isNumeric: true),
-                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("MonthlyDues", "PAYMENT DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<Franchise> dataGridHelper = new DataGridHelper<Franchise>(TableGrid, columnConfigurations);
 
@@ -138,9 +139,9 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     new ColumnConfiguration("Operator.name.legalName", "NAME", minWidth: 140),
                     new ColumnConfiguration("BodyNumber", "BODY NO.", minWidth: 80, isCenter:true, isNumeric: true),
-                    new ColumnConfiguration("LicenseNO", "PLATE NO.", minWidth: 100, isCenter: true,isNumeric: true),
+                    new ColumnConfiguration("PlateNo", "PLATE NO.", minWidth: 100, isCenter: true,isNumeric: true),
                     new ColumnConfiguration("ShareCapital", "SHARE CAPITAL", minWidth: 100, isCenter : true, isNumeric : true),
-                    new ColumnConfiguration("MonthlyDues", "MONTHLY DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
+                    new ColumnConfiguration("MonthlyDues", "PAYMENT DUE", minWidth: 100, isCenter:true, isNumeric: true, haspeso:true),
                 };
                 DataGridHelper<Operator> dataGridHelper = new DataGridHelper<Operator>(TableGrid, columnConfigurations);
 
@@ -178,7 +179,7 @@ namespace SPTC_APP.View.Pages.Output
                     new ColumnConfiguration("name.legalName", "NAME", minWidth: 140),
                     new ColumnConfiguration("address", "ADDRESS", minWidth: 100),
                     new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80, isCenter : true, isNumeric : true),
-                    new ColumnConfiguration("franchise.LicenseNO", "PLATE NO.", minWidth: 80, isCenter:true, isNumeric: true),
+                    new ColumnConfiguration("licenseNo", "LICENSE", minWidth: 80, isCenter:true, isNumeric: true),
                     new ColumnConfiguration("franchise.Operator", "OPERATOR", minWidth: 120),
                 };
                 DataGridHelper<Driver> dataGridHelper = new DataGridHelper<Driver>(TableGrid, columnConfigurations);
@@ -249,7 +250,7 @@ namespace SPTC_APP.View.Pages.Output
                     } 
                     else if(AppState.USER?.position?.title == AppState.Employees[3])
                     {
-                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.LicenseNO ?? "");
+                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.PlateNo ?? "");
                         ValuePairFI(lblF5, "MTOP No.: ", lblI5, MainBody.selectedFranchise?.MTOPNo ?? "");
                         ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
                         ValuePairFI(lblF7, "VOTERS ID No.: ", lblI7, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
@@ -280,7 +281,7 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[1])
                     {
-                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.LicenseNO ?? "");
+                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.PlateNo ?? "");
                         ValuePairFI(lblF5, "MTOP No.: ", lblI5, MainBody.selectedFranchise?.MTOPNo ?? "");
                         ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
                         ValuePairFI(lblF7, "VOTERS ID No.: ", lblI7, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
@@ -294,7 +295,7 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     else if (AppState.USER?.position?.title == AppState.Employees[3])
                     {
-                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.LicenseNO ?? "");
+                        ValuePairFI(lblF4, "PLATE No.: ", lblI4, MainBody.selectedFranchise?.PlateNo ?? "");
                         ValuePairFI(lblF5, "MTOP No.: ", lblI5, MainBody.selectedFranchise?.MTOPNo ?? "");
                         ValuePairFI(lblF6, "TIN No.: ", lblI6, MainBody.selectedFranchise?.Operator?.tinNumber?.ToString() ?? "");
                         ValuePairFI(lblF7, "VOTERS ID No.: ", lblI7, MainBody.selectedFranchise?.Operator?.votersNumbewr?.ToString() ?? "");
@@ -316,7 +317,7 @@ namespace SPTC_APP.View.Pages.Output
                     ValuePairFI(lblF2, "Membership: ", lblI2, MainBody.selectedFranchise?.Driver?.dateOfMembership.ToString("MMM dd, yyyy") ?? "");
                     ValuePairFI(lblF3, "Address: ", lblI3, MainBody.selectedFranchise?.Driver?.address?.ToString() ?? "");
                     ValuePairFI(lblF4, "Body No.: ", lblI4, MainBody.selectedFranchise?.BodyNumber?.ToString() ?? "");
-                    ValuePairFI(lblF5, "License No.: ", lblI5, MainBody.selectedFranchise?.LicenseNO?.ToString() ?? "");
+                    ValuePairFI(lblF5, "License No.: ", lblI5, MainBody.selectedFranchise?.Driver?.licenseNo?.ToString() ?? "");
                     ValuePairFI(lblF6, "Violation:  ", lblI6, MainBody.selectedFranchise?.Driver?.violationCount.ToString() ?? "");
                     if (MainBody.selectedFranchise?.Driver?.image?.GetSource() != null)
                     {
@@ -430,16 +431,15 @@ namespace SPTC_APP.View.Pages.Output
                 ControlWindow.ShowStatic("No Franchise Found", "Please create a new franchise first.", Icons.ERROR);
             }
         }
-
         private async void btnEditProfile_Click(object sender, RoutedEventArgs e)
         {
             if (table == Table.OPERATOR)
             {
-                (new EditProfile(MainBody.selectedFranchise, oholder, General.OPERATOR)).ShowDialog();
+                (new EditProfile(MainBody.selectedFranchise, General.OPERATOR)).ShowDialog();
             }
             else if (table == Table.DRIVER)
             {
-                (new EditProfile(MainBody.selectedFranchise, dholder, General.DRIVER)).ShowDialog();
+                (new EditProfile(MainBody.selectedFranchise, General.DRIVER, dholder)).ShowDialog();
             }
 
             await UpdateTableAsync();
@@ -482,15 +482,13 @@ namespace SPTC_APP.View.Pages.Output
             if (table == Table.FRANCHISE)
                 (new InputFranchiseView()).ShowDialog();
             if (table == Table.DRIVER)
-                (new NewOptr_Drv(MainBody.selectedFranchise, General.DRIVER)).ShowDialog();
+                (new EditProfile(MainBody.selectedFranchise, General.NEW_DRIVER)).ShowDialog();
             await UpdateTableAsync();
         }
-
         private void btnAddShareCapital_Click(object sender, RoutedEventArgs e)
         {
             (new AddShareCaptital(MainBody.selectedFranchise)).Show();
         }
-
         private void btnAddLoan_Click(object sender, RoutedEventArgs e)
         {
             if (MainBody.selectedFranchise?.GetLoans()?.Count <= 0)
@@ -504,7 +502,6 @@ namespace SPTC_APP.View.Pages.Output
                 (new AddLoan(MainBody.selectedFranchise)).Show();
             }
         }
-
         private void btnAddLTLoan_Click(object sender, RoutedEventArgs e)
         {
             if(MainBody.selectedFranchise?.GetLTLoans()?.Count <= 0)
@@ -515,6 +512,80 @@ namespace SPTC_APP.View.Pages.Output
 
                 (new AddLTLoan(MainBody.selectedFranchise)).Show();
             }
+        }
+        public class Filter
+        {
+            string Name;
+            bool isOn;
+
+            public Filter(string x, bool y)
+            {
+                this.Name = x;
+                this.isOn = y;
+            }
+        }
+
+        static List<Filter> franchiseFilter = new List<Filter>()
+        {
+            //FRANCHISE DEFAULT FILTER
+            new Filter("OPERATOR NAME", true),
+            new Filter("BODY NO.", true),
+            new Filter("SHARE CAPITAL", true),
+            new Filter("MTOP NO.", true),
+            new Filter("PAYMENT DUE", true),
+
+
+            new Filter("DRIVER NAME", false),
+            new Filter("LOAN BALANCE", false),
+            new Filter("LTLOAN BALANCE", false),
+            new Filter("OWNERSHIP DATE", false),
+        };
+
+        static List<Filter> opratorFilter = new List<Filter>()
+        {
+            //OPERATOR DEFAULT FILTER
+            new Filter("NAME", true),
+            new Filter("BODY NO.", true),
+            new Filter("PLATE NO.", true),
+            new Filter("SHARE CAPITAL", true),
+            new Filter("PAYMENT DUE", true),
+
+            new Filter("ADDRESS", false),
+            new Filter("BIRTHDAY", false),
+            new Filter("CONTACT", false),
+            new Filter("MEMBERSHIP DATE", false),
+            new Filter("TIN NUMBER", false),
+            new Filter("VOTERS ID", false),
+            new Filter("DRIVER NAME", false),
+            new Filter("LOAN BALANCE", false),
+            new Filter("LTLOAN BALANCE", false),
+            new Filter("OWNERSHIP DATE", false),
+        };
+
+        static List<Filter> driverFilter = new List<Filter>()
+        {
+            //DRIVER DEFAULT FILTER
+            new Filter("NAME", true),
+            new Filter("ADDRESS", true),
+            new Filter("BODY NO.", true),
+            new Filter("LICENSE", true),
+            new Filter("PAYMENT DUE", true),
+
+            new Filter("ADDRESS", false),
+            new Filter("BIRTHDAY", false),
+            new Filter("CONTACT", false),
+            new Filter("PLATE NO.", false),
+        };
+
+        private void btnFilter_Click(object sender, RoutedEventArgs e)
+        {
+            //Open filters view with button
+            //different filters depending on the tableview details
+            //talbe == [Table.DRIVER, Table.OPERATOR, Table.FRANCHISE]
+            // Decide the filter settings
+            // FRANCHISE FILTER
+            // Operator Name, 
+            
         }
     }
 }

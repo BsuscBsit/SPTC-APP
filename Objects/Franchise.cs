@@ -14,29 +14,56 @@ namespace SPTC_APP.Objects
         public int id { get; private set; }
         public string BodyNumber { get; set; }
         public Operator Operator { get; set; }
-        public string LicenseNO { get; set; }
+        public string PlateNo { get; set; }
         public Driver Driver { get; set; }
         public Name Owner { get; set; }
         public int lastFranchiseId { get; set; }
         public DateTime BuyingDate { get; set; }
         public string MTOPNo { get; set; }
-        public double ShareCapital { get { return GetTotalShareCapital(); } }
+        public double ShareCapital { get { return currentshare?.lastBalance ?? 0; } }
         public double MonthlyDues { 
             get {
-                double balance = AppState.TOTAL_SHARE_PER_MONTH;
-                if(LoanBalance > 0)
+                loadshare();
+                loadLoan();
+                loadltloan();
+                int datem = DateTime.Now.Month;
+                double totalshare = ((currentshare?.last_payment.Month ?? -1) == datem) ? 0 : AppState.TOTAL_SHARE_PER_MONTH;
+                double balance = totalshare * ((datem) - (currentshare?.last_payment.Month ?? datem));
+
+                if (LoanBalance > 0 && (currentloan?.last_payment.Month ?? -1) != datem)
                 {
-                    balance += GetLoans()?.FirstOrDefault()?.paymentDues ?? 0;
+                    double totalloan = ((currentloan?.last_payment.Month ?? -1) == datem) ? 0 : currentloan?.paymentDues ?? 0;
+                    balance += totalloan * ((datem) - (currentloan?.last_payment.Month ?? datem));
                 }
-                if(LongTermLoanBalance > 0)
+                if(LongTermLoanBalance > 0 && (currentltloan?.last_payment.Month ?? -1) != datem)
                 {
-                    balance += (GetLTLoans()?.FirstOrDefault()?.paymentDues ?? 0);
+                    double totalloan = ((currentltloan?.last_payment.Month ?? -1) == datem) ? 0 : currentltloan?.paymentDues ?? 0;
+                    balance += totalloan * ((datem) - (currentltloan?.last_payment.Month ?? datem));
                 }
                 return balance;
             } 
         }
-        public double LoanBalance { get { return GetLoans()?.FirstOrDefault()?.amount ?? 0; } }
-        public double LongTermLoanBalance { get { return GetLTLoans()?.FirstOrDefault()?.amount ?? 0; } }
+
+        public Ledger.Loan currentloan;
+        public void loadLoan(bool latest = false)
+        {
+            if (currentloan == null || latest)
+                currentloan = (GetLoans()?.FirstOrDefault()?.isFullyPaid ?? false) ?null: GetLoans().FirstOrDefault();
+        }
+        public Ledger.LongTermLoan currentltloan;
+        public void loadltloan(bool latest = false)
+        {
+            if (currentltloan == null || latest)
+                currentltloan = (GetLTLoans()?.FirstOrDefault()?.isFullyPaid ?? false) ?null: GetLTLoans().FirstOrDefault();
+        }
+        public Ledger.ShareCapital currentshare;
+        public void loadshare(bool latest = false)
+        {
+            if (currentshare == null || latest)
+                currentshare = GetShareCapitals()?.FirstOrDefault() ?? null;
+        }
+        public double LoanBalance { get { loadLoan(); return currentloan?.amount ?? 0; } }
+        public double LongTermLoanBalance { get { loadltloan(); return currentltloan?.amount ?? 0; } }
         public string displayBuyingDate { get { return BuyingDate.ToString("MM/dd/yyyy"); } }
         public Franchise lastFranchise { get { return Retrieve.GetData<Franchise>(Table.FRANCHISE, Select.ALL, Where.ID_NOTDELETED, new MySqlParameter("id", lastFranchiseId)).FirstOrDefault(); } }
 
@@ -63,7 +90,7 @@ namespace SPTC_APP.Objects
             this.BodyNumber = Retrieve.GetValueOrDefault<string>(reader, Field.BODY_NUMBER);
             this.MTOPNo = Retrieve.GetValueOrDefault<string>(reader, Field.MTOP_NUMBER);
             this.BuyingDate = Retrieve.GetValueOrDefault<DateTime>(reader, Field.BUYING_DATE);
-            this.LicenseNO = Retrieve.GetValueOrDefault<string>(reader, Field.LICENSE_NO);
+            this.PlateNo = Retrieve.GetValueOrDefault<string>(reader, Field.LICENSE_NO);
             this.lastFranchiseId = Retrieve.GetValueOrDefault<int>(reader, Field.LAST_FRANCHISE_ID);
             Populate(Retrieve.GetValueOrDefault<int>(reader, Field.OPERATOR_ID), Retrieve.GetValueOrDefault<int>(reader, Field.DRIVER_ID), Retrieve.GetValueOrDefault<int>(reader, Field.OWNER_ID));
 
@@ -84,7 +111,7 @@ namespace SPTC_APP.Objects
             this.BodyNumber = bodynumber;
             this.Operator = lOperator;
             this.Driver = lDriver;
-            this.LicenseNO = licenceNO;
+            this.PlateNo = licenceNO;
             return true;
         }
         public int Save()
@@ -95,7 +122,7 @@ namespace SPTC_APP.Objects
             }
             franchise.Insert(Field.BODY_NUMBER, BodyNumber);
             franchise.Insert(Field.MTOP_NUMBER, MTOPNo);
-            franchise.Insert(Field.LICENSE_NO, LicenseNO);
+            franchise.Insert(Field.LICENSE_NO, PlateNo);
             franchise.Insert(Field.BUYING_DATE, BuyingDate);
             franchise.Insert(Field.LAST_FRANCHISE_ID, lastFranchiseId);
             if (this.Operator != null)
@@ -170,22 +197,6 @@ namespace SPTC_APP.Objects
             return Retrieve.GetDataUsingQuery<PaymentDetails<Ledger.LongTermLoan>>(RequestQuery.GET_LEDGER_PAYMENT(Table.LONG_TERM_LOAN, typeof(Ledger.LongTermLoan).Name.ToUpper(), id));
         }
 
-        
-
-        public double GetTotalShareCapital()
-        {
-            return GetShareCapitalLedger().Sum(tmp => tmp.deposit);
-        }
-
-        public double GetTotalLoan()
-        {
-            return GetLoanLedger().Sum(tmp => tmp.deposit);
-        }
-
-        public double GetTotalLTLoan()
-        {
-            return GetlTLoanLedger().Sum(tmp => tmp.deposit);
-        }
 
         public List<PaymentHistory> GetPaymentList()
         {
@@ -208,12 +219,12 @@ namespace SPTC_APP.Objects
             return mainlist;
         }
 
-        internal double SaveShareCapital()
+        public double SaveShareCapital()
         {
-            Ledger.ShareCapital share = GetShareCapitals()?.FirstOrDefault() ?? null;
+            Ledger.ShareCapital share = currentshare ?? null;
             if(share != null)
             {
-                share.lastBalance = GetTotalShareCapital();
+                share.lastBalance = currentshare.lastBalance;
                 share.Save();
                 return share.lastBalance;
             }

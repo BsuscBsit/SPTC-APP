@@ -43,7 +43,20 @@
                     Content="Add Record" />
             </StackPanel>
         </Button>
-
+        <Button
+            x:Name="btnFilter"
+            Width="80"
+            Height="30"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Background="#FF4B0202"
+            Style="{DynamicResource CommonButtonStyle}"
+            Visibility="Visible" Margin="185,0,0,0" Click="btnFilter_Click">
+            <Grid>
+                <Image Source="/View/Images/icons/filter.png" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="-15, 0, 0, 0"/>
+                <Label Content="Filter" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5, 0, -15, 0"/>
+            </Grid>
+        </Button>
         <Grid Grid.Row="1">
             <Border Background="White" CornerRadius="12">
                 <Border.Effect>

@@ -37,7 +37,7 @@ namespace SPTC_APP.View.Pages.Input
             {
                 tboxBodyNum.Text = franchise.BodyNumber;
                 tboxMTOPplateNum.Text = franchise.MTOPNo;
-                tboxLTOplateNum.Text = franchise.LicenseNO;
+                tboxLTOplateNum.Text = franchise.PlateNo;
                 tboxIDNum1.Text = franchise.Operator?.tinNumber;
                 tboxIDNum2.Text = franchise.Operator?.votersNumbewr;
             }
@@ -69,14 +69,14 @@ namespace SPTC_APP.View.Pages.Input
             Franchise franchise = fran;
             franchise.BodyNumber = tboxBodyNum.Text;
             franchise.MTOPNo = tboxMTOPplateNum.Text;
-            franchise.LicenseNO = tboxLTOplateNum.Text;
+            franchise.PlateNo = tboxLTOplateNum.Text;
             franchise.BuyingDate = DateIssued.DisplayDate;
             if (franchise.Operator == null)
             {
                 franchise.Operator = new Operator();
                 franchise.Operator.tinNumber = tboxIDNum1.Text;
                 franchise.Operator.votersNumbewr = tboxIDNum2.Text;
-                (new NewOptr_Drv(franchise, General.OPERATOR)).Show();
+                (new EditProfile(franchise, General.OPERATOR)).Show();
             } else
             {
                 franchise.Operator.tinNumber = tboxIDNum1.Text;

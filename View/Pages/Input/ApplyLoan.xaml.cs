@@ -56,6 +56,8 @@ namespace SPTC_APP.View.Pages.Input
             dpDate.SelectedDate = DateTime.Now;
             dpDate.DisplayDate = DateTime.Now;
 
+            tbCVORNum.Text = (AppState.CV_OR_LAST + 1).ToString();
+
             List<string> possibleloans = new List<string>();
 
             if (this.franchise.LoanBalance <= 0)
@@ -125,7 +127,8 @@ namespace SPTC_APP.View.Pages.Input
                             {
                                 share.WriteInto(franchise.id, DateTime.Now, 0, 0);
                             }
-
+                            AppState.CV_OR_LAST = Int32.Parse(ornum);
+                            AppState.SaveToJson();
                             share.lastBalance = share.lastBalance + loanCbu;
                             capital.WriteInto(share, 0, dpDate.SelectedDate ?? DateTime.Now, ornum, loanCbu, 0, "FROM " + loantext, share.lastBalance);
                             capital.Save();

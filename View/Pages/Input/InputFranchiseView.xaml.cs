@@ -32,6 +32,7 @@ namespace SPTC_APP.View.Pages.Input
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             DateIssued.DisplayDate = DateTime.Now;
+            DateIssued.SelectedDate = DateTime.Now;
             this.fran = (franchise ?? new Franchise());
             if(franchise != null)
             {
@@ -70,7 +71,7 @@ namespace SPTC_APP.View.Pages.Input
             franchise.BodyNumber = tboxBodyNum.Text;
             franchise.MTOPNo = tboxMTOPplateNum.Text;
             franchise.PlateNo = tboxLTOplateNum.Text;
-            franchise.BuyingDate = DateIssued.DisplayDate;
+            franchise.BuyingDate = DateIssued.SelectedDate ?? DateTime.Now;
             if (franchise.Operator == null)
             {
                 franchise.Operator = new Operator();

@@ -127,8 +127,9 @@ namespace SPTC_APP.View.Pages.Input
                     total += r.content;
                 }
             }
-            tbTotal.Text = $"\u20B1 {total.ToString("N2")}";
+            tbTotal.Text = "\u20B10 " + total.ToString("N2");
             cashonhand.content = total;
+            cashonhand.Save();
         }
 
         private bool check(Recap r)

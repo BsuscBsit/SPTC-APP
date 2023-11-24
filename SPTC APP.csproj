@@ -319,9 +319,6 @@
     <Compile Include="View\Pages\Output\Modules.xaml.cs">
       <DependentUpon>Modules.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Output\Receipts.xaml.cs">
-      <DependentUpon>Receipts.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Pages\Output\Reports.xaml.cs">
       <DependentUpon>Reports.xaml</DependentUpon>
     </Compile>
@@ -474,10 +471,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\Output\Modules.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Pages\Output\Receipts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -195,8 +195,8 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     new ColumnConfiguration("name.legalName", "NAME", minWidth: 140, filter:driverFilter),
                     new ColumnConfiguration("address", "ADDRESS", minWidth: 100, filter:driverFilter),
-                     new ColumnConfiguration("displayBirth", "BIRTHDAY", minWidth:120, filter:driverFilter),
-                     new ColumnConfiguration("Operator.emergencyContact", "CONTACT", minWidth: 120, isNumeric: true, filter:driverFilter),
+                    new ColumnConfiguration("displayBirth", "BIRTHDAY", minWidth:120, filter:driverFilter),
+                    new ColumnConfiguration("Operator.emergencyContact", "CONTACT", minWidth: 120, isNumeric: true, filter:driverFilter),
                     new ColumnConfiguration("franchise.BodyNumber", "BODY NO.", minWidth: 80, isCenter : true, isNumeric : true, filter : driverFilter),
                     new ColumnConfiguration("licenseNo", "LICENSE", minWidth: 80, isCenter:true, isNumeric: true, filter:driverFilter),
                     new ColumnConfiguration("Franchise.PlateNo", "PLATE NO.", minWidth: 100, isCenter: true,isNumeric: true, filter:driverFilter),

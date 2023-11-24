@@ -416,14 +416,14 @@
                         Grid.Row="3"
                         MinHeight="30"
                         Margin="15,10,0,0">
-                        <RadioButton Content="Operator Name"/>
-                        <RadioButton Content="Body Number"/>
-                        <RadioButton Content="Share Capital"/>
-                        <RadioButton Content="MTOP Number"/>
-                        <RadioButton Content="Payment Due"/>
-                        <!-- ??? -->
+                        <RadioButton Content="Operator Name" />
+                        <RadioButton Content="Body Number" />
+                        <RadioButton Content="Share Capital" />
+                        <RadioButton Content="MTOP Number" />
+                        <RadioButton Content="Payment Due" />
+                        <!--  ???  -->
                     </StackPanel>
-                        <StackPanel
+                    <StackPanel
                         x:Name="spOperatorBY"
                         Grid.Row="3"
                         MinHeight="30"
@@ -438,8 +438,8 @@
                         Grid.Row="6"
                         MinHeight="30"
                         Margin="15,10,0,0">
-                        <CheckBox Content="Franchise with loans."/>
-                        <CheckBox Content="Franchise with long term loans."/>
+                        <CheckBox Content="Franchise with loans." />
+                        <CheckBox Content="Franchise with long term loans." />
                     </StackPanel>
                     <StackPanel
                         x:Name="spOperatorSHOW"

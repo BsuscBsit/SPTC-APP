@@ -75,5 +75,10 @@ namespace SPTC_APP.View.Pages.Input
             window?.Show();
             this.Close();
         }
+
+        private void cbFEdit_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

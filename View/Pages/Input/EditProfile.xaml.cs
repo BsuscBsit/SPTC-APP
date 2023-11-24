@@ -1,5 +1,6 @@
 ﻿using AForge.Video;
 using AForge.Video.DirectShow;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.Win32;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
@@ -9,6 +10,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -367,7 +369,7 @@ namespace SPTC_APP.View.Pages.Input
                     }
                     (AppState.mainwindow as MainBody).ResetWindow(General.DRIVER);
                 }
-                else if (type == General.OPERATOR)
+                else if (type == General.OPERATOR || type == General.TRANSFER_FRANCHISE_OWNERSHIP)
                 {
                     Operator optr = (franchise?.Operator == null) ? oholder : franchise.Operator;
                     if (optr.name == null)
@@ -406,7 +408,29 @@ namespace SPTC_APP.View.Pages.Input
                     {
                         optr.Save();
                     }
-                    (AppState.mainwindow as MainBody).ResetWindow(General.OPERATOR);
+
+                    if (type == General.TRANSFER_FRANCHISE_OWNERSHIP)
+                    {
+                        PaymentDetails<Ledger.ShareCapital> capital = new PaymentDetails<Ledger.ShareCapital>();
+                        Ledger.ShareCapital share = new Ledger.ShareCapital();
+                        if (franchise.GetShareCapitals()?.FirstOrDefault() != null)
+                        {
+                            share = franchise.GetShareCapitals().FirstOrDefault();
+                        }
+                        else
+                        {
+                            share.WriteInto(franchise.id, DateTime.Now, 0, 0);
+                        }
+                        share.lastBalance = share.lastBalance + AppState.TRANSFER_FEE;
+                        capital.WriteInto(share, 0, DateTime.Now, "-1", AppState.TRANSFER_FEE, 0, "TRANSFER_FEE", share.lastBalance);
+                        capital.Save();
+
+                        (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE);
+                    }
+                    else
+                    {
+                        (AppState.mainwindow as MainBody).ResetWindow(General.OPERATOR);
+                    }
                 }
                 closingMSG = "Changes was saved successfully.\nPlease refesh the view to see changes.";
                 this.Close();

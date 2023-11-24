@@ -37,9 +37,11 @@ namespace SPTC_APP
         public static int DEFAULT_CAMERA;
         public static int TABLE_BATCH_SIZE;
         public static int CV_OR_LAST;
+        public static double TRANSFER_FEE;
         public static double TOTAL_SHARE_PER_MONTH;
         public static string CAMERA_RESOLUTION;
         public static Newtonsoft.Json.Linq.JArray LIST_RECAP;
+        
 
 
         //NOT SAVED EXTERNALLY

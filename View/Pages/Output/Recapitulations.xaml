@@ -153,7 +153,7 @@
                     Content="System Generated"
                     Style="{StaticResource TextFieldLabelingPreset}" />
                 <ScrollViewer Grid.Row="1" Margin="0,15,0,0">
-                    <Grid x:Name="recapgrid" />
+                    <StackPanel x:Name="recapgrid" />
                 </ScrollViewer>
             </Grid>
             <Grid Grid.Row="2" Margin="15,15,15,15">
@@ -171,9 +171,10 @@
                     Height="30"
                     HorizontalAlignment="Right"
                     Content="Add Record"
+                    Visibility="Collapsed"
                     Style="{DynamicResource CommonButtonStyle}" />
                 <ScrollViewer Grid.Row="1" Margin="0,15,0,0">
-                    <Grid x:Name="recapgrid1" />
+                    <StackPanel x:Name="recapgrid1" />
                 </ScrollViewer>
             </Grid>
         </Grid>

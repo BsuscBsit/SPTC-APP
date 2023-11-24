@@ -130,7 +130,7 @@ public class DataGridHelper<T>
                 Visibility = (filter[header]) ? Visibility.Visible : Visibility.Collapsed;
             } else {
 
-                Visibility = Visibility.Collapsed;
+                Visibility = Visibility.Visible;
             }
         }
     }

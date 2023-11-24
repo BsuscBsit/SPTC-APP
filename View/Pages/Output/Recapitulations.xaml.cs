@@ -102,7 +102,6 @@ namespace SPTC_APP.View.Pages.Input
 
             List<Recap> recaps = AppState.LoadRecapitulations(currentmonth, currentyear);
 
-            recapgrid.RowDefinitions.Clear();
             recapgrid.Children.Clear();
             double total = 0;
 
@@ -116,14 +115,19 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     RowDefinition rowDefinition = new RowDefinition();
                     rowDefinition.Height = new GridLength(40);
-                    recapgrid.RowDefinitions.Add(rowDefinition);
-                    
-                    RecapDisplay recapDisplay = new RecapDisplay(this, r, recaps.IndexOf(r) - 1, check(r));
-                    recapgrid.Children.Add(recapDisplay.AddSelf());
+                    bool ch = check(r);
+                    RecapDisplay recapDisplay = new RecapDisplay(this, r, ch);
+                    if (ch)
+                    {
+                        recapgrid.Children.Add(recapDisplay.AddSelf());
+                    } else
+                    {
+                        recapgrid1.Children.Add(recapDisplay.AddSelf());
+                    }
                     total += r.content;
                 }
             }
-            tbTotal.Text = $"\u20B1{total.ToString("N2")}";
+            tbTotal.Text = $"\u20B1 {total.ToString("N2")}";
             cashonhand.content = total;
         }
 
@@ -133,9 +137,9 @@ namespace SPTC_APP.View.Pages.Input
                 case "Share Capital":
                     r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
                     return true;
-                case "Monthly Dues":
+                /*case "Monthly Dues":
                     r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH($"LOAN\" || {Field.LEDGER_TYPE} = \"LONGTERMLOAN", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
-                    return true;
+                    return true;*/
                 case "Loan Receivable - Pastdue":
                     r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_PASTDUE_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
                     return true;
@@ -147,6 +151,9 @@ namespace SPTC_APP.View.Pages.Input
                     return true;
                 case "Interest Receivable":
                     r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_INTEREST_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    return true;
+                case "Transfer Fees":
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("TRANSFER_FEE", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
                     return true;
                 default:
                     return false;
@@ -164,16 +171,18 @@ namespace SPTC_APP.View.Pages.Input
             private Recap recap;
             private Label label;
             public TextBox textBox;
+            public Label labelBox;
             private Grid grid;
             private bool isReadOnly;
 
-            public RecapDisplay(Recapitulations rptc, Recap r, int row, bool isread = false)
+            public RecapDisplay(Recapitulations rptc, Recap r, bool isread = false)
             {
                 this.recapmain = rptc;
                 this.recap = r;
                 this.grid = new Grid();
                 this.isReadOnly = isread;
-                grid.SetValue(Grid.RowProperty, row); 
+
+                recap.Save();
 
                 ColumnDefinition col1 = new ColumnDefinition();
                 col1.Width = new GridLength(250);
@@ -188,36 +197,52 @@ namespace SPTC_APP.View.Pages.Input
                 label.HorizontalAlignment = HorizontalAlignment.Right;
                 label.Width = 180;
                 label.VerticalAlignment = VerticalAlignment.Center;
-
-
-                this.textBox = new TextBox();
-                textBox.Text = recap.content.ToString("0.00");
-                textBox.SetValue(Grid.ColumnProperty, 1);
-                textBox.Height = 30;
-                textBox.Style = Application.Current.FindResource("CommonTextBoxStyle") as Style;
-                textBox.VerticalAlignment = VerticalAlignment.Center;
-                textBox.Margin = new Thickness(20, 0, 10, 0);
-                if (isReadOnly)
-                {
-                    textBox.Background = Brushes.Blue;
-                }
-                textBox.IsReadOnly = isReadOnly;
-                textBox.GotFocus += SelectAll;
-                textBox.LostFocus += Save;
-                textBox.DefaultTextBoxBehavior(NUMBERPERIOD, true, recapmain.gridToast, null, row);
                 grid.Children.Add(label);
-                grid.Children.Add(textBox);
+                if (!isReadOnly)
+                {
+                    this.textBox = new TextBox();
+                    textBox.Text = "\u20B1 " + recap.content.ToString("0.00");
+                    textBox.SetValue(Grid.ColumnProperty, 1);
+                    textBox.Height = 30;
+                    textBox.Style = Application.Current.FindResource("CommonTextBoxStyle") as Style;
+                    textBox.VerticalAlignment = VerticalAlignment.Center;
+                    textBox.Margin = new Thickness(20, 0, 10, 0);
+                    textBox.GotFocus += SelectAll;
+                    textBox.LostFocus += Save;
+                    textBox.DefaultTextBoxBehavior(NUMBERPERIOD, true, recapmain.gridToast, null);
+                    
+                    grid.Children.Add(textBox);
+                } else
+                {
+                    this.labelBox = new Label();
+                    labelBox.Content = "\u20B1 " + recap.content.ToString("0.00");
+                    labelBox.SetValue(Grid.ColumnProperty, 1);
+                    labelBox.Height = 30;
+                    labelBox.FontSize = 16;
+                    labelBox.Style = Application.Current.FindResource("SubTitlePreset") as Style;
+                    labelBox.VerticalAlignment = VerticalAlignment.Center;
+                    labelBox.Margin = new Thickness(20, 0, 10, 0);
+                    grid.Children.Add(labelBox);
+                }
             }
 
             private void Save(object sender, RoutedEventArgs e)
             {
-                double newval = Double.Parse(textBox.Text);
-                if (recap.content != newval) {
-                    recap.content = newval;
-                    recap.Save();
-                    recapmain.displayToast($"{recap.text} Updated!", 1);
+                string textWithoutCurrencySymbol = textBox.Text.Replace("\u20B1", "");
+
+                if (double.TryParse(textWithoutCurrencySymbol, out double newval))
+                {
+                    if (recap.content != newval)
+                    {
+                        recap.content = newval;
+                        recap.Save();
+                        recapmain.displayToast($"{recap.text} Updated!", 1);
+                    }
                 }
+
+                textBox.Text = "\u20B1 " + textWithoutCurrencySymbol;
             }
+
 
             private void SelectAll(object sender, RoutedEventArgs e)
             {

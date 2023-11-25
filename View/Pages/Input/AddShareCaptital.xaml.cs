@@ -26,6 +26,9 @@ namespace SPTC_APP.View.Pages.Input
     {
         private string closingMSG;
         private Franchise franchise;
+
+        //tanggalin yung cash or cheque dito
+
         public AddShareCaptital(Franchise franchise)
         {
             InitializeComponent();
@@ -60,7 +63,7 @@ namespace SPTC_APP.View.Pages.Input
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             string displaydate = dpBdate.DisplayDate.ToString("MMM dd, YYY");
-            if (ControlWindow.ShowTwoway("Confirm?", $"Adding record: \nShare Capital: {tboxAmount.Text}\nDate: {displaydate}\nCV/OR: {tboxRefNo.Text}", Icons.NOTIFY))
+            if (ControlWindow.ShowTwoway("Confirm?", $"Adding record: {tboxRefNo.Text}\nShare Capital: {tboxAmount.Text}\nDate: {displaydate}", Icons.NOTIFY))
             {
                 PaymentDetails<Ledger.ShareCapital> capital = new PaymentDetails<Ledger.ShareCapital>();
                 Ledger.ShareCapital share = new Ledger.ShareCapital();

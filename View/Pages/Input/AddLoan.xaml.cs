@@ -55,6 +55,9 @@ namespace SPTC_APP.View.Pages.Input
 
             lblLoanDate.Content = loan.displayDate;
             lblLoanCVOR.Content = loan.cv_or;
+
+            lblBodyNum.Content = franchise.BodyNumber;
+
             lblLoanAmount.Content = $"\u20B1 {loan.amountLoaned.ToString("N2")}";
             lblLoanInterest.Content = $"\u20B1 {loan.interest.ToString("N2")}";
             lblTotal.Content = $"\u20B1 {(loan.amountLoaned + loan.interest).ToString("N2")}";
@@ -119,7 +122,8 @@ namespace SPTC_APP.View.Pages.Input
         {
             if (!string.IsNullOrEmpty(tboxCVOR.Text))
             {
-                if (ControlWindow.ShowTwoway("Adding new record", "Confirm?", Icons.NOTIFY))
+                string displaydate = dpBdate.DisplayDate.ToString("MMM dd, YYY");
+                if (ControlWindow.ShowTwoway("Confirm?", $"Adding record: {tboxCVOR.Text}\nLoan Payment: {tboxAmount.Text}\nDate: {displaydate}", Icons.NOTIFY))
                 {
                     compute(double.TryParse(tbPenalty.Text, out double pen) ? pen : 0);
                     return true;

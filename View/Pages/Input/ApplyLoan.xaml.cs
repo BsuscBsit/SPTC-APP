@@ -47,18 +47,25 @@ namespace SPTC_APP.View.Pages.Input
             cbLoanType.SelectedIndex = 0;
             initTextBoxes();
             this.franchise = fran;
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide();
+                if (cbLoanType.Items.Count == 0)
+                {
+                    closingMSG = "This account already have existing Short and Long term loans.";
+                    this.Close();
+                }
+            };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
 
             tbBodyNum.Content = this.franchise?.BodyNumber?.ToString() ?? "N/A";
             DraggingHelper.DragWindow(topBar);
 
+
+
             dpDate.SelectedDate = DateTime.Now;
             dpDate.DisplayDate = DateTime.Now;
 
             tbCVORNum.Text = (AppState.CV_OR_LAST + 1).ToString();
-
-            List<string> possibleloans = new List<string>();
+            tbBodyNum.Content = franchise.BodyNumber;
 
             if (this.franchise.LoanBalance <= 0)
             {
@@ -68,11 +75,6 @@ namespace SPTC_APP.View.Pages.Input
             if (this.franchise.LongTermLoanBalance <= 0)
             {
                 cbLoanType.Items.Add("Long Term");
-            }
-            if (cbLoanType.Items.Count == 0)
-            {
-                closingMSG = "This account already have existing Short and Long term loans.";
-                this.Close();
             }
             tbCVORNum.Focus();
         }
@@ -90,7 +92,8 @@ namespace SPTC_APP.View.Pages.Input
             {
                 if (!string.IsNullOrEmpty(tbCVORNum.Text))
                 {
-                    if (ControlWindow.ShowTwoway("Add Loan", "Confirm adding loan?", Icons.NOTIFY))
+                    string displaydate = dpDate.DisplayDate.ToString("MMM dd, YYY");
+                    if (ControlWindow.ShowTwoway("Confirm?", $"Adding record: {tbCVORNum.Text}\nLoan Application: {tbAmount.Text}\nType: {loantext}\nDate: {displaydate}", Icons.NOTIFY))
                     {
                         double penalty = this.loanAmount * this.interestRate;
                         if (isLoan)
@@ -393,7 +396,8 @@ namespace SPTC_APP.View.Pages.Input
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            presetFields(cbLoanType.SelectedItem.ToString(), false);
+            if(cbLoanType.Items.Count > 0)
+                presetFields(cbLoanType.SelectedItem.ToString(), false);
         }
 
         private void initTextBoxes()

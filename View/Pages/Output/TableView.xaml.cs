@@ -602,13 +602,6 @@ namespace SPTC_APP.View.Pages.Output
             {
                 filterOptions.FadeOut(0.2);
             }
-            //Open filters view with button
-            //different filters depending on the tableview details
-            //talbe == [Table.DRIVER, Table.OPERATOR, Table.FRANCHISE]
-            // Decide the filter settings
-            // FRANCHISE FILTER
-            // franchiseFilter Dictionary, with "NAME" set the Value
-            
         }
         
         private void btnHideFI_Click(object sender, RoutedEventArgs e)
@@ -621,6 +614,11 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnApplyFilters_Click(object sender, RoutedEventArgs e)
         {
+            //Setting the filters
+
+
+
+
             DataGrid datagrid = TableGrid;
             ICollectionView collectionView = CollectionViewSource.GetDefaultView(datagrid.Items);
 
@@ -630,21 +628,27 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     if (item is Franchise franchise)
                     {
-                        if (cbFrWLoan.IsChecked ?? false) // Get the checkbox for filter for loan
+                        if (cbFrWLoan.IsChecked ?? false) 
                         {
-                            //Should i set the filter to display LoanBalance?
-                            franchiseFilter["LOAN BALANCE"] = true;
-
                             return franchise.LoanBalance > 0;
                         }
                         if (cbFrWLtLoan.IsChecked ?? false)
                         {
-                            franchiseFilter["LTLOAN BALANCE"] = true;
                             return franchise.LongTermLoanBalance > 0;
                         }
                     }
                     return true;
                 };
+
+                //reset the visibility
+                foreach (DataGridColumn column in TableGrid.Columns)
+                {
+                    if (column.Header != null && franchiseFilter.TryGetValue(column.Header.ToString(), out bool isVisible))
+                    {
+                        column.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
+                    }
+                }
+
             }
             else if (table == Table.OPERATOR)
             {
@@ -656,6 +660,13 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     return true;
                 };
+                foreach (DataGridColumn column in TableGrid.Columns)
+                {
+                    if (column.Header != null && opratorFilter.TryGetValue(column.Header.ToString(), out bool isVisible))
+                    {
+                        column.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
+                    }
+                }
             }
             else if (table == Table.DRIVER)
             {
@@ -667,7 +678,18 @@ namespace SPTC_APP.View.Pages.Output
                     }
                     return true;
                 };
+                foreach (DataGridColumn column in TableGrid.Columns)
+                {
+                    if (column.Header != null && driverFilter.TryGetValue(column.Header.ToString(), out bool isVisible))
+                    {
+                        column.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
+                    }
+                }
             }
+
+            
+
+
 
             franchiseInformation.AnimateWidth(0, 0.3, () =>
             {

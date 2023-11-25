@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using SPTC_APP.Database;
@@ -619,7 +621,58 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnApplyFilters_Click(object sender, RoutedEventArgs e)
         {
+            DataGrid datagrid = TableGrid;
+            ICollectionView collectionView = CollectionViewSource.GetDefaultView(datagrid.Items);
 
+            if (table == Table.FRANCHISE)
+            {
+                collectionView.Filter = item =>
+                {
+                    if (item is Franchise franchise)
+                    {
+                        if (cbFrWLoan.IsChecked ?? false) // Get the checkbox for filter for loan
+                        {
+                            //Should i set the filter to display LoanBalance?
+                            franchiseFilter["LOAN BALANCE"] = true;
+
+                            return franchise.LoanBalance > 0;
+                        }
+                        if (cbFrWLtLoan.IsChecked ?? false)
+                        {
+                            franchiseFilter["LTLOAN BALANCE"] = true;
+                            return franchise.LongTermLoanBalance > 0;
+                        }
+                    }
+                    return true;
+                };
+            }
+            else if (table == Table.OPERATOR)
+            {
+                collectionView.Filter = item =>
+                {
+                    if (item is Franchise fran)
+                    {
+                        
+                    }
+                    return true;
+                };
+            }
+            else if (table == Table.DRIVER)
+            {
+                collectionView.Filter = item =>
+                {
+                    if (item is Driver driver)
+                    {
+                        
+                    }
+                    return true;
+                };
+            }
+
+            franchiseInformation.AnimateWidth(0, 0.3, () =>
+            {
+                btnHideFI.Visibility = Visibility.Hidden;
+            });
         }
 
         private void btnApplyFiltersCancel_Click(object sender, RoutedEventArgs e)

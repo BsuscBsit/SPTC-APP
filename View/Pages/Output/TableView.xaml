@@ -438,8 +438,8 @@
                         Grid.Row="6"
                         MinHeight="30"
                         Margin="15,10,0,0">
-                        <CheckBox Content="Franchise with loans." />
-                        <CheckBox Content="Franchise with long term loans." />
+                        <CheckBox x:Name="cbFrWLoan" Content="Franchise with loans." />
+                        <CheckBox x:Name="cbFrWLtLoan" Content="Franchise with long term loans." />
                     </StackPanel>
                     <StackPanel
                         x:Name="spOperatorSHOW"

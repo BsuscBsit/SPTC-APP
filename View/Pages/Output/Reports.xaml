@@ -18,10 +18,15 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Label Content="SPTC REPORT: RECAPITULATONS" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="20" Style="{StaticResource CommonTitlePreset}"/>
-        <Label x:Name="lblDate" Grid.Row="1" Content="Jan 2023" Style="{StaticResource LabelFontLarge}" Margin="20, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <Label x:Name="lblDate" Grid.Row="1" Content="" Style="{StaticResource LabelFontLarge}" Margin="20, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
         <StackPanel Grid.Row="2" Margin="100, 20" x:Name="recapgrid"/>
-        <!-- Complete this based on picture for recap -->
+        <Label x:Name="lblProfile" Grid.Row="3" Content="" Style="{StaticResource LabelFontLarge}" Margin="20, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Label x:Name="lblFooter" Content="SPTC REPORT: " Grid.Row="4" HorizontalAlignment="Right" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="20" Style="{StaticResource CommonTitlePreset}"/>
+        
+
     </Grid>
 </Window>

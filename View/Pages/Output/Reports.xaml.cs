@@ -2,6 +2,7 @@
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
 using SPTC_APP.View.Pages.Input;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -34,7 +35,7 @@ namespace SPTC_APP.View.Pages.Output
         {
             double cashonhand = 0;
             double total = 0;
-            lblDate.Content = $"{monthAbbreviations[currentmonth - 1] + ", " + currentyear}";
+            lblDate.Content = $"{monthAbbreviations[currentmonth - 1] + " " + currentyear}";
             foreach (Recap r in recaps)
             {
                 bool is_cash_onhand = false;
@@ -52,13 +53,27 @@ namespace SPTC_APP.View.Pages.Output
                 RecapDisplay recapDisplay = new RecapDisplay(r, !is_cash_onhand);
                 recapgrid.Children.Add(recapDisplay.AddSelf());
             }
+            addTotal(cashonhand, total);
 
-            Border bar = new Border {
-                Height = 5,
-                Width = 800,
-                BorderBrush = System.Windows.Media.Brushes.Black,
+            //FOOTER
+            lblProfile.Content = $"Name: {AppState.USER?.name} (SPTC {AppState.USER?.position?.title})";
+            lblFooter.Content = $"SPTC REPORT: {DateTime.Now.ToString("MMMM dd, yyyy")}";
+            
+
+        }
+
+        private void addTotal(double cashonhand, double total)
+        {
+
+            Border horizontalLine = new Border
+            {
+                BorderBrush = System.Windows.Media.Brushes.Black, // Set the color
+                BorderThickness = new Thickness(0, 1, 0, 1), // Set the thickness (left, top, right, bottom)
+                Margin = new Thickness(0, 5, 0, 5) // Set the margin (top, right, bottom, left)
             };
-            recapgrid.Children.Add(bar);
+
+            recapgrid.Children.Add(horizontalLine);
+
 
             Grid grid = new Grid();
             ColumnDefinition col1 = new ColumnDefinition();
@@ -88,7 +103,7 @@ namespace SPTC_APP.View.Pages.Output
             labelBox.FontWeight = FontWeights.Bold;
             labelBox.Style = Application.Current.FindResource("SubTitlePreset") as Style;
             labelBox.VerticalAlignment = VerticalAlignment.Center;
-            labelBox.Margin = new Thickness(0, 0,0, 0);
+            labelBox.Margin = new Thickness(0, 0, 0, 0);
             grid.Children.Add(labelBox);
 
             Label labelBox2 = new Label();
@@ -102,8 +117,7 @@ namespace SPTC_APP.View.Pages.Output
             labelBox2.Margin = new Thickness(0, 0, 0, 0);
             grid.Children.Add(labelBox2);
 
-            recapgrid.Children.Add(grid);
-
+            recapgrid.Children.Add(grid); throw new NotImplementedException();
         }
 
         class RecapDisplay

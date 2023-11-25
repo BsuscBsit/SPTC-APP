@@ -207,7 +207,7 @@ namespace SPTC_APP.View.Controls
                 tb.Text = Regex.Replace(tb.Text, " ", "");
                 if (grid != null)
                     new Toast(grid, "Spaces not allowed here.");
-
+                
                 tb.CaretIndex = x;
             }
         }

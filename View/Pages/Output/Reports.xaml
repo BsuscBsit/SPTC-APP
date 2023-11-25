@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         <Label Content="SPTC REPORT: RECAPITULATONS" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="20" Style="{StaticResource CommonTitlePreset}"/>
         <Label x:Name="lblDate" Grid.Row="1" Content="Jan 2023" Style="{StaticResource LabelFontLarge}" Margin="20, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-        
+        <StackPanel Grid.Row="2" Margin="100, 20" x:Name="recapgrid"/>
         <!-- Complete this based on picture for recap -->
     </Grid>
 </Window>

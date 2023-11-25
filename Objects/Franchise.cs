@@ -20,7 +20,7 @@ namespace SPTC_APP.Objects
         public int lastFranchiseId { get; set; }
         public DateTime BuyingDate { get; set; }
         public string MTOPNo { get; set; }
-        public double ShareCapital { get { return currentshare?.lastBalance ?? 0; } }
+        public double ShareCapital { get { loadshare();  return currentshare?.lastBalance ?? 0; } }
         public double MonthlyDues { 
             get {
                 loadshare();

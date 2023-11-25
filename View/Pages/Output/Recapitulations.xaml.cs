@@ -3,6 +3,7 @@ using MySqlX.XDevAPI.Relational;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
+using SPTC_APP.View.Pages.Output;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -127,7 +128,7 @@ namespace SPTC_APP.View.Pages.Input
                     total += r.content;
                 }
             }
-            tbTotal.Text = "\u20B10 " + total.ToString("N2");
+            tbTotal.Text = "\u20B1" + total.ToString("N2");
             cashonhand.content = total;
             cashonhand.Save();
         }
@@ -202,7 +203,7 @@ namespace SPTC_APP.View.Pages.Input
                 if (!isReadOnly)
                 {
                     this.textBox = new TextBox();
-                    textBox.Text = "\u20B1 " + recap.content.ToString("0.00");
+                    textBox.Text = "\u20B1" + recap.content.ToString("N2");
                     textBox.SetValue(Grid.ColumnProperty, 1);
                     textBox.Height = 30;
                     textBox.Style = Application.Current.FindResource("CommonTextBoxStyle") as Style;
@@ -216,7 +217,7 @@ namespace SPTC_APP.View.Pages.Input
                 } else
                 {
                     this.labelBox = new Label();
-                    labelBox.Content = "\u20B1 " + recap.content.ToString("0.00");
+                    labelBox.Content = "\u20B1" + recap.content.ToString("N2");
                     labelBox.SetValue(Grid.ColumnProperty, 1);
                     labelBox.Height = 30;
                     labelBox.FontSize = 16;
@@ -241,7 +242,7 @@ namespace SPTC_APP.View.Pages.Input
                     }
                 }
 
-                textBox.Text = "\u20B1 " + textWithoutCurrencySymbol;
+                textBox.Text = "\u20B1" + textWithoutCurrencySymbol;
             }
 
 
@@ -263,5 +264,15 @@ namespace SPTC_APP.View.Pages.Input
             UpdateRecap();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (ControlWindow.ShowTwoway("Printing Report", "Are you sure you want to print Recapitulations?", Icons.NOTIFY))
+            {
+                Reports report = new Reports();
+                List<Recap> recaps = AppState.LoadRecapitulations(currentmonth, currentyear);
+                report.Populate(recaps, currentmonth, currentyear);
+                report.StartPrint();
+            }
+        }
     }
 }

@@ -53,31 +53,54 @@ namespace SPTC_APP.View.Pages.Output
                 recapgrid.Children.Add(recapDisplay.AddSelf());
             }
 
+            Border bar = new Border {
+                Height = 5,
+                Width = 800,
+                BorderBrush = System.Windows.Media.Brushes.Black,
+            };
+            recapgrid.Children.Add(bar);
+
             Grid grid = new Grid();
             ColumnDefinition col1 = new ColumnDefinition();
             col1.Width = new GridLength(250);
             ColumnDefinition col2 = new ColumnDefinition();
             col2.Width = new GridLength(1, GridUnitType.Star);
+            ColumnDefinition col3 = new ColumnDefinition();
+            col3.Width = new GridLength(1, GridUnitType.Star);
             grid.ColumnDefinitions.Add(col1);
             grid.ColumnDefinitions.Add(col2);
+            grid.ColumnDefinitions.Add(col3);
 
             Label label = new Label();
             label.Content = $"TOTAL: ";
             label.SetValue(Grid.ColumnProperty, 0);
             label.HorizontalAlignment = HorizontalAlignment.Right;
             label.Width = 180;
+            label.FontWeight = FontWeights.Bold;
             label.VerticalAlignment = VerticalAlignment.Center;
             grid.Children.Add(label);
 
             Label labelBox = new Label();
-            labelBox.Content = "\u20B1 " + cashonhand.ToString("N2") + "  :  " + "\u20B1 " + total.ToString("N2");
+            labelBox.Content = "\u20B1 " + cashonhand.ToString("N2");
             labelBox.SetValue(Grid.ColumnProperty, 1);
             labelBox.Height = 30;
             labelBox.FontSize = 16;
+            labelBox.FontWeight = FontWeights.Bold;
             labelBox.Style = Application.Current.FindResource("SubTitlePreset") as Style;
             labelBox.VerticalAlignment = VerticalAlignment.Center;
-            labelBox.Margin = new Thickness(20, 0, 10, 0);
+            labelBox.Margin = new Thickness(0, 0,0, 0);
             grid.Children.Add(labelBox);
+
+            Label labelBox2 = new Label();
+            labelBox2.Content = "\u20B1 " + total.ToString("N2");
+            labelBox2.SetValue(Grid.ColumnProperty, 2);
+            labelBox2.Height = 30;
+            labelBox2.FontSize = 16;
+            labelBox2.FontWeight = FontWeights.Bold;
+            labelBox2.Style = Application.Current.FindResource("SubTitlePreset") as Style;
+            labelBox2.VerticalAlignment = VerticalAlignment.Center;
+            labelBox2.Margin = new Thickness(0, 0, 0, 0);
+            grid.Children.Add(labelBox2);
 
             recapgrid.Children.Add(grid);
 
@@ -89,6 +112,7 @@ namespace SPTC_APP.View.Pages.Output
             private Label label;
             public TextBox textBox;
             public Label labelBox;
+            public Label labelBox2;
             private Grid grid;
 
             public RecapDisplay( Recap r, bool isTabbed = true)
@@ -102,8 +126,11 @@ namespace SPTC_APP.View.Pages.Output
                 col1.Width = new GridLength(250);
                 ColumnDefinition col2 = new ColumnDefinition();
                 col2.Width = new GridLength(1, GridUnitType.Star);
+                ColumnDefinition col3 = new ColumnDefinition();
+                col3.Width = new GridLength(1, GridUnitType.Star);
                 grid.ColumnDefinitions.Add(col1);
                 grid.ColumnDefinitions.Add(col2);
+                grid.ColumnDefinitions.Add(col3);
 
                 this.label = new Label();
                 label.Content = $"{recap.text}: ";
@@ -112,17 +139,28 @@ namespace SPTC_APP.View.Pages.Output
                 label.Width = 180;
                 label.VerticalAlignment = VerticalAlignment.Center;
                 grid.Children.Add(label);
-                
-                
+
+
                 this.labelBox = new Label();
-                labelBox.Content = "\u20B1 " + recap.content.ToString("N2");
+                labelBox.Content = (!isTabbed)? "\u20B1 " + recap.content.ToString("N2"): "----------------------------";
                 labelBox.SetValue(Grid.ColumnProperty, 1);
                 labelBox.Height = 30;
                 labelBox.FontSize = 16;
                 labelBox.Style = Application.Current.FindResource("SubTitlePreset") as Style;
                 labelBox.VerticalAlignment = VerticalAlignment.Center;
-                labelBox.Margin = new Thickness((isTabbed)?100: 20, 0, 10, 0);
+                labelBox.Margin = new Thickness(0, 0, 0, 0);
                 grid.Children.Add(labelBox);
+
+
+                this.labelBox2 = new Label();
+                labelBox2.Content = (isTabbed)?"\u20B1 " + recap.content.ToString("N2"): "";
+                labelBox2.SetValue(Grid.ColumnProperty, 2);
+                labelBox2.Height = 30;
+                labelBox2.FontSize = 16;
+                labelBox2.Style = Application.Current.FindResource("SubTitlePreset") as Style;
+                labelBox2.VerticalAlignment = VerticalAlignment.Center;
+                labelBox2.Margin = new Thickness(0, 0, 0, 0);
+                grid.Children.Add(labelBox2);
             }
 
             public Grid AddSelf()

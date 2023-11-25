@@ -58,6 +58,8 @@ namespace SPTC_APP.View
                     Cv2.WaitKey(1);
                 }
             }*/
+
+
         }
 
         //Test for Signature pad
@@ -341,10 +343,13 @@ namespace SPTC_APP.View
         }
         private async void btnMain_Click(object sender, RoutedEventArgs e)
         {
-            await AppState.LoadDatabase();
+            /*await AppState.LoadDatabase();
             MainBody body = (new MainBody());
             AppState.mainwindow = body;
-            body.Show();
+            body.Show();*/
+
+            ListReport reports = new ListReport("SELECT * FROM "+Table.PAYMENT_DETAILS);
+            reports.DisplayReport("franchise");
         }
         private void btnSaveSign_Click(object sender, RoutedEventArgs e)
         {

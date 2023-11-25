@@ -89,7 +89,7 @@ namespace SPTC_APP
                 {
                     IS_ADMIN = true;
                 }
-
+                (new Test()).Show();
                 if (AppState.isDeployment)
                 {
                     MainBody body = (new MainBody());

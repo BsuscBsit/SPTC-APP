@@ -121,7 +121,7 @@ namespace SPTC_APP.View.Pages.Output
                 labelBox.FontSize = 16;
                 labelBox.Style = Application.Current.FindResource("SubTitlePreset") as Style;
                 labelBox.VerticalAlignment = VerticalAlignment.Center;
-                labelBox.Margin = new Thickness((isTabbed)?200: 20, 0, 10, 0);
+                labelBox.Margin = new Thickness((isTabbed)?100: 20, 0, 10, 0);
                 grid.Children.Add(labelBox);
             }
 

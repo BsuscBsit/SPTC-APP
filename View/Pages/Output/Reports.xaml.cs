@@ -117,7 +117,7 @@ namespace SPTC_APP.View.Pages.Output
             labelBox2.Margin = new Thickness(0, 0, 0, 0);
             grid.Children.Add(labelBox2);
 
-            recapgrid.Children.Add(grid); throw new NotImplementedException();
+            recapgrid.Children.Add(grid); 
         }
 
         class RecapDisplay

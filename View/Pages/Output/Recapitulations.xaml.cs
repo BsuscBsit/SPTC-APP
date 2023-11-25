@@ -25,7 +25,7 @@ namespace SPTC_APP.View.Pages.Input
         private string[] monthAbbreviations = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
 
         static Recap cashonhand;
-
+        double total;
         public Recapitulations()
         {
             InitializeComponent();
@@ -34,8 +34,6 @@ namespace SPTC_APP.View.Pages.Input
             currentmonth = DateTime.Now.Month;
             currentyear = DateTime.Now.Year;
             UpdateRecap();
-
-            tbTotal.DefaultTextBoxBehavior(NUMBERPERIOD, true, gridToast, null, 21);
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -104,7 +102,7 @@ namespace SPTC_APP.View.Pages.Input
             List<Recap> recaps = AppState.LoadRecapitulations(currentmonth, currentyear);
 
             recapgrid.Children.Clear();
-            double total = 0;
+            total = 0;
 
             foreach (Recap r in recaps)
             {
@@ -125,10 +123,10 @@ namespace SPTC_APP.View.Pages.Input
                     {
                         recapgrid1.Children.Add(recapDisplay.AddSelf());
                     }
-                    total += r.content;
+                    UpdateTotal(r.content);
                 }
             }
-            tbTotal.Text = "\u20B1" + total.ToString("N2");
+            tbTotal.Content = "\u20B1" + total.ToString("N2");
             cashonhand.content = total;
             cashonhand.Save();
         }
@@ -239,6 +237,7 @@ namespace SPTC_APP.View.Pages.Input
                         recap.content = newval;
                         recap.Save();
                         recapmain.displayToast($"{recap.text} Updated!", 1);
+                        recapmain.UpdateTotal(newval);
                     }
                 }
 
@@ -257,6 +256,14 @@ namespace SPTC_APP.View.Pages.Input
             {
                 return grid;
             }
+        }
+
+        private void UpdateTotal(double newVal)
+        {
+            total += newVal;
+            tbTotal.Content = "\u20B1" + total.ToString("N2");
+            cashonhand.content = total;
+            cashonhand.Save();
         }
 
         private void tbTotal_GotFocus(object sender, RoutedEventArgs e)

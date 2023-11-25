@@ -59,16 +59,15 @@
             VerticalAlignment="Center"
             Content="TOTAL: "
             Style="{StaticResource TextFieldLabelingPreset}" />
-        <TextBox
+        <Label
             x:Name="tbTotal"
             Grid.Row="5"
             Grid.Column="2"
             Grid.ColumnSpan="2"
+            FontSize="18"
             Height="30"
-            GotFocus="tbTotal_GotFocus"
-            IsReadOnly="True"
-            Style="{StaticResource CommonTextBoxStyle}"
-            Text="0.00" />
+            Style="{StaticResource CommonTitlePreset}"
+            Content="0.00" />
         <StackPanel
             Grid.Row="3"
             Grid.Column="1"

@@ -104,6 +104,7 @@ namespace SPTC_APP.View.Pages.Output
                 XpsDocumentWriter xpsWriter = XpsDocument.CreateXpsDocumentWriter(xpsDoc);
 
                 PrintTicket printTicket = new PrintTicket();
+                printTicket.PageOrientation = PageOrientation.Landscape;
                 xpsWriter.Write(reportpage, printTicket);
             }
             this.Hide();

@@ -30,11 +30,10 @@ namespace SPTC_APP.View.Pages.Input
         public Recapitulations()
         {
             InitializeComponent();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); UpdateRecap(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             currentmonth = DateTime.Now.Month;
             currentyear = DateTime.Now.Year;
-            UpdateRecap();
         }
         protected override void OnClosing(CancelEventArgs e)
         {

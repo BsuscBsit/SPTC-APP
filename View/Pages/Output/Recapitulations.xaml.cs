@@ -286,7 +286,7 @@ namespace SPTC_APP.View.Pages.Input
                     new ColumnConfiguration(Field.ID, "ID", minWidth: 50, isNumeric: true, maxWidth:50),
                     new ColumnConfiguration(Field.DEPOSIT, "DEPOSIT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                 };
-                reports.DisplayReport("All Payments", "Here lies payment report", columns);
+                reports.StartPrint("All Payments", "Here lies payment report", columns);
             }
         }
     }

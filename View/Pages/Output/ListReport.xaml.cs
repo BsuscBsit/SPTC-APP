@@ -39,7 +39,7 @@ namespace SPTC_APP.View.Pages.Output
         /// <param name="filename">used in both title and printxps</param>
         /// <param name="description">Use "(page)" to substitute for pagenumber</param>
         /// <param name="columns"></param>
-        public void DisplayReport(string filename,string description, List<ColumnConfiguration> columns)
+        public void StartPrint(string filename,string description, List<ColumnConfiguration> columns)
         {
             pagenumber = 0;
             while (true)

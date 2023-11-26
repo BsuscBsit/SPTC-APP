@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Relational;
+﻿
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
@@ -13,6 +12,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using static SPTC_APP.View.Controls.TextBoxHelper.AllowFormat;
+using Table = SPTC_APP.Database.Table;
+
 namespace SPTC_APP.View.Pages.Input
 {
     /// <summary>
@@ -275,10 +276,18 @@ namespace SPTC_APP.View.Pages.Input
         {
             if (ControlWindow.ShowTwoway("Printing Report", "Are you sure you want to print Recapitulations?", Icons.NOTIFY))
             {
-                Reports report = new Reports();
+                /*Reports report = new Reports();
                 List<Recap> recaps = AppState.LoadRecapitulations(currentmonth, currentyear);
                 report.Populate(recaps, currentmonth, currentyear);
-                report.StartPrint();
+                report.StartPrint();*/
+
+                ListReport reports = new ListReport("SELECT * FROM " + Table.PAYMENT_DETAILS);
+                List<ColumnConfiguration> columns = new List<ColumnConfiguration>
+                {
+                    new ColumnConfiguration("id", "ID", minWidth: 50, isNumeric: true, maxWidth:50),
+                    new ColumnConfiguration("deposit", "DEPOSIT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                };
+                reports.DisplayReport("All Payments", columns);
             }
         }
     }

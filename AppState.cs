@@ -89,12 +89,13 @@ namespace SPTC_APP
                 {
                     IS_ADMIN = true;
                 }
-                (new Test()).Show();
+                
                 if (AppState.isDeployment)
                 {
                     MainBody body = (new MainBody());
                     AppState.mainwindow = body;
                     body.Show();
+                    //(new Test()).Show();
                 }
                 if (AppState.isDeployment_IDGeneration)
                 {

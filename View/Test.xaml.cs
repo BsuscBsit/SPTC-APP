@@ -348,8 +348,6 @@ namespace SPTC_APP.View
             AppState.mainwindow = body;
             body.Show();*/
 
-            ListReport reports = new ListReport("SELECT * FROM "+Table.PAYMENT_DETAILS);
-            reports.DisplayReport("franchise");
         }
         private void btnSaveSign_Click(object sender, RoutedEventArgs e)
         {

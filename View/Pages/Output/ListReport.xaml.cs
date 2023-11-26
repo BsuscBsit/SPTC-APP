@@ -12,11 +12,16 @@ using SPTC_APP.Database;
 using SPTC_APP.Objects;
 using SPTC_APP.View;
 using SPTC_APP.View.Controls;
+using Table = SPTC_APP.Database.Table;
 
 namespace SPTC_APP.View.Pages.Output
 {
     public partial class ListReport : Window
     {
+        public static string PAYMENTS = $"SELECT * FROM {Table.PAYMENT_DETAILS}";
+
+
+
         private readonly string _query;
 
         int pagenumber;

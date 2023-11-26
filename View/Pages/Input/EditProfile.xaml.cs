@@ -369,7 +369,7 @@ namespace SPTC_APP.View.Pages.Input
                     }
                     (AppState.mainwindow as MainBody).ResetWindow(General.DRIVER);
                 }
-                else if (type == General.OPERATOR || type == General.TRANSFER_FRANCHISE_OWNERSHIP)
+                else if (type == General.OPERATOR)
                 {
                     Operator optr = (franchise?.Operator == null) ? oholder : franchise.Operator;
                     if (optr.name == null)
@@ -409,28 +409,66 @@ namespace SPTC_APP.View.Pages.Input
                         optr.Save();
                     }
 
-                    if (type == General.TRANSFER_FRANCHISE_OWNERSHIP)
-                    {
-                        PaymentDetails<Ledger.ShareCapital> capital = new PaymentDetails<Ledger.ShareCapital>();
-                        Ledger.ShareCapital share = new Ledger.ShareCapital();
-                        if (franchise.GetShareCapitals()?.FirstOrDefault() != null)
-                        {
-                            share = franchise.GetShareCapitals().FirstOrDefault();
-                        }
-                        else
-                        {
-                            share.WriteInto(franchise.id, DateTime.Now, 0, 0);
-                        }
-                        share.lastBalance = share.lastBalance + AppState.TRANSFER_FEE;
-                        capital.WriteInto(share, 0, DateTime.Now, "-1", AppState.TRANSFER_FEE, 0, "TRANSFER_FEE", share.lastBalance);
-                        capital.Save();
+                    (AppState.mainwindow as MainBody).ResetWindow(General.OPERATOR);
+                } 
+                else if (type == General.TRANSFER_FRANCHISE_OWNERSHIP)
+                {
+                    Operator optr = new Operator();
+                    optr.name = new Name();
+                    optr.address = new Address();
+                    optr.name.firstname = tbFname.Text;
+                    optr.name.firstname = tbFname.Text;
+                    optr.name.middlename = tbMname.Text;
+                    optr.name.lastname = tbLname.Text;
+                    optr.birthday = (DateTime)bDay.SelectedDate;
+                    optr.name.sex = cbGender.SelectedIndex == 1;
+                    /*optr.emergencyContact = tboxsContactNum.Text;
+                    optr.name.sex = cbGender.SelectedIndex == 1;
+                    optr.address.country = tboxsCountry.Text;
+                    optr.address.province = tboxsProvince.Text;
+                    optr.address.city = tboxsCity.Text;*/
+                    optr.address.addressline1 = tbAddressLine1.Text;
+                    optr.address.addressline2 = tbAddressLine2.Text;
+                    optr.address.UpdateAddressLines();
 
-                        (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE);
+                    if (hasPhoto)
+                    {
+                        optr.image = new Image(imgIDPic.Source, $"Image {optr.name.ToString()}");
+                    }
+                    if (hasSign)
+                    {
+                        optr.signature = new Image(imgSignPic.Source, $"Signature {optr.name.ToString()}");
+                    }
+
+                    Franchise newFracnhise = new Franchise();
+                    newFracnhise.BodyNumber = franchise.BodyNumber;
+                    newFracnhise.MTOPNo = franchise.MTOPNo;
+                    newFracnhise.PlateNo = franchise.PlateNo;
+                    newFracnhise.Operator = optr;
+                    newFracnhise.Driver = franchise.Driver;
+                    newFracnhise.lastFranchiseId = franchise.id;
+                    newFracnhise.BuyingDate = DateTime.Now;
+
+                    Ledger.ShareCapital newshare = new Ledger.ShareCapital();
+                    newshare.WriteInto(franchise.id, DateTime.Now, 0, 0);
+                    newFracnhise.Save();
+
+                    PaymentDetails<Ledger.ShareCapital> capital = new PaymentDetails<Ledger.ShareCapital>();
+                    Ledger.ShareCapital share = new Ledger.ShareCapital();
+                    if (franchise.GetShareCapitals()?.FirstOrDefault() != null)
+                    {
+                        share = franchise.GetShareCapitals().FirstOrDefault();
                     }
                     else
                     {
-                        (AppState.mainwindow as MainBody).ResetWindow(General.OPERATOR);
+                        share.WriteInto(franchise.id, DateTime.Now, 0, 0);
                     }
+                    share.lastBalance = share.lastBalance + AppState.TRANSFER_FEE;
+
+                    capital.WriteInto(share, 0, DateTime.Now, (++AppState.CV_OR_LAST).ToString(), AppState.TRANSFER_FEE, 0, "TRANSFER_FEE", share.lastBalance);
+                    capital.Save();
+
+                    (AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE);
                 }
                 closingMSG = "Changes was saved successfully.\nPlease refesh the view to see changes.";
                 this.Close();

@@ -23,6 +23,9 @@ namespace SPTC_APP.View.Pages.Input
     {
         int currentmonth;
         int currentyear;
+
+        public bool loadedView = false;
+
         private string[] monthAbbreviations = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
 
         static Recap cashonhand;
@@ -69,6 +72,16 @@ namespace SPTC_APP.View.Pages.Input
             {
                 currentmonth--;
             }
+            if (currentmonth == DateTime.Now.Month && currentyear == DateTime.Now.Year)
+            {
+                btnPieForward.IsEnabled = false;
+            }
+            else
+            {
+                btnPieForward.IsEnabled = true;
+            }
+
+            lblMonthYear.Content = $"{monthAbbreviations[currentmonth - 1] + ", " + currentyear}";
             UpdateRecap();
         }
         private void btnPieForward_Click(object sender, RoutedEventArgs e)
@@ -82,6 +95,16 @@ namespace SPTC_APP.View.Pages.Input
             {
                 currentmonth++;
             }
+            if (currentmonth == DateTime.Now.Month && currentyear == DateTime.Now.Year)
+            {
+                btnPieForward.IsEnabled = false;
+            }
+            else
+            {
+                btnPieForward.IsEnabled = true;
+            }
+
+            lblMonthYear.Content = $"{monthAbbreviations[currentmonth - 1] + ", " + currentyear}";
             UpdateRecap();
 
         }
@@ -91,19 +114,24 @@ namespace SPTC_APP.View.Pages.Input
         {
             if (currentmonth == DateTime.Now.Month && currentyear == DateTime.Now.Year)
             {
-                    btnPieForward.IsEnabled = false;
+                btnPieForward.IsEnabled = false;
+                recapgrid.Children.Clear();
+                recapgrid1.Children.Clear();
+
+                recapgrid1.OpacityMask = Brushes.White;
             }
             else
             {
-                    btnPieForward.IsEnabled = true;
+                btnPieForward.IsEnabled = true;
+                recapgrid1.OpacityMask = Brushes.Red;
             }
             lblMonthYear.Content = $"{monthAbbreviations[currentmonth - 1] + ", " + currentyear}";
 
             List<Recap> recaps = AppState.LoadRecapitulations(currentmonth, currentyear);
 
-            recapgrid.Children.Clear();
             total = 0;
-
+            int ind = 0;
+            int ind1 = 0;
             foreach (Recap r in recaps)
             {
                 if (r.text == Field.CASH_ON_HAND)
@@ -115,17 +143,52 @@ namespace SPTC_APP.View.Pages.Input
                     RowDefinition rowDefinition = new RowDefinition();
                     rowDefinition.Height = new GridLength(40);
                     bool ch = check(r);
-                    RecapDisplay recapDisplay = new RecapDisplay(this, r, ch);
-                    if (ch)
+                    if (loadedView && !(DateTime.Now.Month == currentmonth && DateTime.Now.Year == currentyear))
                     {
-                        recapgrid.Children.Add(recapDisplay.AddSelf());
-                    } else
+                        
+                        if (ch)
+                        {
+                            var child = recapgrid.Children[ind++];
+                            if (child is Grid grid)
+                            {
+                                if (grid.Children[1] is Label label)
+                                {
+                                    label.Content = "\u20B1" + r.content.ToString("N2");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var child = recapgrid1.Children[ind1++];
+                            if (child is Grid grid1)
+                            {
+                                if (grid1.Children[1] is TextBox textBox)
+                                {
+                                    textBox.Text = "\u20B1" + r.content.ToString("N2");
+                                    textBox.IsEnabled = false;
+                                    textBox.Background = Brushes.LightGray;
+                                }
+                            }
+                        }
+                    }
+                    else
                     {
-                        recapgrid1.Children.Add(recapDisplay.AddSelf());
+                        
+                        RecapDisplay recapDisplay = new RecapDisplay(this, r, ch);
+                        if (ch)
+                        {
+                            recapgrid.Children.Add(recapDisplay.AddSelf());
+                        }
+                        else
+                        {
+                            recapgrid1.Children.Add(recapDisplay.AddSelf());
+                        }
+                        
                     }
                     UpdateTotal(r.content);
                 }
             }
+            loadedView = true;
             tbTotal.Content = "\u20B1" + total.ToString("N2");
             cashonhand.content = total;
             cashonhand.Save();
@@ -135,25 +198,25 @@ namespace SPTC_APP.View.Pages.Input
         {
             switch(r.text){
                 case "Share Capital":
-                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("SHARECAPITAL", currentmonth, currentyear)).FirstOrDefault();
                     return true;
                 /*case "Monthly Dues":
                     r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH($"LOAN\" || {Field.LEDGER_TYPE} = \"LONGTERMLOAN", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
                     return true;*/
                 case "Loan Receivable - Pastdue":
-                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_PASTDUE_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_PASTDUE_IN_MONTH(currentmonth, currentyear)).FirstOrDefault();
                     return true;
                 case "--------------- - Current":
-                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_CURRENT_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_CURRENT_IN_MONTH(currentmonth, currentyear)).FirstOrDefault();
                     return true;
                 case "Penalties":
-                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_PENALTY_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_PENALTY_IN_MONTH(currentmonth, currentyear)).FirstOrDefault();
                     return true;
                 case "Interest Receivable":
-                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_INTEREST_IN_MONTH(DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_LOAN_INTEREST_IN_MONTH(currentmonth, currentyear)).FirstOrDefault();
                     return true;
                 case "Transfer Fees":
-                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("TRANSFER_FEE", DateTime.Now.Month, DateTime.Now.Year)).FirstOrDefault();
+                    r.content = Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_ALL_PAYMENT_IN_MONTH("TRANSFER_FEE", currentmonth, currentyear)).FirstOrDefault();
                     return true;
                 default:
                     return false;
@@ -226,6 +289,7 @@ namespace SPTC_APP.View.Pages.Input
                 }
             }
 
+
             private void Save(object sender, RoutedEventArgs e)
             {
                 string textWithoutCurrencySymbol = textBox.Text.Replace("\u20B1", "");
@@ -234,10 +298,11 @@ namespace SPTC_APP.View.Pages.Input
                 {
                     if (recap.content != newval)
                     {
+                        double totalvar = newval - recap.content;
                         recap.content = newval;
                         recap.Save();
                         recapmain.displayToast($"{recap.text} Updated!", 1);
-                        recapmain.UpdateTotal(newval);
+                        recapmain.UpdateTotal(totalvar);
                     }
                 }
 

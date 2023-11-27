@@ -20,6 +20,7 @@ namespace SPTC_APP.View
             AppState.LoadFromJson();
             if(!AppState.isDeployment && !AppState.isDeployment_IDGeneration) pbPassword.Password = "Admin1234";
             cbUser.ItemsSource = AppState.Employees;
+            cbUser.SelectedIndex = AppState.LAST_LOGIN;
             if((AppState.Employees?.Count ?? 0) < 4)
             {
                 AppState.SaveToJson();
@@ -31,6 +32,8 @@ namespace SPTC_APP.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            AppState.LAST_LOGIN = cbUser.SelectedIndex;
+            AppState.SaveToJson();
             AppState.Login(cbUser.Text, pbPassword.Password, this);
             pbPassword.Focus();
         }

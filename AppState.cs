@@ -28,6 +28,7 @@ namespace SPTC_APP
         public static string APPSTATE_PATH;
         public static string LOGS;
         public static string OUTPUT_PATH;
+        public static int LAST_LOGIN;
         public static string DEFAULT_PASSWORD;
         public static string DEFAULT_ADDRESSLINE2;
         public static string EXPIRATION_DATE;
@@ -228,6 +229,7 @@ namespace SPTC_APP
             APPSTATE_PATH = "Config\\AppState.json";
             LOGS = "Logs\\log.txt";
             OUTPUT_PATH = "Output\\";
+            LAST_LOGIN = 0;
             DEFAULT_PASSWORD = "Admin1234";
             DEFAULT_ADDRESSLINE2 = "Sapang Palay San Jose Del Monte, Bulacan";
             EXPIRATION_DATE = "2023 - 2024";
@@ -248,6 +250,7 @@ namespace SPTC_APP
                 APPSTATE_PATH,
                 LOGS,
                 OUTPUT_PATH,
+                LAST_LOGIN,
                 DEFAULT_PASSWORD,
                 DEFAULT_ADDRESSLINE2,
                 EXPIRATION_DATE,
@@ -294,6 +297,7 @@ namespace SPTC_APP
                     APPSTATE_PATH = data.APPSTATE_PATH;
                     LOGS = data.LOGS;
                     OUTPUT_PATH = data.OUTPUT_PATH;
+                    LAST_LOGIN = data.LAST_LOGIN;
                     DEFAULT_PASSWORD = data.DEFAULT_PASSWORD;
                     DEFAULT_ADDRESSLINE2 = data.DEFAULT_ADDRESSLINE2;
                     EXPIRATION_DATE = data.EXPIRATION_DATE;

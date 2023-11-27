@@ -402,7 +402,7 @@
                         Margin="0,15,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
-                        Content="Filter By:"
+                        Content="Show Columns For:"
                         Style="{StaticResource TextFieldLabelingPreset}" />
                     <Label
                         Grid.Row="4"

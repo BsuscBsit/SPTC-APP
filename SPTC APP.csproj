@@ -242,6 +242,7 @@
       <DependentUpon>ControlWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\DataGridHelper.cs" />
+    <Compile Include="View\Controls\DatePickerCalendar.cs" />
     <Compile Include="View\Controls\DialogHelper.cs" />
     <Compile Include="View\Controls\DraggingHelper.cs" />
     <Compile Include="View\Controls\OutlinedText.cs" />

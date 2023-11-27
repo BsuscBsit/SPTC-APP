@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SPTC_APP.View.Pages.Output"
+    xmlns:local1="clr-namespace:SPTC_APP.View.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="DashboardView"
     mc:Ignorable="d">
@@ -467,6 +468,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Rectangle
                             Grid.Row="1"
@@ -508,8 +510,19 @@
                             Content="ID PRINTING"
                             Style="{StaticResource CommonButtonStyle}" />
                         <Button
-                            x:Name="btnReload"
+                            x:Name="btnReports"
                             Grid.Row="5"
+                            Width="200"
+                            Height="40"
+                            Margin="0,5,0,5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Click="btnReports_Click"
+                            Content="GENERATE REPORTS"
+                            Style="{StaticResource CommonButtonStyle}" />
+                        <Button
+                            x:Name="btnReload"
+                            Grid.Row="6"
                             Width="200"
                             Height="40"
                             Margin="0,5,0,15"
@@ -548,5 +561,199 @@
             </Grid>
 
         </Canvas>
+        <Grid
+            x:Name="gridReportWindow"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2">
+            <Border Background="#CCFFFFFF" CornerRadius="10" />
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border Background="White" CornerRadius="10">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="20"
+                            Direction="-90"
+                            ShadowDepth="5"
+                            Color="{StaticResource ColorSoftGrey1}" />
+                    </Border.Effect>
+                </Border>
+                <Grid Width="259" Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.ColumnSpan="2"
+                        Margin="0,0,0,15"
+                        HorizontalAlignment="Center"
+                        Content="Generate Reports"
+                        Style="{StaticResource CommonTitlePreset}" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Content="Select Report Category:"
+                        Style="{StaticResource TextFieldLabelingPreset}" />
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="0,15,0,0"
+                        Content="Generate Report For:"
+                        Style="{StaticResource TextFieldLabelingPreset}" />
+                    <ComboBox
+                        x:Name="cbCat"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Width="164"
+                        Height="30"
+                        Margin="15,0,0,0"
+                        HorizontalAlignment="Left"
+                        IsReadOnly="True"
+                        IsTabStop="False"
+                        SelectedIndex="0"
+                        Style="{DynamicResource CommonComboBox}">
+                        <ComboBoxItem Content="Active Loans" />
+                        <ComboBoxItem Content="Loan Payments" />
+                        <ComboBoxItem Content="Monthly Due for Loans" />
+                    </ComboBox>
+                    <StackPanel
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Width="160"
+                        Margin="15,0,0,15"
+                        HorizontalAlignment="Left">
+                        <Button
+                            x:Name="btnRepShort"
+                            Height="30"
+                            Click="generateReports"
+                            Content="Short-Term Loans"
+                            Style="{StaticResource CommonButtonStyle}" />
+                        <Button
+                            x:Name="btnRepLong"
+                            Height="30"
+                            Margin="0,10,0,10"
+                            Click="generateReports"
+                            Content="Long-Term Loans"
+                            Style="{StaticResource CommonButtonStyle}" />
+                        <Button
+                            x:Name="btnRepEmer"
+                            Height="30"
+                            Click="generateReports"
+                            Content="Emergency Loans"
+                            Style="{StaticResource CommonButtonStyle}" />
+                    </StackPanel>
+                    <Button
+                        x:Name="btnGRClose"
+                        Grid.Column="2"
+                        Width="28"
+                        Height="28"
+                        Padding="0,0,0,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Click="btnGRClose_Click"
+                        Content="x"
+                        FontFamily="Berlin Sans FB"
+                        FontSize="20"
+                        FontStretch="Normal"
+                        FontWeight="Regular"
+                        Style="{DynamicResource ExitButtonStyle}" />
+                </Grid>
+            </Grid>
+            <Grid x:Name="gridRepWinChild">
+                <Border Background="#CCFFFFFF" CornerRadius="10" />
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Border Background="White" CornerRadius="10">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="20"
+                                Direction="-90"
+                                ShadowDepth="5"
+                                Color="{StaticResource ColorSoftGrey1}" />
+                        </Border.Effect>
+                    </Border>
+                    <Grid Margin="15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            x:Name="lblTitleReport"
+                            Content="Generate Report"
+                            Style="{StaticResource CommonTitlePreset}" Grid.ColumnSpan="3" Padding="5,5,5,0" />
+                        <Label
+                            x:Name="lblSubTitleReport"
+                            Content="Report For"
+                            Style="{StaticResource SubTitlePreset}" Grid.ColumnSpan="3" Grid.Row="1" Padding="5,0,5,5" Margin="0,0,0,15" />
+                        <Label
+                            Grid.Row="2"
+                            Content="Select Month and Year:"
+                            Style="{StaticResource TextFieldLabelingPreset}" Grid.Column="1" />
+                        <StackPanel
+                            Grid.Row="3"
+                            Margin="15,0,0,0"
+                            Orientation="Horizontal" Grid.Column="1">
+                            <Border x:Name="datesel"
+                                Width="164"
+                                Height="30"
+                                Padding="5,0,5,0"
+                                Background="White"
+                                BorderBrush="{StaticResource BrushGrey}"
+                                BorderThickness="1"
+                                CornerRadius="5">
+                                <DatePicker x:Name="dpDate"
+                                    local1:DatePickerCalendar.IsMonthYear="True"
+                                    local1:DatePickerDateFormat.DateFormat="MMM-yyyy"
+                                    Text="MMM-yyyy"
+                                    BorderBrush="Transparent" Margin="0,2,0,0"/>
+                            </Border>
+                            <CheckBox
+                                x:Name="printAll"
+                                Margin="15,0,0,0"
+                                VerticalAlignment="Center"
+                                Content="Print All" Click="printAll_Click" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="4"
+                            Margin="0,24,0,12"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Orientation="Horizontal" Grid.ColumnSpan="3">
+                            <Button
+                                x:Name="btnPrintRepCancel"
+                                Width="140"
+                                Height="30"
+                                Margin="0,0,10,0"
+                                Click="btnPrintRepCancel_Click"
+                                Content="Cancel"
+                                Style="{DynamicResource CommonButtonStyle}" />
+                            <Button
+                                x:Name="btnPrintReport"
+                                Width="140"
+                                Height="30"
+                                Click="btnPrintReport_Click"
+                                Content="Print Report"
+                                Style="{DynamicResource CommonButtonStyle}" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

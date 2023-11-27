@@ -12,8 +12,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace SPTC_APP.View.Pages.Output
 {
@@ -42,6 +44,10 @@ namespace SPTC_APP.View.Pages.Output
             tbTotalDriver.Content = Retrieve.GetDataUsingQuery<int>(RequestQuery.GET_TOTAL(Table.DRIVER)).FirstOrDefault().ToString();
             tbTotalShares.Content = "\u20B1 " + Retrieve.GetDataUsingQuery<double>(RequestQuery.GET_TOTAL_SHARES).FirstOrDefault().ToString("0.00");
 
+            gridReportWindow.Visibility = Visibility.Hidden;
+            gridRepWinChild.Visibility = Visibility.Hidden;
+            dpDate.SelectedDate = DateTime.Now;
+            dpDate.DisplayDate = DateTime.Now;
             if ((AppState.USER?.position?.accesses[9] ?? false))
             {
                 btnPrint.Visibility = Visibility.Visible;
@@ -497,7 +503,7 @@ namespace SPTC_APP.View.Pages.Output
             }
             else
             {
-                actionMenu.AnimateHeight(260.8, 0.2);
+                actionMenu.AnimateHeight(310.4, 0.2);
                 epektos.IsEnabled = true;
             }
             menuExpanded.IsChecked = !isExpanded;
@@ -506,6 +512,192 @@ namespace SPTC_APP.View.Pages.Output
         private void btnAddViolationType_Click(object sender, RoutedEventArgs e)
         {
             (new AddViolationType()).Show();
+        }
+
+        private void btnReports_Click(object sender, RoutedEventArgs e)
+        {
+            gridReportWindow.FadeIn(0.3);
+        }
+
+        private void btnGRClose_Click(object sender, RoutedEventArgs e)
+        {
+            gridReportWindow.FadeOut(0.3);
+        }
+
+        private string msg = "";
+        private void generateReports(object sender, RoutedEventArgs e)
+        {
+            if(sender is Button btn)
+            {
+                string q = "";
+                switch (cbCat.SelectedIndex)
+                {
+                    case 0: // Active loans (loans sa system na di pa tapos bayaran)
+                        if (btn.Name.Equals("btnRepShort"))
+                        {
+                            q = "Short-Term";
+                            /**
+                             * Table: short term loans(active/di pa bayad)
+                             * operator name, body#, date, cv/or, termlength, loan amount, loan balance
+                             * **/
+                        }
+                        else if (btn.Name.Equals("btnRepLong"))
+                        {
+                            q = "Long-Term";
+                            /**
+                             * Table: long term loans(active/di pa bayad)
+                             * operator name, body#, date, cv/or, termlength, loan amount, loan balance
+                             * **/
+                        }
+                        else if (btn.Name.Equals("btnRepEmer"))
+                        {
+                            q = "Emergency";
+                            /**
+                             * Table: emergency term loans(active/di pa bayad).
+                             * operator name, body#, date, cv/or, termlength, loan amount, loan balance
+                             * **/
+                        }
+                        msg = $"Are you sure you want to print Active Loans for {q} loans?";
+
+                        // global yung msg variable, pwede irekta sa printing function.
+                        if (ControlWindow.ShowTwoway("Confirm Printing", msg, Icons.NOTIFY))
+                        {
+                            // printing confirmed, call printing function.
+                        }
+                        break;
+
+                    // Jump to btnPrintReport_Click for table configs
+                    case 1:
+                        lblTitleReport.Content = "Loan Payment Report";
+                        if (btn.Name.Equals("btnRepShort"))
+                        {
+                            lblSubTitleReport.Content = "For Short-Term Loans";
+                            q = "Short-Term";
+                        }
+                        else if (btn.Name.Equals("btnRepLong"))
+                        {
+                            lblSubTitleReport.Content = "For Long-Term Loans";
+                            q = "Long-Term";
+                        }
+                        else if (btn.Name.Equals("btnRepEmer"))
+                        {
+                            lblSubTitleReport.Content = "For Emergency Loans";
+                            q = "Emergency";
+                        }
+                        msg = $"Are you sure you want to print {q} loan payments";
+                        gridRepWinChild.FadeIn(0.3);
+                        break;
+
+                    case 2:
+                        if (btn.Name.Equals("btnRepShort"))
+                        {
+                            lblSubTitleReport.Content = "For Short-Term Loans";
+                            q = "Short-Term";
+                        }
+                        else if (btn.Name.Equals("btnRepLong"))
+                        {
+                            lblSubTitleReport.Content = "For Long-Term Loans";
+                            q = "Long-Term";
+                        }
+                        else if (btn.Name.Equals("btnRepEmer"))
+                        {
+                            lblSubTitleReport.Content = "For Emergency Loans";
+                            q = "Emergency";
+                        }
+                        msg = $"Are you sure you want to print {q} loan dues";
+                        gridRepWinChild.FadeIn(0.2);
+                        break;
+                }
+            }
+        }
+
+        private void btnPrintRepCancel_Click(object sender, RoutedEventArgs e)
+        {
+            gridRepWinChild.FadeOut(0.2);
+        }
+
+        private void btnPrintReport_Click(object sender, RoutedEventArgs e)
+        {
+            if(sender is Button btn)
+            {
+                string m = dpDate.SelectedDate?.ToString("MMMM");
+                string y = dpDate.SelectedDate?.ToString("yyyy");
+                string q = printAll.IsChecked == true ? " from database?" : $" for {m} {y}?";
+
+                // Get the date month and year for filtering.
+                // kapag checked yung printAll, hindi na fifilterin by date.
+                switch (cbCat.SelectedIndex)
+                {
+                    case 1: //Loan Payments (mga bayad sa loan na pumasok sa system).
+                        if (btn.Name.Equals("btnRepShort"))
+                        {
+                            /**
+                             * Table: short term loan payments (filtered by month and year depende sa sinelect).
+                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
+                             * **/
+                        }
+                        else if (btn.Name.Equals("btnRepLong"))
+                        {
+                            /**
+                             * Table: long term loan payments (filtered by month and year depende sa sinelect).
+                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
+                             * **/
+                        }
+                        else if (btn.Name.Equals("btnRepEmer"))
+                        {
+                            /**
+                             * Table: emergency term loan payments (filtered by month and year depende sa sinelect).
+                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
+                             * **/
+                        }
+                        break;
+
+                    case 2: // Monthly Due (mga expected bayaran na loan sa month, year na sinelect)
+                        if (btn.Name.Equals("btnRepShort"))
+                        {
+                            /**
+                             * Table: short term loan payments (filtered by month and year depende sa sinelect).
+                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
+                             * **/
+                        }
+                        else if (btn.Name.Equals("btnRepLong"))
+                        {
+                            /**
+                             * Table: long term loan payments (filtered by month and year depende sa sinelect).
+                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
+                             * **/
+                        }
+                        else if (btn.Name.Equals("btnRepEmer"))
+                        {
+                            /**
+                             * Table: emergency term loan payments (filtered by month and year depende sa sinelect).
+                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
+                             * **/
+                        }
+                        break;
+                }
+
+                if (ControlWindow.ShowTwoway("Confirm Printing", msg + q, Icons.NOTIFY))
+                {
+                    // printing confirmed, call printing function.
+
+                    gridRepWinChild.FadeOut(0.2);
+                }
+            }
+        }
+
+        private void printAll_Click(object sender, RoutedEventArgs e)
+        {
+            if(printAll.IsChecked == true)
+            {
+                dpDate.IsEnabled = false;
+                datesel.Opacity = 0.5;
+            }
+            else
+            {
+                dpDate.IsEnabled = true;
+                datesel.Opacity = 1;
+            }
         }
     }
 }

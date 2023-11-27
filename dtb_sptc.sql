@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2023 at 10:49 AM
+-- Generation Time: Nov 26, 2023 at 03:20 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -42,7 +42,12 @@ CREATE TABLE `tbl_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
-
+INSERT INTO `tbl_address` (`id`, `address_line1`, `address_line2`, `house_no`, `street_name`, `barangay_subdivision`, `city_municipality`, `postal_code`, `province`, `country`, `isDeleted`) VALUES
+(1, 'Norzagaray, Bulacan', 'FVR', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(2, 'Sta.Cruz 2 , Sapang Palay', 'Santan Street', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(3, 'Assumption, SJDM', 'Katahimikan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(4, 'Bitungol Norzagaray', 'P.Esteban Street ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(5, 'San jose Del Monte, Bulacan', 'Blk 6 Lot 19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 --
 -- Table structure for table `tbl_driver`
 --
@@ -89,15 +94,11 @@ CREATE TABLE `tbl_employee` (
 --
 
 INSERT INTO `tbl_employee` (`id`, `name_id`, `address_id`, `sign_id`, `image_id`, `password`, `position_id`, `start_date`, `end_date`, `date_of_birth`, `contact_no`, `isDeleted`) VALUES
-(1, 10, 10, 10, 17, '751cb3f4aa17c36186f4856c8982bf27', 1, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
-(2, 12, 12, 12, 11, '751cb3f4aa17c36186f4856c8982bf27', 2, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
-(3, 14, 14, 16, 15, '751cb3f4aa17c36186f4856c8982bf27', 3, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
-(4, 13, 13, 14, 13, '751cb3f4aa17c36186f4856c8982bf27', 4, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
-(5, 4, 4, 1, 4, NULL, 5, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
-(6, -1, -1, -1, -1, NULL, -1, NULL, NULL, NULL, NULL, 1),
-(7, -1, -1, -1, -1, NULL, -1, NULL, NULL, NULL, NULL, 1),
-(8, -1, -1, -1, -1, NULL, -1, NULL, NULL, NULL, NULL, 1),
-(9, 11, 11, -1, 24, NULL, 6, '0001-01-01', '0001-01-01', '2023-11-20', NULL, 0);
+(1, 1, 1, 1, 2, '751cb3f4aa17c36186f4856c8982bf27', 1, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
+(2, 2, 2, 3, 4, '751cb3f4aa17c36186f4856c8982bf27', 2, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
+(3, 3, 3, 5, 6, '751cb3f4aa17c36186f4856c8982bf27', 3, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
+(4, 4, 4, 7, 8, '751cb3f4aa17c36186f4856c8982bf27', 4, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0),
+(5, 5, 5, 9, 10, NULL, 5, '0001-01-01', '0001-01-01', '0001-01-01', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -217,6 +218,13 @@ CREATE TABLE `tbl_name` (
 
 -- --------------------------------------------------------
 
+
+INSERT INTO `tbl_name` (`id`, `sex`, `first_name`, `middle_name`, `last_name`, `suffix`, `isDeleted`) VALUES
+(1, 0, 'Leopoldo', 'Juni', 'Aradanas', '', 0),
+(2, 1, 'Rosaline', 'Liao', 'Morado', '', 0),
+(3, 1, 'Julita', 'David', 'Antipasado', '', 0),
+(4, 1, 'Maximina', 'Feliciano', 'Gener', '', 0),
+(5, 1, 'Leonzida', 'Cobong', 'Abad', '', 0);
 --
 -- Table structure for table `tbl_operator`
 --

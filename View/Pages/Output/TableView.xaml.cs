@@ -12,6 +12,7 @@ using SPTC_APP.Objects;
 using SPTC_APP.View.Controls;
 using SPTC_APP.View.Pages.Input;
 using SPTC_APP.View.Styling;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace SPTC_APP.View.Pages.Output
 {
@@ -627,30 +628,50 @@ namespace SPTC_APP.View.Pages.Output
 
             if (table == Table.FRANCHISE)
             {
+                if (cbFrWLoan.IsChecked ?? false)
+                {
+                    franchiseFilter["LOAN BALANCE"] = true;
+                }
+                if (cbFrWLtLoan.IsChecked ?? false)
+                {
+                    franchiseFilter["LTLOAN BALANCE"] = true;
+                }
+
                 collectionView.Filter = item =>
                 {
                     if (item is Franchise franchise)
                     {
-                        if (cbFrWLoan.IsChecked ?? false) 
+                        bool shown = true;
+                        if (cbFrWLoan.IsChecked ?? false)
                         {
-                            return franchise.LoanBalance > 0;
+                            shown = franchise.LoanBalance > 0;
                         }
                         if (cbFrWLtLoan.IsChecked ?? false)
                         {
-                            return franchise.LongTermLoanBalance > 0;
+                            shown = franchise.LongTermLoanBalance > 0;
                         }
+                        return shown;
                     }
                     return true;
                 };
-
-                //reset the visibility
                 foreach (DataGridColumn column in TableGrid.Columns)
                 {
                     if (column.Header != null && franchiseFilter.TryGetValue(column.Header.ToString(), out bool isVisible))
                     {
+                        column.HeaderStyle = new Style()
+                        {
+                            Setters = 
+                            {
+                                new Setter(Control.FontWeightProperty, FontWeights.Bold),
+                                new Setter(Control.HorizontalContentAlignmentProperty, HorizontalAlignment.Center),
+                                new Setter(Control.FontFamilyProperty, new FontFamily("Inter")),
+                                new Setter(VisibilityProperty, isVisible ? Visibility.Visible : Visibility.Collapsed)
+                            }
+                        };
                         column.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
                     }
                 }
+
 
             }
             else if (table == Table.OPERATOR)
@@ -690,14 +711,9 @@ namespace SPTC_APP.View.Pages.Output
                 }
             }
 
-            
 
 
-
-            franchiseInformation.AnimateWidth(0, 0.3, () =>
-            {
-                btnHideFI.Visibility = Visibility.Hidden;
-            });
+            filterOptions.FadeOut(0.2);
         }
 
         private void btnApplyFiltersCancel_Click(object sender, RoutedEventArgs e)

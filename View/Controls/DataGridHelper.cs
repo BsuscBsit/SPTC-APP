@@ -16,7 +16,7 @@ public class DataGridHelper<T>
     {
         //private List<T> stack;
 
-        public DataGridHelper(DataGrid dataGrid, List<ColumnConfiguration> columnConfigurations)
+        public DataGridHelper(DataGrid dataGrid, List<ColumnConfiguration> columnConfigurations, bool isReport = false)
         {
             //this.stack = new List<T>();
             // Clear existing columns
@@ -26,7 +26,7 @@ public class DataGridHelper<T>
             dataGrid.SelectionUnit = DataGridSelectionUnit.FullRow;
             dataGrid.AutoGenerateColumns = false;
 
-            dataGrid.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            dataGrid.GridLinesVisibility = isReport? DataGridGridLinesVisibility.All:DataGridGridLinesVisibility.None;
            
 
 
@@ -61,8 +61,8 @@ public class DataGridHelper<T>
                             new Setter(Control.BackgroundProperty, config.BackgroundColor),
                             new Setter(Control.ForegroundProperty, Brushes.Black),
                             new Setter(Control.FontWeightProperty, config.FontWeight),
-                            new Setter(Control.HeightProperty, config.Height),
-                            new Setter(Control.FontSizeProperty, config.FontSize),
+                            new Setter(Control.HeightProperty, isReport? 18:config.Height),
+                            new Setter(Control.FontSizeProperty, isReport? 10:config.FontSize),
                             new Setter(TextBlock.TextAlignmentProperty, config.Centralize? TextAlignment.Center: TextAlignment.Left),
                             new Setter(TextBlock.FontFamilyProperty, new FontFamily("Inter")),
                             new Setter(TextBlock.FontStretchProperty, config.Numeric? FontStretches.Expanded : FontStretches.Normal),

@@ -8,6 +8,7 @@
         IsHitTestVisible="False"
         IsTabStop="False"
         ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
         Topmost="False"
         WindowStyle="None"

@@ -92,8 +92,8 @@ namespace SPTC_APP.View.Pages.Input
             {
                 if (!string.IsNullOrEmpty(tbCVORNum.Text))
                 {
-                    string displaydate = dpDate.DisplayDate.ToString("MMM dd, YYY");
-                    if (ControlWindow.ShowTwoway("Confirm?", $"Adding record: {tbCVORNum.Text}\nLoan Application: {tbAmount.Text}\nType: {loantext}\nDate: {displaydate}", Icons.NOTIFY))
+                    string displaydate = dpDate.DisplayDate.ToString("MMM dd, yyyy");
+                    if (ControlWindow.ShowTwoway("Confirm Details", $"CV/OR Number: {tbCVORNum.Text}\nAmount Loaned: {tbAmount.Text}\nType: {loantext}\nDate Selected: {displaydate}", Icons.NOTIFY))
                     {
                         double penalty = this.loanAmount * this.interestRate;
                         if (isLoan)

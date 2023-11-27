@@ -122,8 +122,8 @@ namespace SPTC_APP.View.Pages.Input
         {
             if (!string.IsNullOrEmpty(tboxCVOR.Text))
             {
-                string displaydate = dpBdate.DisplayDate.ToString("MMM dd, YYY");
-                if (ControlWindow.ShowTwoway("Confirm?", $"Adding record: {tboxCVOR.Text}\nLoan Payment: {tboxAmount.Text}\nDate: {displaydate}", Icons.NOTIFY))
+                string displaydate = dpBdate.DisplayDate.ToString("MMM dd, yyyy");
+                if (ControlWindow.ShowTwoway("Confirm Details", $"CV/OR Number: {tboxCVOR.Text}\nPayment Amount: {tboxAmount.Text}\nSelected Date: {displaydate}", Icons.NOTIFY))
                 {
                     compute(double.TryParse(tbPenalty.Text, out double pen) ? pen : 0);
                     return true;

@@ -62,8 +62,8 @@ namespace SPTC_APP.View.Pages.Input
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            string displaydate = dpBdate.DisplayDate.ToString("MMM dd, YYY");
-            if (ControlWindow.ShowTwoway("Confirm?", $"Adding record: {tboxRefNo.Text}\nShare Capital: {tboxAmount.Text}\nDate: {displaydate}", Icons.NOTIFY))
+            string displaydate = dpBdate.DisplayDate.ToString("MMM dd, yyyy");
+            if (ControlWindow.ShowTwoway("Confirm Details", $"CV/OR Number: {tboxRefNo.Text}\nShare Capital Amount: {tboxAmount.Text}\nDate Selected: {displaydate}", Icons.NOTIFY))
             {
                 PaymentDetails<Ledger.ShareCapital> capital = new PaymentDetails<Ledger.ShareCapital>();
                 Ledger.ShareCapital share = new Ledger.ShareCapital();

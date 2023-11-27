@@ -589,6 +589,7 @@ namespace SPTC_APP.View.Pages.Output
                         break;
 
                     case 2:
+                        lblTitleReport.Content = "Monthly Due Report";
                         if (btn.Name.Equals("btnRepShort"))
                         {
                             lblSubTitleReport.Content = "For Short-Term Loans";

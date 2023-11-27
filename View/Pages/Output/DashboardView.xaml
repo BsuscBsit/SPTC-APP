@@ -621,7 +621,7 @@
                         Style="{DynamicResource CommonComboBox}">
                         <ComboBoxItem Content="Active Loans" />
                         <ComboBoxItem Content="Loan Payments" />
-                        <ComboBoxItem Content="Monthly Due for Loans" />
+                        <ComboBoxItem Content="Loan Monthly Dues" />
                     </ComboBox>
                     <StackPanel
                         Grid.Row="4"

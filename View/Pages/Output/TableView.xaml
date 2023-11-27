@@ -377,7 +377,7 @@
                             Color="{StaticResource ColorSoftGrey1}" />
                     </Border.Effect>
                 </Border>
-                <Grid
+                <Grid x:Name="filterOpCont"
                     Width="303"
                     MinWidth="351"
                     Margin="15,15,15,15"
@@ -387,10 +387,10 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Label
@@ -404,7 +404,7 @@
                         VerticalAlignment="Bottom"
                         Content="Show Columns For:"
                         Style="{StaticResource TextFieldLabelingPreset}" />
-                    <Label
+                    <Label x:Name="lblOnlyShow"
                         Grid.Row="4"
                         Margin="0,15,0,0"
                         HorizontalAlignment="Left"
@@ -415,29 +415,52 @@
                         x:Name="spFranchiseBY"
                         Grid.Row="3"
                         MinHeight="30"
-                        Margin="15,10,0,0">
-                        <RadioButton Content="Operator Name" />
-                        <RadioButton Content="Body Number" />
-                        <RadioButton Content="Share Capital" />
-                        <RadioButton Content="MTOP Number" />
-                        <RadioButton Content="Payment Due" />
-                        <!--  ???  -->
+                        Margin="15,10,0,0" d:IsHidden="True">
+                        <CheckBox x:Name="franOpName" Content="Operator Name" IsChecked="True"/>
+                        <CheckBox x:Name="franBnum" Content="Body Number" IsChecked="True"/>
+                        <CheckBox x:Name="franShareCap" Content="Share Capital" IsChecked="True"/>
+                        <CheckBox x:Name="franMTOP" Content="MTOP Number" IsChecked="True"/>
+                        <CheckBox x:Name="franPayDue" Content="Payment Due" IsChecked="True"/>
+                        <CheckBox x:Name="franDrName" Content="Driver Name"/>
+                        <CheckBox x:Name="franOwnDate" Content="Ownership Date"/>
                     </StackPanel>
                     <StackPanel
                         x:Name="spOperatorBY"
                         Grid.Row="3"
                         MinHeight="30"
-                        Margin="15,10,0,0" />
+                        Margin="15,10,0,0">
+                        <CheckBox x:Name="operName" Content="Name" IsChecked="True"/>
+                        <CheckBox x:Name="operBnum" Content="Body Number" IsChecked="True"/>
+                        <CheckBox x:Name="operPlate" Content="Plate Number" IsChecked="True"/>
+                        <CheckBox x:Name="operShareCap" Content="Share Capital" IsChecked="True"/>
+                        <CheckBox x:Name="operPaymentDue" Content="Payment Due" IsChecked="True"/>
+                        <CheckBox x:Name="operAddr" Content="Address"/>
+                        <CheckBox x:Name="operBday" Content="Birthday"/>
+                        <CheckBox x:Name="operContact" Content="Contact"/>
+                        <CheckBox x:Name="operMemDate" Content="Membership Date"/>
+                        <CheckBox x:Name="operTin" Content="TIN Number"/>
+                        <CheckBox x:Name="operVoters" Content="Voter's ID Number"/>
+                        <CheckBox x:Name="operDrName" Content="Driver's Name"/>
+                    </StackPanel>
                     <StackPanel
                         x:Name="spDriverBY"
                         Grid.Row="3"
                         MinHeight="30"
-                        Margin="15,10,0,0" />
+                        Margin="15,10,0,0" d:IsHidden="True">
+                        <CheckBox x:Name="drivName" Content="Name" IsChecked="True"/>
+                        <CheckBox x:Name="drivAddr" Content="Address" IsChecked="True"/>
+                        <CheckBox x:Name="drivBnum" Content="Body Number" IsChecked="True"/>
+                        <CheckBox x:Name="drivLicense" Content="License Number" IsChecked="True"/>
+                        <CheckBox x:Name="drivPaymentDue" Content="Payment Due" IsChecked="True"/>
+                        <CheckBox x:Name="drivBirthday" Content="Birthday"/>
+                        <CheckBox x:Name="drivContact" Content="Contact"/>
+                        <CheckBox x:Name="drivPlateNum" Content="Plate Number"/>
+                    </StackPanel>
                     <StackPanel
                         x:Name="spFranchiseSHOW"
                         Grid.Row="6"
                         MinHeight="30"
-                        Margin="15,10,0,0">
+                        Margin="15,10,0,0" d:IsHidden="True">
                         <CheckBox x:Name="cbFrWLoan" Content="Franchise with loans." />
                         <CheckBox x:Name="cbFrWLtLoan" Content="Franchise with long term loans." />
                     </StackPanel>
@@ -445,25 +468,23 @@
                         x:Name="spOperatorSHOW"
                         Grid.Row="6"
                         MinHeight="30"
-                        Margin="15,10,0,0" />
-                    <StackPanel
-                        x:Name="spDriverSHOW"
-                        Grid.Row="6"
-                        MinHeight="30"
-                        Margin="15,10,0,0" />
+                        Margin="15,10,0,0" >
+                        <CheckBox x:Name="cbOpWLoan" Content="Operators with loans." />
+                        <CheckBox x:Name="cbOpWLtLoan" Content="Operators with long term loans." />
+                    </StackPanel>
                     <Rectangle
                         Grid.Row="2"
                         Height="1"
                         VerticalAlignment="Top"
                         Stroke="{StaticResource BrushGrey}" />
-                    <Rectangle
+                    <Rectangle x:Name="recOnlyShow"
                         Grid.Row="5"
                         Height="1"
                         VerticalAlignment="Top"
                         Stroke="{StaticResource BrushGrey}" />
                     <StackPanel
                         Grid.Row="7"
-                        Margin="0,10,0,12"
+                        Margin="0,20,0,12"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Orientation="Horizontal">

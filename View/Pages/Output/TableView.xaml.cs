@@ -616,13 +616,6 @@ namespace SPTC_APP.View.Pages.Output
         private void btnApplyFilters_Click(object sender, RoutedEventArgs e)
         {
             //Setting the filters
-
-
-
-
-
-
-
             DataGrid datagrid = TableGrid;
             ICollectionView collectionView = CollectionViewSource.GetDefaultView(datagrid.Items);
 
@@ -636,6 +629,14 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     franchiseFilter["LTLOAN BALANCE"] = true;
                 }
+
+                franchiseFilter["OPERATOR NAME"] = franOpName.IsChecked ?? false;
+                franchiseFilter["BODY NO."] = franBnum.IsChecked ?? false;
+                franchiseFilter["SHARE CAPITAL"] = franShareCap.IsChecked ?? false;
+                franchiseFilter["MTOP NO."] = franMTOP.IsChecked ?? false;
+                franchiseFilter["PAYMENT DUE"] = franPayDue.IsChecked ?? false;
+                franchiseFilter["DRIVER NAME"] = franDrName.IsChecked ?? false;
+                franchiseFilter["OWNERSHIP DATE"] = franOwnDate.IsChecked ?? false;
 
                 collectionView.Filter = item =>
                 {
@@ -674,11 +675,26 @@ namespace SPTC_APP.View.Pages.Output
 
 
             }
-            else if (table == Table.OPERATOR)
+            else if (table == Table.OPERATOR) // Nag-aaply pero nasa iisang column lang, walang title.
             {
+                opratorFilter["NAME"] = operName.IsChecked ?? false;
+                opratorFilter["BODY NO."] = operBnum.IsChecked ?? false;
+                opratorFilter["PLATE NO."] = operPlate.IsChecked ?? false;
+                opratorFilter["SHARE CAPITAL"] = operShareCap.IsChecked ?? false;
+                opratorFilter["PAYMENT DUE"] = operPaymentDue.IsChecked ?? false;
+                opratorFilter["ADDRESS"] = operAddr.IsChecked ?? false;
+                opratorFilter["BIRTHDAY"] = operBday.IsChecked ?? false;
+                opratorFilter["CONTACT"] = operContact.IsChecked ?? false;
+                opratorFilter["MEMBERSHIP DATE"] = operMemDate.IsChecked ?? false;
+                opratorFilter["TIN NUMBER"] = operTin.IsChecked ?? false;
+                opratorFilter["VOTERS ID"] = operVoters.IsChecked ?? false;
+                opratorFilter["DRIVER NAME"] = operDrName.IsChecked ?? false;
+                opratorFilter["LOAN BALANCE"] = cbOpWLoan.IsChecked ?? false;
+                opratorFilter["LTLOAN BALANCE"] = cbOpWLtLoan.IsChecked ?? false;
+
                 collectionView.Filter = item =>
                 {
-                    if (item is Franchise fran)
+                    if (item is Franchise fran) // ~? franchise ba talaga?
                     {
                         
                     }
@@ -692,8 +708,17 @@ namespace SPTC_APP.View.Pages.Output
                     }
                 }
             }
-            else if (table == Table.DRIVER)
+            else if (table == Table.DRIVER) //Nag-aapply pero nasa iisang column lang
             {
+                driverFilter["NAME"] = drivName.IsChecked ?? false;
+                driverFilter["ADDRESS"] = drivAddr.IsChecked ?? false;
+                driverFilter["BODY NO."] = drivBnum.IsChecked ?? false;
+                driverFilter["LICENSE"] = drivLicense.IsChecked ?? false;
+                driverFilter["PAYMENT DUE"] = drivPaymentDue.IsChecked ?? false;
+                driverFilter["BIRTHDAY"] = drivBirthday.IsChecked ?? false;
+                driverFilter["CONTACT"] = drivContact.IsChecked ?? false;
+                driverFilter["PLATE NO."] = drivPlateNum.IsChecked ?? false;
+
                 collectionView.Filter = item =>
                 {
                     if (item is Driver driver)
@@ -723,28 +748,32 @@ namespace SPTC_APP.View.Pages.Output
 
         private void showFilterChoices(string tbl)
         {
-            spFranchiseBY.Visibility = Visibility.Hidden;
-            spOperatorBY.Visibility = Visibility.Hidden;
-            spDriverBY.Visibility = Visibility.Hidden;
-            spFranchiseSHOW.Visibility = Visibility.Hidden;
-            spOperatorSHOW.Visibility = Visibility.Hidden;
-            spDriverSHOW.Visibility = Visibility.Hidden;
+            spFranchiseBY.Visibility = Visibility.Collapsed;
+            spOperatorBY.Visibility = Visibility.Collapsed;
+            spDriverBY.Visibility = Visibility.Collapsed;
+            spFranchiseSHOW.Visibility = Visibility.Collapsed;
+            spOperatorSHOW.Visibility = Visibility.Collapsed;
+            lblOnlyShow.Visibility = Visibility.Collapsed;
+            recOnlyShow.Visibility = Visibility.Collapsed;
 
             switch (tbl)
             {
                 case Table.FRANCHISE:
                     spFranchiseBY.Visibility = Visibility.Visible;
                     spFranchiseSHOW.Visibility = Visibility.Visible;
+                    lblOnlyShow.Visibility = Visibility.Visible;
+                    recOnlyShow.Visibility = Visibility.Visible;
                     break;
 
                 case Table.OPERATOR:
                     spOperatorBY.Visibility = Visibility.Visible;
                     spOperatorSHOW.Visibility = Visibility.Visible;
+                    lblOnlyShow.Visibility = Visibility.Visible;
+                    recOnlyShow.Visibility = Visibility.Visible;
                     break;
 
                 case Table.DRIVER:
                     spDriverBY.Visibility = Visibility.Visible;
-                    spDriverSHOW.Visibility = Visibility.Visible;
                     break;
 
                 default:

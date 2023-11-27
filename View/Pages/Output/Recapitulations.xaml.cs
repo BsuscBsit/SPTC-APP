@@ -145,7 +145,6 @@ namespace SPTC_APP.View.Pages.Input
                     bool ch = check(r);
                     if (loadedView && !(DateTime.Now.Month == currentmonth && DateTime.Now.Year == currentyear))
                     {
-                        
                         if (ch)
                         {
                             var child = recapgrid.Children[ind++];

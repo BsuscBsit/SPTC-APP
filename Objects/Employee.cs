@@ -24,7 +24,7 @@ namespace SPTC_APP.Objects
         public Employee()
         {
             employee = new Upsert(Table.EMPLOYEE, -1);
-            //employee.Insert(Field.PASSWORD, RequestQuery.Protect(AppState.DEFAULT_PASSWORD));
+            employee.Insert(Field.PASSWORD, RequestQuery.Protect(AppState.DEFAULT_PASSWORD));
             name = null;
             address = null;
             image = null;

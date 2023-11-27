@@ -619,6 +619,9 @@ namespace SPTC_APP.View.Pages.Output
 
 
 
+
+
+
             DataGrid datagrid = TableGrid;
             ICollectionView collectionView = CollectionViewSource.GetDefaultView(datagrid.Items);
 

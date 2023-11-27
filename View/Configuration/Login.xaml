@@ -304,7 +304,7 @@
                                 Click="btnLogin_Click"
                                 Content="EXIT" />
                         </StackPanel>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
                             <Button
                                 x:Name="btnLogin1"
                                 Width="148"
@@ -312,6 +312,7 @@
                                 Click="btnLogin_Click"
                                 Content="LOG IN"
                                 Style="{DynamicResource CommonButtonStyle}" />
+                            <Label Content="Forgot Password" HorizontalAlignment="Center" FontStyle="Italic" MouseDown="Label_MouseDown"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>

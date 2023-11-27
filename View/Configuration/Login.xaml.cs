@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 
 namespace SPTC_APP.View
 {
@@ -129,5 +130,9 @@ namespace SPTC_APP.View
             this.Close();
         }
 
+        private void Label_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MessageBox.Show("HI");
+        }
     }
 }

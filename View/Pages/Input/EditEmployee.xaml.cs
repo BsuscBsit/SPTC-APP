@@ -317,6 +317,8 @@ namespace SPTC_APP.View.Pages.Input
                         }
                         else
                         {
+                            employee.Save();
+                            (AppState.mainwindow as MainBody).ResetWindow(General.BOARD_MEMBER);
                             (new EditPositionAccess(this, employee)).Show();
                         }
                     }

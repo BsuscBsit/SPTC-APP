@@ -675,7 +675,7 @@ namespace SPTC_APP.View.Pages.Output
 
 
             }
-            else if (table == Table.OPERATOR) // Nag-aaply pero nasa iisang column lang, walang title.
+            else if (table == Table.OPERATOR) 
             {
                 opratorFilter["NAME"] = operName.IsChecked ?? false;
                 opratorFilter["BODY NO."] = operBnum.IsChecked ?? false;
@@ -694,9 +694,18 @@ namespace SPTC_APP.View.Pages.Output
 
                 collectionView.Filter = item =>
                 {
-                    if (item is Franchise fran) // ~? franchise ba talaga?
+                    if (item is Franchise franchise) 
                     {
-                        
+                        bool shown = true;
+                        if (cbFrWLoan.IsChecked ?? false)
+                        {
+                            shown = franchise.LoanBalance > 0;
+                        }
+                        if (cbFrWLtLoan.IsChecked ?? false)
+                        {
+                            shown = franchise.LongTermLoanBalance > 0;
+                        }
+                        return shown;
                     }
                     return true;
                 };
@@ -704,11 +713,21 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     if (column.Header != null && opratorFilter.TryGetValue(column.Header.ToString(), out bool isVisible))
                     {
+                        column.HeaderStyle = new Style()
+                        {
+                            Setters =
+                            {
+                                new Setter(Control.FontWeightProperty, FontWeights.Bold),
+                                new Setter(Control.HorizontalContentAlignmentProperty, HorizontalAlignment.Center),
+                                new Setter(Control.FontFamilyProperty, new FontFamily("Inter")),
+                                new Setter(VisibilityProperty, isVisible ? Visibility.Visible : Visibility.Collapsed)
+                            }
+                        };
                         column.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
                     }
                 }
             }
-            else if (table == Table.DRIVER) //Nag-aapply pero nasa iisang column lang
+            else if (table == Table.DRIVER) 
             {
                 driverFilter["NAME"] = drivName.IsChecked ?? false;
                 driverFilter["ADDRESS"] = drivAddr.IsChecked ?? false;
@@ -731,6 +750,16 @@ namespace SPTC_APP.View.Pages.Output
                 {
                     if (column.Header != null && driverFilter.TryGetValue(column.Header.ToString(), out bool isVisible))
                     {
+                        column.HeaderStyle = new Style()
+                        {
+                            Setters =
+                            {
+                                new Setter(Control.FontWeightProperty, FontWeights.Bold),
+                                new Setter(Control.HorizontalContentAlignmentProperty, HorizontalAlignment.Center),
+                                new Setter(Control.FontFamilyProperty, new FontFamily("Inter")),
+                                new Setter(VisibilityProperty, isVisible ? Visibility.Visible : Visibility.Collapsed)
+                            }
+                        };
                         column.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
                     }
                 }

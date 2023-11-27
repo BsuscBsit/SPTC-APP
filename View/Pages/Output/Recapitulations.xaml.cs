@@ -344,13 +344,7 @@ namespace SPTC_APP.View.Pages.Input
                 report.Populate(recaps, currentmonth, currentyear);
                 report.StartPrint();
 
-                /*ListReport reports = new ListReport(ListReport.PAYMENTS);
-                List<ColumnConfiguration> columns = new List<ColumnConfiguration>
-                {
-                    new ColumnConfiguration(Field.ID, "ID", minWidth: 50, isNumeric: true, maxWidth:50),
-                    new ColumnConfiguration(Field.DEPOSIT, "DEPOSIT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                };
-                reports.StartPrint("All Payments", "Here lies payment report", columns);*/
+               
             }
         }
     }

@@ -18,9 +18,20 @@ namespace SPTC_APP.View.Pages.Output
 {
     public partial class ListReport : Window
     {
+        //CREATE QUERY HERE
         public static string PAYMENTS = $"SELECT * FROM {Table.PAYMENT_DETAILS}";
 
-
+        //USAGE
+        /*  ListReport reports = new ListReport(ListReport.PAYMENTS); // PAYMENTS is the MYSQL query
+               
+        //  Create this columnconfigurations, @ diero for every buttons and reports, complete with the Fields
+            List<ColumnConfiguration> columns = new List<ColumnConfiguration>
+            {
+                new ColumnConfiguration(Field.ID, "ID", minWidth: 50, isNumeric: true, maxWidth:50),
+                new ColumnConfiguration(Field.DEPOSIT, "DEPOSIT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+            };
+        //  This starts printing all the data
+            reports.StartPrint("All Payments", "Here lies payment report", columns);*/
 
         private readonly string _query;
 

@@ -37,6 +37,12 @@ namespace SPTC_APP.View.Pages.Output
         public static string PAYMENT_EMERGENCY(int month, int year) => $"SELECT * FROM tbl_payment_details AS pd LEFT JOIN tbl_loan_ledger AS l ON pd.ledger_id = l.id AND pd.ledger_type = \"LOAN\" WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND pd.ledger_id <> -1 AND pd.ledger_type = \"LOAN\" AND l.details = \"EMERGENCY\" AND l.isDeleted = 0 OR pd.isDeleted = 0";
         public static string PAYMENT_SHARECAPITAL;
 
+        // entire apply loan records or by month year din.
+        public static string LOANS_SHORT;
+        public static string LOANS_LONG;
+        public static string LOANS_EMERGENCY;
+
+
         /*public static string DUE_SHORT;
         public static string DUE_LONG;
         public static string DUE_EMERGENCY;*/

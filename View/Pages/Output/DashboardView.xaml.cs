@@ -775,11 +775,16 @@ namespace SPTC_APP.View.Pages.Output
         {
             if(sender is Button btn)
             {
+                #region
+                /**
+                 * Used for notifications, ignore.
+                 * **/
                 string m = dpDate.SelectedDate?.ToString("MMMM");
                 string y = dpDate.SelectedDate?.ToString("yyyy");
                 string q = printAll.IsChecked == true ? " from database?" : $" for {m} {y}?";
                 string typ = "";
                 string desc = "";
+                #endregion
 
                 ListReport report = null;
                 List<ColumnConfiguration> columns = null;
@@ -845,6 +850,7 @@ namespace SPTC_APP.View.Pages.Output
                         break;
 
                     case 2: // Payments
+
                         typ = "payments";
                         desc = "Payment Reports for ";
                         if (btn.Name.Equals("btnRepShort"))

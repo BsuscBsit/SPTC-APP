@@ -994,6 +994,8 @@ namespace SPTC_APP.View.Pages.Output
             {
                 /**
                  * Ewan ko, optional lang ata ito kasi pag nagpalit ng user, marerestart din naman diba?
+                 * for safety purposes ahahaha.
+                 * 
                  * **/
 
                 //both general manager and secretary can generate all reports.
@@ -1002,7 +1004,7 @@ namespace SPTC_APP.View.Pages.Output
                 
                 cbCat.IsEnabled = true;
                 cbCat.SelectedIndex = 0;
-                cbCat.Opacity = 0.5;
+                cbCat.Opacity = 1;
             }
         }
     }

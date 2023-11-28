@@ -25,14 +25,24 @@ namespace SPTC_APP.View.Pages.Output
         public static string ACTIVE_LONG = $"SELECT * FROM {Table.LONG_TERM_LOAN} AS l LEFT JOIN {Table.FRANCHISE} as f ON l.{Field.FRANCHISE_ID} = f.{Field.ID} LEFT JOIN {Table.OPERATOR} AS o ON f.{Field.OPERATOR_ID} = o.{Field.ID} LEFT JOIN {Table.NAME} AS n ON o.{Field.NAME_ID} = n.{Field.ID} WHERE {Field.AMOUNT} > 0 AND l.{Field.IS_FULLY_PAID} = 0 AND l.isDeleted = 0";
         public static string ACTIVE_EMERGENCY = $"SELECT * FROM {Table.LOAN} AS l LEFT JOIN {Table.FRANCHISE} as f ON l.{Field.FRANCHISE_ID} = f.{Field.ID} LEFT JOIN {Table.OPERATOR} AS o ON f.{Field.OPERATOR_ID} = o.{Field.ID} LEFT JOIN {Table.NAME} AS n ON o.{Field.NAME_ID} = n.{Field.ID} WHERE {Field.AMOUNT} > 0 AND l.{Field.IS_FULLY_PAID} = 0 AND l.isDeleted = 0 AND l.details = \"EMERGENCY\"";
 
+        public static string LIST_FRANCHISE;
+        public static string LIST_OPERATOR;
+        public static string LIST_DRIVER;
+        public static string LIST_VIOLATION;
+        public static string LIST_IDHISTORY;
+
         // May date filtering ito (month and year) however pwede din wala.
+        // Itong LOANS_..., lahat ng apply loan to.
+        public static string LOANS_SHORT;
+        public static string LOANS_LONG;
+        public static string LOANS_EMERGENCY;
+
         public static string PAYMENT_SHORT;
         public static string PAYMENT_LONG;
         public static string PAYMENT_EMERGENCY;
+        public static string PAYMENT_SHARECAPITAL;
 
-        public static string DUE_SHORT;
-        public static string DUE_LONG;
-        public static string DUE_EMERGENCY;
+        
 
         //USAGE
         /*  ListReport reports = new ListReport(ListReport.PAYMENTS); // PAYMENTS is the MYSQL query

@@ -618,12 +618,13 @@
                         IsReadOnly="True"
                         IsTabStop="False"
                         SelectedIndex="0"
-                        Style="{DynamicResource CommonComboBox}">
+                        Style="{DynamicResource CommonComboBox}" SelectionChanged="cbCat_SelectionChanged">
                         <ComboBoxItem Content="Active Loans" />
-                        <ComboBoxItem Content="Loan Payments" />
-                        <ComboBoxItem Content="Loan Monthly Dues" />
+                        <ComboBoxItem Content="Entire Record of Loans" />
+                        <ComboBoxItem Content="Payments" />
+                        <ComboBoxItem Content="List of Records" />
                     </ComboBox>
-                    <StackPanel
+                    <StackPanel x:Name="spALPa"
                         Grid.Row="4"
                         Grid.Column="1"
                         Width="160"
@@ -648,6 +649,49 @@
                             Click="generateReports"
                             Content="Emergency Loans"
                             Style="{StaticResource CommonButtonStyle}" />
+                        <Button
+                            x:Name="btnRepShareCap"
+                            Height="30"
+                            Click="generateReports"
+                            Content="Share Capital"
+                            Style="{StaticResource CommonButtonStyle}" Margin="0,10,0,0" Visibility="Collapsed" />
+                    </StackPanel>
+                    <StackPanel x:Name="spList"
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Width="160"
+                        Margin="15,0,0,15"
+                        HorizontalAlignment="Left" Visibility="Collapsed">
+                        <Button
+                            x:Name="btnRepFran"
+                            Height="30"
+                            Click="generateReports"
+                            Content="Franchise"
+                            Style="{StaticResource CommonButtonStyle}" Margin="0,0,0,10" />
+                        <Button
+                            x:Name="btnRepOper"
+                            Height="30"
+                            Click="generateReports"
+                            Content="Operators"
+                            Style="{StaticResource CommonButtonStyle}" Margin="0,0,0,10" />
+                        <Button
+                            x:Name="btnRepDriv"
+                            Height="30"
+                            Click="generateReports"
+                            Content="Drivers"
+                            Style="{StaticResource CommonButtonStyle}" Margin="0,0,0,10" />
+                        <Button
+                            x:Name="btnRepViol"
+                            Height="30"
+                            Click="generateReports"
+                            Content="Violations"
+                            Style="{StaticResource CommonButtonStyle}" Margin="0,0,0,10" />
+                        <Button
+                            x:Name="btnRepIDHi"
+                            Height="30"
+                            Click="generateReports"
+                            Content="ID History"
+                            Style="{StaticResource CommonButtonStyle}" />
                     </StackPanel>
                     <Button
                         x:Name="btnGRClose"
@@ -668,7 +712,7 @@
                         Style="{DynamicResource ExitButtonStyle}" />
                 </Grid>
             </Grid>
-            <Grid x:Name="gridRepWinChild">
+            <Grid x:Name="gridRepWinChild" d:IsHidden="True">
                 <Border Background="#CCFFFFFF" CornerRadius="10" />
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Border Background="White" CornerRadius="10">

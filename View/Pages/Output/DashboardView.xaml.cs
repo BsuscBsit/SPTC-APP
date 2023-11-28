@@ -561,7 +561,7 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
                                 new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("terms_of_payment_month", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
@@ -583,7 +583,7 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
                                 new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("terms_of_payment_month", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
@@ -605,7 +605,7 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
                                 new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("terms_of_payment_month", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
@@ -613,18 +613,18 @@ namespace SPTC_APP.View.Pages.Output
                             };
                         }
                         // global yung msg variable, pwede irekta sa printing function.
-                        msg = $"Are you sure you want to print Active Loans for {q} loans?";
+                        msg = $"Are you sure you want to print Active Loans for {q} loans";
 
                         if (ControlWindow.ShowTwoway("Confirm Printing", msg, Icons.NOTIFY))
                         {
                             // printing confirmed, call printing function.
-                            report.StartPrint($"active_loans_{q.ToLower()}", $"Active Loan Report for {q} Loans", columns);
+                            report.StartPrint($"active loans {q}", $"Active Loan Report for {q} Loans", columns);
                         }
                         break;
 
                     // Jump to btnPrintReport_Click for table configs
                     case 1:
-                        lblTitleReport.Content = "Loan Payment Report";
+                        lblTitleReport.Content = "Loan Record Report";
                         if (btn.Name.Equals("btnRepShort"))
                         {
                             lblSubTitleReport.Content = "For Short-Term Loans";
@@ -640,12 +640,12 @@ namespace SPTC_APP.View.Pages.Output
                             lblSubTitleReport.Content = "For Emergency Loans";
                             qg = "Emergency";
                         }
-                        msg = $"Are you sure you want to print {qg} loan payments";
+                        msg = $"Are you sure you want to print {qg} loan records?";
                         gridRepWinChild.FadeIn(0.3);
                         break;
 
                     case 2:
-                        lblTitleReport.Content = "Monthly Due Report";
+                        lblTitleReport.Content = "Payment Report";
                         if (btn.Name.Equals("btnRepShort"))
                         {
                             lblSubTitleReport.Content = "For Short-Term Loans";
@@ -661,8 +661,106 @@ namespace SPTC_APP.View.Pages.Output
                             lblSubTitleReport.Content = "For Emergency Loans";
                             qg = "Emergency";
                         }
-                        msg = $"Are you sure you want to print {qg} loan dues";
+                        else if (btn.Name.Equals("btnRepShareCap"))
+                        {
+                            lblSubTitleReport.Content = "For Share Capital";
+                            qg = "Share Capital";
+                        }
+                        msg = $"Are you sure you want to print {qg} payments";
                         gridRepWinChild.FadeIn(0.2);
+                        break;
+
+                    case 3:
+                        if (btn.Name.Equals("btnRepFran"))
+                        {
+                            q = "Franchise";
+
+                            report = new ListReport(ListReport.LIST_FRANCHISE);
+
+                            /**
+                             * Ginaya ko lang yung columns sa table view, yung name sana gaya din ng nasa table view kung pwede.
+                             * **/
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "SHARE CAPITAL", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "MTOP", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "PAYMENT DUE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                            };
+                        }
+                        else if (btn.Name.Equals("btnRepOper"))
+                        {
+                            q = "Operator";
+
+                            report = new ListReport(ListReport.LIST_OPERATOR);
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "SHARE CAPITAL", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "MTOP", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "PAYMENT DUE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                            };
+                        }
+                        else if (btn.Name.Equals("btnRepDriv"))
+                        {
+                            q = "Driver";
+
+                            report = new ListReport(ListReport.LIST_DRIVER);
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "DRIVER LASTNAME", minWidth : 80), // Name nalang di dapat kung pwede.
+                                new ColumnConfiguration("", "DRIVER FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("", "ADDRESS", minWidth : 80),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "ADDRESS", minWidth : 80),
+                                new ColumnConfiguration("", "LICENSE", minWidth : 80),
+                                new ColumnConfiguration("", "OPERATOR LASTNAME", minWidth : 80), // Pati to.
+                                new ColumnConfiguration("", "OPERATOR FIRSTNAME", minWidth : 80),
+                            };
+                        }
+                        else if (btn.Name.Equals("btnRepViol"))
+                        {
+                            q = "Violation";
+
+                            report = new ListReport(ListReport.LIST_VIOLATION);
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "VIOLATION", minWidth: 50, isCenter:true),
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isCenter:true),
+                                new ColumnConfiguration("", "FROM:", minWidth: 50, isCenter:true),
+                                new ColumnConfiguration("", "TO:", minWidth: 50, isCenter:true),
+                                new ColumnConfiguration("", "REMARKS", minWidth: 50, isCenter:true),
+                            };
+                        }
+                        else if (btn.Name.Equals("btnRepIDHi"))
+                        {
+                            q = "ID History";
+
+                            report = new ListReport(ListReport.LIST_IDHISTORY);
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "ID TYPE", minWidth : 80),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "PRINTED", minWidth: 50, isCenter:true), // YES NO?
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isCenter:true)
+                            };
+                        }
+
+                        // global yung msg variable, pwede irekta sa printing function.
+                        msg = $"Are you sure you want to print Records for {q}";
+
+                        if (ControlWindow.ShowTwoway("Confirm Printing", msg, Icons.NOTIFY))
+                        {
+                            // printing confirmed, call printing function.
+                            report.StartPrint($"{q} record", $"Records Report for {q}", columns);
+                        }
                         break;
                 }
             }
@@ -677,11 +775,19 @@ namespace SPTC_APP.View.Pages.Output
         {
             if(sender is Button btn)
             {
+                #region
+                /**
+                 * Used for notifications, ignore.
+                 * **/
                 string m = dpDate.SelectedDate?.ToString("MMMM");
                 string y = dpDate.SelectedDate?.ToString("yyyy");
                 string q = printAll.IsChecked == true ? " from database?" : $" for {m} {y}?";
                 string typ = "";
                 string desc = "";
+                #endregion
+
+                int? mo = dpDate.SelectedDate?.Month;
+                int? ye = dpDate.SelectedDate?.Year;
 
                 ListReport report = null;
                 List<ColumnConfiguration> columns = null;
@@ -696,17 +802,13 @@ namespace SPTC_APP.View.Pages.Output
 
                 switch (cbCat.SelectedIndex)
                 {
-                    case 1: //Loan Payments (mga bayad sa loan na pumasok sa system).
+                    case 1: //All Loans
                         typ = "loan_payments";
                         desc = "Loan Payment Report for ";
                         if (btn.Name.Equals("btnRepShort"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_SHORT(0, 0));
+                            report = new ListReport(ListReport.PAYMENT_SHORT);
 
-                            /**
-                             * Table: short term loan payments (filtered by month and year depende sa sinelect).
-                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
-                             * **/
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
@@ -720,12 +822,8 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_LONG(0, 0));
+                            report = new ListReport(ListReport.PAYMENT_LONG);
 
-                            /**
-                             * Table: long term loan payments (filtered by month and year depende sa sinelect).
-                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
-                             * **/
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
@@ -739,12 +837,8 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_EMERGENCY(0, 0));
+                            report = new ListReport(ListReport.PAYMENT_EMERGENCY);
 
-                            /**
-                             * Table: emergency term loan payments (filtered by month and year depende sa sinelect).
-                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
-                             * **/
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
@@ -758,17 +852,14 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         break;
 
-                    case 2: // Monthly Due (mga expected bayaran na loan sa month, year na sinelect)
-                        typ = "monthly_due";
-                        desc = "Monthly Due Report for ";
+                    case 2: // Payments
+
+                        typ = "payments";
+                        desc = "Payment Reports for ";
                         if (btn.Name.Equals("btnRepShort"))
                         {
-                            report = new ListReport(ListReport.DUE_SHORT);
+                            report = new ListReport(ListReport.PAYMENT_SHORT(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year));
 
-                            /**
-                             * Table: short term loan payments (filtered by month and year depende sa sinelect).
-                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
-                             * **/
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
@@ -777,38 +868,40 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                                 new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("", "MONTHLY PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("", "STATUS", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true) // PAID or UNPAID
+                                new ColumnConfiguration("", "PAID AMOUNT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true) // ito ba yung nag pa-paid?
                             };
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
-                            report = new ListReport(ListReport.DUE_SHORT);
-
-                            /**
-                             * Table: long term loan payments (filtered by month and year depende sa sinelect).
-                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
-                             * **/
+                            report = new ListReport(ListReport.PAYMENT_LONG(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year));
                             columns = new List<ColumnConfiguration>
                             {
-                                new ColumnConfiguration("", "OPERATOR NAME", minWidth: 100),
+                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
                                 new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                                 new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("", "MONTHLY PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("", "STATUS", minWidth: 50, isCenter:true)
+                                new ColumnConfiguration("", "PAID AMOUNT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
                             };
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
-                            report = new ListReport(ListReport.DUE_SHORT);
-
-                            /**
-                             * Table: emergency term loan payments (filtered by month and year depende sa sinelect).
-                             * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
-                             * **/
+                            report = new ListReport(ListReport.PAYMENT_EMERGENCY(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year));
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "PAID AMOUNT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                            };
+                        }
+                        else if (btn.Name.Equals("btnShareCap"))
+                        {
+                            report = new ListReport(ListReport.PAYMENT_SHARECAPITAL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("", "OPERATOR NAME", minWidth: 100),
@@ -816,9 +909,9 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("", "MONTHLY PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("", "STATUS", minWidth: 50, isCenter:true)
+                                new ColumnConfiguration("", "DEPOSIT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "PENALTY", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
                             };
                         }
                         break;
@@ -827,7 +920,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (ControlWindow.ShowTwoway("Confirm Printing", msg + q, Icons.NOTIFY))
                 {
                     // printing confirmed, call printing function.
-                    report.StartPrint($"{typ}_{qg.ToLower()}", $"{desc} {qg} Loans", columns);
+                    report.StartPrint($"{typ} {qg}", $"{desc} {qg} Loans", columns);
 
                     gridRepWinChild.FadeOut(0.2);
                 }
@@ -845,6 +938,33 @@ namespace SPTC_APP.View.Pages.Output
             {
                 dpDate.IsEnabled = true;
                 datesel.Opacity = 1;
+            }
+        }
+
+        private void cbCat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (spList != null && spALPa != null)
+            {
+                switch (cbCat.SelectedIndex)
+                {
+                    case 0:
+                    case 1:
+                        spList.Visibility = Visibility.Collapsed;
+                        spALPa.Visibility = Visibility.Visible;
+                        btnRepShareCap.Visibility = Visibility.Collapsed;
+                        break;
+
+                    case 2:
+                        spList.Visibility = Visibility.Collapsed;
+                        spALPa.Visibility = Visibility.Visible;
+                        btnRepShareCap.Visibility = Visibility.Visible;
+                        break;
+
+                    case 3:
+                        spALPa.Visibility = Visibility.Collapsed;
+                        spList.Visibility = Visibility.Visible;
+                        break;
+                }
             }
         }
     }

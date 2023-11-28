@@ -25,14 +25,27 @@ namespace SPTC_APP.View.Pages.Output
         public static string ACTIVE_LONG = $"SELECT * FROM {Table.LONG_TERM_LOAN} AS l LEFT JOIN {Table.FRANCHISE} as f ON l.{Field.FRANCHISE_ID} = f.{Field.ID} LEFT JOIN {Table.OPERATOR} AS o ON f.{Field.OPERATOR_ID} = o.{Field.ID} LEFT JOIN {Table.NAME} AS n ON o.{Field.NAME_ID} = n.{Field.ID} WHERE {Field.AMOUNT} > 0 AND l.{Field.IS_FULLY_PAID} = 0 AND l.isDeleted = 0";
         public static string ACTIVE_EMERGENCY = $"SELECT * FROM {Table.LOAN} AS l LEFT JOIN {Table.FRANCHISE} as f ON l.{Field.FRANCHISE_ID} = f.{Field.ID} LEFT JOIN {Table.OPERATOR} AS o ON f.{Field.OPERATOR_ID} = o.{Field.ID} LEFT JOIN {Table.NAME} AS n ON o.{Field.NAME_ID} = n.{Field.ID} WHERE {Field.AMOUNT} > 0 AND l.{Field.IS_FULLY_PAID} = 0 AND l.isDeleted = 0 AND l.details = \"EMERGENCY\"";
 
+        public static string LIST_FRANCHISE;
+        public static string LIST_OPERATOR;
+        public static string LIST_DRIVER;
+        public static string LIST_VIOLATION;
+        public static string LIST_IDHISTORY;
+
         // May date filtering ito (month and year) however pwede din wala.
         public static string PAYMENT_SHORT(int month, int year) => $"SELECT * FROM tbl_payment_details AS pd LEFT JOIN {Table.LOAN} AS l ON pd.ledger_id = l.id AND pd.ledger_type = \"LOAN\" WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND pd.ledger_id <> -1 AND pd.ledger_type = \"LOAN\" AND l.details = \"SHORT TERM\" AND l.isDeleted = 0 OR pd.isDeleted = 0";
         public static string PAYMENT_LONG(int month, int year) => $"SELECT * FROM tbl_payment_details AS pd LEFT JOIN {Table.LONG_TERM_LOAN} AS l ON pd.ledger_id = l.id AND pd.ledger_type = \"LOAN\" WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND pd.ledger_id <> -1 AND pd.ledger_type = \"LONGTERMLOAN\" AND l.details = \"LONG TERM\" AND l.isDeleted = 0 OR pd.isDeleted = 0";
         public static string PAYMENT_EMERGENCY(int month, int year) => $"SELECT * FROM tbl_payment_details AS pd LEFT JOIN tbl_loan_ledger AS l ON pd.ledger_id = l.id AND pd.ledger_type = \"LOAN\" WHERE YEAR({Field.DATE}) = {year} AND MONTH({Field.DATE}) = {month} AND pd.ledger_id <> -1 AND pd.ledger_type = \"LOAN\" AND l.details = \"EMERGENCY\" AND l.isDeleted = 0 OR pd.isDeleted = 0";
+        public static string PAYMENT_SHARECAPITAL;
 
-        public static string DUE_SHORT;
+        // entire apply loan records or by month year din.
+        public static string LOANS_SHORT;
+        public static string LOANS_LONG;
+        public static string LOANS_EMERGENCY;
+
+
+        /*public static string DUE_SHORT;
         public static string DUE_LONG;
-        public static string DUE_EMERGENCY;
+        public static string DUE_EMERGENCY;*/
 
         //USAGE
         /*  ListReport reports = new ListReport(ListReport.PAYMENTS); // PAYMENTS is the MYSQL query

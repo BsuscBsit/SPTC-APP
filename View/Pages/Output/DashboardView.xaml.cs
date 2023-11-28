@@ -701,7 +701,7 @@ namespace SPTC_APP.View.Pages.Output
                         desc = "Loan Payment Report for ";
                         if (btn.Name.Equals("btnRepShort"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_SHORT);
+                            report = new ListReport(ListReport.PAYMENT_SHORT(0, 0));
 
                             /**
                              * Table: short term loan payments (filtered by month and year depende sa sinelect).
@@ -720,7 +720,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_LONG);
+                            report = new ListReport(ListReport.PAYMENT_LONG(0, 0));
 
                             /**
                              * Table: long term loan payments (filtered by month and year depende sa sinelect).
@@ -739,7 +739,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_EMERGENCY);
+                            report = new ListReport(ListReport.PAYMENT_EMERGENCY(0, 0));
 
                             /**
                              * Table: emergency term loan payments (filtered by month and year depende sa sinelect).

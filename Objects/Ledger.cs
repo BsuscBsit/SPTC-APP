@@ -41,7 +41,7 @@ namespace SPTC_APP.Objects
             {
                 get
                 {
-                    return (amount > 0) ? $"\u20B1 " + amount.ToString("N2") : "PAID";
+                    return (amount > 0) ? "\u20B1 " +amount.ToString("0.00") : "PAID";
                 }
             }
             public double paymentDues
@@ -237,7 +237,7 @@ namespace SPTC_APP.Objects
             {
                 get
                 {
-                    return (amount > 0) ? $"\u20B1 " + amount.ToString("N2") : "PAID";
+                    return(amount > 0) ? "\u20B1 " + amount.ToString("0.00") : "PAID";
                 }
             }
             public double paymentDues

@@ -809,7 +809,7 @@ namespace SPTC_APP.View.Pages.Output
                         desc = "Loan Report for ";
                         if (currBtn.Equals("btnRepShort"))
                         {
-                            report = new ListReport(ListReport.LOANS_SHORT);
+                            report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.LOANS_SHORT(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.LOANS_SHORT_ALL);
 
                             columns = new List<ColumnConfiguration>
                             {
@@ -823,7 +823,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (currBtn.Equals("btnRepLong"))
                         {
-                            report = new ListReport(ListReport.LOANS_LONG);
+                            report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.LOANS_LONG(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.LOANS_LONG_ALL);
 
                             columns = new List<ColumnConfiguration>
                             {
@@ -837,7 +837,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (currBtn.Equals("btnRepEmer"))
                         {
-                            report = new ListReport(ListReport.LOANS_EMERGENCY);
+                            report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.LOANS_EMERGENCY(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.LOANS_EMERGENCY_ALL);
 
                             columns = new List<ColumnConfiguration>
                             {

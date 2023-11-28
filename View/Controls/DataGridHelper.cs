@@ -37,7 +37,7 @@ public class DataGridHelper<T>
                     Header = config.Header,
                     Binding = new System.Windows.Data.Binding(config.BindingPath)
                     {
-                        StringFormat = config.HasSign ? $"\u20B1 {0:N2}" : (config.IsDate? $"{0:MMM dd, yyyy}" : null),
+                        StringFormat = config.HasSign ? $" \u20B1 {0:N2}" : (config.IsDate? $"{0:MMM dd, yyyy}" : null),
                     },
                     Width = new DataGridLength(config.Width, DataGridLengthUnitType.Star),
                     MinWidth = config.Width,

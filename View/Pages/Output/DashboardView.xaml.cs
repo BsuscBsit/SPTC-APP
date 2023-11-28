@@ -807,7 +807,7 @@ namespace SPTC_APP.View.Pages.Output
                         desc = "Loan Payment Report for ";
                         if (btn.Name.Equals("btnRepShort"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_SHORT_ALL);
+                            report = new ListReport(ListReport.LOANS_SHORT);
 
                             columns = new List<ColumnConfiguration>
                             {
@@ -822,7 +822,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_LONG_ALL);
+                            report = new ListReport(ListReport.LOANS_LONG);
 
                             columns = new List<ColumnConfiguration>
                             {
@@ -837,7 +837,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_EMERGENCY_ALL);
+                            report = new ListReport(ListReport.LOANS_EMERGENCY);
 
                             columns = new List<ColumnConfiguration>
                             {
@@ -858,7 +858,7 @@ namespace SPTC_APP.View.Pages.Output
                         desc = "Payment Reports for ";
                         if (btn.Name.Equals("btnRepShort"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_SHORT(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year));
+                            report = new ListReport(printAll.IsChecked == true ? ListReport.PAYMENT_SHORT(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_SHORT_ALL);
 
                             columns = new List<ColumnConfiguration>
                             {
@@ -873,7 +873,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_LONG(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year));
+                            report = new ListReport(printAll.IsChecked == true ? ListReport.PAYMENT_LONG(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_LONG_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
@@ -887,7 +887,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_EMERGENCY(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year));
+                            report = new ListReport(printAll.IsChecked == true ? ListReport.PAYMENT_EMERGENCY(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_EMERGENCY_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
@@ -901,7 +901,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnShareCap"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_SHARECAPITAL(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year));
+                            report = new ListReport(printAll.IsChecked == true ? ListReport.PAYMENT_SHARECAPITAL(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_SHARECAPITAL_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("", "OPERATOR NAME", minWidth: 100),

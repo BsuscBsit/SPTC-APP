@@ -682,12 +682,12 @@ namespace SPTC_APP.View.Pages.Output
                              * **/
                             columns = new List<ColumnConfiguration>
                             {
-                                new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
-                                new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("last_balance", "SHARE CAPITAL", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("mtop_no", "MTOP", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "PAYMENT DUE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                                new ColumnConfiguration("mtop_no", "MTOP ", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("license_no", "PLATE NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
                             };
                         }
                         else if (btn.Name.Equals("btnRepOper"))
@@ -697,12 +697,12 @@ namespace SPTC_APP.View.Pages.Output
                             report = new ListReport(ListReport.LIST_OPERATOR);
                             columns = new List<ColumnConfiguration>
                             {
-                                new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
-                                new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "SHARE CAPITAL", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("mtop_no", "MTOP", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "PAYMENT DUE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                                new ColumnConfiguration("tin_number", "TIN NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("voters_id_number", "VOTERS NUMBER", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date_of_birth", "BIRTHDAY", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
                             };
                         }
                         else if (btn.Name.Equals("btnRepDriv"))
@@ -712,14 +712,12 @@ namespace SPTC_APP.View.Pages.Output
                             report = new ListReport(ListReport.LIST_DRIVER);
                             columns = new List<ColumnConfiguration>
                             {
-                                new ColumnConfiguration("", "DRIVER LASTNAME", minWidth : 80), // Name nalang di dapat kung pwede.
-                                new ColumnConfiguration("", "DRIVER FIRSTNAME", minWidth : 80),
-                                new ColumnConfiguration("", "ADDRESS", minWidth : 80),
-                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "ADDRESS", minWidth : 80),
-                                new ColumnConfiguration("", "LICENSE", minWidth : 80),
-                                new ColumnConfiguration("", "OPERATOR LASTNAME", minWidth : 80), // Pati to.
-                                new ColumnConfiguration("", "OPERATOR FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("tin_number", "TIN NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("voters_id_number", "VOTERS NUMBER", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date_of_birth", "BIRTHDAY", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
                             };
                         }
                         else if (btn.Name.Equals("btnRepViol"))
@@ -729,14 +727,14 @@ namespace SPTC_APP.View.Pages.Output
                             report = new ListReport(ListReport.LIST_VIOLATION);
                             columns = new List<ColumnConfiguration>
                             {
-                                new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
-                                new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "VIOLATION", minWidth: 50, isCenter:true),
-                                new ColumnConfiguration("", "DATE", minWidth: 50, isCenter:true, isDate:true),
-                                new ColumnConfiguration("", "FROM:", minWidth: 50, isCenter:true),
-                                new ColumnConfiguration("", "TO:", minWidth: 50, isCenter:true),
-                                new ColumnConfiguration("", "REMARKS", minWidth: 50, isCenter:true),
+                                new ColumnConfiguration("title", "VIOLATION", minWidth: 50, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isCenter:true, isDate:true),
+                                new ColumnConfiguration("suspension_start", "FROM:", minWidth: 50, isCenter:true, isDate:true),
+                                new ColumnConfiguration("suspension_end", "TO:", minWidth: 50, isCenter:true, isDate:true),
+                                new ColumnConfiguration("remarks", "REMARKS", minWidth: 50, isCenter:true),
                             };
                         }
                         else if (btn.Name.Equals("btnRepIDHi"))
@@ -746,12 +744,12 @@ namespace SPTC_APP.View.Pages.Output
                             report = new ListReport(ListReport.LIST_IDHISTORY);
                             columns = new List<ColumnConfiguration>
                             {
-                                new ColumnConfiguration("", "ID TYPE", minWidth : 80),
+                                new ColumnConfiguration("entity_type", "ID TYPE", minWidth : 80),
                                 new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
                                 new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
-                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "PRINTED", minWidth: 50, isCenter:true), // YES NO? //Checkbox
-                                new ColumnConfiguration("", "DATE", minWidth: 50, isCenter:true, isDate:true)
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("is_printed", "PRINTED", minWidth: 50, isCenter:true), // YES NO? //Checkbox
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isCenter:true, isDate:true)
                             };
                         }
 

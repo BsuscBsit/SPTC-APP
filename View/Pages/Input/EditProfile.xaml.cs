@@ -50,7 +50,7 @@ namespace SPTC_APP.View.Pages.Input
             initTextBoxes();
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
-            
+
             this.franchise = franchise;
             this.type = type;
             bDay.SelectedDate = DateTime.Now;
@@ -571,11 +571,11 @@ namespace SPTC_APP.View.Pages.Input
         private void initTextBoxes()
         {
             tbFname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "First name.", 0);
-            tbMname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Middle name.", 0);
-            tbLname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Last name.", 0);
-            tbLicense.DefaultTextBoxBehavior(ALPHANUMERICDASHPERIOD, false, gridToast, "License number.", 0);
-            tbAddressLine1.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Street Address.", 0);
-            tbAddressLine2.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Additional Address Information.", 0);
+            tbMname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Middle name.", 1);
+            tbLname.DefaultTextBoxBehavior(LETTERPERIOD, false, gridToast, "Last name.", 2);
+            tbLicense.DefaultTextBoxBehavior(ALPHANUMERICDASH,true, gridToast, "License number.", 3, true);
+            tbAddressLine1.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Street Address.", 4);
+            tbAddressLine2.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "Additional Address Information.", 5);
 
             /*tboxsProvince.DefaultTextBoxBehavior(ALPHANUMERICDASH, false, gridToast, "First Name", 0);
             tboxsCity.DefaultTextBoxBehavior(ADDRESS, false, gridToast, "First Name", 0);

@@ -47,7 +47,7 @@ namespace SPTC_APP.View.Pages.Input
             ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             bDay.SelectedDate = DateTime.Now;
-            bDay.Text = DateTime.Now.ToString();
+            bDay.DisplayDate = DateTime.Now;
             this.employee = employee;
             this.isEdit = isEdit;
             this.isManage = isManage;

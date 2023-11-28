@@ -857,7 +857,7 @@ namespace SPTC_APP.View.Pages.Output
                         desc = "Payment Reports for ";
                         if (currBtn.Equals("btnRepShort"))
                         {
-                            report = new ListReport(printAll.IsChecked != true ? ListReport.PAYMENT_SHORT(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_SHORT_ALL);
+                            report = new ListReport(!(printAll.IsChecked??false) ? ListReport.PAYMENT_SHORT(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_SHORT_ALL);
 
                             columns = new List<ColumnConfiguration>
                             {
@@ -871,7 +871,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (currBtn.Equals("btnRepLong"))
                         {
-                            report = new ListReport(printAll.IsChecked != true ? ListReport.PAYMENT_LONG(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_LONG_ALL);
+                            report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.PAYMENT_LONG(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_LONG_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
@@ -884,7 +884,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (currBtn.Equals("btnRepEmer"))
                         {
-                            report = new ListReport(printAll.IsChecked != true ? ListReport.PAYMENT_EMERGENCY(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_EMERGENCY_ALL);
+                            report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.PAYMENT_EMERGENCY(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_EMERGENCY_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
@@ -897,7 +897,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (currBtn.Equals("btnShareCap"))
                         {
-                            report = new ListReport(printAll.IsChecked != true ? ListReport.PAYMENT_SHARECAPITAL(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_SHARECAPITAL_ALL);
+                            report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.PAYMENT_SHARECAPITAL(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_SHARECAPITAL_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true),

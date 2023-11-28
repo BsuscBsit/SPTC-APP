@@ -1,12 +1,15 @@
 ﻿using Google.Protobuf.WellKnownTypes;
+using MySqlX.XDevAPI.Relational;
 using SPTC_APP.Database;
 using SPTC_APP.Objects;
+using SPTC_APP.View.Controls;
 using SPTC_APP.View.Pages.Input;
 using SPTC_APP.View.Styling;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +19,12 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+
+using Table = SPTC_APP.Database.Table; // ~ dinagdag ko, nag-eeror eh:
+/**
+ * Severity	Code	Description	Project	File	Line	Suppression State
+ * Error CS0104 'Table' is an ambiguous reference between 'SPTC_APP.Database.Table' and 'MySqlX.XDevAPI.Relational.Table'
+ * **/
 
 namespace SPTC_APP.View.Pages.Output
 {
@@ -525,11 +534,14 @@ namespace SPTC_APP.View.Pages.Output
         }
 
         private string msg = "";
+        private string qg = "";
         private void generateReports(object sender, RoutedEventArgs e)
         {
             if(sender is Button btn)
             {
-                ListReport report;
+                ListReport report = null;
+                List<ColumnConfiguration> columns = null;
+
                 string q = "";
                 switch (cbCat.SelectedIndex)
                 {
@@ -537,40 +549,73 @@ namespace SPTC_APP.View.Pages.Output
                         if (btn.Name.Equals("btnRepShort"))
                         {
                             q = "Short-Term";
+
                             report = new ListReport(ListReport.ACTIVE_SHORT);
 
                             /**
                              * Table: short term loans(active/di pa bayad)
                              * operator name, body#, date, cv/or, termlength, loan amount, loan balance
                              * **/
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                            };
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
                             q = "Long-Term";
+
                             report = new ListReport(ListReport.ACTIVE_LONG);
 
                             /**
                              * Table: long term loans(active/di pa bayad)
                              * operator name, body#, date, cv/or, termlength, loan amount, loan balance
                              * **/
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                            };
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
                             q = "Emergency";
+
                             report = new ListReport(ListReport.ACTIVE_EMERGENCY);
 
                             /**
                              * Table: emergency term loans(active/di pa bayad).
                              * operator name, body#, date, cv/or, termlength, loan amount, loan balance
                              * **/
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                            };
                         }
+                        // global yung msg variable, pwede irekta sa printing function.
                         msg = $"Are you sure you want to print Active Loans for {q} loans?";
 
-                        // global yung msg variable, pwede irekta sa printing function.
                         if (ControlWindow.ShowTwoway("Confirm Printing", msg, Icons.NOTIFY))
                         {
                             // printing confirmed, call printing function.
-                            // report.StartPrint();
+                            report.StartPrint($"active_loans_{q.ToLower()}", $"Active Loan Report for {q} Loans", columns);
                         }
                         break;
 
@@ -580,17 +625,17 @@ namespace SPTC_APP.View.Pages.Output
                         if (btn.Name.Equals("btnRepShort"))
                         {
                             lblSubTitleReport.Content = "For Short-Term Loans";
-                            q = "Short-Term";
+                            qg = "Short-Term";
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
                             lblSubTitleReport.Content = "For Long-Term Loans";
-                            q = "Long-Term";
+                            qg = "Long-Term";
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
                             lblSubTitleReport.Content = "For Emergency Loans";
-                            q = "Emergency";
+                            qg = "Emergency";
                         }
                         msg = $"Are you sure you want to print {q} loan payments";
                         gridRepWinChild.FadeIn(0.3);
@@ -601,19 +646,19 @@ namespace SPTC_APP.View.Pages.Output
                         if (btn.Name.Equals("btnRepShort"))
                         {
                             lblSubTitleReport.Content = "For Short-Term Loans";
-                            q = "Short-Term";
+                            qg = "Short-Term";
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
                             lblSubTitleReport.Content = "For Long-Term Loans";
-                            q = "Long-Term";
+                            qg = "Long-Term";
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
                             lblSubTitleReport.Content = "For Emergency Loans";
-                            q = "Emergency";
+                            qg = "Emergency";
                         }
-                        msg = $"Are you sure you want to print {q} loan dues";
+                        msg = $"Are you sure you want to print {qg} loan dues";
                         gridRepWinChild.FadeIn(0.2);
                         break;
                 }
@@ -632,13 +677,19 @@ namespace SPTC_APP.View.Pages.Output
                 string m = dpDate.SelectedDate?.ToString("MMMM");
                 string y = dpDate.SelectedDate?.ToString("yyyy");
                 string q = printAll.IsChecked == true ? " from database?" : $" for {m} {y}?";
-                ListReport report;
+                string typ = "";
+                string desc = "";
+
+                ListReport report = null;
+                List<ColumnConfiguration> columns = null;
 
                 // Get the date month and year for filtering.
                 // kapag checked yung printAll, hindi na fifilterin by date.
                 switch (cbCat.SelectedIndex)
                 {
                     case 1: //Loan Payments (mga bayad sa loan na pumasok sa system).
+                        typ = "loan_payments";
+                        desc = "Loan Payment Report for ";
                         if (btn.Name.Equals("btnRepShort"))
                         {
                             report = new ListReport(ListReport.PAYMENT_SHORT);
@@ -647,6 +698,16 @@ namespace SPTC_APP.View.Pages.Output
                              * Table: short term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
                              * **/
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "PAID AMOUNT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                            };
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
@@ -656,6 +717,16 @@ namespace SPTC_APP.View.Pages.Output
                              * Table: long term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
                              * **/
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "PAID AMOUNT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                            };
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
@@ -665,10 +736,22 @@ namespace SPTC_APP.View.Pages.Output
                              * Table: emergency term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
                              * **/
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "PAID AMOUNT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                            };
                         }
                         break;
 
                     case 2: // Monthly Due (mga expected bayaran na loan sa month, year na sinelect)
+                        typ = "monthly_due";
+                        desc = "Monthly Due Report for ";
                         if (btn.Name.Equals("btnRepShort"))
                         {
                             report = new ListReport(ListReport.DUE_SHORT);
@@ -677,6 +760,17 @@ namespace SPTC_APP.View.Pages.Output
                              * Table: short term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
                              * **/
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "MONTHLY PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "STATUS", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true) // PAID or UNPAID
+                            };
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
@@ -686,6 +780,17 @@ namespace SPTC_APP.View.Pages.Output
                              * Table: long term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
                              * **/
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "OPERATOR NAME", minWidth: 100),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "MONTHLY PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "STATUS", minWidth: 50, isCenter:true)
+                            };
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
@@ -695,6 +800,17 @@ namespace SPTC_APP.View.Pages.Output
                              * Table: emergency term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
                              * **/
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("", "OPERATOR NAME", minWidth: 100),
+                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true),
+                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "MONTHLY PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("", "STATUS", minWidth: 50, isCenter:true)
+                            };
                         }
                         break;
                 }
@@ -702,7 +818,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (ControlWindow.ShowTwoway("Confirm Printing", msg + q, Icons.NOTIFY))
                 {
                     // printing confirmed, call printing function.
-                    //report.StartPrint();
+                    report.StartPrint($"{typ}_{qg.ToLower()}", $"{desc} {qg} Loans", columns);
 
                     gridRepWinChild.FadeOut(0.2);
                 }

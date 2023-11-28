@@ -637,7 +637,7 @@ namespace SPTC_APP.View.Pages.Output
                             lblSubTitleReport.Content = "For Emergency Loans";
                             qg = "Emergency";
                         }
-                        msg = $"Are you sure you want to print {q} loan payments";
+                        msg = $"Are you sure you want to print {qg} loan payments";
                         gridRepWinChild.FadeIn(0.3);
                         break;
 

@@ -43,6 +43,9 @@ namespace SPTC_APP.View.Pages.Output
         private int pieMonth;
         private int pieYear;
 
+        private bool isTresur;
+        private bool isSecret;
+
         public DashboardView()
         {
             InitializeComponent();
@@ -61,6 +64,7 @@ namespace SPTC_APP.View.Pages.Output
             {
                 btnPrint.Visibility = Visibility.Visible;
             }
+
         }
 
         private async Task UpdateLFContent(int currentMonth, int currentYear)
@@ -966,6 +970,36 @@ namespace SPTC_APP.View.Pages.Output
                         spList.Visibility = Visibility.Visible;
                         break;
                 }
+            }
+        }
+
+        private void gridReportWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (isSecret)
+            {
+                //Secretary can only generate lists.
+                cbCat.IsEnabled = false;
+                cbCat.SelectedIndex = 3;
+                cbCat.Opacity = 0.5;
+            }
+            else if (isTresur)
+            {
+                //Tresurer cannot generate lists.
+                cbCat.Items.RemoveAt(3);
+            }
+            else
+            {
+                /**
+                 * Ewan ko, optional lang ata ito kasi pag nagpalit ng user, marerestart din naman diba?
+                 * **/
+
+                //both general manager and secretary can generate all reports.
+                if (cbCat.Items.Count < 4)
+                    cbCat.Items.Add("List of Records");
+                
+                cbCat.IsEnabled = true;
+                cbCat.SelectedIndex = 0;
+                cbCat.Opacity = 0.5;
             }
         }
     }

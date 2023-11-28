@@ -565,7 +565,7 @@
             x:Name="gridReportWindow"
             Grid.Row="1"
             Grid.RowSpan="2"
-            Grid.ColumnSpan="2">
+            Grid.ColumnSpan="2" Loaded="gridReportWindow_Loaded">
             <Border Background="#CCFFFFFF" CornerRadius="10" />
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Border Background="White" CornerRadius="10">

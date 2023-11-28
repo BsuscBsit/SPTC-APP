@@ -46,6 +46,9 @@ namespace SPTC_APP.View.Pages.Output
 
         private bool isTresur;
         private bool isSecret;
+        private bool isBookke;
+
+        private double aMenuFinalHeight = 310.4;
 
         public DashboardView()
         {
@@ -66,8 +69,10 @@ namespace SPTC_APP.View.Pages.Output
                 btnPrint.Visibility = Visibility.Visible;
             }
 
-            isTresur = AppState.USER?.position?.title == AppState.Employees[2];
+
             isSecret = AppState.USER?.position?.title == AppState.Employees[1];
+            isTresur = AppState.USER?.position?.title == AppState.Employees[2];
+            isBookke = AppState.USER?.position?.title == AppState.Employees[3];
         }
 
         private async Task UpdateLFContent(int currentMonth, int currentYear)
@@ -519,7 +524,7 @@ namespace SPTC_APP.View.Pages.Output
             }
             else
             {
-                actionMenu.AnimateHeight(310.4, 0.2);
+                actionMenu.AnimateHeight(aMenuFinalHeight, 0.2);
                 epektos.IsEnabled = true;
             }
             menuExpanded.IsChecked = !isExpanded;
@@ -978,6 +983,8 @@ namespace SPTC_APP.View.Pages.Output
 
         private void gridReportWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            btnRepIDHi.Visibility = Visibility.Visible;
+            btnRepViol.Visibility = Visibility.Visible;
             if (isSecret)
             {
                 //Secretary can only generate lists.
@@ -989,6 +996,12 @@ namespace SPTC_APP.View.Pages.Output
             {
                 //Tresurer cannot generate lists.
                 cbCat.Items.RemoveAt(3);
+            }
+            else if (isBookke)
+            {
+                //Bookkeeper cannot generate ID and Violation History.
+                btnRepIDHi.Visibility = Visibility.Collapsed;
+                btnRepViol.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -1005,6 +1018,28 @@ namespace SPTC_APP.View.Pages.Output
                 cbCat.IsEnabled = true;
                 cbCat.SelectedIndex = 0;
                 cbCat.Opacity = 1;
+            }
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (isBookke || isTresur)
+            {
+                btnPrint.Visibility = Visibility.Collapsed;
+                btnAddViolationType.Visibility = Visibility.Collapsed;
+                aMenuFinalHeight = 211.2;
+            }
+            else if (isSecret)
+            {
+                btnViewFullDetails.Visibility = Visibility.Collapsed;
+                aMenuFinalHeight = 265.6;
+            }
+            else
+            {
+                btnViewFullDetails.Visibility = Visibility.Visible;
+                btnPrint.Visibility = Visibility.Visible;
+                btnAddViolationType.Visibility = Visibility.Visible;
+                aMenuFinalHeight = 310.4;
             }
         }
     }

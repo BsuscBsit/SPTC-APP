@@ -613,7 +613,7 @@ namespace SPTC_APP.View.Pages.Output
                             };
                         }
                         // global yung msg variable, pwede irekta sa printing function.
-                        msg = $"Are you sure you want to print Active Loans for {q} loans?";
+                        msg = $"Are you sure you want to print Active Loans for {q} loans";
 
                         if (ControlWindow.ShowTwoway("Confirm Printing", msg, Icons.NOTIFY))
                         {
@@ -666,7 +666,7 @@ namespace SPTC_APP.View.Pages.Output
                             lblSubTitleReport.Content = "For Share Capital";
                             qg = "Share Capital";
                         }
-                        msg = $"Are you sure you want to print {qg} payments?";
+                        msg = $"Are you sure you want to print {qg} payments";
                         gridRepWinChild.FadeIn(0.2);
                         break;
 

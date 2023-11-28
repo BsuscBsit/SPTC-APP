@@ -199,4 +199,4 @@ INSERT INTO `tbl_payment_details` (`id`, `ledger_id`, `isDownPayment`, `div_pat`
 (197, -1, 0, 0, 'RECAP', '2023-10-01 00:00:00', '', 9500, 0, 'Rental Fee: Franchise', 0, 0),
 (198, -1, 0, 0, 'RECAP', '2023-10-01 00:00:00', '', 9800, 0, 'Transfer Fees', 0, 0),
 (199, -1, 0, 0, 'RECAP', '2023-10-01 00:00:00', '', 1900, 0, 'Membership Fee', 0, 0),
-(200, -1, 0, 0, 'RECAP', '2023-10-01 00:00:00', '', 6000, 0, 'Seminar Fee', 0, 0),
+(200, -1, 0, 0, 'RECAP', '2023-10-01 00:00:00', '', 6000, 0, 'Seminar Fee', 0, 0);

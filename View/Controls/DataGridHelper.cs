@@ -37,7 +37,7 @@ public class DataGridHelper<T>
                     Header = config.Header,
                     Binding = new System.Windows.Data.Binding(config.BindingPath)
                     {
-                        StringFormat = config.HasSign ? $"\u20B1 {0:N2}" : null,
+                        StringFormat = config.HasSign ? $"\u20B1 {0:N2}" : (config.IsDate? $"{0:MMM dd, yyyy}" : null),
                     },
                     Width = new DataGridLength(config.Width, DataGridLengthUnitType.Star),
                     MinWidth = config.Width,
@@ -93,6 +93,7 @@ public class DataGridHelper<T>
         public bool Centralize { get; }
         public bool Numeric { get; }
         public bool HasSign { get; }
+        public bool IsDate { get; }
         public Brush BackgroundColor { get; }
         public FontWeight FontWeight { get; }
         public Visibility Visibility { get; }
@@ -108,6 +109,7 @@ public class DataGridHelper<T>
             bool isNumeric = false,
             bool haspeso = false,
             bool isPaid = false,
+            bool isDate = false,
             Dictionary<string, bool> filter = null,
             Brush backgroundColor = null,
             FontWeight? fontWeight = null) 
@@ -121,6 +123,7 @@ public class DataGridHelper<T>
             Centralize = isCenter;
             Numeric = isNumeric;
             HasSign = haspeso;
+            IsDate = isDate;
             BackgroundColor = backgroundColor ?? Brushes.White;
 
             FontWeight = fontWeight.HasValue ? fontWeight.Value : FontWeights.SemiBold;

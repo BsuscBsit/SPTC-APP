@@ -558,13 +558,14 @@ namespace SPTC_APP.View.Pages.Output
                              * **/
                             columns = new List<ColumnConfiguration>
                             {
-                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
-                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                                new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
+                                new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("terms_of_payment_month", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("amount", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
                             };
                         }
                         else if (btn.Name.Equals("btnRepLong"))
@@ -579,13 +580,14 @@ namespace SPTC_APP.View.Pages.Output
                              * **/
                             columns = new List<ColumnConfiguration>
                             {
-                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
-                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                                new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
+                                new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("terms_of_payment_month", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("amount", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
                             };
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
@@ -600,13 +602,14 @@ namespace SPTC_APP.View.Pages.Output
                              * **/
                             columns = new List<ColumnConfiguration>
                             {
-                                new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
-                                new ColumnConfiguration("", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                                new ColumnConfiguration("last_name", "OPERATOR LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "OPERATOR FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
+                                new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("terms_of_payment_month", "TERM", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("amount", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
                             };
                         }
                         // global yung msg variable, pwede irekta sa printing function.

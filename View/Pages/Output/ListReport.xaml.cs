@@ -21,14 +21,15 @@ namespace SPTC_APP.View.Pages.Output
         //CREATE QUERY HERE
         public static string PAYMENTS = $"SELECT * FROM {Table.PAYMENT_DETAILS}";
 
-        public static string ACTIVE_SHORT;
-        public static string ACTIVE_LONG;
-        public static string ACTIVE_EMERGENCY;
+        public static string ACTIVE_SHORT = $"SELECT * FROM {Table.LOAN} AS l LEFT JOIN {Table.FRANCHISE} as f ON l.{Field.FRANCHISE_ID} = f.{Field.ID} LEFT JOIN {Table.OPERATOR} AS o ON f.{Field.OPERATOR_ID} = o.{Field.ID} LEFT JOIN {Table.NAME} AS n ON o.{Field.NAME_ID} = n.{Field.ID} WHERE {Field.AMOUNT} > 0 AND l.{Field.IS_FULLY_PAID} = 0 AND l.isDeleted = 0 AND l.details = \"SHORT TERM\"";
+        public static string ACTIVE_LONG = $"SELECT * FROM {Table.LONG_TERM_LOAN} AS l LEFT JOIN {Table.FRANCHISE} as f ON l.{Field.FRANCHISE_ID} = f.{Field.ID} LEFT JOIN {Table.OPERATOR} AS o ON f.{Field.OPERATOR_ID} = o.{Field.ID} LEFT JOIN {Table.NAME} AS n ON o.{Field.NAME_ID} = n.{Field.ID} WHERE {Field.AMOUNT} > 0 AND l.{Field.IS_FULLY_PAID} = 0 AND l.isDeleted = 0";
+        public static string ACTIVE_EMERGENCY = $"SELECT * FROM {Table.LOAN} AS l LEFT JOIN {Table.FRANCHISE} as f ON l.{Field.FRANCHISE_ID} = f.{Field.ID} LEFT JOIN {Table.OPERATOR} AS o ON f.{Field.OPERATOR_ID} = o.{Field.ID} LEFT JOIN {Table.NAME} AS n ON o.{Field.NAME_ID} = n.{Field.ID} WHERE {Field.AMOUNT} > 0 AND l.{Field.IS_FULLY_PAID} = 0 AND l.isDeleted = 0 AND l.details = \"EMERGENCY\"";
 
         // May date filtering ito (month and year) however pwede din wala.
         public static string PAYMENT_SHORT;
         public static string PAYMENT_LONG;
         public static string PAYMENT_EMERGENCY;
+
         public static string DUE_SHORT;
         public static string DUE_LONG;
         public static string DUE_EMERGENCY;
@@ -86,6 +87,7 @@ namespace SPTC_APP.View.Pages.Output
 
                 if (!ControlWindow.ShowTwoway("Printing", $"Do you want to continue printing \nPage: {pagenumber + 1} of {filename}", Icons.NOTIFY))
                 {
+                    this.Close();
                     break;
                 }
                 

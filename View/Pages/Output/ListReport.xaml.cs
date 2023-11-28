@@ -43,12 +43,9 @@ namespace SPTC_APP.View.Pages.Output
         public static string PAYMENT_EMERGENCY_ALL = $"SELECT * FROM tbl_payment_details AS pd LEFT JOIN tbl_loan_ledger AS l ON pd.ledger_id = l.id AND pd.ledger_type = \"LOAN\" LEFT JOIN {Table.FRANCHISE} AS f ON f.{Field.ID} = l.{Field.FRANCHISE_ID} WHERE pd.ledger_id <> -1 AND pd.ledger_type = \"LOAN\" AND l.details = \"EMERGENCY\" AND (l.isDeleted = 0 OR pd.isDeleted = 0)";
         public static string PAYMENT_SHARECAPITAL_ALL = $"SELECT * FROM tbl_payment_details AS pd LEFT JOIN tbl_share_capital_ledger AS l ON pd.ledger_id = l.id AND pd.ledger_type = \"SHARECAPITAl\" LEFT JOIN {Table.FRANCHISE} AS f ON f.{Field.ID} = l.{Field.FRANCHISE_ID} WHERE pd.ledger_id <> -1 AND pd.ledger_type = \"SHARECAPITAL\" AND (l.isDeleted = 0 OR pd.isDeleted = 0)";
 
-        // entire apply loan records or by month year din.
-        public static string LOANS_SHORT;
-        public static string LOANS_LONG;
-        public static string LOANS_EMERGENCY;
-
-
+        public static string LOANS_SHORT = $"SELECT * FROM {Table.LOAN} AS l LEFT JOIN {Table.FRANCHISE} as f ON l.{Field.FRANCHISE_ID} = f.{Field.ID} LEFT JOIN {Table.OPERATOR} AS o ON f.{Field.OPERATOR_ID} = o.{Field.ID} LEFT JOIN {Table.NAME} AS n ON o.{Field.NAME_ID} = n.{Field.ID} WHERE {Field.AMOUNT} > 0 AND l.isDeleted = 0 AND l.details = \"SHORT TERM\"";
+        public static string LOANS_LONG = $"SELECT * FROM {Table.LONG_TERM_LOAN} AS l LEFT JOIN {Table.FRANCHISE} as f ON l.{Field.FRANCHISE_ID} = f.{Field.ID} LEFT JOIN {Table.OPERATOR} AS o ON f.{Field.OPERATOR_ID} = o.{Field.ID} LEFT JOIN {Table.NAME} AS n ON o.{Field.NAME_ID} = n.{Field.ID} WHERE {Field.AMOUNT} > 0 AND l.isDeleted = 0";
+        public static string LOANS_EMERGENCY = $"SELECT * FROM {Table.LOAN} AS l LEFT JOIN {Table.FRANCHISE} as f ON l.{Field.FRANCHISE_ID} = f.{Field.ID} LEFT JOIN {Table.OPERATOR} AS o ON f.{Field.OPERATOR_ID} = o.{Field.ID} LEFT JOIN {Table.NAME} AS n ON o.{Field.NAME_ID} = n.{Field.ID} WHERE {Field.AMOUNT} > 0A AND l.isDeleted = 0 AND l.details = \"EMERGENCY\"";
         /*public static string DUE_SHORT;
         public static string DUE_LONG;
         public static string DUE_EMERGENCY;*/

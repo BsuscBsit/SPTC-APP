@@ -58,13 +58,6 @@ namespace SPTC_APP.View.Pages.Input
             closingMSG = "No franchise was added.\nAction was canceled.";
             this.Close();
         }
-
-
-        //Make Requirements into dropdown, out database will only save tin_number and voters_id_number
-        //NOTE: gather all posible requirements for Franchise only
-
-        // (08-11-23) Design Temporary: TIN & Voter's as labels til' other requirements incomplete.
-
         private void btnNextFranchiseInput_Click(object sender, RoutedEventArgs e)
         {
             Franchise franchise = fran;

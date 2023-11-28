@@ -132,10 +132,5 @@ namespace SPTC_APP.View
         {
             this.Close();
         }
-
-        private void Label_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            MessageBox.Show("HI");
-        }
     }
 }

@@ -312,7 +312,7 @@
                                 Click="btnLogin_Click"
                                 Content="LOG IN"
                                 Style="{DynamicResource CommonButtonStyle}" />
-                            <Label Content="Forgot Password" HorizontalAlignment="Center" FontStyle="Italic" MouseDown="Label_MouseDown"/>
+                            <Label Content="Forgot Password" HorizontalAlignment="Center" FontStyle="Italic"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>

@@ -82,16 +82,24 @@ namespace SPTC_APP.View.Pages.Output
         public void StartPrint(string filename,string description, List<ColumnConfiguration> columns)
         {
             pagenumber = 0;
+            int counter = 0;
             while (true)
             {
                 DataTable dataSource = GetYourData(_query, pagenumber, itemcount);
 
                 if (dataSource.Rows.Count == 0)
                 {
-                    ControlWindow.ShowStatic("Print Success", $"{filename} is printed", Icons.NOTIFY);
+                    if (counter > 0)
+                    {
+                        ControlWindow.ShowStatic("Print Success", $"{filename} is printed", Icons.NOTIFY);
+                    } else
+                    {
+                        ControlWindow.ShowStatic("Print Warning", $"{filename} is empty", Icons.WARNING);
+                    }
                     this.Close();
                     break;
                 }
+                counter++;
                 this.Show();
                 lblDescription.Content = $"Description: {description}".Replace("(page)", (pagenumber+1).ToString());
                 lblTitle.Content = "SPTC REPORT: " + filename.ToUpper();

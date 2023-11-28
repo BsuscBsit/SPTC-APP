@@ -94,7 +94,7 @@ namespace SPTC_APP.View.Pages.Output
                         ControlWindow.ShowStatic("Print Success", $"{filename} is printed", Icons.NOTIFY);
                     } else
                     {
-                        ControlWindow.ShowStatic("Print Warning", $"{filename} is empty", Icons.WARNING);
+                        ControlWindow.ShowStatic("Print Warning", $"{filename} is empty", Icons.DEFAULT);
                     }
                     this.Close();
                     break;

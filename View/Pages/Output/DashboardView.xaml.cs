@@ -529,6 +529,7 @@ namespace SPTC_APP.View.Pages.Output
         {
             if(sender is Button btn)
             {
+                ListReport report;
                 string q = "";
                 switch (cbCat.SelectedIndex)
                 {
@@ -536,6 +537,8 @@ namespace SPTC_APP.View.Pages.Output
                         if (btn.Name.Equals("btnRepShort"))
                         {
                             q = "Short-Term";
+                            report = new ListReport(ListReport.ACTIVE_SHORT);
+
                             /**
                              * Table: short term loans(active/di pa bayad)
                              * operator name, body#, date, cv/or, termlength, loan amount, loan balance
@@ -544,6 +547,8 @@ namespace SPTC_APP.View.Pages.Output
                         else if (btn.Name.Equals("btnRepLong"))
                         {
                             q = "Long-Term";
+                            report = new ListReport(ListReport.ACTIVE_LONG);
+
                             /**
                              * Table: long term loans(active/di pa bayad)
                              * operator name, body#, date, cv/or, termlength, loan amount, loan balance
@@ -552,6 +557,8 @@ namespace SPTC_APP.View.Pages.Output
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
                             q = "Emergency";
+                            report = new ListReport(ListReport.ACTIVE_EMERGENCY);
+
                             /**
                              * Table: emergency term loans(active/di pa bayad).
                              * operator name, body#, date, cv/or, termlength, loan amount, loan balance
@@ -563,6 +570,7 @@ namespace SPTC_APP.View.Pages.Output
                         if (ControlWindow.ShowTwoway("Confirm Printing", msg, Icons.NOTIFY))
                         {
                             // printing confirmed, call printing function.
+                            // report.StartPrint();
                         }
                         break;
 
@@ -624,6 +632,7 @@ namespace SPTC_APP.View.Pages.Output
                 string m = dpDate.SelectedDate?.ToString("MMMM");
                 string y = dpDate.SelectedDate?.ToString("yyyy");
                 string q = printAll.IsChecked == true ? " from database?" : $" for {m} {y}?";
+                ListReport report;
 
                 // Get the date month and year for filtering.
                 // kapag checked yung printAll, hindi na fifilterin by date.
@@ -632,6 +641,8 @@ namespace SPTC_APP.View.Pages.Output
                     case 1: //Loan Payments (mga bayad sa loan na pumasok sa system).
                         if (btn.Name.Equals("btnRepShort"))
                         {
+                            report = new ListReport(ListReport.PAYMENT_SHORT);
+
                             /**
                              * Table: short term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
@@ -639,6 +650,8 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
+                            report = new ListReport(ListReport.PAYMENT_LONG);
+
                             /**
                              * Table: long term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
@@ -646,6 +659,8 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
+                            report = new ListReport(ListReport.PAYMENT_EMERGENCY);
+
                             /**
                              * Table: emergency term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment.
@@ -656,6 +671,8 @@ namespace SPTC_APP.View.Pages.Output
                     case 2: // Monthly Due (mga expected bayaran na loan sa month, year na sinelect)
                         if (btn.Name.Equals("btnRepShort"))
                         {
+                            report = new ListReport(ListReport.DUE_SHORT);
+
                             /**
                              * Table: short term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
@@ -663,6 +680,8 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
+                            report = new ListReport(ListReport.DUE_SHORT);
+
                             /**
                              * Table: long term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
@@ -670,6 +689,8 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
+                            report = new ListReport(ListReport.DUE_SHORT);
+
                             /**
                              * Table: emergency term loan payments (filtered by month and year depende sa sinelect).
                              * operator name, body#, date, cv/or, loan amount, loan balance, monthly payment, isPaid?.
@@ -681,6 +702,7 @@ namespace SPTC_APP.View.Pages.Output
                 if (ControlWindow.ShowTwoway("Confirm Printing", msg + q, Icons.NOTIFY))
                 {
                     // printing confirmed, call printing function.
+                    //report.StartPrint();
 
                     gridRepWinChild.FadeOut(0.2);
                 }

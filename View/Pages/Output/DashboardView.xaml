@@ -689,27 +689,36 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Label
                             x:Name="lblTitleReport"
+                            Grid.ColumnSpan="3"
+                            Padding="5,5,5,0"
                             Content="Generate Report"
-                            Style="{StaticResource CommonTitlePreset}" Grid.ColumnSpan="3" Padding="5,5,5,0" />
+                            Style="{StaticResource CommonTitlePreset}" />
                         <Label
                             x:Name="lblSubTitleReport"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,15"
+                            Padding="5,0,5,5"
                             Content="Report For"
-                            Style="{StaticResource SubTitlePreset}" Grid.ColumnSpan="3" Grid.Row="1" Padding="5,0,5,5" Margin="0,0,0,15" />
+                            Style="{StaticResource SubTitlePreset}" />
                         <Label
                             Grid.Row="2"
+                            Grid.Column="1"
                             Content="Select Month and Year:"
-                            Style="{StaticResource TextFieldLabelingPreset}" Grid.Column="1" />
+                            Style="{StaticResource TextFieldLabelingPreset}" />
                         <StackPanel
                             Grid.Row="3"
+                            Grid.Column="1"
                             Margin="15,0,0,0"
-                            Orientation="Horizontal" Grid.Column="1">
-                            <Border x:Name="datesel"
+                            Orientation="Horizontal">
+                            <Border
+                                x:Name="datesel"
                                 Width="164"
                                 Height="30"
                                 Padding="5,0,5,0"
@@ -717,24 +726,28 @@
                                 BorderBrush="{StaticResource BrushGrey}"
                                 BorderThickness="1"
                                 CornerRadius="5">
-                                <DatePicker x:Name="dpDate"
+                                <DatePicker
+                                    x:Name="dpDate"
+                                    Margin="0,2,0,0"
                                     local1:DatePickerCalendar.IsMonthYear="True"
                                     local1:DatePickerDateFormat.DateFormat="MMM-yyyy"
-                                    Text="MMM-yyyy"
-                                    BorderBrush="Transparent" Margin="0,2,0,0"/>
+                                    BorderBrush="Transparent"
+                                    Text="MMM-yyyy" />
                             </Border>
                             <CheckBox
                                 x:Name="printAll"
                                 Margin="15,0,0,0"
                                 VerticalAlignment="Center"
-                                Content="Print All" Click="printAll_Click" />
+                                Click="printAll_Click"
+                                Content="Print All" />
                         </StackPanel>
                         <StackPanel
                             Grid.Row="4"
+                            Grid.ColumnSpan="3"
                             Margin="0,24,0,12"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
-                            Orientation="Horizontal" Grid.ColumnSpan="3">
+                            Orientation="Horizontal">
                             <Button
                                 x:Name="btnPrintRepCancel"
                                 Width="140"

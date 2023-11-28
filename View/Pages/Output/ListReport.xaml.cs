@@ -21,6 +21,16 @@ namespace SPTC_APP.View.Pages.Output
         //CREATE QUERY HERE
         public static string PAYMENTS = $"SELECT * FROM {Table.PAYMENT_DETAILS}";
 
+        public static string ACTIVE_SHORT;
+        public static string ACTIVE_LONG;
+        public static string ACTIVE_EMERGENCY; 
+        public static string PAYMENT_SHORT;
+        public static string PAYMENT_LONG;
+        public static string PAYMENT_EMERGENCY;
+        public static string DUE_SHORT;
+        public static string DUE_LONG;
+        public static string DUE_EMERGENCY;
+
         //USAGE
         /*  ListReport reports = new ListReport(ListReport.PAYMENTS); // PAYMENTS is the MYSQL query
                

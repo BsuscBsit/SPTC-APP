@@ -807,7 +807,7 @@ namespace SPTC_APP.View.Pages.Output
                         desc = "Loan Payment Report for ";
                         if (btn.Name.Equals("btnRepShort"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_SHORT);
+                            report = new ListReport(ListReport.LOANS_SHORT);
 
                             columns = new List<ColumnConfiguration>
                             {
@@ -822,7 +822,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_LONG);
+                            report = new ListReport(ListReport.LOANS_LONG);
 
                             columns = new List<ColumnConfiguration>
                             {
@@ -837,7 +837,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_EMERGENCY);
+                            report = new ListReport(ListReport.LOANS_EMERGENCY);
 
                             columns = new List<ColumnConfiguration>
                             {

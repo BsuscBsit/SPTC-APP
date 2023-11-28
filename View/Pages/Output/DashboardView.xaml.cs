@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows;
@@ -65,6 +66,8 @@ namespace SPTC_APP.View.Pages.Output
                 btnPrint.Visibility = Visibility.Visible;
             }
 
+            isTresur = AppState.USER?.position?.title == AppState.Employees[2];
+            isSecret = AppState.USER?.position?.title == AppState.Employees[1];
         }
 
         private async Task UpdateLFContent(int currentMonth, int currentYear)

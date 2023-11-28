@@ -786,6 +786,9 @@ namespace SPTC_APP.View.Pages.Output
                 string desc = "";
                 #endregion
 
+                int? mo = dpDate.SelectedDate?.Month;
+                int? ye = dpDate.SelectedDate?.Year;
+
                 ListReport report = null;
                 List<ColumnConfiguration> columns = null;
 
@@ -855,7 +858,7 @@ namespace SPTC_APP.View.Pages.Output
                         desc = "Payment Reports for ";
                         if (btn.Name.Equals("btnRepShort"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_SHORT);
+                            report = new ListReport(ListReport.PAYMENT_SHORT(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year));
 
                             columns = new List<ColumnConfiguration>
                             {
@@ -870,7 +873,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepLong"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_LONG);
+                            report = new ListReport(ListReport.PAYMENT_LONG(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year));
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),
@@ -884,7 +887,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (btn.Name.Equals("btnRepEmer"))
                         {
-                            report = new ListReport(ListReport.PAYMENT_EMERGENCY);
+                            report = new ListReport(ListReport.PAYMENT_EMERGENCY(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year));
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("", "OPERATOR NAME", minWidth : 100),

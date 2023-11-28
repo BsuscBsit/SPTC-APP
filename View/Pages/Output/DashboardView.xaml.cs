@@ -814,7 +814,7 @@ namespace SPTC_APP.View.Pages.Output
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
                                 new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                                 new ColumnConfiguration("amount", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
@@ -828,7 +828,7 @@ namespace SPTC_APP.View.Pages.Output
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
                                 new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                                 new ColumnConfiguration("amount", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
@@ -842,7 +842,7 @@ namespace SPTC_APP.View.Pages.Output
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
                                 new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                                 new ColumnConfiguration("amount", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
@@ -862,7 +862,7 @@ namespace SPTC_APP.View.Pages.Output
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
                                 new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                                 new ColumnConfiguration("amount", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
@@ -875,7 +875,7 @@ namespace SPTC_APP.View.Pages.Output
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
                                 new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                                 new ColumnConfiguration("amount", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
@@ -888,20 +888,20 @@ namespace SPTC_APP.View.Pages.Output
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
                                 new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("amount_loaned", "AMOUNT LOANED", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                                 new ColumnConfiguration("amount", "LOAN BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                                 new ColumnConfiguration("last_payment_date", "LAST PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
                             };
                         }
-                        else if (currBtn.Equals("btnShareCap"))
+                        else if (currBtn.Equals("btnRepShareCap"))
                         {
                             report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.PAYMENT_SHARECAPITAL(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_SHARECAPITAL_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true),
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isNumeric: true, isCenter:true, isDate:true),
                                 new ColumnConfiguration("reference_no", "CV/OR", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("deposit", "DEPOSIT", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                                 new ColumnConfiguration("balance", "BALANCE", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
@@ -912,6 +912,11 @@ namespace SPTC_APP.View.Pages.Output
 
                 if (ControlWindow.ShowTwoway("Confirm Printing", msg + q, Icons.NOTIFY))
                 {
+                    if(report == null)
+                    {
+                        ControlWindow.ShowStatic("Error", "An error has occured\nPrinting failed...", Icons.ERROR);
+                        gridRepWinChild.FadeOut(0.2);
+                    }
                     // printing confirmed, call printing function.
                     report.StartPrint($"{typ} {qg}", $"{desc} {qg} Loans", columns);
 

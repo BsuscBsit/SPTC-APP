@@ -683,8 +683,14 @@ namespace SPTC_APP.View.Pages.Output
                 ListReport report = null;
                 List<ColumnConfiguration> columns = null;
 
-                // Get the date month and year for filtering.
-                // kapag checked yung printAll, hindi na fifilterin by date.
+                /**
+                 * Get the date month and year sa dpDate for filtering.
+                 * Month and Year lang naseset sa control na to.
+                 * Preferrably, month and year lang kukunin.
+                 * 
+                 * Kapag checked yung printAll, hindi na fifilterin by date kukunin na lahat.
+                 * **/
+
                 switch (cbCat.SelectedIndex)
                 {
                     case 1: //Loan Payments (mga bayad sa loan na pumasok sa system).

@@ -23,7 +23,9 @@ namespace SPTC_APP.View.Pages.Output
 
         public static string ACTIVE_SHORT;
         public static string ACTIVE_LONG;
-        public static string ACTIVE_EMERGENCY; 
+        public static string ACTIVE_EMERGENCY;
+
+        // May date filtering ito (month and year) however pwede din wala.
         public static string PAYMENT_SHORT;
         public static string PAYMENT_LONG;
         public static string PAYMENT_EMERGENCY;
@@ -55,7 +57,7 @@ namespace SPTC_APP.View.Pages.Output
             
         }
         /// <summary>
-        /// 
+        /// e
         /// </summary>
         /// <param name="filename">used in both title and printxps</param>
         /// <param name="description">Use "(page)" to substitute for pagenumber</param>

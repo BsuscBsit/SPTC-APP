@@ -535,6 +535,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private string msg = "";
         private string qg = "";
+        private string currBtn = "";
         private void generateReports(object sender, RoutedEventArgs e)
         {
             if(sender is Button btn)
@@ -624,18 +625,19 @@ namespace SPTC_APP.View.Pages.Output
 
                     // Jump to btnPrintReport_Click for table configs
                     case 1:
+                        currBtn = btn.Name;
                         lblTitleReport.Content = "Loan Record Report";
-                        if (btn.Name.Equals("btnRepShort"))
+                        if (currBtn.Equals("btnRepShort"))
                         {
                             lblSubTitleReport.Content = "For Short-Term Loans";
                             qg = "Short-Term";
                         }
-                        else if (btn.Name.Equals("btnRepLong"))
+                        else if (currBtn.Equals("btnRepLong"))
                         {
                             lblSubTitleReport.Content = "For Long-Term Loans";
                             qg = "Long-Term";
                         }
-                        else if (btn.Name.Equals("btnRepEmer"))
+                        else if (currBtn.Equals("btnRepEmer"))
                         {
                             lblSubTitleReport.Content = "For Emergency Loans";
                             qg = "Emergency";
@@ -645,23 +647,24 @@ namespace SPTC_APP.View.Pages.Output
                         break;
 
                     case 2:
+                        currBtn = btn.Name;
                         lblTitleReport.Content = "Payment Report";
-                        if (btn.Name.Equals("btnRepShort"))
+                        if (currBtn.Equals("btnRepShort"))
                         {
                             lblSubTitleReport.Content = "For Short-Term Loans";
                             qg = "Short-Term";
                         }
-                        else if (btn.Name.Equals("btnRepLong"))
+                        else if (currBtn.Equals("btnRepLong"))
                         {
                             lblSubTitleReport.Content = "For Long-Term Loans";
                             qg = "Long-Term";
                         }
-                        else if (btn.Name.Equals("btnRepEmer"))
+                        else if (currBtn.Equals("btnRepEmer"))
                         {
                             lblSubTitleReport.Content = "For Emergency Loans";
                             qg = "Emergency";
                         }
-                        else if (btn.Name.Equals("btnRepShareCap"))
+                        else if (currBtn.Equals("btnRepShareCap"))
                         {
                             lblSubTitleReport.Content = "For Share Capital";
                             qg = "Share Capital";
@@ -802,9 +805,9 @@ namespace SPTC_APP.View.Pages.Output
                 switch (cbCat.SelectedIndex)
                 {
                     case 1: //All Loans
-                        typ = "loan_payments";
-                        desc = "Loan Payment Report for ";
-                        if (btn.Name.Equals("btnRepShort"))
+                        typ = "loans";
+                        desc = "Loan Report for ";
+                        if (currBtn.Equals("btnRepShort"))
                         {
                             report = new ListReport(ListReport.LOANS_SHORT);
 
@@ -818,7 +821,7 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("last_payment_date", "LAST PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
                             };
                         }
-                        else if (btn.Name.Equals("btnRepLong"))
+                        else if (currBtn.Equals("btnRepLong"))
                         {
                             report = new ListReport(ListReport.LOANS_LONG);
 
@@ -832,7 +835,7 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("last_payment_date", "LAST PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
                             };
                         }
-                        else if (btn.Name.Equals("btnRepEmer"))
+                        else if (currBtn.Equals("btnRepEmer"))
                         {
                             report = new ListReport(ListReport.LOANS_EMERGENCY);
 
@@ -852,7 +855,7 @@ namespace SPTC_APP.View.Pages.Output
 
                         typ = "payments";
                         desc = "Payment Reports for ";
-                        if (btn.Name.Equals("btnRepShort"))
+                        if (currBtn.Equals("btnRepShort"))
                         {
                             report = new ListReport(printAll.IsChecked != true ? ListReport.PAYMENT_SHORT(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_SHORT_ALL);
 
@@ -866,7 +869,7 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("last_payment_date", "LAST PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
                             };
                         }
-                        else if (btn.Name.Equals("btnRepLong"))
+                        else if (currBtn.Equals("btnRepLong"))
                         {
                             report = new ListReport(printAll.IsChecked != true ? ListReport.PAYMENT_LONG(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_LONG_ALL);
                             columns = new List<ColumnConfiguration>
@@ -879,7 +882,7 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("last_payment_date", "LAST PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
                             };
                         }
-                        else if (btn.Name.Equals("btnRepEmer"))
+                        else if (currBtn.Equals("btnRepEmer"))
                         {
                             report = new ListReport(printAll.IsChecked != true ? ListReport.PAYMENT_EMERGENCY(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_EMERGENCY_ALL);
                             columns = new List<ColumnConfiguration>
@@ -892,7 +895,7 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("last_payment_date", "LAST PAYMENT", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
                             };
                         }
-                        else if (btn.Name.Equals("btnShareCap"))
+                        else if (currBtn.Equals("btnShareCap"))
                         {
                             report = new ListReport(printAll.IsChecked != true ? ListReport.PAYMENT_SHARECAPITAL(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.PAYMENT_SHARECAPITAL_ALL);
                             columns = new List<ColumnConfiguration>

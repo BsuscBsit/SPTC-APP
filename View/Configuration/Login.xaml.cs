@@ -19,7 +19,6 @@ namespace SPTC_APP.View
         {
             InitializeComponent();
             AppState.LoadFromJson();
-            if(!AppState.isDeployment && !AppState.isDeployment_IDGeneration) pbPassword.Password = "Admin1234";
             cbUser.ItemsSource = AppState.Employees;
             cbUser.SelectedIndex = AppState.LAST_LOGIN;
             if((AppState.Employees?.Count ?? 0) < 4)
@@ -38,7 +37,6 @@ namespace SPTC_APP.View
             AppState.Login(cbUser.Text, pbPassword.Password, this);
             pbPassword.Focus();
         }
-      
         private async void FocusPb()
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
@@ -49,8 +47,6 @@ namespace SPTC_APP.View
                 this.Close();
             }
         }
-
-        // Styling
         private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter)
@@ -110,14 +106,6 @@ namespace SPTC_APP.View
 
         private void pbPassword_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            /*if (pbPassword.Password.Length > 0)
-            {
-
-            }
-            else
-            {
-
-            }*/
             if (pbPassword.Password == string.Empty)
             {
                 btnViewPass.Visibility = Visibility.Hidden;

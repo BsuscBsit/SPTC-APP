@@ -86,10 +86,11 @@
                 Grid.ColumnSpan="3"
                 Height="102"
                 Margin="0,12,0,0"
+                Padding="15,15,15,15"
                 VerticalAlignment="Top"
                 BorderBrush="{StaticResource BrushBlack}"
-                CornerRadius="10"
-                BorderThickness="1" Padding="15,15,15,15">
+                BorderThickness="1"
+                CornerRadius="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -236,7 +237,7 @@
                 </Grid>
             </Border>
         </Grid>
-        <Grid x:Name="ViolationGrid" >
+        <Grid x:Name="ViolationGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -267,16 +268,16 @@
             <DataGrid
                 x:Name="dgDriverViolation"
                 Grid.Row="1"
-                Grid.ColumnSpan="2" 
+                Grid.ColumnSpan="2"
                 SelectionChanged="dgDriverViolation_SelectionChanged" />
             <Border
-                 Grid.Row="2"
-                 Grid.ColumnSpan="2"
-                 Margin="20,15,20,0"
-                 VerticalAlignment="Bottom"
-                 BorderBrush="Black"
-                 BorderThickness="1"
-                 CornerRadius="10">
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Margin="20,15,20,0"
+                VerticalAlignment="Bottom"
+                BorderBrush="Black"
+                BorderThickness="1"
+                CornerRadius="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -284,33 +285,34 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Label
-                         Margin="10,0,0,0"
-                         Padding="5,5,0,5"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Center"
-                         Content="Selected: "
-                         Foreground="{StaticResource BrushGrey}"
-                         Style="{StaticResource LabelFontMedium}" />
+                        Margin="10,0,0,0"
+                        Padding="5,5,0,5"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="Selected: "
+                        Foreground="{StaticResource BrushGrey}"
+                        Style="{StaticResource LabelFontMedium}" />
                     <Label
-                         x:Name="lblSelectedViolation"
-                         Grid.Column="1"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Center"
-                         Content="N/A"
-                         FontWeight="Regular"
-                         Style="{StaticResource LabelFontMedium}" />
+                        x:Name="lblSelectedViolation"
+                        Grid.Column="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="N/A"
+                        FontWeight="Regular"
+                        Style="{StaticResource LabelFontMedium}" />
                     <Button
-                         x:Name="btnDeleteViolation"
-                         Grid.Column="2"
-                         Width="80"
-                         Height="25"
-                         Margin="12,12,12,12"
-                         HorizontalAlignment="Right"
-                         VerticalAlignment="Center"
-                         Content="Delete"
-                         FontSize="12"
-                         IsEnabled="False"
-                         Style="{DynamicResource CommonButtonStyle}" Click="btnDeleteViolation_Click" />
+                        x:Name="btnDeleteViolation"
+                        Grid.Column="2"
+                        Width="80"
+                        Height="25"
+                        Margin="12,12,12,12"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Click="btnDeleteViolation_Click"
+                        Content="Delete"
+                        FontSize="12"
+                        IsEnabled="False"
+                        Style="{DynamicResource CommonButtonStyle}" />
                 </Grid>
             </Border>
 
@@ -331,7 +333,8 @@
                 Grid.ColumnSpan="3"
                 BorderBrush="Black"
                 BorderThickness="1"
-                SelectionChanged="dgLedger_SelectionChanged" MouseDoubleClick="dgLedger_MouseDoubleClick">
+                MouseDoubleClick="dgLedger_MouseDoubleClick"
+                SelectionChanged="dgLedger_SelectionChanged">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="FontFamily" Value="Arial" />
@@ -401,13 +404,14 @@
                 x:Name="lblTotalLedger"
                 Grid.Row="1"
                 Grid.Column="2"
+                Margin="0,0,12,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 HorizontalContentAlignment="Center"
                 Content="0.00"
                 FontWeight="Regular"
                 Foreground="{StaticResource BrushRed}"
-                Style="{StaticResource LabelFontMedium}" Margin="0,0,12,0" />
+                Style="{StaticResource LabelFontMedium}" />
 
 
 
@@ -450,16 +454,17 @@
                 Style="{StaticResource LabelFontMedium}" />
 
             <Label
-                 x:Name="lblTransferTotal"
-                 Grid.Row="1"
-                 Grid.Column="2"
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Center"
-                 HorizontalContentAlignment="Center"
-                 Content="0.00"
-                 FontWeight="Regular"
-                 Foreground="{StaticResource BrushRed}"
-                 Style="{StaticResource LabelFontMedium}" Margin="0,0,12,0" />
+                x:Name="lblTransferTotal"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0,0,12,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Content="0.00"
+                FontWeight="Regular"
+                Foreground="{StaticResource BrushRed}"
+                Style="{StaticResource LabelFontMedium}" />
         </Grid>
     </Grid>
 </Window>

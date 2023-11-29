@@ -30,6 +30,7 @@ namespace SPTC_APP.Objects
             public double amount { get; set; }
             public double penaltyPercent { get; set; }
             public DateTime last_payment { get; set; }
+            public double balance { get; set; }
             public string displayDate
             {
                 get
@@ -48,7 +49,10 @@ namespace SPTC_APP.Objects
             {
                 get
                 {
-                    return Scaler.RoundUp((amountLoaned + interest) / termsofpayment);
+                    if (balance == 0)
+                        return Scaler.RoundUp((amountLoaned) / termsofpayment);
+                    else
+                        return balance;
                 }
             }
             public bool isFullyPaid { get; set; } = false;
@@ -77,6 +81,7 @@ namespace SPTC_APP.Objects
                 this.amount = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT);
                 this.penaltyPercent = Retrieve.GetValueOrDefault<double>(reader, Field.PENALTIES);
                 this.last_payment = Retrieve.GetValueOrDefault<DateTime>(reader, Field.LAST_PAYMENT);
+                this.balance = Retrieve.GetValueOrDefault<double>(reader, Field.BALANCE);
             }
             public bool WriteInto(
                     int franchiseId,
@@ -122,6 +127,7 @@ namespace SPTC_APP.Objects
                 loan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
                 loan.Insert(Field.AMOUNT, amount);
                 loan.Insert(Field.LAST_PAYMENT, last_payment);
+                loan.Insert(Field.BALANCE, balance);
                 loan.Save();
                 id = loan.id;
 
@@ -226,6 +232,7 @@ namespace SPTC_APP.Objects
             public double penaltyPercent { get; set; }
             public double amount { get; set; }
             public DateTime last_payment { get; set; }
+            public double balance { get; set; }
             public string displayDate
             {
                 get
@@ -244,7 +251,10 @@ namespace SPTC_APP.Objects
             {
                 get
                 {
-                    return Scaler.RoundUp((amountLoaned + interest) / termsofpayment);  
+                    if (balance == 0)
+                        return Scaler.RoundUp((amountLoaned + interest) / termsofpayment);
+                    else
+                        return balance;
                 }   
             }
 
@@ -274,6 +284,7 @@ namespace SPTC_APP.Objects
                 this.penaltyPercent = Retrieve.GetValueOrDefault<double>(reader, Field.PENALTIES);
                 this.amount = Retrieve.GetValueOrDefault<double>(reader, Field.AMOUNT);
                 this.last_payment = Retrieve.GetValueOrDefault<DateTime>(reader, Field.LAST_PAYMENT);
+                this.balance = Retrieve.GetValueOrDefault<double>(reader, Field.BALANCE);
             }
             public bool WriteInto(
                     int franchiseId,
@@ -318,6 +329,7 @@ namespace SPTC_APP.Objects
                 loan.Insert(Field.IS_FULLY_PAID, isFullyPaid);
                 loan.Insert(Field.AMOUNT, amount);
                 loan.Insert(Field.LAST_PAYMENT, last_payment);
+                loan.Insert(Field.BALANCE, balance);
                 loan.Save();
                 id = loan.id;
 

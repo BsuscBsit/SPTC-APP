@@ -621,14 +621,6 @@ namespace SPTC_APP.View.Pages.Output
 
             if (table == Table.FRANCHISE)
             {
-                if (cbFrWLoan.IsChecked ?? false)
-                {
-                    franchiseFilter["LOAN BALANCE"] = true;
-                }
-                if (cbFrWLtLoan.IsChecked ?? false)
-                {
-                    franchiseFilter["LTLOAN BALANCE"] = true;
-                }
 
                 franchiseFilter["OPERATOR NAME"] = franOpName.IsChecked ?? false;
                 franchiseFilter["BODY NO."] = franBnum.IsChecked ?? false;
@@ -637,6 +629,8 @@ namespace SPTC_APP.View.Pages.Output
                 franchiseFilter["PAYMENT DUE"] = franPayDue.IsChecked ?? false;
                 franchiseFilter["DRIVER NAME"] = franDrName.IsChecked ?? false;
                 franchiseFilter["OWNERSHIP DATE"] = franOwnDate.IsChecked ?? false;
+                franchiseFilter["LOAN BALANCE"] = cbFrWLoan.IsChecked ?? false;
+                franchiseFilter["LTLOAN BALANCE"] = cbFrWLtLoan.IsChecked ?? false;
 
                 collectionView.Filter = item =>
                 {
@@ -697,11 +691,11 @@ namespace SPTC_APP.View.Pages.Output
                     if (item is Franchise franchise) 
                     {
                         bool shown = true;
-                        if (cbFrWLoan.IsChecked ?? false)
+                        if (cbOpWLoan.IsChecked ?? false)
                         {
                             shown = franchise.LoanBalance > 0;
                         }
-                        if (cbFrWLtLoan.IsChecked ?? false)
+                        if (cbOpWLtLoan.IsChecked ?? false)
                         {
                             shown = franchise.LongTermLoanBalance > 0;
                         }

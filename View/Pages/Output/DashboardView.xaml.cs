@@ -686,95 +686,38 @@ namespace SPTC_APP.View.Pages.Output
                         break;
 
                     case 3:
+                        currBtn = btn.Name;
+                        lblTitleReport.Content = "List Report";
                         if (btn.Name.Equals("btnRepFran"))
                         {
-                            q = "Franchise";
-
-                            report = new ListReport(ListReport.LIST_FRANCHISE);
-
-                            /**
-                             * Ginaya ko lang yung columns sa table view, yung name sana gaya din ng nasa table view kung pwede.
-                             * **/
-                            columns = new List<ColumnConfiguration>
-                            {
-                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
-                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
-                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("last_balance", "SHARE CAPITAL", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("mtop_no", "MTOP ", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("license_no", "PLATE NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
-                            };
+                            lblSubTitleReport.Content = "For List of Franchise";
+                            qg = "Franchise";
                         }
                         else if (btn.Name.Equals("btnRepOper"))
-                        {
-                            q = "Operator";
-
-                            report = new ListReport(ListReport.LIST_OPERATOR);
-                            columns = new List<ColumnConfiguration>
-                            {
-                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
-                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
-                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("tin_number1", "TIN NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("voters_id_number1", "VOTERS NUMBER", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("date_of_birth", "BIRTHDAY", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
-                            };
+                        {                            
+                            lblSubTitleReport.Content = "For List of Operators";
+                            qg = "Operator";
                         }
                         else if (btn.Name.Equals("btnRepDriv"))
-                        {
-                            q = "Driver";
+                        {                            
+                            lblSubTitleReport.Content = "For List of Drivers";
+                            qg = "Driver";
 
-                            report = new ListReport(ListReport.LIST_DRIVER);
-                            columns = new List<ColumnConfiguration>
-                            {
-                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
-                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
-                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("license_no", "TIN NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("date_of_birth", "BIRTHDAY", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
-                            };
                         }
                         else if (btn.Name.Equals("btnRepViol"))
-                        {
-                            q = "Violation";
-
-                            report = new ListReport(ListReport.LIST_VIOLATION);
-                            columns = new List<ColumnConfiguration>
-                            {
-                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
-                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
-                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("title", "VIOLATION", minWidth: 50, isCenter:true),
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isCenter:true, isDate:true),
-                                new ColumnConfiguration("suspension_start", "FROM:", minWidth: 50, isCenter:true, isDate:true),
-                                new ColumnConfiguration("suspension_end", "TO:", minWidth: 50, isCenter:true, isDate:true),
-                                new ColumnConfiguration("remarks", "REMARKS", minWidth: 50, isCenter:true),
-                            };
+                        {                            
+                            lblSubTitleReport.Content = "For List of Violation";
+                            qg = "Violation";
                         }
                         else if (btn.Name.Equals("btnRepIDHi"))
                         {
-                            q = "ID History";
-
-                            report = new ListReport(ListReport.LIST_IDHISTORY);
-                            columns = new List<ColumnConfiguration>
-                            {
-                                new ColumnConfiguration("entity_type", "ID TYPE", minWidth : 80),
-                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
-                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
-                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("is_printed", "PRINTED", minWidth: 50, isCenter:true), // YES NO? //Checkbox
-                                new ColumnConfiguration("date", "DATE", minWidth: 50, isCenter:true, isDate:true)
-                            };
+                            lblSubTitleReport.Content = "For History of ID";
+                            qg = "ID History";
                         }
 
                         // global yung msg variable, pwede irekta sa printing function.
-                        msg = $"Are you sure you want to print Records for {q}";
-
-                        if (ControlWindow.ShowTwoway("Confirm Printing", msg, Icons.NOTIFY))
-                        {
-                            // printing confirmed, call printing function.
-                            report.StartPrint($"{q} record", $"Records Report for {q}", columns);
-                        }
+                        msg = $"Are you sure you want to print Records for {qg}";
+                        gridRepWinChild.FadeIn(0.2);
                         break;
                 }
             }
@@ -867,7 +810,6 @@ namespace SPTC_APP.View.Pages.Output
                         break;
 
                     case 2: // Payments
-
                         typ = "payments";
                         desc = "Payment Reports for ";
                         if (currBtn.Equals("btnRepShort"))
@@ -923,7 +865,79 @@ namespace SPTC_APP.View.Pages.Output
                             };
                         }
                         break;
+
+                    case 3:
+                        typ = "list";
+                        desc = "List Reports for ";
+                        if (currBtn.Equals("btnRepFran"))
+                        {
+                            report = new ListReport(ListReport.LIST_FRANCHISE);
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("last_balance", "SHARE CAPITAL", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("mtop_no", "MTOP ", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("license_no", "PLATE NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true)
+                            };
+                        }
+                        else if (currBtn.Equals("btnRepOper"))
+                        {
+                            report = new ListReport(ListReport.LIST_OPERATOR);
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("tin_number1", "TIN NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("voters_id_number1", "VOTERS NUMBER", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("date_of_birth", "BIRTHDAY", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
+                            };
+                        }
+                        else if (currBtn.Equals("btnRepDriv"))
+                        {
+                            report = new ListReport(ListReport.LIST_DRIVER);
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("license_no", "TIN NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("date_of_birth", "BIRTHDAY", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
+                            };
+                        }
+                        else if (currBtn.Equals("btnRepViol"))
+                        {
+                            report = new ListReport(ListReport.LIST_VIOLATION);
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("title", "VIOLATION", minWidth: 50, isCenter:true),
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isCenter:true, isDate:true),
+                                new ColumnConfiguration("suspension_start", "FROM:", minWidth: 50, isCenter:true, isDate:true),
+                                new ColumnConfiguration("suspension_end", "TO:", minWidth: 50, isCenter:true, isDate:true),
+                                new ColumnConfiguration("remarks", "REMARKS", minWidth: 50, isCenter:true),
+                            };
+                        }
+                        else if (currBtn.Equals("btnRepIDHi"))
+                        {
+                            report = new ListReport(ListReport.LIST_IDHISTORY);
+                            columns = new List<ColumnConfiguration>
+                            {
+                                new ColumnConfiguration("entity_type", "ID TYPE", minWidth : 80),
+                                new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
+                                new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
+                                new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("is_printed", "PRINTED", minWidth: 50, isCenter:true), // YES NO? //Checkbox
+                                new ColumnConfiguration("date", "DATE", minWidth: 50, isCenter:true, isDate:true)
+                            };
+                        }
+                        break;
                 }
+
 
                 if (ControlWindow.ShowTwoway("Confirm Printing", msg + q, Icons.NOTIFY))
                 {

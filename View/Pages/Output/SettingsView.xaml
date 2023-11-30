@@ -13,7 +13,8 @@
         mc:Ignorable="d">
     <Grid Width="497" Height="500" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
@@ -22,15 +23,24 @@
         Grid.Row="0"
         Margin="0,0,2,0"
         Style="{StaticResource TopBarStyle}" />
-        <Grid Grid.Row="1" HorizontalAlignment="Center" Width="380">
-        <ScrollViewer Grid.Row="1" Margin="0,24,0,24">
-            <StackPanel>
-                <StackPanel x:Name="SettingsPanel">
-                    
-                </StackPanel>
-                <StackPanel x:Name="stCamera" Orientation="Horizontal" Margin="10, 0, 0, 10">
-                    <TextBlock Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Text="CAMERA"/>
-                    <ComboBox
+        <Label
+            x:Name="lblTitle"
+            Grid.Row="1"
+            Margin="20,0,0,0"
+            Padding="0,5,5,5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="SYSTEM SETTINGS"
+            Style="{DynamicResource CommonTitlePreset}" />
+        <Grid Grid.Row="2" HorizontalAlignment="Center" Width="380">
+            <ScrollViewer Grid.Row="1" Margin="0,24,0,24">
+                <StackPanel>
+                    <StackPanel x:Name="SettingsPanel">
+
+                    </StackPanel>
+                    <StackPanel x:Name="stCamera" Orientation="Horizontal" Margin="10, 0, 0, 10">
+                        <TextBlock Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Text="CAMERA"/>
+                        <ComboBox
                         x:Name="cbCamera"
                         Height="31"
                         Margin="0,4,0,4"
@@ -39,11 +49,11 @@
                         IsTabStop="False"
                         SelectedIndex="0"
                         Style="{DynamicResource CommonComboBox}" Width="200" SelectionChanged="cbCamera_SelectionChanged">
-                    </ComboBox>
-                </StackPanel>
-                <StackPanel x:Name="stResolution" Orientation="Horizontal" Margin="10, 0, 0, 10">
-                    <TextBlock Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Text="CAMERA RESOLUTION"/>
-                    <ComboBox
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel x:Name="stResolution" Orientation="Horizontal" Margin="10, 0, 0, 10">
+                        <TextBlock Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Text="CAMERA RESOLUTION"/>
+                        <ComboBox
                             x:Name="cbResolution"
                             Height="31"
                             Margin="0,4,0,4"
@@ -52,12 +62,12 @@
                             IsTabStop="False"
                             SelectedIndex="0"
                             Style="{DynamicResource CommonComboBox}" Width="200">
-                    </ComboBox>
+                        </ComboBox>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-        </ScrollViewer>
+            </ScrollViewer>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Button x:Name="btnCancel" Content="CANCEL" Style="{StaticResource CommonButtonStyle}" Width="140" Height="31" Margin="40, 0, 0, 20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="btnCancel_Click"/>
             <Button x:Name="btnSave" Content="SAVE" Style="{StaticResource CommonButtonStyle}" Width="140" Height="31" Margin="0, 0, 40, 20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnSave_Click"/>
         </Grid>

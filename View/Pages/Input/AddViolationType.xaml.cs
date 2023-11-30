@@ -74,7 +74,7 @@ namespace SPTC_APP.View.Pages.Input
         {
             tbTitle.DefaultTextBoxBehavior(ALPHANUMERICDASHPERIOD, false, gridToast, "Enter a descriptve title of violation type.", 0, false, 20);
             tbNumDays.DefaultTextBoxBehavior(NUMBER, true, gridToast, "Span of suspended days.", 1, false, 3);
-            tbDescription.DefaultTextBoxBehavior(COMMON, false, gridToast, "Enter description for this type of violation.", 2, false, 100);
+            //tbDescription.DefaultTextBoxBehavior(COMMON, false, gridToast, "Enter description for this type of violation.", 2, false, 100);
         }
     }
 }

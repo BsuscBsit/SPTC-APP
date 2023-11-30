@@ -82,6 +82,20 @@
             VerticalAlignment="Top"
             Content="Remarks:"
             Style="{StaticResource TextFieldLabelingPreset}" />
+        <Label
+            Grid.Row="3"
+            Grid.Column="4"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Body Number:"
+            Style="{StaticResource TextFieldLabelingPreset}" Grid.ColumnSpan="2" />
+        <Label x:Name="lblBodyNum"
+            Grid.Row="3"
+            Grid.Column="4"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="8080"
+            Style="{StaticResource TextFieldLabelingPreset}" Grid.ColumnSpan="2" Margin="99,0,0,0" />
         <Border
             Grid.Row="3"
             Grid.Column="2"

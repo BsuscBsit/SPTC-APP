@@ -25,6 +25,7 @@ namespace SPTC_APP.View.Pages.Input
             };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
             this.franchise = franchise;
+            lblBodyNum.Content = franchise.BodyNumber;
         }
 
         private void Populate()

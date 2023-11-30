@@ -573,10 +573,10 @@ namespace SPTC_APP.Objects
     public class ViolationType
     {
         public int id { get; private set; }
-        public string title;
-        public string details;
-        public int numOfDays;
-        public General entityType;
+        public string title { get; set; }
+        public string details { get; set; }
+        public int numOfDays { get; set; }
+        public General entityType { get; set; }
 
         private Upsert violationType;
         public ViolationType()

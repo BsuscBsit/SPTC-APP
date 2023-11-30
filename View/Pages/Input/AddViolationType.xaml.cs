@@ -24,11 +24,23 @@ namespace SPTC_APP.View.Pages.Input
     public partial class AddViolationType : Window
     {
         private string closingMSG;
-        public AddViolationType()
+        private ViolationType selected;
+        private ViolationTypeList window;
+        public AddViolationType(ViolationTypeList list, ViolationType violationType = null)
         {
             InitializeComponent();
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); AppState.mainwindow?.Hide(); };
+            window = list;
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); window?.Hide(); };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
+
+            if(violationType != null)
+            {
+                selected = violationType;
+                tbTitle.Text = selected.title;
+                tbNumDays.Text = selected.numOfDays.ToString();
+                tbDescription.Text = selected.details;
+            }
+
             DraggingHelper.DragWindow(topBar);
             initTextBoxes();
             tbTitle.Focus();
@@ -36,14 +48,17 @@ namespace SPTC_APP.View.Pages.Input
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            AppState.mainwindow?.Show();
-            AppState.mainwindow?.displayToast(closingMSG);
+            window?.Show();
+            window?.displayToast(closingMSG);
             base.OnClosing(e);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.closingMSG = "Adding violation type was cancelled.";
+            if(selected != null)
+                this.closingMSG = "Editing violation type was cancelled.";
+            else
+                this.closingMSG = "Adding violation type was cancelled.";
             this.Close();
         }
 
@@ -55,10 +70,13 @@ namespace SPTC_APP.View.Pages.Input
                 int numofdays = 0;
                 if (Int32.TryParse(tbNumDays.Text, out numofdays))
                 {
-                    ViolationType violationType = new ViolationType();
+                    ViolationType violationType = (selected != null)? selected: new ViolationType();
                     violationType.WriteInto(tbTitle.Text, tbDescription.Text, numofdays, General.DRIVER);
                     violationType.Save();
-                    this.closingMSG = "Adding violation type was successful.";
+                    if(selected != null)
+                        this.closingMSG = "Editing violation type was successful.";
+                    else
+                        this.closingMSG = "Adding violation type was successful.";
                     this.Close();
                 } else
                 {

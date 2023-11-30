@@ -16,6 +16,89 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
-        
+        <Border
+        x:Name="topBar"
+        VerticalAlignment="Top"
+        Style="{StaticResource TopBarStyle}" />
+        <Label Content="VIOLATION TYPES" Style="{StaticResource CommonTitlePreset}" Height="50" VerticalAlignment="Top" Margin="20, 50, 0, 0"/>
+        <DataGrid x:Name="dgViolationType" SelectionChanged="DataGrid_SelectionChanged" Margin="63,100,78,139"/>
+        <Border
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Bottom"
+            BorderBrush="Black"
+            BorderThickness="1"
+            CornerRadius="10"
+            Height="60" 
+            Margin="63,321,78,69"/>
+        <Grid Height="60" Margin="63,321,78,69">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                 Margin="10,0,0,0"
+                 Padding="5,5,0,5"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Center"
+                 Content="Selected: "
+                 Foreground="{StaticResource BrushGrey}"
+                 Style="{StaticResource LabelFontMedium}" />
+            <Label
+                 x:Name="lblSelectedViolation"
+                 Grid.Column="1"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Center"
+                 Content="N/A"
+                 FontWeight="Regular"
+                 Style="{StaticResource LabelFontMedium}" />
+            <Button
+                 x:Name="btnEdit"
+                 Grid.Column="2"
+                 Width="80"
+                 Height="25"
+                 Margin="12,12,100,12"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Center"
+                 Click="btnEdit_Click"
+                 Content="Edit"
+                 FontSize="12"
+                 IsEnabled="False"
+                 Style="{DynamicResource CommonButtonStyle}" />
+            <Button
+                 x:Name="btnDelete"
+                 Grid.Column="2"
+                 Width="80"
+                 Height="25"
+                 Margin="12,12,12,12"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Center"
+                 Click="btnDelete_Click"
+                 Content="Delete"
+                 FontSize="12"
+                 IsEnabled="False"
+                 Style="{DynamicResource CommonButtonStyle}" />
+        </Grid>
+        <Button
+            x:Name="btnCancel"
+            Click="btnCancel_Click"
+            Content="CANCEL"
+            Style="{StaticResource CommonButtonStyle}"
+            TabIndex="4" Margin="232,386,390,24" />
+        <Button
+            x:Name="btnSave"
+            Click="btnSave_Click"
+            Content="NEW"
+            Style="{StaticResource CommonButtonStyle}"
+            TabIndex="5" Margin="425,386,197,24" />
+        <Grid
+            x:Name="gridToast"
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Margin="0,24,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top" />
     </Grid>
 </Window>

@@ -532,7 +532,7 @@ namespace SPTC_APP.View.Pages.Output
 
         private void btnAddViolationType_Click(object sender, RoutedEventArgs e)
         {
-            (new AddViolationType()).Show();
+            (new ViolationTypeList()).Show();
         }
 
         private void btnReports_Click(object sender, RoutedEventArgs e)
@@ -871,7 +871,7 @@ namespace SPTC_APP.View.Pages.Output
                         desc = "List Reports for ";
                         if (currBtn.Equals("btnRepFran"))
                         {
-                            report = new ListReport(ListReport.LIST_FRANCHISE);
+                            report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.LIST_FRANCHISE(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.LIST_FRANCHISE_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
@@ -884,7 +884,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (currBtn.Equals("btnRepOper"))
                         {
-                            report = new ListReport(ListReport.LIST_OPERATOR);
+                            report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.LIST_OPERATOR(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.LIST_OPERATOR_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
@@ -897,7 +897,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (currBtn.Equals("btnRepDriv"))
                         {
-                            report = new ListReport(ListReport.LIST_DRIVER);
+                            report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.LIST_DRIVER(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.LIST_DRIVER_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
@@ -909,7 +909,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (currBtn.Equals("btnRepViol"))
                         {
-                            report = new ListReport(ListReport.LIST_VIOLATION);
+                            report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.LIST_VIOLATION(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.LIST_VIOLATION_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
@@ -924,7 +924,7 @@ namespace SPTC_APP.View.Pages.Output
                         }
                         else if (currBtn.Equals("btnRepIDHi"))
                         {
-                            report = new ListReport(ListReport.LIST_IDHISTORY);
+                            report = new ListReport(!(printAll.IsChecked ?? false) ? ListReport.LIST_IDHISTORY(mo ?? DateTime.Now.Month, ye ?? DateTime.Now.Year) : ListReport.LIST_IDHISTORY_ALL);
                             columns = new List<ColumnConfiguration>
                             {
                                 new ColumnConfiguration("entity_type", "ID TYPE", minWidth : 80),

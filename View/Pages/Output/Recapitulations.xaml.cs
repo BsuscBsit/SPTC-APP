@@ -343,8 +343,6 @@ namespace SPTC_APP.View.Pages.Input
                 List<Recap> recaps = AppState.LoadRecapitulations(currentmonth, currentyear);
                 report.Populate(recaps, currentmonth, currentyear);
                 report.StartPrint();
-
-               
             }
         }
     }

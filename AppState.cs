@@ -41,6 +41,14 @@ namespace SPTC_APP
         public static double TRANSFER_FEE;
         public static double TOTAL_SHARE_PER_MONTH;
         public static string CAMERA_RESOLUTION;
+
+        public static string SPTC;
+        public static string ADDRESS;
+        public static string EMAIL;
+        public static string CDA;
+        public static string CIN;
+        public static string TIN;
+
         public static Newtonsoft.Json.Linq.JArray LIST_RECAP;
         
 
@@ -242,6 +250,12 @@ namespace SPTC_APP
             TRANSFER_FEE = 6400;
             CV_OR_LAST = 0;
             CAMERA_RESOLUTION = "";
+            SPTC = "SAPANG PALAY TRICYCLE SERVICE COOPERATIVE";
+            ADDRESS = "Blk 1 Lot 8, Sitio Hulo, Hacienda Sapang Palay Proper, City of San Jose Del Monte, Bulacan";
+            EMAIL = "Sapangpalaytricyclecooperative@gmail.com";
+            CDA = "9520-03006397";
+            CIN = "0106030220";
+            TIN = "234-829-228";
             LIST_RECAP = new Newtonsoft.Json.Linq.JArray { Field.CASH_ON_HAND, "Share Capital", "Monthly Dues", "Mutual Funds Payable", "Certification Fee", "Loan Receivable - Pastdue", "--------------- - Current", "Change Motor - Entrance", "--------------- - Motor", "Clearance Fee", "Miscelleneous Income", "Sales Trapal", "AIR-Stricker", "Penalties", "Interest Receivable", "Cash in Bank", "Rental Fee: Franchise", "Transfer Fees", "Membership Fee", "Seminar Fee" };
         }
         public static void SaveToJson()
@@ -264,6 +278,12 @@ namespace SPTC_APP
                 TOTAL_SHARE_PER_MONTH,
                 TRANSFER_FEE,
                 CAMERA_RESOLUTION,
+                SPTC,
+                ADDRESS,
+                EMAIL,
+                CDA,
+                CIN,
+                TIN,
                 LIST_RECAP,
             };
 
@@ -312,6 +332,12 @@ namespace SPTC_APP
                     TOTAL_SHARE_PER_MONTH = data.TOTAL_SHARE_PER_MONTH;
                     TRANSFER_FEE = data.TRANSFER_FEE;
                     CAMERA_RESOLUTION = data.CAMERA_RESOLUTION;
+                    SPTC = data.SPTC;
+                    ADDRESS = data.ADDRESS;
+                    EMAIL = data.EMAIL;
+                    CDA = data.CDA;
+                    CIN = data.CIN;
+                    TIN = data.TIN;
                     LIST_RECAP = data.LIST_RECAP;
                     if (DatabaseConnection.HasConnection())
                     {

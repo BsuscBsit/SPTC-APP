@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2023 at 03:20 AM
+-- Generation Time: Nov 29, 2023 at 01:08 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -42,12 +42,7 @@ CREATE TABLE `tbl_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
-INSERT INTO `tbl_address` (`id`, `address_line1`, `address_line2`, `house_no`, `street_name`, `barangay_subdivision`, `city_municipality`, `postal_code`, `province`, `country`, `isDeleted`) VALUES
-(1, 'Norzagaray, Bulacan', 'FVR', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(2, 'Sta.Cruz 2 , Sapang Palay', 'Santan Street', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(3, 'Assumption, SJDM', 'Katahimikan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(4, 'Bitungol Norzagaray', 'P.Esteban Street ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(5, 'San jose Del Monte, Bulacan', 'Blk 6 Lot 19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+
 --
 -- Table structure for table `tbl_driver`
 --
@@ -172,6 +167,7 @@ CREATE TABLE `tbl_loan_ledger` (
   `isFullyPaid` tinyint(1) NOT NULL DEFAULT 0,
   `amount` double NOT NULL DEFAULT 0,
   `last_payment_date` datetime DEFAULT NULL,
+  `balance` double NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -197,6 +193,7 @@ CREATE TABLE `tbl_long_term_loan_ledger` (
   `isFullyPaid` tinyint(1) NOT NULL DEFAULT 0,
   `amount` double NOT NULL DEFAULT 0,
   `last_payment_date` datetime DEFAULT NULL,
+  `balance` double NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -218,13 +215,6 @@ CREATE TABLE `tbl_name` (
 
 -- --------------------------------------------------------
 
-
-INSERT INTO `tbl_name` (`id`, `sex`, `first_name`, `middle_name`, `last_name`, `suffix`, `isDeleted`) VALUES
-(1, 0, 'Leopoldo', 'Juni', 'Aradanas', '', 0),
-(2, 1, 'Rosaline', 'Liao', 'Morado', '', 0),
-(3, 1, 'Julita', 'David', 'Antipasado', '', 0),
-(4, 1, 'Maximina', 'Feliciano', 'Gener', '', 0),
-(5, 1, 'Leonzida', 'Cobong', 'Abad', '', 0);
 --
 -- Table structure for table `tbl_operator`
 --

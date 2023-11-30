@@ -75,7 +75,7 @@ namespace SPTC_APP.View.Pages.Input
             lblLoanRec.Content = $"\u20B1 {(ltloan.amountLoaned / ltloan.termsofpayment).ToString("N2") + (shouldRound ? $"\n -> (\u20B1 {balanceOrReceivable.ToString("N2")})" : "")}";
             lblInteRec.Content = $"\u20B1 {(ltloan.interest / ltloan.termsofpayment).ToString("N2")}";
 
-            breakdown = ((ltloan.amountLoaned / ltloan.termsofpayment) + (ltloan.interest / ltloan.termsofpayment));
+            breakdown = (ltloan.balance != 0) ? ltloan.balance : ((ltloan.amountLoaned / ltloan.termsofpayment) + (ltloan.interest / ltloan.termsofpayment));
             if(ltloan.amount < breakdown)
             {
                 breakdown = ltloan.amount;
@@ -118,6 +118,16 @@ namespace SPTC_APP.View.Pages.Input
             if (confirmPayment())
             {
                 PaymentDetails<Ledger.LongTermLoan> loanPayment = new PaymentDetails<Ledger.LongTermLoan>();
+                double actualbalance = (ltloan.balance != 0) ? ltloan.balance : ((ltloan.amountLoaned / ltloan.termsofpayment) + (ltloan.interest / ltloan.termsofpayment));
+                double inputamount = Double.Parse(tboxAmount.Text);
+                if (inputamount != actualbalance)
+                {
+                    ltloan.balance = inputamount - actualbalance;
+                } else
+                {
+                    ltloan.balance = 0;
+                }
+
                 ltloan.amount = ltloan.amount - amortization;
                 loanPayment.WriteInto(ltloan, 0, dpBdate.DisplayDate, tboxCVOR.Text, amortization, penaltyTot, "", ltloan.amount);
                 if (ltloan.amount <= 0)
@@ -126,6 +136,11 @@ namespace SPTC_APP.View.Pages.Input
                 }
                 ltloan.last_payment = dpBdate.DisplayDate;
                 loanPayment.Save();
+                if (inputamount != actualbalance)
+                {
+                    ltloan.last_payment = dpBdate.DisplayDate.AddMonths(-1);
+                    ltloan.Save();
+                }
                 AppState.CV_OR_LAST = Int32.Parse(tboxCVOR.Text);
                 AppState.SaveToJson();
                 //(AppState.mainwindow as MainBody).ResetWindow(General.FRANCHISE, true);
@@ -179,6 +194,12 @@ namespace SPTC_APP.View.Pages.Input
         
         private void compute(double overdue)
         {
+            double inputamount = Double.Parse(tboxAmount.Text);
+            if (breakdown != inputamount)
+            {
+                breakdown = inputamount;
+            }
+
             amortization = Scaler.RoundUp(breakdown);
             principal = breakdown;
             total = franchise.LongTermLoanBalance - amortization;

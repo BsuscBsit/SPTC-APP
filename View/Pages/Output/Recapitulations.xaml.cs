@@ -300,7 +300,7 @@ namespace SPTC_APP.View.Pages.Input
                         double totalvar = newval - recap.content;
                         recap.content = newval;
                         recap.Save();
-                        recapmain.displayToast($"{recap.text} Updated!", 1);
+                        recapmain.displayToast($"{recap.text} update success.", 1);
                         recapmain.UpdateTotal(totalvar);
                     }
                 }

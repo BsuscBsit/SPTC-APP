@@ -495,7 +495,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
                             Click="btnAddViolationType_Click"
-                            Content="ADD VIOLATION TYPE"
+                            Content="VIEW VIOLATION TYPES"
                             Style="{StaticResource CommonButtonStyle}" />
                         <Button
                             x:Name="btnPrint"

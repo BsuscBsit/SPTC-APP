@@ -15,7 +15,7 @@ namespace SPTC_APP.Objects
         public Image signature { get; set; }
         public string remarks { get; set; }
         public DateTime birthday { get; set; }
-        public string displayBirth { get { return birthday.ToString("MMMM dd, YYYY"); } }
+        public string displayBirth { get { return birthday.ToString("MMMM dd, yyyy"); } }
         public string emergencyPerson { get; set; }
         public string emergencyContact { get; set; }
         public DateTime dateOfMembership = DateTime.Now;

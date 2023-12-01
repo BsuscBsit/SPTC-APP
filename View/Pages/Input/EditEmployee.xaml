@@ -8,11 +8,12 @@
     Title="EditEmployee"
     AllowsTransparency="True"
     KeyboardNavigation.TabNavigation="Continue"
+    Loaded="Window_Loaded"
     ResizeMode="NoResize"
     SizeToContent="WidthAndHeight"
     Style="{StaticResource DetachedRoundedWindow}"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" Loaded="Window_Loaded">
+    mc:Ignorable="d">
     <Grid Width="655" Height="580">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

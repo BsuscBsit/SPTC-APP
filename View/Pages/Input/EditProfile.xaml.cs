@@ -115,12 +115,15 @@ namespace SPTC_APP.View.Pages.Input
             } 
             else if (type == General.OPERATOR)
             {
-                Operator optr =franchise.Operator as Operator;
+                Operator optr = franchise.Operator as Operator;
                 tbFname.Text = optr.name?.firstname;
                 tbMname.Text = optr.name?.middlename;
                 tbLname.Text = optr.name?.lastname;
-                bDay.SelectedDate = optr.birthday;
-                bDay.DisplayDate = optr.birthday;
+                if (optr.name != null)
+                {
+                    bDay.SelectedDate = optr.birthday;
+                    bDay.DisplayDate = optr.birthday;
+                }
                 cbGender.SelectedIndex = optr.name?.sex ?? false ? 1 : 0;
                 /*tboxsContactNum.Text = optr.emergencyContact;
                 tboxsCountry.Text = optr.address?.country;

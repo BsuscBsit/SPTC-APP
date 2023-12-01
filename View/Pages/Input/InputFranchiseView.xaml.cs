@@ -41,6 +41,7 @@ namespace SPTC_APP.View.Pages.Input
                 tboxLTOplateNum.Text = franchise.PlateNo;
                 tboxIDNum1.Text = franchise.Operator?.tinNumber;
                 tboxIDNum2.Text = franchise.Operator?.votersNumbewr;
+                tboxCNum.Text = franchise.Operator?.emergencyContact;
             }
             DraggingHelper.DragWindow(topBar);
             tboxBodyNum.Focus();
@@ -70,11 +71,13 @@ namespace SPTC_APP.View.Pages.Input
                 franchise.Operator = new Operator();
                 franchise.Operator.tinNumber = tboxIDNum1.Text;
                 franchise.Operator.votersNumbewr = tboxIDNum2.Text;
+                franchise.Operator.emergencyContact = tboxCNum.Text;
                 (new EditProfile(franchise, General.OPERATOR)).Show();
             } else
             {
                 franchise.Operator.tinNumber = tboxIDNum1.Text;
                 franchise.Operator.votersNumbewr = tboxIDNum2.Text;
+                franchise.Operator.emergencyContact = tboxCNum.Text;
                 franchise.Save();
             }
             this.Close();
@@ -86,8 +89,9 @@ namespace SPTC_APP.View.Pages.Input
             tboxBodyNum.DefaultTextBoxBehavior(NUMBER, true, gridToast, "Body number.", 0, true);
             tboxMTOPplateNum.DefaultTextBoxBehavior(ALPHANUMERICDASH, true, gridToast, "Motorcycle/Tricycle Plate number.", 1, true);
             tboxLTOplateNum.DefaultTextBoxBehavior(ALPHANUMERICDASH, true, gridToast, "Land Transportation Office Plate number.", 2, true);
-            tboxIDNum1.DefaultTextBoxBehavior(NUMBERDASH, true, gridToast, "Taxpayer's Identification Number", 3, true);
-            tboxIDNum2.DefaultTextBoxBehavior(ALPHANUMERICDASH, true, gridToast, "Voter's Identification number.", 4, true);
+            tboxIDNum1.DefaultTextBoxBehavior(NUMBERDASH, true, gridToast, "Taxpayer's Identification Number", 4, true);
+            tboxIDNum2.DefaultTextBoxBehavior(ALPHANUMERICDASH, true, gridToast, "Voter's Identification number.", 5, true);
+            tboxCNum.DefaultTextBoxBehavior(PHONE, true, gridToast, "Voter's Identification number.", 3, true);
         }
     }
 }

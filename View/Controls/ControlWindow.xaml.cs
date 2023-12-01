@@ -22,12 +22,14 @@ namespace SPTC_APP.View
             this.SetIcon(icons);
             this.lblHeader.Content = header;
             this.tblockContent.Text = content;
-            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); };
+            ContentRendered += (sender, e) => { AppState.WindowsCounter(true, sender); 
+                if (btnOK != null && btnOK.Visibility == Visibility.Visible)
+                    btnOK.Focus();
+            };
             Closed += (sender, e) => { AppState.WindowsCounter(false, sender); };
 
             DraggingHelper.DragWindow(topBar);
-            if (btnOK != null && btnOK.Visibility == Visibility.Visible)
-                btnOK.Focus();
+            
         }
 
         public ControlWindow(string header, string content, string middlebtn, string rightbtn, Icons icons = Icons.DEFAULT)

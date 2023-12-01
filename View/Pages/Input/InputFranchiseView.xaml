@@ -31,6 +31,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -105,7 +107,7 @@
             Content="LTO Plate Number:"
             Style="{StaticResource TextFieldLabelingPreset}" />
         <Label
-            Grid.Row="6"
+            Grid.Row="8"
             Grid.Column="1"
             Margin="0,20,0,0"
             HorizontalAlignment="Left"
@@ -140,7 +142,7 @@
             Style="{StaticResource CommonTextBoxStyle}"
             Text="" />
         <Rectangle
-            Grid.Row="6"
+            Grid.Row="8"
             Grid.Column="2"
             Grid.ColumnSpan="4"
             Height="1"
@@ -148,13 +150,14 @@
             VerticalAlignment="Center"
             Fill="{StaticResource BrushGrey}" />
         <Grid
-            Grid.Row="7"
+            Grid.Row="9"
             Grid.Column="1"
             Grid.ColumnSpan="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="89*" />
+                <ColumnDefinition Width="187*"/>
                 <ColumnDefinition Width="15" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="276*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -162,14 +165,12 @@
             </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
-                Margin="0,5,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Content="TIN ID:"
                 Style="{StaticResource TextFieldLabelingPreset}" />
             <Label
-                Grid.Column="2"
-                Margin="0,5,0,0"
+                Grid.Column="3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Content="Voter's ID Number:"
@@ -180,21 +181,21 @@
                 Grid.Column="0"
                 Width="261.6"
                 Height="30"
-                Margin="15,0,0,0"
-                Style="{StaticResource CommonTextBoxStyle}" />
+                Margin="15,0,15,0"
+                Style="{StaticResource CommonTextBoxStyle}" Grid.ColumnSpan="3" />
             <TextBox
                 x:Name="tboxIDNum2"
                 Grid.Row="1"
-                Grid.Column="2"
+                Grid.Column="3"
                 Width="260.8"
                 Height="30"
                 Margin="15,0,0,0"
-                VerticalAlignment="Top"
+                VerticalAlignment="Center"
                 Style="{StaticResource CommonTextBoxStyle}"
                 Text="" />
         </Grid>
         <StackPanel
-            Grid.Row="9"
+            Grid.Row="11"
             Grid.ColumnSpan="7"
             Margin="0,0,0,24"
             HorizontalAlignment="Center"
@@ -221,5 +222,21 @@
             Grid.ColumnSpan="7"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom" />
+        <Label
+            Grid.Row="6"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Contact Number:"
+            Style="{StaticResource TextFieldLabelingPreset}" />
+        <TextBox
+            x:Name="tboxCNum"
+            Grid.Row="7"
+            Grid.Column="1"
+            Width="164"
+            Height="30"
+            Margin="15,0,0,0"
+            Style="{StaticResource CommonTextBoxStyle}"
+            Text="" />
     </Grid>
 </Window>

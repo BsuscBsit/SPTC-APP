@@ -890,8 +890,8 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
                                 new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("tin_number1", "TIN NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
-                                new ColumnConfiguration("voters_id_number1", "VOTERS NUMBER", minWidth: 50, isNumeric: true, isCenter:true),
+                                new ColumnConfiguration("tin_number1", "MTOP", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("voters_id_number1", "VOTERS ID NUMBER", minWidth: 50, isNumeric: true, isCenter:true),
                                 new ColumnConfiguration("date_of_birth", "BIRTHDAY", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
                             };
                         }
@@ -903,7 +903,7 @@ namespace SPTC_APP.View.Pages.Output
                                 new ColumnConfiguration("last_name", "LASTNAME", minWidth : 80),
                                 new ColumnConfiguration("first_name", "FIRSTNAME", minWidth : 80),
                                 new ColumnConfiguration("body_number", "BODY NO.", minWidth: 50, isNumeric: true, isCenter:true),
-                                new ColumnConfiguration("license_no", "TIN NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
+                                new ColumnConfiguration("license_no", "LICENSE NUMBER", minWidth: 50, isNumeric: true, isCenter:true, haspeso:true),
                                 new ColumnConfiguration("date_of_birth", "BIRTHDAY", minWidth: 50, isNumeric: true, isCenter:true, isDate:true)
                             };
                         }

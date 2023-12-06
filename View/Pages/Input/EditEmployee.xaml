@@ -213,7 +213,7 @@
                 Margin="0,15,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Content="Province, City/Municipality &amp; Barangay:"
+                Content="Barangay, City/Municipality, Province:"
                 Style="{StaticResource TextFieldLabelingPreset}" />
             <Label
                 Grid.Row="0"

@@ -49,8 +49,9 @@ namespace SPTC_APP.Objects
             {
                 get
                 {
+                    
                     if (balance == 0)
-                        return Scaler.RoundUp((amountLoaned) / termsofpayment);
+                        return (amountLoaned) / termsofpayment;
                     else
                         return balance;
                 }
@@ -255,7 +256,8 @@ namespace SPTC_APP.Objects
                         return Scaler.RoundUp((amountLoaned + interest) / termsofpayment);
                     else
                         return balance;
-                }   
+                } 
+                
             }
 
             public bool isFullyPaid { get; set; } = false;

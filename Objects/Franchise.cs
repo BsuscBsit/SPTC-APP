@@ -33,14 +33,21 @@ namespace SPTC_APP.Objects
                 if (LoanBalance > 0 && (currentloan?.last_payment.Month ?? -1) != datem)
                 {
                     double totalloan = ((currentloan?.last_payment.Month ?? -1) == datem) ? 0 : currentloan?.paymentDues ?? 0;
-                    balance += totalloan * ((datem) - (currentloan?.last_payment.Month ?? datem));
+                    if (currentloan?.balance == 0)
+                        balance += totalloan * ((datem) - (currentloan?.last_payment.Month ?? datem));
+                    else
+                        balance += totalloan + (((currentloan?.amountLoaned ?? 0) / currentloan?.termsofpayment ?? 0) * ((datem) - ((currentloan?.last_payment.Month ?? datem))));
                 }
                 if(LongTermLoanBalance > 0 && (currentltloan?.last_payment.Month ?? -1) != datem)
                 {
                     double totalloan = ((currentltloan?.last_payment.Month ?? -1) == datem) ? 0 : currentltloan?.paymentDues ?? 0;
-                    balance += totalloan * ((datem) - (currentltloan?.last_payment.Month ?? datem));
+                    if (currentltloan?.balance == 0)
+                        balance += totalloan * ((datem) - (currentltloan?.last_payment.Month ?? datem));
+                    else
+                        balance += totalloan + ((((currentltloan?.amountLoaned ?? 0) + (currentltloan?.interest ?? 0)) / currentltloan?.termsofpayment ?? 0) * ((datem) - ((currentltloan?.last_payment.Month ?? datem))));
+
                 }
-                return balance;
+                return (balance < 0)? 0: balance;
             } 
         }
 

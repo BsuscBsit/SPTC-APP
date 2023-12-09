@@ -138,7 +138,7 @@ namespace SPTC_APP.View.Pages.Input
                 loanPayment.Save();
                 if (inputamount != actualbalance)
                 {
-                    ltloan.last_payment = dpBdate.DisplayDate.AddMonths(-1);
+                    ltloan.last_payment = dpBdate.DisplayDate;
                     ltloan.Save();
                 }
                 AppState.CV_OR_LAST = Int32.Parse(tboxCVOR.Text);

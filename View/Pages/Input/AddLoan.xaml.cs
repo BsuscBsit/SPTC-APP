@@ -113,12 +113,13 @@ namespace SPTC_APP.View.Pages.Input
         {
             if (confirmPayment())
             {
+                int datem = DateTime.Now.Month;
                 PaymentDetails<Ledger.Loan> loanPayment = new PaymentDetails<Ledger.Loan>();
-                double actualbalance = (loan.balance != 0) ? loan.balance : (loan.details.Contains("EMERGENCY") ? loan.amount : (loan.amountLoaned / loan.termsofpayment));
+                double actualbalance = (loan.balance != 0) ? loan.balance : (loan.details.Contains("EMERGENCY") ? loan.amount : (loan.amountLoaned / loan.termsofpayment) * (((datem) - ((loan?.last_payment.Month ?? datem)))));
                 double inputamount = Double.Parse(tboxAmount.Text);
                 if (inputamount != actualbalance)
                 {
-                    loan.balance = actualbalance - inputamount;
+                    loan.balance = (inputamount - actualbalance) > 0 ? inputamount - actualbalance : 0;
                 }
                 else
                 {

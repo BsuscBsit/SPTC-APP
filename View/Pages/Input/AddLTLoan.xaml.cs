@@ -74,8 +74,18 @@ namespace SPTC_APP.View.Pages.Input
             bool shouldRound = (ltloan.amountLoaned / ltloan.termsofpayment != Scaler.RoundUp(ltloan.amountLoaned / ltloan.termsofpayment)); // if true,it should display round
             lblLoanRec.Content = $"\u20B1 {(ltloan.amountLoaned / ltloan.termsofpayment).ToString("N2") + (shouldRound ? $"\n -> (\u20B1 {balanceOrReceivable.ToString("N2")})" : "")}";
             lblInteRec.Content = $"\u20B1 {(ltloan.interest / ltloan.termsofpayment).ToString("N2")}";
+            int datem = DateTime.Now.Month;
+            double balance = 0;
+            if ((ltloan?.paymentDues ?? 0) > 0)
+            {
+                double totalloan = ltloan.paymentDues;
+                if (ltloan?.balance == 0)
+                    balance += totalloan * ((datem) - (ltloan?.last_payment.Month ?? datem));
+                else
+                    balance += totalloan + ((((ltloan?.amountLoaned ?? 0) + (ltloan?.interest ?? 0))) / ltloan?.termsofpayment ?? 0) * ((datem) - ((ltloan?.last_payment.Month ?? datem)));
+            }
 
-            breakdown = (ltloan.balance != 0) ? ltloan.balance : ((ltloan.amountLoaned / ltloan.termsofpayment) + (ltloan.interest / ltloan.termsofpayment));
+            breakdown = balance;
             if(ltloan.amount < breakdown)
             {
                 breakdown = ltloan.amount;

@@ -65,7 +65,19 @@ namespace SPTC_APP.View.Pages.Input
             lblLoanRec.Content = $"\u20B1 {(loan.amountLoaned / loan.termsofpayment).ToString("N2")}";
             lblInteRec.Content = $"\u20B1 {(loan.interest / loan.termsofpayment).ToString("N2")}";
 
-            breakdown = (loan.balance != 0)? loan.balance:(loan.details.Contains("EMERGENCY") ? loan.amount : (loan.amountLoaned / loan.termsofpayment));
+            int datem = DateTime.Now.Month;
+            double balance = 0;
+            if ((loan?.paymentDues ?? 0) > 0)
+            {
+                double totalloan = loan.paymentDues;
+                if (loan?.balance == 0)
+                    balance += totalloan * ((datem) - (loan?.last_payment.Month ?? datem));
+                else
+                    balance += totalloan + (((loan?.amountLoaned ?? 0) / loan?.termsofpayment ?? 0) * ((datem) - ((loan?.last_payment.Month ?? datem))));
+            }
+
+            breakdown = loan.details.Contains("EMERGENCY") ? loan.amount : balance;
+
             lblTotalBreak.Content = $"\u20B1 {breakdown.ToString("N2")}";
 
             penalty = loan.amountLoaned * (loan.penaltyPercent / 100);

@@ -9,9 +9,15 @@
 
 [![Download PDF](https://img.shields.io/badge/Download%20PDF-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/10dKC1KEpIyPwKHE9G2yWlNRGmNh7Jleu/view?usp=sharing)
 
+## Screenshots
+<img src="/image/image1.png" align="left" height="300" width="500" >
+<img src="/image/image2.png" align="left" height="300" width="500" >
+<img src="/image/image3.png" align="left" height="300" width="500" >
+<img src="/image/screenshot1.png" align="left" height="300" width="500" >
+<img src="/image/screenshot2.png" align="left" height="300" width="500" >
+<img src="/image/screenshot3.png" align="left" height="300" width="500" >
 
-
-**Capstone Adviser:** Joann
+**Capstone Adviser:** Mrs. Joann Perez
 
 **Members:**
 - Calim, Arwyn
@@ -26,10 +32,6 @@
 [![Messenger](https://img.shields.io/badge/Messenger-00B2FF?style=for-the-badge&logo=messenger&logoColor=white)](https://m.me/lewismasallo)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lewismasallo/)
 
-
-![Project Image 1](/image/image1.png)
-![Project Image 2](/image/image2.png)
-![Project Image 3](/image/image3.png)
 
 ---
 
@@ -54,11 +56,7 @@ This repository contains the capstone project developed by the students of Bulac
 5. Start the application by pressing `F5` or using the "Start" button in Visual Studio.
 6. Use ( Admin1234 ) for Username and Password
 
-## Screenshots
 
-![Screenshot 1](/image/screenshot1.png)
-![Screenshot 2](/image/screenshot2.png)
-![Screenshot 3](/image/screenshot3.png)
 
 ## Release 
 [![Download Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/BsuscBsit/SPTC-APP/releases/latest)

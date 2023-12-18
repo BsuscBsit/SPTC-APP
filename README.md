@@ -17,7 +17,7 @@
 <img src="/image/screenshot2.png" align="left" height="300" width="500" >
 <img src="/image/screenshot3.png" align="left" height="300" width="500" >
 
-**Capstone Adviser:** Mrs. Joann Perez
+**Capstone Advisor:** Mrs. Joann Perez
 
 **Members:**
 - Calim, Arwyn

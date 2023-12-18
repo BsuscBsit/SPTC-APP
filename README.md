@@ -9,34 +9,36 @@
 
 [![Download PDF](https://img.shields.io/badge/Download%20PDF-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/10dKC1KEpIyPwKHE9G2yWlNRGmNh7Jleu/view?usp=sharing)
 
-## Screenshots
-<img src="/image/image1.png" align="left" height="300" width="500" >  
-<img src="/image/image2.png" align="left" height="300" width="500" >  
-<img src="/image/image3.png" align="left" height="300" width="500" >  
-<img src="/image/screenshot1.png" align="left" height="300" width="500" >  
-<img src="/image/screenshot2.png" align="left" height="300" width="500" >  
-<img src="/image/screenshot3.png" align="left" height="300" width="500" >  
-
 **Capstone Advisor:** Mrs. Joann Perez
 
 **Members:**
 - Calim, Arwyn
-    - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/arwyncalim/)
-- Estabillio, John Rey   
-- Estrella, Diero Reneel   
-- Manriza, Gabriel   
+    - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/arwyncalim/)  [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/wynclm/)
+- Estabillio, John Rey
+    - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/KoyaJeeArr)
+- Estrella, Diero Reneel
+    - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/die.ro.84728)
+- Manriza, Gabriel
+    - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/people/Gabriel-Manriza/100009376845917/)
 - Masallo, Lewis Daveriel
-    - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/xxlllllllxx)
-    - [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:lewismasallo@gmail.com)
-    - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/lewismasallo)
-    - [![Messenger](https://img.shields.io/badge/Messenger-00B2FF?style=for-the-badge&logo=messenger&logoColor=white)](https://m.me/lewismasallo)
-    - [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lewis-daveriel-masallo-0881521ba/)
+    - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/xxlllllllxx)  [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:lewismasallo@gmail.com)  [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/lewismasallo)  [![Messenger](https://img.shields.io/badge/Messenger-00B2FF?style=for-the-badge&logo=messenger&logoColor=white)](https://m.me/lewismasallo)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lewis-daveriel-masallo-0881521ba/)
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/xxlllllllxx)
 [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:elewismasallo@gmail.com)
-[![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/arwyncalim/)
+[![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/people/Gabriel-Manriza/100009376845917/)
 [![Messenger](https://img.shields.io/badge/Messenger-00B2FF?style=for-the-badge&logo=messenger&logoColor=white)](https://m.me/lewismasallo)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lewismasallo/)
+
+
+## Screenshots
+<div align="center">
+<img src="/image/image1.png" height="300" width="500"/>
+<img src="/image/image2.png" height="300"  width="500"/>  
+<img src="/image/image3.png" height="300" width="500" />
+<img src="/image/screenshot1.png" height="300" width="500" />  
+<img src="/image/screenshot2.png" height="300" width="500" />
+<img src="/image/screenshot3.png" height="300" width="500" />  
+</div>
 
 
 ---

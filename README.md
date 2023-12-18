@@ -56,7 +56,7 @@ This repository contains the capstone project developed by the students of Bulac
 ## Release 
 [Download Latest Release](https://github.com/yourusername/yourrepository/releases/latest)
 
-[![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)]([https://drive.google.com](https://drive.google.com/drive/folders/13pnI7OK6ZEpKbaUYfkcKhZDEYP2fRdwa?usp=sharing))
+[![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)]((https://drive.google.com/drive/folders/13pnI7OK6ZEpKbaUYfkcKhZDEYP2fRdwa?usp=sharing))
 
 
 

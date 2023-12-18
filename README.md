@@ -2,13 +2,16 @@
 ## Sapang Palay Tricycle Cooperative (SPTC)
 <img src="/image/bsu-logo.png" alt="BSU Logo" width="64" height="64" style="margin-right: 10px;"> <img src="/image/sptc_logo.png" alt="SPTC Logo" width="64" height="64" style="margin-left: 10px;">
 
+---
 ### Capstone Project: Information Management System for Sapang Palay Tricycle Cooperative
-#### --- School Extension Project
+- #### School Extension Project
 
-### Capstone Paper  
+#### Capstone preview:
 ![PDF Preview](/image/preview1.png)
 
 [![Download PDF](https://img.shields.io/badge/Download%20PDF-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/10dKC1KEpIyPwKHE9G2yWlNRGmNh7Jleu/view?usp=sharing)
+
+---
 
 **Capstone Advisor:** Mrs. Joann Perez
 
@@ -24,13 +27,7 @@
 - Masallo, Lewis Daveriel
     - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/lewismasallo)  [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/xxlllllllxx)  [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:lewismasallo@gmail.com)  [![Messenger](https://img.shields.io/badge/Messenger-00B2FF?style=for-the-badge&logo=messenger&logoColor=white)](https://m.me/lewismasallo)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lewis-daveriel-masallo-0881521ba/)
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/deletesailorr)
-[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:dieroreneel.estrella.m@bulsu.edu.ph)
-[![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/people/Gabriel-Manriza/100009376845917/)
-[![Messenger](https://img.shields.io/badge/Messenger-00B2FF?style=for-the-badge&logo=messenger&logoColor=white)](https://m.me/lewismasallo)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lewismasallo/)
-
-
+---
 ## Screenshots
 <div align="center">
 <img src="/image/image1.png" height="300" width="500"/>
@@ -56,6 +53,7 @@ This repository contains the capstone project developed by the students of Bulac
 - **Violation and Suspension:** Monitor Drivers violation and suspension history.
 - **Reports and Analytics:** Generate insightful reports for decision-making.
 
+---
 ## How to Use
 
 1. Open the project in Visual Studio.
@@ -66,13 +64,11 @@ This repository contains the capstone project developed by the students of Bulac
 6. Use ( Admin1234 ) for Username and Password
 
 
-
+---
 ## Release 
 [![Download Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/BsuscBsit/SPTC-APP/releases/latest)
 
 [![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/drive/folders/13pnI7OK6ZEpKbaUYfkcKhZDEYP2fRdwa?usp=sharing)
-
-
 
 ## Contributions
 

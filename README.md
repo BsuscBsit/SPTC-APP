@@ -20,9 +20,9 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lewismasallo/)
 
 
-![Project Image 1](/imgs/image1.png)
-![Project Image 2](/imgs/image2.png)
-![Project Image 3](/imgs/image3.png)
+![Project Image 1](/image/image1.png)
+![Project Image 2](/image/image2.png)
+![Project Image 3](/image/image3.png)
 
 ---
 
@@ -49,9 +49,16 @@ This repository contains the capstone project developed by the students of Bulac
 
 ## Screenshots
 
-![Screenshot 1](/imgs/screenshot1.png)
-![Screenshot 2](/imgs/screenshot2.png)
-![Screenshot 3](/imgs/screenshot3.png)
+![Screenshot 1](/image/screenshot1.png)
+![Screenshot 2](/image/screenshot2.png)
+![Screenshot 3](/image/screenshot3.png)
+
+## Release 
+[Download Latest Release](https://github.com/yourusername/yourrepository/releases/latest)
+
+[![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)]([https://drive.google.com](https://drive.google.com/drive/folders/13pnI7OK6ZEpKbaUYfkcKhZDEYP2fRdwa?usp=sharing))
+
+
 
 ## Contributions
 

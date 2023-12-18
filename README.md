@@ -1,8 +1,15 @@
 # Bulacan State University (Sarmiento Campus)
-## For: Sapang Palay Tricycle Cooperative (SPTC)
+## for Sapang Palay Tricycle Cooperative (SPTC)
 
 ### Capstone Project: Information Management System for Sapang Palay Tricycle Cooperative
-#### - School Extension Project
+#### --- School Extension Project
+
+### Capstone Paper  
+![PDF Preview](/image/preview1.png)
+
+[![Download PDF](https://img.shields.io/badge/Download%20PDF-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/10dKC1KEpIyPwKHE9G2yWlNRGmNh7Jleu/view?usp=sharing)
+
+
 
 **Capstone Adviser:** Joann
 
@@ -54,7 +61,7 @@ This repository contains the capstone project developed by the students of Bulac
 ![Screenshot 3](/image/screenshot3.png)
 
 ## Release 
-[Download Latest Release](https://github.com/BsuscBsit/SPTC-APP/releases/latest)
+[![Download Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/BsuscBsit/SPTC-APP/releases/latest)
 
 [![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/drive/folders/13pnI7OK6ZEpKbaUYfkcKhZDEYP2fRdwa?usp=sharing)
 

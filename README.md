@@ -10,11 +10,11 @@
 [![Download PDF](https://img.shields.io/badge/Download%20PDF-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/10dKC1KEpIyPwKHE9G2yWlNRGmNh7Jleu/view?usp=sharing)
 
 ## Screenshots
-<img src="/image/image1.png" align="left" height="300" width="500" >
+<img src="/image/image1.png" align="left" height="300" width="500" >  
 <img src="/image/image2.png" align="left" height="300" width="500" >  
-<img src="/image/image3.png" align="left" height="300" width="500" >
+<img src="/image/image3.png" align="left" height="300" width="500" >  
 <img src="/image/screenshot1.png" align="left" height="300" width="500" >  
-<img src="/image/screenshot2.png" align="left" height="300" width="500" >
+<img src="/image/screenshot2.png" align="left" height="300" width="500" >  
 <img src="/image/screenshot3.png" align="left" height="300" width="500" >  
 
 **Capstone Advisor:** Mrs. Joann Perez

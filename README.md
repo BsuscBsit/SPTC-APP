@@ -1,5 +1,6 @@
-# Bulacan State University (Sarmiento Campus)
-## for Sapang Palay Tricycle Cooperative (SPTC)
+## Bulacan State University (Sarmiento Campus)
+## Sapang Palay Tricycle Cooperative (SPTC)
+<img src="/image/bsu-logo.png" alt="BSU Logo" width="64" height="64" style="margin-right: 10px;"> <img src="/image/sptc_logo.png" alt="SPTC Logo" width="64" height="64" style="margin-left: 10px;">
 
 ### Capstone Project: Information Management System for Sapang Palay Tricycle Cooperative
 #### --- School Extension Project
@@ -13,18 +14,18 @@
 
 **Members:**
 - Calim, Arwyn
-    - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/arwyncalim/)  [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/wynclm/)
+    - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/arwyncalim/)  [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/wyncalim)  [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/wynclm/)
 - Estabillio, John Rey
     - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/KoyaJeeArr)
 - Estrella, Diero Reneel
-    - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/die.ro.84728)
+    - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/die.ro.84728)  [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/deletesailorr)  [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:dieroreneel.estrella.m@bulsu.edu.ph)
 - Manriza, Gabriel
     - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/people/Gabriel-Manriza/100009376845917/)
 - Masallo, Lewis Daveriel
-    - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/xxlllllllxx)  [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:lewismasallo@gmail.com)  [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/lewismasallo)  [![Messenger](https://img.shields.io/badge/Messenger-00B2FF?style=for-the-badge&logo=messenger&logoColor=white)](https://m.me/lewismasallo)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lewis-daveriel-masallo-0881521ba/)
+    - [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/lewismasallo)  [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/xxlllllllxx)  [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:lewismasallo@gmail.com)  [![Messenger](https://img.shields.io/badge/Messenger-00B2FF?style=for-the-badge&logo=messenger&logoColor=white)](https://m.me/lewismasallo)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lewis-daveriel-masallo-0881521ba/)
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/xxlllllllxx)
-[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:elewismasallo@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/deletesailorr)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:dieroreneel.estrella.m@bulsu.edu.ph)
 [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/people/Gabriel-Manriza/100009376845917/)
 [![Messenger](https://img.shields.io/badge/Messenger-00B2FF?style=for-the-badge&logo=messenger&logoColor=white)](https://m.me/lewismasallo)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lewismasallo/)
@@ -52,7 +53,7 @@ This repository contains the capstone project developed by the students of Bulac
 - **Member Management:** Efficiently manage cooperative members' information including Board members, Operators and Drivers.
 - **Franchise Information:** Keep track of franchises details, loans loan ledgers, share capitals and ownerships.
 - **Operators and Drivers:** Generation of IDs for Operators and Drivers.
-- ##Violation and Suspension:** Monitor Drivers violation and suspension history.
+- **Violation and Suspension:** Monitor Drivers violation and suspension history.
 - **Reports and Analytics:** Generate insightful reports for decision-making.
 
 ## How to Use
@@ -79,4 +80,4 @@ We welcome contributions from the community to enhance and improve this system. 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details..
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details..
